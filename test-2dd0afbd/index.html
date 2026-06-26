@@ -1,0 +1,1125 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <meta name="description" content="完成 32 道「去大城市还是留小城」测试，生成你的专属路径诊断报告。" />
+    <meta property="og:title" content="去大城市还是留小城？" />
+    <meta property="og:description" content="完成 32 道「去大城市还是留小城」测试，生成你的专属路径诊断报告。" />
+    <title>去大城市还是留小城？</title>
+    <style>
+:root {
+  --bg: #fbfaf7;
+  --paper: #fffefd;
+  --ink: #20242a;
+  --muted: #65707d;
+  --line: #d9d4ca;
+  --line-strong: #b9afa0;
+  --accent: #9b4339;
+  --accent-soft: #f1dfd7;
+  --gold: #c0964d;
+  --sage: #66795f;
+  --blue: #526a86;
+  --shadow: 0 16px 36px rgba(60, 47, 38, 0.1);
+  --radius: 8px;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  min-height: 100%;
+  background:
+    linear-gradient(rgba(32, 36, 42, 0.035) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(32, 36, 42, 0.035) 1px, transparent 1px),
+    var(--bg);
+  background-size: 24px 24px;
+}
+
+body {
+  min-height: 100vh;
+  margin: 0;
+  color: var(--ink);
+  font-family:
+    "PingFang SC",
+    "Microsoft YaHei",
+    "Noto Sans SC",
+    system-ui,
+    -apple-system,
+    BlinkMacSystemFont,
+    sans-serif;
+  letter-spacing: 0;
+}
+
+button {
+  font: inherit;
+}
+
+.shell {
+  width: min(100%, 480px);
+  min-height: 100vh;
+  margin: 0 auto;
+  background: rgba(251, 250, 247, 0.88);
+}
+
+.top-rule {
+  height: 4px;
+  background: var(--accent);
+}
+
+.screen {
+  min-height: calc(100vh - 4px);
+  padding: 28px 22px 32px;
+}
+
+.home {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.kicker {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  color: var(--muted);
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  font-size: 11px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+.dot {
+  width: 7px;
+  height: 7px;
+  background: var(--accent);
+  border-radius: 50%;
+}
+
+.hero-title {
+  margin: 26px 0 14px;
+  color: var(--ink);
+  font-size: 30px;
+  line-height: 1.2;
+  text-align: center;
+  font-weight: 800;
+}
+
+.hero-subtitle {
+  margin: 0 auto 28px;
+  max-width: 340px;
+  color: var(--muted);
+  font-size: 15px;
+  line-height: 1.75;
+  text-align: center;
+}
+
+.hairline {
+  width: 64px;
+  height: 1px;
+  margin: 0 auto 30px;
+  background: var(--line-strong);
+}
+
+.intro {
+  margin: 0 auto;
+  max-width: 380px;
+}
+
+.intro p {
+  margin: 0 0 15px;
+  color: rgba(32, 36, 42, 0.82);
+  font-size: 15px;
+  line-height: 1.8;
+}
+
+.intro .strong {
+  color: var(--accent);
+  font-weight: 700;
+}
+
+.pill-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px;
+  margin: 28px 0;
+}
+
+.pill {
+  min-height: 42px;
+  display: grid;
+  place-items: center;
+  border: 1px solid var(--line);
+  color: var(--muted);
+  background: rgba(255, 255, 255, 0.44);
+  font-size: 13px;
+}
+
+.primary-btn,
+.ghost-btn,
+.copy-btn {
+  width: 100%;
+  min-height: 48px;
+  border: 1px solid var(--ink);
+  border-radius: 0;
+  cursor: pointer;
+  transition: transform 150ms ease, background 150ms ease, color 150ms ease, border-color 150ms ease;
+}
+
+.primary-btn {
+  background: var(--ink);
+  color: #fff;
+  font-weight: 700;
+}
+
+.ghost-btn,
+.copy-btn {
+  background: transparent;
+  color: var(--ink);
+}
+
+.primary-btn:active,
+.ghost-btn:active,
+.copy-btn:active,
+.option:active {
+  transform: translateY(1px);
+}
+
+.disclaimer {
+  margin: 18px auto 0;
+  max-width: 340px;
+  color: var(--muted);
+  font-size: 12px;
+  line-height: 1.65;
+  text-align: center;
+}
+
+.quiz-screen {
+  padding-top: 0;
+}
+
+.sticky-head {
+  position: sticky;
+  top: 0;
+  z-index: 5;
+  margin: 0 -22px 26px;
+  padding: 14px 22px 12px;
+  background: rgba(251, 250, 247, 0.95);
+  border-bottom: 1px solid var(--line);
+  backdrop-filter: blur(12px);
+}
+
+.quiz-meta {
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+  color: var(--muted);
+  font-size: 12px;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+}
+
+.progress-track {
+  height: 4px;
+  margin-top: 10px;
+  background: rgba(32, 36, 42, 0.09);
+}
+
+.progress-bar {
+  height: 100%;
+  background: var(--accent);
+  transition: width 260ms ease;
+}
+
+.question-no {
+  color: rgba(155, 67, 57, 0.18);
+  font-size: 48px;
+  line-height: 1;
+  font-weight: 800;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+}
+
+.question-title {
+  margin: 18px 0 24px;
+  font-size: 22px;
+  line-height: 1.5;
+  font-weight: 750;
+}
+
+.options {
+  display: grid;
+  gap: 12px;
+}
+
+.option {
+  min-height: 66px;
+  display: grid;
+  grid-template-columns: 30px 1fr;
+  gap: 12px;
+  align-items: start;
+  width: 100%;
+  padding: 15px;
+  border: 1px solid var(--line);
+  background: rgba(255, 255, 255, 0.68);
+  color: var(--ink);
+  text-align: left;
+  cursor: pointer;
+  transition: background 160ms ease, border-color 160ms ease, color 160ms ease, opacity 160ms ease;
+}
+
+.option-key {
+  display: grid;
+  place-items: center;
+  width: 28px;
+  height: 28px;
+  border: 1px solid var(--line-strong);
+  font-size: 13px;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+}
+
+.option-text {
+  padding-top: 2px;
+  font-size: 15px;
+  line-height: 1.55;
+}
+
+.option.selected {
+  border-color: var(--accent);
+  background: var(--accent);
+  color: #fff;
+}
+
+.option.selected .option-key {
+  border-color: rgba(255, 255, 255, 0.8);
+}
+
+.option.dimmed {
+  opacity: 0.42;
+}
+
+.hint {
+  margin: 18px 0 0;
+  color: var(--muted);
+  font-size: 12px;
+  text-align: center;
+}
+
+.loading-screen {
+  display: grid;
+  place-items: center;
+}
+
+.loading-card {
+  width: 100%;
+  max-width: 360px;
+  text-align: center;
+}
+
+.spinner {
+  width: 54px;
+  height: 54px;
+  margin: 0 auto 24px;
+  border: 2px solid var(--line);
+  border-top-color: var(--accent);
+  border-radius: 50%;
+  animation: spin 850ms linear infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.loading-text {
+  min-height: 54px;
+  color: var(--accent);
+  font-size: 17px;
+  line-height: 1.6;
+  font-weight: 700;
+}
+
+.step-bars {
+  display: grid;
+  gap: 8px;
+  margin-top: 28px;
+}
+
+.step {
+  height: 4px;
+  overflow: hidden;
+  background: rgba(32, 36, 42, 0.09);
+}
+
+.step span {
+  display: block;
+  height: 100%;
+  width: 0;
+  background: var(--accent);
+  transition: width 300ms ease;
+}
+
+.step.done span {
+  width: 100%;
+}
+
+.result-screen {
+  padding: 22px 18px 30px;
+}
+
+.report {
+  padding: 22px 16px 18px;
+  border: 1px solid var(--line);
+  background: var(--paper);
+  box-shadow: var(--shadow);
+}
+
+.result-type {
+  margin: 8px 0 8px;
+  color: var(--accent);
+  font-size: 30px;
+  line-height: 1.15;
+  font-weight: 850;
+  text-align: center;
+}
+
+.result-subtitle {
+  margin: 0 auto 20px;
+  color: var(--muted);
+  font-size: 15px;
+  line-height: 1.7;
+  text-align: center;
+}
+
+.stamp-row {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px;
+  margin: 18px 0 20px;
+}
+
+.stamp {
+  padding: 12px 10px;
+  border: 1px solid var(--line);
+  background: #fbfaf7;
+}
+
+.stamp strong {
+  display: block;
+  margin-bottom: 4px;
+  color: var(--ink);
+  font-size: 20px;
+}
+
+.stamp span {
+  color: var(--muted);
+  font-size: 12px;
+}
+
+.section {
+  padding: 20px 0;
+  border-top: 1px solid var(--line);
+}
+
+.section h2 {
+  margin: 0 0 12px;
+  font-size: 18px;
+  color: var(--ink);
+}
+
+.section p {
+  margin: 0 0 12px;
+  color: rgba(32, 36, 42, 0.82);
+  font-size: 15px;
+  line-height: 1.85;
+}
+
+.quote {
+  padding: 15px;
+  border-left: 3px solid var(--accent);
+  background: var(--accent-soft);
+  color: #5b2d27;
+  line-height: 1.8;
+  font-weight: 700;
+}
+
+.meters {
+  display: grid;
+  gap: 14px;
+}
+
+.meter-head {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 7px;
+  color: var(--muted);
+  font-size: 13px;
+}
+
+.meter-track {
+  height: 8px;
+  background: rgba(32, 36, 42, 0.08);
+}
+
+.meter-fill {
+  height: 100%;
+  background: var(--accent);
+}
+
+.compare {
+  display: grid;
+  gap: 10px;
+}
+
+.compare-card {
+  padding: 14px;
+  border: 1px solid var(--line);
+  background: #fbfaf7;
+}
+
+.compare-card h3,
+.plan-card h3 {
+  margin: 0 0 8px;
+  font-size: 15px;
+}
+
+.compare-card p,
+.plan-card p {
+  font-size: 14px;
+}
+
+.tag-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.tag {
+  padding: 7px 9px;
+  border: 1px solid var(--line);
+  background: #fbfaf7;
+  color: var(--muted);
+  font-size: 13px;
+}
+
+.plan {
+  display: grid;
+  gap: 10px;
+}
+
+.plan-card {
+  padding: 14px;
+  border: 1px solid var(--line);
+  background: #fbfaf7;
+}
+
+.secondary-note {
+  padding: 14px;
+  border: 1px dashed var(--line-strong);
+  background: rgba(192, 150, 77, 0.12);
+  line-height: 1.75;
+  font-size: 14px;
+}
+
+.actions {
+  display: grid;
+  gap: 10px;
+  margin-top: 18px;
+}
+
+.toast {
+  position: fixed;
+  left: 50%;
+  bottom: 22px;
+  z-index: 20;
+  transform: translateX(-50%);
+  padding: 10px 14px;
+  background: var(--ink);
+  color: #fff;
+  font-size: 13px;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 180ms ease;
+}
+
+.toast.show {
+  opacity: 1;
+}
+
+.error {
+  display: grid;
+  place-items: center;
+  min-height: 100vh;
+  padding: 24px;
+  text-align: center;
+}
+
+.error p {
+  color: var(--muted);
+  line-height: 1.7;
+}
+
+@media (min-width: 700px) {
+  body {
+    padding: 28px 0;
+  }
+
+  .shell {
+    min-height: calc(100vh - 56px);
+    border: 1px solid var(--line);
+    box-shadow: var(--shadow);
+  }
+
+  .screen {
+    min-height: calc(100vh - 60px);
+  }
+}
+
+    </style>
+  </head>
+  <body>
+    <main id="app" aria-live="polite"></main>
+    <script>window.__QUIZ_CONFIG__ = {"slug":"test-2dd0afbd","topic":"去大城市还是留小城？","kicker":"32-Q Diagnostic","title":"去大城市还是留小城？","subtitle":"32 道题，拆清你的机会需求、成本承受、身份焦虑和退路设计。","metaDescription":"完成 32 道「去大城市还是留小城」测试，生成你的专属路径诊断报告。","startButton":"开始测试","resultKicker":"Diagnostic Report","quizHint":"选择后自动进入下一题","copyButton":"复制我的结果","restartButton":"重新测试","scoreLabel":"路径成熟度","stageLabel":"当前阶段","stageLabels":[{"max":45,"label":"降噪期"},{"max":65,"label":"验证期"},{"max":82,"label":"规划期"},{"max":100,"label":"行动期"}],"compareLabels":["如果继续原路","如果换一种做法"],"disclaimer":"本测试为趣味自我观察工具，非心理测评或职业咨询结论，仅供决策前整理思路。","secondaryThreshold":4,"dimensions":["机会密度","真实成本","关系支持","风险管理"],"intro":["这不是一道简单的城市选择题。","真正难的不是选大城市还是小城，而是分清：你是在追机会、保生活、躲焦虑，还是需要一条过渡路。","32 道题会从机会、成本、关系、成长、情绪、能力迁移、风险管理和行动验证 8 个模块，生成一份更贴近你当前状态的路径报告。"],"loadingMessages":["正在读取你的选择反应...","正在拆分机会、成本和关系支持...","正在识别焦虑信号与真实动机...","正在生成 32 题路径诊断报告...","分析完成。"],"questions":[{"id":1,"module":"机会密度","text":"周五晚上，一个在一线的朋友说他们组可能缺人。你心里最先冒出来的是：","options":[{"key":"A","text":"这可能是个入口，我想先看看门槛和机会"},{"key":"B","text":"先别激动，房租、通勤、生活质量都要算清楚"},{"key":"C","text":"心里一紧，感觉自己再不动就真的晚了"},{"key":"D","text":"能不能先远程、短期项目或试岗，不直接搬走"}]},{"id":2,"module":"机会密度","text":"你刷到一个同岗位在大城市薪资高 40% 的帖子，第一反应更像：","options":[{"key":"A","text":"我要去验证一下自己在那个市场值多少钱"},{"key":"B","text":"高薪背后可能也有高成本，不能只看数字"},{"key":"C","text":"有点慌，感觉自己这些年是不是太慢了"},{"key":"D","text":"先用面试或咨询测身价，不急着搬家"}]},{"id":3,"module":"机会密度","text":"如果现在的城市机会少，但你手上的工作还算稳定，你最容易卡在：","options":[{"key":"A","text":"明知道稳定，却总觉得天花板越来越低"},{"key":"B","text":"稳定不差，只要生活能越来越踏实就行"},{"key":"C","text":"怕留下被看成没野心，怕走又撑不住"},{"key":"D","text":"想保住稳定，同时接触更大的机会池"}]},{"id":4,"module":"机会密度","text":"你最不能忍受的工作状态是：","options":[{"key":"A","text":"努力很多，但身边没有能把你往上带的人和机会"},{"key":"B","text":"每天被成本和节奏推着跑，没有自己的生活"},{"key":"C","text":"别人都在升级，自己却说不清哪里出了问题"},{"key":"D","text":"明明有能力，却一直没有找到更好的使用场景"}]},{"id":5,"module":"真实成本","text":"如果去大城市后，前 6 个月只能住得远、通勤久、存不下钱，你会更在意：","options":[{"key":"A","text":"只要机会打开，这段成本可以接受"},{"key":"B","text":"如果生活质量明显下降，我会很快被消耗掉"},{"key":"C","text":"我会硬撑，因为不想承认自己选错了"},{"key":"D","text":"可以接受短期试水，但必须提前设止损线"}]},{"id":6,"module":"真实成本","text":"小城现在给你涨薪 20%，但工作内容基本不会变。你更可能：","options":[{"key":"A","text":"还是会想去更大的盘子里试一次"},{"key":"B","text":"认真考虑留下，稳定现金流很重要"},{"key":"C","text":"更纠结了，怕留下是认怂，走了又怕翻车"},{"key":"D","text":"先把这份稳定当底盘，同时找外部增量机会"}]},{"id":7,"module":"真实成本","text":"你打开记账软件，看见搬去大城市后的预算表，最真实的感受是：","options":[{"key":"A","text":"压力有，但如果能换来更大机会，值得算清楚"},{"key":"B","text":"这会直接影响睡眠和安全感，我不想长期这样"},{"key":"C","text":"越算越焦虑，感觉怎么选都有代价"},{"key":"D","text":"先做一版 3 个月试运行预算，不直接做终局判断"}]},{"id":8,"module":"真实成本","text":"你最害怕的经济风险不是没钱，而是：","options":[{"key":"A","text":"为了省钱错过关键窗口"},{"key":"B","text":"为了所谓机会把生活和身体都透支掉"},{"key":"C","text":"钱花了、苦吃了，最后证明自己判断不行"},{"key":"D","text":"现金流断掉，旧生活和新机会都接不住"}]},{"id":9,"module":"关系支持","text":"如果明天就要搬走，真正让你舍不得的不是东西，而是：","options":[{"key":"A","text":"舍不得也能走，我更怕一直没有新变量"},{"key":"B","text":"熟悉的人、生活半径和被托住的感觉"},{"key":"C","text":"怕别人觉得我之前的选择都白费了"},{"key":"D","text":"怕旧资源断掉，所以需要设计一个缓冲带"}]},{"id":10,"module":"关系支持","text":"家人说“在身边稳定点不好吗”，你心里更像：","options":[{"key":"A","text":"我理解他们，但我不能只活在他们能接受的半径里"},{"key":"B","text":"被支持和照应对我真的很重要"},{"key":"C","text":"我会开始怀疑自己是不是太自私或太折腾"},{"key":"D","text":"能不能先不彻底离开，用阶段性方式让他们放心"}]},{"id":11,"module":"关系支持","text":"想到一个人去陌生城市，最让你不安的是：","options":[{"key":"A","text":"不安有，但我更想知道自己能不能打开新局面"},{"key":"B","text":"没有熟人兜底，情绪和生活都会很难撑"},{"key":"C","text":"怕自己混得不好，还要被别人知道"},{"key":"D","text":"需要先建立目标城市的联系人和信息网络"}]},{"id":12,"module":"关系支持","text":"如果伴侣/朋友不支持你离开，你最可能：","options":[{"key":"A","text":"会痛苦，但还是想把自己的可能性排在前面"},{"key":"B","text":"会重新评估，因为关系稳定是我的重要资产"},{"key":"C","text":"会反复内耗，觉得怎么选都亏欠别人"},{"key":"D","text":"先谈一个试验期，而不是直接做永久决定"}]},{"id":13,"module":"成长路径","text":"你现在最想改变的，不是城市本身，而是：","options":[{"key":"A","text":"平台、视野和上升空间"},{"key":"B","text":"生活消耗、关系稳定和可控节奏"},{"key":"C","text":"别人眼里我是不是还在往前走"},{"key":"D","text":"收入结构和能力被使用的方式"}]},{"id":14,"module":"成长路径","text":"如果一年后你还在原城市原岗位，你最怕的是：","options":[{"key":"A","text":"机会更少，想跳出去时已经晚了"},{"key":"B","text":"不怕原地，只怕没有把生活经营得更好"},{"key":"C","text":"怕被贴上没闯过、没野心的标签"},{"key":"D","text":"怕能力一直被低估，没有找到外部出口"}]},{"id":15,"module":"成长路径","text":"你最希望下一份工作带给你的，不是头衔，而是：","options":[{"key":"A","text":"更快的反馈、更强的人和更大的项目"},{"key":"B","text":"稳定的节奏、明确的职责和可持续生活"},{"key":"C","text":"让我能证明自己并没有落后"},{"key":"D","text":"能把过往经验换成更高价值的位置"}]},{"id":16,"module":"成长路径","text":"当别人说“大城市才有前途”时，你内心更接近：","options":[{"key":"A","text":"这话不全对，但大环境确实会改变机会密度"},{"key":"B","text":"前途不只有一种，我不想被单一叙事绑架"},{"key":"C","text":"会被刺到，感觉自己是不是选错了赛道"},{"key":"D","text":"关键不是城市，而是我能不能接入外部机会"}]},{"id":17,"module":"情绪动机","text":"你最容易在什么时候突然想离开现在的城市：","options":[{"key":"A","text":"看到一个真实机会，感觉自己可以被重新激活"},{"key":"B","text":"不太会突然想走，除非生活已经明显失衡"},{"key":"C","text":"刷到同龄人的高光时，心里开始发慌"},{"key":"D","text":"发现旧资源在新场景里可能更值钱的时候"}]},{"id":18,"module":"情绪动机","text":"你说“我想去大城市”的时候，里面最多的是：","options":[{"key":"A","text":"想进入更大的竞争和成长环境"},{"key":"B","text":"其实也想去，但一想到生活成本就会收回来"},{"key":"C","text":"怕自己再不去，就没有资格说自己努力过"},{"key":"D","text":"想先验证外部市场，不想把话说死"}]},{"id":19,"module":"情绪动机","text":"如果身边人都说你现在这样已经很好了，你会：","options":[{"key":"A","text":"更想试试，因为他们看见的是稳定，不是我的上限"},{"key":"B","text":"会被安定下来，因为我也珍惜现在的生活"},{"key":"C","text":"更混乱，不知道是我不知足还是他们不懂我"},{"key":"D","text":"把他们的话当提醒，但继续做低风险验证"}]},{"id":20,"module":"情绪动机","text":"你真正不想输掉的是：","options":[{"key":"A","text":"自己还有可能变得更大的那部分"},{"key":"B","text":"好不容易建立起来的稳定生活"},{"key":"C","text":"别人对我“还不错”的评价和期待"},{"key":"D","text":"过去积累的经验、关系和安全边界"}]},{"id":21,"module":"能力迁移","text":"如果你不搬去大城市，也想接触更好的机会，你会先想到：","options":[{"key":"A","text":"直接投递目标城市岗位，看市场反应"},{"key":"B","text":"先把本地工作做好，慢慢等更稳的机会"},{"key":"C","text":"想很多，但不知道自己到底拿什么去竞争"},{"key":"D","text":"远程合作、短期项目、外部作品或副业试水"}]},{"id":22,"module":"能力迁移","text":"你最有可能被低估的能力是：","options":[{"key":"A","text":"放到更大平台后可能被放大的执行力和学习速度"},{"key":"B","text":"在稳定环境里长期坚持和照顾生活的能力"},{"key":"C","text":"被焦虑遮住了，自己也说不清优势在哪里"},{"key":"D","text":"把旧经验重新组合、迁移到新场景的能力"}]},{"id":23,"module":"能力迁移","text":"如果让你准备一份去大城市的竞争材料，你第一步会：","options":[{"key":"A","text":"更新简历和作品，马上找人反馈"},{"key":"B","text":"先评估是否真的要投入这件事"},{"key":"C","text":"拖着不敢做，怕一做就发现自己不够好"},{"key":"D","text":"把过往项目拆成可迁移的案例和成果"}]},{"id":24,"module":"能力迁移","text":"你更相信哪种“试一试”：","options":[{"key":"A","text":"直接进入目标环境，真实压力最能说明问题"},{"key":"B","text":"先在低消耗环境里打磨能力，别急着换战场"},{"key":"C","text":"先看更多成功案例，确认自己不是盲目"},{"key":"D","text":"用小项目、小驻留、小合作测试，不先改变全部生活"}]},{"id":25,"module":"风险管理","text":"如果这次选择失败，你最难接受的是：","options":[{"key":"A","text":"没有真正试过，就一直停在想象里"},{"key":"B","text":"为了试错把原本稳定生活弄乱"},{"key":"C","text":"被证明自己判断错了，还被别人看见"},{"key":"D","text":"没有设计退路，导致两边都接不住"}]},{"id":26,"module":"风险管理","text":"做决定前，你最需要看见的是：","options":[{"key":"A","text":"目标城市真实岗位反馈和面试机会"},{"key":"B","text":"现金流、安全感和生活质量不会崩"},{"key":"C","text":"有人告诉我这个选择不会让我后悔"},{"key":"D","text":"一条可以进入、暂停、撤回的路线图"}]},{"id":27,"module":"风险管理","text":"你最容易犯的错误是：","options":[{"key":"A","text":"把窗口期看得太重要，低估现实消耗"},{"key":"B","text":"把安全感看得太重要，错过外部验证"},{"key":"C","text":"把别人的进度当成自己的倒计时"},{"key":"D","text":"一直设计过渡方案，但迟迟不真正验证"}]},{"id":28,"module":"风险管理","text":"如果只能给自己设置一个底线，你会选：","options":[{"key":"A","text":"不能因为怕输，就完全不进入更大的机会场"},{"key":"B","text":"不能为了证明自己，把身体和现金流拖垮"},{"key":"C","text":"不能在比较和羞耻感最强的时候做决定"},{"key":"D","text":"不能没有试验期、预算线和撤退机制"}]},{"id":29,"module":"行动验证","text":"未来 30 天，你最愿意做的第一个动作是：","options":[{"key":"A","text":"投递/约谈 10 个目标城市机会，看真实反馈"},{"key":"B","text":"算清留在小城也能升级的收入和生活方案"},{"key":"C","text":"停刷对比内容，写清楚自己到底为什么焦虑"},{"key":"D","text":"安排短期驻留、远程合作或一个外部项目"}]},{"id":30,"module":"行动验证","text":"如果测试结果建议你先别急着搬，你会：","options":[{"key":"A","text":"可以缓一缓，但我还是要尽快拿到外部反馈"},{"key":"B","text":"松一口气，因为我本来就想先把生活稳住"},{"key":"C","text":"又开始怀疑，是不是自己真的不够勇敢"},{"key":"D","text":"接受，先做一段过渡验证比直接搬更靠谱"}]},{"id":31,"module":"行动验证","text":"如果给你一个“不会被任何人评价”的选择空间，你更可能：","options":[{"key":"A","text":"去更大的城市试一轮，不给自己留遗憾"},{"key":"B","text":"留在更舒服的生活里，把日子过厚一点"},{"key":"C","text":"先休息，因为很多焦虑其实来自被比较"},{"key":"D","text":"两边都不押死，做一个可验证的中间方案"}]},{"id":32,"module":"行动验证","text":"做完这套题，你最想得到的不是答案，而是：","options":[{"key":"A","text":"确认自己到底有没有到该突围的时候"},{"key":"B","text":"确认留下是不是也可以是主动选择"},{"key":"C","text":"确认自己是不是被焦虑推着跑"},{"key":"D","text":"确认有没有不用清零也能升级的路线"}]}],"results":{"A":{"typeName":"大城突围型","subtitle":"你需要的不是单纯换城市，而是进入更高密度的机会场。","posterSubtext":"你不是不安分，你是已经开始嫌现在的变量太少。","maturityScore":82,"coreConclusion":"你的主线不是逃离小城，而是追求更高密度的反馈、平台、人群和上升机会。你对成本和风险不是完全没感觉，只是相比短期舒服，你更怕长期被困在低变量环境里。对你来说，最危险的不是去大城市失败，而是一直没有真正测试过自己的市场位置。","diagnosis":"你的心理动力更接近“机会饥饿”：当环境太熟、任务太重复、身边缺少能把你往上带的人，你会明显失去能量。你不适合只靠劝自己知足来解决问题，因为你的核心需求是成长空间和可见的外部反馈。","whatYouReallyWant":"你想确认自己放到更大的市场里，到底能不能被重新激活。你需要的不是马上搬走，而是一套严肃的突围验证：真实岗位反馈、真实生活预算、真实竞争样本。","mechanism":{"title":"机会密度机制","content":"城市选择的本质不是地理位置，而是机会密度。对你来说，平台规模、同伴质量、项目复杂度、薪资天花板和信息流速度，都会直接影响你的行动力。你适合把大城市当验证场，而不是把它幻想成自动变好的地方。"},"professionalBasis":["从职业决策角度看，你的关键变量是“外部机会反馈”而不是“内部安全感”。这类人如果长期待在低反馈环境里，容易把能力不足和环境不足混在一起，最后变成慢性不甘心。","从风险管理角度看，你不适合裸辞式突围。更适合先用投递、约谈、短期驻留、项目合作建立样本，再决定是否迁移。","从心理动机看，你的焦虑不完全是坏事。它提醒你需要新变量，但也必须被预算、止损线和真实反馈约束。"],"coreTensions":["想打开上限","怕错过窗口","能承受短期不舒服","需要真实市场反馈"],"suitableIf":["已经有 3-6 个月现金缓冲","目标城市岗位能给出真实面试反馈","你能接受短期生活质量下降","你不是为了向别人证明才离开"],"cautionIf":["没有现金流预算","只被小红书/朋友圈高光刺激","身体和情绪已经明显透支","把大城市想象成唯一答案"],"indices":[{"label":"机会饥饿指数","value":90},{"label":"成本耐受指数","value":66},{"label":"外部反馈需求","value":88},{"label":"裸冲风险","value":58}],"ifStay":"如果继续留在小城，你短期会更稳，但内心的不甘心大概率不会消失。它会从“我想出去看看”变成“我是不是已经错过了”。","ifChange":"如果去大城市，你需要把它设计成一次可验证的职业实验，而不是一次情绪性搬家。先拿岗位反馈，再决定是否迁移。","notRecommended":["裸辞搬城","只看高薪帖子","没有预算就硬闯","为了证明自己而走","把城市当万能解药"],"plan90":[{"title":"第 1-2 周：目标市场测试","content":"投递 10-15 个目标城市岗位，约谈 3 个同行，记录反馈，不用想象判断自己值不值钱。"},{"title":"第 3-4 周：成本压力测试","content":"按目标城市真实房租、通勤、饮食、社交成本做 3 档预算，写清最多能承受几个月。"},{"title":"第 2 个月：短期驻留或集中面试","content":"如果条件允许，去目标城市待 7-14 天，按工作日生活，不按旅游方式感受城市。"},{"title":"第 3 个月：迁移决策","content":"只有当岗位反馈、现金流和身体状态同时过线，才进入正式迁移；否则继续远程验证。"}],"closing":"你可以去闯，但不要把闯当成浪漫。成熟的突围，是带着证据进入更大的场。"},"B":{"typeName":"小城深耕型","subtitle":"你不是没有野心，你只是更在意生活是否能被自己掌控。","posterSubtext":"你要的不是别人眼里的成功，而是可持续的生活质量。","maturityScore":86,"coreConclusion":"你更适合先把小城路线做深。你看重的不是城市大小，而是现金流、关系支持、生活节奏和长期稳定感。盲目去大城市可能不是升级，而是把自己放进高成本、高压力、高不确定的消耗里。","diagnosis":"你的决策系统更重视“可持续性”。你知道自己不是不能吃苦，而是不愿意为了一个被包装出来的成功叙事，把睡眠、关系、身体和安全感都押进去。这是清醒，不是怂。","whatYouReallyWant":"你想要的是一种不被掏空的成长。你可以留下，但不能只是原地稳定。你的关键任务是把小城生活升级成更有收入增量、更有能力积累、更有外部接口的版本。","mechanism":{"title":"低耗复利机制","content":"不是所有成长都发生在高压环境里。对一部分人来说，低成本、强支持、稳定节奏反而更容易产生长期复利。小城不是问题，问题是留在那里以后有没有主动设计成长系统。"},"professionalBasis":["从职业发展看，你的优势在于稳定投入和长期积累。你不适合频繁切换环境，但适合在低消耗环境里把一个能力做深、做厚、做成资产。","从心理资源看，关系支持和生活秩序是你的重要能量来源。如果为了外部标签切断这些资源，可能会导致行动力下降。","从商业变现看，小城深耕不等于只做本地机会。你需要接入线上、远程、内容、项目合作等外部接口，让稳定环境承接外部增长。"],"coreTensions":["想稳定但不想停滞","重视生活质量","抗拒被城市叙事绑架","需要外部增长接口"],"suitableIf":["当前生活支持系统强","本地现金流稳定","你能主动建立外部机会接口","你有耐心做长期积累"],"cautionIf":["稳定已经变成麻木","本地行业完全没有成长空间","你只是在用舒服逃避挑战","收入结构过于单一"],"indices":[{"label":"生活掌控指数","value":92},{"label":"长期复利指数","value":84},{"label":"外部接口需求","value":72},{"label":"环境切换风险","value":70}],"ifStay":"如果继续留小城，你需要主动创造增量，否则稳定会慢慢变成停滞，舒服会变成钝感。","ifChange":"如果贸然去大城市，你可能会被成本和节奏消耗，反而失去原本稳定积累的能力。","notRecommended":["为了证明自己而离开","稳定但不成长","只看城市名判断价值","忽视线上机会","把舒服当终点"],"plan90":[{"title":"第 1-2 周：小城升级设计","content":"写出留下也能变好的 3 个增量：收入、能力、关系或生活质量，每个都要有动作。"},{"title":"第 3-4 周：建立外部接口","content":"每周约谈 1 个外部同行，投递或观察 5 个外部机会，避免信息只困在本地。"},{"title":"第 2 个月：做可迁移资产","content":"沉淀一个作品、案例、证书、内容账号或副业雏形，让你的能力不只被本地市场定价。"},{"title":"第 3 个月：收入结构复盘","content":"评估主业、项目、副业、技能资产的组合，决定是否继续深耕或启动过渡方案。"}],"closing":"留下不是输。真正的问题是，你有没有把留下过成自己的主动选择。"},"C":{"typeName":"焦虑追赶型","subtitle":"你现在最需要的不是选城市，而是先把比较焦虑降下来。","posterSubtext":"你以为自己想去远方，其实是在怕自己落后。","maturityScore":56,"coreConclusion":"你现在不适合立刻做大决定。你的选择里有真实渴望，但也混着同龄压力、身份焦虑和被比较后的刺痛感。大城市和小城都不是最终答案，真正困住你的是：别人都在往前走，我是不是不行了。","diagnosis":"你很容易被外部样本牵动：别人升职、跳槽、搬去一线、发新生活，你会立刻开始审判自己。问题不在于你没有能力，而是判断系统正在被外部参照物劫持。","whatYouReallyWant":"你想确认自己没有被时代甩下。你需要的不是更多建议，而是把“我真正想要”和“我怕别人怎么看”分开。","mechanism":{"title":"身份追赶机制","content":"当一个人用同龄人的进度定义自己，就会把很多选择都变成证明题。证明题最危险的地方在于：你无论选大城还是小城，都不是为了自己，而是为了摆脱羞耻感。"},"professionalBasis":["从心理机制看，你的核心变量是社会比较。高频接触同龄人高光，会放大损失厌恶，让你误以为“不动就是输”。","从决策质量看，焦虑状态下的大决定通常会高估短期收益、低估执行成本。你需要先降低噪音，再做城市选择。","从行动策略看，你适合小规模验证，不适合全盘迁移。验证的目的不是证明你厉害，而是拿回自己的判断权。"],"coreTensions":["怕落后","怕被评价","想证明自己","真实意愿不够清晰"],"suitableIf":["愿意暂停比较信息输入","能写清楚自己真正想要什么","愿意用小动作验证而不是大迁移证明","能接受当前阶段先不做终局决定"],"cautionIf":["最近频繁刷同龄人高光","身体和情绪已经疲惫","选择动机主要来自不甘心和羞耻感","很想让别人觉得你没有输"],"indices":[{"label":"社会比较指数","value":94},{"label":"真实意愿清晰度","value":44},{"label":"情绪驱动风险","value":86},{"label":"降噪必要性","value":90}],"ifStay":"如果在焦虑里留下，你会把小城看成退路，越待越不甘心。","ifChange":"如果在焦虑里离开，你会把大城市看成证明场，一旦不顺就更容易自我否定。","notRecommended":["刷同龄人高光","用搬城证明自己","问太多人要答案","在焦虑最强时裸辞","把羡慕当热爱"],"plan90":[{"title":"第 1-2 周：停止比较输入","content":"减少同龄人职业、高薪、城市选择类内容输入，给判断系统降噪。"},{"title":"第 3-4 周：拆分真实动机","content":"写两张清单：我真正想要什么；我怕别人怎么看。两张不要混在一起。"},{"title":"第 2 个月：做低成本验证","content":"只做一个动作：约谈、投递、短住、项目试水。目的不是证明，而是拿数据。"},{"title":"第 3 个月：再做选择","content":"等情绪下降后再评估结果，不在被刺激的当天做迁移决定。"}],"closing":"你不需要跑赢别人。你需要先把自己的路，从别人的眼光里拿回来。"},"D":{"typeName":"桥梁过渡型","subtitle":"你最适合的不是立刻走或立刻留，而是设计一条可验证的中间路线。","posterSubtext":"你的答案不是二选一，而是先搭一座桥。","maturityScore":90,"coreConclusion":"你不适合把这件事做成非黑即白。你的旧经验、关系、工作基础和现实成本都还有价值，直接清零太浪费；但完全不动也会让你错过外部机会。你更适合阶段性过渡，用小规模真实反馈替代一次性豪赌。","diagnosis":"你最大的优势是能设计退路，也能把旧资源迁移到新场景。你不是优柔寡断，而是知道好选择往往不是勇敢和保守之间二选一，而是把风险拆小，把证据做实。","whatYouReallyWant":"你想要的是可试错、可撤回、可升级的路径。你的关键词不是搬走，而是迁移；不是清零，而是重组。","mechanism":{"title":"桥梁迁移机制","content":"很多人生选择不是一脚跨过去的，而是靠桥梁过渡。短期驻留、远程合作、外部项目、集中面试、双城节奏，都是把大决定拆成小证据的方法。"},"professionalBasis":["从职业策略看，你适合“渐进式迁移”。先迁移信息、关系、项目和市场反馈，再决定是否迁移居住地。","从风险控制看，你的优势是能保留底盘。只要不过度拖延，这会显著降低城市选择失败的损失。","从能力定价看，你需要测试旧能力在新市场的价格，而不是一上来否定过去或直接清零重来。"],"coreTensions":["想升级但不想清零","重视退路","擅长组合资源","容易拖延验证"],"suitableIf":["已有可迁移技能或项目经验","当前现金流还能支撑试验期","目标城市可以先远程或短期接触","你愿意给过渡方案设截止日期"],"cautionIf":["过渡方案一直停在纸面","用计划感逃避真正行动","两边都想保住导致没有重点","没有明确验证指标"],"indices":[{"label":"过渡设计指数","value":94},{"label":"资源迁移指数","value":88},{"label":"清零必要指数","value":22},{"label":"拖延风险","value":62}],"ifStay":"如果完全留在原地，你会觉得自己还有一部分可能性没有被用出来。","ifChange":"如果直接搬走，你可能会浪费原本能帮你降低风险的旧资源。","notRecommended":["非黑即白地决定","完全清零重来","只设计不验证","没有截止日期","两边都不愿放手"],"plan90":[{"title":"第 1-2 周：盘点可迁移资产","content":"列出技能、项目、联系人、作品、行业经验，判断哪些能在目标城市重新定价。"},{"title":"第 3-4 周：建立外部试验","content":"找远程合作、短期项目、集中面试或目标城市驻留机会，先迁移机会而不是生活。"},{"title":"第 2 个月：设置验证指标","content":"用明确指标判断：面试反馈、项目收入、人脉质量、生活成本、身体状态。"},{"title":"第 3 个月：决定迁移程度","content":"根据数据选择继续留、短期驻留、双城过渡或正式搬迁，不靠情绪定终局。"}],"closing":"你不用逼自己马上选边。你的高质量答案，是先把桥搭出来，然后让真实反馈告诉你往哪走。"}},"secondaryNotes":{"A":{"B":"你的主倾向是「大城突围型」，副倾向带有「小城深耕型」。这说明你的选择不是单线条：主倾向决定当前最适合的路径，副倾向提醒你要补上的风险控制。","C":"你的主倾向是「大城突围型」，副倾向带有「焦虑追赶型」。这说明你的选择不是单线条：主倾向决定当前最适合的路径，副倾向提醒你要补上的风险控制。","D":"你的主倾向是「大城突围型」，副倾向带有「桥梁过渡型」。这说明你的选择不是单线条：主倾向决定当前最适合的路径，副倾向提醒你要补上的风险控制。"},"B":{"A":"你的主倾向是「小城深耕型」，副倾向带有「大城突围型」。这说明你的选择不是单线条：主倾向决定当前最适合的路径，副倾向提醒你要补上的风险控制。","C":"你的主倾向是「小城深耕型」，副倾向带有「焦虑追赶型」。这说明你的选择不是单线条：主倾向决定当前最适合的路径，副倾向提醒你要补上的风险控制。","D":"你的主倾向是「小城深耕型」，副倾向带有「桥梁过渡型」。这说明你的选择不是单线条：主倾向决定当前最适合的路径，副倾向提醒你要补上的风险控制。"},"C":{"A":"你的主倾向是「焦虑追赶型」，副倾向带有「大城突围型」。这说明你的选择不是单线条：主倾向决定当前最适合的路径，副倾向提醒你要补上的风险控制。","B":"你的主倾向是「焦虑追赶型」，副倾向带有「小城深耕型」。这说明你的选择不是单线条：主倾向决定当前最适合的路径，副倾向提醒你要补上的风险控制。","D":"你的主倾向是「焦虑追赶型」，副倾向带有「桥梁过渡型」。这说明你的选择不是单线条：主倾向决定当前最适合的路径，副倾向提醒你要补上的风险控制。"},"D":{"A":"你的主倾向是「桥梁过渡型」，副倾向带有「大城突围型」。这说明你的选择不是单线条：主倾向决定当前最适合的路径，副倾向提醒你要补上的风险控制。","B":"你的主倾向是「桥梁过渡型」，副倾向带有「小城深耕型」。这说明你的选择不是单线条：主倾向决定当前最适合的路径，副倾向提醒你要补上的风险控制。","C":"你的主倾向是「桥梁过渡型」，副倾向带有「焦虑追赶型」。这说明你的选择不是单线条：主倾向决定当前最适合的路径，副倾向提醒你要补上的风险控制。"}},"shareTemplate":["我测出了：{{typeName}}","{{posterSubtext}}","{{secondaryLine}}","","去大城市还是留小城？32题诊断"]};</script>
+    <script>
+(function () {
+  const app = document.getElementById("app");
+  const configPaths = ["./configs/site-config.json", "./configs/career-change.json"];
+
+  const state = {
+    config: null,
+    answers: {},
+    currentIndex: 0,
+    selected: null,
+    locked: false,
+    loadingStep: 0,
+    route: "home",
+    resultData: null,
+  };
+
+  const defaultLoadingMessages = [
+    "正在读取你的选择倾向...",
+    "正在识别隐藏动机...",
+    "正在计算结果分布...",
+    "正在生成专属报告...",
+    "分析完成。",
+  ];
+
+  init();
+
+  async function init() {
+    try {
+      state.config = await fetchConfig();
+      applyDocumentMeta(state.config);
+
+      const saved = sessionStorage.getItem(getStorageKey());
+      if (saved) {
+        state.answers = JSON.parse(saved);
+      }
+
+      routeFromHash();
+      window.addEventListener("hashchange", routeFromHash);
+    } catch (error) {
+      app.innerHTML = `
+        <div class="error">
+          <div>
+            <h1>测试加载失败</h1>
+            <p>请确认你是通过网页链接打开页面，而不是直接双击 HTML 文件。</p>
+          </div>
+        </div>
+      `;
+      console.error(error);
+    }
+  }
+
+  async function fetchConfig() {
+    if (window.__QUIZ_CONFIG__) return window.__QUIZ_CONFIG__;
+    let lastError;
+    for (const path of configPaths) {
+      try {
+        const response = await fetch(path, { cache: "no-store" });
+        if (!response.ok) throw new Error(`${path} ${response.status}`);
+        return response.json();
+      } catch (error) {
+        lastError = error;
+      }
+    }
+    throw lastError;
+  }
+
+  function applyDocumentMeta(cfg) {
+    const title = cfg.title || "趣味测试";
+    const description = cfg.metaDescription || cfg.subtitle || "完成测试，生成你的专属报告。";
+    document.title = title;
+    setMeta("name", "description", description);
+    setMeta("property", "og:title", title);
+    setMeta("property", "og:description", description);
+  }
+
+  function setMeta(attr, key, content) {
+    let node = document.querySelector(`meta[${attr}="${key}"]`);
+    if (!node) {
+      node = document.createElement("meta");
+      node.setAttribute(attr, key);
+      document.head.appendChild(node);
+    }
+    node.setAttribute("content", content);
+  }
+
+  function routeFromHash() {
+    const route = (location.hash || "#/").replace("#/", "") || "home";
+    renderRoute(route);
+  }
+
+  function navigate(route) {
+    const nextHash = `#/${route}`;
+    if (location.hash === nextHash) {
+      renderRoute(route);
+      return;
+    }
+    location.hash = nextHash;
+  }
+
+  function renderRoute(route) {
+    state.route = route;
+    if (route === "quiz") renderQuiz();
+    else if (route === "loading") startLoading();
+    else if (route === "result") renderResult();
+    else renderHome();
+  }
+
+  function renderShell(content, extraClass = "") {
+    app.innerHTML = `
+      <div class="shell">
+        <div class="top-rule"></div>
+        <section class="screen ${extraClass}">${content}</section>
+      </div>
+      <div id="toast" class="toast">已复制</div>
+    `;
+  }
+
+  function renderHome() {
+    const cfg = state.config;
+    renderShell(
+      `
+      <div class="home">
+        <div class="kicker"><span class="dot"></span><span>${text(cfg.kicker)}</span><span class="dot"></span></div>
+        <h1 class="hero-title">${text(cfg.title)}</h1>
+        <p class="hero-subtitle">${text(cfg.subtitle)}</p>
+        <div class="hairline"></div>
+        <div class="intro">
+          ${(cfg.intro || []).map((p, index) => `<p class="${index === cfg.intro.length - 1 ? "strong" : ""}">${text(p)}</p>`).join("")}
+        </div>
+        <div class="pill-grid">
+          ${(cfg.dimensions || []).map((item) => `<div class="pill">${text(item)}</div>`).join("")}
+        </div>
+        <button class="primary-btn" data-action="start">${text(cfg.startButton || "开始测试")}</button>
+        <p class="disclaimer">${text(cfg.disclaimer || "本测试为趣味内容，仅供娱乐参考。")}</p>
+      </div>
+      `,
+      "home"
+    );
+    const startButton = app.querySelector("[data-action='start']");
+    let started = false;
+    const startQuiz = () => {
+      if (started) return;
+      started = true;
+      state.answers = {};
+      state.currentIndex = 0;
+      sessionStorage.removeItem(getStorageKey());
+      navigate("quiz");
+    };
+    startButton.addEventListener("click", startQuiz);
+    startButton.addEventListener(
+      "touchend",
+      (event) => {
+        event.preventDefault();
+        startQuiz();
+      },
+      { passive: false }
+    );
+  }
+
+  function renderQuiz() {
+    const questions = state.config.questions || [];
+    const question = questions[state.currentIndex];
+    if (!question) {
+      renderHome();
+      return;
+    }
+
+    const progress = ((state.currentIndex + 1) / questions.length) * 100;
+
+    renderShell(
+      `
+      <div class="sticky-head">
+        <div class="quiz-meta">
+          <span>${String(state.currentIndex + 1).padStart(2, "0")} / ${questions.length}</span>
+          <span>${text(question.module)}</span>
+        </div>
+        <div class="progress-track"><div class="progress-bar" style="width:${progress}%"></div></div>
+      </div>
+      <div class="question-no">${String(state.currentIndex + 1).padStart(2, "0")}</div>
+      <h1 class="question-title">${text(question.text)}</h1>
+      <div class="options">
+        ${(question.options || [])
+          .map(
+            (option) => `
+            <button class="option" data-option="${text(option.key)}">
+              <span class="option-key">${text(option.key)}</span>
+              <span class="option-text">${text(option.text)}</span>
+            </button>
+          `
+          )
+          .join("")}
+      </div>
+      <p class="hint">${text(state.config.quizHint || "选择后自动进入下一题")}</p>
+      `,
+      "quiz-screen"
+    );
+
+    app.querySelectorAll("[data-option]").forEach((button) => {
+      button.addEventListener("click", () => selectOption(button.dataset.option));
+    });
+  }
+
+  function selectOption(key) {
+    if (state.locked) return;
+    state.locked = true;
+    state.selected = key;
+    const question = state.config.questions[state.currentIndex];
+    state.answers[question.id] = key;
+
+    app.querySelectorAll(".option").forEach((button) => {
+      const selected = button.dataset.option === key;
+      button.classList.toggle("selected", selected);
+      button.classList.toggle("dimmed", !selected);
+    });
+
+    window.setTimeout(() => {
+      if (state.currentIndex < state.config.questions.length - 1) {
+        state.currentIndex += 1;
+        state.locked = false;
+        state.selected = null;
+        renderQuiz();
+      } else {
+        sessionStorage.setItem(getStorageKey(), JSON.stringify(state.answers));
+        state.locked = false;
+        navigate("loading");
+      }
+    }, 420);
+  }
+
+  function startLoading() {
+    state.loadingStep = 0;
+    renderLoading("");
+    tickLoading();
+  }
+
+  function renderLoading(value) {
+    const loadingMessages = getLoadingMessages();
+    renderShell(
+      `
+      <div class="loading-card">
+        <div class="spinner"></div>
+        <div class="loading-text">${text(value)}<span class="cursor">|</span></div>
+        <div class="step-bars">
+          ${loadingMessages.map((_, index) => `<div class="step ${index < state.loadingStep ? "done" : ""}"><span></span></div>`).join("")}
+        </div>
+      </div>
+      `,
+      "loading-screen"
+    );
+  }
+
+  function tickLoading() {
+    if (state.route !== "loading") return;
+    const loadingMessages = getLoadingMessages();
+    if (state.loadingStep >= loadingMessages.length) {
+      window.setTimeout(() => navigate("result"), 700);
+      return;
+    }
+    const message = loadingMessages[state.loadingStep];
+    let chars = 0;
+    const interval = window.setInterval(() => {
+      chars += 1;
+      renderLoading(message.slice(0, chars));
+      if (chars >= message.length) {
+        window.clearInterval(interval);
+        window.setTimeout(() => {
+          state.loadingStep += 1;
+          tickLoading();
+        }, 520);
+      }
+    }, 35);
+  }
+
+  function renderResult() {
+    const saved = sessionStorage.getItem(getStorageKey());
+    if (saved) state.answers = JSON.parse(saved);
+    if (Object.keys(state.answers).length < state.config.questions.length) {
+      renderHome();
+      return;
+    }
+
+    const scored = scoreAnswers(state.answers);
+    const primary = state.config.results[scored.primary];
+    const secondary = scored.secondary ? state.config.secondaryNotes?.[scored.primary]?.[scored.secondary] : null;
+    const stage = getStage(primary.maturityScore);
+    const shareText = buildShareText(primary, secondary);
+    const compareLabels = state.config.compareLabels || ["如果继续原路", "如果换一种做法"];
+    state.resultData = { scored, primary, secondary, stage, shareText };
+
+    renderShell(
+      `
+      <article class="report">
+        <div class="kicker"><span class="dot"></span><span>${text(state.config.resultKicker || "Result Report")}</span><span class="dot"></span></div>
+        <h1 class="result-type">${text(primary.typeName)}</h1>
+        <p class="result-subtitle">${text(primary.subtitle)}</p>
+        <div class="stamp-row">
+          <div class="stamp"><strong>${text(primary.maturityScore)}</strong><span>${text(state.config.scoreLabel || "决策成熟度")}</span></div>
+          <div class="stamp"><strong>${text(stage)}</strong><span>${text(state.config.stageLabel || "当前行动阶段")}</span></div>
+        </div>
+
+        <section class="section">
+          <h2>你的答案分布</h2>
+          <div class="meters">
+            ${Object.entries(scored.counts)
+              .map(([key, value]) => {
+                const typeData = state.config.results[key];
+                const width = (value / state.config.questions.length) * 100;
+                return `
+                  <div>
+                    <div class="meter-head"><span>${text(key)} · ${text(typeData.typeName)}</span><span>${value} 题</span></div>
+                    <div class="meter-track"><div class="meter-fill" style="width:${width}%"></div></div>
+                  </div>
+                `;
+              })
+              .join("")}
+          </div>
+        </section>
+
+        ${secondary ? `<section class="section"><h2>副倾向提示</h2><div class="secondary-note">${text(secondary)}</div></section>` : ""}
+
+        <section class="section">
+          <h2>诊断结论</h2>
+          <div class="quote">${text(primary.coreConclusion)}</div>
+        </section>
+
+        <section class="section">
+          <h2>为什么你会这样</h2>
+          <p>${text(primary.diagnosis)}</p>
+          <p>${text(primary.whatYouReallyWant)}</p>
+        </section>
+
+        <section class="section">
+          <h2>${text(primary.mechanism.title)}</h2>
+          <p>${text(primary.mechanism.content)}</p>
+        </section>
+
+        ${renderParagraphSection("专业解读框架", primary.professionalBasis)}
+        ${renderTagSection("你的关键矛盾", primary.coreTensions)}
+        ${renderCompareListSection("适合推进的条件", "需要谨慎的信号", primary.suitableIf, primary.cautionIf)}
+
+        <section class="section">
+          <h2>关键指数</h2>
+          <div class="meters">
+            ${(primary.indices || [])
+              .map(
+                (item) => `
+                <div>
+                  <div class="meter-head"><span>${text(item.label)}</span><span>${text(item.value)}</span></div>
+                  <div class="meter-track"><div class="meter-fill" style="width:${number(item.value)}%"></div></div>
+                </div>
+              `
+              )
+              .join("")}
+          </div>
+        </section>
+
+        <section class="section">
+          <h2>两条路径对比</h2>
+          <div class="compare">
+            <div class="compare-card"><h3>${text(compareLabels[0])}</h3><p>${text(primary.ifStay)}</p></div>
+            <div class="compare-card"><h3>${text(compareLabels[1])}</h3><p>${text(primary.ifChange)}</p></div>
+          </div>
+        </section>
+
+        <section class="section">
+          <h2>现在最不建议你做</h2>
+          <div class="tag-list">${(primary.notRecommended || []).map((item) => `<span class="tag">${text(item)}</span>`).join("")}</div>
+        </section>
+
+        <section class="section">
+          <h2>未来 90 天验证方案</h2>
+          <div class="plan">
+            ${(primary.plan90 || [])
+              .map(
+                (item, index) => `
+                <div class="plan-card">
+                  <h3>${index + 1}. ${text(item.title)}</h3>
+                  <p>${text(item.content)}</p>
+                </div>
+              `
+              )
+              .join("")}
+          </div>
+        </section>
+
+        <section class="section">
+          <h2>最后一句话</h2>
+          <p>${text(primary.closing)}</p>
+        </section>
+
+        <div class="actions">
+          <button class="primary-btn" data-action="copy">${text(state.config.copyButton || "复制我的结果")}</button>
+          <button class="ghost-btn" data-action="restart">${text(state.config.restartButton || "重新测试")}</button>
+        </div>
+      </article>
+      `,
+      "result-screen"
+    );
+
+    app.querySelector("[data-action='copy']").addEventListener("click", () => copyShareText(shareText));
+    app.querySelector("[data-action='restart']").addEventListener("click", () => {
+      sessionStorage.removeItem(getStorageKey());
+      state.answers = {};
+      state.currentIndex = 0;
+      navigate("home");
+    });
+  }
+
+  function renderParagraphSection(title, paragraphs) {
+    if (!Array.isArray(paragraphs) || !paragraphs.length) return "";
+    return `
+      <section class="section">
+        <h2>${text(title)}</h2>
+        ${paragraphs.map((item) => `<p>${text(item)}</p>`).join("")}
+      </section>
+    `;
+  }
+
+  function renderTagSection(title, items) {
+    if (!Array.isArray(items) || !items.length) return "";
+    return `
+      <section class="section">
+        <h2>${text(title)}</h2>
+        <div class="tag-list">${items.map((item) => `<span class="tag">${text(item)}</span>`).join("")}</div>
+      </section>
+    `;
+  }
+
+  function renderCompareListSection(leftTitle, rightTitle, leftItems, rightItems) {
+    const hasLeft = Array.isArray(leftItems) && leftItems.length;
+    const hasRight = Array.isArray(rightItems) && rightItems.length;
+    if (!hasLeft && !hasRight) return "";
+    return `
+      <section class="section">
+        <h2>适用边界</h2>
+        <div class="compare">
+          <div class="compare-card">
+            <h3>${text(leftTitle)}</h3>
+            ${(leftItems || []).map((item) => `<p>${text(item)}</p>`).join("")}
+          </div>
+          <div class="compare-card">
+            <h3>${text(rightTitle)}</h3>
+            ${(rightItems || []).map((item) => `<p>${text(item)}</p>`).join("")}
+          </div>
+        </div>
+      </section>
+    `;
+  }
+
+  function scoreAnswers(answers) {
+    const counts = { A: 0, B: 0, C: 0, D: 0 };
+    Object.values(answers).forEach((key) => {
+      if (counts[key] !== undefined) counts[key] += 1;
+    });
+    const sorted = Object.entries(counts).sort((a, b) => b[1] - a[1]);
+    const threshold = state.config.secondaryThreshold ?? 2;
+    const primary = sorted[0][0];
+    const secondary = sorted[1][1] > 0 && sorted[0][1] - sorted[1][1] <= threshold ? sorted[1][0] : null;
+    return { counts, primary, secondary };
+  }
+
+  function getStage(score) {
+    const labels = state.config.stageLabels || [
+      { max: 45, label: "观察期" },
+      { max: 65, label: "验证期" },
+      { max: 82, label: "规划期" },
+      { max: 100, label: "行动期" },
+    ];
+    const hit = labels.find((item) => score <= item.max);
+    return hit ? hit.label : labels[labels.length - 1].label;
+  }
+
+  function buildShareText(primary, secondary) {
+    const template = state.config.shareTemplate || [
+      "我测出了：{{typeName}}",
+      "{{posterSubtext}}",
+      "{{secondaryLine}}",
+      "",
+      "{{title}}",
+    ];
+    const values = {
+      title: state.config.title,
+      typeName: primary.typeName,
+      posterSubtext: primary.posterSubtext,
+      secondary: secondary || "",
+      secondaryLine: secondary ? `副倾向：${secondary}` : "",
+    };
+    return template
+      .map((line) => fillTemplate(line, values))
+      .filter((line, index, arr) => line || arr[index - 1])
+      .join("\n")
+      .trim();
+  }
+
+  async function copyShareText(value) {
+    try {
+      await navigator.clipboard.writeText(value);
+      showToast("结果文案已复制");
+    } catch (error) {
+      showToast("复制失败，可长按手动复制");
+    }
+  }
+
+  function showToast(value) {
+    const toast = document.getElementById("toast");
+    if (!toast) return;
+    toast.textContent = value;
+    toast.classList.add("show");
+    window.setTimeout(() => toast.classList.remove("show"), 1600);
+  }
+
+  function getLoadingMessages() {
+    return state.config.loadingMessages || defaultLoadingMessages;
+  }
+
+  function getStorageKey() {
+    return `xhsTestAnswers:${state.config.slug || "default"}`;
+  }
+
+  function fillTemplate(template, values) {
+    return String(template).replace(/\{\{(\w+)\}\}/g, (_, key) => values[key] || "");
+  }
+
+  function number(value) {
+    const parsed = Number(value);
+    if (Number.isNaN(parsed)) return 0;
+    return Math.max(0, Math.min(100, parsed));
+  }
+
+  function text(value) {
+    return String(value ?? "")
+      .replace(/&/g, "&amp;")
+      .replace(/</g, "&lt;")
+      .replace(/>/g, "&gt;")
+      .replace(/"/g, "&quot;");
+  }
+})();
+
+    </script>
+  </body>
+</html>
