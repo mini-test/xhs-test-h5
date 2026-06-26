@@ -1,0 +1,1125 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <meta name="description" content="完成 32 道「你是真的想辞职，还是只想被好好对待」测试，生成你的职场状态报告。" />
+    <meta property="og:title" content="你是真的想辞职，还是只想被好好对待？" />
+    <meta property="og:description" content="完成 32 道「你是真的想辞职，还是只想被好好对待」测试，生成你的职场状态报告。" />
+    <title>你是真的想辞职，还是只想被好好对待？</title>
+    <style>
+:root {
+  --bg: #fbfaf7;
+  --paper: #fffefd;
+  --ink: #20242a;
+  --muted: #65707d;
+  --line: #d9d4ca;
+  --line-strong: #b9afa0;
+  --accent: #9b4339;
+  --accent-soft: #f1dfd7;
+  --gold: #c0964d;
+  --sage: #66795f;
+  --blue: #526a86;
+  --shadow: 0 16px 36px rgba(60, 47, 38, 0.1);
+  --radius: 8px;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  min-height: 100%;
+  background:
+    linear-gradient(rgba(32, 36, 42, 0.035) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(32, 36, 42, 0.035) 1px, transparent 1px),
+    var(--bg);
+  background-size: 24px 24px;
+}
+
+body {
+  min-height: 100vh;
+  margin: 0;
+  color: var(--ink);
+  font-family:
+    "PingFang SC",
+    "Microsoft YaHei",
+    "Noto Sans SC",
+    system-ui,
+    -apple-system,
+    BlinkMacSystemFont,
+    sans-serif;
+  letter-spacing: 0;
+}
+
+button {
+  font: inherit;
+}
+
+.shell {
+  width: min(100%, 480px);
+  min-height: 100vh;
+  margin: 0 auto;
+  background: rgba(251, 250, 247, 0.88);
+}
+
+.top-rule {
+  height: 4px;
+  background: var(--accent);
+}
+
+.screen {
+  min-height: calc(100vh - 4px);
+  padding: 28px 22px 32px;
+}
+
+.home {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.kicker {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  color: var(--muted);
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  font-size: 11px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+.dot {
+  width: 7px;
+  height: 7px;
+  background: var(--accent);
+  border-radius: 50%;
+}
+
+.hero-title {
+  margin: 26px 0 14px;
+  color: var(--ink);
+  font-size: 30px;
+  line-height: 1.2;
+  text-align: center;
+  font-weight: 800;
+}
+
+.hero-subtitle {
+  margin: 0 auto 28px;
+  max-width: 340px;
+  color: var(--muted);
+  font-size: 15px;
+  line-height: 1.75;
+  text-align: center;
+}
+
+.hairline {
+  width: 64px;
+  height: 1px;
+  margin: 0 auto 30px;
+  background: var(--line-strong);
+}
+
+.intro {
+  margin: 0 auto;
+  max-width: 380px;
+}
+
+.intro p {
+  margin: 0 0 15px;
+  color: rgba(32, 36, 42, 0.82);
+  font-size: 15px;
+  line-height: 1.8;
+}
+
+.intro .strong {
+  color: var(--accent);
+  font-weight: 700;
+}
+
+.pill-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px;
+  margin: 28px 0;
+}
+
+.pill {
+  min-height: 42px;
+  display: grid;
+  place-items: center;
+  border: 1px solid var(--line);
+  color: var(--muted);
+  background: rgba(255, 255, 255, 0.44);
+  font-size: 13px;
+}
+
+.primary-btn,
+.ghost-btn,
+.copy-btn {
+  width: 100%;
+  min-height: 48px;
+  border: 1px solid var(--ink);
+  border-radius: 0;
+  cursor: pointer;
+  transition: transform 150ms ease, background 150ms ease, color 150ms ease, border-color 150ms ease;
+}
+
+.primary-btn {
+  background: var(--ink);
+  color: #fff;
+  font-weight: 700;
+}
+
+.ghost-btn,
+.copy-btn {
+  background: transparent;
+  color: var(--ink);
+}
+
+.primary-btn:active,
+.ghost-btn:active,
+.copy-btn:active,
+.option:active {
+  transform: translateY(1px);
+}
+
+.disclaimer {
+  margin: 18px auto 0;
+  max-width: 340px;
+  color: var(--muted);
+  font-size: 12px;
+  line-height: 1.65;
+  text-align: center;
+}
+
+.quiz-screen {
+  padding-top: 0;
+}
+
+.sticky-head {
+  position: sticky;
+  top: 0;
+  z-index: 5;
+  margin: 0 -22px 26px;
+  padding: 14px 22px 12px;
+  background: rgba(251, 250, 247, 0.95);
+  border-bottom: 1px solid var(--line);
+  backdrop-filter: blur(12px);
+}
+
+.quiz-meta {
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+  color: var(--muted);
+  font-size: 12px;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+}
+
+.progress-track {
+  height: 4px;
+  margin-top: 10px;
+  background: rgba(32, 36, 42, 0.09);
+}
+
+.progress-bar {
+  height: 100%;
+  background: var(--accent);
+  transition: width 260ms ease;
+}
+
+.question-no {
+  color: rgba(155, 67, 57, 0.18);
+  font-size: 48px;
+  line-height: 1;
+  font-weight: 800;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+}
+
+.question-title {
+  margin: 18px 0 24px;
+  font-size: 22px;
+  line-height: 1.5;
+  font-weight: 750;
+}
+
+.options {
+  display: grid;
+  gap: 12px;
+}
+
+.option {
+  min-height: 66px;
+  display: grid;
+  grid-template-columns: 30px 1fr;
+  gap: 12px;
+  align-items: start;
+  width: 100%;
+  padding: 15px;
+  border: 1px solid var(--line);
+  background: rgba(255, 255, 255, 0.68);
+  color: var(--ink);
+  text-align: left;
+  cursor: pointer;
+  transition: background 160ms ease, border-color 160ms ease, color 160ms ease, opacity 160ms ease;
+}
+
+.option-key {
+  display: grid;
+  place-items: center;
+  width: 28px;
+  height: 28px;
+  border: 1px solid var(--line-strong);
+  font-size: 13px;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+}
+
+.option-text {
+  padding-top: 2px;
+  font-size: 15px;
+  line-height: 1.55;
+}
+
+.option.selected {
+  border-color: var(--accent);
+  background: var(--accent);
+  color: #fff;
+}
+
+.option.selected .option-key {
+  border-color: rgba(255, 255, 255, 0.8);
+}
+
+.option.dimmed {
+  opacity: 0.42;
+}
+
+.hint {
+  margin: 18px 0 0;
+  color: var(--muted);
+  font-size: 12px;
+  text-align: center;
+}
+
+.loading-screen {
+  display: grid;
+  place-items: center;
+}
+
+.loading-card {
+  width: 100%;
+  max-width: 360px;
+  text-align: center;
+}
+
+.spinner {
+  width: 54px;
+  height: 54px;
+  margin: 0 auto 24px;
+  border: 2px solid var(--line);
+  border-top-color: var(--accent);
+  border-radius: 50%;
+  animation: spin 850ms linear infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.loading-text {
+  min-height: 54px;
+  color: var(--accent);
+  font-size: 17px;
+  line-height: 1.6;
+  font-weight: 700;
+}
+
+.step-bars {
+  display: grid;
+  gap: 8px;
+  margin-top: 28px;
+}
+
+.step {
+  height: 4px;
+  overflow: hidden;
+  background: rgba(32, 36, 42, 0.09);
+}
+
+.step span {
+  display: block;
+  height: 100%;
+  width: 0;
+  background: var(--accent);
+  transition: width 300ms ease;
+}
+
+.step.done span {
+  width: 100%;
+}
+
+.result-screen {
+  padding: 22px 18px 30px;
+}
+
+.report {
+  padding: 22px 16px 18px;
+  border: 1px solid var(--line);
+  background: var(--paper);
+  box-shadow: var(--shadow);
+}
+
+.result-type {
+  margin: 8px 0 8px;
+  color: var(--accent);
+  font-size: 30px;
+  line-height: 1.15;
+  font-weight: 850;
+  text-align: center;
+}
+
+.result-subtitle {
+  margin: 0 auto 20px;
+  color: var(--muted);
+  font-size: 15px;
+  line-height: 1.7;
+  text-align: center;
+}
+
+.stamp-row {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px;
+  margin: 18px 0 20px;
+}
+
+.stamp {
+  padding: 12px 10px;
+  border: 1px solid var(--line);
+  background: #fbfaf7;
+}
+
+.stamp strong {
+  display: block;
+  margin-bottom: 4px;
+  color: var(--ink);
+  font-size: 20px;
+}
+
+.stamp span {
+  color: var(--muted);
+  font-size: 12px;
+}
+
+.section {
+  padding: 20px 0;
+  border-top: 1px solid var(--line);
+}
+
+.section h2 {
+  margin: 0 0 12px;
+  font-size: 18px;
+  color: var(--ink);
+}
+
+.section p {
+  margin: 0 0 12px;
+  color: rgba(32, 36, 42, 0.82);
+  font-size: 15px;
+  line-height: 1.85;
+}
+
+.quote {
+  padding: 15px;
+  border-left: 3px solid var(--accent);
+  background: var(--accent-soft);
+  color: #5b2d27;
+  line-height: 1.8;
+  font-weight: 700;
+}
+
+.meters {
+  display: grid;
+  gap: 14px;
+}
+
+.meter-head {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 7px;
+  color: var(--muted);
+  font-size: 13px;
+}
+
+.meter-track {
+  height: 8px;
+  background: rgba(32, 36, 42, 0.08);
+}
+
+.meter-fill {
+  height: 100%;
+  background: var(--accent);
+}
+
+.compare {
+  display: grid;
+  gap: 10px;
+}
+
+.compare-card {
+  padding: 14px;
+  border: 1px solid var(--line);
+  background: #fbfaf7;
+}
+
+.compare-card h3,
+.plan-card h3 {
+  margin: 0 0 8px;
+  font-size: 15px;
+}
+
+.compare-card p,
+.plan-card p {
+  font-size: 14px;
+}
+
+.tag-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.tag {
+  padding: 7px 9px;
+  border: 1px solid var(--line);
+  background: #fbfaf7;
+  color: var(--muted);
+  font-size: 13px;
+}
+
+.plan {
+  display: grid;
+  gap: 10px;
+}
+
+.plan-card {
+  padding: 14px;
+  border: 1px solid var(--line);
+  background: #fbfaf7;
+}
+
+.secondary-note {
+  padding: 14px;
+  border: 1px dashed var(--line-strong);
+  background: rgba(192, 150, 77, 0.12);
+  line-height: 1.75;
+  font-size: 14px;
+}
+
+.actions {
+  display: grid;
+  gap: 10px;
+  margin-top: 18px;
+}
+
+.toast {
+  position: fixed;
+  left: 50%;
+  bottom: 22px;
+  z-index: 20;
+  transform: translateX(-50%);
+  padding: 10px 14px;
+  background: var(--ink);
+  color: #fff;
+  font-size: 13px;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 180ms ease;
+}
+
+.toast.show {
+  opacity: 1;
+}
+
+.error {
+  display: grid;
+  place-items: center;
+  min-height: 100vh;
+  padding: 24px;
+  text-align: center;
+}
+
+.error p {
+  color: var(--muted);
+  line-height: 1.7;
+}
+
+@media (min-width: 700px) {
+  body {
+    padding: 28px 0;
+  }
+
+  .shell {
+    min-height: calc(100vh - 56px);
+    border: 1px solid var(--line);
+    box-shadow: var(--shadow);
+  }
+
+  .screen {
+    min-height: calc(100vh - 60px);
+  }
+}
+
+    </style>
+  </head>
+  <body>
+    <main id="app" aria-live="polite"></main>
+    <script>window.__QUIZ_CONFIG__ = {"slug":"test-resign-or-treated","topic":"你是真的想辞职，还是只想被好好对待？","kicker":"32-Q Workplace Boundary Test","title":"你是真的想辞职，还是只想被好好对待？","subtitle":"32 道题，拆清你是该离开、该谈边界、只是太累了，还是其实还想被这个地方认真对待一次。","metaDescription":"完成 32 道「你是真的想辞职，还是只想被好好对待」测试，生成你的职场状态报告。","startButton":"开始测试","resultKicker":"Workplace Boundary Report","quizHint":"选择后自动进入下一题","copyButton":"复制我的结果","restartButton":"重新测试","scoreLabel":"离职清晰度","stageLabel":"当前阶段","stageLabels":[{"max":45,"label":"委屈期"},{"max":65,"label":"降噪期"},{"max":82,"label":"谈判期"},{"max":100,"label":"行动期"}],"compareLabels":["如果现在离开","如果继续留下"],"disclaimer":"本测试为趣味自我观察工具，非职业咨询或心理测评结论，仅供你整理职场感受和下一步思路。","secondaryThreshold":4,"dimensions":["离职动机","被善待需求","耗竭程度","边界修复"],"intro":["你以为自己想辞职，可能只是太久没有被认真对待。","也可能相反：你一直用「再忍忍」安慰自己，但身体和情绪已经替你做完决定。","32 道题会从委屈来源、工作耗竭、关系边界、成长反馈、表达成本和行动准备 8 个模块，帮你看清自己到底卡在哪里。"],"loadingMessages":["正在读取你的第一反应...","正在拆分离职冲动、委屈感和耗竭信号...","正在识别你是想离开，还是想被好好对待...","正在生成 32 题职场状态报告...","分析完成。"],"questions":[{"id":1,"module":"委屈来源","text":"你最近最常冒出的念头是：","options":[{"key":"A","text":"我真的不想再把时间交给这里了"},{"key":"B","text":"如果有人认真听我说一次，我可能还能撑"},{"key":"C","text":"我已经累到连想辞职都觉得麻烦"},{"key":"D","text":"我需要把边界和条件说清楚，再决定走不走"}]},{"id":2,"module":"委屈来源","text":"让你最想离开的瞬间，通常不是工作本身，而是：","options":[{"key":"A","text":"发现这里已经没有我想要的成长和位置"},{"key":"B","text":"明明做了很多，却像理所当然一样被忽略"},{"key":"C","text":"听到消息那一刻，身体先开始抗拒"},{"key":"D","text":"规则和责任一直不清，最后都变成我来扛"}]},{"id":3,"module":"委屈来源","text":"如果领导突然夸你一句，你最真实的反应是：","options":[{"key":"A","text":"太晚了，这已经改变不了我想走的事实"},{"key":"B","text":"会有点动摇，原来我只是想被看见"},{"key":"C","text":"没什么感觉，我已经没有力气接收反馈"},{"key":"D","text":"我会听，但更想看后续有没有实际改变"}]},{"id":4,"module":"委屈来源","text":"你最介意同事或上级哪种反应？","options":[{"key":"A","text":"一直让我做没价值的事，还要求我保持热情"},{"key":"B","text":"只在出问题时找我，平时看不见我的付出"},{"key":"C","text":"不管他们说什么，我都觉得很消耗"},{"key":"D","text":"边界不清，谁都能临时把事推到我这里"}]},{"id":5,"module":"委屈来源","text":"你说「我想辞职」时，里面更多是：","options":[{"key":"A","text":"我已经确认这里不值得继续投入"},{"key":"B","text":"我想让他们知道，我不是没有感受的人"},{"key":"C","text":"我想从这种疲惫里消失几天"},{"key":"D","text":"我想用离开提醒自己，边界不能再退了"}]},{"id":6,"module":"工作耗竭","text":"周日晚上想到上班，你更像是：","options":[{"key":"A","text":"冷静地想，我该把离职计划排上日程"},{"key":"B","text":"心里酸一下，觉得自己不该被这样对待"},{"key":"C","text":"胸口发紧，只想把手机关掉"},{"key":"D","text":"开始列本周必须拒绝或谈清楚的事"}]},{"id":7,"module":"工作耗竭","text":"你下班后最常出现的状态是：","options":[{"key":"A","text":"刷岗位、改简历，想给自己找出口"},{"key":"B","text":"反复回想白天哪句话让我难受"},{"key":"C","text":"躺着不想说话，也不想做任何决定"},{"key":"D","text":"复盘哪些事本来不该我承担"}]},{"id":8,"module":"工作耗竭","text":"如果现在给你放三天假，你最想做的是：","options":[{"key":"A","text":"认真准备下一份工作，而不是休完继续回来"},{"key":"B","text":"缓一缓，也许我只是太久没被接住"},{"key":"C","text":"睡觉，不社交，不回复任何工作消息"},{"key":"D","text":"想清楚哪些条件必须改变，否则就走"}]},{"id":9,"module":"成长反馈","text":"你对这份工作最失望的是：","options":[{"key":"A","text":"它已经无法让我变得更强"},{"key":"B","text":"我努力了，却很少得到具体肯定"},{"key":"C","text":"我连自己想不想成长都快感受不到了"},{"key":"D","text":"目标总在变，标准却没人提前说清"}]},{"id":10,"module":"成长反馈","text":"别人劝你「再坚持一下」，你最想回的是：","options":[{"key":"A","text":"我已经坚持够久了，坚持不再带来回报"},{"key":"B","text":"我不是不能坚持，我是觉得没人珍惜"},{"key":"C","text":"我现在不是坚持的问题，是快撑不住了"},{"key":"D","text":"可以坚持，但要有明确条件和时间点"}]},{"id":11,"module":"成长反馈","text":"如果公司给你加一点薪，但环境不变，你会：","options":[{"key":"A","text":"不太会动摇，钱已经不是核心问题"},{"key":"B","text":"会动摇，因为这至少证明他们看见了我"},{"key":"C","text":"短暂安心，但很快又回到疲惫里"},{"key":"D","text":"加薪之外，还要确认职责、节奏和边界"}]},{"id":12,"module":"成长反馈","text":"你最怕继续留下后变成：","options":[{"key":"A","text":"几年后发现自己一直停在原地"},{"key":"B","text":"越来越习惯被忽视，还说服自己没关系"},{"key":"C","text":"情绪和身体先坏掉"},{"key":"D","text":"所有人默认我没有边界"}]},{"id":13,"module":"关系边界","text":"当别人临时把活塞给你，你通常会：","options":[{"key":"A","text":"心里更确定，这种协作方式我不想要了"},{"key":"B","text":"接下来，但会很委屈，觉得没人考虑我"},{"key":"C","text":"机械处理，已经懒得解释"},{"key":"D","text":"问清优先级、截止时间和谁来负责取舍"}]},{"id":14,"module":"关系边界","text":"你最想从上级那里听到的一句话是：","options":[{"key":"A","text":"不是听一句话，而是给我真正值得留下的理由"},{"key":"B","text":"这段时间辛苦了，我知道你承担了很多"},{"key":"C","text":"你先休息，这些事不用你一个人扛"},{"key":"D","text":"我们把你的职责和优先级重新定清楚"}]},{"id":15,"module":"关系边界","text":"如果你表达不满，对方说「大家都这样」，你会：","options":[{"key":"A","text":"更想走，因为这说明问题不会改变"},{"key":"B","text":"很难受，感觉自己的感受又被轻轻带过"},{"key":"C","text":"懒得再说，只想把自己关起来"},{"key":"D","text":"继续追问，那具体谁负责、标准是什么"}]},{"id":16,"module":"关系边界","text":"你最不想再配合的事是：","options":[{"key":"A","text":"为了一个没前景的岗位继续消耗自己"},{"key":"B","text":"一边被需要，一边不被尊重"},{"key":"C","text":"用自己的健康替团队兜底"},{"key":"D","text":"没有边界地接所有临时需求"}]},{"id":17,"module":"表达成本","text":"你迟迟没有开口谈，是因为：","options":[{"key":"A","text":"我觉得谈也没用，不如准备离开"},{"key":"B","text":"我怕一说出口，就显得自己很脆弱"},{"key":"C","text":"我连组织语言的力气都没有"},{"key":"D","text":"我还在整理证据和诉求，想一次说清"}]},{"id":18,"module":"表达成本","text":"如果给你一次 30 分钟沟通机会，你会重点说：","options":[{"key":"A","text":"我的职业方向和这里已经不匹配"},{"key":"B","text":"我需要被尊重，不只是被安排任务"},{"key":"C","text":"我现在真的很累，需要先减负"},{"key":"D","text":"我需要明确职责、优先级、反馈和资源"}]},{"id":19,"module":"表达成本","text":"你最怕沟通后的结果是：","options":[{"key":"A","text":"他们只是挽留我，但不给任何实质改变"},{"key":"B","text":"他们觉得我矫情，否定我的感受"},{"key":"C","text":"沟通完更累，还要继续面对同样的问题"},{"key":"D","text":"说得很动听，最后没有明确负责人和时间表"}]},{"id":20,"module":"表达成本","text":"你判断这份工作还能不能留，最需要看到：","options":[{"key":"A","text":"岗位和发展方向有真实调整空间"},{"key":"B","text":"有人认真承认我的感受和付出"},{"key":"C","text":"工作量和情绪压力先降下来"},{"key":"D","text":"明确的边界、资源和复盘节点"}]},{"id":21,"module":"行动准备","text":"如果明天就能离职，你最先想到的是：","options":[{"key":"A","text":"终于可以把生活和职业重新拿回来"},{"key":"B","text":"也许我不是非走不可，只是这里太伤人"},{"key":"C","text":"我只想先躲开一切，什么都不想管"},{"key":"D","text":"我要先确认交接、存款和下一步计划"}]},{"id":22,"module":"行动准备","text":"你现在的简历状态更像：","options":[{"key":"A","text":"已经在改，或者很想今晚就开始改"},{"key":"B","text":"还没动，因为心里其实还期待被挽回"},{"key":"C","text":"想到要改简历就更累"},{"key":"D","text":"我会先整理项目和谈判筹码，再决定是否投"}]},{"id":23,"module":"行动准备","text":"如果有人问你为什么想走，你最真实的答案是：","options":[{"key":"A","text":"这里已经不符合我的长期方向"},{"key":"B","text":"我在这里太久没有被好好对待"},{"key":"C","text":"我已经累到没办法像以前那样工作"},{"key":"D","text":"我需要更清楚的责任边界和交换条件"}]},{"id":24,"module":"行动准备","text":"你最担心离职后的事是：","options":[{"key":"A","text":"下一份能不能真的比现在更适合我"},{"key":"B","text":"会不会发现自己只是因为委屈才想走"},{"key":"C","text":"没工作以后，我的状态会不会更低"},{"key":"D","text":"有没有准备好资金、交接和求职节奏"}]},{"id":25,"module":"现实成本","text":"看到银行卡余额时，你会：","options":[{"key":"A","text":"开始计算自己什么时候可以安全离开"},{"key":"B","text":"有点心酸，为什么我被逼到要用钱衡量委屈"},{"key":"C","text":"更焦虑，觉得自己连休息的资格都没有"},{"key":"D","text":"算清缓冲期，再决定谈判还是启动求职"}]},{"id":26,"module":"现实成本","text":"如果现在有一个还不错的面试机会，你会：","options":[{"key":"A","text":"认真准备，我需要一个新出口"},{"key":"B","text":"去看看，但心里还会比较现在有没有救"},{"key":"C","text":"想去，但身体和脑子都跟不上"},{"key":"D","text":"用它校准市场，也给自己增加谈判底气"}]},{"id":27,"module":"现实成本","text":"你最不想裸辞的原因是：","options":[{"key":"A","text":"我想走得稳，不想用冲动换新风险"},{"key":"B","text":"我怕自己离开后才发现只是想被在乎"},{"key":"C","text":"我怕状态更差，连找工作都难"},{"key":"D","text":"我还没准备好退路和边界方案"}]},{"id":28,"module":"现实成本","text":"如果公司说愿意调整，你最想先看：","options":[{"key":"A","text":"调整是否真的匹配我的职业方向"},{"key":"B","text":"他们是不是终于愿意正视我的感受"},{"key":"C","text":"能不能先让我缓下来，不要继续压榨"},{"key":"D","text":"调整内容有没有负责人、时间表和书面确认"}]},{"id":29,"module":"下一步","text":"最适合你现在做的第一件事是：","options":[{"key":"A","text":"整理简历和作品集，开始看外部机会"},{"key":"B","text":"写下让我最委屈的 3 件事，判断是否可修复"},{"key":"C","text":"先休息和降负荷，不在崩溃边缘做决定"},{"key":"D","text":"列出必须谈清的边界，约一次正式沟通"}]},{"id":30,"module":"下一步","text":"你更希望 30 天后的自己是：","options":[{"key":"A","text":"已经在推进新的机会，不再原地消耗"},{"key":"B","text":"至少知道自己不是玻璃心，而是真的受伤了"},{"key":"C","text":"睡眠和情绪先恢复一点"},{"key":"D","text":"把职责、节奏和回报谈到一个可接受状态"}]},{"id":31,"module":"下一步","text":"如果只能给现在的自己一句提醒，你会选：","options":[{"key":"A","text":"不要把人生继续押在一个不合适的地方"},{"key":"B","text":"你想走，也许只是因为太久没人好好对你"},{"key":"C","text":"先别逼自己坚强，累是真的"},{"key":"D","text":"你的边界不说清，别人就会默认没有"}]},{"id":32,"module":"下一步","text":"做完这组题，你最想得到的答案是：","options":[{"key":"A","text":"确认我可以开始准备离开"},{"key":"B","text":"确认我不是想逃，只是想被尊重"},{"key":"C","text":"确认我需要先停下来恢复"},{"key":"D","text":"确认我该先谈条件，再做决定"}]}],"results":{"A":{"typeName":"真想离开型","subtitle":"你不是一时冲动，而是已经看见这里不再适合你。","posterSubtext":"你想辞职，不只是因为委屈，而是因为投入回报已经失衡。","maturityScore":86,"coreConclusion":"你的答案显示，离职冲动背后有比较清晰的职业判断。你不只是想被安慰，也不只是累了几天，而是已经感到岗位价值、成长反馈、团队方式和未来路径都在持续消耗你。对你来说，最重要的不是再忍一次，而是把离开从情绪冲动变成可执行计划。","diagnosis":"你现在的核心问题不是「要不要再撑」，而是「怎样离开更稳」。如果继续把全部精力放在证明自己还能忍，你会失去准备新机会的窗口。你适合开始整理简历、作品、存款和交接方案。","whatYouReallyWant":"你真正想要的是重新拿回职业主动权。你不想再用被需要来证明价值，也不想把成长交给一个不再给你回报的环境。","mechanism":{"title":"投入回报失衡机制","content":"当一个人长期付出时间、情绪和能力，却得不到成长、尊重和合理回报时，离开不再是逃避，而是对资源配置的重新选择。"},"professionalBasis":["从职业决策角度看，你的离职动机已经从情绪反应上升到结构判断，适合进入外部机会验证阶段。","从风险控制角度看，你需要避免裸辞冲动，把离开拆成资金缓冲、简历更新、面试节奏和交接安排。","从心理状态看，你对被善待仍有期待，但它已经不足以抵消长期发展不匹配。"],"coreTensions":["想离开旧环境","担心下一份不确定","不想继续原地消耗","需要稳妥行动计划"],"suitableIf":["你已经连续几个月感到成长停滞","岗位价值和长期方向明显不匹配","沟通多次仍没有实质改变","你有基本资金缓冲或外部机会"],"cautionIf":["只是被某一次争吵刺激","还没看过外部市场","没有准备交接和简历","想用辞职惩罚别人"],"indices":[{"label":"离职清晰度","value":88},{"label":"旧环境消耗度","value":84},{"label":"行动准备度","value":72},{"label":"被善待期待","value":48}],"ifStay":"如果继续留下，你短期会维持稳定收入，但大概率会继续消耗职业信心和行动力。","ifChange":"如果开始准备离开，你会重新获得主动权。关键是不要用情绪裸奔，要用计划离场。","notRecommended":["深夜冲动提离职","不看市场直接裸辞","为了报复而离开","没有资金缓冲","把下一份幻想成万能解药"],"plan90":[{"title":"48小时内：写出离职原因","content":"把情绪原因和结构原因分开写，只保留能被事实支撑的部分。"},{"title":"一周内：更新简历和作品","content":"整理最能证明你能力的项目、数据和成果，开始小范围投递测试市场反馈。"},{"title":"一个月内：建立离职缓冲","content":"确认存款、社保、交接周期和面试节奏，不让离开变成新的焦虑源。"},{"title":"三个月内：完成新机会筛选","content":"用岗位匹配、上级风格、成长空间和边界清晰度筛选下一份工作。"}],"closing":"你可以走，但要体面地走、稳稳地走。真正的离开不是摔门，而是把自己带回更值得投入的地方。"},"B":{"typeName":"渴望被善待型","subtitle":"你不是非要辞职，你只是太久没有被认真看见。","posterSubtext":"你想离开的那部分，可能是一种迟到太久的委屈。","maturityScore":68,"coreConclusion":"你的答案显示，你对这份工作的失望里有很重的情感成分。你真正难受的不是任务本身，而是付出被忽略、感受被轻描淡写、需要一直被当成理所当然。你可能还没有完全想离开，你更想确认：这里是否还有人愿意认真对待你。","diagnosis":"你现在最需要的不是立刻做离职决定，而是分清「这份工作不适合」和「我在这里受了委屈」。如果问题还有修复空间，一次正式沟通可能会让答案变清楚；如果沟通后仍被敷衍，你的离开会更坚定。","whatYouReallyWant":"你真正想要的是被尊重、被看见、被公平对待。你不是想被哄，而是想确认自己的付出不是空气。","mechanism":{"title":"被看见需求机制","content":"当一个人长期承担责任却缺少反馈，会把离职当成证明自己重要的方式。真正的需求不是逃走，而是让自己的价值被承认。"},"professionalBasis":["从职场关系角度看，你的冲突点集中在反馈和尊重，而不完全是岗位本身。","从决策角度看，建议先做一次清晰表达，再根据对方反应判断是否值得留下。","从心理状态看，你需要避免把一次迟来的肯定当成全部改变，也不要把一次委屈当成唯一证据。"],"coreTensions":["想被认真看见","又怕自己太敏感","还对关系修复有期待","需要一次真实回应"],"suitableIf":["岗位本身仍有价值","你还愿意沟通一次","上级或团队有调整空间","你的委屈有具体事件支撑"],"cautionIf":["只要别人哄一句就全盘妥协","对方长期否定你的感受","你一直用委屈换认可","沟通后没有任何实际变化"],"indices":[{"label":"被善待需求","value":90},{"label":"离职确定性","value":52},{"label":"关系修复空间","value":74},{"label":"委屈累积度","value":86}],"ifStay":"如果继续留下，你需要的不只是情绪安慰，而是看见、反馈、边界和资源上的实际改变。","ifChange":"如果选择离开，你会从被忽视的环境里抽身，但也要确认自己不是为了让别人后悔才离开。","notRecommended":["用提离职测试别人重不重视你","被一句好话立刻哄回去","把所有委屈都憋到爆发","只讲情绪不讲具体事件","没有给自己设观察期限"],"plan90":[{"title":"24小时内：写下最委屈的3件事","content":"只写具体事件、影响和你期待的改变，先别急着下结论。"},{"title":"一周内：约一次正式沟通","content":"表达你的付出、感受和诉求，观察对方是认真回应还是继续敷衍。"},{"title":"两周内：设置观察期","content":"看反馈、资源和协作方式是否真的改变，不要只听承诺。"},{"title":"一个月内：决定修复或离开","content":"如果对方能改变，就重新设边界；如果仍旧忽视，就开始准备离开。"}],"closing":"你不是太矫情。想被好好对待，是很正常的需求。只是你要看清，这里到底有没有能力给你。"},"C":{"typeName":"耗竭降噪型","subtitle":"你现在不一定适合马上辞职，更需要先从耗竭里退出来。","posterSubtext":"你不是没有判断力，你只是太累了。","maturityScore":56,"coreConclusion":"你的答案显示，当前状态里耗竭信号非常明显。你想辞职，很可能不只是因为工作选择，而是因为身体、睡眠、情绪和注意力都已经被压到低位。在这种状态下做重大决定，容易把「我需要休息」误判成「我必须立刻离开」。","diagnosis":"你现在最需要的是降噪和恢复。不是说你不能辞职，而是不要在精力最低、情绪最窄的时候做不可逆决定。你需要先降低工作负荷、暂停额外责任、恢复睡眠和基本生活节奏，再判断这份工作是否还值得留。","whatYouReallyWant":"你真正想要的是暂停。不是被鸡血打起来，也不是被劝继续忍，而是先让自己从持续紧绷里出来。","mechanism":{"title":"耗竭遮蔽机制","content":"当人处在长期压力里，大脑会把所有问题都归结为一个出口：离开。但有些时候，离开是答案；有些时候，先恢复才是答案出现的前提。"},"professionalBasis":["从身心状态看，你的能量水平不足以支撑高质量职业决策，需要先处理疲惫和压力源。","从风险控制看，耗竭期裸辞容易带来新的经济焦虑和自我怀疑。","从行动策略看，你适合先做减负、请假、边界收缩和外部支持，再进行离职判断。"],"coreTensions":["非常想逃离","能量严重不足","判断被疲惫影响","需要先恢复再决定"],"suitableIf":["你最近睡眠明显变差","下班后无法恢复","想到求职也觉得疲惫","你已经很久没有真正休息"],"cautionIf":["在崩溃当天提离职","把休息需求误当职业答案","没有资金缓冲就裸辞","拒绝寻求任何外部支持"],"indices":[{"label":"耗竭指数","value":94},{"label":"离职清晰度","value":48},{"label":"恢复优先级","value":96},{"label":"行动能量","value":38}],"ifStay":"如果继续留下，你必须先减负和设边界，否则留下只会加重耗竭。","ifChange":"如果现在离开，你会短暂松一口气，但如果没有恢复计划，焦虑可能转移到钱、求职和自我价值上。","notRecommended":["在最累的时候做重大决定","用裸辞解决所有疲惫","继续接额外任务","假装自己还能扛","完全不和任何人说真实状态"],"plan90":[{"title":"24小时内：停止加码","content":"暂停主动接活、非必要社交和深夜复盘，先把能量漏口堵住。"},{"title":"一周内：争取一次减负","content":"请假、调优先级、拒绝低价值任务，让自己先从高压里退半步。"},{"title":"两周内：恢复基本节奏","content":"优先修复睡眠、饮食和运动，不在持续崩溃里判断未来。"},{"title":"一个月后：重新评估去留","content":"等状态回升后，再看工作问题是否仍然存在，以及离职准备是否充分。"}],"closing":"你现在最该做的，不是逼自己立刻勇敢，而是先救回自己的能量。等你没那么累了，答案会更诚实。"},"D":{"typeName":"边界谈判型","subtitle":"你不一定要马上走，但必须开始把话说清楚。","posterSubtext":"你的关键不是辞职，而是停止默认自己没有边界。","maturityScore":82,"coreConclusion":"你的答案显示，这份工作的问题集中在边界、责任、反馈和资源不清。你不是完全想离开，也不是单纯想被安慰，你需要的是一次正式的条件重谈。如果对方愿意把职责、优先级、工作量、反馈机制说清楚，这份工作还有修复空间；如果对方继续模糊，你就有更充分的理由离开。","diagnosis":"你现在最适合做的不是憋到爆发，也不是马上提交离职，而是把隐性不满转成清晰诉求。很多消耗不是来自工作量本身，而是来自没有边界、没有取舍、没有承认、没有规则。","whatYouReallyWant":"你真正想要的是公平交换。你可以努力，但不想继续无条件兜底；你可以配合，但不想所有模糊都由你承担。","mechanism":{"title":"边界修复机制","content":"职场里的委屈常常来自默认规则。你不说，别人就默认你可以；你不设边界，临时需求就会变成长期责任。"},"professionalBasis":["从组织协作看，你的问题可被拆成职责、优先级、反馈和资源四类，适合用正式沟通解决。","从职业风险看，如果沟通后仍无改变，离开会比继续内耗更理性。","从个人成长看，边界表达本身就是一种能力，它会影响你下一份工作里的位置。"],"coreTensions":["还没完全想走","不能继续无边界兜底","需要正式沟通","要用结果判断去留"],"suitableIf":["岗位仍有成长价值","问题集中在协作和边界","你能列出具体诉求","上级还有沟通空间"],"cautionIf":["对方只安抚不改变","你不敢提出具体要求","所有责任继续往你身上落","沟通没有记录和时间表"],"indices":[{"label":"边界修复必要性","value":92},{"label":"离职紧迫度","value":62},{"label":"谈判空间","value":80},{"label":"规则模糊风险","value":88}],"ifStay":"如果继续留下，你必须用明确规则换取安全感，而不是继续靠忍耐维持表面和平。","ifChange":"如果沟通失败后离开，你会更确定这不是冲动，而是环境无法承接你的合理边界。","notRecommended":["只在心里生气","用阴阳怪气代替正式沟通","没有诉求就提离职","接受口头安慰","谈完没有观察期限"],"plan90":[{"title":"24小时内：列出边界清单","content":"写清楚哪些事不能再默认由你承担，哪些任务必须有优先级和资源。"},{"title":"一周内：发起正式沟通","content":"用事实、影响、诉求、时间表四段式沟通，避免只讲情绪。"},{"title":"两周内：观察实际改变","content":"看任务分配、反馈方式和临时需求是否真的调整。"},{"title":"一个月内：决定留下或启动求职","content":"如果边界被尊重，就继续优化；如果仍被忽视，就开始准备离开。"}],"closing":"你不是不能继续做，而是不能再照旧做。先把边界说清楚，答案会自己站出来。"}},"secondaryNotes":{"A":{"B":"你的主倾向是「真想离开型」，副倾向带有「渴望被善待型」。这说明你既看见了结构性不适合，也仍在意自己是否被认真对待。","C":"你的主倾向是「真想离开型」，副倾向带有「耗竭降噪型」。这说明你想走的判断较清晰，但行动前仍要先照顾能量状态。","D":"你的主倾向是「真想离开型」，副倾向带有「边界谈判型」。这说明你可以准备离开，但最好把离开前的边界和交接做得更清楚。"},"B":{"A":"你的主倾向是「渴望被善待型」，副倾向带有「真想离开型」。这说明你的委屈已经不只是情绪，里面也有真实的去留判断。","C":"你的主倾向是「渴望被善待型」，副倾向带有「耗竭降噪型」。这说明你既想被看见，也已经被长期忽视消耗了能量。","D":"你的主倾向是「渴望被善待型」，副倾向带有「边界谈判型」。这说明你不只需要一句安慰，更需要实际规则和反馈改变。"},"C":{"A":"你的主倾向是「耗竭降噪型」，副倾向带有「真想离开型」。这说明你确实可能该走，但最好不要在能量最低点做决定。","B":"你的主倾向是「耗竭降噪型」，副倾向带有「渴望被善待型」。这说明你的疲惫里有很重的委屈，需要先被自己认真对待。","D":"你的主倾向是「耗竭降噪型」，副倾向带有「边界谈判型」。这说明你需要先减负，再用清晰边界判断这份工作是否还能修复。"},"D":{"A":"你的主倾向是「边界谈判型」，副倾向带有「真想离开型」。这说明谈判不是拖延，而是给离开或留下一个更确定的依据。","B":"你的主倾向是「边界谈判型」，副倾向带有「渴望被善待型」。这说明你需要的不只是被安抚，而是尊重落实到规则里。","C":"你的主倾向是「边界谈判型」，副倾向带有「耗竭降噪型」。这说明你要谈边界，也要先确保自己有力气谈。"}},"shareTemplate":["我测出来了：{{typeName}}","{{posterSubtext}}","{{secondaryLine}}","","你是真的想辞职，还是只想被好好对待？"]};</script>
+    <script>
+(function () {
+  const app = document.getElementById("app");
+  const configPaths = ["./configs/site-config.json", "./configs/career-change.json"];
+
+  const state = {
+    config: null,
+    answers: {},
+    currentIndex: 0,
+    selected: null,
+    locked: false,
+    loadingStep: 0,
+    route: "home",
+    resultData: null,
+  };
+
+  const defaultLoadingMessages = [
+    "正在读取你的选择倾向...",
+    "正在识别隐藏动机...",
+    "正在计算结果分布...",
+    "正在生成专属报告...",
+    "分析完成。",
+  ];
+
+  init();
+
+  async function init() {
+    try {
+      state.config = await fetchConfig();
+      applyDocumentMeta(state.config);
+
+      const saved = sessionStorage.getItem(getStorageKey());
+      if (saved) {
+        state.answers = JSON.parse(saved);
+      }
+
+      routeFromHash();
+      window.addEventListener("hashchange", routeFromHash);
+    } catch (error) {
+      app.innerHTML = `
+        <div class="error">
+          <div>
+            <h1>测试加载失败</h1>
+            <p>请确认你是通过网页链接打开页面，而不是直接双击 HTML 文件。</p>
+          </div>
+        </div>
+      `;
+      console.error(error);
+    }
+  }
+
+  async function fetchConfig() {
+    if (window.__QUIZ_CONFIG__) return window.__QUIZ_CONFIG__;
+    let lastError;
+    for (const path of configPaths) {
+      try {
+        const response = await fetch(path, { cache: "no-store" });
+        if (!response.ok) throw new Error(`${path} ${response.status}`);
+        return response.json();
+      } catch (error) {
+        lastError = error;
+      }
+    }
+    throw lastError;
+  }
+
+  function applyDocumentMeta(cfg) {
+    const title = cfg.title || "趣味测试";
+    const description = cfg.metaDescription || cfg.subtitle || "完成测试，生成你的专属报告。";
+    document.title = title;
+    setMeta("name", "description", description);
+    setMeta("property", "og:title", title);
+    setMeta("property", "og:description", description);
+  }
+
+  function setMeta(attr, key, content) {
+    let node = document.querySelector(`meta[${attr}="${key}"]`);
+    if (!node) {
+      node = document.createElement("meta");
+      node.setAttribute(attr, key);
+      document.head.appendChild(node);
+    }
+    node.setAttribute("content", content);
+  }
+
+  function routeFromHash() {
+    const route = (location.hash || "#/").replace("#/", "") || "home";
+    renderRoute(route);
+  }
+
+  function navigate(route) {
+    const nextHash = `#/${route}`;
+    if (location.hash === nextHash) {
+      renderRoute(route);
+      return;
+    }
+    location.hash = nextHash;
+  }
+
+  function renderRoute(route) {
+    state.route = route;
+    if (route === "quiz") renderQuiz();
+    else if (route === "loading") startLoading();
+    else if (route === "result") renderResult();
+    else renderHome();
+  }
+
+  function renderShell(content, extraClass = "") {
+    app.innerHTML = `
+      <div class="shell">
+        <div class="top-rule"></div>
+        <section class="screen ${extraClass}">${content}</section>
+      </div>
+      <div id="toast" class="toast">已复制</div>
+    `;
+  }
+
+  function renderHome() {
+    const cfg = state.config;
+    renderShell(
+      `
+      <div class="home">
+        <div class="kicker"><span class="dot"></span><span>${text(cfg.kicker)}</span><span class="dot"></span></div>
+        <h1 class="hero-title">${text(cfg.title)}</h1>
+        <p class="hero-subtitle">${text(cfg.subtitle)}</p>
+        <div class="hairline"></div>
+        <div class="intro">
+          ${(cfg.intro || []).map((p, index) => `<p class="${index === cfg.intro.length - 1 ? "strong" : ""}">${text(p)}</p>`).join("")}
+        </div>
+        <div class="pill-grid">
+          ${(cfg.dimensions || []).map((item) => `<div class="pill">${text(item)}</div>`).join("")}
+        </div>
+        <button class="primary-btn" data-action="start">${text(cfg.startButton || "开始测试")}</button>
+        <p class="disclaimer">${text(cfg.disclaimer || "本测试为趣味内容，仅供娱乐参考。")}</p>
+      </div>
+      `,
+      "home"
+    );
+    const startButton = app.querySelector("[data-action='start']");
+    let started = false;
+    const startQuiz = () => {
+      if (started) return;
+      started = true;
+      state.answers = {};
+      state.currentIndex = 0;
+      sessionStorage.removeItem(getStorageKey());
+      navigate("quiz");
+    };
+    startButton.addEventListener("click", startQuiz);
+    startButton.addEventListener(
+      "touchend",
+      (event) => {
+        event.preventDefault();
+        startQuiz();
+      },
+      { passive: false }
+    );
+  }
+
+  function renderQuiz() {
+    const questions = state.config.questions || [];
+    const question = questions[state.currentIndex];
+    if (!question) {
+      renderHome();
+      return;
+    }
+
+    const progress = ((state.currentIndex + 1) / questions.length) * 100;
+
+    renderShell(
+      `
+      <div class="sticky-head">
+        <div class="quiz-meta">
+          <span>${String(state.currentIndex + 1).padStart(2, "0")} / ${questions.length}</span>
+          <span>${text(question.module)}</span>
+        </div>
+        <div class="progress-track"><div class="progress-bar" style="width:${progress}%"></div></div>
+      </div>
+      <div class="question-no">${String(state.currentIndex + 1).padStart(2, "0")}</div>
+      <h1 class="question-title">${text(question.text)}</h1>
+      <div class="options">
+        ${(question.options || [])
+          .map(
+            (option) => `
+            <button class="option" data-option="${text(option.key)}">
+              <span class="option-key">${text(option.key)}</span>
+              <span class="option-text">${text(option.text)}</span>
+            </button>
+          `
+          )
+          .join("")}
+      </div>
+      <p class="hint">${text(state.config.quizHint || "选择后自动进入下一题")}</p>
+      `,
+      "quiz-screen"
+    );
+
+    app.querySelectorAll("[data-option]").forEach((button) => {
+      button.addEventListener("click", () => selectOption(button.dataset.option));
+    });
+  }
+
+  function selectOption(key) {
+    if (state.locked) return;
+    state.locked = true;
+    state.selected = key;
+    const question = state.config.questions[state.currentIndex];
+    state.answers[question.id] = key;
+
+    app.querySelectorAll(".option").forEach((button) => {
+      const selected = button.dataset.option === key;
+      button.classList.toggle("selected", selected);
+      button.classList.toggle("dimmed", !selected);
+    });
+
+    window.setTimeout(() => {
+      if (state.currentIndex < state.config.questions.length - 1) {
+        state.currentIndex += 1;
+        state.locked = false;
+        state.selected = null;
+        renderQuiz();
+      } else {
+        sessionStorage.setItem(getStorageKey(), JSON.stringify(state.answers));
+        state.locked = false;
+        navigate("loading");
+      }
+    }, 420);
+  }
+
+  function startLoading() {
+    state.loadingStep = 0;
+    renderLoading("");
+    tickLoading();
+  }
+
+  function renderLoading(value) {
+    const loadingMessages = getLoadingMessages();
+    renderShell(
+      `
+      <div class="loading-card">
+        <div class="spinner"></div>
+        <div class="loading-text">${text(value)}<span class="cursor">|</span></div>
+        <div class="step-bars">
+          ${loadingMessages.map((_, index) => `<div class="step ${index < state.loadingStep ? "done" : ""}"><span></span></div>`).join("")}
+        </div>
+      </div>
+      `,
+      "loading-screen"
+    );
+  }
+
+  function tickLoading() {
+    if (state.route !== "loading") return;
+    const loadingMessages = getLoadingMessages();
+    if (state.loadingStep >= loadingMessages.length) {
+      window.setTimeout(() => navigate("result"), 700);
+      return;
+    }
+    const message = loadingMessages[state.loadingStep];
+    let chars = 0;
+    const interval = window.setInterval(() => {
+      chars += 1;
+      renderLoading(message.slice(0, chars));
+      if (chars >= message.length) {
+        window.clearInterval(interval);
+        window.setTimeout(() => {
+          state.loadingStep += 1;
+          tickLoading();
+        }, 520);
+      }
+    }, 35);
+  }
+
+  function renderResult() {
+    const saved = sessionStorage.getItem(getStorageKey());
+    if (saved) state.answers = JSON.parse(saved);
+    if (Object.keys(state.answers).length < state.config.questions.length) {
+      renderHome();
+      return;
+    }
+
+    const scored = scoreAnswers(state.answers);
+    const primary = state.config.results[scored.primary];
+    const secondary = scored.secondary ? state.config.secondaryNotes?.[scored.primary]?.[scored.secondary] : null;
+    const stage = getStage(primary.maturityScore);
+    const shareText = buildShareText(primary, secondary);
+    const compareLabels = state.config.compareLabels || ["如果继续原路", "如果换一种做法"];
+    state.resultData = { scored, primary, secondary, stage, shareText };
+
+    renderShell(
+      `
+      <article class="report">
+        <div class="kicker"><span class="dot"></span><span>${text(state.config.resultKicker || "Result Report")}</span><span class="dot"></span></div>
+        <h1 class="result-type">${text(primary.typeName)}</h1>
+        <p class="result-subtitle">${text(primary.subtitle)}</p>
+        <div class="stamp-row">
+          <div class="stamp"><strong>${text(primary.maturityScore)}</strong><span>${text(state.config.scoreLabel || "决策成熟度")}</span></div>
+          <div class="stamp"><strong>${text(stage)}</strong><span>${text(state.config.stageLabel || "当前行动阶段")}</span></div>
+        </div>
+
+        <section class="section">
+          <h2>你的答案分布</h2>
+          <div class="meters">
+            ${Object.entries(scored.counts)
+              .map(([key, value]) => {
+                const typeData = state.config.results[key];
+                const width = (value / state.config.questions.length) * 100;
+                return `
+                  <div>
+                    <div class="meter-head"><span>${text(key)} · ${text(typeData.typeName)}</span><span>${value} 题</span></div>
+                    <div class="meter-track"><div class="meter-fill" style="width:${width}%"></div></div>
+                  </div>
+                `;
+              })
+              .join("")}
+          </div>
+        </section>
+
+        ${secondary ? `<section class="section"><h2>副倾向提示</h2><div class="secondary-note">${text(secondary)}</div></section>` : ""}
+
+        <section class="section">
+          <h2>诊断结论</h2>
+          <div class="quote">${text(primary.coreConclusion)}</div>
+        </section>
+
+        <section class="section">
+          <h2>为什么你会这样</h2>
+          <p>${text(primary.diagnosis)}</p>
+          <p>${text(primary.whatYouReallyWant)}</p>
+        </section>
+
+        <section class="section">
+          <h2>${text(primary.mechanism.title)}</h2>
+          <p>${text(primary.mechanism.content)}</p>
+        </section>
+
+        ${renderParagraphSection("专业解读框架", primary.professionalBasis)}
+        ${renderTagSection("你的关键矛盾", primary.coreTensions)}
+        ${renderCompareListSection("适合推进的条件", "需要谨慎的信号", primary.suitableIf, primary.cautionIf)}
+
+        <section class="section">
+          <h2>关键指数</h2>
+          <div class="meters">
+            ${(primary.indices || [])
+              .map(
+                (item) => `
+                <div>
+                  <div class="meter-head"><span>${text(item.label)}</span><span>${text(item.value)}</span></div>
+                  <div class="meter-track"><div class="meter-fill" style="width:${number(item.value)}%"></div></div>
+                </div>
+              `
+              )
+              .join("")}
+          </div>
+        </section>
+
+        <section class="section">
+          <h2>两条路径对比</h2>
+          <div class="compare">
+            <div class="compare-card"><h3>${text(compareLabels[0])}</h3><p>${text(primary.ifStay)}</p></div>
+            <div class="compare-card"><h3>${text(compareLabels[1])}</h3><p>${text(primary.ifChange)}</p></div>
+          </div>
+        </section>
+
+        <section class="section">
+          <h2>现在最不建议你做</h2>
+          <div class="tag-list">${(primary.notRecommended || []).map((item) => `<span class="tag">${text(item)}</span>`).join("")}</div>
+        </section>
+
+        <section class="section">
+          <h2>未来 90 天验证方案</h2>
+          <div class="plan">
+            ${(primary.plan90 || [])
+              .map(
+                (item, index) => `
+                <div class="plan-card">
+                  <h3>${index + 1}. ${text(item.title)}</h3>
+                  <p>${text(item.content)}</p>
+                </div>
+              `
+              )
+              .join("")}
+          </div>
+        </section>
+
+        <section class="section">
+          <h2>最后一句话</h2>
+          <p>${text(primary.closing)}</p>
+        </section>
+
+        <div class="actions">
+          <button class="primary-btn" data-action="copy">${text(state.config.copyButton || "复制我的结果")}</button>
+          <button class="ghost-btn" data-action="restart">${text(state.config.restartButton || "重新测试")}</button>
+        </div>
+      </article>
+      `,
+      "result-screen"
+    );
+
+    app.querySelector("[data-action='copy']").addEventListener("click", () => copyShareText(shareText));
+    app.querySelector("[data-action='restart']").addEventListener("click", () => {
+      sessionStorage.removeItem(getStorageKey());
+      state.answers = {};
+      state.currentIndex = 0;
+      navigate("home");
+    });
+  }
+
+  function renderParagraphSection(title, paragraphs) {
+    if (!Array.isArray(paragraphs) || !paragraphs.length) return "";
+    return `
+      <section class="section">
+        <h2>${text(title)}</h2>
+        ${paragraphs.map((item) => `<p>${text(item)}</p>`).join("")}
+      </section>
+    `;
+  }
+
+  function renderTagSection(title, items) {
+    if (!Array.isArray(items) || !items.length) return "";
+    return `
+      <section class="section">
+        <h2>${text(title)}</h2>
+        <div class="tag-list">${items.map((item) => `<span class="tag">${text(item)}</span>`).join("")}</div>
+      </section>
+    `;
+  }
+
+  function renderCompareListSection(leftTitle, rightTitle, leftItems, rightItems) {
+    const hasLeft = Array.isArray(leftItems) && leftItems.length;
+    const hasRight = Array.isArray(rightItems) && rightItems.length;
+    if (!hasLeft && !hasRight) return "";
+    return `
+      <section class="section">
+        <h2>适用边界</h2>
+        <div class="compare">
+          <div class="compare-card">
+            <h3>${text(leftTitle)}</h3>
+            ${(leftItems || []).map((item) => `<p>${text(item)}</p>`).join("")}
+          </div>
+          <div class="compare-card">
+            <h3>${text(rightTitle)}</h3>
+            ${(rightItems || []).map((item) => `<p>${text(item)}</p>`).join("")}
+          </div>
+        </div>
+      </section>
+    `;
+  }
+
+  function scoreAnswers(answers) {
+    const counts = { A: 0, B: 0, C: 0, D: 0 };
+    Object.values(answers).forEach((key) => {
+      if (counts[key] !== undefined) counts[key] += 1;
+    });
+    const sorted = Object.entries(counts).sort((a, b) => b[1] - a[1]);
+    const threshold = state.config.secondaryThreshold ?? 2;
+    const primary = sorted[0][0];
+    const secondary = sorted[1][1] > 0 && sorted[0][1] - sorted[1][1] <= threshold ? sorted[1][0] : null;
+    return { counts, primary, secondary };
+  }
+
+  function getStage(score) {
+    const labels = state.config.stageLabels || [
+      { max: 45, label: "观察期" },
+      { max: 65, label: "验证期" },
+      { max: 82, label: "规划期" },
+      { max: 100, label: "行动期" },
+    ];
+    const hit = labels.find((item) => score <= item.max);
+    return hit ? hit.label : labels[labels.length - 1].label;
+  }
+
+  function buildShareText(primary, secondary) {
+    const template = state.config.shareTemplate || [
+      "我测出了：{{typeName}}",
+      "{{posterSubtext}}",
+      "{{secondaryLine}}",
+      "",
+      "{{title}}",
+    ];
+    const values = {
+      title: state.config.title,
+      typeName: primary.typeName,
+      posterSubtext: primary.posterSubtext,
+      secondary: secondary || "",
+      secondaryLine: secondary ? `副倾向：${secondary}` : "",
+    };
+    return template
+      .map((line) => fillTemplate(line, values))
+      .filter((line, index, arr) => line || arr[index - 1])
+      .join("\n")
+      .trim();
+  }
+
+  async function copyShareText(value) {
+    try {
+      await navigator.clipboard.writeText(value);
+      showToast("结果文案已复制");
+    } catch (error) {
+      showToast("复制失败，可长按手动复制");
+    }
+  }
+
+  function showToast(value) {
+    const toast = document.getElementById("toast");
+    if (!toast) return;
+    toast.textContent = value;
+    toast.classList.add("show");
+    window.setTimeout(() => toast.classList.remove("show"), 1600);
+  }
+
+  function getLoadingMessages() {
+    return state.config.loadingMessages || defaultLoadingMessages;
+  }
+
+  function getStorageKey() {
+    return `xhsTestAnswers:${state.config.slug || "default"}`;
+  }
+
+  function fillTemplate(template, values) {
+    return String(template).replace(/\{\{(\w+)\}\}/g, (_, key) => values[key] || "");
+  }
+
+  function number(value) {
+    const parsed = Number(value);
+    if (Number.isNaN(parsed)) return 0;
+    return Math.max(0, Math.min(100, parsed));
+  }
+
+  function text(value) {
+    return String(value ?? "")
+      .replace(/&/g, "&amp;")
+      .replace(/</g, "&lt;")
+      .replace(/>/g, "&gt;")
+      .replace(/"/g, "&quot;");
+  }
+})();
+
+    </script>
+  </body>
+</html>
