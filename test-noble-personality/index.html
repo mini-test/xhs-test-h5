@@ -1,0 +1,1125 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <meta name="description" content="完成 32 道「你的性格更容易吸引哪类贵人」测试，生成你的专属贵人类型报告。" />
+    <meta property="og:title" content="你的性格更容易吸引哪类贵人？" />
+    <meta property="og:description" content="完成 32 道「你的性格更容易吸引哪类贵人」测试，生成你的专属贵人类型报告。" />
+    <title>你的性格更容易吸引哪类贵人？</title>
+    <style>
+:root {
+  --bg: #fbfaf7;
+  --paper: #fffefd;
+  --ink: #20242a;
+  --muted: #65707d;
+  --line: #d9d4ca;
+  --line-strong: #b9afa0;
+  --accent: #9b4339;
+  --accent-soft: #f1dfd7;
+  --gold: #c0964d;
+  --sage: #66795f;
+  --blue: #526a86;
+  --shadow: 0 16px 36px rgba(60, 47, 38, 0.1);
+  --radius: 8px;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  min-height: 100%;
+  background:
+    linear-gradient(rgba(32, 36, 42, 0.035) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(32, 36, 42, 0.035) 1px, transparent 1px),
+    var(--bg);
+  background-size: 24px 24px;
+}
+
+body {
+  min-height: 100vh;
+  margin: 0;
+  color: var(--ink);
+  font-family:
+    "PingFang SC",
+    "Microsoft YaHei",
+    "Noto Sans SC",
+    system-ui,
+    -apple-system,
+    BlinkMacSystemFont,
+    sans-serif;
+  letter-spacing: 0;
+}
+
+button {
+  font: inherit;
+}
+
+.shell {
+  width: min(100%, 480px);
+  min-height: 100vh;
+  margin: 0 auto;
+  background: rgba(251, 250, 247, 0.88);
+}
+
+.top-rule {
+  height: 4px;
+  background: var(--accent);
+}
+
+.screen {
+  min-height: calc(100vh - 4px);
+  padding: 28px 22px 32px;
+}
+
+.home {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.kicker {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  color: var(--muted);
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  font-size: 11px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+.dot {
+  width: 7px;
+  height: 7px;
+  background: var(--accent);
+  border-radius: 50%;
+}
+
+.hero-title {
+  margin: 26px 0 14px;
+  color: var(--ink);
+  font-size: 30px;
+  line-height: 1.2;
+  text-align: center;
+  font-weight: 800;
+}
+
+.hero-subtitle {
+  margin: 0 auto 28px;
+  max-width: 340px;
+  color: var(--muted);
+  font-size: 15px;
+  line-height: 1.75;
+  text-align: center;
+}
+
+.hairline {
+  width: 64px;
+  height: 1px;
+  margin: 0 auto 30px;
+  background: var(--line-strong);
+}
+
+.intro {
+  margin: 0 auto;
+  max-width: 380px;
+}
+
+.intro p {
+  margin: 0 0 15px;
+  color: rgba(32, 36, 42, 0.82);
+  font-size: 15px;
+  line-height: 1.8;
+}
+
+.intro .strong {
+  color: var(--accent);
+  font-weight: 700;
+}
+
+.pill-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px;
+  margin: 28px 0;
+}
+
+.pill {
+  min-height: 42px;
+  display: grid;
+  place-items: center;
+  border: 1px solid var(--line);
+  color: var(--muted);
+  background: rgba(255, 255, 255, 0.44);
+  font-size: 13px;
+}
+
+.primary-btn,
+.ghost-btn,
+.copy-btn {
+  width: 100%;
+  min-height: 48px;
+  border: 1px solid var(--ink);
+  border-radius: 0;
+  cursor: pointer;
+  transition: transform 150ms ease, background 150ms ease, color 150ms ease, border-color 150ms ease;
+}
+
+.primary-btn {
+  background: var(--ink);
+  color: #fff;
+  font-weight: 700;
+}
+
+.ghost-btn,
+.copy-btn {
+  background: transparent;
+  color: var(--ink);
+}
+
+.primary-btn:active,
+.ghost-btn:active,
+.copy-btn:active,
+.option:active {
+  transform: translateY(1px);
+}
+
+.disclaimer {
+  margin: 18px auto 0;
+  max-width: 340px;
+  color: var(--muted);
+  font-size: 12px;
+  line-height: 1.65;
+  text-align: center;
+}
+
+.quiz-screen {
+  padding-top: 0;
+}
+
+.sticky-head {
+  position: sticky;
+  top: 0;
+  z-index: 5;
+  margin: 0 -22px 26px;
+  padding: 14px 22px 12px;
+  background: rgba(251, 250, 247, 0.95);
+  border-bottom: 1px solid var(--line);
+  backdrop-filter: blur(12px);
+}
+
+.quiz-meta {
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+  color: var(--muted);
+  font-size: 12px;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+}
+
+.progress-track {
+  height: 4px;
+  margin-top: 10px;
+  background: rgba(32, 36, 42, 0.09);
+}
+
+.progress-bar {
+  height: 100%;
+  background: var(--accent);
+  transition: width 260ms ease;
+}
+
+.question-no {
+  color: rgba(155, 67, 57, 0.18);
+  font-size: 48px;
+  line-height: 1;
+  font-weight: 800;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+}
+
+.question-title {
+  margin: 18px 0 24px;
+  font-size: 22px;
+  line-height: 1.5;
+  font-weight: 750;
+}
+
+.options {
+  display: grid;
+  gap: 12px;
+}
+
+.option {
+  min-height: 66px;
+  display: grid;
+  grid-template-columns: 30px 1fr;
+  gap: 12px;
+  align-items: start;
+  width: 100%;
+  padding: 15px;
+  border: 1px solid var(--line);
+  background: rgba(255, 255, 255, 0.68);
+  color: var(--ink);
+  text-align: left;
+  cursor: pointer;
+  transition: background 160ms ease, border-color 160ms ease, color 160ms ease, opacity 160ms ease;
+}
+
+.option-key {
+  display: grid;
+  place-items: center;
+  width: 28px;
+  height: 28px;
+  border: 1px solid var(--line-strong);
+  font-size: 13px;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+}
+
+.option-text {
+  padding-top: 2px;
+  font-size: 15px;
+  line-height: 1.55;
+}
+
+.option.selected {
+  border-color: var(--accent);
+  background: var(--accent);
+  color: #fff;
+}
+
+.option.selected .option-key {
+  border-color: rgba(255, 255, 255, 0.8);
+}
+
+.option.dimmed {
+  opacity: 0.42;
+}
+
+.hint {
+  margin: 18px 0 0;
+  color: var(--muted);
+  font-size: 12px;
+  text-align: center;
+}
+
+.loading-screen {
+  display: grid;
+  place-items: center;
+}
+
+.loading-card {
+  width: 100%;
+  max-width: 360px;
+  text-align: center;
+}
+
+.spinner {
+  width: 54px;
+  height: 54px;
+  margin: 0 auto 24px;
+  border: 2px solid var(--line);
+  border-top-color: var(--accent);
+  border-radius: 50%;
+  animation: spin 850ms linear infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.loading-text {
+  min-height: 54px;
+  color: var(--accent);
+  font-size: 17px;
+  line-height: 1.6;
+  font-weight: 700;
+}
+
+.step-bars {
+  display: grid;
+  gap: 8px;
+  margin-top: 28px;
+}
+
+.step {
+  height: 4px;
+  overflow: hidden;
+  background: rgba(32, 36, 42, 0.09);
+}
+
+.step span {
+  display: block;
+  height: 100%;
+  width: 0;
+  background: var(--accent);
+  transition: width 300ms ease;
+}
+
+.step.done span {
+  width: 100%;
+}
+
+.result-screen {
+  padding: 22px 18px 30px;
+}
+
+.report {
+  padding: 22px 16px 18px;
+  border: 1px solid var(--line);
+  background: var(--paper);
+  box-shadow: var(--shadow);
+}
+
+.result-type {
+  margin: 8px 0 8px;
+  color: var(--accent);
+  font-size: 30px;
+  line-height: 1.15;
+  font-weight: 850;
+  text-align: center;
+}
+
+.result-subtitle {
+  margin: 0 auto 20px;
+  color: var(--muted);
+  font-size: 15px;
+  line-height: 1.7;
+  text-align: center;
+}
+
+.stamp-row {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px;
+  margin: 18px 0 20px;
+}
+
+.stamp {
+  padding: 12px 10px;
+  border: 1px solid var(--line);
+  background: #fbfaf7;
+}
+
+.stamp strong {
+  display: block;
+  margin-bottom: 4px;
+  color: var(--ink);
+  font-size: 20px;
+}
+
+.stamp span {
+  color: var(--muted);
+  font-size: 12px;
+}
+
+.section {
+  padding: 20px 0;
+  border-top: 1px solid var(--line);
+}
+
+.section h2 {
+  margin: 0 0 12px;
+  font-size: 18px;
+  color: var(--ink);
+}
+
+.section p {
+  margin: 0 0 12px;
+  color: rgba(32, 36, 42, 0.82);
+  font-size: 15px;
+  line-height: 1.85;
+}
+
+.quote {
+  padding: 15px;
+  border-left: 3px solid var(--accent);
+  background: var(--accent-soft);
+  color: #5b2d27;
+  line-height: 1.8;
+  font-weight: 700;
+}
+
+.meters {
+  display: grid;
+  gap: 14px;
+}
+
+.meter-head {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 7px;
+  color: var(--muted);
+  font-size: 13px;
+}
+
+.meter-track {
+  height: 8px;
+  background: rgba(32, 36, 42, 0.08);
+}
+
+.meter-fill {
+  height: 100%;
+  background: var(--accent);
+}
+
+.compare {
+  display: grid;
+  gap: 10px;
+}
+
+.compare-card {
+  padding: 14px;
+  border: 1px solid var(--line);
+  background: #fbfaf7;
+}
+
+.compare-card h3,
+.plan-card h3 {
+  margin: 0 0 8px;
+  font-size: 15px;
+}
+
+.compare-card p,
+.plan-card p {
+  font-size: 14px;
+}
+
+.tag-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.tag {
+  padding: 7px 9px;
+  border: 1px solid var(--line);
+  background: #fbfaf7;
+  color: var(--muted);
+  font-size: 13px;
+}
+
+.plan {
+  display: grid;
+  gap: 10px;
+}
+
+.plan-card {
+  padding: 14px;
+  border: 1px solid var(--line);
+  background: #fbfaf7;
+}
+
+.secondary-note {
+  padding: 14px;
+  border: 1px dashed var(--line-strong);
+  background: rgba(192, 150, 77, 0.12);
+  line-height: 1.75;
+  font-size: 14px;
+}
+
+.actions {
+  display: grid;
+  gap: 10px;
+  margin-top: 18px;
+}
+
+.toast {
+  position: fixed;
+  left: 50%;
+  bottom: 22px;
+  z-index: 20;
+  transform: translateX(-50%);
+  padding: 10px 14px;
+  background: var(--ink);
+  color: #fff;
+  font-size: 13px;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 180ms ease;
+}
+
+.toast.show {
+  opacity: 1;
+}
+
+.error {
+  display: grid;
+  place-items: center;
+  min-height: 100vh;
+  padding: 24px;
+  text-align: center;
+}
+
+.error p {
+  color: var(--muted);
+  line-height: 1.7;
+}
+
+@media (min-width: 700px) {
+  body {
+    padding: 28px 0;
+  }
+
+  .shell {
+    min-height: calc(100vh - 56px);
+    border: 1px solid var(--line);
+    box-shadow: var(--shadow);
+  }
+
+  .screen {
+    min-height: calc(100vh - 60px);
+  }
+}
+
+    </style>
+  </head>
+  <body>
+    <main id="app" aria-live="polite"></main>
+    <script>window.__QUIZ_CONFIG__ = {"slug":"test-noble-personality","topic":"你的性格更容易吸引哪类贵人？","kicker":"32-Q Relationship Opportunity Test","title":"你的性格更容易吸引哪类贵人？","subtitle":"32 道题，拆清你在人际关系里最容易释放出的性格信号，以及哪类人更愿意靠近、提携或与你合作。","metaDescription":"完成 32 道「你的性格更容易吸引哪类贵人」测试，生成你的专属贵人类型报告。","startButton":"开始测试","resultKicker":"Relationship Opportunity Report","quizHint":"选择后自动进入下一题","copyButton":"复制我的结果","restartButton":"重新测试","scoreLabel":"贵人显化度","stageLabel":"当前阶段","stageLabels":[{"max":45,"label":"信号模糊期"},{"max":65,"label":"关系显影期"},{"max":82,"label":"机会靠近期"},{"max":100,"label":"主动承接期"}],"compareLabels":["如果继续原路","如果换一种做法"],"disclaimer":"本测试为趣味自我观察工具，非科学心理测评、命理判断或人际关系承诺，仅供你整理性格信号和关系策略。","secondaryThreshold":4,"dimensions":["表达信号","价值呈现","求助方式","关系经营"],"intro":["你吸引来的贵人，往往不是凭空出现的。","很多时候，是你的表达方式、做事风格、接受反馈的能力，以及你和别人相处时释放出的信号，在决定哪类人更愿意帮你。","32 道题会从第一印象、表达方式、做事风格、求助方式、反馈接收、关系维护、机会承接和人际盲区 8 个模块，生成一份更贴近你当前状态的贵人类型报告。"],"loadingMessages":["正在读取你的第一反应...","正在拆分表达信号、合作姿态和关系边界...","正在识别你更容易吸引的贵人类型...","正在生成 32 题贵人类型报告...","分析完成。"],"questions":[{"id":1,"module":"第一印象","text":"第一次和一个厉害的人聊天，你最容易让对方记住的是：","options":[{"key":"A","text":"我会直接说清楚自己正在做什么、想要什么机会"},{"key":"B","text":"我会真诚地表达敬佩，也会让对方感到被尊重"},{"key":"C","text":"我会问很具体的问题，让对方看见我不是随便问问"},{"key":"D","text":"我会自然地聊到共同兴趣，看看有没有一起做事的可能"}]},{"id":2,"module":"第一印象","text":"别人夸你“挺有潜力”的时候，你内心第一反应更像：","options":[{"key":"A","text":"希望对方能告诉我哪里有更大的机会"},{"key":"B","text":"会很受鼓舞，感觉自己被认真看见了"},{"key":"C","text":"想知道对方觉得我还能怎么改得更好"},{"key":"D","text":"会想以后有没有机会和对方保持合作"}]},{"id":3,"module":"第一印象","text":"在一群不太熟的人里，你通常更像：","options":[{"key":"A","text":"先观察谁掌握资源，再找合适机会表达自己"},{"key":"B","text":"先让氛围舒服，慢慢建立信任感"},{"key":"C","text":"如果话题有价值，会忍不住追问细节"},{"key":"D","text":"更容易发现谁和自己节奏相近，适合一起做事"}]},{"id":4,"module":"第一印象","text":"如果有人主动想了解你，你最容易先讲的是：","options":[{"key":"A","text":"我现在的目标、作品和下一步想争取的机会"},{"key":"B","text":"我一路上遇到的真实经历和想被理解的地方"},{"key":"C","text":"我正在打磨的能力，以及还没有想明白的问题"},{"key":"D","text":"我能提供什么、也希望和什么样的人互相成就"}]},{"id":5,"module":"表达方式","text":"向别人介绍自己时，你最怕出现哪种情况：","options":[{"key":"A","text":"说了很多，但别人还是不知道我想要什么机会"},{"key":"B","text":"显得太功利，让对方觉得我只想占便宜"},{"key":"C","text":"被发现准备不够，问题问得很浅"},{"key":"D","text":"只有我在表达，对方看不出合作的空间"}]},{"id":6,"module":"表达方式","text":"你发朋友圈或小红书时，最希望别人看到的是：","options":[{"key":"A","text":"我在持续行动，不是只会想"},{"key":"B","text":"我是真实、有温度、值得被信任的人"},{"key":"C","text":"我在认真学习和复盘，愿意被打磨"},{"key":"D","text":"我有审美、想法和可以一起玩的项目感"}]},{"id":7,"module":"表达方式","text":"别人给你一个建议，你最常见的回应是：","options":[{"key":"A","text":"我会问这个建议能不能带来更实际的入口"},{"key":"B","text":"我会先感谢对方愿意提醒我"},{"key":"C","text":"我会追问标准、案例和具体修改方向"},{"key":"D","text":"我会想这个建议能不能变成后续合作"}]},{"id":8,"module":"表达方式","text":"你最容易被哪句话刺到：","options":[{"key":"A","text":"你想要的东西不够明确，别人不知道怎么帮你"},{"key":"B","text":"你太懂事了，反而不好意思让别人看见你的需要"},{"key":"C","text":"你有潜力，但现在还不够扎实"},{"key":"D","text":"你很好相处，但别人不知道你能一起做什么"}]},{"id":9,"module":"做事风格","text":"接到一个新机会时，你通常会先：","options":[{"key":"A","text":"快速判断这是不是一个能打开局面的机会"},{"key":"B","text":"先确认对方是否真心相信我、愿意托我一把"},{"key":"C","text":"拆标准、拆要求，看看自己哪里还要补"},{"key":"D","text":"判断双方资源能不能互补，合作是否顺畅"}]},{"id":10,"module":"做事风格","text":"你最容易被别人认可的地方是：","options":[{"key":"A","text":"目标感强，给了机会就会往前冲"},{"key":"B","text":"真诚可靠，让人愿意多照顾一点"},{"key":"C","text":"肯学肯改，别人一说你真的会调整"},{"key":"D","text":"会配合也会补位，和你一起做事不累"}]},{"id":11,"module":"做事风格","text":"如果一个前辈愿意带你，你最希望 TA 给你的是：","options":[{"key":"A","text":"资源入口、关键联系人和更大的舞台"},{"key":"B","text":"相信、鼓励和在关键时刻替我说句话"},{"key":"C","text":"高标准要求、真实反馈和专业训练"},{"key":"D","text":"一起共创项目，边做边互相成就"}]},{"id":12,"module":"做事风格","text":"你做事最容易卡住的点是：","options":[{"key":"A","text":"能力有一点，但缺少能把我推出去的入口"},{"key":"B","text":"太在意别人感受，常常不好意思争取"},{"key":"C","text":"知道自己还不够好，所以不敢被更厉害的人看见"},{"key":"D","text":"有想法，但缺少能一起拆解和落地的人"}]},{"id":13,"module":"求助方式","text":"你真正需要别人帮忙时，更可能怎么开口：","options":[{"key":"A","text":"说明目标、现状和希望对方帮我链接什么"},{"key":"B","text":"先铺垫很久，怕直接说需求会打扰别人"},{"key":"C","text":"带着具体问题和材料去请教"},{"key":"D","text":"先说我能帮对方什么，再聊能否互相支持"}]},{"id":14,"module":"求助方式","text":"你最不喜欢哪种求助关系：","options":[{"key":"A","text":"对方只给情绪安慰，却没有实际入口"},{"key":"B","text":"对方很有资源，但让我觉得自己被轻视"},{"key":"C","text":"对方不讲真话，只说一些好听但没用的话"},{"key":"D","text":"关系变成单向索取，没有互相成就"}]},{"id":15,"module":"求助方式","text":"如果别人没有立刻帮你，你通常会：","options":[{"key":"A","text":"继续寻找更匹配的资源入口"},{"key":"B","text":"有点失落，开始怀疑自己是不是不值得被帮"},{"key":"C","text":"复盘是不是自己准备不够、表达不够清楚"},{"key":"D","text":"保持联系，等以后有更合适的合作点"}]},{"id":16,"module":"求助方式","text":"你最希望贵人看见你的哪一面：","options":[{"key":"A","text":"我有野心，也有执行力，只差一个入口"},{"key":"B","text":"我很真诚，也很珍惜别人给我的善意"},{"key":"C","text":"我不怕被指出问题，我怕没人告诉我真话"},{"key":"D","text":"我不只想被帮，也想成为对方的有用伙伴"}]},{"id":17,"module":"反馈接收","text":"别人指出你的问题时，你最真实的反应是：","options":[{"key":"A","text":"只要能让我离机会更近，我愿意听"},{"key":"B","text":"会有点受伤，但也会记住对方的好意"},{"key":"C","text":"越具体越好，我需要真实标准"},{"key":"D","text":"我会判断这是不是双方共创时必须磨合的部分"}]},{"id":18,"module":"反馈接收","text":"你最容易让高标准的人愿意继续指导你，是因为：","options":[{"key":"A","text":"我会把建议转成行动，让人看到投入产出"},{"key":"B","text":"我会真诚表达感谢，不把别人的时间当理所当然"},{"key":"C","text":"我能扛得住批评，也能一次比一次做得更好"},{"key":"D","text":"我会把反馈变成合作流程，而不是个人情绪"}]},{"id":19,"module":"反馈接收","text":"被厉害的人否定一次后，你最可能：","options":[{"key":"A","text":"先难受，但会去找下一个更适合的机会入口"},{"key":"B","text":"很久都记得那种被否定的感觉"},{"key":"C","text":"把否定拆成可改的部分，重新做一版"},{"key":"D","text":"判断双方是不是价值观或节奏不合"}]},{"id":20,"module":"反馈接收","text":"你最怕贵人对你失望，是因为：","options":[{"key":"A","text":"怕错过对方背后的资源和机会"},{"key":"B","text":"怕辜负对方的信任和善意"},{"key":"C","text":"怕证明自己真的不够好"},{"key":"D","text":"怕原本有机会的合作关系断掉"}]},{"id":21,"module":"关系维护","text":"别人帮过你一次后，你通常会：","options":[{"key":"A","text":"及时反馈结果，让对方知道资源没有浪费"},{"key":"B","text":"认真感谢，也会记在心里很久"},{"key":"C","text":"带着改进后的成果再去汇报"},{"key":"D","text":"想办法在合适的时候回馈对方"}]},{"id":22,"module":"关系维护","text":"你维护关系最常见的方式是：","options":[{"key":"A","text":"带着进展和新成果出现，而不是只寒暄"},{"key":"B","text":"在细节上表达关心，让关系更有人情味"},{"key":"C","text":"持续请教和复盘，让对方看见成长曲线"},{"key":"D","text":"分享有用信息、资源或合作机会"}]},{"id":23,"module":"关系维护","text":"你最容易让关系变淡的原因是：","options":[{"key":"A","text":"忙着往前冲，忘了同步进展和感谢"},{"key":"B","text":"太怕打扰别人，所以很久不主动联系"},{"key":"C","text":"觉得自己还没做出成绩，不好意思出现"},{"key":"D","text":"如果没有共同项目，就不知道怎么自然保持连接"}]},{"id":24,"module":"关系维护","text":"你最欣赏的关系状态是：","options":[{"key":"A","text":"对方愿意给我机会，我也能用结果证明自己"},{"key":"B","text":"彼此真诚，有事可以被托住"},{"key":"C","text":"对方高标准要求我，但我知道那是在帮我变强"},{"key":"D","text":"彼此平等互补，不用讨好也能一起成事"}]},{"id":25,"module":"机会承接","text":"如果有人突然把你推荐给一个重要机会，你最需要补的是：","options":[{"key":"A","text":"更清楚地讲出自己的定位和可交付成果"},{"key":"B","text":"更稳定地相信自己值得被推荐"},{"key":"C","text":"更扎实的作品、案例和专业表达"},{"key":"D","text":"更明确的合作边界、分工和回报方式"}]},{"id":26,"module":"机会承接","text":"你最容易错过贵人的时刻是：","options":[{"key":"A","text":"机会来了，但我没有提前准备好展示材料"},{"key":"B","text":"别人释放善意时，我反而不好意思接住"},{"key":"C","text":"别人愿意教我，但我怕暴露短板"},{"key":"D","text":"明明可以合作，却没有把下一步说具体"}]},{"id":27,"module":"机会承接","text":"你最适合把贵人关系变成什么：","options":[{"key":"A","text":"入口：帮我进入更大的资源场"},{"key":"B","text":"托举：在我低谷时给我信心和支持"},{"key":"C","text":"训练：帮我看到问题并持续变强"},{"key":"D","text":"共创：一起把想法做成真实成果"}]},{"id":28,"module":"机会承接","text":"如果要让别人更放心地帮你，你最该做到：","options":[{"key":"A","text":"让别人一眼看懂你要什么、能做什么"},{"key":"B","text":"表达需要时不自我贬低，也不过度讨好"},{"key":"C","text":"把每次反馈都落实成可见进步"},{"key":"D","text":"提前讲清彼此的边界、节奏和收益"}]},{"id":29,"module":"贵人盲区","text":"你最容易误会贵人的地方是：","options":[{"key":"A","text":"以为贵人一定会主动把机会送到我面前"},{"key":"B","text":"以为被帮就意味着自己不够强"},{"key":"C","text":"以为严格就是不喜欢我"},{"key":"D","text":"以为关系好就不用把合作说清楚"}]},{"id":30,"module":"贵人盲区","text":"你最容易在贵人面前隐藏什么：","options":[{"key":"A","text":"隐藏自己的野心，怕显得目的太强"},{"key":"B","text":"隐藏自己的脆弱，怕给别人添麻烦"},{"key":"C","text":"隐藏自己的不懂，怕被看轻"},{"key":"D","text":"隐藏自己的需求，怕破坏关系平衡"}]},{"id":31,"module":"贵人盲区","text":"未来 30 天，如果想更容易被贵人看见，你最愿意做的是：","options":[{"key":"A","text":"整理一份清楚的自我介绍和作品链接"},{"key":"B","text":"主动感谢和回访曾经帮过我的人"},{"key":"C","text":"找一个厉害的人请 TA 批改我的作品或方案"},{"key":"D","text":"约一个同频的人讨论一个可以共创的小项目"}]},{"id":32,"module":"贵人盲区","text":"做完这套题，你最想知道的是：","options":[{"key":"A","text":"我该怎么让资源型贵人更快看见我"},{"key":"B","text":"我是不是总把善意挡在门外"},{"key":"C","text":"我该怎么把被批评变成升级机会"},{"key":"D","text":"我该怎么把关系变成真正的互相成就"}]}],"results":{"A":{"typeName":"资源牵线型贵人","subtitle":"你更容易吸引能给入口、带资源、推你进入更大场域的人。","posterSubtext":"你不是缺人帮，你是需要让别人一眼看懂你值得被链接到哪里。","maturityScore":84,"coreConclusion":"你身上最容易被贵人看见的，是目标感、行动感和想要进入更大机会场的冲劲。资源牵线型贵人通常不会只因为你“人好”就帮你，而是因为他们看见你有明确方向、能承接机会、不会浪费入口。你适合被推荐、被引荐、被带进更高密度的圈子，但前提是你的定位和作品要足够清楚。","diagnosis":"你的关系吸引力来自“可链接性”。别人愿意帮你，是因为你让对方知道：你要什么、能做什么、适合被介绍给谁。你的问题不是没有贵人，而是有时表达太散，别人想帮也不知道从哪里下手。","whatYouReallyWant":"你真正需要的不是一句鼓励，而是一个入口、一个场域、一个能让你被更多人看见的机会。你要学会把野心说得清楚、把成果摆得具体、把请求变得可执行。","mechanism":{"title":"机会入口机制","content":"资源型贵人更愿意帮助“方向明确且能交付”的人。清晰的定位、可见的作品、具体的请求，会让对方判断帮你这件事成本低、回报高、风险小。"},"professionalBasis":["从人际网络角度看，你需要的是弱连接里的关键节点。它们未必和你很亲密，但能把你带到新的信息流和机会池。","从自我呈现角度看，你的核心任务是降低别人理解你的成本。越清楚，越容易被推荐。","从机会承接角度看，资源只是入口，能否变成结果取决于你的响应速度、交付能力和后续反馈。"],"coreTensions":["想被推荐","怕显得太功利","有行动力但表达不够聚焦","需要更清楚的个人定位"],"suitableIf":["你已经有作品、案例或可展示成果","你知道自己下一步想进入什么场域","你能及时反馈进展","你愿意主动表达具体需求"],"cautionIf":["只想要资源但没有交付准备","把贵人当成捷径","请求太大、太空、太模糊","被推荐后没有后续反馈"],"indices":[{"label":"机会识别指数","value":92},{"label":"自我呈现清晰度","value":76},{"label":"资源承接能力","value":82},{"label":"功利感风险","value":48}],"ifStay":"如果继续等别人主动发现你，你会错过很多弱连接里的入口。真正能帮你的人，往往需要你先递出清楚的信号。","ifChange":"如果你把定位、作品和请求整理清楚，资源型贵人会更容易判断该把你推荐到哪里。","notRecommended":["只说想变好","没有作品就求推荐","请求别人帮你想方向","被帮助后不反馈","隐藏真实目标"],"plan90":[{"title":"第 1-2 周：写清你的机会说明书","content":"整理一段 100 字自我介绍：你是谁、擅长什么、正在找什么机会、别人如何帮你。"},{"title":"第 3-4 周：准备可转发材料","content":"做一个作品/案例/成果链接，让别人愿意推荐你时不用重新解释。"},{"title":"第 2 个月：主动连接 10 个弱关系","content":"向行业前辈、同学、旧同事发出具体请求，不求大帮忙，只求一次建议或一次转介绍可能。"},{"title":"第 3 个月：建立反馈闭环","content":"每一次被帮助后，及时同步结果、感谢和下一步，让对方知道资源没有被浪费。"}],"closing":"你的贵人不是从天而降的。很多时候，是你把自己讲清楚以后，别人终于知道该把你推向哪里。"},"B":{"typeName":"看见托举型贵人","subtitle":"你更容易吸引愿意理解你、鼓励你、在关键时刻托你一把的人。","posterSubtext":"你吸引来的不是冷冰冰的资源，而是愿意认真看见你的人。","maturityScore":80,"coreConclusion":"你身上最容易打动贵人的，是诚恳、柔软、可靠和懂得珍惜善意。看见托举型贵人不一定一上来就给你资源，但他们会在你怀疑自己时给你信心，在你需要被理解时替你说话，在你快要退缩时提醒你别轻易否定自己。你适合被温柔型前辈、保护型领导、愿意长期陪伴你成长的人托举。","diagnosis":"你的关系吸引力来自“可信任感”。别人愿意帮你，不只是因为你有能力，而是因为你让人感觉真诚、知感恩、不把别人的善意当理所当然。你的盲区是太怕麻烦别人，反而容易把贵人的善意挡在外面。","whatYouReallyWant":"你真正需要的不是被安排人生，而是被认真看见一次。你希望有人相信你、鼓励你，也希望自己不用一直假装强大。","mechanism":{"title":"信任托举机制","content":"托举型贵人会被真诚、稳定、懂得回应善意的人吸引。这类关系不靠强索取，而靠长期信任、情感回响和关键时刻的互相支持。"},"professionalBasis":["从关系心理看，你更容易在高信任关系里释放潜力。被理解和被支持会显著提升你的行动稳定性。","从求助方式看，你需要练习不带羞耻感地表达需要。真正健康的求助不是麻烦别人，而是让关系有机会流动。","从长期发展看，托举型贵人能帮你渡过低谷，但你也要把善意转化为行动，而不是只停留在被安慰。"],"coreTensions":["渴望被看见","害怕麻烦别人","懂得感恩但不敢开口","需要把支持变成行动"],"suitableIf":["你身边有愿意听你说真话的人","你能珍惜并回应别人的善意","你愿意承认自己也有需要","你不把被帮助当成欠债"],"cautionIf":["一直等别人主动发现你的委屈","过度懂事导致需求消失","把求助看成软弱","只接受安慰但不行动"],"indices":[{"label":"信任感指数","value":90},{"label":"善意接收能力","value":68},{"label":"情绪支持需求","value":84},{"label":"过度懂事风险","value":76}],"ifStay":"如果你继续什么都自己扛，托举型贵人即使在你身边，也可能不知道你真的需要帮助。","ifChange":"如果你能更自然地表达需要，并把收到的支持转成实际行动，你会更容易进入被信任、被支持、被推荐的良性循环。","notRecommended":["装作不需要帮助","用懂事掩盖需求","把善意都当成人情债","只在崩溃时才开口","低估自己的被喜欢程度"],"plan90":[{"title":"第 1-2 周：列出 5 个可信任的人","content":"不一定是资源最多的人，而是你可以说真话、对方也愿意认真回应的人。"},{"title":"第 3-4 周：练习一次小求助","content":"用具体、轻量的方式开口，比如请对方给一个建议、看一段文字、介绍一个信息源。"},{"title":"第 2 个月：建立感谢反馈","content":"别人帮过你后，不只说谢谢，还要告诉对方这件事给你带来了什么改变。"},{"title":"第 3 个月：把支持转成成果","content":"选一个被鼓励过的方向做出小结果，让托举你的人看见你的行动力。"}],"closing":"你不需要一直证明自己很坚强。能接住善意，也是一种很重要的能力。"},"C":{"typeName":"严格打磨型贵人","subtitle":"你更容易吸引愿意指出问题、提高标准、把你训练得更强的人。","posterSubtext":"你的贵人未必温柔，但很可能真的能让你升级。","maturityScore":88,"coreConclusion":"你最容易吸引的贵人，是那些高标准、重细节、愿意讲真话的人。他们不一定会一直夸你，甚至会让你短期不舒服，但他们能看见你的潜力，也愿意花时间指出你哪里还不够好。对你来说，真正的贵人不是只给安慰的人，而是能让你变扎实、变专业、变能扛事的人。","diagnosis":"你的关系吸引力来自“可塑性”。别人愿意打磨你，是因为你不是只想听好话，而是真的愿意改、愿意复盘、愿意把反馈落实到下一版成果里。你的盲区是容易把严格误读成否定，把被指出问题当成自己不被认可。","whatYouReallyWant":"你想要的是更清楚的标准。你不怕努力，怕的是没人告诉你到底差在哪里，也怕自己一直在低水平重复。","mechanism":{"title":"高标准训练机制","content":"严格型贵人通常会被“能承受反馈、能快速迭代、有成长证据”的人吸引。对他们来说，值得培养的人不是最会讨喜的人，而是最能把建议变成进步的人。"},"professionalBasis":["从能力发展看，高质量反馈是成长加速器。越具体的批评，越能暴露你真正需要升级的地方。","从导师关系看，严格型贵人愿意投入时间，前提是他们看到你的迭代速度和执行诚意。","从心理适应看，你需要把“被指出问题”和“被否定人格”分开。前者是训练，后者才是伤害。"],"coreTensions":["想变强","怕被否定","需要真实标准","容易把批评情绪化"],"suitableIf":["你正在打磨一项硬能力","你能接受具体反馈","你愿意做第二版、第三版","你不只追求被喜欢"],"cautionIf":["把所有批评都当成针对你","只找会夸你的人","被指出问题后立刻逃避","没有把反馈变成作品或行动"],"indices":[{"label":"反馈吸收指数","value":91},{"label":"成长迭代指数","value":88},{"label":"专业打磨潜力","value":86},{"label":"受挫敏感度","value":62}],"ifStay":"如果你只待在舒服关系里，你会少受伤，但也容易少成长。真正能点醒你的人，往往不总是让你舒服。","ifChange":"如果你把批评当成训练材料，严格型贵人会更愿意持续投入，因为他们能看见自己的建议真的被你用上了。","notRecommended":["只听好话","收到反馈就自我否定","把严厉等同于不喜欢","不复盘就继续做","让别人重复提醒同一个问题"],"plan90":[{"title":"第 1-2 周：找一个具体作品请人批改","content":"不要问我怎么样，而是问：哪里最弱、先改哪三处、标准是什么。"},{"title":"第 3-4 周：做反馈记录表","content":"把每次被指出的问题归类，看看自己最常重复出现的短板是什么。"},{"title":"第 2 个月：完成三轮迭代","content":"同一个作品或技能至少做三版，让别人看见你不是听完就算了。"},{"title":"第 3 个月：主动汇报成长证据","content":"把前后对比发给给过你建议的人，让严格型贵人知道你值得继续培养。"}],"closing":"有些贵人不是来哄你的，是来把你磨亮的。你能不能接住，决定了这段关系值不值钱。"},"D":{"typeName":"同频共创型贵人","subtitle":"你更容易吸引能与你互补、协作、一起把想法做成结果的人。","posterSubtext":"你的贵人不一定站在高处，也可能正站在你旁边。","maturityScore":86,"coreConclusion":"你最容易吸引的贵人，是那些和你同频、互补、愿意一起做事的人。TA 不一定比你高很多，也不一定以“导师”身份出现，但会在共同项目、共同兴趣、共同目标里和你形成互相成就。你适合通过合作遇见贵人，而不是只通过单向求助遇见贵人。","diagnosis":"你的关系吸引力来自“共创感”。别人愿意靠近你，是因为和你一起做事有空间、有边界、有反馈，也有互相补位的可能。你的盲区是有时太重视关系舒服，却没有把合作的下一步说具体，导致很多同频关系停在聊天阶段。","whatYouReallyWant":"你想要的不是被单方面拯救，而是找到能一起升级的人。你希望关系里有平等、有互惠、有共同作品，而不是永远站在求助者的位置。","mechanism":{"title":"互惠共创机制","content":"共创型贵人会被“有想法、有边界、能互相补位”的人吸引。共同完成一件小事，往往比单纯聊天更容易让关系沉淀成真实机会。"},"professionalBasis":["从协作关系看，贵人不只来自上位者，也可能来自同级伙伴。共同项目能快速暴露一个人的靠谱程度和互补价值。","从社交资本看，互惠关系更可持续。你不是只拿资源，而是也能提供信息、执行、审美、方法或情绪价值。","从机会生成看，小共创是低成本验证关系的方式。一次小项目，比十次空泛寒暄更能建立信任。"],"coreTensions":["想平等合作","不喜欢单向索取","容易停在聊天阶段","需要把同频变成行动"],"suitableIf":["你有想法也愿意落地","你能尊重边界和分工","你愿意给对方提供价值","你适合在项目里建立关系"],"cautionIf":["只聊天不推进","不好意思谈分工和收益","把关系舒服当成合作成功","没有截止日期和交付标准"],"indices":[{"label":"同频识别指数","value":88},{"label":"互惠意识指数","value":90},{"label":"共创落地能力","value":78},{"label":"边界清晰度","value":72}],"ifStay":"如果你一直把同频关系停在聊天层面，很多潜在贵人会从机会变成普通熟人。","ifChange":"如果你敢把一个小想法变成共同项目，共创型贵人会更容易出现，也更容易留下。","notRecommended":["只找感觉不谈落地","不好意思谈边界","关系舒服但没有行动","把合作全靠默契","只等别人来推进"],"plan90":[{"title":"第 1-2 周：找 3 个同频对象","content":"不是找最厉害的人，而是找目标相近、节奏相近、愿意一起试的人。"},{"title":"第 3-4 周：发起一个最小共创","content":"可以是一篇内容、一次直播、一个清单、一个小产品，不要一开始就做大。"},{"title":"第 2 个月：把分工说清楚","content":"明确谁负责什么、什么时候交付、成果归谁、后续怎么复盘。"},{"title":"第 3 个月：沉淀合作资产","content":"把共创结果变成作品、案例或经验复盘，让这段关系继续产生新机会。"}],"closing":"你要找的贵人，也许不是来拉你一把的人，而是愿意和你一起把事情做出来的人。"}},"secondaryNotes":{"A":{"B":"你的主倾向是「资源牵线型贵人」，副倾向带有「看见托举型贵人」。这说明你既需要入口，也需要信任感。争取机会时，不要只强调结果，也要让别人看见你值得长期托付。","C":"你的主倾向是「资源牵线型贵人」，副倾向带有「严格打磨型贵人」。这说明资源入口和能力打磨要同步推进。别人能带你进门，但真正留下来靠的是硬实力。","D":"你的主倾向是「资源牵线型贵人」，副倾向带有「同频共创型贵人」。这说明你不只适合被推荐，也适合通过合作制造新机会。把请求变成项目，会更容易被看见。"},"B":{"A":"你的主倾向是「看见托举型贵人」，副倾向带有「资源牵线型贵人」。这说明你需要被理解，但也不能只停在被安慰。把信任转化为具体请求，机会才会往前走。","C":"你的主倾向是「看见托举型贵人」，副倾向带有「严格打磨型贵人」。这说明你既需要温柔支持，也需要真实反馈。被看见之后，下一步是被训练。","D":"你的主倾向是「看见托举型贵人」，副倾向带有「同频共创型贵人」。这说明你的贵人关系很适合从信任走向合作。不要只做被照顾的人，也可以主动提供价值。"},"C":{"A":"你的主倾向是「严格打磨型贵人」，副倾向带有「资源牵线型贵人」。这说明你需要先把能力打硬，再去承接更大的资源。越扎实，越容易被推荐。","B":"你的主倾向是「严格打磨型贵人」，副倾向带有「看见托举型贵人」。这说明你需要真实反馈，也需要情绪托底。别把严格都理解成否定，也别让自己一直硬扛。","D":"你的主倾向是「严格打磨型贵人」，副倾向带有「同频共创型贵人」。这说明你适合在项目里被训练。共同做事时，反馈会更具体，也更容易转化为成长。"},"D":{"A":"你的主倾向是「同频共创型贵人」，副倾向带有「资源牵线型贵人」。这说明合作可能就是你的资源入口。先做出小成果，再让别人看见你的链接价值。","B":"你的主倾向是「同频共创型贵人」，副倾向带有「看见托举型贵人」。这说明你需要舒服的关系氛围，也需要把信任变成行动。关系好不等于自动有结果。","C":"你的主倾向是「同频共创型贵人」，副倾向带有「严格打磨型贵人」。这说明你适合和高标准伙伴一起做事。只要边界清楚，压力会变成升级。"}},"shareTemplate":["我测出了：{{typeName}}","{{posterSubtext}}","{{secondaryLine}}","","你的性格更容易吸引哪类贵人？32题诊断"]};</script>
+    <script>
+(function () {
+  const app = document.getElementById("app");
+  const configPaths = ["./configs/site-config.json", "./configs/career-change.json"];
+
+  const state = {
+    config: null,
+    answers: {},
+    currentIndex: 0,
+    selected: null,
+    locked: false,
+    loadingStep: 0,
+    route: "home",
+    resultData: null,
+  };
+
+  const defaultLoadingMessages = [
+    "正在读取你的选择倾向...",
+    "正在识别隐藏动机...",
+    "正在计算结果分布...",
+    "正在生成专属报告...",
+    "分析完成。",
+  ];
+
+  init();
+
+  async function init() {
+    try {
+      state.config = await fetchConfig();
+      applyDocumentMeta(state.config);
+
+      const saved = sessionStorage.getItem(getStorageKey());
+      if (saved) {
+        state.answers = JSON.parse(saved);
+      }
+
+      routeFromHash();
+      window.addEventListener("hashchange", routeFromHash);
+    } catch (error) {
+      app.innerHTML = `
+        <div class="error">
+          <div>
+            <h1>测试加载失败</h1>
+            <p>请确认你是通过网页链接打开页面，而不是直接双击 HTML 文件。</p>
+          </div>
+        </div>
+      `;
+      console.error(error);
+    }
+  }
+
+  async function fetchConfig() {
+    if (window.__QUIZ_CONFIG__) return window.__QUIZ_CONFIG__;
+    let lastError;
+    for (const path of configPaths) {
+      try {
+        const response = await fetch(path, { cache: "no-store" });
+        if (!response.ok) throw new Error(`${path} ${response.status}`);
+        return response.json();
+      } catch (error) {
+        lastError = error;
+      }
+    }
+    throw lastError;
+  }
+
+  function applyDocumentMeta(cfg) {
+    const title = cfg.title || "趣味测试";
+    const description = cfg.metaDescription || cfg.subtitle || "完成测试，生成你的专属报告。";
+    document.title = title;
+    setMeta("name", "description", description);
+    setMeta("property", "og:title", title);
+    setMeta("property", "og:description", description);
+  }
+
+  function setMeta(attr, key, content) {
+    let node = document.querySelector(`meta[${attr}="${key}"]`);
+    if (!node) {
+      node = document.createElement("meta");
+      node.setAttribute(attr, key);
+      document.head.appendChild(node);
+    }
+    node.setAttribute("content", content);
+  }
+
+  function routeFromHash() {
+    const route = (location.hash || "#/").replace("#/", "") || "home";
+    renderRoute(route);
+  }
+
+  function navigate(route) {
+    const nextHash = `#/${route}`;
+    if (location.hash === nextHash) {
+      renderRoute(route);
+      return;
+    }
+    location.hash = nextHash;
+  }
+
+  function renderRoute(route) {
+    state.route = route;
+    if (route === "quiz") renderQuiz();
+    else if (route === "loading") startLoading();
+    else if (route === "result") renderResult();
+    else renderHome();
+  }
+
+  function renderShell(content, extraClass = "") {
+    app.innerHTML = `
+      <div class="shell">
+        <div class="top-rule"></div>
+        <section class="screen ${extraClass}">${content}</section>
+      </div>
+      <div id="toast" class="toast">已复制</div>
+    `;
+  }
+
+  function renderHome() {
+    const cfg = state.config;
+    renderShell(
+      `
+      <div class="home">
+        <div class="kicker"><span class="dot"></span><span>${text(cfg.kicker)}</span><span class="dot"></span></div>
+        <h1 class="hero-title">${text(cfg.title)}</h1>
+        <p class="hero-subtitle">${text(cfg.subtitle)}</p>
+        <div class="hairline"></div>
+        <div class="intro">
+          ${(cfg.intro || []).map((p, index) => `<p class="${index === cfg.intro.length - 1 ? "strong" : ""}">${text(p)}</p>`).join("")}
+        </div>
+        <div class="pill-grid">
+          ${(cfg.dimensions || []).map((item) => `<div class="pill">${text(item)}</div>`).join("")}
+        </div>
+        <button class="primary-btn" data-action="start">${text(cfg.startButton || "开始测试")}</button>
+        <p class="disclaimer">${text(cfg.disclaimer || "本测试为趣味内容，仅供娱乐参考。")}</p>
+      </div>
+      `,
+      "home"
+    );
+    const startButton = app.querySelector("[data-action='start']");
+    let started = false;
+    const startQuiz = () => {
+      if (started) return;
+      started = true;
+      state.answers = {};
+      state.currentIndex = 0;
+      sessionStorage.removeItem(getStorageKey());
+      navigate("quiz");
+    };
+    startButton.addEventListener("click", startQuiz);
+    startButton.addEventListener(
+      "touchend",
+      (event) => {
+        event.preventDefault();
+        startQuiz();
+      },
+      { passive: false }
+    );
+  }
+
+  function renderQuiz() {
+    const questions = state.config.questions || [];
+    const question = questions[state.currentIndex];
+    if (!question) {
+      renderHome();
+      return;
+    }
+
+    const progress = ((state.currentIndex + 1) / questions.length) * 100;
+
+    renderShell(
+      `
+      <div class="sticky-head">
+        <div class="quiz-meta">
+          <span>${String(state.currentIndex + 1).padStart(2, "0")} / ${questions.length}</span>
+          <span>${text(question.module)}</span>
+        </div>
+        <div class="progress-track"><div class="progress-bar" style="width:${progress}%"></div></div>
+      </div>
+      <div class="question-no">${String(state.currentIndex + 1).padStart(2, "0")}</div>
+      <h1 class="question-title">${text(question.text)}</h1>
+      <div class="options">
+        ${(question.options || [])
+          .map(
+            (option) => `
+            <button class="option" data-option="${text(option.key)}">
+              <span class="option-key">${text(option.key)}</span>
+              <span class="option-text">${text(option.text)}</span>
+            </button>
+          `
+          )
+          .join("")}
+      </div>
+      <p class="hint">${text(state.config.quizHint || "选择后自动进入下一题")}</p>
+      `,
+      "quiz-screen"
+    );
+
+    app.querySelectorAll("[data-option]").forEach((button) => {
+      button.addEventListener("click", () => selectOption(button.dataset.option));
+    });
+  }
+
+  function selectOption(key) {
+    if (state.locked) return;
+    state.locked = true;
+    state.selected = key;
+    const question = state.config.questions[state.currentIndex];
+    state.answers[question.id] = key;
+
+    app.querySelectorAll(".option").forEach((button) => {
+      const selected = button.dataset.option === key;
+      button.classList.toggle("selected", selected);
+      button.classList.toggle("dimmed", !selected);
+    });
+
+    window.setTimeout(() => {
+      if (state.currentIndex < state.config.questions.length - 1) {
+        state.currentIndex += 1;
+        state.locked = false;
+        state.selected = null;
+        renderQuiz();
+      } else {
+        sessionStorage.setItem(getStorageKey(), JSON.stringify(state.answers));
+        state.locked = false;
+        navigate("loading");
+      }
+    }, 420);
+  }
+
+  function startLoading() {
+    state.loadingStep = 0;
+    renderLoading("");
+    tickLoading();
+  }
+
+  function renderLoading(value) {
+    const loadingMessages = getLoadingMessages();
+    renderShell(
+      `
+      <div class="loading-card">
+        <div class="spinner"></div>
+        <div class="loading-text">${text(value)}<span class="cursor">|</span></div>
+        <div class="step-bars">
+          ${loadingMessages.map((_, index) => `<div class="step ${index < state.loadingStep ? "done" : ""}"><span></span></div>`).join("")}
+        </div>
+      </div>
+      `,
+      "loading-screen"
+    );
+  }
+
+  function tickLoading() {
+    if (state.route !== "loading") return;
+    const loadingMessages = getLoadingMessages();
+    if (state.loadingStep >= loadingMessages.length) {
+      window.setTimeout(() => navigate("result"), 700);
+      return;
+    }
+    const message = loadingMessages[state.loadingStep];
+    let chars = 0;
+    const interval = window.setInterval(() => {
+      chars += 1;
+      renderLoading(message.slice(0, chars));
+      if (chars >= message.length) {
+        window.clearInterval(interval);
+        window.setTimeout(() => {
+          state.loadingStep += 1;
+          tickLoading();
+        }, 520);
+      }
+    }, 35);
+  }
+
+  function renderResult() {
+    const saved = sessionStorage.getItem(getStorageKey());
+    if (saved) state.answers = JSON.parse(saved);
+    if (Object.keys(state.answers).length < state.config.questions.length) {
+      renderHome();
+      return;
+    }
+
+    const scored = scoreAnswers(state.answers);
+    const primary = state.config.results[scored.primary];
+    const secondary = scored.secondary ? state.config.secondaryNotes?.[scored.primary]?.[scored.secondary] : null;
+    const stage = getStage(primary.maturityScore);
+    const shareText = buildShareText(primary, secondary);
+    const compareLabels = state.config.compareLabels || ["如果继续原路", "如果换一种做法"];
+    state.resultData = { scored, primary, secondary, stage, shareText };
+
+    renderShell(
+      `
+      <article class="report">
+        <div class="kicker"><span class="dot"></span><span>${text(state.config.resultKicker || "Result Report")}</span><span class="dot"></span></div>
+        <h1 class="result-type">${text(primary.typeName)}</h1>
+        <p class="result-subtitle">${text(primary.subtitle)}</p>
+        <div class="stamp-row">
+          <div class="stamp"><strong>${text(primary.maturityScore)}</strong><span>${text(state.config.scoreLabel || "决策成熟度")}</span></div>
+          <div class="stamp"><strong>${text(stage)}</strong><span>${text(state.config.stageLabel || "当前行动阶段")}</span></div>
+        </div>
+
+        <section class="section">
+          <h2>你的答案分布</h2>
+          <div class="meters">
+            ${Object.entries(scored.counts)
+              .map(([key, value]) => {
+                const typeData = state.config.results[key];
+                const width = (value / state.config.questions.length) * 100;
+                return `
+                  <div>
+                    <div class="meter-head"><span>${text(key)} · ${text(typeData.typeName)}</span><span>${value} 题</span></div>
+                    <div class="meter-track"><div class="meter-fill" style="width:${width}%"></div></div>
+                  </div>
+                `;
+              })
+              .join("")}
+          </div>
+        </section>
+
+        ${secondary ? `<section class="section"><h2>副倾向提示</h2><div class="secondary-note">${text(secondary)}</div></section>` : ""}
+
+        <section class="section">
+          <h2>诊断结论</h2>
+          <div class="quote">${text(primary.coreConclusion)}</div>
+        </section>
+
+        <section class="section">
+          <h2>为什么你会这样</h2>
+          <p>${text(primary.diagnosis)}</p>
+          <p>${text(primary.whatYouReallyWant)}</p>
+        </section>
+
+        <section class="section">
+          <h2>${text(primary.mechanism.title)}</h2>
+          <p>${text(primary.mechanism.content)}</p>
+        </section>
+
+        ${renderParagraphSection("专业解读框架", primary.professionalBasis)}
+        ${renderTagSection("你的关键矛盾", primary.coreTensions)}
+        ${renderCompareListSection("适合推进的条件", "需要谨慎的信号", primary.suitableIf, primary.cautionIf)}
+
+        <section class="section">
+          <h2>关键指数</h2>
+          <div class="meters">
+            ${(primary.indices || [])
+              .map(
+                (item) => `
+                <div>
+                  <div class="meter-head"><span>${text(item.label)}</span><span>${text(item.value)}</span></div>
+                  <div class="meter-track"><div class="meter-fill" style="width:${number(item.value)}%"></div></div>
+                </div>
+              `
+              )
+              .join("")}
+          </div>
+        </section>
+
+        <section class="section">
+          <h2>两条路径对比</h2>
+          <div class="compare">
+            <div class="compare-card"><h3>${text(compareLabels[0])}</h3><p>${text(primary.ifStay)}</p></div>
+            <div class="compare-card"><h3>${text(compareLabels[1])}</h3><p>${text(primary.ifChange)}</p></div>
+          </div>
+        </section>
+
+        <section class="section">
+          <h2>现在最不建议你做</h2>
+          <div class="tag-list">${(primary.notRecommended || []).map((item) => `<span class="tag">${text(item)}</span>`).join("")}</div>
+        </section>
+
+        <section class="section">
+          <h2>未来 90 天验证方案</h2>
+          <div class="plan">
+            ${(primary.plan90 || [])
+              .map(
+                (item, index) => `
+                <div class="plan-card">
+                  <h3>${index + 1}. ${text(item.title)}</h3>
+                  <p>${text(item.content)}</p>
+                </div>
+              `
+              )
+              .join("")}
+          </div>
+        </section>
+
+        <section class="section">
+          <h2>最后一句话</h2>
+          <p>${text(primary.closing)}</p>
+        </section>
+
+        <div class="actions">
+          <button class="primary-btn" data-action="copy">${text(state.config.copyButton || "复制我的结果")}</button>
+          <button class="ghost-btn" data-action="restart">${text(state.config.restartButton || "重新测试")}</button>
+        </div>
+      </article>
+      `,
+      "result-screen"
+    );
+
+    app.querySelector("[data-action='copy']").addEventListener("click", () => copyShareText(shareText));
+    app.querySelector("[data-action='restart']").addEventListener("click", () => {
+      sessionStorage.removeItem(getStorageKey());
+      state.answers = {};
+      state.currentIndex = 0;
+      navigate("home");
+    });
+  }
+
+  function renderParagraphSection(title, paragraphs) {
+    if (!Array.isArray(paragraphs) || !paragraphs.length) return "";
+    return `
+      <section class="section">
+        <h2>${text(title)}</h2>
+        ${paragraphs.map((item) => `<p>${text(item)}</p>`).join("")}
+      </section>
+    `;
+  }
+
+  function renderTagSection(title, items) {
+    if (!Array.isArray(items) || !items.length) return "";
+    return `
+      <section class="section">
+        <h2>${text(title)}</h2>
+        <div class="tag-list">${items.map((item) => `<span class="tag">${text(item)}</span>`).join("")}</div>
+      </section>
+    `;
+  }
+
+  function renderCompareListSection(leftTitle, rightTitle, leftItems, rightItems) {
+    const hasLeft = Array.isArray(leftItems) && leftItems.length;
+    const hasRight = Array.isArray(rightItems) && rightItems.length;
+    if (!hasLeft && !hasRight) return "";
+    return `
+      <section class="section">
+        <h2>适用边界</h2>
+        <div class="compare">
+          <div class="compare-card">
+            <h3>${text(leftTitle)}</h3>
+            ${(leftItems || []).map((item) => `<p>${text(item)}</p>`).join("")}
+          </div>
+          <div class="compare-card">
+            <h3>${text(rightTitle)}</h3>
+            ${(rightItems || []).map((item) => `<p>${text(item)}</p>`).join("")}
+          </div>
+        </div>
+      </section>
+    `;
+  }
+
+  function scoreAnswers(answers) {
+    const counts = { A: 0, B: 0, C: 0, D: 0 };
+    Object.values(answers).forEach((key) => {
+      if (counts[key] !== undefined) counts[key] += 1;
+    });
+    const sorted = Object.entries(counts).sort((a, b) => b[1] - a[1]);
+    const threshold = state.config.secondaryThreshold ?? 2;
+    const primary = sorted[0][0];
+    const secondary = sorted[1][1] > 0 && sorted[0][1] - sorted[1][1] <= threshold ? sorted[1][0] : null;
+    return { counts, primary, secondary };
+  }
+
+  function getStage(score) {
+    const labels = state.config.stageLabels || [
+      { max: 45, label: "观察期" },
+      { max: 65, label: "验证期" },
+      { max: 82, label: "规划期" },
+      { max: 100, label: "行动期" },
+    ];
+    const hit = labels.find((item) => score <= item.max);
+    return hit ? hit.label : labels[labels.length - 1].label;
+  }
+
+  function buildShareText(primary, secondary) {
+    const template = state.config.shareTemplate || [
+      "我测出了：{{typeName}}",
+      "{{posterSubtext}}",
+      "{{secondaryLine}}",
+      "",
+      "{{title}}",
+    ];
+    const values = {
+      title: state.config.title,
+      typeName: primary.typeName,
+      posterSubtext: primary.posterSubtext,
+      secondary: secondary || "",
+      secondaryLine: secondary ? `副倾向：${secondary}` : "",
+    };
+    return template
+      .map((line) => fillTemplate(line, values))
+      .filter((line, index, arr) => line || arr[index - 1])
+      .join("\n")
+      .trim();
+  }
+
+  async function copyShareText(value) {
+    try {
+      await navigator.clipboard.writeText(value);
+      showToast("结果文案已复制");
+    } catch (error) {
+      showToast("复制失败，可长按手动复制");
+    }
+  }
+
+  function showToast(value) {
+    const toast = document.getElementById("toast");
+    if (!toast) return;
+    toast.textContent = value;
+    toast.classList.add("show");
+    window.setTimeout(() => toast.classList.remove("show"), 1600);
+  }
+
+  function getLoadingMessages() {
+    return state.config.loadingMessages || defaultLoadingMessages;
+  }
+
+  function getStorageKey() {
+    return `xhsTestAnswers:${state.config.slug || "default"}`;
+  }
+
+  function fillTemplate(template, values) {
+    return String(template).replace(/\{\{(\w+)\}\}/g, (_, key) => values[key] || "");
+  }
+
+  function number(value) {
+    const parsed = Number(value);
+    if (Number.isNaN(parsed)) return 0;
+    return Math.max(0, Math.min(100, parsed));
+  }
+
+  function text(value) {
+    return String(value ?? "")
+      .replace(/&/g, "&amp;")
+      .replace(/</g, "&lt;")
+      .replace(/>/g, "&gt;")
+      .replace(/"/g, "&quot;");
+  }
+})();
+
+    </script>
+  </body>
+</html>
