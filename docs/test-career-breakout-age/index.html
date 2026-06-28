@@ -1,0 +1,1125 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <meta name="description" content="完成 32 道「你的事业爆发期在几岁」测试，生成你的事业爆发窗口报告。" />
+    <meta property="og:title" content="你的事业爆发期在几岁？" />
+    <meta property="og:description" content="完成 32 道「你的事业爆发期在几岁」测试，生成你的事业爆发窗口报告。" />
+    <title>你的事业爆发期在几岁？</title>
+    <style>
+:root {
+  --bg: #fbfaf7;
+  --paper: #fffefd;
+  --ink: #20242a;
+  --muted: #65707d;
+  --line: #d9d4ca;
+  --line-strong: #b9afa0;
+  --accent: #9b4339;
+  --accent-soft: #f1dfd7;
+  --gold: #c0964d;
+  --sage: #66795f;
+  --blue: #526a86;
+  --shadow: 0 16px 36px rgba(60, 47, 38, 0.1);
+  --radius: 8px;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  min-height: 100%;
+  background:
+    linear-gradient(rgba(32, 36, 42, 0.035) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(32, 36, 42, 0.035) 1px, transparent 1px),
+    var(--bg);
+  background-size: 24px 24px;
+}
+
+body {
+  min-height: 100vh;
+  margin: 0;
+  color: var(--ink);
+  font-family:
+    "PingFang SC",
+    "Microsoft YaHei",
+    "Noto Sans SC",
+    system-ui,
+    -apple-system,
+    BlinkMacSystemFont,
+    sans-serif;
+  letter-spacing: 0;
+}
+
+button {
+  font: inherit;
+}
+
+.shell {
+  width: min(100%, 480px);
+  min-height: 100vh;
+  margin: 0 auto;
+  background: rgba(251, 250, 247, 0.88);
+}
+
+.top-rule {
+  height: 4px;
+  background: var(--accent);
+}
+
+.screen {
+  min-height: calc(100vh - 4px);
+  padding: 28px 22px 32px;
+}
+
+.home {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.kicker {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  color: var(--muted);
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  font-size: 11px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+.dot {
+  width: 7px;
+  height: 7px;
+  background: var(--accent);
+  border-radius: 50%;
+}
+
+.hero-title {
+  margin: 26px 0 14px;
+  color: var(--ink);
+  font-size: 30px;
+  line-height: 1.2;
+  text-align: center;
+  font-weight: 800;
+}
+
+.hero-subtitle {
+  margin: 0 auto 28px;
+  max-width: 340px;
+  color: var(--muted);
+  font-size: 15px;
+  line-height: 1.75;
+  text-align: center;
+}
+
+.hairline {
+  width: 64px;
+  height: 1px;
+  margin: 0 auto 30px;
+  background: var(--line-strong);
+}
+
+.intro {
+  margin: 0 auto;
+  max-width: 380px;
+}
+
+.intro p {
+  margin: 0 0 15px;
+  color: rgba(32, 36, 42, 0.82);
+  font-size: 15px;
+  line-height: 1.8;
+}
+
+.intro .strong {
+  color: var(--accent);
+  font-weight: 700;
+}
+
+.pill-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px;
+  margin: 28px 0;
+}
+
+.pill {
+  min-height: 42px;
+  display: grid;
+  place-items: center;
+  border: 1px solid var(--line);
+  color: var(--muted);
+  background: rgba(255, 255, 255, 0.44);
+  font-size: 13px;
+}
+
+.primary-btn,
+.ghost-btn,
+.copy-btn {
+  width: 100%;
+  min-height: 48px;
+  border: 1px solid var(--ink);
+  border-radius: 0;
+  cursor: pointer;
+  transition: transform 150ms ease, background 150ms ease, color 150ms ease, border-color 150ms ease;
+}
+
+.primary-btn {
+  background: var(--ink);
+  color: #fff;
+  font-weight: 700;
+}
+
+.ghost-btn,
+.copy-btn {
+  background: transparent;
+  color: var(--ink);
+}
+
+.primary-btn:active,
+.ghost-btn:active,
+.copy-btn:active,
+.option:active {
+  transform: translateY(1px);
+}
+
+.disclaimer {
+  margin: 18px auto 0;
+  max-width: 340px;
+  color: var(--muted);
+  font-size: 12px;
+  line-height: 1.65;
+  text-align: center;
+}
+
+.quiz-screen {
+  padding-top: 0;
+}
+
+.sticky-head {
+  position: sticky;
+  top: 0;
+  z-index: 5;
+  margin: 0 -22px 26px;
+  padding: 14px 22px 12px;
+  background: rgba(251, 250, 247, 0.95);
+  border-bottom: 1px solid var(--line);
+  backdrop-filter: blur(12px);
+}
+
+.quiz-meta {
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+  color: var(--muted);
+  font-size: 12px;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+}
+
+.progress-track {
+  height: 4px;
+  margin-top: 10px;
+  background: rgba(32, 36, 42, 0.09);
+}
+
+.progress-bar {
+  height: 100%;
+  background: var(--accent);
+  transition: width 260ms ease;
+}
+
+.question-no {
+  color: rgba(155, 67, 57, 0.18);
+  font-size: 48px;
+  line-height: 1;
+  font-weight: 800;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+}
+
+.question-title {
+  margin: 18px 0 24px;
+  font-size: 22px;
+  line-height: 1.5;
+  font-weight: 750;
+}
+
+.options {
+  display: grid;
+  gap: 12px;
+}
+
+.option {
+  min-height: 66px;
+  display: grid;
+  grid-template-columns: 30px 1fr;
+  gap: 12px;
+  align-items: start;
+  width: 100%;
+  padding: 15px;
+  border: 1px solid var(--line);
+  background: rgba(255, 255, 255, 0.68);
+  color: var(--ink);
+  text-align: left;
+  cursor: pointer;
+  transition: background 160ms ease, border-color 160ms ease, color 160ms ease, opacity 160ms ease;
+}
+
+.option-key {
+  display: grid;
+  place-items: center;
+  width: 28px;
+  height: 28px;
+  border: 1px solid var(--line-strong);
+  font-size: 13px;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+}
+
+.option-text {
+  padding-top: 2px;
+  font-size: 15px;
+  line-height: 1.55;
+}
+
+.option.selected {
+  border-color: var(--accent);
+  background: var(--accent);
+  color: #fff;
+}
+
+.option.selected .option-key {
+  border-color: rgba(255, 255, 255, 0.8);
+}
+
+.option.dimmed {
+  opacity: 0.42;
+}
+
+.hint {
+  margin: 18px 0 0;
+  color: var(--muted);
+  font-size: 12px;
+  text-align: center;
+}
+
+.loading-screen {
+  display: grid;
+  place-items: center;
+}
+
+.loading-card {
+  width: 100%;
+  max-width: 360px;
+  text-align: center;
+}
+
+.spinner {
+  width: 54px;
+  height: 54px;
+  margin: 0 auto 24px;
+  border: 2px solid var(--line);
+  border-top-color: var(--accent);
+  border-radius: 50%;
+  animation: spin 850ms linear infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.loading-text {
+  min-height: 54px;
+  color: var(--accent);
+  font-size: 17px;
+  line-height: 1.6;
+  font-weight: 700;
+}
+
+.step-bars {
+  display: grid;
+  gap: 8px;
+  margin-top: 28px;
+}
+
+.step {
+  height: 4px;
+  overflow: hidden;
+  background: rgba(32, 36, 42, 0.09);
+}
+
+.step span {
+  display: block;
+  height: 100%;
+  width: 0;
+  background: var(--accent);
+  transition: width 300ms ease;
+}
+
+.step.done span {
+  width: 100%;
+}
+
+.result-screen {
+  padding: 22px 18px 30px;
+}
+
+.report {
+  padding: 22px 16px 18px;
+  border: 1px solid var(--line);
+  background: var(--paper);
+  box-shadow: var(--shadow);
+}
+
+.result-type {
+  margin: 8px 0 8px;
+  color: var(--accent);
+  font-size: 30px;
+  line-height: 1.15;
+  font-weight: 850;
+  text-align: center;
+}
+
+.result-subtitle {
+  margin: 0 auto 20px;
+  color: var(--muted);
+  font-size: 15px;
+  line-height: 1.7;
+  text-align: center;
+}
+
+.stamp-row {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px;
+  margin: 18px 0 20px;
+}
+
+.stamp {
+  padding: 12px 10px;
+  border: 1px solid var(--line);
+  background: #fbfaf7;
+}
+
+.stamp strong {
+  display: block;
+  margin-bottom: 4px;
+  color: var(--ink);
+  font-size: 20px;
+}
+
+.stamp span {
+  color: var(--muted);
+  font-size: 12px;
+}
+
+.section {
+  padding: 20px 0;
+  border-top: 1px solid var(--line);
+}
+
+.section h2 {
+  margin: 0 0 12px;
+  font-size: 18px;
+  color: var(--ink);
+}
+
+.section p {
+  margin: 0 0 12px;
+  color: rgba(32, 36, 42, 0.82);
+  font-size: 15px;
+  line-height: 1.85;
+}
+
+.quote {
+  padding: 15px;
+  border-left: 3px solid var(--accent);
+  background: var(--accent-soft);
+  color: #5b2d27;
+  line-height: 1.8;
+  font-weight: 700;
+}
+
+.meters {
+  display: grid;
+  gap: 14px;
+}
+
+.meter-head {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 7px;
+  color: var(--muted);
+  font-size: 13px;
+}
+
+.meter-track {
+  height: 8px;
+  background: rgba(32, 36, 42, 0.08);
+}
+
+.meter-fill {
+  height: 100%;
+  background: var(--accent);
+}
+
+.compare {
+  display: grid;
+  gap: 10px;
+}
+
+.compare-card {
+  padding: 14px;
+  border: 1px solid var(--line);
+  background: #fbfaf7;
+}
+
+.compare-card h3,
+.plan-card h3 {
+  margin: 0 0 8px;
+  font-size: 15px;
+}
+
+.compare-card p,
+.plan-card p {
+  font-size: 14px;
+}
+
+.tag-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.tag {
+  padding: 7px 9px;
+  border: 1px solid var(--line);
+  background: #fbfaf7;
+  color: var(--muted);
+  font-size: 13px;
+}
+
+.plan {
+  display: grid;
+  gap: 10px;
+}
+
+.plan-card {
+  padding: 14px;
+  border: 1px solid var(--line);
+  background: #fbfaf7;
+}
+
+.secondary-note {
+  padding: 14px;
+  border: 1px dashed var(--line-strong);
+  background: rgba(192, 150, 77, 0.12);
+  line-height: 1.75;
+  font-size: 14px;
+}
+
+.actions {
+  display: grid;
+  gap: 10px;
+  margin-top: 18px;
+}
+
+.toast {
+  position: fixed;
+  left: 50%;
+  bottom: 22px;
+  z-index: 20;
+  transform: translateX(-50%);
+  padding: 10px 14px;
+  background: var(--ink);
+  color: #fff;
+  font-size: 13px;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 180ms ease;
+}
+
+.toast.show {
+  opacity: 1;
+}
+
+.error {
+  display: grid;
+  place-items: center;
+  min-height: 100vh;
+  padding: 24px;
+  text-align: center;
+}
+
+.error p {
+  color: var(--muted);
+  line-height: 1.7;
+}
+
+@media (min-width: 700px) {
+  body {
+    padding: 28px 0;
+  }
+
+  .shell {
+    min-height: calc(100vh - 56px);
+    border: 1px solid var(--line);
+    box-shadow: var(--shadow);
+  }
+
+  .screen {
+    min-height: calc(100vh - 60px);
+  }
+}
+
+    </style>
+  </head>
+  <body>
+    <main id="app" aria-live="polite"></main>
+    <script>window.__QUIZ_CONFIG__ = {"slug":"test-career-breakout-age","topic":"你的事业爆发期在几岁？","kicker":"32-Q Career Timing Test","title":"你的事业爆发期在几岁？","subtitle":"32 道题，拆清你的事业爆发窗口、能力积累方式、机会承接能力和下一步发力点。","metaDescription":"完成 32 道「你的事业爆发期在几岁」测试，生成你的事业爆发窗口报告。","startButton":"开始测试","resultKicker":"Career Timing Report","quizHint":"选择后自动进入下一题","copyButton":"复制我的结果","restartButton":"重新测试","scoreLabel":"爆发准备度","stageLabel":"当前阶段","stageLabels":[{"max":45,"label":"沉淀期"},{"max":65,"label":"验证期"},{"max":82,"label":"加速期"},{"max":100,"label":"爆发期"}],"compareLabels":["如果继续原路","如果调整打法"],"disclaimer":"本测试为趣味自我观察工具，非职业咨询、投资建议或命运预测，仅供你整理事业节奏和行动方向。","secondaryThreshold":4,"dimensions":["能力积累","机会密度","可见度","承接能力"],"intro":["所谓事业爆发期，不是某个神秘年龄突然降临。","它更像一个窗口：你的能力、资源、表达、机会和行动节奏，刚好叠到一起。","32 道题会从目标感、能力沉淀、机会判断、输出可见度、人际资源、风险承受、行动节奏和第二曲线 8 个模块，生成一份更贴近你当前状态的事业爆发窗口报告。"],"loadingMessages":["正在读取你的第一反应...","正在拆分能力积累、机会密度和可见度...","正在识别你的事业爆发窗口...","正在生成 32 题事业节奏报告...","分析完成。"],"questions":[{"id":1,"module":"目标感","text":"看到别人年纪轻轻事业起势，你心里最先冒出来的是：","options":[{"key":"A","text":"我也要尽快冲一把，不想错过窗口期"},{"key":"B","text":"我会研究对方怎么抓机会、怎么转折"},{"key":"C","text":"我更关心他前面到底积累了什么"},{"key":"D","text":"每个人节奏不同，我更相信长线复利"}]},{"id":2,"module":"目标感","text":"如果现在给你一个更大的机会，但压力也更大，你更可能：","options":[{"key":"A","text":"先接住再说，压力可以边做边消化"},{"key":"B","text":"会接，但要先判断它是不是关键跳板"},{"key":"C","text":"除非我已经准备得比较扎实，否则不会硬上"},{"key":"D","text":"我会看它是否符合长期方向，而不是只看眼前热闹"}]},{"id":3,"module":"目标感","text":"你对“事业爆发”的想象，更接近哪一种：","options":[{"key":"A","text":"被看见、涨收入、快速进入更大的平台"},{"key":"B","text":"抓住一次关键跃迁，从普通位置跳到核心位置"},{"key":"C","text":"长期积累终于被市场认可，收入和影响力一起上来"},{"key":"D","text":"在成熟之后开启第二曲线，越往后越稳"}]},{"id":4,"module":"目标感","text":"当别人说“你现在还不急”时，你真实感受是：","options":[{"key":"A","text":"会急，我怕自己再不冲就慢了"},{"key":"B","text":"我不怕晚一点，但不能没有节点和计划"},{"key":"C","text":"我能等，但要确保每一年都在变厚"},{"key":"D","text":"我不太被年龄催动，更在意方向是否可持续"}]},{"id":5,"module":"能力积累","text":"你现在最能拿得出手的东西是：","options":[{"key":"A","text":"行动速度和学习速度，给机会我能马上冲"},{"key":"B","text":"一套正在成型的方法和阶段性成果"},{"key":"C","text":"多年经验、专业判断和稳定交付能力"},{"key":"D","text":"跨领域理解、资源整合和长期耐心"}]},{"id":6,"module":"能力积累","text":"你最怕自己哪种状态持续太久：","options":[{"key":"A","text":"想得很多，但迟迟没有一个能被看见的结果"},{"key":"B","text":"一直在努力，却没有关键跃迁点"},{"key":"C","text":"积累很多，但没有被重新定价"},{"key":"D","text":"只做熟悉的事，没有开启新的增长曲线"}]},{"id":7,"module":"能力积累","text":"如果要补一块能力，你最想先补：","options":[{"key":"A","text":"表达和曝光，让别人更快知道我能做什么"},{"key":"B","text":"关键项目经验，让简历或作品更有分量"},{"key":"C","text":"专业壁垒，让自己不再只靠勤奋竞争"},{"key":"D","text":"系统搭建能力，把经验变成可复制的资产"}]},{"id":8,"module":"能力积累","text":"你对“慢慢来”的理解更像：","options":[{"key":"A","text":"不能太慢，慢到没有反馈我会焦虑"},{"key":"B","text":"可以慢，但每一步要踩到关键节点"},{"key":"C","text":"慢不是问题，只要积累真的有复利"},{"key":"D","text":"慢是我的优势，我更擅长后半程发力"}]},{"id":9,"module":"机会判断","text":"一个新项目突然找上你，你第一反应更像：","options":[{"key":"A","text":"这是被看见的机会，我要先抓住"},{"key":"B","text":"我要判断它是不是能带来身份或收入跃迁"},{"key":"C","text":"我要看它能不能放大我已有的积累"},{"key":"D","text":"我要看它是否能成为长期系统的一部分"}]},{"id":10,"module":"机会判断","text":"你最容易错过机会的原因是：","options":[{"key":"A","text":"不够主动展示，别人不知道我准备好了"},{"key":"B","text":"犹豫太久，关键节点被别人拿走"},{"key":"C","text":"太低估自己过去积累的价值"},{"key":"D","text":"太习惯稳态，不轻易切换新赛道"}]},{"id":11,"module":"机会判断","text":"你最羡慕哪类人的事业路径：","options":[{"key":"A","text":"年轻就被看见，迅速进入上升通道"},{"key":"B","text":"某个阶段突然抓住机会，完成跃迁"},{"key":"C","text":"前面很稳，后面凭专业厚度爆发"},{"key":"D","text":"越成熟越有后劲，越往后越值钱"}]},{"id":12,"module":"机会判断","text":"如果现在的工作稳定但看不到上限，你更可能：","options":[{"key":"A","text":"尽快换到更有机会的环境"},{"key":"B","text":"先找内部或外部的关键跳板"},{"key":"C","text":"把这段稳定期变成专业积累期"},{"key":"D","text":"一边保底，一边设计第二增长曲线"}]},{"id":13,"module":"可见度","text":"别人最容易通过什么看见你的价值：","options":[{"key":"A","text":"我做事快、反应快、能把事情推起来"},{"key":"B","text":"我能在关键项目里承担核心部分"},{"key":"C","text":"我有稳定输出和扎实经验"},{"key":"D","text":"我能把复杂问题整理成系统和方法"}]},{"id":14,"module":"可见度","text":"你现在最缺的事业曝光是：","options":[{"key":"A","text":"让更多人知道我能做什么"},{"key":"B","text":"让关键人物知道我适合更大位置"},{"key":"C","text":"让市场知道我的专业值得更高价格"},{"key":"D","text":"让别人知道我不只会做事，还能搭系统"}]},{"id":15,"module":"可见度","text":"如果让你公开展示自己，你最担心：","options":[{"key":"A","text":"展示得不够快，错过第一波机会"},{"key":"B","text":"展示得不够准，没打中关键人"},{"key":"C","text":"展示得不够厚，别人看不到真正积累"},{"key":"D","text":"展示得太单一，看不出我的长期价值"}]},{"id":16,"module":"可见度","text":"你最适合把自己包装成哪种形象：","options":[{"key":"A","text":"正在快速上升、值得提前押注的人"},{"key":"B","text":"有清晰野心、能抓住关键机会的人"},{"key":"C","text":"专业可靠、越做越值钱的人"},{"key":"D","text":"成熟稳健、能跨周期创造价值的人"}]},{"id":17,"module":"人际资源","text":"对你事业帮助最大的人，通常会提供：","options":[{"key":"A","text":"一个能让我被看见的入口"},{"key":"B","text":"关键节点上的推荐和机会"},{"key":"C","text":"专业认可和长期信任"},{"key":"D","text":"资源整合、合作网络和长期平台"}]},{"id":18,"module":"人际资源","text":"你最需要补的人脉关系是：","options":[{"key":"A","text":"能看见我潜力并愿意给第一次机会的人"},{"key":"B","text":"能把我推到关键位置的人"},{"key":"C","text":"认可我专业能力并愿意长期合作的人"},{"key":"D","text":"能一起做资源整合和新业务的人"}]},{"id":19,"module":"人际资源","text":"你经营关系时最容易忽略：","options":[{"key":"A","text":"及时展示进展，让别人知道我在变强"},{"key":"B","text":"关键节点主动争取，而不是等别人安排"},{"key":"C","text":"把能力沉淀成别人可识别的标签"},{"key":"D","text":"把关系变成长期互惠，而不是一次性帮忙"}]},{"id":20,"module":"人际资源","text":"如果贵人只给你一句建议，你最想听到：","options":[{"key":"A","text":"现在就去做一个能被看见的结果"},{"key":"B","text":"你该抓住这个节点，别再犹豫"},{"key":"C","text":"别急着跳，先把专业壁垒做厚"},{"key":"D","text":"把能力做成系统，后面会越来越值钱"}]},{"id":21,"module":"风险承受","text":"面对事业转折，你最能接受的风险是：","options":[{"key":"A","text":"短期不稳定，但换来更快上升"},{"key":"B","text":"阶段性压力变大，但有明确跃迁机会"},{"key":"C","text":"收入暂时慢一点，但专业资产变厚"},{"key":"D","text":"前期投入周期长，但后期可以持续复利"}]},{"id":22,"module":"风险承受","text":"你最怕哪种失败：","options":[{"key":"A","text":"一直没被看见，年轻时没有冲出来"},{"key":"B","text":"关键机会来了，但自己没接住"},{"key":"C","text":"多年积累没有被市场重新定价"},{"key":"D","text":"过了很久才发现自己没有第二曲线"}]},{"id":23,"module":"风险承受","text":"你做重大决定前，最需要确认：","options":[{"key":"A","text":"这件事能不能快速带来真实反馈"},{"key":"B","text":"它是不是我接下来三年的关键节点"},{"key":"C","text":"它能不能放大我过去的专业积累"},{"key":"D","text":"它能不能成为长期资产的一部分"}]},{"id":24,"module":"风险承受","text":"如果事业暂时没有明显起色，你会：","options":[{"key":"A","text":"焦虑，想立刻换一种更快的打法"},{"key":"B","text":"复盘是不是节点没踩对"},{"key":"C","text":"继续沉淀，但会找更好的定价方式"},{"key":"D","text":"接受长周期，同时调整系统和结构"}]},{"id":25,"module":"行动节奏","text":"未来 30 天你最愿意做的动作是：","options":[{"key":"A","text":"做一个公开作品或成果，让别人看见我"},{"key":"B","text":"争取一个关键项目、岗位或合作机会"},{"key":"C","text":"整理自己的专业案例，提升定价能力"},{"key":"D","text":"设计一个长期副线、产品或个人系统"}]},{"id":26,"module":"行动节奏","text":"你现在最适合的发力方式是：","options":[{"key":"A","text":"先冲出一个可见结果，再边走边修正"},{"key":"B","text":"集中火力拿下一个关键节点"},{"key":"C","text":"把已有能力做成更高价值的专业资产"},{"key":"D","text":"把经验、资源和影响力搭成长期系统"}]},{"id":27,"module":"行动节奏","text":"你最容易拖慢自己的习惯是：","options":[{"key":"A","text":"想马上爆发，但没有持续输出"},{"key":"B","text":"机会来了还想再等等"},{"key":"C","text":"做得很多，却不包装、不定价、不传播"},{"key":"D","text":"想得太远，迟迟不启动第一步"}]},{"id":28,"module":"行动节奏","text":"你判断自己是否在上升，最看重：","options":[{"key":"A","text":"反馈速度、机会数量和可见度"},{"key":"B","text":"位置变化、收入变化和关键人认可"},{"key":"C","text":"专业深度、稳定口碑和复购信任"},{"key":"D","text":"资产积累、系统能力和长期自由度"}]},{"id":29,"module":"第二曲线","text":"如果主业进入瓶颈，你最可能：","options":[{"key":"A","text":"快速试一个更有曝光的新方向"},{"key":"B","text":"找一个能提升身价的新机会"},{"key":"C","text":"把主业经验转成咨询、课程、作品或案例"},{"key":"D","text":"搭一个不依赖单一岗位的长期系统"}]},{"id":30,"module":"第二曲线","text":"你对“越往后越值钱”的理解是：","options":[{"key":"A","text":"先被看见，后面才有议价权"},{"key":"B","text":"踩中关键阶段，身价会明显跳升"},{"key":"C","text":"专业越厚，越不怕年龄增长"},{"key":"D","text":"系统越成熟，后劲越强"}]},{"id":31,"module":"第二曲线","text":"你最想把过去经验升级成：","options":[{"key":"A","text":"一个能帮我快速出圈的成果"},{"key":"B","text":"一个能让我进入更高层级的跳板"},{"key":"C","text":"一套被市场认可的专业方法"},{"key":"D","text":"一个可复制、可扩张、可长期运行的系统"}]},{"id":32,"module":"第二曲线","text":"做完这套题，你最想知道的是：","options":[{"key":"A","text":"我是不是该尽快冲出一个早期爆点"},{"key":"B","text":"我接下来几年该抓哪个关键节点"},{"key":"C","text":"我的积累什么时候最容易被重新定价"},{"key":"D","text":"我该怎么让后半程越来越有价值"}]}],"results":{"A":{"typeName":"25-28岁快速起势型","subtitle":"你的事业爆发更依赖早期可见度、行动速度和外部反馈。","posterSubtext":"你不是等风来的人，你需要先把自己推到风口上。","maturityScore":78,"coreConclusion":"你的事业爆发窗口更偏早发型。你对机会、反馈和曝光非常敏感，适合在 25-28 岁左右主动冲出一个可见结果：作品、项目、岗位跃迁、内容账号、个人标签或一次关键展示。你最大的优势是行动快、学习快、敢进入新场域；最大的风险是冲得快但沉淀不够，容易有一阵热度，却没有形成可持续资产。","diagnosis":"你的事业动力来自“被看见”。当你长期没有反馈、没有舞台、没有人知道你在做什么时，你会明显焦虑。你不适合一直埋头等准备完美，而适合用公开作品和真实反馈倒逼成长。","whatYouReallyWant":"你想要的是确认自己有上升可能。你需要的不是再准备一年，而是拿出一个能被别人评价、转发、推荐或购买的小成果。","mechanism":{"title":"早期曝光机制","content":"早发型爆发通常不是因为能力已经满格，而是因为行动和曝光先一步打开了反馈系统。越早让市场看见你，越早知道自己该补什么。"},"professionalBasis":["从职业发展看，你需要先建立可见度，再通过反馈修正能力结构。","从机会承接看，早期爆发不是裸冲，而是用小成果换真实机会。","从风险控制看，你要避免只有热情没有连续输出，最好把每一次曝光沉淀成作品资产。"],"coreTensions":["想快速被看见","害怕窗口期过去","行动快但容易分散","需要持续输出机制"],"suitableIf":["你愿意公开展示作品","你能承受早期反馈不完美","你有比较强的学习和迭代速度","你愿意先做出结果再优化"],"cautionIf":["只追热点不沉淀","把爆发等同于一夜成功","频繁换方向","没有固定输出节奏"],"indices":[{"label":"行动速度","value":92},{"label":"曝光需求","value":88},{"label":"沉淀厚度","value":54},{"label":"持续输出风险","value":68}],"ifStay":"如果你继续等准备好了再出现，很多早期机会会被更敢展示的人拿走。","ifChange":"如果你先做一个可见成果，再持续迭代，你会更早进入被看见、被推荐、被机会追上的循环。","notRecommended":["只收藏不输出","等完美再开始","追太多方向","被一次差反馈劝退","把曝光当成全部"],"plan90":[{"title":"第 1-2 周：做一个可展示成果","content":"可以是作品集、案例、账号系列、项目复盘或一次公开表达，先让别人知道你能做什么。"},{"title":"第 3-4 周：连续输出 10 次","content":"用固定主题连续发布或展示，不看单次数据，只看是否形成清晰标签。"},{"title":"第 2 个月：找真实反馈","content":"让 5 个目标行业的人评价你的成果，记录他们真正看懂了什么、没看懂什么。"},{"title":"第 3 个月：筛选最有反馈的方向","content":"把反馈最好的方向做成一个小产品、小服务或关键项目入口。"}],"closing":"你的爆发不是等出来的，而是先把自己放到能被看见的地方。"},"B":{"typeName":"29-33岁主升跃迁型","subtitle":"你的事业爆发更像一次关键节点跃迁，抓准机会会突然上一个台阶。","posterSubtext":"你的关键不在于多早开始，而在于不要错过那个该上桌的节点。","maturityScore":86,"coreConclusion":"你的事业爆发窗口更可能集中在 29-33 岁左右。这个阶段对你来说，不是从零开始，而是把前面积累、能力、资源和野心压缩到一次关键跃迁里。你适合通过核心项目、重要岗位、行业转型、贵人推荐或一次高价值合作完成身价跳升。你不是最适合乱冲的人，你更适合看准节点后集中火力。","diagnosis":"你的事业动力来自“关键位置”。你并不满足于一直努力却没变化，你真正需要的是进入更核心的项目、更高权重的位置、更能放大你的场域。你的风险是过度等待确定性，导致机会来了还在犹豫。","whatYouReallyWant":"你想要的是一次让自己进入新层级的转折。你需要主动识别关键节点，而不是把所有努力平均分配。","mechanism":{"title":"关键跃迁机制","content":"主升型爆发通常发生在能力已经够用、机会刚好出现、身份需要升级的交汇点。这个阶段最怕的不是能力不足，而是犹豫和错判节点。"},"professionalBasis":["从职业路径看，你适合通过关键项目、关键岗位或关键合作完成职业重新定价。","从能力结构看，你已经不适合只做执行层努力，而要争取更高权重的任务。","从关系资源看，推荐和背书会显著放大你的跃迁速度。"],"coreTensions":["想上一个台阶","害怕押错机会","需要关键人背书","容易在节点前犹豫"],"suitableIf":["你已经有阶段性成果","你能承担更大责任","你身边出现了转岗、跳槽、合作或项目机会","你愿意为一个关键节点集中投入"],"cautionIf":["什么都想兼顾","总等最稳的时机","不敢主动要位置","低估关键项目的价值"],"indices":[{"label":"节点识别力","value":88},{"label":"跃迁潜力","value":90},{"label":"资源承接力","value":82},{"label":"犹豫成本","value":64}],"ifStay":"如果你继续只做平均努力，可能会越来越忙，但身份和收入没有真正变化。","ifChange":"如果你主动争取关键节点，你会更容易在一个阶段完成明显跃迁。","notRecommended":["把所有机会平均对待","只做低权重任务","机会来了还反复观望","不经营关键关系","害怕提出更高要求"],"plan90":[{"title":"第 1-2 周：列出 3 个关键节点","content":"包括岗位、项目、合作、客户、考试、转型入口，判断哪个最能改变你的层级。"},{"title":"第 3-4 周：准备跃迁材料","content":"整理简历、作品、项目成果和推荐话术，让关键人能快速判断你值得被推。"},{"title":"第 2 个月：主动争取一次核心位置","content":"不要只等安排，主动提出你能承担什么，以及为什么你适合。"},{"title":"第 3 个月：集中火力打穿一个点","content":"把时间和资源集中到最有跃迁价值的机会，不再什么都平均做。"}],"closing":"你的爆发不一定来得最早，但一旦踩中关键节点，会很明显地上一个台阶。"},"C":{"typeName":"34-40岁厚积爆发型","subtitle":"你的事业爆发更依赖专业厚度、稳定口碑和被市场重新定价。","posterSubtext":"你不是慢，你是在把后面的爆发一点点做厚。","maturityScore":89,"coreConclusion":"你的事业爆发窗口更偏厚积型，常见在 34-40 岁左右打开。你不是靠一阵风冲上去的人，而是靠多年经验、专业判断、稳定交付和口碑积累，逐渐形成别人无法轻易替代的价值。对你来说，真正的爆发不是突然出名，而是被重新定价：同样的能力，开始获得更高收入、更高信任、更高话语权。","diagnosis":"你的事业动力来自“专业复利”。你适合把过去的经验沉淀成方法、案例、服务、课程、咨询、作品或行业标签。你的风险是做得很多却不包装、不传播、不定价，导致市场一直低估你。","whatYouReallyWant":"你想确认过去那些看起来普通的积累，并没有白费。你需要把经验变成可见资产，让市场知道你不是只会做事，而是有可复用的方法和判断。","mechanism":{"title":"专业复利机制","content":"厚积型爆发不是靠速度，而是靠积累被重新识别。当专业经验变成清晰标签、稳定口碑和可交易资产时，事业会进入更稳的上升期。"},"professionalBasis":["从职业定价看，资深经验只有被结构化表达出来，才会变成可交易价值。","从个人品牌看，你需要从会做事的人，升级为有方法、有案例、有判断的人。","从长期竞争看，专业壁垒能降低年龄焦虑，让你越往后越稳定。"],"coreTensions":["积累很多但不够显性","专业强但表达弱","想被重新定价","需要把经验资产化"],"suitableIf":["你已经有多年经验或稳定技能","你能拿出真实案例","你愿意做系统化整理","你不急于追短期热闹"],"cautionIf":["只埋头做事不展示","一直低价提供专业能力","没有案例和方法沉淀","把稳定误认为没有机会"],"indices":[{"label":"专业厚度","value":92},{"label":"口碑复利","value":86},{"label":"资产化潜力","value":88},{"label":"曝光短板","value":70}],"ifStay":"如果你继续只靠勤奋和经验工作，你可能会越来越累，但不一定越来越贵。","ifChange":"如果你把经验整理成方法、案例和可见标签，市场会更容易重新给你定价。","notRecommended":["只做不说","低估自己的案例价值","长期用时间换钱","不做方法沉淀","害怕提高报价"],"plan90":[{"title":"第 1-2 周：整理 5 个代表案例","content":"写清问题、过程、结果、你的关键判断，让别人看见你的专业不是空话。"},{"title":"第 3-4 周：提炼一套方法论","content":"把经验拆成步骤、清单、模板或框架，形成可复制资产。"},{"title":"第 2 个月：做一次专业展示","content":"用文章、直播、作品集、简报或咨询样本展示你的专业厚度。"},{"title":"第 3 个月：测试更高定价","content":"选择一个服务、岗位、项目或合作，尝试用更高标准和更高价格承接。"}],"closing":"你不是错过了爆发期。你的爆发，可能正在等你把积累变成别人看得懂的价值。"},"D":{"typeName":"40岁后复利翻盘型","subtitle":"你的事业爆发更偏长周期，成熟后的系统能力会成为真正优势。","posterSubtext":"你越往后越不该和别人比速度，而要比系统和后劲。","maturityScore":87,"coreConclusion":"你的事业爆发窗口更偏长线复利型，常见在 40 岁以后打开新局面。你不一定靠早期速度取胜，而是靠成熟判断、资源整合、跨领域经验、稳定心态和系统搭建能力，在后半程形成更强的事业后劲。对你来说，年龄不是劣势，真正的风险是一直把自己困在单一岗位、单一技能、单一收入结构里。","diagnosis":"你的事业动力来自“第二曲线”。你适合把过去的经验、人脉、理解力和行业判断，升级成产品、服务、团队、内容、咨询、投资能力或长期项目。你的盲区是想得太远，但迟迟不启动小系统。","whatYouReallyWant":"你想要的是后半程的主动权。你不想只靠一份工作证明自己，而是希望拥有更稳、更自由、更可持续的事业结构。","mechanism":{"title":"长线复利机制","content":"复利型爆发不追求短期突然出圈，而是通过系统能力、资源整合和长期资产，让事业越往后越稳、越自由、越有议价权。"},"professionalBasis":["从职业生命周期看，成熟阶段的优势不再是体力和速度，而是判断、资源、系统和信任。","从收入结构看，你需要减少对单一岗位的依赖，逐步建立可复制、可扩展的资产。","从战略选择看，第二曲线不是离开原来的全部，而是把过去积累换一种方式继续变现。"],"coreTensions":["不想只靠岗位","适合长周期","需要第二曲线","容易想太多启动太慢"],"suitableIf":["你有跨领域经验或资源","你愿意长期搭系统","你不被短期比较牵着走","你想让后半程更自由"],"cautionIf":["一直停在规划层面","过度依赖单一收入","害怕重新开始","把成熟当成保守"],"indices":[{"label":"系统搭建力","value":90},{"label":"长线复利潜力","value":92},{"label":"资源整合力","value":84},{"label":"启动拖延风险","value":66}],"ifStay":"如果你继续只靠单一岗位，后半程可能会越来越被动。","ifChange":"如果你开始搭建第二曲线，把经验变成系统，你会更容易越往后越有价值。","notRecommended":["只守住旧经验","一直等完美时机","把年龄当限制","不做资产化","所有收入只靠一个来源"],"plan90":[{"title":"第 1-2 周：盘点长期资产","content":"列出经验、人脉、行业理解、案例、方法、资源，判断哪些能变成第二曲线。"},{"title":"第 3-4 周：启动一个小系统","content":"可以是内容栏目、咨询样本、课程雏形、服务产品或长期合作项目。"},{"title":"第 2 个月：验证变现入口","content":"用小范围真实用户、客户或合作方验证：你的经验是否有人愿意为它付费或合作。"},{"title":"第 3 个月：建立复利节奏","content":"固定每周投入时间，把第二曲线从想法变成可持续运行的系统。"}],"closing":"你不必急着证明自己比别人早。你的优势，是把人生后半场打成一场复利局。"}},"secondaryNotes":{"A":{"B":"你的主倾向是「25-28岁快速起势型」，副倾向带有「29-33岁主升跃迁型」。这说明你既需要尽快被看见，也要学会抓关键节点，别把早期曝光做成一阵热闹。","C":"你的主倾向是「25-28岁快速起势型」，副倾向带有「34-40岁厚积爆发型」。这说明你行动快，但也需要开始沉淀专业资产，否则爆点容易短暂。","D":"你的主倾向是「25-28岁快速起势型」，副倾向带有「40岁后复利翻盘型」。这说明你现在适合先冲出反馈，但不要只追短期热度，要把早期成果接入长期系统。"},"B":{"A":"你的主倾向是「29-33岁主升跃迁型」，副倾向带有「25-28岁快速起势型」。这说明你需要关键节点，也不能忽略早期可见度。机会来之前，先让别人看见你。","C":"你的主倾向是「29-33岁主升跃迁型」，副倾向带有「34-40岁厚积爆发型」。这说明你适合在关键节点跃迁，但真正能承接跃迁的，是前面积累的专业厚度。","D":"你的主倾向是「29-33岁主升跃迁型」，副倾向带有「40岁后复利翻盘型」。这说明你既要抓住阶段性跳板，也要开始布局长期第二曲线。"},"C":{"A":"你的主倾向是「34-40岁厚积爆发型」，副倾向带有「25-28岁快速起势型」。这说明你有专业厚度，但也需要更主动展示，别让好东西一直藏着。","B":"你的主倾向是「34-40岁厚积爆发型」，副倾向带有「29-33岁主升跃迁型」。这说明你需要把积累对准关键节点，别只做长期沉淀，也要争取重新定价。","D":"你的主倾向是「34-40岁厚积爆发型」，副倾向带有「40岁后复利翻盘型」。这说明你的事业后劲很强，适合把专业方法进一步系统化、产品化、长期化。"},"D":{"A":"你的主倾向是「40岁后复利翻盘型」，副倾向带有「25-28岁快速起势型」。这说明你适合长线系统，但也需要阶段性可见成果，避免一直只规划不出现。","B":"你的主倾向是「40岁后复利翻盘型」，副倾向带有「29-33岁主升跃迁型」。这说明你适合长期布局，但也要抓住关键节点，让系统有真实转折点。","C":"你的主倾向是「40岁后复利翻盘型」，副倾向带有「34-40岁厚积爆发型」。这说明你最适合把经验、专业和资源做成长期资产，越往后越有价值。"}},"shareTemplate":["我测出了：{{typeName}}","{{posterSubtext}}","{{secondaryLine}}","","你的事业爆发期在几岁？32题诊断"]};</script>
+    <script>
+(function () {
+  const app = document.getElementById("app");
+  const configPaths = ["./configs/site-config.json", "./configs/career-change.json"];
+
+  const state = {
+    config: null,
+    answers: {},
+    currentIndex: 0,
+    selected: null,
+    locked: false,
+    loadingStep: 0,
+    route: "home",
+    resultData: null,
+  };
+
+  const defaultLoadingMessages = [
+    "正在读取你的选择倾向...",
+    "正在识别隐藏动机...",
+    "正在计算结果分布...",
+    "正在生成专属报告...",
+    "分析完成。",
+  ];
+
+  init();
+
+  async function init() {
+    try {
+      state.config = await fetchConfig();
+      applyDocumentMeta(state.config);
+
+      const saved = sessionStorage.getItem(getStorageKey());
+      if (saved) {
+        state.answers = JSON.parse(saved);
+      }
+
+      routeFromHash();
+      window.addEventListener("hashchange", routeFromHash);
+    } catch (error) {
+      app.innerHTML = `
+        <div class="error">
+          <div>
+            <h1>测试加载失败</h1>
+            <p>请确认你是通过网页链接打开页面，而不是直接双击 HTML 文件。</p>
+          </div>
+        </div>
+      `;
+      console.error(error);
+    }
+  }
+
+  async function fetchConfig() {
+    if (window.__QUIZ_CONFIG__) return window.__QUIZ_CONFIG__;
+    let lastError;
+    for (const path of configPaths) {
+      try {
+        const response = await fetch(path, { cache: "no-store" });
+        if (!response.ok) throw new Error(`${path} ${response.status}`);
+        return response.json();
+      } catch (error) {
+        lastError = error;
+      }
+    }
+    throw lastError;
+  }
+
+  function applyDocumentMeta(cfg) {
+    const title = cfg.title || "趣味测试";
+    const description = cfg.metaDescription || cfg.subtitle || "完成测试，生成你的专属报告。";
+    document.title = title;
+    setMeta("name", "description", description);
+    setMeta("property", "og:title", title);
+    setMeta("property", "og:description", description);
+  }
+
+  function setMeta(attr, key, content) {
+    let node = document.querySelector(`meta[${attr}="${key}"]`);
+    if (!node) {
+      node = document.createElement("meta");
+      node.setAttribute(attr, key);
+      document.head.appendChild(node);
+    }
+    node.setAttribute("content", content);
+  }
+
+  function routeFromHash() {
+    const route = (location.hash || "#/").replace("#/", "") || "home";
+    renderRoute(route);
+  }
+
+  function navigate(route) {
+    const nextHash = `#/${route}`;
+    if (location.hash === nextHash) {
+      renderRoute(route);
+      return;
+    }
+    location.hash = nextHash;
+  }
+
+  function renderRoute(route) {
+    state.route = route;
+    if (route === "quiz") renderQuiz();
+    else if (route === "loading") startLoading();
+    else if (route === "result") renderResult();
+    else renderHome();
+  }
+
+  function renderShell(content, extraClass = "") {
+    app.innerHTML = `
+      <div class="shell">
+        <div class="top-rule"></div>
+        <section class="screen ${extraClass}">${content}</section>
+      </div>
+      <div id="toast" class="toast">已复制</div>
+    `;
+  }
+
+  function renderHome() {
+    const cfg = state.config;
+    renderShell(
+      `
+      <div class="home">
+        <div class="kicker"><span class="dot"></span><span>${text(cfg.kicker)}</span><span class="dot"></span></div>
+        <h1 class="hero-title">${text(cfg.title)}</h1>
+        <p class="hero-subtitle">${text(cfg.subtitle)}</p>
+        <div class="hairline"></div>
+        <div class="intro">
+          ${(cfg.intro || []).map((p, index) => `<p class="${index === cfg.intro.length - 1 ? "strong" : ""}">${text(p)}</p>`).join("")}
+        </div>
+        <div class="pill-grid">
+          ${(cfg.dimensions || []).map((item) => `<div class="pill">${text(item)}</div>`).join("")}
+        </div>
+        <button class="primary-btn" data-action="start">${text(cfg.startButton || "开始测试")}</button>
+        <p class="disclaimer">${text(cfg.disclaimer || "本测试为趣味内容，仅供娱乐参考。")}</p>
+      </div>
+      `,
+      "home"
+    );
+    const startButton = app.querySelector("[data-action='start']");
+    let started = false;
+    const startQuiz = () => {
+      if (started) return;
+      started = true;
+      state.answers = {};
+      state.currentIndex = 0;
+      sessionStorage.removeItem(getStorageKey());
+      navigate("quiz");
+    };
+    startButton.addEventListener("click", startQuiz);
+    startButton.addEventListener(
+      "touchend",
+      (event) => {
+        event.preventDefault();
+        startQuiz();
+      },
+      { passive: false }
+    );
+  }
+
+  function renderQuiz() {
+    const questions = state.config.questions || [];
+    const question = questions[state.currentIndex];
+    if (!question) {
+      renderHome();
+      return;
+    }
+
+    const progress = ((state.currentIndex + 1) / questions.length) * 100;
+
+    renderShell(
+      `
+      <div class="sticky-head">
+        <div class="quiz-meta">
+          <span>${String(state.currentIndex + 1).padStart(2, "0")} / ${questions.length}</span>
+          <span>${text(question.module)}</span>
+        </div>
+        <div class="progress-track"><div class="progress-bar" style="width:${progress}%"></div></div>
+      </div>
+      <div class="question-no">${String(state.currentIndex + 1).padStart(2, "0")}</div>
+      <h1 class="question-title">${text(question.text)}</h1>
+      <div class="options">
+        ${(question.options || [])
+          .map(
+            (option) => `
+            <button class="option" data-option="${text(option.key)}">
+              <span class="option-key">${text(option.key)}</span>
+              <span class="option-text">${text(option.text)}</span>
+            </button>
+          `
+          )
+          .join("")}
+      </div>
+      <p class="hint">${text(state.config.quizHint || "选择后自动进入下一题")}</p>
+      `,
+      "quiz-screen"
+    );
+
+    app.querySelectorAll("[data-option]").forEach((button) => {
+      button.addEventListener("click", () => selectOption(button.dataset.option));
+    });
+  }
+
+  function selectOption(key) {
+    if (state.locked) return;
+    state.locked = true;
+    state.selected = key;
+    const question = state.config.questions[state.currentIndex];
+    state.answers[question.id] = key;
+
+    app.querySelectorAll(".option").forEach((button) => {
+      const selected = button.dataset.option === key;
+      button.classList.toggle("selected", selected);
+      button.classList.toggle("dimmed", !selected);
+    });
+
+    window.setTimeout(() => {
+      if (state.currentIndex < state.config.questions.length - 1) {
+        state.currentIndex += 1;
+        state.locked = false;
+        state.selected = null;
+        renderQuiz();
+      } else {
+        sessionStorage.setItem(getStorageKey(), JSON.stringify(state.answers));
+        state.locked = false;
+        navigate("loading");
+      }
+    }, 420);
+  }
+
+  function startLoading() {
+    state.loadingStep = 0;
+    renderLoading("");
+    tickLoading();
+  }
+
+  function renderLoading(value) {
+    const loadingMessages = getLoadingMessages();
+    renderShell(
+      `
+      <div class="loading-card">
+        <div class="spinner"></div>
+        <div class="loading-text">${text(value)}<span class="cursor">|</span></div>
+        <div class="step-bars">
+          ${loadingMessages.map((_, index) => `<div class="step ${index < state.loadingStep ? "done" : ""}"><span></span></div>`).join("")}
+        </div>
+      </div>
+      `,
+      "loading-screen"
+    );
+  }
+
+  function tickLoading() {
+    if (state.route !== "loading") return;
+    const loadingMessages = getLoadingMessages();
+    if (state.loadingStep >= loadingMessages.length) {
+      window.setTimeout(() => navigate("result"), 700);
+      return;
+    }
+    const message = loadingMessages[state.loadingStep];
+    let chars = 0;
+    const interval = window.setInterval(() => {
+      chars += 1;
+      renderLoading(message.slice(0, chars));
+      if (chars >= message.length) {
+        window.clearInterval(interval);
+        window.setTimeout(() => {
+          state.loadingStep += 1;
+          tickLoading();
+        }, 520);
+      }
+    }, 35);
+  }
+
+  function renderResult() {
+    const saved = sessionStorage.getItem(getStorageKey());
+    if (saved) state.answers = JSON.parse(saved);
+    if (Object.keys(state.answers).length < state.config.questions.length) {
+      renderHome();
+      return;
+    }
+
+    const scored = scoreAnswers(state.answers);
+    const primary = state.config.results[scored.primary];
+    const secondary = scored.secondary ? state.config.secondaryNotes?.[scored.primary]?.[scored.secondary] : null;
+    const stage = getStage(primary.maturityScore);
+    const shareText = buildShareText(primary, secondary);
+    const compareLabels = state.config.compareLabels || ["如果继续原路", "如果换一种做法"];
+    state.resultData = { scored, primary, secondary, stage, shareText };
+
+    renderShell(
+      `
+      <article class="report">
+        <div class="kicker"><span class="dot"></span><span>${text(state.config.resultKicker || "Result Report")}</span><span class="dot"></span></div>
+        <h1 class="result-type">${text(primary.typeName)}</h1>
+        <p class="result-subtitle">${text(primary.subtitle)}</p>
+        <div class="stamp-row">
+          <div class="stamp"><strong>${text(primary.maturityScore)}</strong><span>${text(state.config.scoreLabel || "决策成熟度")}</span></div>
+          <div class="stamp"><strong>${text(stage)}</strong><span>${text(state.config.stageLabel || "当前行动阶段")}</span></div>
+        </div>
+
+        <section class="section">
+          <h2>你的答案分布</h2>
+          <div class="meters">
+            ${Object.entries(scored.counts)
+              .map(([key, value]) => {
+                const typeData = state.config.results[key];
+                const width = (value / state.config.questions.length) * 100;
+                return `
+                  <div>
+                    <div class="meter-head"><span>${text(key)} · ${text(typeData.typeName)}</span><span>${value} 题</span></div>
+                    <div class="meter-track"><div class="meter-fill" style="width:${width}%"></div></div>
+                  </div>
+                `;
+              })
+              .join("")}
+          </div>
+        </section>
+
+        ${secondary ? `<section class="section"><h2>副倾向提示</h2><div class="secondary-note">${text(secondary)}</div></section>` : ""}
+
+        <section class="section">
+          <h2>诊断结论</h2>
+          <div class="quote">${text(primary.coreConclusion)}</div>
+        </section>
+
+        <section class="section">
+          <h2>为什么你会这样</h2>
+          <p>${text(primary.diagnosis)}</p>
+          <p>${text(primary.whatYouReallyWant)}</p>
+        </section>
+
+        <section class="section">
+          <h2>${text(primary.mechanism.title)}</h2>
+          <p>${text(primary.mechanism.content)}</p>
+        </section>
+
+        ${renderParagraphSection("专业解读框架", primary.professionalBasis)}
+        ${renderTagSection("你的关键矛盾", primary.coreTensions)}
+        ${renderCompareListSection("适合推进的条件", "需要谨慎的信号", primary.suitableIf, primary.cautionIf)}
+
+        <section class="section">
+          <h2>关键指数</h2>
+          <div class="meters">
+            ${(primary.indices || [])
+              .map(
+                (item) => `
+                <div>
+                  <div class="meter-head"><span>${text(item.label)}</span><span>${text(item.value)}</span></div>
+                  <div class="meter-track"><div class="meter-fill" style="width:${number(item.value)}%"></div></div>
+                </div>
+              `
+              )
+              .join("")}
+          </div>
+        </section>
+
+        <section class="section">
+          <h2>两条路径对比</h2>
+          <div class="compare">
+            <div class="compare-card"><h3>${text(compareLabels[0])}</h3><p>${text(primary.ifStay)}</p></div>
+            <div class="compare-card"><h3>${text(compareLabels[1])}</h3><p>${text(primary.ifChange)}</p></div>
+          </div>
+        </section>
+
+        <section class="section">
+          <h2>现在最不建议你做</h2>
+          <div class="tag-list">${(primary.notRecommended || []).map((item) => `<span class="tag">${text(item)}</span>`).join("")}</div>
+        </section>
+
+        <section class="section">
+          <h2>未来 90 天验证方案</h2>
+          <div class="plan">
+            ${(primary.plan90 || [])
+              .map(
+                (item, index) => `
+                <div class="plan-card">
+                  <h3>${index + 1}. ${text(item.title)}</h3>
+                  <p>${text(item.content)}</p>
+                </div>
+              `
+              )
+              .join("")}
+          </div>
+        </section>
+
+        <section class="section">
+          <h2>最后一句话</h2>
+          <p>${text(primary.closing)}</p>
+        </section>
+
+        <div class="actions">
+          <button class="primary-btn" data-action="copy">${text(state.config.copyButton || "复制我的结果")}</button>
+          <button class="ghost-btn" data-action="restart">${text(state.config.restartButton || "重新测试")}</button>
+        </div>
+      </article>
+      `,
+      "result-screen"
+    );
+
+    app.querySelector("[data-action='copy']").addEventListener("click", () => copyShareText(shareText));
+    app.querySelector("[data-action='restart']").addEventListener("click", () => {
+      sessionStorage.removeItem(getStorageKey());
+      state.answers = {};
+      state.currentIndex = 0;
+      navigate("home");
+    });
+  }
+
+  function renderParagraphSection(title, paragraphs) {
+    if (!Array.isArray(paragraphs) || !paragraphs.length) return "";
+    return `
+      <section class="section">
+        <h2>${text(title)}</h2>
+        ${paragraphs.map((item) => `<p>${text(item)}</p>`).join("")}
+      </section>
+    `;
+  }
+
+  function renderTagSection(title, items) {
+    if (!Array.isArray(items) || !items.length) return "";
+    return `
+      <section class="section">
+        <h2>${text(title)}</h2>
+        <div class="tag-list">${items.map((item) => `<span class="tag">${text(item)}</span>`).join("")}</div>
+      </section>
+    `;
+  }
+
+  function renderCompareListSection(leftTitle, rightTitle, leftItems, rightItems) {
+    const hasLeft = Array.isArray(leftItems) && leftItems.length;
+    const hasRight = Array.isArray(rightItems) && rightItems.length;
+    if (!hasLeft && !hasRight) return "";
+    return `
+      <section class="section">
+        <h2>适用边界</h2>
+        <div class="compare">
+          <div class="compare-card">
+            <h3>${text(leftTitle)}</h3>
+            ${(leftItems || []).map((item) => `<p>${text(item)}</p>`).join("")}
+          </div>
+          <div class="compare-card">
+            <h3>${text(rightTitle)}</h3>
+            ${(rightItems || []).map((item) => `<p>${text(item)}</p>`).join("")}
+          </div>
+        </div>
+      </section>
+    `;
+  }
+
+  function scoreAnswers(answers) {
+    const counts = { A: 0, B: 0, C: 0, D: 0 };
+    Object.values(answers).forEach((key) => {
+      if (counts[key] !== undefined) counts[key] += 1;
+    });
+    const sorted = Object.entries(counts).sort((a, b) => b[1] - a[1]);
+    const threshold = state.config.secondaryThreshold ?? 2;
+    const primary = sorted[0][0];
+    const secondary = sorted[1][1] > 0 && sorted[0][1] - sorted[1][1] <= threshold ? sorted[1][0] : null;
+    return { counts, primary, secondary };
+  }
+
+  function getStage(score) {
+    const labels = state.config.stageLabels || [
+      { max: 45, label: "观察期" },
+      { max: 65, label: "验证期" },
+      { max: 82, label: "规划期" },
+      { max: 100, label: "行动期" },
+    ];
+    const hit = labels.find((item) => score <= item.max);
+    return hit ? hit.label : labels[labels.length - 1].label;
+  }
+
+  function buildShareText(primary, secondary) {
+    const template = state.config.shareTemplate || [
+      "我测出了：{{typeName}}",
+      "{{posterSubtext}}",
+      "{{secondaryLine}}",
+      "",
+      "{{title}}",
+    ];
+    const values = {
+      title: state.config.title,
+      typeName: primary.typeName,
+      posterSubtext: primary.posterSubtext,
+      secondary: secondary || "",
+      secondaryLine: secondary ? `副倾向：${secondary}` : "",
+    };
+    return template
+      .map((line) => fillTemplate(line, values))
+      .filter((line, index, arr) => line || arr[index - 1])
+      .join("\n")
+      .trim();
+  }
+
+  async function copyShareText(value) {
+    try {
+      await navigator.clipboard.writeText(value);
+      showToast("结果文案已复制");
+    } catch (error) {
+      showToast("复制失败，可长按手动复制");
+    }
+  }
+
+  function showToast(value) {
+    const toast = document.getElementById("toast");
+    if (!toast) return;
+    toast.textContent = value;
+    toast.classList.add("show");
+    window.setTimeout(() => toast.classList.remove("show"), 1600);
+  }
+
+  function getLoadingMessages() {
+    return state.config.loadingMessages || defaultLoadingMessages;
+  }
+
+  function getStorageKey() {
+    return `xhsTestAnswers:${state.config.slug || "default"}`;
+  }
+
+  function fillTemplate(template, values) {
+    return String(template).replace(/\{\{(\w+)\}\}/g, (_, key) => values[key] || "");
+  }
+
+  function number(value) {
+    const parsed = Number(value);
+    if (Number.isNaN(parsed)) return 0;
+    return Math.max(0, Math.min(100, parsed));
+  }
+
+  function text(value) {
+    return String(value ?? "")
+      .replace(/&/g, "&amp;")
+      .replace(/</g, "&lt;")
+      .replace(/>/g, "&gt;")
+      .replace(/"/g, "&quot;");
+  }
+})();
+
+    </script>
+  </body>
+</html>
