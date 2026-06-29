@@ -1,0 +1,1125 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <meta name="description" content="完成 32 道「你的政治手段像哪位历史人物」测试，生成你的历史博弈风格报告。" />
+    <meta property="og:title" content="你的政治手段，像历史中的哪位人物？" />
+    <meta property="og:description" content="完成 32 道「你的政治手段像哪位历史人物」测试，生成你的历史博弈风格报告。" />
+    <title>你的政治手段，像历史中的哪位人物？</title>
+    <style>
+:root {
+  --bg: #fbfaf7;
+  --paper: #fffefd;
+  --ink: #20242a;
+  --muted: #65707d;
+  --line: #d9d4ca;
+  --line-strong: #b9afa0;
+  --accent: #9b4339;
+  --accent-soft: #f1dfd7;
+  --gold: #c0964d;
+  --sage: #66795f;
+  --blue: #526a86;
+  --shadow: 0 16px 36px rgba(60, 47, 38, 0.1);
+  --radius: 8px;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  min-height: 100%;
+  background:
+    linear-gradient(rgba(32, 36, 42, 0.035) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(32, 36, 42, 0.035) 1px, transparent 1px),
+    var(--bg);
+  background-size: 24px 24px;
+}
+
+body {
+  min-height: 100vh;
+  margin: 0;
+  color: var(--ink);
+  font-family:
+    "PingFang SC",
+    "Microsoft YaHei",
+    "Noto Sans SC",
+    system-ui,
+    -apple-system,
+    BlinkMacSystemFont,
+    sans-serif;
+  letter-spacing: 0;
+}
+
+button {
+  font: inherit;
+}
+
+.shell {
+  width: min(100%, 480px);
+  min-height: 100vh;
+  margin: 0 auto;
+  background: rgba(251, 250, 247, 0.88);
+}
+
+.top-rule {
+  height: 4px;
+  background: var(--accent);
+}
+
+.screen {
+  min-height: calc(100vh - 4px);
+  padding: 28px 22px 32px;
+}
+
+.home {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.kicker {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  color: var(--muted);
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  font-size: 11px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+.dot {
+  width: 7px;
+  height: 7px;
+  background: var(--accent);
+  border-radius: 50%;
+}
+
+.hero-title {
+  margin: 26px 0 14px;
+  color: var(--ink);
+  font-size: 30px;
+  line-height: 1.2;
+  text-align: center;
+  font-weight: 800;
+}
+
+.hero-subtitle {
+  margin: 0 auto 28px;
+  max-width: 340px;
+  color: var(--muted);
+  font-size: 15px;
+  line-height: 1.75;
+  text-align: center;
+}
+
+.hairline {
+  width: 64px;
+  height: 1px;
+  margin: 0 auto 30px;
+  background: var(--line-strong);
+}
+
+.intro {
+  margin: 0 auto;
+  max-width: 380px;
+}
+
+.intro p {
+  margin: 0 0 15px;
+  color: rgba(32, 36, 42, 0.82);
+  font-size: 15px;
+  line-height: 1.8;
+}
+
+.intro .strong {
+  color: var(--accent);
+  font-weight: 700;
+}
+
+.pill-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px;
+  margin: 28px 0;
+}
+
+.pill {
+  min-height: 42px;
+  display: grid;
+  place-items: center;
+  border: 1px solid var(--line);
+  color: var(--muted);
+  background: rgba(255, 255, 255, 0.44);
+  font-size: 13px;
+}
+
+.primary-btn,
+.ghost-btn,
+.copy-btn {
+  width: 100%;
+  min-height: 48px;
+  border: 1px solid var(--ink);
+  border-radius: 0;
+  cursor: pointer;
+  transition: transform 150ms ease, background 150ms ease, color 150ms ease, border-color 150ms ease;
+}
+
+.primary-btn {
+  background: var(--ink);
+  color: #fff;
+  font-weight: 700;
+}
+
+.ghost-btn,
+.copy-btn {
+  background: transparent;
+  color: var(--ink);
+}
+
+.primary-btn:active,
+.ghost-btn:active,
+.copy-btn:active,
+.option:active {
+  transform: translateY(1px);
+}
+
+.disclaimer {
+  margin: 18px auto 0;
+  max-width: 340px;
+  color: var(--muted);
+  font-size: 12px;
+  line-height: 1.65;
+  text-align: center;
+}
+
+.quiz-screen {
+  padding-top: 0;
+}
+
+.sticky-head {
+  position: sticky;
+  top: 0;
+  z-index: 5;
+  margin: 0 -22px 26px;
+  padding: 14px 22px 12px;
+  background: rgba(251, 250, 247, 0.95);
+  border-bottom: 1px solid var(--line);
+  backdrop-filter: blur(12px);
+}
+
+.quiz-meta {
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+  color: var(--muted);
+  font-size: 12px;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+}
+
+.progress-track {
+  height: 4px;
+  margin-top: 10px;
+  background: rgba(32, 36, 42, 0.09);
+}
+
+.progress-bar {
+  height: 100%;
+  background: var(--accent);
+  transition: width 260ms ease;
+}
+
+.question-no {
+  color: rgba(155, 67, 57, 0.18);
+  font-size: 48px;
+  line-height: 1;
+  font-weight: 800;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+}
+
+.question-title {
+  margin: 18px 0 24px;
+  font-size: 22px;
+  line-height: 1.5;
+  font-weight: 750;
+}
+
+.options {
+  display: grid;
+  gap: 12px;
+}
+
+.option {
+  min-height: 66px;
+  display: grid;
+  grid-template-columns: 30px 1fr;
+  gap: 12px;
+  align-items: start;
+  width: 100%;
+  padding: 15px;
+  border: 1px solid var(--line);
+  background: rgba(255, 255, 255, 0.68);
+  color: var(--ink);
+  text-align: left;
+  cursor: pointer;
+  transition: background 160ms ease, border-color 160ms ease, color 160ms ease, opacity 160ms ease;
+}
+
+.option-key {
+  display: grid;
+  place-items: center;
+  width: 28px;
+  height: 28px;
+  border: 1px solid var(--line-strong);
+  font-size: 13px;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+}
+
+.option-text {
+  padding-top: 2px;
+  font-size: 15px;
+  line-height: 1.55;
+}
+
+.option.selected {
+  border-color: var(--accent);
+  background: var(--accent);
+  color: #fff;
+}
+
+.option.selected .option-key {
+  border-color: rgba(255, 255, 255, 0.8);
+}
+
+.option.dimmed {
+  opacity: 0.42;
+}
+
+.hint {
+  margin: 18px 0 0;
+  color: var(--muted);
+  font-size: 12px;
+  text-align: center;
+}
+
+.loading-screen {
+  display: grid;
+  place-items: center;
+}
+
+.loading-card {
+  width: 100%;
+  max-width: 360px;
+  text-align: center;
+}
+
+.spinner {
+  width: 54px;
+  height: 54px;
+  margin: 0 auto 24px;
+  border: 2px solid var(--line);
+  border-top-color: var(--accent);
+  border-radius: 50%;
+  animation: spin 850ms linear infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.loading-text {
+  min-height: 54px;
+  color: var(--accent);
+  font-size: 17px;
+  line-height: 1.6;
+  font-weight: 700;
+}
+
+.step-bars {
+  display: grid;
+  gap: 8px;
+  margin-top: 28px;
+}
+
+.step {
+  height: 4px;
+  overflow: hidden;
+  background: rgba(32, 36, 42, 0.09);
+}
+
+.step span {
+  display: block;
+  height: 100%;
+  width: 0;
+  background: var(--accent);
+  transition: width 300ms ease;
+}
+
+.step.done span {
+  width: 100%;
+}
+
+.result-screen {
+  padding: 22px 18px 30px;
+}
+
+.report {
+  padding: 22px 16px 18px;
+  border: 1px solid var(--line);
+  background: var(--paper);
+  box-shadow: var(--shadow);
+}
+
+.result-type {
+  margin: 8px 0 8px;
+  color: var(--accent);
+  font-size: 30px;
+  line-height: 1.15;
+  font-weight: 850;
+  text-align: center;
+}
+
+.result-subtitle {
+  margin: 0 auto 20px;
+  color: var(--muted);
+  font-size: 15px;
+  line-height: 1.7;
+  text-align: center;
+}
+
+.stamp-row {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px;
+  margin: 18px 0 20px;
+}
+
+.stamp {
+  padding: 12px 10px;
+  border: 1px solid var(--line);
+  background: #fbfaf7;
+}
+
+.stamp strong {
+  display: block;
+  margin-bottom: 4px;
+  color: var(--ink);
+  font-size: 20px;
+}
+
+.stamp span {
+  color: var(--muted);
+  font-size: 12px;
+}
+
+.section {
+  padding: 20px 0;
+  border-top: 1px solid var(--line);
+}
+
+.section h2 {
+  margin: 0 0 12px;
+  font-size: 18px;
+  color: var(--ink);
+}
+
+.section p {
+  margin: 0 0 12px;
+  color: rgba(32, 36, 42, 0.82);
+  font-size: 15px;
+  line-height: 1.85;
+}
+
+.quote {
+  padding: 15px;
+  border-left: 3px solid var(--accent);
+  background: var(--accent-soft);
+  color: #5b2d27;
+  line-height: 1.8;
+  font-weight: 700;
+}
+
+.meters {
+  display: grid;
+  gap: 14px;
+}
+
+.meter-head {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 7px;
+  color: var(--muted);
+  font-size: 13px;
+}
+
+.meter-track {
+  height: 8px;
+  background: rgba(32, 36, 42, 0.08);
+}
+
+.meter-fill {
+  height: 100%;
+  background: var(--accent);
+}
+
+.compare {
+  display: grid;
+  gap: 10px;
+}
+
+.compare-card {
+  padding: 14px;
+  border: 1px solid var(--line);
+  background: #fbfaf7;
+}
+
+.compare-card h3,
+.plan-card h3 {
+  margin: 0 0 8px;
+  font-size: 15px;
+}
+
+.compare-card p,
+.plan-card p {
+  font-size: 14px;
+}
+
+.tag-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.tag {
+  padding: 7px 9px;
+  border: 1px solid var(--line);
+  background: #fbfaf7;
+  color: var(--muted);
+  font-size: 13px;
+}
+
+.plan {
+  display: grid;
+  gap: 10px;
+}
+
+.plan-card {
+  padding: 14px;
+  border: 1px solid var(--line);
+  background: #fbfaf7;
+}
+
+.secondary-note {
+  padding: 14px;
+  border: 1px dashed var(--line-strong);
+  background: rgba(192, 150, 77, 0.12);
+  line-height: 1.75;
+  font-size: 14px;
+}
+
+.actions {
+  display: grid;
+  gap: 10px;
+  margin-top: 18px;
+}
+
+.toast {
+  position: fixed;
+  left: 50%;
+  bottom: 22px;
+  z-index: 20;
+  transform: translateX(-50%);
+  padding: 10px 14px;
+  background: var(--ink);
+  color: #fff;
+  font-size: 13px;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 180ms ease;
+}
+
+.toast.show {
+  opacity: 1;
+}
+
+.error {
+  display: grid;
+  place-items: center;
+  min-height: 100vh;
+  padding: 24px;
+  text-align: center;
+}
+
+.error p {
+  color: var(--muted);
+  line-height: 1.7;
+}
+
+@media (min-width: 700px) {
+  body {
+    padding: 28px 0;
+  }
+
+  .shell {
+    min-height: calc(100vh - 56px);
+    border: 1px solid var(--line);
+    box-shadow: var(--shadow);
+  }
+
+  .screen {
+    min-height: calc(100vh - 60px);
+  }
+}
+
+    </style>
+  </head>
+  <body>
+    <main id="app" aria-live="polite"></main>
+    <script>window.__QUIZ_CONFIG__ = {"slug":"test-political-strategy-history","topic":"你的政治手段，像历史中的哪位人物？","kicker":"32-Q Historical Strategy Test","title":"你的政治手段，像历史中的哪位人物？","subtitle":"32 道题，拆清你在人际、职场和资源局里的控局方式：强势控局、借力结盟、精密布局，还是隐忍翻盘。","metaDescription":"完成 32 道「你的政治手段像哪位历史人物」测试，生成你的历史博弈风格报告。","startButton":"开始测试","resultKicker":"Historical Strategy Report","quizHint":"选择后自动进入下一题","copyButton":"复制我的结果","restartButton":"重新测试","scoreLabel":"控局成熟度","stageLabel":"当前阶段","stageLabels":[{"max":45,"label":"直觉反应期"},{"max":65,"label":"策略成型期"},{"max":82,"label":"局势掌控期"},{"max":100,"label":"深层博弈期"}],"compareLabels":["如果继续原路","如果调整打法"],"disclaimer":"本测试为趣味历史人格映射，非现实政治建议、非权谋教学、非心理诊断，仅供自我观察和沟通风格参考。","secondaryThreshold":4,"dimensions":["控局欲","结盟力","布局感","翻盘韧性"],"intro":["所谓“政治手段”，不一定是阴谋，也不一定是算计。","在日常生活里，它更像一个人处理关系、资源、冲突、机会和位置变化时的本能打法。","32 道题会从第一反应、权力感、资源处理、关系结盟、冲突方式、信息判断、低谷翻盘和边界底线 8 个模块，生成一份历史人物式博弈风格报告。"],"loadingMessages":["正在读取你的第一反应...","正在拆分控局欲、结盟力和布局感...","正在匹配你的历史人物风格...","正在生成 32 题博弈风格报告...","分析完成。"],"questions":[{"id":1,"module":"第一反应","text":"进入一个陌生团队，你最先会观察什么？","options":[{"key":"A","text":"谁真正说了算，资源和决定权在谁手里"},{"key":"B","text":"谁和谁关系好，哪些人适合先建立连接"},{"key":"C","text":"规则怎么运转，流程里哪里最容易出问题"},{"key":"D","text":"谁被低估、谁被忽视，哪里藏着翻盘空间"}]},{"id":2,"module":"第一反应","text":"别人临时把一个棘手任务推给你，你心里第一反应是：","options":[{"key":"A","text":"可以接，但我要拿到足够权限和话语权"},{"key":"B","text":"先看能拉谁一起做，不必一个人硬扛"},{"key":"C","text":"先拆清目标、边界、节点和风险"},{"key":"D","text":"这可能是翻身机会，但我不会立刻暴露野心"}]},{"id":3,"module":"第一反应","text":"当一个局面开始混乱时，你更像哪一种人？","options":[{"key":"A","text":"先站出来定方向，让局面别散"},{"key":"B","text":"先稳住关键人，让大家愿意继续合作"},{"key":"C","text":"先把信息排清楚，再判断下一步"},{"key":"D","text":"先降低存在感，等真正的转折点出现"}]},{"id":4,"module":"第一反应","text":"你最不喜欢哪种处境？","options":[{"key":"A","text":"明明有能力，却没有决策权"},{"key":"B","text":"大家都各做各的，没人愿意站在一起"},{"key":"C","text":"事情没有章法，靠情绪和临场反应推进"},{"key":"D","text":"被别人贴标签，还暂时没法证明自己"}]},{"id":5,"module":"权力感","text":"如果你必须争取一个关键位置，你会更倾向于：","options":[{"key":"A","text":"直接证明我能扛事，也敢承担结果"},{"key":"B","text":"让更多人觉得我坐上去对大家都有利"},{"key":"C","text":"拿出一套清晰方案，让别人看到我最稳"},{"key":"D","text":"先积累筹码，等时机成熟再正式出手"}]},{"id":6,"module":"权力感","text":"你怎么看“掌控感”？","options":[{"key":"A","text":"关键时候必须有人拍板，否则大家都会被拖住"},{"key":"B","text":"真正的掌控是让不同的人愿意跟你走"},{"key":"C","text":"掌控感来自清晰规则和提前预案"},{"key":"D","text":"最深的掌控，是别人还没意识到你已经在布局"}]},{"id":7,"module":"权力感","text":"面对一个比你强势的人，你通常会：","options":[{"key":"A","text":"保持气场，不让对方轻易压住我"},{"key":"B","text":"先找到共同利益，避免正面消耗"},{"key":"C","text":"观察他的逻辑漏洞和决策习惯"},{"key":"D","text":"暂时顺势，但记住以后可以借力的位置"}]},{"id":8,"module":"权力感","text":"你最容易被哪类人吸引？","options":[{"key":"A","text":"敢下注、敢拍板、敢背锅的人"},{"key":"B","text":"能把一群人拢在一起的人"},{"key":"C","text":"冷静、克制、逻辑极强的人"},{"key":"D","text":"前期不显山露水，后期突然改写局面的人"}]},{"id":9,"module":"资源处理","text":"拿到一份稀缺资源时，你第一步会：","options":[{"key":"A","text":"用它撬动更大的控制权和影响力"},{"key":"B","text":"分配给关键伙伴，让联盟更稳"},{"key":"C","text":"先做风险评估，保证它发挥最大效率"},{"key":"D","text":"不急着亮出来，留到最关键时刻使用"}]},{"id":10,"module":"资源处理","text":"当别人来找你帮忙，你最在意：","options":[{"key":"A","text":"这件事值不值得我动用资源"},{"key":"B","text":"帮完之后关系是否更深、更互信"},{"key":"C","text":"对方需求是否清楚，边界是否明确"},{"key":"D","text":"这份人情未来是否能在关键处回流"}]},{"id":11,"module":"资源处理","text":"你最怕自己的资源被怎样浪费？","options":[{"key":"A","text":"花了力气，却没有换来位置和结果"},{"key":"B","text":"帮了很多人，却没有形成真正的同盟"},{"key":"C","text":"事情没规划好，投入产出不成比例"},{"key":"D","text":"太早暴露底牌，被别人提前消耗"}]},{"id":12,"module":"资源处理","text":"如果只能选择一种优势，你更想拥有：","options":[{"key":"A","text":"强执行和强决断，让别人不敢轻视"},{"key":"B","text":"强人缘和强整合，让别人愿意靠近"},{"key":"C","text":"强分析和强规划，让别人离不开我"},{"key":"D","text":"强耐心和强隐忍，让自己总有后手"}]},{"id":13,"module":"关系结盟","text":"一段关系对你最有价值的地方是：","options":[{"key":"A","text":"能共同拿下更大的目标"},{"key":"B","text":"能互相托举，关键时刻有人站出来"},{"key":"C","text":"能提供稳定信息和专业判断"},{"key":"D","text":"能在未来某个节点变成关键筹码"}]},{"id":14,"module":"关系结盟","text":"你判断一个人能不能深交，最看重：","options":[{"key":"A","text":"他有没有担当和执行力"},{"key":"B","text":"他是否讲义气、懂回报、愿意互相成全"},{"key":"C","text":"他是否稳定、可靠、说话有逻辑"},{"key":"D","text":"他在逆境里的反应，和是否守得住秘密"}]},{"id":15,"module":"关系结盟","text":"你最不擅长处理哪种人？","options":[{"key":"A","text":"没有能力却占着位置的人"},{"key":"B","text":"只拿好处、不愿共担的人"},{"key":"C","text":"情绪化、不按规则沟通的人"},{"key":"D","text":"表面亲近、背后试探的人"}]},{"id":16,"module":"关系结盟","text":"如果要说服别人支持你，你更可能：","options":[{"key":"A","text":"让对方看到我能赢，也能带他赢"},{"key":"B","text":"让对方觉得我们是同一边的人"},{"key":"C","text":"用事实、方案和推演降低对方疑虑"},{"key":"D","text":"不急着说服，先让局势逼出共同利益"}]},{"id":17,"module":"冲突方式","text":"和人发生冲突时，你最常见的反应是：","options":[{"key":"A","text":"先把态度摆明，不能让对方得寸进尺"},{"key":"B","text":"先找中间人或共同利益，别把局面闹死"},{"key":"C","text":"先梳理事实，避免被情绪带偏"},{"key":"D","text":"先忍住，不在最不利的时候反击"}]},{"id":18,"module":"冲突方式","text":"如果有人公开质疑你，你会更倾向于：","options":[{"key":"A","text":"当场回应，守住自己的位置"},{"key":"B","text":"给对方台阶，把矛盾降级"},{"key":"C","text":"用证据和逻辑把问题说清楚"},{"key":"D","text":"先记下，等更合适的场合再处理"}]},{"id":19,"module":"冲突方式","text":"你最容易在什么时候变得强硬？","options":[{"key":"A","text":"别人挑战我的权威或底线时"},{"key":"B","text":"有人破坏团队信任时"},{"key":"C","text":"有人无视规则、影响整体进度时"},{"key":"D","text":"忍耐很久后，对方仍然持续试探时"}]},{"id":20,"module":"冲突方式","text":"你眼里最有效的反击是：","options":[{"key":"A","text":"拿出结果，让对方不得不服"},{"key":"B","text":"让更多人知道谁更值得信任"},{"key":"C","text":"让事实和规则站在我这边"},{"key":"D","text":"不急着赢一局，而是改写后面的局势"}]},{"id":21,"module":"信息判断","text":"听到一个重要消息，你第一步会：","options":[{"key":"A","text":"判断它能不能变成我的行动优势"},{"key":"B","text":"确认哪些人会因此被影响"},{"key":"C","text":"核实来源、细节和逻辑链条"},{"key":"D","text":"判断它有没有被别人故意放出来"}]},{"id":22,"module":"信息判断","text":"你最讨厌哪种信息环境？","options":[{"key":"A","text":"信息太少，无法快速做判断"},{"key":"B","text":"大家互不信任，什么都要猜"},{"key":"C","text":"信息混乱，没有可靠依据"},{"key":"D","text":"表面透明，其实每个人都有隐藏目的"}]},{"id":23,"module":"信息判断","text":"做重大决定前，你最需要：","options":[{"key":"A","text":"明确目标和胜算，不要拖泥带水"},{"key":"B","text":"知道关键人是否会支持我"},{"key":"C","text":"完整资料、备选方案和风险清单"},{"key":"D","text":"确认现在是不是最适合出手的时间"}]},{"id":24,"module":"信息判断","text":"你最容易被哪种信息打动？","options":[{"key":"A","text":"能证明机会窗口已经打开的信息"},{"key":"B","text":"能说明大家利益一致的信息"},{"key":"C","text":"逻辑严密、证据充分的信息"},{"key":"D","text":"能看出隐藏趋势和后续变量的信息"}]},{"id":25,"module":"低谷翻盘","text":"当你处在低谷时，你最可能：","options":[{"key":"A","text":"尽快找一个结果证明自己还能打"},{"key":"B","text":"找回信任我的人，重新组织支持"},{"key":"C","text":"复盘失败原因，重建方法和秩序"},{"key":"D","text":"先把情绪藏好，慢慢积累下一次翻盘筹码"}]},{"id":26,"module":"低谷翻盘","text":"别人低估你时，你心里更像：","options":[{"key":"A","text":"迟早让他们看到我真正的能力"},{"key":"B","text":"没关系，先把愿意相信我的人留下"},{"key":"C","text":"我会用更扎实的结果慢慢纠偏"},{"key":"D","text":"低估也是保护色，未必是坏事"}]},{"id":27,"module":"低谷翻盘","text":"你最认可哪句话？","options":[{"key":"A","text":"乱局里，敢拍板的人才有位置"},{"key":"B","text":"一个人能走多远，取决于多少人愿意跟他走"},{"key":"C","text":"真正稳的人，先把每一步算清楚"},{"key":"D","text":"最狠的翻盘，通常发生在别人以为你没牌的时候"}]},{"id":28,"module":"低谷翻盘","text":"如果需要从头再来，你会先做什么？","options":[{"key":"A","text":"找一个能快速打出声量的机会"},{"key":"B","text":"先恢复关系网络和信任基础"},{"key":"C","text":"先建立新的规则、流程和能力体系"},{"key":"D","text":"先隐藏真实目标，慢慢把局势推向有利方向"}]},{"id":29,"module":"边界底线","text":"你最不能接受别人怎样对你？","options":[{"key":"A","text":"否定我的能力，还想剥夺我的位置"},{"key":"B","text":"享受我的帮助，却在关键时刻不站出来"},{"key":"C","text":"破坏规则，让认真做事的人吃亏"},{"key":"D","text":"不断试探我，以为我不会反击"}]},{"id":30,"module":"边界底线","text":"你最想修炼的能力是：","options":[{"key":"A","text":"更果断，不在关键时刻犹豫"},{"key":"B","text":"更会识人，把人心和利益连起来"},{"key":"C","text":"更会谋划，把复杂事提前拆清楚"},{"key":"D","text":"更能忍、更能等，也更懂何时出手"}]},{"id":31,"module":"边界底线","text":"如果你拥有一次改写局面的机会，你会：","options":[{"key":"A","text":"直接拿下主导权，不再让别人替我安排"},{"key":"B","text":"把能合作的人都拉到同一张桌上"},{"key":"C","text":"先设计一套别人不得不认可的方案"},{"key":"D","text":"让所有人以为只是小变化，最后形成大翻盘"}]},{"id":32,"module":"边界底线","text":"做完这套题，你最想知道的是：","options":[{"key":"A","text":"我是不是天生适合掌控局面"},{"key":"B","text":"我靠什么把人聚到自己身边"},{"key":"C","text":"我的谋划能力到底强在哪里"},{"key":"D","text":"我真正的翻盘方式是什么"}]}],"results":{"A":{"typeName":"曹操型强势控局者","subtitle":"你的博弈风格更像现实主义控局派：先看权力结构，再抢关键位置。","posterSubtext":"你不是怕局面乱，你怕的是局面没人敢定。","maturityScore":86,"coreConclusion":"你的历史人物风格更接近曹操型强势控局者。你对局势、权力、资源和位置变化非常敏感，习惯先判断谁真正有决定权，再决定自己怎么行动。你适合在混乱、竞争、压力比较大的环境里快速定方向、拿结果、守位置。你的优势是决断力和执行力，弱点是容易让别人感到压迫，或者太早把关系推到胜负对立里。","diagnosis":"你不是单纯想赢，而是不喜欢把命运交给模糊的人情和不靠谱的规则。越是关键局，你越希望自己能拥有足够话语权。","whatYouReallyWant":"你真正想要的是主导权。不是所有事都要你说了算，而是关键时刻你不能被动等别人安排。","mechanism":{"title":"强势控局机制","content":"曹操型风格的核心不是蛮横，而是现实主义：看清利益、识别权力、快速行动。它适合乱局破局，但也需要控制压迫感。"},"professionalBasis":["从职场沟通看，你容易成为推动决策的人，但要避免让协作者感到被支配。","从资源使用看，你擅长把机会变成结果，但要给别人足够参与感。","从长期关系看，强势可以立威，稳定的信任才会让你走得更远。"],"coreTensions":["想掌控关键局面","讨厌低效和犹豫","容易显得强势","需要学会留台阶"],"suitableIf":["局面混乱，需要快速拍板","目标明确，需要有人推进","团队缺少主心骨","你能承担结果和责任"],"cautionIf":["所有事都想自己控制","忽略别人的面子和安全感","把分歧看成挑战权威","短期赢了，长期关系变冷"],"indices":[{"label":"控局欲","value":92},{"label":"决断力","value":90},{"label":"结盟柔度","value":58},{"label":"压迫感风险","value":72}],"ifStay":"如果你继续只靠强势推进，短期效率会很高，但容易把关系消耗成服从和防备。","ifChange":"如果你在强势之外增加解释、共赢和台阶，你的控局力会从压住别人，升级为让别人愿意跟你赢。","notRecommended":["急于立威","公开压人","只讲结果不讲感受","把盟友当下属","过早亮出全部意图"],"plan90":[{"title":"第 1-2 周：练习先问再定","content":"在重要讨论前，先问清对方顾虑和利益，再提出你的判断。"},{"title":"第 3-4 周：建立解释权","content":"每次拍板时补一句为什么，让别人理解你不是独断，而是在承担风险。"},{"title":"第 2 个月：给关键伙伴留位置","content":"让别人参与一部分决策，减少被支配感。"},{"title":"第 3 个月：把强势变成信用","content":"用稳定交付证明你强势不是为了压人，而是为了把事做成。"}],"closing":"你适合做破局的人，但真正厉害的控局，不是让所有人怕你，而是让关键人信你。"},"B":{"typeName":"刘邦型借力结盟者","subtitle":"你的博弈风格更像联盟整合派：不必样样最强，但很会让人站到你身边。","posterSubtext":"你最大的本事，不是单打独斗，而是把人聚起来。","maturityScore":84,"coreConclusion":"你的历史人物风格更接近刘邦型借力结盟者。你对人心、利益、关系温度和合作空间很敏感，擅长把不同类型的人拉到同一张桌上。你未必是最强执行者，也未必每次都亲自冲在最前面，但你能看见谁有用、谁需要被尊重、谁适合放在什么位置。你的优势是结盟力和识人感，风险是有时过度依赖关系，或者为了维持和气而拖延真正的决断。","diagnosis":"你相信一个人走不远，真正的局要靠人一起撑。你比很多人更懂得给台阶、给位置、给情绪价值。","whatYouReallyWant":"你真正想要的是同盟感。你希望关键时刻不是一个人在扛，而是有人愿意和你一起承担。","mechanism":{"title":"借力结盟机制","content":"刘邦型风格的核心是用人和整合：承认自己不必全能，但要知道谁能补上关键一环。"},"professionalBasis":["从团队合作看，你适合做连接者、组织者和资源整合者。","从人际策略看，你能降低冲突成本，让更多人愿意进入同一目标。","从长期发展看，你需要把人情优势转化为清晰规则，否则联盟容易松散。"],"coreTensions":["重视关系温度","擅长借力而行","怕把话说死","需要提高决断边界"],"suitableIf":["项目需要多方协作","资源分散，需要有人整合","关系比技术更影响结果","你能稳住不同人的需求"],"cautionIf":["只维护关系，不处理问题","为了和气牺牲边界","对关键人判断失准","把借力变成依赖"],"indices":[{"label":"结盟力","value":93},{"label":"识人感","value":88},{"label":"决断锋利度","value":62},{"label":"关系消耗风险","value":68}],"ifStay":"如果你继续只靠关系维持局面，短期会很顺，但遇到硬冲突时容易被拖住。","ifChange":"如果你在结盟之外建立规则和边界，你会从会做人，升级为真正能带局的人。","notRecommended":["过度讨好","回避硬问题","谁都不得罪","关系不设边界","关键节点不拍板"],"plan90":[{"title":"第 1-2 周：盘点关键关系","content":"列出能互相托举的人，区分伙伴、资源、情绪消耗和普通熟人。"},{"title":"第 3-4 周：明确合作边界","content":"每次合作前说清目标、分工、回报和退出方式。"},{"title":"第 2 个月：练习温和但坚定","content":"遇到不合理要求，不解释太多，直接给出边界。"},{"title":"第 3 个月：把人脉变成系统","content":"固定维护关键关系，但不要让所有关系都靠临时情绪维系。"}],"closing":"你最大的牌是人心，但人心不是讨来的，是靠识人、分利和边界一起稳住的。"},"C":{"typeName":"诸葛亮型精密布局者","subtitle":"你的博弈风格更像规则谋划派：先算清局，再出手。","posterSubtext":"你不是反应慢，你是在等信息足够完整。","maturityScore":88,"coreConclusion":"你的历史人物风格更接近诸葛亮型精密布局者。你做事重逻辑、重秩序、重证据，也很在意每一步是否可控。你不喜欢靠情绪和临场发挥推进局面，更习惯先拆结构、看变量、做预案，再选择最稳的路径。你的优势是谋划能力和稳定交付，风险是容易想太多、算太细，错过一些需要先行动再修正的机会。","diagnosis":"你真正相信的是秩序。只要信息足够清楚、规则足够明确、方案足够严密，你就能发挥很强的组织和判断能力。","whatYouReallyWant":"你真正想要的是确定感。你希望自己不是被局势推着走，而是提前看见风险，并把复杂局面变得可管理。","mechanism":{"title":"精密布局机制","content":"诸葛亮型风格的核心是结构化思维：不是靠气势赢，而是靠预判、规则、方案和长期执行赢。"},"professionalBasis":["从决策方式看，你适合处理复杂问题、长期项目和高风险任务。","从协作方式看，你能给团队提供秩序感，但要避免让别人觉得压力太大。","从成长路径看，你需要在完美方案之外增加快速试错能力。"],"coreTensions":["喜欢先算清楚","讨厌无序推进","责任感强","容易过度预案"],"suitableIf":["任务复杂，需要系统规划","风险高，需要提前拆解","团队混乱，需要秩序","你有时间获得足够信息"],"cautionIf":["迟迟不出手","把所有变量都想完才行动","对别人要求过细","把不确定性视为错误"],"indices":[{"label":"布局感","value":94},{"label":"规则意识","value":90},{"label":"行动速度","value":60},{"label":"过度消耗风险","value":70}],"ifStay":"如果你继续追求完全可控，会得到稳定结果，但可能错过一些窗口期很短的机会。","ifChange":"如果你允许自己用小步试错补充大局规划，你的谋划力会更灵活，也更容易被看见。","notRecommended":["过度复盘","预案太多","不信任临场调整","替所有人兜底","用理性压住情绪"],"plan90":[{"title":"第 1-2 周：减少一个预案层级","content":"重要事情保留核心预案，不再为低概率变量消耗过多精力。"},{"title":"第 3-4 周：做一次小规模试错","content":"选一件低风险的事，先行动再复盘，不等完全准备好。"},{"title":"第 2 个月：把方案讲得更人话","content":"不要只给逻辑，也给别人一个愿意执行的理由。"},{"title":"第 3 个月：练习授权","content":"把部分细节交给别人，让系统不只依赖你一个人维持。"}],"closing":"你的强项是把乱局变成棋盘，但真正高阶的布局，也要给变化留空间。"},"D":{"typeName":"武则天型隐忍翻盘者","subtitle":"你的博弈风格更像长线翻盘派：能忍、能等，也能在关键节点改写身份。","posterSubtext":"你不急着赢第一局，你更在意最后谁重新定义局面。","maturityScore":87,"coreConclusion":"你的历史人物风格更接近武则天型隐忍翻盘者。你对身份变化、隐藏机会、长期筹码和他人试探非常敏感。你不一定会在第一时间表现得强势，也不一定急着证明自己，但你会记住局势里的细节，慢慢积累后手，等真正适合的时机再改变位置。你的优势是韧性和耐心，风险是容易压抑太久，或者把很多普通关系也看成暗线博弈。","diagnosis":"你不是没有野心，而是很少轻易暴露野心。你更习惯先观察、先适应、先存活，然后在别人放松警惕时完成身份升级。","whatYouReallyWant":"你真正想要的是翻盘权。你不希望被早期标签、出身位置或他人的低估困住太久。","mechanism":{"title":"隐忍翻盘机制","content":"武则天型风格的核心是长线筹码：先守住自己，再积累资源，最后在身份、位置和话语权上完成重写。"},"professionalBasis":["从逆境适应看，你有较强的低谷承受力和长期耐心。","从机会捕捉看，你善于在边缘位置发现后手，但要避免过度防备。","从自我表达看，你需要更早释放价值信号，不要等别人完全误判你。"],"coreTensions":["能忍但不服输","擅长积累后手","害怕被早早看穿","需要减少过度防御"],"suitableIf":["起点不占优势","环境复杂，需要长期等待","你有耐心慢慢积累筹码","你能在关键时刻果断行动"],"cautionIf":["什么都不说，别人看不见价值","长期压抑导致情绪反噬","把每个人都当成潜在对手","错过可以正面争取的机会"],"indices":[{"label":"翻盘韧性","value":93},{"label":"隐忍力","value":88},{"label":"表达显性度","value":55},{"label":"防御过度风险","value":72}],"ifStay":"如果你继续把所有筹码都藏起来，安全感会更强，但别人可能长期低估你。","ifChange":"如果你在隐忍之外增加阶段性展示，你会更早获得资源，不必等到绝境才翻盘。","notRecommended":["过度隐藏","长期不表达需求","把低估当保护色太久","等到最后才行动","把关系都看成试探"],"plan90":[{"title":"第 1-2 周：公开一个小成果","content":"不用暴露全部计划，先让别人看见你在变强。"},{"title":"第 3-4 周：区分防备和判断","content":"记录哪些是真风险，哪些只是过去经验带来的警惕。"},{"title":"第 2 个月：争取一个小位置","content":"不要等大翻盘，先拿一个能增加话语权的小节点。"},{"title":"第 3 个月：设计翻盘路线","content":"把长期筹码拆成资源、能力、关系、作品四类，逐步显性化。"}],"closing":"你不怕慢，也不怕被低估。但真正的翻盘，不只是忍到最后，而是知道哪一刻该让世界重新看见你。"}},"secondaryNotes":{"A":{"B":"你的主倾向是曹操型强势控局者，副倾向带有刘邦型借力结盟者。这说明你既想掌控局面，也懂得关键人心的重要性。","C":"你的主倾向是曹操型强势控局者，副倾向带有诸葛亮型精密布局者。这说明你不仅敢拍板，也需要用方案和逻辑支撑权威。","D":"你的主倾向是曹操型强势控局者，副倾向带有武则天型隐忍翻盘者。这说明你外在强势，内在也很懂得留后手。"},"B":{"A":"你的主倾向是刘邦型借力结盟者，副倾向带有曹操型强势控局者。这说明你会聚人，但关键时刻也需要更果断。","C":"你的主倾向是刘邦型借力结盟者，副倾向带有诸葛亮型精密布局者。这说明你既重人心，也需要规则让联盟更稳定。","D":"你的主倾向是刘邦型借力结盟者，副倾向带有武则天型隐忍翻盘者。这说明你很会维护关系，也擅长给自己保留后路。"},"C":{"A":"你的主倾向是诸葛亮型精密布局者，副倾向带有曹操型强势控局者。这说明你既会算局，也有在关键时刻接管局面的能力。","B":"你的主倾向是诸葛亮型精密布局者，副倾向带有刘邦型借力结盟者。这说明你适合用规则和信任一起稳定团队。","D":"你的主倾向是诸葛亮型精密布局者，副倾向带有武则天型隐忍翻盘者。这说明你很会长线规划，也懂得等待变量变化。"},"D":{"A":"你的主倾向是武则天型隐忍翻盘者，副倾向带有曹操型强势控局者。这说明你能忍，也能在关键时刻强势夺回位置。","B":"你的主倾向是武则天型隐忍翻盘者，副倾向带有刘邦型借力结盟者。这说明你不只会等待，也懂得把人变成长期筹码。","C":"你的主倾向是武则天型隐忍翻盘者，副倾向带有诸葛亮型精密布局者。这说明你的翻盘不是靠冲动，而是靠长期布局。"}},"shareTemplate":["我测出了：{{typeName}}","{{posterSubtext}}","{{secondaryLine}}","","你的政治手段，像历史中的哪位人物？32题诊断"]};</script>
+    <script>
+(function () {
+  const app = document.getElementById("app");
+  const configPaths = ["./configs/site-config.json", "./configs/career-change.json"];
+
+  const state = {
+    config: null,
+    answers: {},
+    currentIndex: 0,
+    selected: null,
+    locked: false,
+    loadingStep: 0,
+    route: "home",
+    resultData: null,
+  };
+
+  const defaultLoadingMessages = [
+    "正在读取你的选择倾向...",
+    "正在识别隐藏动机...",
+    "正在计算结果分布...",
+    "正在生成专属报告...",
+    "分析完成。",
+  ];
+
+  init();
+
+  async function init() {
+    try {
+      state.config = await fetchConfig();
+      applyDocumentMeta(state.config);
+
+      const saved = sessionStorage.getItem(getStorageKey());
+      if (saved) {
+        state.answers = JSON.parse(saved);
+      }
+
+      routeFromHash();
+      window.addEventListener("hashchange", routeFromHash);
+    } catch (error) {
+      app.innerHTML = `
+        <div class="error">
+          <div>
+            <h1>测试加载失败</h1>
+            <p>请确认你是通过网页链接打开页面，而不是直接双击 HTML 文件。</p>
+          </div>
+        </div>
+      `;
+      console.error(error);
+    }
+  }
+
+  async function fetchConfig() {
+    if (window.__QUIZ_CONFIG__) return window.__QUIZ_CONFIG__;
+    let lastError;
+    for (const path of configPaths) {
+      try {
+        const response = await fetch(path, { cache: "no-store" });
+        if (!response.ok) throw new Error(`${path} ${response.status}`);
+        return response.json();
+      } catch (error) {
+        lastError = error;
+      }
+    }
+    throw lastError;
+  }
+
+  function applyDocumentMeta(cfg) {
+    const title = cfg.title || "趣味测试";
+    const description = cfg.metaDescription || cfg.subtitle || "完成测试，生成你的专属报告。";
+    document.title = title;
+    setMeta("name", "description", description);
+    setMeta("property", "og:title", title);
+    setMeta("property", "og:description", description);
+  }
+
+  function setMeta(attr, key, content) {
+    let node = document.querySelector(`meta[${attr}="${key}"]`);
+    if (!node) {
+      node = document.createElement("meta");
+      node.setAttribute(attr, key);
+      document.head.appendChild(node);
+    }
+    node.setAttribute("content", content);
+  }
+
+  function routeFromHash() {
+    const route = (location.hash || "#/").replace("#/", "") || "home";
+    renderRoute(route);
+  }
+
+  function navigate(route) {
+    const nextHash = `#/${route}`;
+    if (location.hash === nextHash) {
+      renderRoute(route);
+      return;
+    }
+    location.hash = nextHash;
+  }
+
+  function renderRoute(route) {
+    state.route = route;
+    if (route === "quiz") renderQuiz();
+    else if (route === "loading") startLoading();
+    else if (route === "result") renderResult();
+    else renderHome();
+  }
+
+  function renderShell(content, extraClass = "") {
+    app.innerHTML = `
+      <div class="shell">
+        <div class="top-rule"></div>
+        <section class="screen ${extraClass}">${content}</section>
+      </div>
+      <div id="toast" class="toast">已复制</div>
+    `;
+  }
+
+  function renderHome() {
+    const cfg = state.config;
+    renderShell(
+      `
+      <div class="home">
+        <div class="kicker"><span class="dot"></span><span>${text(cfg.kicker)}</span><span class="dot"></span></div>
+        <h1 class="hero-title">${text(cfg.title)}</h1>
+        <p class="hero-subtitle">${text(cfg.subtitle)}</p>
+        <div class="hairline"></div>
+        <div class="intro">
+          ${(cfg.intro || []).map((p, index) => `<p class="${index === cfg.intro.length - 1 ? "strong" : ""}">${text(p)}</p>`).join("")}
+        </div>
+        <div class="pill-grid">
+          ${(cfg.dimensions || []).map((item) => `<div class="pill">${text(item)}</div>`).join("")}
+        </div>
+        <button class="primary-btn" data-action="start">${text(cfg.startButton || "开始测试")}</button>
+        <p class="disclaimer">${text(cfg.disclaimer || "本测试为趣味内容，仅供娱乐参考。")}</p>
+      </div>
+      `,
+      "home"
+    );
+    const startButton = app.querySelector("[data-action='start']");
+    let started = false;
+    const startQuiz = () => {
+      if (started) return;
+      started = true;
+      state.answers = {};
+      state.currentIndex = 0;
+      sessionStorage.removeItem(getStorageKey());
+      navigate("quiz");
+    };
+    startButton.addEventListener("click", startQuiz);
+    startButton.addEventListener(
+      "touchend",
+      (event) => {
+        event.preventDefault();
+        startQuiz();
+      },
+      { passive: false }
+    );
+  }
+
+  function renderQuiz() {
+    const questions = state.config.questions || [];
+    const question = questions[state.currentIndex];
+    if (!question) {
+      renderHome();
+      return;
+    }
+
+    const progress = ((state.currentIndex + 1) / questions.length) * 100;
+
+    renderShell(
+      `
+      <div class="sticky-head">
+        <div class="quiz-meta">
+          <span>${String(state.currentIndex + 1).padStart(2, "0")} / ${questions.length}</span>
+          <span>${text(question.module)}</span>
+        </div>
+        <div class="progress-track"><div class="progress-bar" style="width:${progress}%"></div></div>
+      </div>
+      <div class="question-no">${String(state.currentIndex + 1).padStart(2, "0")}</div>
+      <h1 class="question-title">${text(question.text)}</h1>
+      <div class="options">
+        ${(question.options || [])
+          .map(
+            (option) => `
+            <button class="option" data-option="${text(option.key)}">
+              <span class="option-key">${text(option.key)}</span>
+              <span class="option-text">${text(option.text)}</span>
+            </button>
+          `
+          )
+          .join("")}
+      </div>
+      <p class="hint">${text(state.config.quizHint || "选择后自动进入下一题")}</p>
+      `,
+      "quiz-screen"
+    );
+
+    app.querySelectorAll("[data-option]").forEach((button) => {
+      button.addEventListener("click", () => selectOption(button.dataset.option));
+    });
+  }
+
+  function selectOption(key) {
+    if (state.locked) return;
+    state.locked = true;
+    state.selected = key;
+    const question = state.config.questions[state.currentIndex];
+    state.answers[question.id] = key;
+
+    app.querySelectorAll(".option").forEach((button) => {
+      const selected = button.dataset.option === key;
+      button.classList.toggle("selected", selected);
+      button.classList.toggle("dimmed", !selected);
+    });
+
+    window.setTimeout(() => {
+      if (state.currentIndex < state.config.questions.length - 1) {
+        state.currentIndex += 1;
+        state.locked = false;
+        state.selected = null;
+        renderQuiz();
+      } else {
+        sessionStorage.setItem(getStorageKey(), JSON.stringify(state.answers));
+        state.locked = false;
+        navigate("loading");
+      }
+    }, 420);
+  }
+
+  function startLoading() {
+    state.loadingStep = 0;
+    renderLoading("");
+    tickLoading();
+  }
+
+  function renderLoading(value) {
+    const loadingMessages = getLoadingMessages();
+    renderShell(
+      `
+      <div class="loading-card">
+        <div class="spinner"></div>
+        <div class="loading-text">${text(value)}<span class="cursor">|</span></div>
+        <div class="step-bars">
+          ${loadingMessages.map((_, index) => `<div class="step ${index < state.loadingStep ? "done" : ""}"><span></span></div>`).join("")}
+        </div>
+      </div>
+      `,
+      "loading-screen"
+    );
+  }
+
+  function tickLoading() {
+    if (state.route !== "loading") return;
+    const loadingMessages = getLoadingMessages();
+    if (state.loadingStep >= loadingMessages.length) {
+      window.setTimeout(() => navigate("result"), 700);
+      return;
+    }
+    const message = loadingMessages[state.loadingStep];
+    let chars = 0;
+    const interval = window.setInterval(() => {
+      chars += 1;
+      renderLoading(message.slice(0, chars));
+      if (chars >= message.length) {
+        window.clearInterval(interval);
+        window.setTimeout(() => {
+          state.loadingStep += 1;
+          tickLoading();
+        }, 520);
+      }
+    }, 35);
+  }
+
+  function renderResult() {
+    const saved = sessionStorage.getItem(getStorageKey());
+    if (saved) state.answers = JSON.parse(saved);
+    if (Object.keys(state.answers).length < state.config.questions.length) {
+      renderHome();
+      return;
+    }
+
+    const scored = scoreAnswers(state.answers);
+    const primary = state.config.results[scored.primary];
+    const secondary = scored.secondary ? state.config.secondaryNotes?.[scored.primary]?.[scored.secondary] : null;
+    const stage = getStage(primary.maturityScore);
+    const shareText = buildShareText(primary, secondary);
+    const compareLabels = state.config.compareLabels || ["如果继续原路", "如果换一种做法"];
+    state.resultData = { scored, primary, secondary, stage, shareText };
+
+    renderShell(
+      `
+      <article class="report">
+        <div class="kicker"><span class="dot"></span><span>${text(state.config.resultKicker || "Result Report")}</span><span class="dot"></span></div>
+        <h1 class="result-type">${text(primary.typeName)}</h1>
+        <p class="result-subtitle">${text(primary.subtitle)}</p>
+        <div class="stamp-row">
+          <div class="stamp"><strong>${text(primary.maturityScore)}</strong><span>${text(state.config.scoreLabel || "决策成熟度")}</span></div>
+          <div class="stamp"><strong>${text(stage)}</strong><span>${text(state.config.stageLabel || "当前行动阶段")}</span></div>
+        </div>
+
+        <section class="section">
+          <h2>你的答案分布</h2>
+          <div class="meters">
+            ${Object.entries(scored.counts)
+              .map(([key, value]) => {
+                const typeData = state.config.results[key];
+                const width = (value / state.config.questions.length) * 100;
+                return `
+                  <div>
+                    <div class="meter-head"><span>${text(key)} · ${text(typeData.typeName)}</span><span>${value} 题</span></div>
+                    <div class="meter-track"><div class="meter-fill" style="width:${width}%"></div></div>
+                  </div>
+                `;
+              })
+              .join("")}
+          </div>
+        </section>
+
+        ${secondary ? `<section class="section"><h2>副倾向提示</h2><div class="secondary-note">${text(secondary)}</div></section>` : ""}
+
+        <section class="section">
+          <h2>诊断结论</h2>
+          <div class="quote">${text(primary.coreConclusion)}</div>
+        </section>
+
+        <section class="section">
+          <h2>为什么你会这样</h2>
+          <p>${text(primary.diagnosis)}</p>
+          <p>${text(primary.whatYouReallyWant)}</p>
+        </section>
+
+        <section class="section">
+          <h2>${text(primary.mechanism.title)}</h2>
+          <p>${text(primary.mechanism.content)}</p>
+        </section>
+
+        ${renderParagraphSection("专业解读框架", primary.professionalBasis)}
+        ${renderTagSection("你的关键矛盾", primary.coreTensions)}
+        ${renderCompareListSection("适合推进的条件", "需要谨慎的信号", primary.suitableIf, primary.cautionIf)}
+
+        <section class="section">
+          <h2>关键指数</h2>
+          <div class="meters">
+            ${(primary.indices || [])
+              .map(
+                (item) => `
+                <div>
+                  <div class="meter-head"><span>${text(item.label)}</span><span>${text(item.value)}</span></div>
+                  <div class="meter-track"><div class="meter-fill" style="width:${number(item.value)}%"></div></div>
+                </div>
+              `
+              )
+              .join("")}
+          </div>
+        </section>
+
+        <section class="section">
+          <h2>两条路径对比</h2>
+          <div class="compare">
+            <div class="compare-card"><h3>${text(compareLabels[0])}</h3><p>${text(primary.ifStay)}</p></div>
+            <div class="compare-card"><h3>${text(compareLabels[1])}</h3><p>${text(primary.ifChange)}</p></div>
+          </div>
+        </section>
+
+        <section class="section">
+          <h2>现在最不建议你做</h2>
+          <div class="tag-list">${(primary.notRecommended || []).map((item) => `<span class="tag">${text(item)}</span>`).join("")}</div>
+        </section>
+
+        <section class="section">
+          <h2>未来 90 天验证方案</h2>
+          <div class="plan">
+            ${(primary.plan90 || [])
+              .map(
+                (item, index) => `
+                <div class="plan-card">
+                  <h3>${index + 1}. ${text(item.title)}</h3>
+                  <p>${text(item.content)}</p>
+                </div>
+              `
+              )
+              .join("")}
+          </div>
+        </section>
+
+        <section class="section">
+          <h2>最后一句话</h2>
+          <p>${text(primary.closing)}</p>
+        </section>
+
+        <div class="actions">
+          <button class="primary-btn" data-action="copy">${text(state.config.copyButton || "复制我的结果")}</button>
+          <button class="ghost-btn" data-action="restart">${text(state.config.restartButton || "重新测试")}</button>
+        </div>
+      </article>
+      `,
+      "result-screen"
+    );
+
+    app.querySelector("[data-action='copy']").addEventListener("click", () => copyShareText(shareText));
+    app.querySelector("[data-action='restart']").addEventListener("click", () => {
+      sessionStorage.removeItem(getStorageKey());
+      state.answers = {};
+      state.currentIndex = 0;
+      navigate("home");
+    });
+  }
+
+  function renderParagraphSection(title, paragraphs) {
+    if (!Array.isArray(paragraphs) || !paragraphs.length) return "";
+    return `
+      <section class="section">
+        <h2>${text(title)}</h2>
+        ${paragraphs.map((item) => `<p>${text(item)}</p>`).join("")}
+      </section>
+    `;
+  }
+
+  function renderTagSection(title, items) {
+    if (!Array.isArray(items) || !items.length) return "";
+    return `
+      <section class="section">
+        <h2>${text(title)}</h2>
+        <div class="tag-list">${items.map((item) => `<span class="tag">${text(item)}</span>`).join("")}</div>
+      </section>
+    `;
+  }
+
+  function renderCompareListSection(leftTitle, rightTitle, leftItems, rightItems) {
+    const hasLeft = Array.isArray(leftItems) && leftItems.length;
+    const hasRight = Array.isArray(rightItems) && rightItems.length;
+    if (!hasLeft && !hasRight) return "";
+    return `
+      <section class="section">
+        <h2>适用边界</h2>
+        <div class="compare">
+          <div class="compare-card">
+            <h3>${text(leftTitle)}</h3>
+            ${(leftItems || []).map((item) => `<p>${text(item)}</p>`).join("")}
+          </div>
+          <div class="compare-card">
+            <h3>${text(rightTitle)}</h3>
+            ${(rightItems || []).map((item) => `<p>${text(item)}</p>`).join("")}
+          </div>
+        </div>
+      </section>
+    `;
+  }
+
+  function scoreAnswers(answers) {
+    const counts = { A: 0, B: 0, C: 0, D: 0 };
+    Object.values(answers).forEach((key) => {
+      if (counts[key] !== undefined) counts[key] += 1;
+    });
+    const sorted = Object.entries(counts).sort((a, b) => b[1] - a[1]);
+    const threshold = state.config.secondaryThreshold ?? 2;
+    const primary = sorted[0][0];
+    const secondary = sorted[1][1] > 0 && sorted[0][1] - sorted[1][1] <= threshold ? sorted[1][0] : null;
+    return { counts, primary, secondary };
+  }
+
+  function getStage(score) {
+    const labels = state.config.stageLabels || [
+      { max: 45, label: "观察期" },
+      { max: 65, label: "验证期" },
+      { max: 82, label: "规划期" },
+      { max: 100, label: "行动期" },
+    ];
+    const hit = labels.find((item) => score <= item.max);
+    return hit ? hit.label : labels[labels.length - 1].label;
+  }
+
+  function buildShareText(primary, secondary) {
+    const template = state.config.shareTemplate || [
+      "我测出了：{{typeName}}",
+      "{{posterSubtext}}",
+      "{{secondaryLine}}",
+      "",
+      "{{title}}",
+    ];
+    const values = {
+      title: state.config.title,
+      typeName: primary.typeName,
+      posterSubtext: primary.posterSubtext,
+      secondary: secondary || "",
+      secondaryLine: secondary ? `副倾向：${secondary}` : "",
+    };
+    return template
+      .map((line) => fillTemplate(line, values))
+      .filter((line, index, arr) => line || arr[index - 1])
+      .join("\n")
+      .trim();
+  }
+
+  async function copyShareText(value) {
+    try {
+      await navigator.clipboard.writeText(value);
+      showToast("结果文案已复制");
+    } catch (error) {
+      showToast("复制失败，可长按手动复制");
+    }
+  }
+
+  function showToast(value) {
+    const toast = document.getElementById("toast");
+    if (!toast) return;
+    toast.textContent = value;
+    toast.classList.add("show");
+    window.setTimeout(() => toast.classList.remove("show"), 1600);
+  }
+
+  function getLoadingMessages() {
+    return state.config.loadingMessages || defaultLoadingMessages;
+  }
+
+  function getStorageKey() {
+    return `xhsTestAnswers:${state.config.slug || "default"}`;
+  }
+
+  function fillTemplate(template, values) {
+    return String(template).replace(/\{\{(\w+)\}\}/g, (_, key) => values[key] || "");
+  }
+
+  function number(value) {
+    const parsed = Number(value);
+    if (Number.isNaN(parsed)) return 0;
+    return Math.max(0, Math.min(100, parsed));
+  }
+
+  function text(value) {
+    return String(value ?? "")
+      .replace(/&/g, "&amp;")
+      .replace(/</g, "&lt;")
+      .replace(/>/g, "&gt;")
+      .replace(/"/g, "&quot;");
+  }
+})();
+
+    </script>
+  </body>
+</html>
