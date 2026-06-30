@@ -1,0 +1,1125 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <meta name="description" content="完成 32 道「你是否适合考公」测试，生成你的考公适配度报告。" />
+    <meta property="og:title" content="检测你是否适合考公？" />
+    <meta property="og:description" content="完成 32 道「你是否适合考公」测试，生成你的考公适配度报告。" />
+    <title>检测你是否适合考公？</title>
+    <style>
+:root {
+  --bg: #fbfaf7;
+  --paper: #fffefd;
+  --ink: #20242a;
+  --muted: #65707d;
+  --line: #d9d4ca;
+  --line-strong: #b9afa0;
+  --accent: #9b4339;
+  --accent-soft: #f1dfd7;
+  --gold: #c0964d;
+  --sage: #66795f;
+  --blue: #526a86;
+  --shadow: 0 16px 36px rgba(60, 47, 38, 0.1);
+  --radius: 8px;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  min-height: 100%;
+  background:
+    linear-gradient(rgba(32, 36, 42, 0.035) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(32, 36, 42, 0.035) 1px, transparent 1px),
+    var(--bg);
+  background-size: 24px 24px;
+}
+
+body {
+  min-height: 100vh;
+  margin: 0;
+  color: var(--ink);
+  font-family:
+    "PingFang SC",
+    "Microsoft YaHei",
+    "Noto Sans SC",
+    system-ui,
+    -apple-system,
+    BlinkMacSystemFont,
+    sans-serif;
+  letter-spacing: 0;
+}
+
+button {
+  font: inherit;
+}
+
+.shell {
+  width: min(100%, 480px);
+  min-height: 100vh;
+  margin: 0 auto;
+  background: rgba(251, 250, 247, 0.88);
+}
+
+.top-rule {
+  height: 4px;
+  background: var(--accent);
+}
+
+.screen {
+  min-height: calc(100vh - 4px);
+  padding: 28px 22px 32px;
+}
+
+.home {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.kicker {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  color: var(--muted);
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  font-size: 11px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+.dot {
+  width: 7px;
+  height: 7px;
+  background: var(--accent);
+  border-radius: 50%;
+}
+
+.hero-title {
+  margin: 26px 0 14px;
+  color: var(--ink);
+  font-size: 30px;
+  line-height: 1.2;
+  text-align: center;
+  font-weight: 800;
+}
+
+.hero-subtitle {
+  margin: 0 auto 28px;
+  max-width: 340px;
+  color: var(--muted);
+  font-size: 15px;
+  line-height: 1.75;
+  text-align: center;
+}
+
+.hairline {
+  width: 64px;
+  height: 1px;
+  margin: 0 auto 30px;
+  background: var(--line-strong);
+}
+
+.intro {
+  margin: 0 auto;
+  max-width: 380px;
+}
+
+.intro p {
+  margin: 0 0 15px;
+  color: rgba(32, 36, 42, 0.82);
+  font-size: 15px;
+  line-height: 1.8;
+}
+
+.intro .strong {
+  color: var(--accent);
+  font-weight: 700;
+}
+
+.pill-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px;
+  margin: 28px 0;
+}
+
+.pill {
+  min-height: 42px;
+  display: grid;
+  place-items: center;
+  border: 1px solid var(--line);
+  color: var(--muted);
+  background: rgba(255, 255, 255, 0.44);
+  font-size: 13px;
+}
+
+.primary-btn,
+.ghost-btn,
+.copy-btn {
+  width: 100%;
+  min-height: 48px;
+  border: 1px solid var(--ink);
+  border-radius: 0;
+  cursor: pointer;
+  transition: transform 150ms ease, background 150ms ease, color 150ms ease, border-color 150ms ease;
+}
+
+.primary-btn {
+  background: var(--ink);
+  color: #fff;
+  font-weight: 700;
+}
+
+.ghost-btn,
+.copy-btn {
+  background: transparent;
+  color: var(--ink);
+}
+
+.primary-btn:active,
+.ghost-btn:active,
+.copy-btn:active,
+.option:active {
+  transform: translateY(1px);
+}
+
+.disclaimer {
+  margin: 18px auto 0;
+  max-width: 340px;
+  color: var(--muted);
+  font-size: 12px;
+  line-height: 1.65;
+  text-align: center;
+}
+
+.quiz-screen {
+  padding-top: 0;
+}
+
+.sticky-head {
+  position: sticky;
+  top: 0;
+  z-index: 5;
+  margin: 0 -22px 26px;
+  padding: 14px 22px 12px;
+  background: rgba(251, 250, 247, 0.95);
+  border-bottom: 1px solid var(--line);
+  backdrop-filter: blur(12px);
+}
+
+.quiz-meta {
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+  color: var(--muted);
+  font-size: 12px;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+}
+
+.progress-track {
+  height: 4px;
+  margin-top: 10px;
+  background: rgba(32, 36, 42, 0.09);
+}
+
+.progress-bar {
+  height: 100%;
+  background: var(--accent);
+  transition: width 260ms ease;
+}
+
+.question-no {
+  color: rgba(155, 67, 57, 0.18);
+  font-size: 48px;
+  line-height: 1;
+  font-weight: 800;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+}
+
+.question-title {
+  margin: 18px 0 24px;
+  font-size: 22px;
+  line-height: 1.5;
+  font-weight: 750;
+}
+
+.options {
+  display: grid;
+  gap: 12px;
+}
+
+.option {
+  min-height: 66px;
+  display: grid;
+  grid-template-columns: 30px 1fr;
+  gap: 12px;
+  align-items: start;
+  width: 100%;
+  padding: 15px;
+  border: 1px solid var(--line);
+  background: rgba(255, 255, 255, 0.68);
+  color: var(--ink);
+  text-align: left;
+  cursor: pointer;
+  transition: background 160ms ease, border-color 160ms ease, color 160ms ease, opacity 160ms ease;
+}
+
+.option-key {
+  display: grid;
+  place-items: center;
+  width: 28px;
+  height: 28px;
+  border: 1px solid var(--line-strong);
+  font-size: 13px;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+}
+
+.option-text {
+  padding-top: 2px;
+  font-size: 15px;
+  line-height: 1.55;
+}
+
+.option.selected {
+  border-color: var(--accent);
+  background: var(--accent);
+  color: #fff;
+}
+
+.option.selected .option-key {
+  border-color: rgba(255, 255, 255, 0.8);
+}
+
+.option.dimmed {
+  opacity: 0.42;
+}
+
+.hint {
+  margin: 18px 0 0;
+  color: var(--muted);
+  font-size: 12px;
+  text-align: center;
+}
+
+.loading-screen {
+  display: grid;
+  place-items: center;
+}
+
+.loading-card {
+  width: 100%;
+  max-width: 360px;
+  text-align: center;
+}
+
+.spinner {
+  width: 54px;
+  height: 54px;
+  margin: 0 auto 24px;
+  border: 2px solid var(--line);
+  border-top-color: var(--accent);
+  border-radius: 50%;
+  animation: spin 850ms linear infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.loading-text {
+  min-height: 54px;
+  color: var(--accent);
+  font-size: 17px;
+  line-height: 1.6;
+  font-weight: 700;
+}
+
+.step-bars {
+  display: grid;
+  gap: 8px;
+  margin-top: 28px;
+}
+
+.step {
+  height: 4px;
+  overflow: hidden;
+  background: rgba(32, 36, 42, 0.09);
+}
+
+.step span {
+  display: block;
+  height: 100%;
+  width: 0;
+  background: var(--accent);
+  transition: width 300ms ease;
+}
+
+.step.done span {
+  width: 100%;
+}
+
+.result-screen {
+  padding: 22px 18px 30px;
+}
+
+.report {
+  padding: 22px 16px 18px;
+  border: 1px solid var(--line);
+  background: var(--paper);
+  box-shadow: var(--shadow);
+}
+
+.result-type {
+  margin: 8px 0 8px;
+  color: var(--accent);
+  font-size: 30px;
+  line-height: 1.15;
+  font-weight: 850;
+  text-align: center;
+}
+
+.result-subtitle {
+  margin: 0 auto 20px;
+  color: var(--muted);
+  font-size: 15px;
+  line-height: 1.7;
+  text-align: center;
+}
+
+.stamp-row {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px;
+  margin: 18px 0 20px;
+}
+
+.stamp {
+  padding: 12px 10px;
+  border: 1px solid var(--line);
+  background: #fbfaf7;
+}
+
+.stamp strong {
+  display: block;
+  margin-bottom: 4px;
+  color: var(--ink);
+  font-size: 20px;
+}
+
+.stamp span {
+  color: var(--muted);
+  font-size: 12px;
+}
+
+.section {
+  padding: 20px 0;
+  border-top: 1px solid var(--line);
+}
+
+.section h2 {
+  margin: 0 0 12px;
+  font-size: 18px;
+  color: var(--ink);
+}
+
+.section p {
+  margin: 0 0 12px;
+  color: rgba(32, 36, 42, 0.82);
+  font-size: 15px;
+  line-height: 1.85;
+}
+
+.quote {
+  padding: 15px;
+  border-left: 3px solid var(--accent);
+  background: var(--accent-soft);
+  color: #5b2d27;
+  line-height: 1.8;
+  font-weight: 700;
+}
+
+.meters {
+  display: grid;
+  gap: 14px;
+}
+
+.meter-head {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 7px;
+  color: var(--muted);
+  font-size: 13px;
+}
+
+.meter-track {
+  height: 8px;
+  background: rgba(32, 36, 42, 0.08);
+}
+
+.meter-fill {
+  height: 100%;
+  background: var(--accent);
+}
+
+.compare {
+  display: grid;
+  gap: 10px;
+}
+
+.compare-card {
+  padding: 14px;
+  border: 1px solid var(--line);
+  background: #fbfaf7;
+}
+
+.compare-card h3,
+.plan-card h3 {
+  margin: 0 0 8px;
+  font-size: 15px;
+}
+
+.compare-card p,
+.plan-card p {
+  font-size: 14px;
+}
+
+.tag-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.tag {
+  padding: 7px 9px;
+  border: 1px solid var(--line);
+  background: #fbfaf7;
+  color: var(--muted);
+  font-size: 13px;
+}
+
+.plan {
+  display: grid;
+  gap: 10px;
+}
+
+.plan-card {
+  padding: 14px;
+  border: 1px solid var(--line);
+  background: #fbfaf7;
+}
+
+.secondary-note {
+  padding: 14px;
+  border: 1px dashed var(--line-strong);
+  background: rgba(192, 150, 77, 0.12);
+  line-height: 1.75;
+  font-size: 14px;
+}
+
+.actions {
+  display: grid;
+  gap: 10px;
+  margin-top: 18px;
+}
+
+.toast {
+  position: fixed;
+  left: 50%;
+  bottom: 22px;
+  z-index: 20;
+  transform: translateX(-50%);
+  padding: 10px 14px;
+  background: var(--ink);
+  color: #fff;
+  font-size: 13px;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 180ms ease;
+}
+
+.toast.show {
+  opacity: 1;
+}
+
+.error {
+  display: grid;
+  place-items: center;
+  min-height: 100vh;
+  padding: 24px;
+  text-align: center;
+}
+
+.error p {
+  color: var(--muted);
+  line-height: 1.7;
+}
+
+@media (min-width: 700px) {
+  body {
+    padding: 28px 0;
+  }
+
+  .shell {
+    min-height: calc(100vh - 56px);
+    border: 1px solid var(--line);
+    box-shadow: var(--shadow);
+  }
+
+  .screen {
+    min-height: calc(100vh - 60px);
+  }
+}
+
+    </style>
+  </head>
+  <body>
+    <main id="app" aria-live="polite"></main>
+    <script>window.__QUIZ_CONFIG__ = {"slug":"test-civil-service-fit","topic":"检测你是否适合考公？","kicker":"32-Q Civil Service Fit Test","title":"检测你是否适合考公？","subtitle":"32 道题，拆清你和考公这条路的适配度：稳定偏好、规则耐受、备考韧性、组织适应和长期发展诉求。","metaDescription":"完成 32 道「你是否适合考公」测试，生成你的考公适配度报告。","startButton":"开始测试","resultKicker":"Civil Service Fit Report","quizHint":"选择后自动进入下一题","copyButton":"复制我的结果","restartButton":"重新测试","scoreLabel":"考公适配度","stageLabel":"当前阶段","stageLabels":[{"max":45,"label":"需要慎重期"},{"max":65,"label":"观察匹配期"},{"max":82,"label":"可尝试期"},{"max":100,"label":"高适配期"}],"compareLabels":["如果盲目跟风考","如果按适配度规划"],"disclaimer":"本测试为趣味自我观察工具，非职业咨询、招录政策解读或备考承诺，不构成任何报考、择业或人生决策建议。","secondaryThreshold":4,"dimensions":["稳定偏好","规则耐受","备考韧性","长期适配"],"intro":["适不适合考公，不只看你想不想稳定。","真正影响这条路的，是你能不能接受规则感、慢反馈、长期准备、组织节奏，以及进入之后的工作方式。","32 道题会从稳定需求、规则边界、备考耐受、公共服务动机、人际组织、发展诉求、风险承受和真实顾虑 8 个模块，生成一份更贴近你当前状态的考公适配度报告。"],"loadingMessages":["正在读取你的第一反应...","正在拆分稳定偏好、规则耐受和备考韧性...","正在识别你的考公适配类型...","正在生成 32 题考公适配度报告...","分析完成。"],"questions":[{"id":1,"module":"稳定需求","text":"你第一次认真想考公，最主要是因为：","options":[{"key":"A","text":"我真的很需要稳定、确定和可预期的生活"},{"key":"B","text":"我希望做一份对社会、群众或公共事务有价值的工作"},{"key":"C","text":"我觉得这是一条可规划、可竞争、可上岸的路径"},{"key":"D","text":"我只是被现实压力推着想一想，但心里还没确定"}]},{"id":2,"module":"稳定需求","text":"如果一份工作收入涨得不快，但节奏稳定、福利清晰，你更可能：","options":[{"key":"A","text":"我能接受，稳定本身就是重要价值"},{"key":"B","text":"如果岗位有服务意义，我会更愿意坚持"},{"key":"C","text":"要看它能不能换来长期身份和资源优势"},{"key":"D","text":"我会担心自己慢慢失去冲劲和选择权"}]},{"id":3,"module":"稳定需求","text":"你对“稳定”的真实理解更接近：","options":[{"key":"A","text":"生活有底，不用一直担心明天会不会变"},{"key":"B","text":"能长期做有秩序、有责任感的公共工作"},{"key":"C","text":"通过考试拿到一个更稳的职业筹码"},{"key":"D","text":"稳定是好事，但我不想被稳定困住"}]},{"id":4,"module":"稳定需求","text":"看到身边人上岸，你心里最先冒出来的是：","options":[{"key":"A","text":"羡慕他们终于不用漂着了"},{"key":"B","text":"想知道他们未来具体做什么、服务谁"},{"key":"C","text":"我会研究他们怎么选岗、怎么备考、怎么上岸"},{"key":"D","text":"羡慕归羡慕，但我也怕自己进去后不适应"}]},{"id":5,"module":"规则边界","text":"你对规章制度很多的环境，第一反应是：","options":[{"key":"A","text":"只要规则清楚，我反而会更安心"},{"key":"B","text":"规则是为了公平和秩序，我愿意理解它"},{"key":"C","text":"我会先搞懂规则，再用规则提高效率"},{"key":"D","text":"我会有点压抑，担心很多想法施展不开"}]},{"id":6,"module":"规则边界","text":"如果领导安排一件流程复杂但意义不明显的事，你更可能：","options":[{"key":"A","text":"先按要求完成，流程本身也很重要"},{"key":"B","text":"会想它背后服务的是谁、解决什么问题"},{"key":"C","text":"先拆流程，找到最快完成且不出错的方法"},{"key":"D","text":"会比较烦，尤其是看不到实际价值时"}]},{"id":7,"module":"规则边界","text":"你最不适应哪种工作状态？","options":[{"key":"A","text":"目标不断变，今天这样明天那样"},{"key":"B","text":"事情只讲效率，不讲人和公共价值"},{"key":"C","text":"没有明确标准，努力了也不知道怎么赢"},{"key":"D","text":"每一步都要审批，做什么都不够自由"}]},{"id":8,"module":"规则边界","text":"面对细节、材料、表格、流程，你通常：","options":[{"key":"A","text":"能耐心处理，越规范越安心"},{"key":"B","text":"如果它关系到别人办事，我愿意仔细一点"},{"key":"C","text":"会做清单和模板，尽量一次搞定"},{"key":"D","text":"容易烦躁，我更喜欢直接解决核心问题"}]},{"id":9,"module":"备考耐受","text":"如果要连续备考 6-12 个月，你最担心：","options":[{"key":"A","text":"我能坚持，但怕生活和情绪被消耗"},{"key":"B","text":"怕忘了自己为什么要考，只剩机械刷题"},{"key":"C","text":"怕方法不对、岗位没选好，努力白费"},{"key":"D","text":"怕自己根本受不了这种长时间单调重复"}]},{"id":10,"module":"备考耐受","text":"你更适合哪种备考方式？","options":[{"key":"A","text":"固定时间、固定任务、每天稳稳推进"},{"key":"B","text":"把备考和未来想做的公共价值联系起来"},{"key":"C","text":"用数据复盘，按模块提分，目标导向很强"},{"key":"D","text":"短期冲刺可以，长期重复会让我很痛苦"}]},{"id":11,"module":"备考耐受","text":"做题连续错很多时，你更像：","options":[{"key":"A","text":"会难受，但还能按节奏继续"},{"key":"B","text":"会想这是不是通往某个具体岗位的必要过程"},{"key":"C","text":"立刻复盘错因，重新调整训练方法"},{"key":"D","text":"容易怀疑自己是不是不适合这条路"}]},{"id":12,"module":"备考耐受","text":"如果第一次没考上，你更可能：","options":[{"key":"A","text":"只要差距不大，我愿意再稳稳准备一次"},{"key":"B","text":"会重新确认自己想服务的方向，再决定是否继续"},{"key":"C","text":"分析分差、岗位、竞争比，决定要不要二战"},{"key":"D","text":"我可能会转向其他路径，不想一直耗着"}]},{"id":13,"module":"公共服务","text":"如果未来工作经常面对群众咨询、材料解释、重复沟通，你会：","options":[{"key":"A","text":"能接受，这是岗位职责的一部分"},{"key":"B","text":"如果真的能帮到人，我会有成就感"},{"key":"C","text":"我会总结高频问题，提高处理效率"},{"key":"D","text":"我怕长期重复沟通会把自己耗空"}]},{"id":14,"module":"公共服务","text":"你对“体制内工作”的想象，最吸引你的是：","options":[{"key":"A","text":"秩序感、稳定感和长期保障"},{"key":"B","text":"参与公共事务，做一点具体有用的事"},{"key":"C","text":"通过考试进入一个相对清晰的职业通道"},{"key":"D","text":"吸引我的是安全感，但我不确定自己喜欢那种工作"}]},{"id":15,"module":"公共服务","text":"如果工作成果很难被看见，也不容易得到即时夸奖，你更可能：","options":[{"key":"A","text":"可以接受，工作本来不一定天天有反馈"},{"key":"B","text":"只要事情对别人有帮助，我不一定需要很多掌声"},{"key":"C","text":"我会用自己的指标记录进步和成果"},{"key":"D","text":"我会比较失落，我需要更明显的成长反馈"}]},{"id":16,"module":"公共服务","text":"你更愿意做哪类事情？","options":[{"key":"A","text":"稳定执行、规范推进、保证事情不出错"},{"key":"B","text":"协调沟通、解释政策、帮助人把问题办成"},{"key":"C","text":"研究信息、制定计划、把复杂任务拆解成步骤"},{"key":"D","text":"创新项目、自由表达、做能快速看到结果的事"}]},{"id":17,"module":"组织适应","text":"你对层级、汇报、请示这类组织节奏的感受是：","options":[{"key":"A","text":"能适应，按流程来反而减少很多风险"},{"key":"B","text":"只要沟通是为了更好服务，我可以接受"},{"key":"C","text":"我会先摸清规则，知道什么时候该汇报"},{"key":"D","text":"我会觉得束缚，怕自己很多想法被卡住"}]},{"id":18,"module":"组织适应","text":"如果你的想法暂时不能被采纳，你通常：","options":[{"key":"A","text":"能接受，组织里不可能每件事都按个人想法来"},{"key":"B","text":"会继续沟通，看怎样更符合整体需要"},{"key":"C","text":"会判断阻力在哪里，下次换一种表达方式"},{"key":"D","text":"会很挫败，觉得自己的主动性被消耗"}]},{"id":19,"module":"组织适应","text":"你最容易在什么环境里发挥稳定？","options":[{"key":"A","text":"职责明确、规则稳定、预期清楚的环境"},{"key":"B","text":"同事愿意协作，大家认可公共价值的环境"},{"key":"C","text":"目标清楚、竞争公平、能用努力换结果的环境"},{"key":"D","text":"空间大、变化快、允许个人创造的环境"}]},{"id":20,"module":"组织适应","text":"如果你需要长期做不太刺激但很重要的基础工作，你会：","options":[{"key":"A","text":"可以做，基础工作本来就需要有人稳住"},{"key":"B","text":"如果它影响很多人的办事体验，我愿意投入"},{"key":"C","text":"我会优化流程，让重复工作更高效"},{"key":"D","text":"我会担心自己几年后变得麻木"}]},{"id":21,"module":"发展诉求","text":"你对未来 5 年最在意的是：","options":[{"key":"A","text":"生活稳定、风险降低、节奏可控"},{"key":"B","text":"工作有意义，能被需要，也能服务具体的人"},{"key":"C","text":"通过明确路径实现身份、城市或家庭规划"},{"key":"D","text":"成长速度、收入弹性和选择自由"}]},{"id":22,"module":"发展诉求","text":"你最怕考上之后出现哪种情况？","options":[{"key":"A","text":"岗位和生活不稳定，和我期待不一致"},{"key":"B","text":"发现工作和公共服务想象差距很大"},{"key":"C","text":"发现上岸只是开始，后续发展并不自动顺利"},{"key":"D","text":"发现自己被困在不喜欢的节奏里，退出成本很高"}]},{"id":23,"module":"发展诉求","text":"如果别人说“考公上岸就好了”，你真实想法是：","options":[{"key":"A","text":"至少上岸能解决我很大一部分安全感问题"},{"key":"B","text":"上岸不是终点，还要看岗位是否真的适合服务"},{"key":"C","text":"上岸是阶段目标，但要先算清投入产出"},{"key":"D","text":"我不太相信一种选择能解决所有人生问题"}]},{"id":24,"module":"发展诉求","text":"你更希望工作给你带来什么？","options":[{"key":"A","text":"长期确定性和生活底盘"},{"key":"B","text":"社会连接感和被需要的价值"},{"key":"C","text":"清晰目标、可规划路径和阶段性成果"},{"key":"D","text":"自由度、成长空间和更高收入可能"}]},{"id":25,"module":"风险承受","text":"如果现在不考公，而是继续市场化工作，你最担心：","options":[{"key":"A","text":"不稳定，随时可能被行业和公司影响"},{"key":"B","text":"工作越来越只为绩效，缺少意义感"},{"key":"C","text":"没有清晰路径，努力方向经常变"},{"key":"D","text":"我担心风险，但也怕错过更自由的发展"}]},{"id":26,"module":"风险承受","text":"如果为了考公需要降低短期收入或暂停一段职业发展，你会：","options":[{"key":"A","text":"如果能换来长期稳定，我可以接受"},{"key":"B","text":"如果目标岗位真的符合我价值感，我愿意投入"},{"key":"C","text":"会设定时间上限和复盘节点，不能无限投入"},{"key":"D","text":"我会很犹豫，机会成本让我不安"}]},{"id":27,"module":"风险承受","text":"面对父母或身边人劝你考公，你更像：","options":[{"key":"A","text":"他们说的稳定确实是我需要的"},{"key":"B","text":"我会听，但更想知道自己适合什么岗位"},{"key":"C","text":"我会把建议变成计划，自己评估可行性"},{"key":"D","text":"我不想只是因为别人觉得好，就把自己交出去"}]},{"id":28,"module":"风险承受","text":"你对“二战、三战”的接受度是：","options":[{"key":"A","text":"只要方向确定，我可以再坚持一次"},{"key":"B","text":"如果仍然想进入公共服务领域，我会继续"},{"key":"C","text":"要看数据和进步幅度，不会只靠执念"},{"key":"D","text":"我很难接受长期把人生押在一个考试上"}]},{"id":29,"module":"真实顾虑","text":"你最想通过这个测试确认的是：","options":[{"key":"A","text":"我是不是适合稳定、规则和体制节奏"},{"key":"B","text":"我是不是适合做公共服务类工作"},{"key":"C","text":"我是不是有机会通过备考策略上岸"},{"key":"D","text":"我是不是只是被焦虑推着去考"}]},{"id":30,"module":"真实顾虑","text":"如果给你一个建议，你最想听到：","options":[{"key":"A","text":"你适合稳定路线，但要选对地区和岗位"},{"key":"B","text":"你适合服务型岗位，但要确认工作真实面貌"},{"key":"C","text":"你适合按计划冲刺，但要设置止损点"},{"key":"D","text":"你不一定不适合，只是不能被焦虑绑架"}]},{"id":31,"module":"真实顾虑","text":"你最怕自己考公失败后：","options":[{"key":"A","text":"安全感更低，不知道下一步怎么稳定下来"},{"key":"B","text":"怀疑自己是不是不适合做有意义的工作"},{"key":"C","text":"投入很多时间，但没有形成可迁移能力"},{"key":"D","text":"发现自己只是跟风，白白绕了一大圈"}]},{"id":32,"module":"真实顾虑","text":"做完这套题，你最希望结果帮你看清：","options":[{"key":"A","text":"我和稳定体制节奏到底匹不匹配"},{"key":"B","text":"我适不适合公共服务和组织工作"},{"key":"C","text":"我该不该用一年时间系统备考"},{"key":"D","text":"我真正想要的是考公，还是逃离现在"}]}],"results":{"A":{"typeName":"稳定秩序高适配型","subtitle":"你对稳定、规则和长期确定性的需求很强，适合认真评估考公路线。","posterSubtext":"你不是单纯想逃避竞争，你是真的需要一个更稳的生活底盘。","maturityScore":88,"coreConclusion":"你的考公适配度更偏高。你对稳定、秩序、规则、确定性和长期保障有真实需求，也能接受工作反馈不那么快、流程不那么自由、节奏不那么刺激的状态。对你来说，考公不是单纯跟风，而可能是一条能降低生活风险、建立长期安全感的路径。但你需要注意：稳定不等于轻松，体制内也不等于没有压力，真正关键是岗位、地区、单位氛围和你的长期生活目标是否匹配。","diagnosis":"你最看重的是生活底盘。相比高弹性、高变化、高收入想象，你更在意日常是否可预期、风险是否可控、未来是否不用一直漂着。","whatYouReallyWant":"你真正想要的是确定感，不只是一个编制，而是一个能让你把生活慢慢安顿下来的结构。","mechanism":{"title":"稳定秩序机制","content":"稳定适配型并不是没有野心，而是更擅长在清晰规则里长期积累。你需要的不是刺激，而是可持续。"},"professionalBasis":["从职业偏好看，你更适合规则明确、职责稳定、风险较低的工作结构。","从组织适应看，你对流程、层级和规范的排斥较低，更容易在体制节奏里沉下来。","从备考策略看，你适合长期计划型备考，但要提前筛岗位，避免只追热门。"],"coreTensions":["想要稳定","害怕长期漂着","能接受慢反馈","需要警惕把稳定想得过美"],"suitableIf":["你能接受规则和流程","你愿意长期做基础工作","你对收入爆发没有强烈执念","你更需要生活确定性"],"cautionIf":["只看稳定不看岗位","以为上岸后就没有压力","忽略地区和单位差异","把考公当成唯一退路"],"indices":[{"label":"稳定偏好","value":94},{"label":"规则耐受","value":86},{"label":"备考韧性","value":82},{"label":"自由度需求","value":42}],"ifStay":"如果你只是继续焦虑却不筛选岗位，容易在跟风和犹豫中消耗时间。","ifChange":"如果你把考公拆成岗位、地区、备考周期和止损点，你会更容易判断这是不是适合你的稳定路线。","notRecommended":["盲目追热门岗位","只听家人意见","忽略工作真实内容","无限期备考","把稳定等同于轻松"],"plan90":[{"title":"第 1-2 周：筛选岗位画像","content":"先列出你能接受的地区、岗位类型、工作内容和竞争强度。"},{"title":"第 3-4 周：做一次基础测评","content":"完整做一套行测和申论，确认当前差距，不靠感觉判断。"},{"title":"第 2 个月：建立稳定备考节奏","content":"固定每日学习时段，用小目标累计，而不是靠情绪冲刺。"},{"title":"第 3 个月：复盘投入产出","content":"看分数提升、情绪状态和岗位匹配度，决定是否进入长期备考。"}],"closing":"你适合认真考虑考公，但不是为了逃避世界，而是为了给自己建立一个更稳的生活结构。"},"B":{"typeName":"公共服务使命适配型","subtitle":"你适合考公的理由不只是稳定，而是对公共服务、秩序和具体帮助他人有真实认同。","posterSubtext":"你最适合的不是“只求稳定”，而是能看见人的岗位。","maturityScore":84,"coreConclusion":"你的考公适配度来自公共服务动机。你不只是想要编制和安全感，也会在意这份工作能不能帮助具体的人、参与公共事务、让事情变得更有秩序。你更适合群众沟通、基层服务、综合协调、政策执行、民生相关等需要耐心和责任感的岗位。你的风险是把公共服务想象得太理想化，一旦进入现实里的材料、流程、重复沟通和复杂情绪，容易出现落差。","diagnosis":"你需要意义感。只要你知道这件事背后对谁有帮助，你就能忍受很多重复、琐碎和慢反馈。","whatYouReallyWant":"你真正想要的是被需要。你希望工作不是只换钱，而是能和某种公共价值连接起来。","mechanism":{"title":"服务动机机制","content":"使命适配型适合进入有明确公共服务对象的岗位，但必须先理解工作真实面貌，避免只靠理想撑着。"},"professionalBasis":["从价值动机看，你更容易在服务型、协调型和民生相关岗位里获得意义感。","从工作承受看，重复沟通会消耗你，但真实帮助他人也会给你补能。","从报考策略看，你需要看岗位内容和服务对象，而不是只看单位名称。"],"coreTensions":["重视意义感","愿意服务具体的人","容易理想化岗位","需要了解现实工作"],"suitableIf":["你能耐心沟通","你愿意处理具体琐碎事务","你对公共价值有认同","你能接受服务中的情绪消耗"],"cautionIf":["只看使命不看压力","期待每天都有成就感","不擅长边界管理","容易被负面情绪带走"],"indices":[{"label":"公共服务动机","value":92},{"label":"沟通耐心","value":84},{"label":"规则适应","value":76},{"label":"理想落差风险","value":70}],"ifStay":"如果你只凭情怀报考，可能会在现实工作里感到落差。","ifChange":"如果你提前了解岗位内容、服务对象和日常压力，你会更清楚哪些公职岗位真正适合你。","notRecommended":["只看单位光环","忽略基层压力","不设情绪边界","把服务等同于被感谢","不看岗位日常"],"plan90":[{"title":"第 1-2 周：了解真实岗位","content":"找 3 个已上岸的人聊日常工作，而不是只看经验帖。"},{"title":"第 3-4 周：匹配服务对象","content":"判断你更适合窗口沟通、材料处理、综合协调还是政策执行。"},{"title":"第 2 个月：训练表达和申论","content":"你的优势适合转化为申论理解、群众语言和政策表达。"},{"title":"第 3 个月：做压力预演","content":"想象重复咨询、突发任务、情绪沟通是否在你的承受范围内。"}],"closing":"你适合的是有真实服务感的考公路线。别只问能不能上岸，也要问上岸后你愿不愿意每天面对那种人和事。"},"C":{"typeName":"策略备考上岸型","subtitle":"你未必天然热爱体制节奏，但很擅长把考公当成一个可规划、可复盘、可攻克的目标。","posterSubtext":"你适不适合考公，关键不在情怀，而在策略和止损点。","maturityScore":86,"coreConclusion":"你的考公适配度主要来自目标感和策略能力。你能把考公拆成选岗、刷题、申论、面试、竞争比、时间管理和复盘数据，不容易只靠情绪盲冲。你适合把考公当成一个阶段性项目来推进，尤其适合有明确城市、岗位、家庭规划或身份目标的人。你的风险是把“上岸”当成唯一结果，而忽略上岸后的工作内容和长期适配。","diagnosis":"你更像项目型备考者。只要目标清楚、路径明确、反馈可量化，你就能进入高效率状态。","whatYouReallyWant":"你真正想要的是可控的跃迁。你希望用一段集中的努力，换来一个更稳定或更有确定性的职业入口。","mechanism":{"title":"策略上岸机制","content":"策略型适合用计划、数据和复盘提高上岸概率，但必须设置时间上限，避免把人生无限押在一场考试上。"},"professionalBasis":["从备考方式看，你适合模块化训练和数据复盘，而不是随缘刷题。","从岗位选择看，你需要平衡理想岗位和现实竞争比。","从长期适配看，你要同时评估考上之后能否接受组织节奏。"],"coreTensions":["目标感强","擅长复盘提分","容易结果导向","需要设置止损点"],"suitableIf":["你能持续记录分数和错因","你愿意研究岗位和竞争比","你能接受阶段性高强度备考","你有明确城市或身份目标"],"cautionIf":["只想上岸不看工作","无限延长备考周期","用分数定义自我价值","忽略身心状态和机会成本"],"indices":[{"label":"备考策略","value":94},{"label":"目标执行","value":88},{"label":"岗位现实感","value":78},{"label":"长期适配待验证","value":66}],"ifStay":"如果你只盯着上岸，可能会考得很努力，却没想清楚自己要进入怎样的生活。","ifChange":"如果你把备考和岗位适配一起评估，你会更像在做一场职业选择，而不是单纯参加考试。","notRecommended":["只看经验帖","盲目二战三战","不设复盘节点","岗位选择只看热度","忽略进入后的工作日常"],"plan90":[{"title":"第 1-2 周：完成基线测试","content":"做一套完整行测和申论，记录真实水平和薄弱模块。"},{"title":"第 3-4 周：选岗建模","content":"整理地区、岗位、专业限制、竞争比和往年分数线。"},{"title":"第 2 个月：模块突破","content":"每周只集中攻克 1-2 个高失分模块，避免全面用力却没有提升。"},{"title":"第 3 个月：设置继续或止损标准","content":"根据分数进步、情绪状态、机会成本，决定是否长期投入。"}],"closing":"你可以考，但别只做一个努力的人。你要做一个知道为什么考、考哪里、考多久、失败后怎么转向的人。"},"D":{"typeName":"自由成长慎重型","subtitle":"你可能不是完全不适合考公，而是不适合被焦虑推着进入一条高约束路线。","posterSubtext":"你想要的也许不是考公，而是从现在的不确定里逃出来。","maturityScore":62,"coreConclusion":"你对考公需要慎重。你可能被稳定、安全感、家人建议或现实压力吸引，但内心仍然很在意自由度、成长速度、收入弹性、表达空间和个人选择权。你不是不能考，而是不能在没想清楚之前把考公当成唯一答案。对你来说，更重要的是分清：你是真的适合体制节奏，还是只是想逃离现在的工作、行业、城市或焦虑状态。","diagnosis":"你对高约束环境比较敏感。规则、流程、层级、慢反馈和低弹性可能会让你感到压抑。","whatYouReallyWant":"你真正想要的是选择权。稳定对你有吸引力，但如果稳定意味着长期失去成长和表达，你会很难受。","mechanism":{"title":"自由成长机制","content":"慎重型不是反对考公，而是需要先确认自己能接受的约束边界。你适合先做小规模验证，而不是用焦虑替自己做决定。"},"professionalBasis":["从职业偏好看，你更需要成长反馈、空间弹性和自我表达。","从备考风险看，长期单调重复可能快速消耗你的动力。","从决策方式看，你需要比较考公、事业单位、国企、市场化岗位和继续深造等多条路径。"],"coreTensions":["想要安全感","又害怕被困住","需要成长反馈","容易被外界焦虑推动"],"suitableIf":["你能找到自由度较高的岗位","你愿意先短期试备考","你能接受规则和慢反馈","你已确认不是为了逃避当下"],"cautionIf":["只因家人催促而考","强烈需要高收入弹性","无法忍受流程和层级","把考公当成情绪避难所"],"indices":[{"label":"自由度需求","value":90},{"label":"稳定吸引","value":58},{"label":"规则耐受","value":52},{"label":"慎重评估必要性","value":88}],"ifStay":"如果你在焦虑里直接备考，可能会投入很多时间，却越来越怀疑这是不是自己想要的生活。","ifChange":"如果你先用 30-60 天做低成本验证，你会更清楚自己是不是真的适合考公，而不是被压力推着走。","notRecommended":["因为别人都考所以考","把考公当唯一退路","不看岗位约束","忽略成长需求","长期备考却不复盘"],"plan90":[{"title":"第 1-2 周：写下真实动机","content":"分别写出你想考公的原因，以及你想逃离现在的原因，看看二者是否混在一起。"},{"title":"第 3-4 周：做一次低成本试备考","content":"连续 14 天按真实备考节奏学习，观察自己是否能承受单调重复。"},{"title":"第 2 个月：访谈真实上岸者","content":"不要只看成功帖，重点问日常工作、压力、限制和后悔点。"},{"title":"第 3 个月：做路径对比","content":"把考公、国企、事业单位、考研、转岗或副业路线放在一起比较，不要只选一个出口。"}],"closing":"你不一定不适合考公，但你绝不能只因为害怕现在，就把自己交给一条你还没看清的路。"}},"secondaryNotes":{"A":{"B":"你的主倾向是稳定秩序高适配型，副倾向带有公共服务使命适配型。这说明你不仅需要稳定，也更容易在服务型岗位里找到意义感。","C":"你的主倾向是稳定秩序高适配型，副倾向带有策略备考上岸型。这说明你适合认真考，但要用计划和岗位筛选提高成功率。","D":"你的主倾向是稳定秩序高适配型，副倾向带有自由成长慎重型。这说明你需要稳定，但也要筛选不会过度压抑你的岗位。"},"B":{"A":"你的主倾向是公共服务使命适配型，副倾向带有稳定秩序高适配型。这说明你既有服务动机，也能接受相对稳定的组织节奏。","C":"你的主倾向是公共服务使命适配型，副倾向带有策略备考上岸型。这说明你适合把公共服务动机转化为清晰备考计划。","D":"你的主倾向是公共服务使命适配型，副倾向带有自由成长慎重型。这说明你有服务热情，但要确认岗位不会长期消耗你的自由感。"},"C":{"A":"你的主倾向是策略备考上岸型，副倾向带有稳定秩序高适配型。这说明你既能规划备考，也确实需要更稳定的职业底盘。","B":"你的主倾向是策略备考上岸型，副倾向带有公共服务使命适配型。这说明你不只想赢考试，也需要岗位本身有意义。","D":"你的主倾向是策略备考上岸型，副倾向带有自由成长慎重型。这说明你有上岸策略，但仍要确认上岸后的生活是不是你想要的。"},"D":{"A":"你的主倾向是自由成长慎重型，副倾向带有稳定秩序高适配型。这说明你需要安全感，但不一定适合高约束岗位。","B":"你的主倾向是自由成长慎重型，副倾向带有公共服务使命适配型。这说明你有服务动机，但需要找到自由度和意义感更平衡的岗位。","C":"你的主倾向是自由成长慎重型，副倾向带有策略备考上岸型。这说明你能做计划，但不该把备考当成唯一出路。"}},"shareTemplate":["我测出了：{{typeName}}","{{posterSubtext}}","{{secondaryLine}}","","检测你是否适合考公？32题诊断"]};</script>
+    <script>
+(function () {
+  const app = document.getElementById("app");
+  const configPaths = ["./configs/site-config.json", "./configs/career-change.json"];
+
+  const state = {
+    config: null,
+    answers: {},
+    currentIndex: 0,
+    selected: null,
+    locked: false,
+    loadingStep: 0,
+    route: "home",
+    resultData: null,
+  };
+
+  const defaultLoadingMessages = [
+    "正在读取你的选择倾向...",
+    "正在识别隐藏动机...",
+    "正在计算结果分布...",
+    "正在生成专属报告...",
+    "分析完成。",
+  ];
+
+  init();
+
+  async function init() {
+    try {
+      state.config = await fetchConfig();
+      applyDocumentMeta(state.config);
+
+      const saved = sessionStorage.getItem(getStorageKey());
+      if (saved) {
+        state.answers = JSON.parse(saved);
+      }
+
+      routeFromHash();
+      window.addEventListener("hashchange", routeFromHash);
+    } catch (error) {
+      app.innerHTML = `
+        <div class="error">
+          <div>
+            <h1>测试加载失败</h1>
+            <p>请确认你是通过网页链接打开页面，而不是直接双击 HTML 文件。</p>
+          </div>
+        </div>
+      `;
+      console.error(error);
+    }
+  }
+
+  async function fetchConfig() {
+    if (window.__QUIZ_CONFIG__) return window.__QUIZ_CONFIG__;
+    let lastError;
+    for (const path of configPaths) {
+      try {
+        const response = await fetch(path, { cache: "no-store" });
+        if (!response.ok) throw new Error(`${path} ${response.status}`);
+        return response.json();
+      } catch (error) {
+        lastError = error;
+      }
+    }
+    throw lastError;
+  }
+
+  function applyDocumentMeta(cfg) {
+    const title = cfg.title || "趣味测试";
+    const description = cfg.metaDescription || cfg.subtitle || "完成测试，生成你的专属报告。";
+    document.title = title;
+    setMeta("name", "description", description);
+    setMeta("property", "og:title", title);
+    setMeta("property", "og:description", description);
+  }
+
+  function setMeta(attr, key, content) {
+    let node = document.querySelector(`meta[${attr}="${key}"]`);
+    if (!node) {
+      node = document.createElement("meta");
+      node.setAttribute(attr, key);
+      document.head.appendChild(node);
+    }
+    node.setAttribute("content", content);
+  }
+
+  function routeFromHash() {
+    const route = (location.hash || "#/").replace("#/", "") || "home";
+    renderRoute(route);
+  }
+
+  function navigate(route) {
+    const nextHash = `#/${route}`;
+    if (location.hash === nextHash) {
+      renderRoute(route);
+      return;
+    }
+    location.hash = nextHash;
+  }
+
+  function renderRoute(route) {
+    state.route = route;
+    if (route === "quiz") renderQuiz();
+    else if (route === "loading") startLoading();
+    else if (route === "result") renderResult();
+    else renderHome();
+  }
+
+  function renderShell(content, extraClass = "") {
+    app.innerHTML = `
+      <div class="shell">
+        <div class="top-rule"></div>
+        <section class="screen ${extraClass}">${content}</section>
+      </div>
+      <div id="toast" class="toast">已复制</div>
+    `;
+  }
+
+  function renderHome() {
+    const cfg = state.config;
+    renderShell(
+      `
+      <div class="home">
+        <div class="kicker"><span class="dot"></span><span>${text(cfg.kicker)}</span><span class="dot"></span></div>
+        <h1 class="hero-title">${text(cfg.title)}</h1>
+        <p class="hero-subtitle">${text(cfg.subtitle)}</p>
+        <div class="hairline"></div>
+        <div class="intro">
+          ${(cfg.intro || []).map((p, index) => `<p class="${index === cfg.intro.length - 1 ? "strong" : ""}">${text(p)}</p>`).join("")}
+        </div>
+        <div class="pill-grid">
+          ${(cfg.dimensions || []).map((item) => `<div class="pill">${text(item)}</div>`).join("")}
+        </div>
+        <button class="primary-btn" data-action="start">${text(cfg.startButton || "开始测试")}</button>
+        <p class="disclaimer">${text(cfg.disclaimer || "本测试为趣味内容，仅供娱乐参考。")}</p>
+      </div>
+      `,
+      "home"
+    );
+    const startButton = app.querySelector("[data-action='start']");
+    let started = false;
+    const startQuiz = () => {
+      if (started) return;
+      started = true;
+      state.answers = {};
+      state.currentIndex = 0;
+      sessionStorage.removeItem(getStorageKey());
+      navigate("quiz");
+    };
+    startButton.addEventListener("click", startQuiz);
+    startButton.addEventListener(
+      "touchend",
+      (event) => {
+        event.preventDefault();
+        startQuiz();
+      },
+      { passive: false }
+    );
+  }
+
+  function renderQuiz() {
+    const questions = state.config.questions || [];
+    const question = questions[state.currentIndex];
+    if (!question) {
+      renderHome();
+      return;
+    }
+
+    const progress = ((state.currentIndex + 1) / questions.length) * 100;
+
+    renderShell(
+      `
+      <div class="sticky-head">
+        <div class="quiz-meta">
+          <span>${String(state.currentIndex + 1).padStart(2, "0")} / ${questions.length}</span>
+          <span>${text(question.module)}</span>
+        </div>
+        <div class="progress-track"><div class="progress-bar" style="width:${progress}%"></div></div>
+      </div>
+      <div class="question-no">${String(state.currentIndex + 1).padStart(2, "0")}</div>
+      <h1 class="question-title">${text(question.text)}</h1>
+      <div class="options">
+        ${(question.options || [])
+          .map(
+            (option) => `
+            <button class="option" data-option="${text(option.key)}">
+              <span class="option-key">${text(option.key)}</span>
+              <span class="option-text">${text(option.text)}</span>
+            </button>
+          `
+          )
+          .join("")}
+      </div>
+      <p class="hint">${text(state.config.quizHint || "选择后自动进入下一题")}</p>
+      `,
+      "quiz-screen"
+    );
+
+    app.querySelectorAll("[data-option]").forEach((button) => {
+      button.addEventListener("click", () => selectOption(button.dataset.option));
+    });
+  }
+
+  function selectOption(key) {
+    if (state.locked) return;
+    state.locked = true;
+    state.selected = key;
+    const question = state.config.questions[state.currentIndex];
+    state.answers[question.id] = key;
+
+    app.querySelectorAll(".option").forEach((button) => {
+      const selected = button.dataset.option === key;
+      button.classList.toggle("selected", selected);
+      button.classList.toggle("dimmed", !selected);
+    });
+
+    window.setTimeout(() => {
+      if (state.currentIndex < state.config.questions.length - 1) {
+        state.currentIndex += 1;
+        state.locked = false;
+        state.selected = null;
+        renderQuiz();
+      } else {
+        sessionStorage.setItem(getStorageKey(), JSON.stringify(state.answers));
+        state.locked = false;
+        navigate("loading");
+      }
+    }, 420);
+  }
+
+  function startLoading() {
+    state.loadingStep = 0;
+    renderLoading("");
+    tickLoading();
+  }
+
+  function renderLoading(value) {
+    const loadingMessages = getLoadingMessages();
+    renderShell(
+      `
+      <div class="loading-card">
+        <div class="spinner"></div>
+        <div class="loading-text">${text(value)}<span class="cursor">|</span></div>
+        <div class="step-bars">
+          ${loadingMessages.map((_, index) => `<div class="step ${index < state.loadingStep ? "done" : ""}"><span></span></div>`).join("")}
+        </div>
+      </div>
+      `,
+      "loading-screen"
+    );
+  }
+
+  function tickLoading() {
+    if (state.route !== "loading") return;
+    const loadingMessages = getLoadingMessages();
+    if (state.loadingStep >= loadingMessages.length) {
+      window.setTimeout(() => navigate("result"), 700);
+      return;
+    }
+    const message = loadingMessages[state.loadingStep];
+    let chars = 0;
+    const interval = window.setInterval(() => {
+      chars += 1;
+      renderLoading(message.slice(0, chars));
+      if (chars >= message.length) {
+        window.clearInterval(interval);
+        window.setTimeout(() => {
+          state.loadingStep += 1;
+          tickLoading();
+        }, 520);
+      }
+    }, 35);
+  }
+
+  function renderResult() {
+    const saved = sessionStorage.getItem(getStorageKey());
+    if (saved) state.answers = JSON.parse(saved);
+    if (Object.keys(state.answers).length < state.config.questions.length) {
+      renderHome();
+      return;
+    }
+
+    const scored = scoreAnswers(state.answers);
+    const primary = state.config.results[scored.primary];
+    const secondary = scored.secondary ? state.config.secondaryNotes?.[scored.primary]?.[scored.secondary] : null;
+    const stage = getStage(primary.maturityScore);
+    const shareText = buildShareText(primary, secondary);
+    const compareLabels = state.config.compareLabels || ["如果继续原路", "如果换一种做法"];
+    state.resultData = { scored, primary, secondary, stage, shareText };
+
+    renderShell(
+      `
+      <article class="report">
+        <div class="kicker"><span class="dot"></span><span>${text(state.config.resultKicker || "Result Report")}</span><span class="dot"></span></div>
+        <h1 class="result-type">${text(primary.typeName)}</h1>
+        <p class="result-subtitle">${text(primary.subtitle)}</p>
+        <div class="stamp-row">
+          <div class="stamp"><strong>${text(primary.maturityScore)}</strong><span>${text(state.config.scoreLabel || "决策成熟度")}</span></div>
+          <div class="stamp"><strong>${text(stage)}</strong><span>${text(state.config.stageLabel || "当前行动阶段")}</span></div>
+        </div>
+
+        <section class="section">
+          <h2>你的答案分布</h2>
+          <div class="meters">
+            ${Object.entries(scored.counts)
+              .map(([key, value]) => {
+                const typeData = state.config.results[key];
+                const width = (value / state.config.questions.length) * 100;
+                return `
+                  <div>
+                    <div class="meter-head"><span>${text(key)} · ${text(typeData.typeName)}</span><span>${value} 题</span></div>
+                    <div class="meter-track"><div class="meter-fill" style="width:${width}%"></div></div>
+                  </div>
+                `;
+              })
+              .join("")}
+          </div>
+        </section>
+
+        ${secondary ? `<section class="section"><h2>副倾向提示</h2><div class="secondary-note">${text(secondary)}</div></section>` : ""}
+
+        <section class="section">
+          <h2>诊断结论</h2>
+          <div class="quote">${text(primary.coreConclusion)}</div>
+        </section>
+
+        <section class="section">
+          <h2>为什么你会这样</h2>
+          <p>${text(primary.diagnosis)}</p>
+          <p>${text(primary.whatYouReallyWant)}</p>
+        </section>
+
+        <section class="section">
+          <h2>${text(primary.mechanism.title)}</h2>
+          <p>${text(primary.mechanism.content)}</p>
+        </section>
+
+        ${renderParagraphSection("专业解读框架", primary.professionalBasis)}
+        ${renderTagSection("你的关键矛盾", primary.coreTensions)}
+        ${renderCompareListSection("适合推进的条件", "需要谨慎的信号", primary.suitableIf, primary.cautionIf)}
+
+        <section class="section">
+          <h2>关键指数</h2>
+          <div class="meters">
+            ${(primary.indices || [])
+              .map(
+                (item) => `
+                <div>
+                  <div class="meter-head"><span>${text(item.label)}</span><span>${text(item.value)}</span></div>
+                  <div class="meter-track"><div class="meter-fill" style="width:${number(item.value)}%"></div></div>
+                </div>
+              `
+              )
+              .join("")}
+          </div>
+        </section>
+
+        <section class="section">
+          <h2>两条路径对比</h2>
+          <div class="compare">
+            <div class="compare-card"><h3>${text(compareLabels[0])}</h3><p>${text(primary.ifStay)}</p></div>
+            <div class="compare-card"><h3>${text(compareLabels[1])}</h3><p>${text(primary.ifChange)}</p></div>
+          </div>
+        </section>
+
+        <section class="section">
+          <h2>现在最不建议你做</h2>
+          <div class="tag-list">${(primary.notRecommended || []).map((item) => `<span class="tag">${text(item)}</span>`).join("")}</div>
+        </section>
+
+        <section class="section">
+          <h2>未来 90 天验证方案</h2>
+          <div class="plan">
+            ${(primary.plan90 || [])
+              .map(
+                (item, index) => `
+                <div class="plan-card">
+                  <h3>${index + 1}. ${text(item.title)}</h3>
+                  <p>${text(item.content)}</p>
+                </div>
+              `
+              )
+              .join("")}
+          </div>
+        </section>
+
+        <section class="section">
+          <h2>最后一句话</h2>
+          <p>${text(primary.closing)}</p>
+        </section>
+
+        <div class="actions">
+          <button class="primary-btn" data-action="copy">${text(state.config.copyButton || "复制我的结果")}</button>
+          <button class="ghost-btn" data-action="restart">${text(state.config.restartButton || "重新测试")}</button>
+        </div>
+      </article>
+      `,
+      "result-screen"
+    );
+
+    app.querySelector("[data-action='copy']").addEventListener("click", () => copyShareText(shareText));
+    app.querySelector("[data-action='restart']").addEventListener("click", () => {
+      sessionStorage.removeItem(getStorageKey());
+      state.answers = {};
+      state.currentIndex = 0;
+      navigate("home");
+    });
+  }
+
+  function renderParagraphSection(title, paragraphs) {
+    if (!Array.isArray(paragraphs) || !paragraphs.length) return "";
+    return `
+      <section class="section">
+        <h2>${text(title)}</h2>
+        ${paragraphs.map((item) => `<p>${text(item)}</p>`).join("")}
+      </section>
+    `;
+  }
+
+  function renderTagSection(title, items) {
+    if (!Array.isArray(items) || !items.length) return "";
+    return `
+      <section class="section">
+        <h2>${text(title)}</h2>
+        <div class="tag-list">${items.map((item) => `<span class="tag">${text(item)}</span>`).join("")}</div>
+      </section>
+    `;
+  }
+
+  function renderCompareListSection(leftTitle, rightTitle, leftItems, rightItems) {
+    const hasLeft = Array.isArray(leftItems) && leftItems.length;
+    const hasRight = Array.isArray(rightItems) && rightItems.length;
+    if (!hasLeft && !hasRight) return "";
+    return `
+      <section class="section">
+        <h2>适用边界</h2>
+        <div class="compare">
+          <div class="compare-card">
+            <h3>${text(leftTitle)}</h3>
+            ${(leftItems || []).map((item) => `<p>${text(item)}</p>`).join("")}
+          </div>
+          <div class="compare-card">
+            <h3>${text(rightTitle)}</h3>
+            ${(rightItems || []).map((item) => `<p>${text(item)}</p>`).join("")}
+          </div>
+        </div>
+      </section>
+    `;
+  }
+
+  function scoreAnswers(answers) {
+    const counts = { A: 0, B: 0, C: 0, D: 0 };
+    Object.values(answers).forEach((key) => {
+      if (counts[key] !== undefined) counts[key] += 1;
+    });
+    const sorted = Object.entries(counts).sort((a, b) => b[1] - a[1]);
+    const threshold = state.config.secondaryThreshold ?? 2;
+    const primary = sorted[0][0];
+    const secondary = sorted[1][1] > 0 && sorted[0][1] - sorted[1][1] <= threshold ? sorted[1][0] : null;
+    return { counts, primary, secondary };
+  }
+
+  function getStage(score) {
+    const labels = state.config.stageLabels || [
+      { max: 45, label: "观察期" },
+      { max: 65, label: "验证期" },
+      { max: 82, label: "规划期" },
+      { max: 100, label: "行动期" },
+    ];
+    const hit = labels.find((item) => score <= item.max);
+    return hit ? hit.label : labels[labels.length - 1].label;
+  }
+
+  function buildShareText(primary, secondary) {
+    const template = state.config.shareTemplate || [
+      "我测出了：{{typeName}}",
+      "{{posterSubtext}}",
+      "{{secondaryLine}}",
+      "",
+      "{{title}}",
+    ];
+    const values = {
+      title: state.config.title,
+      typeName: primary.typeName,
+      posterSubtext: primary.posterSubtext,
+      secondary: secondary || "",
+      secondaryLine: secondary ? `副倾向：${secondary}` : "",
+    };
+    return template
+      .map((line) => fillTemplate(line, values))
+      .filter((line, index, arr) => line || arr[index - 1])
+      .join("\n")
+      .trim();
+  }
+
+  async function copyShareText(value) {
+    try {
+      await navigator.clipboard.writeText(value);
+      showToast("结果文案已复制");
+    } catch (error) {
+      showToast("复制失败，可长按手动复制");
+    }
+  }
+
+  function showToast(value) {
+    const toast = document.getElementById("toast");
+    if (!toast) return;
+    toast.textContent = value;
+    toast.classList.add("show");
+    window.setTimeout(() => toast.classList.remove("show"), 1600);
+  }
+
+  function getLoadingMessages() {
+    return state.config.loadingMessages || defaultLoadingMessages;
+  }
+
+  function getStorageKey() {
+    return `xhsTestAnswers:${state.config.slug || "default"}`;
+  }
+
+  function fillTemplate(template, values) {
+    return String(template).replace(/\{\{(\w+)\}\}/g, (_, key) => values[key] || "");
+  }
+
+  function number(value) {
+    const parsed = Number(value);
+    if (Number.isNaN(parsed)) return 0;
+    return Math.max(0, Math.min(100, parsed));
+  }
+
+  function text(value) {
+    return String(value ?? "")
+      .replace(/&/g, "&amp;")
+      .replace(/</g, "&lt;")
+      .replace(/>/g, "&gt;")
+      .replace(/"/g, "&quot;");
+  }
+})();
+
+    </script>
+  </body>
+</html>
