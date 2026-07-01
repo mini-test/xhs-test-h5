@@ -1,0 +1,1125 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <meta name="description" content="完成 32 道「你适合上班还是单干」测试，生成你的职业路径适配报告。" />
+    <meta property="og:title" content="你适合上班还是单干？" />
+    <meta property="og:description" content="完成 32 道「你适合上班还是单干」测试，生成你的职业路径适配报告。" />
+    <title>你适合上班还是单干？</title>
+    <style>
+:root {
+  --bg: #fbfaf7;
+  --paper: #fffefd;
+  --ink: #20242a;
+  --muted: #65707d;
+  --line: #d9d4ca;
+  --line-strong: #b9afa0;
+  --accent: #9b4339;
+  --accent-soft: #f1dfd7;
+  --gold: #c0964d;
+  --sage: #66795f;
+  --blue: #526a86;
+  --shadow: 0 16px 36px rgba(60, 47, 38, 0.1);
+  --radius: 8px;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  min-height: 100%;
+  background:
+    linear-gradient(rgba(32, 36, 42, 0.035) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(32, 36, 42, 0.035) 1px, transparent 1px),
+    var(--bg);
+  background-size: 24px 24px;
+}
+
+body {
+  min-height: 100vh;
+  margin: 0;
+  color: var(--ink);
+  font-family:
+    "PingFang SC",
+    "Microsoft YaHei",
+    "Noto Sans SC",
+    system-ui,
+    -apple-system,
+    BlinkMacSystemFont,
+    sans-serif;
+  letter-spacing: 0;
+}
+
+button {
+  font: inherit;
+}
+
+.shell {
+  width: min(100%, 480px);
+  min-height: 100vh;
+  margin: 0 auto;
+  background: rgba(251, 250, 247, 0.88);
+}
+
+.top-rule {
+  height: 4px;
+  background: var(--accent);
+}
+
+.screen {
+  min-height: calc(100vh - 4px);
+  padding: 28px 22px 32px;
+}
+
+.home {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.kicker {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  color: var(--muted);
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  font-size: 11px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+.dot {
+  width: 7px;
+  height: 7px;
+  background: var(--accent);
+  border-radius: 50%;
+}
+
+.hero-title {
+  margin: 26px 0 14px;
+  color: var(--ink);
+  font-size: 30px;
+  line-height: 1.2;
+  text-align: center;
+  font-weight: 800;
+}
+
+.hero-subtitle {
+  margin: 0 auto 28px;
+  max-width: 340px;
+  color: var(--muted);
+  font-size: 15px;
+  line-height: 1.75;
+  text-align: center;
+}
+
+.hairline {
+  width: 64px;
+  height: 1px;
+  margin: 0 auto 30px;
+  background: var(--line-strong);
+}
+
+.intro {
+  margin: 0 auto;
+  max-width: 380px;
+}
+
+.intro p {
+  margin: 0 0 15px;
+  color: rgba(32, 36, 42, 0.82);
+  font-size: 15px;
+  line-height: 1.8;
+}
+
+.intro .strong {
+  color: var(--accent);
+  font-weight: 700;
+}
+
+.pill-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px;
+  margin: 28px 0;
+}
+
+.pill {
+  min-height: 42px;
+  display: grid;
+  place-items: center;
+  border: 1px solid var(--line);
+  color: var(--muted);
+  background: rgba(255, 255, 255, 0.44);
+  font-size: 13px;
+}
+
+.primary-btn,
+.ghost-btn,
+.copy-btn {
+  width: 100%;
+  min-height: 48px;
+  border: 1px solid var(--ink);
+  border-radius: 0;
+  cursor: pointer;
+  transition: transform 150ms ease, background 150ms ease, color 150ms ease, border-color 150ms ease;
+}
+
+.primary-btn {
+  background: var(--ink);
+  color: #fff;
+  font-weight: 700;
+}
+
+.ghost-btn,
+.copy-btn {
+  background: transparent;
+  color: var(--ink);
+}
+
+.primary-btn:active,
+.ghost-btn:active,
+.copy-btn:active,
+.option:active {
+  transform: translateY(1px);
+}
+
+.disclaimer {
+  margin: 18px auto 0;
+  max-width: 340px;
+  color: var(--muted);
+  font-size: 12px;
+  line-height: 1.65;
+  text-align: center;
+}
+
+.quiz-screen {
+  padding-top: 0;
+}
+
+.sticky-head {
+  position: sticky;
+  top: 0;
+  z-index: 5;
+  margin: 0 -22px 26px;
+  padding: 14px 22px 12px;
+  background: rgba(251, 250, 247, 0.95);
+  border-bottom: 1px solid var(--line);
+  backdrop-filter: blur(12px);
+}
+
+.quiz-meta {
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+  color: var(--muted);
+  font-size: 12px;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+}
+
+.progress-track {
+  height: 4px;
+  margin-top: 10px;
+  background: rgba(32, 36, 42, 0.09);
+}
+
+.progress-bar {
+  height: 100%;
+  background: var(--accent);
+  transition: width 260ms ease;
+}
+
+.question-no {
+  color: rgba(155, 67, 57, 0.18);
+  font-size: 48px;
+  line-height: 1;
+  font-weight: 800;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+}
+
+.question-title {
+  margin: 18px 0 24px;
+  font-size: 22px;
+  line-height: 1.5;
+  font-weight: 750;
+}
+
+.options {
+  display: grid;
+  gap: 12px;
+}
+
+.option {
+  min-height: 66px;
+  display: grid;
+  grid-template-columns: 30px 1fr;
+  gap: 12px;
+  align-items: start;
+  width: 100%;
+  padding: 15px;
+  border: 1px solid var(--line);
+  background: rgba(255, 255, 255, 0.68);
+  color: var(--ink);
+  text-align: left;
+  cursor: pointer;
+  transition: background 160ms ease, border-color 160ms ease, color 160ms ease, opacity 160ms ease;
+}
+
+.option-key {
+  display: grid;
+  place-items: center;
+  width: 28px;
+  height: 28px;
+  border: 1px solid var(--line-strong);
+  font-size: 13px;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+}
+
+.option-text {
+  padding-top: 2px;
+  font-size: 15px;
+  line-height: 1.55;
+}
+
+.option.selected {
+  border-color: var(--accent);
+  background: var(--accent);
+  color: #fff;
+}
+
+.option.selected .option-key {
+  border-color: rgba(255, 255, 255, 0.8);
+}
+
+.option.dimmed {
+  opacity: 0.42;
+}
+
+.hint {
+  margin: 18px 0 0;
+  color: var(--muted);
+  font-size: 12px;
+  text-align: center;
+}
+
+.loading-screen {
+  display: grid;
+  place-items: center;
+}
+
+.loading-card {
+  width: 100%;
+  max-width: 360px;
+  text-align: center;
+}
+
+.spinner {
+  width: 54px;
+  height: 54px;
+  margin: 0 auto 24px;
+  border: 2px solid var(--line);
+  border-top-color: var(--accent);
+  border-radius: 50%;
+  animation: spin 850ms linear infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.loading-text {
+  min-height: 54px;
+  color: var(--accent);
+  font-size: 17px;
+  line-height: 1.6;
+  font-weight: 700;
+}
+
+.step-bars {
+  display: grid;
+  gap: 8px;
+  margin-top: 28px;
+}
+
+.step {
+  height: 4px;
+  overflow: hidden;
+  background: rgba(32, 36, 42, 0.09);
+}
+
+.step span {
+  display: block;
+  height: 100%;
+  width: 0;
+  background: var(--accent);
+  transition: width 300ms ease;
+}
+
+.step.done span {
+  width: 100%;
+}
+
+.result-screen {
+  padding: 22px 18px 30px;
+}
+
+.report {
+  padding: 22px 16px 18px;
+  border: 1px solid var(--line);
+  background: var(--paper);
+  box-shadow: var(--shadow);
+}
+
+.result-type {
+  margin: 8px 0 8px;
+  color: var(--accent);
+  font-size: 30px;
+  line-height: 1.15;
+  font-weight: 850;
+  text-align: center;
+}
+
+.result-subtitle {
+  margin: 0 auto 20px;
+  color: var(--muted);
+  font-size: 15px;
+  line-height: 1.7;
+  text-align: center;
+}
+
+.stamp-row {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px;
+  margin: 18px 0 20px;
+}
+
+.stamp {
+  padding: 12px 10px;
+  border: 1px solid var(--line);
+  background: #fbfaf7;
+}
+
+.stamp strong {
+  display: block;
+  margin-bottom: 4px;
+  color: var(--ink);
+  font-size: 20px;
+}
+
+.stamp span {
+  color: var(--muted);
+  font-size: 12px;
+}
+
+.section {
+  padding: 20px 0;
+  border-top: 1px solid var(--line);
+}
+
+.section h2 {
+  margin: 0 0 12px;
+  font-size: 18px;
+  color: var(--ink);
+}
+
+.section p {
+  margin: 0 0 12px;
+  color: rgba(32, 36, 42, 0.82);
+  font-size: 15px;
+  line-height: 1.85;
+}
+
+.quote {
+  padding: 15px;
+  border-left: 3px solid var(--accent);
+  background: var(--accent-soft);
+  color: #5b2d27;
+  line-height: 1.8;
+  font-weight: 700;
+}
+
+.meters {
+  display: grid;
+  gap: 14px;
+}
+
+.meter-head {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 7px;
+  color: var(--muted);
+  font-size: 13px;
+}
+
+.meter-track {
+  height: 8px;
+  background: rgba(32, 36, 42, 0.08);
+}
+
+.meter-fill {
+  height: 100%;
+  background: var(--accent);
+}
+
+.compare {
+  display: grid;
+  gap: 10px;
+}
+
+.compare-card {
+  padding: 14px;
+  border: 1px solid var(--line);
+  background: #fbfaf7;
+}
+
+.compare-card h3,
+.plan-card h3 {
+  margin: 0 0 8px;
+  font-size: 15px;
+}
+
+.compare-card p,
+.plan-card p {
+  font-size: 14px;
+}
+
+.tag-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.tag {
+  padding: 7px 9px;
+  border: 1px solid var(--line);
+  background: #fbfaf7;
+  color: var(--muted);
+  font-size: 13px;
+}
+
+.plan {
+  display: grid;
+  gap: 10px;
+}
+
+.plan-card {
+  padding: 14px;
+  border: 1px solid var(--line);
+  background: #fbfaf7;
+}
+
+.secondary-note {
+  padding: 14px;
+  border: 1px dashed var(--line-strong);
+  background: rgba(192, 150, 77, 0.12);
+  line-height: 1.75;
+  font-size: 14px;
+}
+
+.actions {
+  display: grid;
+  gap: 10px;
+  margin-top: 18px;
+}
+
+.toast {
+  position: fixed;
+  left: 50%;
+  bottom: 22px;
+  z-index: 20;
+  transform: translateX(-50%);
+  padding: 10px 14px;
+  background: var(--ink);
+  color: #fff;
+  font-size: 13px;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 180ms ease;
+}
+
+.toast.show {
+  opacity: 1;
+}
+
+.error {
+  display: grid;
+  place-items: center;
+  min-height: 100vh;
+  padding: 24px;
+  text-align: center;
+}
+
+.error p {
+  color: var(--muted);
+  line-height: 1.7;
+}
+
+@media (min-width: 700px) {
+  body {
+    padding: 28px 0;
+  }
+
+  .shell {
+    min-height: calc(100vh - 56px);
+    border: 1px solid var(--line);
+    box-shadow: var(--shadow);
+  }
+
+  .screen {
+    min-height: calc(100vh - 60px);
+  }
+}
+
+    </style>
+  </head>
+  <body>
+    <main id="app" aria-live="polite"></main>
+    <script>window.__QUIZ_CONFIG__ = {"slug":"test-work-or-solo","topic":"你适合上班还是单干？","kicker":"32-Q Work or Solo Test","title":"你适合上班还是单干？","subtitle":"32 道题，拆清你更适合在组织里稳定发展、独立经营单干、边上班边验证，还是先别急着裸辞。","metaDescription":"完成 32 道「你适合上班还是单干」测试，生成你的职业路径适配报告。","startButton":"开始测试","resultKicker":"Work or Solo Report","quizHint":"选择后自动进入下一题","copyButton":"复制我的结果","restartButton":"重新测试","scoreLabel":"路径适配度","stageLabel":"当前阶段","stageLabels":[{"max":45,"label":"先修复期"},{"max":65,"label":"谨慎验证期"},{"max":82,"label":"过渡规划期"},{"max":100,"label":"行动推进期"}],"compareLabels":["如果继续原路线","如果换一种路径"],"disclaimer":"本测试为趣味自我观察工具，非职业咨询、心理测评、创业建议或财务建议，不构成任何离职、投资、择业或人生决策建议。","secondaryThreshold":4,"dimensions":["动机与逃离","现金流安全","获客与交付","行动路径"],"intro":["你想单干，可能不是因为你真的适合创业，也可能只是因为现在太累了。","真正要判断的不是“上班低级，单干高级”，而是你当前有没有现金流、获客、交付、边界和自驱这几块底盘。","这 32 道题会从动机、现金流、自驱、获客、销售、交付、协作和行动路径 8 个模块，帮你看清现在更适合哪一种路线。"],"loadingMessages":["正在读取你的第一反应...","正在拆分上班适配、单干准备和逃离情绪...","正在识别你的职业路径类型...","正在生成 32 题职业路径适配报告...","分析完成。"],"questions":[{"id":1,"module":"动机来源","text":"想到“单干”这件事，你心里最先冒出来的是：","options":[{"key":"A","text":"我其实更想在一个清楚的组织里做事，只是不想一直被消耗"},{"key":"B","text":"我想把自己的能力直接卖给客户，不想只等公司给机会"},{"key":"C","text":"我想先保住工资，再用副业慢慢验证能不能跑通"},{"key":"D","text":"我只是太受不了现在的工作了，想先离开再说"}]},{"id":2,"module":"动机来源","text":"如果明天不用上班，但收入全靠你自己找客户，你第一反应是：","options":[{"key":"A","text":"有点慌，我还是需要固定收入和团队分工给我托底"},{"key":"B","text":"紧张但兴奋，我会马上列产品、报价和获客路径"},{"key":"C","text":"可以小范围试，但我不会立刻放掉主业收入"},{"key":"D","text":"先自由几天再说，后面的事我还没真正想过"}]},{"id":3,"module":"动机来源","text":"你最想从“单干”里得到的东西是：","options":[{"key":"A","text":"更少内耗、更清楚的边界，而不是完全离开组织"},{"key":"B","text":"收入上限、选择权，以及自己决定怎么服务客户"},{"key":"C","text":"一条备用收入线，让自己不再只靠一份工资"},{"key":"D","text":"不用再看领导脸色，也不用忍受无意义的流程"}]},{"id":4,"module":"动机来源","text":"看到别人自由职业赚钱，你更容易：","options":[{"key":"A","text":"羡慕，但也会担心对方背后有没有不稳定和焦虑"},{"key":"B","text":"拆他的客群、产品、交付、复购和渠道从哪来"},{"key":"C","text":"想做一个小实验，看看自己有没有类似可能"},{"key":"D","text":"马上觉得自己也应该辞职，不然好像落后了"}]},{"id":5,"module":"现实逃离","text":"你现在最想离开上班状态的原因，更接近：","options":[{"key":"A","text":"不是不想工作，是不想在混乱管理里反复被消耗"},{"key":"B","text":"我已经看到自己的能力在公司里被低估和压价"},{"key":"C","text":"我想多一条路，但还没到必须立刻离开的程度"},{"key":"D","text":"我快撑不住了，只要不上班，什么都好一点"}]},{"id":6,"module":"现实逃离","text":"如果现在公司突然改善管理和边界，你会：","options":[{"key":"A","text":"可能愿意继续上班，我要的其实是正常环境"},{"key":"B","text":"感谢改善，但我还是想把能力做成自己的生意"},{"key":"C","text":"继续上班，同时把副业验证周期拉长一点"},{"key":"D","text":"就算改善也不想待，我已经对上班这件事反感了"}]},{"id":7,"module":"现实逃离","text":"你最害怕自己单干后出现哪种情况？","options":[{"key":"A","text":"没人分工、没人兜底，所有事都压到自己身上"},{"key":"B","text":"客户少、复购低，证明我的产品还不够硬"},{"key":"C","text":"主业副业两头累，最后哪个都没做好"},{"key":"D","text":"发现自由并没有想象中轻松，但已经回不去了"}]},{"id":8,"module":"现实逃离","text":"如果朋友问你“你为什么要单干”，你最真实的答案是：","options":[{"key":"A","text":"我想换一种更健康的工作关系，不一定非要单干"},{"key":"B","text":"我想拥有自己的客户、产品和收入系统"},{"key":"C","text":"我想先验证自己离开公司后能不能活得更稳"},{"key":"D","text":"我就是不想再上班了，其他原因以后再补"}]},{"id":9,"module":"现金流","text":"如果单干前要准备 6 个月生活费，你会：","options":[{"key":"A","text":"准备不到这个数，我会非常没有安全感"},{"key":"B","text":"这是基本盘，我会先算清成本再行动"},{"key":"C","text":"我会边上班边攒，把验证期和存款一起做出来"},{"key":"D","text":"我知道该准备，但想到存钱周期就想直接跳过"}]},{"id":10,"module":"现金流","text":"面对收入忽高忽低，你更可能：","options":[{"key":"A","text":"长期受不了，我需要固定到账来稳定情绪"},{"key":"B","text":"可以接受，只要我知道波动来自哪里、怎么优化"},{"key":"C","text":"短期可接受，但主业收入最好还能托底一段时间"},{"key":"D","text":"先不想这些，等真的没钱了再想办法"}]},{"id":11,"module":"现金流","text":"你对“第一个月可能只赚很少”这件事的反应是：","options":[{"key":"A","text":"这会让我怀疑自己，不如在组织里稳定输出"},{"key":"B","text":"正常，我会看询单、成交、交付反馈有没有进步"},{"key":"C","text":"可以试，但我不想让它立刻影响房租和生活费"},{"key":"D","text":"会崩，但我又不想因为钱继续回去上班"}]},{"id":12,"module":"现金流","text":"如果有一份稳定工作月薪 1 万，单干前 3 个月可能月入 3000，你会：","options":[{"key":"A","text":"大概率继续上班，稳定收入对我太重要"},{"key":"B","text":"如果增长模型清楚，我能接受阶段性下降"},{"key":"C","text":"先不裸辞，用下班时间把 3000 做到更稳定再说"},{"key":"D","text":"理性上知道危险，但情绪上很想直接试"}]},{"id":13,"module":"自驱能力","text":"没有领导催你时，你的工作状态通常是：","options":[{"key":"A","text":"容易松掉，我更适合有外部节奏和明确要求"},{"key":"B","text":"我会自己拆任务、定节点、复盘结果"},{"key":"C","text":"重要的事能推进，但最好有一个轻量监督机制"},{"key":"D","text":"看心情，状态好很猛，状态差就彻底停摆"}]},{"id":14,"module":"自驱能力","text":"单干时一天没人安排你，你会先做什么？","options":[{"key":"A","text":"会有点空，不知道先处理销售、交付还是运营"},{"key":"B","text":"先看今天最影响现金流和交付质量的动作"},{"key":"C","text":"按前一天列好的副业清单完成 1-2 个关键任务"},{"key":"D","text":"先刷刷资料找灵感，很容易不知不觉过半天"}]},{"id":15,"module":"自驱能力","text":"你最稳定的执行力来自：","options":[{"key":"A","text":"团队目标、岗位职责和别人对我的期待"},{"key":"B","text":"客户结果、收入反馈和自己设定的指标"},{"key":"C","text":"固定时间块、低压力试验和可视化进度"},{"key":"D","text":"情绪被点燃的瞬间，一旦兴奋就能冲很久"}]},{"id":16,"module":"自驱能力","text":"如果连续两周没有明显进展，你更可能：","options":[{"key":"A","text":"怀疑自己是不是不适合脱离组织环境"},{"key":"B","text":"拆数据：流量、转化、报价、交付哪一段掉了"},{"key":"C","text":"缩小目标，继续做一个更小的验证版本"},{"key":"D","text":"陷入自责，然后想彻底换一个方向"}]},{"id":17,"module":"获客销售","text":"让你主动向陌生人介绍自己的服务，你会：","options":[{"key":"A","text":"很不自在，我更习惯公司把客户和任务分给我"},{"key":"B","text":"可以，我会把对方痛点、方案和价格说清楚"},{"key":"C","text":"可以从熟人、小红书、社群这种低压渠道开始"},{"key":"D","text":"很抗拒，但又希望客户能自动找上门"}]},{"id":18,"module":"获客销售","text":"如果客户说“太贵了”，你更可能：","options":[{"key":"A","text":"马上不好意思，觉得自己是不是要价过高"},{"key":"B","text":"解释价值、调整方案，必要时筛掉不匹配客户"},{"key":"C","text":"记录反馈，继续测试不同价格和交付包"},{"key":"D","text":"被打击很久，甚至怀疑自己不配收费"}]},{"id":19,"module":"获客销售","text":"你对发内容、做曝光、持续表达的感受是：","options":[{"key":"A","text":"很消耗，我更适合在已有平台里做专业产出"},{"key":"B","text":"这是单干的基本动作，我愿意练习和复盘"},{"key":"C","text":"可以先一周发 3 篇，看看有没有真实咨询"},{"key":"D","text":"想做又怕被熟人看到，拖到最后什么都没发"}]},{"id":20,"module":"获客销售","text":"你觉得单干最核心的能力是：","options":[{"key":"A","text":"我不确定，可能专业强就够了吧"},{"key":"B","text":"专业交付、获客、销售、复购都要形成闭环"},{"key":"C","text":"先验证一个最小闭环，别一开始就追求完整公司"},{"key":"D","text":"只要我自由了，状态好了，应该自然会做出来"}]},{"id":21,"module":"交付边界","text":"客户临时加需求，你会：","options":[{"key":"A","text":"容易不好意思拒绝，希望有公司规则帮我挡一下"},{"key":"B","text":"按合同和边界处理，该加钱就加钱"},{"key":"C","text":"先记录这类需求，下次把范围写得更清楚"},{"key":"D","text":"嘴上答应，心里崩溃，最后自己加班补"}]},{"id":22,"module":"交付边界","text":"如果客户不满意你的成果，你更可能：","options":[{"key":"A","text":"很受伤，觉得个人被否定，还是组织里安全一点"},{"key":"B","text":"追问标准、修正交付、沉淀成下一版流程"},{"key":"C","text":"把它当测试反馈，看看是不是目标客户选错了"},{"key":"D","text":"立刻想退钱逃掉，之后不想再面对客户"}]},{"id":23,"module":"交付边界","text":"你现在是否能清楚说出自己卖什么？","options":[{"key":"A","text":"还说不清，我更多是想换环境"},{"key":"B","text":"能说出目标客户、具体问题、交付物和价格区间"},{"key":"C","text":"大概有方向，但还需要用小单来打磨话术"},{"key":"D","text":"说不清，但我相信离开上班后会慢慢想出来"}]},{"id":24,"module":"交付边界","text":"你对“合同、报价、退款规则、交付周期”的态度是：","options":[{"key":"A","text":"这些让我头大，我更想专注完成公司给的专业任务"},{"key":"B","text":"必须写清楚，这是保护客户也是保护自己"},{"key":"C","text":"可以先用简单模板，边做边完善"},{"key":"D","text":"感觉很麻烦，所以一直拖着没真正开始"}]},{"id":25,"module":"人际与协作","text":"你在组织里最舒服的状态是：","options":[{"key":"A","text":"目标清楚、分工清楚、有人协作但不过度干预"},{"key":"B","text":"外部合作也行，只要边界和利益分配清楚"},{"key":"C","text":"主业有团队，副业有少量合作伙伴，两边互补"},{"key":"D","text":"最好没人管我，也不用处理复杂关系"}]},{"id":26,"module":"人际与协作","text":"单干后很多事都要自己沟通，你会：","options":[{"key":"A","text":"觉得很累，我并不想把所有沟通都揽到自己身上"},{"key":"B","text":"接受，沟通本来就是成交和交付的一部分"},{"key":"C","text":"先把沟通脚本、报价模板、常见问题准备好"},{"key":"D","text":"能躲就躲，最好客户自己理解我想表达什么"}]},{"id":27,"module":"人际与协作","text":"你最需要的不是自由，而是：","options":[{"key":"A","text":"一个正常、清楚、有尊重感的工作环境"},{"key":"B","text":"自己掌控客户关系和商业决策的权利"},{"key":"C","text":"在稳定收入之外，有一块属于自己的试验田"},{"key":"D","text":"远离所有让我觉得压抑的人和场合"}]},{"id":28,"module":"人际与协作","text":"别人建议你先别裸辞，你的反应是：","options":[{"key":"A","text":"我会认真听，因为我确实需要现实托底"},{"key":"B","text":"如果我的现金流和客户池已经够了，我会坚持判断"},{"key":"C","text":"认同，先验证模型比证明勇敢更重要"},{"key":"D","text":"会很烦，觉得所有人都在阻止我自由"}]},{"id":29,"module":"行动路径","text":"未来 30 天，你最应该做的动作是：","options":[{"key":"A","text":"优化当前工作或换一份更健康的班，而不是急着单干"},{"key":"B","text":"做出一个明确可售卖的服务包，并找真实客户测试"},{"key":"C","text":"保留主业，完成一次从内容曝光到成交的最小闭环"},{"key":"D","text":"先休息一下，等状态好了再想方向"}]},{"id":30,"module":"行动路径","text":"如果测试结果建议你继续上班，你会：","options":[{"key":"A","text":"松一口气，因为我也觉得自己更需要稳定结构"},{"key":"B","text":"不完全认同，我会继续看自己的业务数据是否支持单干"},{"key":"C","text":"接受，先把副业验证做扎实再决定"},{"key":"D","text":"有点失望，因为我真的很想逃离现在"}]},{"id":31,"module":"行动路径","text":"如果测试结果建议你适合单干，你最需要补上的一环是：","options":[{"key":"A","text":"确认自己是不是真的想单干，而不是只想换工作"},{"key":"B","text":"扩大客户来源、提高成交率和复购率"},{"key":"C","text":"设计从兼职到全职的切换线和止损点"},{"key":"D","text":"先处理情绪和生活秩序，不然自由会变成失控"}]},{"id":32,"module":"行动路径","text":"做完 32 题，你真正想要的不是一个标签，而是：","options":[{"key":"A","text":"确认自己不用被“必须单干”绑架，可以选择好好上班"},{"key":"B","text":"知道自己可以把能力变成生意，并且下一步怎么做"},{"key":"C","text":"一条不冒进但能往外长的过渡路线"},{"key":"D","text":"弄清楚自己到底是想创业，还是只是太累了"}]}],"results":{"A":{"typeName":"平台借力上班型","subtitle":"你不是没野心，你更需要一个清楚、稳定、有人分工的结构，把能力放进去持续产出。","posterSubtext":"你适合的不是硬撑烂班，而是换到一个更正常的组织里发力。","maturityScore":78,"coreConclusion":"你的答案显示，你更适合在组织里发展，而不是立刻单干。你真正排斥的往往不是“上班”本身，而是混乱管理、边界不清、低反馈和不被尊重。对你来说，公司平台、团队分工、稳定现金流和外部节奏会帮你保持产出。单干带来的不确定、获客压力、合同沟通和全流程兜底，短期内可能会显著消耗你。更适合你的路线，是先换一个更健康的工作环境，或在现有岗位里重建边界，而不是用裸辞来解决所有不舒服。","diagnosis":"你需要结构感。你能做事，也愿意负责，但你并不喜欢所有风险都压在自己身上。你在有目标、有协作、有反馈的环境里更容易稳定发挥。","whatYouReallyWant":"你想要的是被好好对待、被合理管理、被看见价值，而不一定是完全离开组织。把“想单干”和“想离开烂环境”分开，你的决策会清楚很多。","mechanism":{"title":"组织托底机制","content":"平台借力型的人不是依赖公司，而是善于利用组织资源放大专业产出。你适合让公司承担一部分获客、品牌、流程和协作成本，自己把精力集中在核心能力上。"},"professionalBasis":["从现金流偏好看，你需要固定收入提供安全感。收入波动会直接影响你的情绪和判断，因此不适合在没有存款和客户池时裸辞。","从能力结构看，你更擅长在明确任务和团队协作中稳定交付，而不是同时承担获客、销售、交付、售后、财务和运营。","从职业策略看，你不是不能做副业，而是应该先在主业稳定的前提下小规模验证，避免把现实逃离误判成创业准备。"],"coreTensions":["需要稳定现金流","讨厌混乱管理","适合团队协作","不适合突然全风险兜底"],"suitableIf":["当前只是工作环境不好","你还没有稳定客户来源","你需要固定收入维持生活秩序","你更擅长专业产出而非销售获客"],"cautionIf":["把裸辞当成解脱","忽略单干的获客压力","因为羡慕别人自由而冲动离开","没有准备 6 个月生活费"],"indices":[{"label":"组织适配度","value":88},{"label":"现金流安全需求","value":86},{"label":"单干准备度","value":48},{"label":"副业验证必要性","value":82}],"ifStay":"如果继续上班，你需要优先解决的是组织质量和边界，而不是继续忍耐。换一个更清楚的团队，可能比裸辞更快改善状态。","ifChange":"如果你直接单干，短期会获得自由感，但很快会面对收入波动、客户沟通和全流程兜底。没有准备时，自由会变成新的压力。","notRecommended":["情绪上头裸辞","把所有上班都等同于消耗","没有客户就辞职","只看别人自由不看别人获客","用单干逃避沟通问题"],"plan90":[{"title":"第 1-2 周：区分问题来源","content":"写清楚你讨厌的是公司、岗位、领导、行业，还是上班这种形式。不要把所有不舒服都归因于“我不适合上班”。"},{"title":"第 3-4 周：优化主业边界","content":"尝试和领导确认职责、优先级、反馈方式和加班边界。如果不可改善，再启动换岗或跳槽。"},{"title":"第 2 个月：做低压副业测试","content":"选一个能用你现有能力完成的小服务，不裸辞，只测试是否有人愿意咨询和付费。"},{"title":"第 3 个月：判断是否继续加码","content":"根据收入、客户反馈、精力消耗和主业状态，决定是继续上班、换工作，还是进入更系统的副业验证。"}],"closing":"你不是非要单干才算有出路。先把自己从烂环境里拿出来，再判断要不要离开组织，会更稳。"},"B":{"typeName":"独立经营单干型","subtitle":"你已经不只是想自由，而是在思考客户、产品、成交、交付和复购这套完整闭环。","posterSubtext":"你适合单干，但前提是把能力变成可售卖的系统，而不是只靠热情硬冲。","maturityScore":88,"coreConclusion":"你的答案显示，你具备较高的单干适配度。你不只是厌倦上班，而是已经开始用经营视角看自己的能力：谁会为你付费、你解决什么问题、如何报价、怎么交付、怎么复购。你能接受收入波动，也愿意面对客户和市场反馈。对你来说，继续长期待在组织里，可能会限制收入上限和决策空间。但这不代表你应该立刻裸辞，真正适合你的路线，是先把服务包、客户池和现金流跑到可验证水平，再做全职切换。","diagnosis":"你有经营意识。你看到的不是“自由职业很爽”，而是“我能不能把专业能力产品化”。这说明你已经越过了单纯幻想阶段。","whatYouReallyWant":"你想要的是自主权和收益上限。你希望自己的能力不再只被工资定价，而是能直接面对市场，被真实客户重新定价。","mechanism":{"title":"商业闭环机制","content":"独立经营型的人适合把能力拆成产品、内容、渠道、成交和交付。只要闭环跑通，收入不再只取决于公司岗位，而取决于你创造和传递价值的能力。"},"professionalBasis":["从获客能力看，你愿意表达、销售和复盘，这比单纯专业强更重要。单干不是只做擅长的事，而是持续让客户知道你能解决什么问题。","从现金流承受看，你能接受阶段性波动，但仍需要明确存款线、客户线和止损线。成熟的单干不是赌一把，而是带着模型行动。","从交付边界看，你具备把规则写清楚的意识。合同、报价、退款、交付范围和售后边界，是你能长期单干的保护层。"],"coreTensions":["想要自主权","有客户意识","能接受波动","需要扩大稳定获客"],"suitableIf":["已有明确可售卖能力","能说清目标客户和痛点","愿意持续做内容和销售","已有存款或试单收入"],"cautionIf":["只想自由不想销售","只有专业没有产品化表达","没有止损线","过早把全部收入押在一个渠道"],"indices":[{"label":"单干适配度","value":91},{"label":"商业闭环意识","value":88},{"label":"获客销售准备","value":82},{"label":"现金流风险","value":58}],"ifStay":"如果你继续长期上班，稳定性会保住，但可能越来越觉得能力被低估。你需要至少保留一个可增长的个人业务入口。","ifChange":"如果你切换到单干，最关键不是辞职那一天，而是辞职前是否已经有真实客户、真实付费和可复用交付流程。","notRecommended":["没有试单就全职单干","只做交付不做获客","低价接所有客户","没有合同和退款规则","把一个爆款内容当稳定生意"],"plan90":[{"title":"第 1-2 周：定义一个服务包","content":"写清楚你服务谁、解决什么问题、交付什么结果、多少钱、周期多久。不要先做复杂产品。"},{"title":"第 3-4 周：完成 3 次真实询单","content":"通过小红书、朋友圈、社群或老客户获取真实咨询，重点验证别人是否愿意为问题付费。"},{"title":"第 2 个月：跑通 1-3 单交付","content":"不要追求完美，先完成小单交付，记录客户问题、成交阻力、交付耗时和复购可能。"},{"title":"第 3 个月：计算全职切换线","content":"当副业收入连续 3 个月达到生活费 50%-70%，且获客来源不止一个，再评估是否全职单干。"}],"closing":"你可以单干，但别把单干当身份，要把它当一门生意。能成交、能交付、能复购，才是真的自由。"},"C":{"typeName":"副业验证过渡型","subtitle":"你适合先保留主业，再用一个小闭环验证自己是否真的能从上班切到单干。","posterSubtext":"你现在最好的选择不是辞职，而是给自己建一条可验证的第二曲线。","maturityScore":82,"coreConclusion":"你的答案显示，你正处在上班和单干之间的过渡期。你对自由和收入上限有向往，也知道完全裸辞风险太高。你并不适合立刻把主业断掉，而是适合边上班边做最小商业闭环：内容曝光、用户咨询、报价成交、交付反馈、复盘优化。对你来说，主业不是束缚，而是试验期的现金流保护。等副业模型被验证后，你再考虑逐步切换，会比一口气跳出去更稳。","diagnosis":"你有探索欲，也有风险意识。你不是胆小，而是知道单干不能只靠心动，需要真实订单和现金流证明。","whatYouReallyWant":"你想要的是选择权。你不一定现在就要自由职业，但你不想让自己的人生只剩一份工资和一个老板。","mechanism":{"title":"低风险验证机制","content":"副业验证型最重要的是用小成本换真实反馈。不要先问自己适不适合单干，而是先问市场是否愿意为你的能力付费。"},"professionalBasis":["从风险控制看，你需要主业收入托底。这样你才能用更稳定的心态测试副业，而不是因为缺钱做出低质量决策。","从行动路径看，你适合用 30-90 天周期做最小闭环，而不是一开始就做品牌、课程、社群、复杂产品。","从心理状态看，你既想突破又怕失控。过渡方案能让你既不压抑自己，也不把生活推到悬崖边。"],"coreTensions":["想要第二收入","不适合裸辞","需要低成本试单","适合逐步切换"],"suitableIf":["主业还能维持基本生活","你有一个可测试的技能或服务","每周能拿出固定时间","愿意用订单而不是幻想判断"],"cautionIf":["副业只是收藏资料","主业已经严重影响身心","迟迟不敢报价","没有设置验证周期和指标"],"indices":[{"label":"过渡路线适配","value":90},{"label":"裸辞风险","value":76},{"label":"副业验证潜力","value":84},{"label":"当前商业清晰度","value":63}],"ifStay":"如果继续只上班不验证，你会越来越焦虑，觉得自己还有别的可能却一直没开始。","ifChange":"如果现在直接单干，你可能会因为现金流压力而动作变形。先跑通副业闭环，会让之后的选择更有底气。","notRecommended":["长期只想不做","副业没有报价","一上来做复杂产品","为了证明自己勇敢而裸辞","用点赞代替成交"],"plan90":[{"title":"第 1-2 周：选一个最小服务","content":"只选一个你能在 3-7 天内交付的小服务，写清楚目标客户、交付物、价格和适合人群。"},{"title":"第 3-4 周：公开表达 10 次","content":"围绕客户痛点发 10 条内容或触达 30 个潜在用户，观察是否有人咨询，而不是只看点赞。"},{"title":"第 2 个月：完成第一单","content":"哪怕金额不高，也要完成一次从沟通、报价、交付到反馈的完整流程。"},{"title":"第 3 个月：复盘是否加码","content":"看咨询量、成交率、交付耗时、满意度和复购可能，决定继续副业、暂停还是扩大投入。"}],"closing":"你不需要马上证明自己敢不敢辞职。先证明有人愿意为你的能力付费，这比任何勇气都更有用。"},"D":{"typeName":"自由幻想慎重型","subtitle":"你现在想要的可能不是单干，而是从疲惫、压抑和失控感里喘一口气。","posterSubtext":"别急着把自由当解药。你需要先分清：你是想创业，还是只是太累了。","maturityScore":56,"coreConclusion":"你的答案显示，当前不建议你立刻裸辞单干。你对自由的渴望是真实的，但里面混杂了较多逃离情绪：厌倦被管、害怕继续消耗、想远离复杂关系、希望先休息再想。问题是，单干并不会自动消除压力，它只是把压力从领导和公司，换成客户、现金流、销售、交付和自我管理。如果你在没有产品、没有客户、没有存款、没有节奏的情况下离开，很可能会从上班焦虑变成自由职业焦虑。","diagnosis":"你现在更像处在耗竭期，而不是创业准备期。耗竭期最容易把“停止痛苦”误判成“找到方向”。","whatYouReallyWant":"你想要的是休息、边界、自主感和重新掌控生活。它们不一定只能通过单干获得，也可能通过休假、换岗、换公司、调整生活节奏和低压探索获得。","mechanism":{"title":"逃离冲动机制","content":"当人长期被消耗时，大脑会本能地寻找一个看起来最彻底的出口。单干因为带有自由想象，容易被包装成答案。但真正的答案必须能承受现实压力，而不只是暂时缓解情绪。"},"professionalBasis":["从现金流看，你对波动和不确定的承受度还不足。单干前期收入不稳定，如果没有存款和客户池，会快速放大焦虑。","从行动能力看，你目前更容易被情绪驱动，而不是被计划驱动。自由职业需要高度自驱，状态不稳会直接影响收入。","从职业策略看，你需要先修复能量，再做小规模验证。现在最危险的是用辞职做情绪止痛，而不是做职业选择。"],"coreTensions":["渴望自由","现实准备不足","容易情绪决策","需要先恢复能量"],"suitableIf":["先休整身心","不急着裸辞","愿意做低压探索","愿意把问题来源写清楚"],"cautionIf":["没有存款","没有明确服务产品","害怕销售和沟通","只想离开现在的一切"],"indices":[{"label":"逃离情绪强度","value":91},{"label":"单干现实准备","value":38},{"label":"现金流风险","value":88},{"label":"先休整必要性","value":93}],"ifStay":"如果继续硬撑当前状态，你会越来越把所有痛苦都归因于上班，判断会变得更极端。","ifChange":"如果现在直接单干，短期会轻松，但很快会被收入、获客和自我管理追上。更稳的做法是先降压，再验证。","notRecommended":["深夜冲动提离职","没有存款就裸辞","把自由想象成无压力","不做获客却期待客户上门","用单干逃避所有关系"],"plan90":[{"title":"第 1-2 周：先降压","content":"先处理睡眠、作息、工作边界和情绪状态。人在耗竭期做出的重大决定，往往不是最清醒的决定。"},{"title":"第 3-4 周：写清问题来源","content":"把你想逃离的东西分成：公司问题、岗位问题、领导问题、行业问题、上班形式问题。不要混成一团。"},{"title":"第 2 个月：做一次低压试单","content":"不辞职，只用一个周末测试一个小服务。看自己是否真的愿意面对客户和交付。"},{"title":"第 3 个月：决定先换班还是继续验证","content":"如果问题主要来自当前环境，优先跳槽或换岗。如果试单有真实付费，再进入副业验证路线。"}],"closing":"你可以向往自由，但不要在最累的时候把人生方向交给冲动。先让自己恢复，再谈单干，答案会更准。"}},"secondaryNotes":{"A":{"B":"你的主倾向是「平台借力上班型」，但也带有「独立经营单干型」的影子。这说明你的选择不是单线条：主倾向决定当前最稳的行动，副倾向提醒你需要补上的风险控制。","C":"你的主倾向是「平台借力上班型」，但也带有「副业验证过渡型」的影子。这说明你的选择不是单线条：主倾向决定当前最稳的行动，副倾向提醒你需要补上的风险控制。","D":"你的主倾向是「平台借力上班型」，但也带有「自由幻想慎重型」的影子。这说明你的选择不是单线条：主倾向决定当前最稳的行动，副倾向提醒你需要补上的风险控制。"},"B":{"A":"你的主倾向是「独立经营单干型」，但也带有「平台借力上班型」的影子。这说明你的选择不是单线条：主倾向决定当前最稳的行动，副倾向提醒你需要补上的风险控制。","C":"你的主倾向是「独立经营单干型」，但也带有「副业验证过渡型」的影子。这说明你的选择不是单线条：主倾向决定当前最稳的行动，副倾向提醒你需要补上的风险控制。","D":"你的主倾向是「独立经营单干型」，但也带有「自由幻想慎重型」的影子。这说明你的选择不是单线条：主倾向决定当前最稳的行动，副倾向提醒你需要补上的风险控制。"},"C":{"A":"你的主倾向是「副业验证过渡型」，但也带有「平台借力上班型」的影子。这说明你的选择不是单线条：主倾向决定当前最稳的行动，副倾向提醒你需要补上的风险控制。","B":"你的主倾向是「副业验证过渡型」，但也带有「独立经营单干型」的影子。这说明你的选择不是单线条：主倾向决定当前最稳的行动，副倾向提醒你需要补上的风险控制。","D":"你的主倾向是「副业验证过渡型」，但也带有「自由幻想慎重型」的影子。这说明你的选择不是单线条：主倾向决定当前最稳的行动，副倾向提醒你需要补上的风险控制。"},"D":{"A":"你的主倾向是「自由幻想慎重型」，但也带有「平台借力上班型」的影子。这说明你的选择不是单线条：主倾向决定当前最稳的行动，副倾向提醒你需要补上的风险控制。","B":"你的主倾向是「自由幻想慎重型」，但也带有「独立经营单干型」的影子。这说明你的选择不是单线条：主倾向决定当前最稳的行动，副倾向提醒你需要补上的风险控制。","C":"你的主倾向是「自由幻想慎重型」，但也带有「副业验证过渡型」的影子。这说明你的选择不是单线条：主倾向决定当前最稳的行动，副倾向提醒你需要补上的风险控制。"}},"shareTemplate":["我测出来了：{{typeName}}","{{posterSubtext}}","{{secondaryLine}}","","你适合上班还是单干？32题诊断"]};</script>
+    <script>
+(function () {
+  const app = document.getElementById("app");
+  const configPaths = ["./configs/site-config.json", "./configs/career-change.json"];
+
+  const state = {
+    config: null,
+    answers: {},
+    currentIndex: 0,
+    selected: null,
+    locked: false,
+    loadingStep: 0,
+    route: "home",
+    resultData: null,
+  };
+
+  const defaultLoadingMessages = [
+    "正在读取你的选择倾向...",
+    "正在识别隐藏动机...",
+    "正在计算结果分布...",
+    "正在生成专属报告...",
+    "分析完成。",
+  ];
+
+  init();
+
+  async function init() {
+    try {
+      state.config = await fetchConfig();
+      applyDocumentMeta(state.config);
+
+      const saved = sessionStorage.getItem(getStorageKey());
+      if (saved) {
+        state.answers = JSON.parse(saved);
+      }
+
+      routeFromHash();
+      window.addEventListener("hashchange", routeFromHash);
+    } catch (error) {
+      app.innerHTML = `
+        <div class="error">
+          <div>
+            <h1>测试加载失败</h1>
+            <p>请确认你是通过网页链接打开页面，而不是直接双击 HTML 文件。</p>
+          </div>
+        </div>
+      `;
+      console.error(error);
+    }
+  }
+
+  async function fetchConfig() {
+    if (window.__QUIZ_CONFIG__) return window.__QUIZ_CONFIG__;
+    let lastError;
+    for (const path of configPaths) {
+      try {
+        const response = await fetch(path, { cache: "no-store" });
+        if (!response.ok) throw new Error(`${path} ${response.status}`);
+        return response.json();
+      } catch (error) {
+        lastError = error;
+      }
+    }
+    throw lastError;
+  }
+
+  function applyDocumentMeta(cfg) {
+    const title = cfg.title || "趣味测试";
+    const description = cfg.metaDescription || cfg.subtitle || "完成测试，生成你的专属报告。";
+    document.title = title;
+    setMeta("name", "description", description);
+    setMeta("property", "og:title", title);
+    setMeta("property", "og:description", description);
+  }
+
+  function setMeta(attr, key, content) {
+    let node = document.querySelector(`meta[${attr}="${key}"]`);
+    if (!node) {
+      node = document.createElement("meta");
+      node.setAttribute(attr, key);
+      document.head.appendChild(node);
+    }
+    node.setAttribute("content", content);
+  }
+
+  function routeFromHash() {
+    const route = (location.hash || "#/").replace("#/", "") || "home";
+    renderRoute(route);
+  }
+
+  function navigate(route) {
+    const nextHash = `#/${route}`;
+    if (location.hash === nextHash) {
+      renderRoute(route);
+      return;
+    }
+    location.hash = nextHash;
+  }
+
+  function renderRoute(route) {
+    state.route = route;
+    if (route === "quiz") renderQuiz();
+    else if (route === "loading") startLoading();
+    else if (route === "result") renderResult();
+    else renderHome();
+  }
+
+  function renderShell(content, extraClass = "") {
+    app.innerHTML = `
+      <div class="shell">
+        <div class="top-rule"></div>
+        <section class="screen ${extraClass}">${content}</section>
+      </div>
+      <div id="toast" class="toast">已复制</div>
+    `;
+  }
+
+  function renderHome() {
+    const cfg = state.config;
+    renderShell(
+      `
+      <div class="home">
+        <div class="kicker"><span class="dot"></span><span>${text(cfg.kicker)}</span><span class="dot"></span></div>
+        <h1 class="hero-title">${text(cfg.title)}</h1>
+        <p class="hero-subtitle">${text(cfg.subtitle)}</p>
+        <div class="hairline"></div>
+        <div class="intro">
+          ${(cfg.intro || []).map((p, index) => `<p class="${index === cfg.intro.length - 1 ? "strong" : ""}">${text(p)}</p>`).join("")}
+        </div>
+        <div class="pill-grid">
+          ${(cfg.dimensions || []).map((item) => `<div class="pill">${text(item)}</div>`).join("")}
+        </div>
+        <button class="primary-btn" data-action="start">${text(cfg.startButton || "开始测试")}</button>
+        <p class="disclaimer">${text(cfg.disclaimer || "本测试为趣味内容，仅供娱乐参考。")}</p>
+      </div>
+      `,
+      "home"
+    );
+    const startButton = app.querySelector("[data-action='start']");
+    let started = false;
+    const startQuiz = () => {
+      if (started) return;
+      started = true;
+      state.answers = {};
+      state.currentIndex = 0;
+      sessionStorage.removeItem(getStorageKey());
+      navigate("quiz");
+    };
+    startButton.addEventListener("click", startQuiz);
+    startButton.addEventListener(
+      "touchend",
+      (event) => {
+        event.preventDefault();
+        startQuiz();
+      },
+      { passive: false }
+    );
+  }
+
+  function renderQuiz() {
+    const questions = state.config.questions || [];
+    const question = questions[state.currentIndex];
+    if (!question) {
+      renderHome();
+      return;
+    }
+
+    const progress = ((state.currentIndex + 1) / questions.length) * 100;
+
+    renderShell(
+      `
+      <div class="sticky-head">
+        <div class="quiz-meta">
+          <span>${String(state.currentIndex + 1).padStart(2, "0")} / ${questions.length}</span>
+          <span>${text(question.module)}</span>
+        </div>
+        <div class="progress-track"><div class="progress-bar" style="width:${progress}%"></div></div>
+      </div>
+      <div class="question-no">${String(state.currentIndex + 1).padStart(2, "0")}</div>
+      <h1 class="question-title">${text(question.text)}</h1>
+      <div class="options">
+        ${(question.options || [])
+          .map(
+            (option) => `
+            <button class="option" data-option="${text(option.key)}">
+              <span class="option-key">${text(option.key)}</span>
+              <span class="option-text">${text(option.text)}</span>
+            </button>
+          `
+          )
+          .join("")}
+      </div>
+      <p class="hint">${text(state.config.quizHint || "选择后自动进入下一题")}</p>
+      `,
+      "quiz-screen"
+    );
+
+    app.querySelectorAll("[data-option]").forEach((button) => {
+      button.addEventListener("click", () => selectOption(button.dataset.option));
+    });
+  }
+
+  function selectOption(key) {
+    if (state.locked) return;
+    state.locked = true;
+    state.selected = key;
+    const question = state.config.questions[state.currentIndex];
+    state.answers[question.id] = key;
+
+    app.querySelectorAll(".option").forEach((button) => {
+      const selected = button.dataset.option === key;
+      button.classList.toggle("selected", selected);
+      button.classList.toggle("dimmed", !selected);
+    });
+
+    window.setTimeout(() => {
+      if (state.currentIndex < state.config.questions.length - 1) {
+        state.currentIndex += 1;
+        state.locked = false;
+        state.selected = null;
+        renderQuiz();
+      } else {
+        sessionStorage.setItem(getStorageKey(), JSON.stringify(state.answers));
+        state.locked = false;
+        navigate("loading");
+      }
+    }, 420);
+  }
+
+  function startLoading() {
+    state.loadingStep = 0;
+    renderLoading("");
+    tickLoading();
+  }
+
+  function renderLoading(value) {
+    const loadingMessages = getLoadingMessages();
+    renderShell(
+      `
+      <div class="loading-card">
+        <div class="spinner"></div>
+        <div class="loading-text">${text(value)}<span class="cursor">|</span></div>
+        <div class="step-bars">
+          ${loadingMessages.map((_, index) => `<div class="step ${index < state.loadingStep ? "done" : ""}"><span></span></div>`).join("")}
+        </div>
+      </div>
+      `,
+      "loading-screen"
+    );
+  }
+
+  function tickLoading() {
+    if (state.route !== "loading") return;
+    const loadingMessages = getLoadingMessages();
+    if (state.loadingStep >= loadingMessages.length) {
+      window.setTimeout(() => navigate("result"), 700);
+      return;
+    }
+    const message = loadingMessages[state.loadingStep];
+    let chars = 0;
+    const interval = window.setInterval(() => {
+      chars += 1;
+      renderLoading(message.slice(0, chars));
+      if (chars >= message.length) {
+        window.clearInterval(interval);
+        window.setTimeout(() => {
+          state.loadingStep += 1;
+          tickLoading();
+        }, 520);
+      }
+    }, 35);
+  }
+
+  function renderResult() {
+    const saved = sessionStorage.getItem(getStorageKey());
+    if (saved) state.answers = JSON.parse(saved);
+    if (Object.keys(state.answers).length < state.config.questions.length) {
+      renderHome();
+      return;
+    }
+
+    const scored = scoreAnswers(state.answers);
+    const primary = state.config.results[scored.primary];
+    const secondary = scored.secondary ? state.config.secondaryNotes?.[scored.primary]?.[scored.secondary] : null;
+    const stage = getStage(primary.maturityScore);
+    const shareText = buildShareText(primary, secondary);
+    const compareLabels = state.config.compareLabels || ["如果继续原路", "如果换一种做法"];
+    state.resultData = { scored, primary, secondary, stage, shareText };
+
+    renderShell(
+      `
+      <article class="report">
+        <div class="kicker"><span class="dot"></span><span>${text(state.config.resultKicker || "Result Report")}</span><span class="dot"></span></div>
+        <h1 class="result-type">${text(primary.typeName)}</h1>
+        <p class="result-subtitle">${text(primary.subtitle)}</p>
+        <div class="stamp-row">
+          <div class="stamp"><strong>${text(primary.maturityScore)}</strong><span>${text(state.config.scoreLabel || "决策成熟度")}</span></div>
+          <div class="stamp"><strong>${text(stage)}</strong><span>${text(state.config.stageLabel || "当前行动阶段")}</span></div>
+        </div>
+
+        <section class="section">
+          <h2>你的答案分布</h2>
+          <div class="meters">
+            ${Object.entries(scored.counts)
+              .map(([key, value]) => {
+                const typeData = state.config.results[key];
+                const width = (value / state.config.questions.length) * 100;
+                return `
+                  <div>
+                    <div class="meter-head"><span>${text(key)} · ${text(typeData.typeName)}</span><span>${value} 题</span></div>
+                    <div class="meter-track"><div class="meter-fill" style="width:${width}%"></div></div>
+                  </div>
+                `;
+              })
+              .join("")}
+          </div>
+        </section>
+
+        ${secondary ? `<section class="section"><h2>副倾向提示</h2><div class="secondary-note">${text(secondary)}</div></section>` : ""}
+
+        <section class="section">
+          <h2>诊断结论</h2>
+          <div class="quote">${text(primary.coreConclusion)}</div>
+        </section>
+
+        <section class="section">
+          <h2>为什么你会这样</h2>
+          <p>${text(primary.diagnosis)}</p>
+          <p>${text(primary.whatYouReallyWant)}</p>
+        </section>
+
+        <section class="section">
+          <h2>${text(primary.mechanism.title)}</h2>
+          <p>${text(primary.mechanism.content)}</p>
+        </section>
+
+        ${renderParagraphSection("专业解读框架", primary.professionalBasis)}
+        ${renderTagSection("你的关键矛盾", primary.coreTensions)}
+        ${renderCompareListSection("适合推进的条件", "需要谨慎的信号", primary.suitableIf, primary.cautionIf)}
+
+        <section class="section">
+          <h2>关键指数</h2>
+          <div class="meters">
+            ${(primary.indices || [])
+              .map(
+                (item) => `
+                <div>
+                  <div class="meter-head"><span>${text(item.label)}</span><span>${text(item.value)}</span></div>
+                  <div class="meter-track"><div class="meter-fill" style="width:${number(item.value)}%"></div></div>
+                </div>
+              `
+              )
+              .join("")}
+          </div>
+        </section>
+
+        <section class="section">
+          <h2>两条路径对比</h2>
+          <div class="compare">
+            <div class="compare-card"><h3>${text(compareLabels[0])}</h3><p>${text(primary.ifStay)}</p></div>
+            <div class="compare-card"><h3>${text(compareLabels[1])}</h3><p>${text(primary.ifChange)}</p></div>
+          </div>
+        </section>
+
+        <section class="section">
+          <h2>现在最不建议你做</h2>
+          <div class="tag-list">${(primary.notRecommended || []).map((item) => `<span class="tag">${text(item)}</span>`).join("")}</div>
+        </section>
+
+        <section class="section">
+          <h2>未来 90 天验证方案</h2>
+          <div class="plan">
+            ${(primary.plan90 || [])
+              .map(
+                (item, index) => `
+                <div class="plan-card">
+                  <h3>${index + 1}. ${text(item.title)}</h3>
+                  <p>${text(item.content)}</p>
+                </div>
+              `
+              )
+              .join("")}
+          </div>
+        </section>
+
+        <section class="section">
+          <h2>最后一句话</h2>
+          <p>${text(primary.closing)}</p>
+        </section>
+
+        <div class="actions">
+          <button class="primary-btn" data-action="copy">${text(state.config.copyButton || "复制我的结果")}</button>
+          <button class="ghost-btn" data-action="restart">${text(state.config.restartButton || "重新测试")}</button>
+        </div>
+      </article>
+      `,
+      "result-screen"
+    );
+
+    app.querySelector("[data-action='copy']").addEventListener("click", () => copyShareText(shareText));
+    app.querySelector("[data-action='restart']").addEventListener("click", () => {
+      sessionStorage.removeItem(getStorageKey());
+      state.answers = {};
+      state.currentIndex = 0;
+      navigate("home");
+    });
+  }
+
+  function renderParagraphSection(title, paragraphs) {
+    if (!Array.isArray(paragraphs) || !paragraphs.length) return "";
+    return `
+      <section class="section">
+        <h2>${text(title)}</h2>
+        ${paragraphs.map((item) => `<p>${text(item)}</p>`).join("")}
+      </section>
+    `;
+  }
+
+  function renderTagSection(title, items) {
+    if (!Array.isArray(items) || !items.length) return "";
+    return `
+      <section class="section">
+        <h2>${text(title)}</h2>
+        <div class="tag-list">${items.map((item) => `<span class="tag">${text(item)}</span>`).join("")}</div>
+      </section>
+    `;
+  }
+
+  function renderCompareListSection(leftTitle, rightTitle, leftItems, rightItems) {
+    const hasLeft = Array.isArray(leftItems) && leftItems.length;
+    const hasRight = Array.isArray(rightItems) && rightItems.length;
+    if (!hasLeft && !hasRight) return "";
+    return `
+      <section class="section">
+        <h2>适用边界</h2>
+        <div class="compare">
+          <div class="compare-card">
+            <h3>${text(leftTitle)}</h3>
+            ${(leftItems || []).map((item) => `<p>${text(item)}</p>`).join("")}
+          </div>
+          <div class="compare-card">
+            <h3>${text(rightTitle)}</h3>
+            ${(rightItems || []).map((item) => `<p>${text(item)}</p>`).join("")}
+          </div>
+        </div>
+      </section>
+    `;
+  }
+
+  function scoreAnswers(answers) {
+    const counts = { A: 0, B: 0, C: 0, D: 0 };
+    Object.values(answers).forEach((key) => {
+      if (counts[key] !== undefined) counts[key] += 1;
+    });
+    const sorted = Object.entries(counts).sort((a, b) => b[1] - a[1]);
+    const threshold = state.config.secondaryThreshold ?? 2;
+    const primary = sorted[0][0];
+    const secondary = sorted[1][1] > 0 && sorted[0][1] - sorted[1][1] <= threshold ? sorted[1][0] : null;
+    return { counts, primary, secondary };
+  }
+
+  function getStage(score) {
+    const labels = state.config.stageLabels || [
+      { max: 45, label: "观察期" },
+      { max: 65, label: "验证期" },
+      { max: 82, label: "规划期" },
+      { max: 100, label: "行动期" },
+    ];
+    const hit = labels.find((item) => score <= item.max);
+    return hit ? hit.label : labels[labels.length - 1].label;
+  }
+
+  function buildShareText(primary, secondary) {
+    const template = state.config.shareTemplate || [
+      "我测出了：{{typeName}}",
+      "{{posterSubtext}}",
+      "{{secondaryLine}}",
+      "",
+      "{{title}}",
+    ];
+    const values = {
+      title: state.config.title,
+      typeName: primary.typeName,
+      posterSubtext: primary.posterSubtext,
+      secondary: secondary || "",
+      secondaryLine: secondary ? `副倾向：${secondary}` : "",
+    };
+    return template
+      .map((line) => fillTemplate(line, values))
+      .filter((line, index, arr) => line || arr[index - 1])
+      .join("\n")
+      .trim();
+  }
+
+  async function copyShareText(value) {
+    try {
+      await navigator.clipboard.writeText(value);
+      showToast("结果文案已复制");
+    } catch (error) {
+      showToast("复制失败，可长按手动复制");
+    }
+  }
+
+  function showToast(value) {
+    const toast = document.getElementById("toast");
+    if (!toast) return;
+    toast.textContent = value;
+    toast.classList.add("show");
+    window.setTimeout(() => toast.classList.remove("show"), 1600);
+  }
+
+  function getLoadingMessages() {
+    return state.config.loadingMessages || defaultLoadingMessages;
+  }
+
+  function getStorageKey() {
+    return `xhsTestAnswers:${state.config.slug || "default"}`;
+  }
+
+  function fillTemplate(template, values) {
+    return String(template).replace(/\{\{(\w+)\}\}/g, (_, key) => values[key] || "");
+  }
+
+  function number(value) {
+    const parsed = Number(value);
+    if (Number.isNaN(parsed)) return 0;
+    return Math.max(0, Math.min(100, parsed));
+  }
+
+  function text(value) {
+    return String(value ?? "")
+      .replace(/&/g, "&amp;")
+      .replace(/</g, "&lt;")
+      .replace(/>/g, "&gt;")
+      .replace(/"/g, "&quot;");
+  }
+})();
+
+    </script>
+  </body>
+</html>
