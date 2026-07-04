@@ -1,0 +1,1125 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <meta name="description" content="完成 32 道年上年下适配测试，生成你的亲密关系需求报告。" />
+    <meta property="og:title" content="你适合年上还是年下？" />
+    <meta property="og:description" content="完成 32 道年上年下适配测试，生成你的亲密关系需求报告。" />
+    <title>你适合年上还是年下？</title>
+    <style>
+:root {
+  --bg: #fbfaf7;
+  --paper: #fffefd;
+  --ink: #20242a;
+  --muted: #65707d;
+  --line: #d9d4ca;
+  --line-strong: #b9afa0;
+  --accent: #9b4339;
+  --accent-soft: #f1dfd7;
+  --gold: #c0964d;
+  --sage: #66795f;
+  --blue: #526a86;
+  --shadow: 0 16px 36px rgba(60, 47, 38, 0.1);
+  --radius: 8px;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  min-height: 100%;
+  background:
+    linear-gradient(rgba(32, 36, 42, 0.035) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(32, 36, 42, 0.035) 1px, transparent 1px),
+    var(--bg);
+  background-size: 24px 24px;
+}
+
+body {
+  min-height: 100vh;
+  margin: 0;
+  color: var(--ink);
+  font-family:
+    "PingFang SC",
+    "Microsoft YaHei",
+    "Noto Sans SC",
+    system-ui,
+    -apple-system,
+    BlinkMacSystemFont,
+    sans-serif;
+  letter-spacing: 0;
+}
+
+button {
+  font: inherit;
+}
+
+.shell {
+  width: min(100%, 480px);
+  min-height: 100vh;
+  margin: 0 auto;
+  background: rgba(251, 250, 247, 0.88);
+}
+
+.top-rule {
+  height: 4px;
+  background: var(--accent);
+}
+
+.screen {
+  min-height: calc(100vh - 4px);
+  padding: 28px 22px 32px;
+}
+
+.home {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.kicker {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  color: var(--muted);
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  font-size: 11px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+.dot {
+  width: 7px;
+  height: 7px;
+  background: var(--accent);
+  border-radius: 50%;
+}
+
+.hero-title {
+  margin: 26px 0 14px;
+  color: var(--ink);
+  font-size: 30px;
+  line-height: 1.2;
+  text-align: center;
+  font-weight: 800;
+}
+
+.hero-subtitle {
+  margin: 0 auto 28px;
+  max-width: 340px;
+  color: var(--muted);
+  font-size: 15px;
+  line-height: 1.75;
+  text-align: center;
+}
+
+.hairline {
+  width: 64px;
+  height: 1px;
+  margin: 0 auto 30px;
+  background: var(--line-strong);
+}
+
+.intro {
+  margin: 0 auto;
+  max-width: 380px;
+}
+
+.intro p {
+  margin: 0 0 15px;
+  color: rgba(32, 36, 42, 0.82);
+  font-size: 15px;
+  line-height: 1.8;
+}
+
+.intro .strong {
+  color: var(--accent);
+  font-weight: 700;
+}
+
+.pill-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px;
+  margin: 28px 0;
+}
+
+.pill {
+  min-height: 42px;
+  display: grid;
+  place-items: center;
+  border: 1px solid var(--line);
+  color: var(--muted);
+  background: rgba(255, 255, 255, 0.44);
+  font-size: 13px;
+}
+
+.primary-btn,
+.ghost-btn,
+.copy-btn {
+  width: 100%;
+  min-height: 48px;
+  border: 1px solid var(--ink);
+  border-radius: 0;
+  cursor: pointer;
+  transition: transform 150ms ease, background 150ms ease, color 150ms ease, border-color 150ms ease;
+}
+
+.primary-btn {
+  background: var(--ink);
+  color: #fff;
+  font-weight: 700;
+}
+
+.ghost-btn,
+.copy-btn {
+  background: transparent;
+  color: var(--ink);
+}
+
+.primary-btn:active,
+.ghost-btn:active,
+.copy-btn:active,
+.option:active {
+  transform: translateY(1px);
+}
+
+.disclaimer {
+  margin: 18px auto 0;
+  max-width: 340px;
+  color: var(--muted);
+  font-size: 12px;
+  line-height: 1.65;
+  text-align: center;
+}
+
+.quiz-screen {
+  padding-top: 0;
+}
+
+.sticky-head {
+  position: sticky;
+  top: 0;
+  z-index: 5;
+  margin: 0 -22px 26px;
+  padding: 14px 22px 12px;
+  background: rgba(251, 250, 247, 0.95);
+  border-bottom: 1px solid var(--line);
+  backdrop-filter: blur(12px);
+}
+
+.quiz-meta {
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+  color: var(--muted);
+  font-size: 12px;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+}
+
+.progress-track {
+  height: 4px;
+  margin-top: 10px;
+  background: rgba(32, 36, 42, 0.09);
+}
+
+.progress-bar {
+  height: 100%;
+  background: var(--accent);
+  transition: width 260ms ease;
+}
+
+.question-no {
+  color: rgba(155, 67, 57, 0.18);
+  font-size: 48px;
+  line-height: 1;
+  font-weight: 800;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+}
+
+.question-title {
+  margin: 18px 0 24px;
+  font-size: 22px;
+  line-height: 1.5;
+  font-weight: 750;
+}
+
+.options {
+  display: grid;
+  gap: 12px;
+}
+
+.option {
+  min-height: 66px;
+  display: grid;
+  grid-template-columns: 30px 1fr;
+  gap: 12px;
+  align-items: start;
+  width: 100%;
+  padding: 15px;
+  border: 1px solid var(--line);
+  background: rgba(255, 255, 255, 0.68);
+  color: var(--ink);
+  text-align: left;
+  cursor: pointer;
+  transition: background 160ms ease, border-color 160ms ease, color 160ms ease, opacity 160ms ease;
+}
+
+.option-key {
+  display: grid;
+  place-items: center;
+  width: 28px;
+  height: 28px;
+  border: 1px solid var(--line-strong);
+  font-size: 13px;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+}
+
+.option-text {
+  padding-top: 2px;
+  font-size: 15px;
+  line-height: 1.55;
+}
+
+.option.selected {
+  border-color: var(--accent);
+  background: var(--accent);
+  color: #fff;
+}
+
+.option.selected .option-key {
+  border-color: rgba(255, 255, 255, 0.8);
+}
+
+.option.dimmed {
+  opacity: 0.42;
+}
+
+.hint {
+  margin: 18px 0 0;
+  color: var(--muted);
+  font-size: 12px;
+  text-align: center;
+}
+
+.loading-screen {
+  display: grid;
+  place-items: center;
+}
+
+.loading-card {
+  width: 100%;
+  max-width: 360px;
+  text-align: center;
+}
+
+.spinner {
+  width: 54px;
+  height: 54px;
+  margin: 0 auto 24px;
+  border: 2px solid var(--line);
+  border-top-color: var(--accent);
+  border-radius: 50%;
+  animation: spin 850ms linear infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.loading-text {
+  min-height: 54px;
+  color: var(--accent);
+  font-size: 17px;
+  line-height: 1.6;
+  font-weight: 700;
+}
+
+.step-bars {
+  display: grid;
+  gap: 8px;
+  margin-top: 28px;
+}
+
+.step {
+  height: 4px;
+  overflow: hidden;
+  background: rgba(32, 36, 42, 0.09);
+}
+
+.step span {
+  display: block;
+  height: 100%;
+  width: 0;
+  background: var(--accent);
+  transition: width 300ms ease;
+}
+
+.step.done span {
+  width: 100%;
+}
+
+.result-screen {
+  padding: 22px 18px 30px;
+}
+
+.report {
+  padding: 22px 16px 18px;
+  border: 1px solid var(--line);
+  background: var(--paper);
+  box-shadow: var(--shadow);
+}
+
+.result-type {
+  margin: 8px 0 8px;
+  color: var(--accent);
+  font-size: 30px;
+  line-height: 1.15;
+  font-weight: 850;
+  text-align: center;
+}
+
+.result-subtitle {
+  margin: 0 auto 20px;
+  color: var(--muted);
+  font-size: 15px;
+  line-height: 1.7;
+  text-align: center;
+}
+
+.stamp-row {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px;
+  margin: 18px 0 20px;
+}
+
+.stamp {
+  padding: 12px 10px;
+  border: 1px solid var(--line);
+  background: #fbfaf7;
+}
+
+.stamp strong {
+  display: block;
+  margin-bottom: 4px;
+  color: var(--ink);
+  font-size: 20px;
+}
+
+.stamp span {
+  color: var(--muted);
+  font-size: 12px;
+}
+
+.section {
+  padding: 20px 0;
+  border-top: 1px solid var(--line);
+}
+
+.section h2 {
+  margin: 0 0 12px;
+  font-size: 18px;
+  color: var(--ink);
+}
+
+.section p {
+  margin: 0 0 12px;
+  color: rgba(32, 36, 42, 0.82);
+  font-size: 15px;
+  line-height: 1.85;
+}
+
+.quote {
+  padding: 15px;
+  border-left: 3px solid var(--accent);
+  background: var(--accent-soft);
+  color: #5b2d27;
+  line-height: 1.8;
+  font-weight: 700;
+}
+
+.meters {
+  display: grid;
+  gap: 14px;
+}
+
+.meter-head {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 7px;
+  color: var(--muted);
+  font-size: 13px;
+}
+
+.meter-track {
+  height: 8px;
+  background: rgba(32, 36, 42, 0.08);
+}
+
+.meter-fill {
+  height: 100%;
+  background: var(--accent);
+}
+
+.compare {
+  display: grid;
+  gap: 10px;
+}
+
+.compare-card {
+  padding: 14px;
+  border: 1px solid var(--line);
+  background: #fbfaf7;
+}
+
+.compare-card h3,
+.plan-card h3 {
+  margin: 0 0 8px;
+  font-size: 15px;
+}
+
+.compare-card p,
+.plan-card p {
+  font-size: 14px;
+}
+
+.tag-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.tag {
+  padding: 7px 9px;
+  border: 1px solid var(--line);
+  background: #fbfaf7;
+  color: var(--muted);
+  font-size: 13px;
+}
+
+.plan {
+  display: grid;
+  gap: 10px;
+}
+
+.plan-card {
+  padding: 14px;
+  border: 1px solid var(--line);
+  background: #fbfaf7;
+}
+
+.secondary-note {
+  padding: 14px;
+  border: 1px dashed var(--line-strong);
+  background: rgba(192, 150, 77, 0.12);
+  line-height: 1.75;
+  font-size: 14px;
+}
+
+.actions {
+  display: grid;
+  gap: 10px;
+  margin-top: 18px;
+}
+
+.toast {
+  position: fixed;
+  left: 50%;
+  bottom: 22px;
+  z-index: 20;
+  transform: translateX(-50%);
+  padding: 10px 14px;
+  background: var(--ink);
+  color: #fff;
+  font-size: 13px;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 180ms ease;
+}
+
+.toast.show {
+  opacity: 1;
+}
+
+.error {
+  display: grid;
+  place-items: center;
+  min-height: 100vh;
+  padding: 24px;
+  text-align: center;
+}
+
+.error p {
+  color: var(--muted);
+  line-height: 1.7;
+}
+
+@media (min-width: 700px) {
+  body {
+    padding: 28px 0;
+  }
+
+  .shell {
+    min-height: calc(100vh - 56px);
+    border: 1px solid var(--line);
+    box-shadow: var(--shadow);
+  }
+
+  .screen {
+    min-height: calc(100vh - 60px);
+  }
+}
+
+    </style>
+  </head>
+  <body>
+    <main id="app" aria-live="polite"></main>
+    <script>window.__QUIZ_CONFIG__ = {"slug":"test-age-gap-love","topic":"你适合年上还是年下？","kicker":"32-Q Age Gap Love Test","title":"你适合年上还是年下？","subtitle":"32 道题，测出你更适合年上稳定照顾、年下高能治愈、同龄并肩搭子，还是年龄无关边界型关系。","metaDescription":"完成 32 道年上年下适配测试，生成你的亲密关系需求报告。","startButton":"开始测试","resultKicker":"Age Gap Love Report","quizHint":"凭第一反应选择，系统会自动进入下一题","copyButton":"复制我的结果","restartButton":"重新测试","scoreLabel":"关系适配清晰度","stageLabel":"当前关系需求","stageLabels":[{"max":55,"label":"需求模糊期"},{"max":72,"label":"偏好识别期"},{"max":86,"label":"适配筛选期"},{"max":100,"label":"关系清醒期"}],"compareLabels":["如果只看年龄差","如果改看关系质量"],"disclaimer":"本测试仅讨论成年人之间的亲密关系偏好，为趣味自我观察工具，非心理诊断、情感咨询、婚恋建议或关系承诺。结果仅供娱乐和自我复盘参考，请不要把年龄作为判断一个人是否适合你的唯一标准。","secondaryThreshold":4,"dimensions":["安全感","心动感","平等感","边界感"],"intro":["很多人问自己适合年上还是年下，其实不是在问年龄。","真正想知道的是：你需要被成熟感托住，还是被少年感点亮；你更想要有人带你，还是有人和你并肩；你在亲密里最怕失控，还是最怕平淡。","32 道题会从安全感来源、被照顾方式、情绪节奏、相处边界、成长现实、冲突处理、亲密角色和长期关系 8 个模块，生成你的年上年下适配报告。"],"loadingMessages":["正在读取你的亲密关系第一反应...","正在拆分安全感、心动感、平等感和边界感...","正在识别你更容易被哪种关系节奏吸引...","正在生成 32 题年上年下适配报告...","分析完成。"],"questions":[{"id":1,"module":"安全感来源","text":"刚开始暧昧时，最容易让你心动的是：","options":[{"key":"A","text":"对方说话做事很稳，不急着推进，但让你觉得被认真对待"},{"key":"B","text":"对方眼睛亮亮的，会直接表达喜欢，让你觉得自己很有吸引力"},{"key":"C","text":"两个人聊天节奏很平等，能互相接梗，也能一起吐槽生活"},{"key":"D","text":"对方年龄不重要，关键是边界清楚、情绪稳定、说到做到"}]},{"id":2,"module":"安全感来源","text":"你最受不了一段关系里出现哪种不确定：","options":[{"key":"A","text":"对方没有规划，也没有让你看见未来的能力"},{"key":"B","text":"关系越来越平淡，没有新鲜感，也没有被需要的感觉"},{"key":"C","text":"两个人节奏不在一起，总像一个人在追另一个人"},{"key":"D","text":"对方忽冷忽热、边界模糊，让你猜来猜去"}]},{"id":3,"module":"安全感来源","text":"当你很累的时候，你更希望伴侣：","options":[{"key":"A","text":"帮你把现实问题稳住，比如安排、沟通、做决定"},{"key":"B","text":"逗你开心，抱抱你，让你短暂从压力里出来"},{"key":"C","text":"陪你一起骂两句，再一起想办法解决"},{"key":"D","text":"先尊重你的状态，问清楚你需要陪伴还是空间"}]},{"id":4,"module":"安全感来源","text":"你判断一个人靠不靠谱，最先看：","options":[{"key":"A","text":"TA 是否有经验、有承担感，遇事能不能稳住局面"},{"key":"B","text":"TA 是否真诚热烈，喜欢你时会不会让你清楚感受到"},{"key":"C","text":"TA 是否能和你站在同一边，不端着也不压你"},{"key":"D","text":"TA 是否尊重承诺、边界和沟通规则"}]},{"id":5,"module":"被照顾方式","text":"如果对方想照顾你，你最吃哪一套：","options":[{"key":"A","text":"提前想好细节，让你少操一点心"},{"key":"B","text":"用很直接的喜欢和依赖，让你觉得自己被偏爱"},{"key":"C","text":"不是单方面照顾，而是你来我往，谁有空谁多担一点"},{"key":"D","text":"不替你做主，但会问清楚你真正需要什么"}]},{"id":6,"module":"被照顾方式","text":"你最容易对哪种人产生依赖感：","options":[{"key":"A","text":"经历比你多一点，能在关键时刻给你托底的人"},{"key":"B","text":"情绪明亮、表达直接，会把你从疲惫里拉出来的人"},{"key":"C","text":"和你一起成长，能共同面对现实压力的人"},{"key":"D","text":"不会入侵你的生活，但在你需要时稳定出现的人"}]},{"id":7,"module":"被照顾方式","text":"别人说“你适合被宠一点”，你心里更像：","options":[{"key":"A","text":"是的，我需要一个成熟的人让我不用一直硬撑"},{"key":"B","text":"我更想被热烈喜欢，而不是被安排"},{"key":"C","text":"我不想只被宠，我也想和对方互相撑腰"},{"key":"D","text":"宠不宠不重要，别用爱控制我就行"}]},{"id":8,"module":"被照顾方式","text":"你最不喜欢的“照顾”方式是：","options":[{"key":"A","text":"嘴上说照顾你，现实里却什么都扛不住"},{"key":"B","text":"太像长辈管教，少了恋爱的心动感"},{"key":"C","text":"总是一方付出一方享受，关系失衡"},{"key":"D","text":"打着为你好旗号替你决定人生"}]},{"id":9,"module":"情绪节奏","text":"吵架后你最希望对方怎么处理：","options":[{"key":"A","text":"先稳住情绪，再把问题说清楚，不逃避"},{"key":"B","text":"别冷战，哪怕笨拙一点，也要主动靠近"},{"key":"C","text":"两个人都别端着，谁错谁先说，别上纲上线"},{"key":"D","text":"给彼此一点空间，但约定好什么时候回来谈"}]},{"id":10,"module":"情绪节奏","text":"你在感情里最怕自己变成：","options":[{"key":"A","text":"什么都自己扛，却没人真的能接住你"},{"key":"B","text":"越来越理智，连心动和撒娇都不会了"},{"key":"C","text":"像在和上司或小孩谈恋爱，无法平等交流"},{"key":"D","text":"为了关系失去边界，变得不像自己"}]},{"id":11,"module":"情绪节奏","text":"对方吃醋时，你比较能接受：","options":[{"key":"A","text":"表达在意，但不失控，能讲清楚底线"},{"key":"B","text":"有点小别扭、小粘人，让你觉得被需要"},{"key":"C","text":"可以互相调侃，但不会真的限制彼此"},{"key":"D","text":"直接说感受，不查手机、不试探、不冷暴力"}]},{"id":12,"module":"情绪节奏","text":"你最容易被哪种情绪氛围吸引：","options":[{"key":"A","text":"安静、稳定、让人可以慢慢卸下防备"},{"key":"B","text":"明亮、热烈、像重新开始喜欢生活"},{"key":"C","text":"轻松、互怼、像朋友也像恋人"},{"key":"D","text":"清醒、尊重、有亲密也有空间"}]},{"id":13,"module":"相处边界","text":"如果对方比你成熟很多，你最担心：","options":[{"key":"A","text":"担心是有的，但只要 TA 尊重我，我会很有安全感"},{"key":"B","text":"担心关系太像被教育，少了轻盈和好玩"},{"key":"C","text":"担心节奏差太大，很多话题没法真的平等讨论"},{"key":"D","text":"我会重点看 TA 是否用成熟感压制我"}]},{"id":14,"module":"相处边界","text":"如果对方比你年轻很多，你最担心：","options":[{"key":"A","text":"担心 TA 不够稳定，关键时刻需要我托底"},{"key":"B","text":"不太担心，年轻感反而会让我放松和开心"},{"key":"C","text":"担心生活阶段不同，计划很难对齐"},{"key":"D","text":"年龄不是问题，我更看 TA 是否有自我负责能力"}]},{"id":15,"module":"相处边界","text":"你更愿意接受哪种亲密距离：","options":[{"key":"A","text":"关系明确后可以深度绑定，很多事一起规划"},{"key":"B","text":"可以粘一点、甜一点，不要太快进入现实压力"},{"key":"C","text":"像队友一样亲密，有事一起商量，没事各自生活"},{"key":"D","text":"亲密可以，但个人空间、社交边界、财务边界要清楚"}]},{"id":16,"module":"相处边界","text":"你最在意伴侣尊重你哪一点：","options":[{"key":"A","text":"尊重你的脆弱，不因为你需要依靠就看轻你"},{"key":"B","text":"尊重你的玩心，不总把恋爱过成任务"},{"key":"C","text":"尊重你的观点，不用年龄、经验或性别压你"},{"key":"D","text":"尊重你的边界，不越界打探、不情绪绑架"}]},{"id":17,"module":"成长与现实","text":"谈到未来规划时，你更想听到：","options":[{"key":"A","text":"对方有清楚计划，也愿意把你放进计划里"},{"key":"B","text":"先别把未来说太死，我想保留一点心动和可能性"},{"key":"C","text":"两个人一起算现实账，一起调整路线"},{"key":"D","text":"未来可以谈，但不要用承诺代替当下的行动"}]},{"id":18,"module":"成长与现实","text":"你对经济与生活压力的态度更接近：","options":[{"key":"A","text":"希望对方比我更稳一点，至少能一起扛现实"},{"key":"B","text":"现实重要，但我也需要关系里有轻松和快乐"},{"key":"C","text":"两个人共同承担，谁也别天然负责更多"},{"key":"D","text":"讲清楚分工和底线，比谁大谁小更重要"}]},{"id":19,"module":"成长与现实","text":"你最希望在关系里获得哪种成长：","options":[{"key":"A","text":"变得更安定，不再总靠自己硬撑"},{"key":"B","text":"重新找回生命力，敢喜欢、敢表达、敢撒娇"},{"key":"C","text":"学会和另一个人并肩解决问题"},{"key":"D","text":"学会在亲密里保持自我和边界"}]},{"id":20,"module":"成长与现实","text":"如果两个人生活阶段不同，你会先看：","options":[{"key":"A","text":"成熟的一方是否愿意耐心带着关系往前走"},{"key":"B","text":"不同阶段能不能带来新鲜感和互相启发"},{"key":"C","text":"目标是否还能对齐，日常是否还能同步"},{"key":"D","text":"双方是否都能为自己的选择负责"}]},{"id":21,"module":"冲突处理","text":"关系出现问题时，你最不能接受：","options":[{"key":"A","text":"对方不承担，让你觉得自己又要一个人解决全部"},{"key":"B","text":"对方把关系弄得太沉重，连喜欢都变成压力"},{"key":"C","text":"对方总摆高低位，没法平等讨论问题"},{"key":"D","text":"对方用消失、试探、威胁来处理冲突"}]},{"id":22,"module":"冲突处理","text":"当你表达不满时，你希望对方：","options":[{"key":"A","text":"听完后给出明确行动，而不是只会哄"},{"key":"B","text":"先靠近你，让你知道 TA 还在乎你"},{"key":"C","text":"别把你当难搞，两个人一起复盘就好"},{"key":"D","text":"不急着反驳，也不转移话题，能守住沟通规则"}]},{"id":23,"module":"冲突处理","text":"你最容易心软的瞬间是：","options":[{"key":"A","text":"对方默默把问题处理好，让你不用再撑着"},{"key":"B","text":"对方有点笨拙但很真诚地来哄你"},{"key":"C","text":"对方愿意放下面子，和你一起把话说开"},{"key":"D","text":"对方尊重你的暂停，不逼你立刻给答案"}]},{"id":24,"module":"冲突处理","text":"你最想避免哪种恋爱模式：","options":[{"key":"A","text":"你表面被照顾，实际上对方没有真正承担"},{"key":"B","text":"关系越来越现实，心动感被消耗没了"},{"key":"C","text":"双方都想赢，最后没有人真正靠近"},{"key":"D","text":"一边说爱，一边不断越过你的边界"}]},{"id":25,"module":"亲密角色","text":"你在恋爱里更常扮演的角色是：","options":[{"key":"A","text":"外面很独立，但私下很想有人接住你"},{"key":"B","text":"容易被可爱、热烈、真诚的表达打动"},{"key":"C","text":"希望彼此像队友，能聊废话也能聊正事"},{"key":"D","text":"很看重清醒感，不想因为恋爱丢掉判断力"}]},{"id":26,"module":"亲密角色","text":"你最想被伴侣看见的是：","options":[{"key":"A","text":"我其实也会累，也想被稳稳照顾"},{"key":"B","text":"我也有柔软、幼稚、想被喜欢的一面"},{"key":"C","text":"我不是要依附谁，我想和你一起变好"},{"key":"D","text":"我可以爱你，但我也需要保留自己"}]},{"id":27,"module":"亲密角色","text":"你更喜欢哪种称呼感：","options":[{"key":"A","text":"被认真放在心上，有一种被珍惜的感觉"},{"key":"B","text":"被黏着、被夸、被直白地喜欢"},{"key":"C","text":"像搭子、恋人、队友混在一起的亲密感"},{"key":"D","text":"不靠称呼证明关系，行动和边界更能说明问题"}]},{"id":28,"module":"亲密角色","text":"如果对方很依赖你，你会：","options":[{"key":"A","text":"短期会心软，但长期会担心自己又要承担太多"},{"key":"B","text":"会觉得很可爱，只要不是失控依赖就能接受"},{"key":"C","text":"可以互相依赖，但不能只有我一个人负责"},{"key":"D","text":"先看依赖有没有越界，有没有影响各自生活"}]},{"id":29,"module":"长期关系","text":"你觉得一段关系最该留下的是：","options":[{"key":"A","text":"稳定感，哪怕外面很乱，回到关系里能安心"},{"key":"B","text":"生命力，和对方在一起会更想笑、更想生活"},{"key":"C","text":"并肩感，很多现实问题两个人都能一起面对"},{"key":"D","text":"清醒感，亲密但不消耗，靠近但不吞没"}]},{"id":30,"module":"长期关系","text":"你最想确认自己适合年上还是年下，其实是想知道：","options":[{"key":"A","text":"我是不是需要一个更成熟的人来托住我"},{"key":"B","text":"我是不是更适合被年轻感和热烈感唤醒"},{"key":"C","text":"我是不是只适合和同频的人平等相处"},{"key":"D","text":"年龄到底是不是关键，还是边界和成熟度才是关键"}]},{"id":31,"module":"长期关系","text":"如果只能选一个长期关键词，你会选：","options":[{"key":"A","text":"安定"},{"key":"B","text":"心动"},{"key":"C","text":"并肩"},{"key":"D","text":"边界"}]},{"id":32,"module":"长期关系","text":"做完这 32 题，你最想得到的答案是：","options":[{"key":"A","text":"我到底适不适合成熟型、年上感更强的人"},{"key":"B","text":"我到底是不是会被年下感、少年感打动"},{"key":"C","text":"我是不是更适合同龄或同阶段的平等关系"},{"key":"D","text":"我怎样才能避开只看年龄、不看关系质量的坑"}]}],"results":{"A":{"typeName":"年上稳定照顾型","subtitle":"你更容易被成熟、稳定、有承担感的人吸引。你要的不是被管，而是有人能在关键时刻接住你。","posterSubtext":"你适合的不是单纯年龄大，而是情绪稳、现实稳、承诺稳的人。","maturityScore":86,"coreConclusion":"你的答案显示，你在亲密关系里对稳定感和托底感的需求很高。你不一定真的只适合年上，但你很容易被年上感吸引：对方说话有分寸，做事有计划，遇到问题不慌，能让你从长期硬撑的状态里放松下来。你心动的核心不是年龄，而是成熟感带来的安全感。 你真正想要的，是不用一直做那个最懂事、最能扛、最会安排的人。你希望有人看见你的疲惫，也愿意在现实层面承担一部分责任，而不是只给你情绪价值。","diagnosis":"你的答案显示，你在亲密关系里对稳定感和托底感的需求很高。你不一定真的只适合年上，但你很容易被年上感吸引：对方说话有分寸，做事有计划，遇到问题不慌，能让你从长期硬撑的状态里放松下来。你心动的核心不是年龄，而是成熟感带来的安全感。","whatYouReallyWant":"你真正想要的，是不用一直做那个最懂事、最能扛、最会安排的人。你希望有人看见你的疲惫，也愿意在现实层面承担一部分责任，而不是只给你情绪价值。","mechanism":{"title":"稳定托底机制","content":"年上感之所以吸引你，是因为它满足了亲密关系里的安全基地需求。你会天然观察一个人是否稳定、是否可靠、是否能处理现实问题。真正适合你的成熟型关系，不是对方替你做主，而是对方有能力和你一起扛事。"},"professionalBasis":["从安全感来源看，你更看重长期稳定、行动承诺和现实承担，而不是短期刺激。","从被照顾方式看，你吃细节型照顾，但不喜欢被控制。你需要成熟感，不需要爹味或说教。","从冲突处理看，你希望对方先稳住局面，再进入沟通，而不是用情绪把你拖进更累的状态。"],"coreTensions":["需要被接住","容易过度硬撑","喜欢成熟感","害怕被控制","重视现实承担"],"suitableIf":["情绪稳定的人","有生活规划的人","能承担现实问题的人","尊重你选择的人"],"cautionIf":["把控制欲误认为成熟","因为对方年纪大就默认可靠","过度依赖对方做决定","忽略心动和轻松感"],"indices":[{"label":"成熟依赖度","value":88},{"label":"现实安全感需求","value":91},{"label":"被照顾敏感度","value":84},{"label":"控制风险警惕","value":72}],"ifStay":"如果你继续只看年龄差，很容易被表面的成熟感吸引，却忽略对方是否真的尊重你、是否有稳定行动。","ifChange":"如果你把筛选标准从年纪转成情绪稳定、现实承担和边界尊重，你会更容易遇到真正适合你的年上感伴侣。","notRecommended":["把控制欲误认为成熟","因为对方年纪大就默认可靠","过度依赖对方做决定","忽略心动和轻松感"],"plan90":[{"title":"第 1 周：写清楚你的稳定感标准","content":"列出你认为成熟的 5 个具体表现，比如守时、能沟通、遇事不逃避、财务观稳定、承诺有行动。"},{"title":"第 2-3 周：区分成熟和控制","content":"观察对方是在帮你看见选择，还是替你决定选择。前者是成熟，后者是控制。"},{"title":"第 4-6 周：练习表达需求","content":"不要只等对方猜。把你需要陪伴、建议、行动支持还是空间说清楚。"},{"title":"第 7-12 周：看行动一致性","content":"稳定感不能只听承诺，要看对方在小事里是否持续可靠。"}],"closing":"你适合的年上感，是能让你安心做自己的人，而不是让你变小、变弱、变听话的人。"},"B":{"typeName":"年下高能治愈型","subtitle":"你更容易被热烈、直接、带一点少年感的人打动。你需要的不是被安排，而是被重新点亮。","posterSubtext":"你未必只适合年下，但你很吃年轻感、直球表达和轻盈的心动。","maturityScore":79,"coreConclusion":"你的答案显示，你在关系里很需要新鲜感、生命力和被热烈喜欢的感觉。你容易被年下感吸引，不是因为对方真的小，而是因为 TA 让你觉得恋爱重新变轻了、亮了、好玩了。你可能已经习惯理智、负责、克制，所以会被直白表达和真诚依赖打动。 你真正想要的，是从过度成熟里松一口气。你想被喜欢得明确一点，被需要得可爱一点，也想在关系里找回自己柔软、撒娇、敢心动的一面。","diagnosis":"你的答案显示，你在关系里很需要新鲜感、生命力和被热烈喜欢的感觉。你容易被年下感吸引，不是因为对方真的小，而是因为 TA 让你觉得恋爱重新变轻了、亮了、好玩了。你可能已经习惯理智、负责、克制，所以会被直白表达和真诚依赖打动。","whatYouReallyWant":"你真正想要的，是从过度成熟里松一口气。你想被喜欢得明确一点，被需要得可爱一点，也想在关系里找回自己柔软、撒娇、敢心动的一面。","mechanism":{"title":"心动唤醒机制","content":"年下感吸引你的核心，是情绪唤醒。一个真诚、热烈、表达直接的人，会让你从长期理性和疲惫里出来。你要小心的不是年下本身，而是把新鲜感误认为长期适配。"},"professionalBasis":["从情绪节奏看，你需要关系里有轻盈、笑点和明亮感，不想一上来就进入沉重现实。","从亲密角色看，你希望自己能被直白喜欢，也能保留一点幼稚和松弛。","从长期关系看，你仍然需要稳定，只是稳定不能以牺牲心动为代价。"],"coreTensions":["需要心动","害怕关系沉重","容易被直球打动","也担心自己承担太多","需要新鲜感"],"suitableIf":["表达直接的人","真诚热烈的人","情绪明亮的人","愿意成长的人"],"cautionIf":["把上头当适合","把依赖当爱","忽略现实责任","长期变成你单方面托底"],"indices":[{"label":"心动唤醒度","value":92},{"label":"新鲜感需求","value":88},{"label":"被需要满足感","value":81},{"label":"现实托底风险","value":74}],"ifStay":"如果你只追求热烈，很容易在前期很上头，后期发现自己又变成照顾者。","ifChange":"如果你能同时筛选真诚表达和自我负责能力，年下感关系会给你带来很强的治愈和生命力。","notRecommended":["把上头当适合","把依赖当爱","忽略现实责任","长期变成你单方面托底"],"plan90":[{"title":"第 1 周：区分热烈和稳定","content":"不要只看 TA 喜不喜欢你，也要看 TA 是否能持续行动、处理冲突、为自己负责。"},{"title":"第 2-3 周：保留一点慢节奏","content":"越上头越要慢一点，看三次冲突后的表现，比看三句甜话更重要。"},{"title":"第 4-6 周：观察依赖是否健康","content":"可爱的依赖会让关系更亲密，失控的依赖会让你变成家长。"},{"title":"第 7-12 周：把心动落到日常","content":"看你们能不能一起处理现实小事，而不是只在暧昧和情绪高点里好。"}],"closing":"你不是幼稚，你只是太久没有被轻盈地喜欢过。真正适合你的年下感，要热烈，也要负责。"},"C":{"typeName":"同龄并肩搭子型","subtitle":"你更适合同阶段、同频、平等感强的关系。你要的不是谁带谁，而是两个人一起往前走。","posterSubtext":"你可能没那么执着年上或年下，你更在意同频、平等和并肩感。","maturityScore":83,"coreConclusion":"你的答案显示，你对关系里的平等感非常敏感。你不太喜欢明显高低位，也不想长期扮演被照顾者或照顾者。你更容易被同龄感、同阶段感、朋友式恋人吸引：能聊废话，也能聊现实；能互相吐槽，也能一起解决问题。 你真正想要的，是一个能和你站在同一边的人。你不想在关系里被教育、被管理，也不想一直托底别人。你希望彼此都能成长，彼此都能承担。","diagnosis":"你的答案显示，你对关系里的平等感非常敏感。你不太喜欢明显高低位，也不想长期扮演被照顾者或照顾者。你更容易被同龄感、同阶段感、朋友式恋人吸引：能聊废话，也能聊现实；能互相吐槽，也能一起解决问题。","whatYouReallyWant":"你真正想要的，是一个能和你站在同一边的人。你不想在关系里被教育、被管理，也不想一直托底别人。你希望彼此都能成长，彼此都能承担。","mechanism":{"title":"平等并肩机制","content":"同龄感吸引你的核心，是低权力差。你会天然寻找能平等讨论、共同决策、互相补位的人。你需要的不是绝对同岁，而是生活阶段、价值观和沟通节奏相近。"},"professionalBasis":["从沟通方式看，你更偏好互相商量，而不是一方指挥一方服从。","从冲突处理看，你希望双方都放下面子，一起复盘，而不是比谁更有理。","从长期关系看，你重视队友感。现实问题可以难，但不能只有一个人在扛。"],"coreTensions":["需要平等","不喜欢高低位","看重同频","害怕单方承担","重视朋友式亲密"],"suitableIf":["同阶段的人","能共同成长的人","平等沟通的人","像队友也像恋人的人"],"cautionIf":["把同频误认为完全一样","害怕依赖导致过度独立","遇到问题都等对方先低头","关系像朋友但缺少亲密表达"],"indices":[{"label":"同频需求","value":90},{"label":"平等敏感度","value":87},{"label":"并肩成长感","value":86},{"label":"亲密表达待加强","value":61}],"ifStay":"如果你只追求平等，可能会让关系太像合作，少了被偏爱和柔软表达。","ifChange":"如果你在同频关系里增加一点主动表达和情绪照顾，你会更容易拥有稳定又轻松的长期亲密。","notRecommended":["把同频误认为完全一样","害怕依赖导致过度独立","遇到问题都等对方先低头","关系像朋友但缺少亲密表达"],"plan90":[{"title":"第 1 周：定义你的同频标准","content":"写下哪些是必须同频，比如金钱观、生活节奏、沟通方式；哪些只是兴趣不同，可以保留差异。"},{"title":"第 2-3 周：练习表达偏爱","content":"不要只做理性队友，也要让对方感受到你真的喜欢 TA。"},{"title":"第 4-6 周：建立共同解决问题的流程","content":"遇到冲突时先确认共同目标，再谈谁对谁错。"},{"title":"第 7-12 周：做一个共同小计划","content":"旅行、健身、存钱、学习都可以。并肩感需要被真实行动喂养。"}],"closing":"你适合的不是谁大谁小，而是那个能和你一起把日子过成队友局、也过成恋爱局的人。"},"D":{"typeName":"年龄无关边界型","subtitle":"对你来说，年上年下都不是关键。真正重要的是情绪成熟、边界清楚、关系不消耗。","posterSubtext":"你不是挑年龄，你是在筛选关系质量。","maturityScore":90,"coreConclusion":"你的答案显示，你对年龄差本身没有那么执着。你更在意一个人是否尊重边界、情绪是否稳定、能不能清楚沟通、有没有自我负责能力。年上可以不成熟，年下也可以很可靠。同龄也可能消耗你。你真正筛选的是关系质量，而不是出生年份。 你真正想要的，是亲密但不被吞没。你可以很喜欢一个人，也可以投入关系，但你不想为了爱失去判断力、边界和生活秩序。","diagnosis":"你的答案显示，你对年龄差本身没有那么执着。你更在意一个人是否尊重边界、情绪是否稳定、能不能清楚沟通、有没有自我负责能力。年上可以不成熟，年下也可以很可靠。同龄也可能消耗你。你真正筛选的是关系质量，而不是出生年份。","whatYouReallyWant":"你真正想要的，是亲密但不被吞没。你可以很喜欢一个人，也可以投入关系，但你不想为了爱失去判断力、边界和生活秩序。","mechanism":{"title":"边界安全机制","content":"当一个人对边界高度敏感时，年龄差不再是第一变量。你会更关注对方如何处理冲突、如何尊重空间、如何兑现承诺，以及是否会用爱来控制你。适合你的关系，必须同时有靠近和自由。"},"professionalBasis":["从相处边界看，你不排斥亲密，但非常排斥越界、试探和情绪绑架。","从冲突处理看，你更相信沟通规则，而不是靠年龄、经验或热烈程度解决问题。","从长期关系看，你需要一个能和你保持清醒关系的人，既能靠近，也能尊重彼此独立。"],"coreTensions":["重视边界","不迷信年龄","害怕被吞没","需要情绪成熟","看重行动一致性"],"suitableIf":["边界清楚的人","情绪稳定的人","自我负责的人","尊重个人空间的人"],"cautionIf":["被年龄标签带偏","把冷淡误认为边界感","过度防御导致难以靠近","只看理性忽略心动"],"indices":[{"label":"边界敏感度","value":94},{"label":"情绪成熟需求","value":90},{"label":"年龄标签依赖","value":26},{"label":"清醒恋爱指数","value":88}],"ifStay":"如果你继续问自己适合年上还是年下，可能会错过真正的问题：这个人是否尊重你、是否稳定、是否能好好沟通。","ifChange":"如果你把标准改成边界、情绪成熟和行动一致，你会更快筛掉消耗型关系，也更容易识别真正适合的人。","notRecommended":["被年龄标签带偏","把冷淡误认为边界感","过度防御导致难以靠近","只看理性忽略心动"],"plan90":[{"title":"第 1 周：列出你的边界红线","content":"包括联系频率、社交边界、隐私边界、金钱边界、冲突处理方式。越具体越好。"},{"title":"第 2-3 周：看对方如何处理拒绝","content":"一个人被拒绝后的反应，往往比追你的时候更能说明成熟度。"},{"title":"第 4-6 周：练习柔软表达边界","content":"边界不是冷漠。你可以温和、清楚、坚定地说出自己的需要。"},{"title":"第 7-12 周：观察长期一致性","content":"不要被一次热烈或一次成熟表现打动，要看对方是否稳定重复做到。"}],"closing":"你适合的不是某个年龄段，而是那个让你既能靠近、又不用丢掉自己的人。"}},"secondaryNotes":{"A":{"B":"你的主倾向是「年上稳定照顾型」，但也带有「年下高能治愈型」的影子。主结果代表你在亲密关系里最核心的需求，副结果提醒你：不要只用年上或年下概括自己，真正决定适配度的是安全感、心动感、平等感和边界感的组合。","C":"你的主倾向是「年上稳定照顾型」，但也带有「同龄并肩搭子型」的影子。主结果代表你在亲密关系里最核心的需求，副结果提醒你：不要只用年上或年下概括自己，真正决定适配度的是安全感、心动感、平等感和边界感的组合。","D":"你的主倾向是「年上稳定照顾型」，但也带有「年龄无关边界型」的影子。主结果代表你在亲密关系里最核心的需求，副结果提醒你：不要只用年上或年下概括自己，真正决定适配度的是安全感、心动感、平等感和边界感的组合。"},"B":{"A":"你的主倾向是「年下高能治愈型」，但也带有「年上稳定照顾型」的影子。主结果代表你在亲密关系里最核心的需求，副结果提醒你：不要只用年上或年下概括自己，真正决定适配度的是安全感、心动感、平等感和边界感的组合。","C":"你的主倾向是「年下高能治愈型」，但也带有「同龄并肩搭子型」的影子。主结果代表你在亲密关系里最核心的需求，副结果提醒你：不要只用年上或年下概括自己，真正决定适配度的是安全感、心动感、平等感和边界感的组合。","D":"你的主倾向是「年下高能治愈型」，但也带有「年龄无关边界型」的影子。主结果代表你在亲密关系里最核心的需求，副结果提醒你：不要只用年上或年下概括自己，真正决定适配度的是安全感、心动感、平等感和边界感的组合。"},"C":{"A":"你的主倾向是「同龄并肩搭子型」，但也带有「年上稳定照顾型」的影子。主结果代表你在亲密关系里最核心的需求，副结果提醒你：不要只用年上或年下概括自己，真正决定适配度的是安全感、心动感、平等感和边界感的组合。","B":"你的主倾向是「同龄并肩搭子型」，但也带有「年下高能治愈型」的影子。主结果代表你在亲密关系里最核心的需求，副结果提醒你：不要只用年上或年下概括自己，真正决定适配度的是安全感、心动感、平等感和边界感的组合。","D":"你的主倾向是「同龄并肩搭子型」，但也带有「年龄无关边界型」的影子。主结果代表你在亲密关系里最核心的需求，副结果提醒你：不要只用年上或年下概括自己，真正决定适配度的是安全感、心动感、平等感和边界感的组合。"},"D":{"A":"你的主倾向是「年龄无关边界型」，但也带有「年上稳定照顾型」的影子。主结果代表你在亲密关系里最核心的需求，副结果提醒你：不要只用年上或年下概括自己，真正决定适配度的是安全感、心动感、平等感和边界感的组合。","B":"你的主倾向是「年龄无关边界型」，但也带有「年下高能治愈型」的影子。主结果代表你在亲密关系里最核心的需求，副结果提醒你：不要只用年上或年下概括自己，真正决定适配度的是安全感、心动感、平等感和边界感的组合。","C":"你的主倾向是「年龄无关边界型」，但也带有「同龄并肩搭子型」的影子。主结果代表你在亲密关系里最核心的需求，副结果提醒你：不要只用年上或年下概括自己，真正决定适配度的是安全感、心动感、平等感和边界感的组合。"}},"shareTemplate":["我测出来了：{{typeName}}","{{posterSubtext}}","{{secondaryLine}}","","你适合年上还是年下？32题亲密关系适配测试"]};</script>
+    <script>
+(function () {
+  const app = document.getElementById("app");
+  const configPaths = ["./configs/site-config.json", "./configs/career-change.json"];
+
+  const state = {
+    config: null,
+    answers: {},
+    currentIndex: 0,
+    selected: null,
+    locked: false,
+    loadingStep: 0,
+    route: "home",
+    resultData: null,
+  };
+
+  const defaultLoadingMessages = [
+    "正在读取你的选择倾向...",
+    "正在识别隐藏动机...",
+    "正在计算结果分布...",
+    "正在生成专属报告...",
+    "分析完成。",
+  ];
+
+  init();
+
+  async function init() {
+    try {
+      state.config = await fetchConfig();
+      applyDocumentMeta(state.config);
+
+      const saved = sessionStorage.getItem(getStorageKey());
+      if (saved) {
+        state.answers = JSON.parse(saved);
+      }
+
+      routeFromHash();
+      window.addEventListener("hashchange", routeFromHash);
+    } catch (error) {
+      app.innerHTML = `
+        <div class="error">
+          <div>
+            <h1>测试加载失败</h1>
+            <p>请确认你是通过网页链接打开页面，而不是直接双击 HTML 文件。</p>
+          </div>
+        </div>
+      `;
+      console.error(error);
+    }
+  }
+
+  async function fetchConfig() {
+    if (window.__QUIZ_CONFIG__) return window.__QUIZ_CONFIG__;
+    let lastError;
+    for (const path of configPaths) {
+      try {
+        const response = await fetch(path, { cache: "no-store" });
+        if (!response.ok) throw new Error(`${path} ${response.status}`);
+        return response.json();
+      } catch (error) {
+        lastError = error;
+      }
+    }
+    throw lastError;
+  }
+
+  function applyDocumentMeta(cfg) {
+    const title = cfg.title || "趣味测试";
+    const description = cfg.metaDescription || cfg.subtitle || "完成测试，生成你的专属报告。";
+    document.title = title;
+    setMeta("name", "description", description);
+    setMeta("property", "og:title", title);
+    setMeta("property", "og:description", description);
+  }
+
+  function setMeta(attr, key, content) {
+    let node = document.querySelector(`meta[${attr}="${key}"]`);
+    if (!node) {
+      node = document.createElement("meta");
+      node.setAttribute(attr, key);
+      document.head.appendChild(node);
+    }
+    node.setAttribute("content", content);
+  }
+
+  function routeFromHash() {
+    const route = (location.hash || "#/").replace("#/", "") || "home";
+    renderRoute(route);
+  }
+
+  function navigate(route) {
+    const nextHash = `#/${route}`;
+    if (location.hash === nextHash) {
+      renderRoute(route);
+      return;
+    }
+    location.hash = nextHash;
+  }
+
+  function renderRoute(route) {
+    state.route = route;
+    if (route === "quiz") renderQuiz();
+    else if (route === "loading") startLoading();
+    else if (route === "result") renderResult();
+    else renderHome();
+  }
+
+  function renderShell(content, extraClass = "") {
+    app.innerHTML = `
+      <div class="shell">
+        <div class="top-rule"></div>
+        <section class="screen ${extraClass}">${content}</section>
+      </div>
+      <div id="toast" class="toast">已复制</div>
+    `;
+  }
+
+  function renderHome() {
+    const cfg = state.config;
+    renderShell(
+      `
+      <div class="home">
+        <div class="kicker"><span class="dot"></span><span>${text(cfg.kicker)}</span><span class="dot"></span></div>
+        <h1 class="hero-title">${text(cfg.title)}</h1>
+        <p class="hero-subtitle">${text(cfg.subtitle)}</p>
+        <div class="hairline"></div>
+        <div class="intro">
+          ${(cfg.intro || []).map((p, index) => `<p class="${index === cfg.intro.length - 1 ? "strong" : ""}">${text(p)}</p>`).join("")}
+        </div>
+        <div class="pill-grid">
+          ${(cfg.dimensions || []).map((item) => `<div class="pill">${text(item)}</div>`).join("")}
+        </div>
+        <button class="primary-btn" data-action="start">${text(cfg.startButton || "开始测试")}</button>
+        <p class="disclaimer">${text(cfg.disclaimer || "本测试为趣味内容，仅供娱乐参考。")}</p>
+      </div>
+      `,
+      "home"
+    );
+    const startButton = app.querySelector("[data-action='start']");
+    let started = false;
+    const startQuiz = () => {
+      if (started) return;
+      started = true;
+      state.answers = {};
+      state.currentIndex = 0;
+      sessionStorage.removeItem(getStorageKey());
+      navigate("quiz");
+    };
+    startButton.addEventListener("click", startQuiz);
+    startButton.addEventListener(
+      "touchend",
+      (event) => {
+        event.preventDefault();
+        startQuiz();
+      },
+      { passive: false }
+    );
+  }
+
+  function renderQuiz() {
+    const questions = state.config.questions || [];
+    const question = questions[state.currentIndex];
+    if (!question) {
+      renderHome();
+      return;
+    }
+
+    const progress = ((state.currentIndex + 1) / questions.length) * 100;
+
+    renderShell(
+      `
+      <div class="sticky-head">
+        <div class="quiz-meta">
+          <span>${String(state.currentIndex + 1).padStart(2, "0")} / ${questions.length}</span>
+          <span>${text(question.module)}</span>
+        </div>
+        <div class="progress-track"><div class="progress-bar" style="width:${progress}%"></div></div>
+      </div>
+      <div class="question-no">${String(state.currentIndex + 1).padStart(2, "0")}</div>
+      <h1 class="question-title">${text(question.text)}</h1>
+      <div class="options">
+        ${(question.options || [])
+          .map(
+            (option) => `
+            <button class="option" data-option="${text(option.key)}">
+              <span class="option-key">${text(option.key)}</span>
+              <span class="option-text">${text(option.text)}</span>
+            </button>
+          `
+          )
+          .join("")}
+      </div>
+      <p class="hint">${text(state.config.quizHint || "选择后自动进入下一题")}</p>
+      `,
+      "quiz-screen"
+    );
+
+    app.querySelectorAll("[data-option]").forEach((button) => {
+      button.addEventListener("click", () => selectOption(button.dataset.option));
+    });
+  }
+
+  function selectOption(key) {
+    if (state.locked) return;
+    state.locked = true;
+    state.selected = key;
+    const question = state.config.questions[state.currentIndex];
+    state.answers[question.id] = key;
+
+    app.querySelectorAll(".option").forEach((button) => {
+      const selected = button.dataset.option === key;
+      button.classList.toggle("selected", selected);
+      button.classList.toggle("dimmed", !selected);
+    });
+
+    window.setTimeout(() => {
+      if (state.currentIndex < state.config.questions.length - 1) {
+        state.currentIndex += 1;
+        state.locked = false;
+        state.selected = null;
+        renderQuiz();
+      } else {
+        sessionStorage.setItem(getStorageKey(), JSON.stringify(state.answers));
+        state.locked = false;
+        navigate("loading");
+      }
+    }, 420);
+  }
+
+  function startLoading() {
+    state.loadingStep = 0;
+    renderLoading("");
+    tickLoading();
+  }
+
+  function renderLoading(value) {
+    const loadingMessages = getLoadingMessages();
+    renderShell(
+      `
+      <div class="loading-card">
+        <div class="spinner"></div>
+        <div class="loading-text">${text(value)}<span class="cursor">|</span></div>
+        <div class="step-bars">
+          ${loadingMessages.map((_, index) => `<div class="step ${index < state.loadingStep ? "done" : ""}"><span></span></div>`).join("")}
+        </div>
+      </div>
+      `,
+      "loading-screen"
+    );
+  }
+
+  function tickLoading() {
+    if (state.route !== "loading") return;
+    const loadingMessages = getLoadingMessages();
+    if (state.loadingStep >= loadingMessages.length) {
+      window.setTimeout(() => navigate("result"), 700);
+      return;
+    }
+    const message = loadingMessages[state.loadingStep];
+    let chars = 0;
+    const interval = window.setInterval(() => {
+      chars += 1;
+      renderLoading(message.slice(0, chars));
+      if (chars >= message.length) {
+        window.clearInterval(interval);
+        window.setTimeout(() => {
+          state.loadingStep += 1;
+          tickLoading();
+        }, 520);
+      }
+    }, 35);
+  }
+
+  function renderResult() {
+    const saved = sessionStorage.getItem(getStorageKey());
+    if (saved) state.answers = JSON.parse(saved);
+    if (Object.keys(state.answers).length < state.config.questions.length) {
+      renderHome();
+      return;
+    }
+
+    const scored = scoreAnswers(state.answers);
+    const primary = state.config.results[scored.primary];
+    const secondary = scored.secondary ? state.config.secondaryNotes?.[scored.primary]?.[scored.secondary] : null;
+    const stage = getStage(primary.maturityScore);
+    const shareText = buildShareText(primary, secondary);
+    const compareLabels = state.config.compareLabels || ["如果继续原路", "如果换一种做法"];
+    state.resultData = { scored, primary, secondary, stage, shareText };
+
+    renderShell(
+      `
+      <article class="report">
+        <div class="kicker"><span class="dot"></span><span>${text(state.config.resultKicker || "Result Report")}</span><span class="dot"></span></div>
+        <h1 class="result-type">${text(primary.typeName)}</h1>
+        <p class="result-subtitle">${text(primary.subtitle)}</p>
+        <div class="stamp-row">
+          <div class="stamp"><strong>${text(primary.maturityScore)}</strong><span>${text(state.config.scoreLabel || "决策成熟度")}</span></div>
+          <div class="stamp"><strong>${text(stage)}</strong><span>${text(state.config.stageLabel || "当前行动阶段")}</span></div>
+        </div>
+
+        <section class="section">
+          <h2>你的答案分布</h2>
+          <div class="meters">
+            ${Object.entries(scored.counts)
+              .map(([key, value]) => {
+                const typeData = state.config.results[key];
+                const width = (value / state.config.questions.length) * 100;
+                return `
+                  <div>
+                    <div class="meter-head"><span>${text(key)} · ${text(typeData.typeName)}</span><span>${value} 题</span></div>
+                    <div class="meter-track"><div class="meter-fill" style="width:${width}%"></div></div>
+                  </div>
+                `;
+              })
+              .join("")}
+          </div>
+        </section>
+
+        ${secondary ? `<section class="section"><h2>副倾向提示</h2><div class="secondary-note">${text(secondary)}</div></section>` : ""}
+
+        <section class="section">
+          <h2>诊断结论</h2>
+          <div class="quote">${text(primary.coreConclusion)}</div>
+        </section>
+
+        <section class="section">
+          <h2>为什么你会这样</h2>
+          <p>${text(primary.diagnosis)}</p>
+          <p>${text(primary.whatYouReallyWant)}</p>
+        </section>
+
+        <section class="section">
+          <h2>${text(primary.mechanism.title)}</h2>
+          <p>${text(primary.mechanism.content)}</p>
+        </section>
+
+        ${renderParagraphSection("专业解读框架", primary.professionalBasis)}
+        ${renderTagSection("你的关键矛盾", primary.coreTensions)}
+        ${renderCompareListSection("适合推进的条件", "需要谨慎的信号", primary.suitableIf, primary.cautionIf)}
+
+        <section class="section">
+          <h2>关键指数</h2>
+          <div class="meters">
+            ${(primary.indices || [])
+              .map(
+                (item) => `
+                <div>
+                  <div class="meter-head"><span>${text(item.label)}</span><span>${text(item.value)}</span></div>
+                  <div class="meter-track"><div class="meter-fill" style="width:${number(item.value)}%"></div></div>
+                </div>
+              `
+              )
+              .join("")}
+          </div>
+        </section>
+
+        <section class="section">
+          <h2>两条路径对比</h2>
+          <div class="compare">
+            <div class="compare-card"><h3>${text(compareLabels[0])}</h3><p>${text(primary.ifStay)}</p></div>
+            <div class="compare-card"><h3>${text(compareLabels[1])}</h3><p>${text(primary.ifChange)}</p></div>
+          </div>
+        </section>
+
+        <section class="section">
+          <h2>现在最不建议你做</h2>
+          <div class="tag-list">${(primary.notRecommended || []).map((item) => `<span class="tag">${text(item)}</span>`).join("")}</div>
+        </section>
+
+        <section class="section">
+          <h2>未来 90 天验证方案</h2>
+          <div class="plan">
+            ${(primary.plan90 || [])
+              .map(
+                (item, index) => `
+                <div class="plan-card">
+                  <h3>${index + 1}. ${text(item.title)}</h3>
+                  <p>${text(item.content)}</p>
+                </div>
+              `
+              )
+              .join("")}
+          </div>
+        </section>
+
+        <section class="section">
+          <h2>最后一句话</h2>
+          <p>${text(primary.closing)}</p>
+        </section>
+
+        <div class="actions">
+          <button class="primary-btn" data-action="copy">${text(state.config.copyButton || "复制我的结果")}</button>
+          <button class="ghost-btn" data-action="restart">${text(state.config.restartButton || "重新测试")}</button>
+        </div>
+      </article>
+      `,
+      "result-screen"
+    );
+
+    app.querySelector("[data-action='copy']").addEventListener("click", () => copyShareText(shareText));
+    app.querySelector("[data-action='restart']").addEventListener("click", () => {
+      sessionStorage.removeItem(getStorageKey());
+      state.answers = {};
+      state.currentIndex = 0;
+      navigate("home");
+    });
+  }
+
+  function renderParagraphSection(title, paragraphs) {
+    if (!Array.isArray(paragraphs) || !paragraphs.length) return "";
+    return `
+      <section class="section">
+        <h2>${text(title)}</h2>
+        ${paragraphs.map((item) => `<p>${text(item)}</p>`).join("")}
+      </section>
+    `;
+  }
+
+  function renderTagSection(title, items) {
+    if (!Array.isArray(items) || !items.length) return "";
+    return `
+      <section class="section">
+        <h2>${text(title)}</h2>
+        <div class="tag-list">${items.map((item) => `<span class="tag">${text(item)}</span>`).join("")}</div>
+      </section>
+    `;
+  }
+
+  function renderCompareListSection(leftTitle, rightTitle, leftItems, rightItems) {
+    const hasLeft = Array.isArray(leftItems) && leftItems.length;
+    const hasRight = Array.isArray(rightItems) && rightItems.length;
+    if (!hasLeft && !hasRight) return "";
+    return `
+      <section class="section">
+        <h2>适用边界</h2>
+        <div class="compare">
+          <div class="compare-card">
+            <h3>${text(leftTitle)}</h3>
+            ${(leftItems || []).map((item) => `<p>${text(item)}</p>`).join("")}
+          </div>
+          <div class="compare-card">
+            <h3>${text(rightTitle)}</h3>
+            ${(rightItems || []).map((item) => `<p>${text(item)}</p>`).join("")}
+          </div>
+        </div>
+      </section>
+    `;
+  }
+
+  function scoreAnswers(answers) {
+    const counts = { A: 0, B: 0, C: 0, D: 0 };
+    Object.values(answers).forEach((key) => {
+      if (counts[key] !== undefined) counts[key] += 1;
+    });
+    const sorted = Object.entries(counts).sort((a, b) => b[1] - a[1]);
+    const threshold = state.config.secondaryThreshold ?? 2;
+    const primary = sorted[0][0];
+    const secondary = sorted[1][1] > 0 && sorted[0][1] - sorted[1][1] <= threshold ? sorted[1][0] : null;
+    return { counts, primary, secondary };
+  }
+
+  function getStage(score) {
+    const labels = state.config.stageLabels || [
+      { max: 45, label: "观察期" },
+      { max: 65, label: "验证期" },
+      { max: 82, label: "规划期" },
+      { max: 100, label: "行动期" },
+    ];
+    const hit = labels.find((item) => score <= item.max);
+    return hit ? hit.label : labels[labels.length - 1].label;
+  }
+
+  function buildShareText(primary, secondary) {
+    const template = state.config.shareTemplate || [
+      "我测出了：{{typeName}}",
+      "{{posterSubtext}}",
+      "{{secondaryLine}}",
+      "",
+      "{{title}}",
+    ];
+    const values = {
+      title: state.config.title,
+      typeName: primary.typeName,
+      posterSubtext: primary.posterSubtext,
+      secondary: secondary || "",
+      secondaryLine: secondary ? `副倾向：${secondary}` : "",
+    };
+    return template
+      .map((line) => fillTemplate(line, values))
+      .filter((line, index, arr) => line || arr[index - 1])
+      .join("\n")
+      .trim();
+  }
+
+  async function copyShareText(value) {
+    try {
+      await navigator.clipboard.writeText(value);
+      showToast("结果文案已复制");
+    } catch (error) {
+      showToast("复制失败，可长按手动复制");
+    }
+  }
+
+  function showToast(value) {
+    const toast = document.getElementById("toast");
+    if (!toast) return;
+    toast.textContent = value;
+    toast.classList.add("show");
+    window.setTimeout(() => toast.classList.remove("show"), 1600);
+  }
+
+  function getLoadingMessages() {
+    return state.config.loadingMessages || defaultLoadingMessages;
+  }
+
+  function getStorageKey() {
+    return `xhsTestAnswers:${state.config.slug || "default"}`;
+  }
+
+  function fillTemplate(template, values) {
+    return String(template).replace(/\{\{(\w+)\}\}/g, (_, key) => values[key] || "");
+  }
+
+  function number(value) {
+    const parsed = Number(value);
+    if (Number.isNaN(parsed)) return 0;
+    return Math.max(0, Math.min(100, parsed));
+  }
+
+  function text(value) {
+    return String(value ?? "")
+      .replace(/&/g, "&amp;")
+      .replace(/</g, "&lt;")
+      .replace(/>/g, "&gt;")
+      .replace(/"/g, "&quot;");
+  }
+})();
+
+    </script>
+  </body>
+</html>
