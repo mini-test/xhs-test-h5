@@ -1,0 +1,1125 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <meta name="description" content="完成 32 道神仙转世测试，生成你的神仙原型、人间课题和天赋报告。" />
+    <meta property="og:title" content="测测你是哪位神仙转世？" />
+    <meta property="og:description" content="完成 32 道神仙转世测试，生成你的神仙原型、人间课题和天赋报告。" />
+    <title>测测你是哪位神仙转世？</title>
+    <style>
+:root {
+  --bg: #fbfaf7;
+  --paper: #fffefd;
+  --ink: #20242a;
+  --muted: #65707d;
+  --line: #d9d4ca;
+  --line-strong: #b9afa0;
+  --accent: #9b4339;
+  --accent-soft: #f1dfd7;
+  --gold: #c0964d;
+  --sage: #66795f;
+  --blue: #526a86;
+  --shadow: 0 16px 36px rgba(60, 47, 38, 0.1);
+  --radius: 8px;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  min-height: 100%;
+  background:
+    linear-gradient(rgba(32, 36, 42, 0.035) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(32, 36, 42, 0.035) 1px, transparent 1px),
+    var(--bg);
+  background-size: 24px 24px;
+}
+
+body {
+  min-height: 100vh;
+  margin: 0;
+  color: var(--ink);
+  font-family:
+    "PingFang SC",
+    "Microsoft YaHei",
+    "Noto Sans SC",
+    system-ui,
+    -apple-system,
+    BlinkMacSystemFont,
+    sans-serif;
+  letter-spacing: 0;
+}
+
+button {
+  font: inherit;
+}
+
+.shell {
+  width: min(100%, 480px);
+  min-height: 100vh;
+  margin: 0 auto;
+  background: rgba(251, 250, 247, 0.88);
+}
+
+.top-rule {
+  height: 4px;
+  background: var(--accent);
+}
+
+.screen {
+  min-height: calc(100vh - 4px);
+  padding: 28px 22px 32px;
+}
+
+.home {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.kicker {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  color: var(--muted);
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  font-size: 11px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+.dot {
+  width: 7px;
+  height: 7px;
+  background: var(--accent);
+  border-radius: 50%;
+}
+
+.hero-title {
+  margin: 26px 0 14px;
+  color: var(--ink);
+  font-size: 30px;
+  line-height: 1.2;
+  text-align: center;
+  font-weight: 800;
+}
+
+.hero-subtitle {
+  margin: 0 auto 28px;
+  max-width: 340px;
+  color: var(--muted);
+  font-size: 15px;
+  line-height: 1.75;
+  text-align: center;
+}
+
+.hairline {
+  width: 64px;
+  height: 1px;
+  margin: 0 auto 30px;
+  background: var(--line-strong);
+}
+
+.intro {
+  margin: 0 auto;
+  max-width: 380px;
+}
+
+.intro p {
+  margin: 0 0 15px;
+  color: rgba(32, 36, 42, 0.82);
+  font-size: 15px;
+  line-height: 1.8;
+}
+
+.intro .strong {
+  color: var(--accent);
+  font-weight: 700;
+}
+
+.pill-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px;
+  margin: 28px 0;
+}
+
+.pill {
+  min-height: 42px;
+  display: grid;
+  place-items: center;
+  border: 1px solid var(--line);
+  color: var(--muted);
+  background: rgba(255, 255, 255, 0.44);
+  font-size: 13px;
+}
+
+.primary-btn,
+.ghost-btn,
+.copy-btn {
+  width: 100%;
+  min-height: 48px;
+  border: 1px solid var(--ink);
+  border-radius: 0;
+  cursor: pointer;
+  transition: transform 150ms ease, background 150ms ease, color 150ms ease, border-color 150ms ease;
+}
+
+.primary-btn {
+  background: var(--ink);
+  color: #fff;
+  font-weight: 700;
+}
+
+.ghost-btn,
+.copy-btn {
+  background: transparent;
+  color: var(--ink);
+}
+
+.primary-btn:active,
+.ghost-btn:active,
+.copy-btn:active,
+.option:active {
+  transform: translateY(1px);
+}
+
+.disclaimer {
+  margin: 18px auto 0;
+  max-width: 340px;
+  color: var(--muted);
+  font-size: 12px;
+  line-height: 1.65;
+  text-align: center;
+}
+
+.quiz-screen {
+  padding-top: 0;
+}
+
+.sticky-head {
+  position: sticky;
+  top: 0;
+  z-index: 5;
+  margin: 0 -22px 26px;
+  padding: 14px 22px 12px;
+  background: rgba(251, 250, 247, 0.95);
+  border-bottom: 1px solid var(--line);
+  backdrop-filter: blur(12px);
+}
+
+.quiz-meta {
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+  color: var(--muted);
+  font-size: 12px;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+}
+
+.progress-track {
+  height: 4px;
+  margin-top: 10px;
+  background: rgba(32, 36, 42, 0.09);
+}
+
+.progress-bar {
+  height: 100%;
+  background: var(--accent);
+  transition: width 260ms ease;
+}
+
+.question-no {
+  color: rgba(155, 67, 57, 0.18);
+  font-size: 48px;
+  line-height: 1;
+  font-weight: 800;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+}
+
+.question-title {
+  margin: 18px 0 24px;
+  font-size: 22px;
+  line-height: 1.5;
+  font-weight: 750;
+}
+
+.options {
+  display: grid;
+  gap: 12px;
+}
+
+.option {
+  min-height: 66px;
+  display: grid;
+  grid-template-columns: 30px 1fr;
+  gap: 12px;
+  align-items: start;
+  width: 100%;
+  padding: 15px;
+  border: 1px solid var(--line);
+  background: rgba(255, 255, 255, 0.68);
+  color: var(--ink);
+  text-align: left;
+  cursor: pointer;
+  transition: background 160ms ease, border-color 160ms ease, color 160ms ease, opacity 160ms ease;
+}
+
+.option-key {
+  display: grid;
+  place-items: center;
+  width: 28px;
+  height: 28px;
+  border: 1px solid var(--line-strong);
+  font-size: 13px;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+}
+
+.option-text {
+  padding-top: 2px;
+  font-size: 15px;
+  line-height: 1.55;
+}
+
+.option.selected {
+  border-color: var(--accent);
+  background: var(--accent);
+  color: #fff;
+}
+
+.option.selected .option-key {
+  border-color: rgba(255, 255, 255, 0.8);
+}
+
+.option.dimmed {
+  opacity: 0.42;
+}
+
+.hint {
+  margin: 18px 0 0;
+  color: var(--muted);
+  font-size: 12px;
+  text-align: center;
+}
+
+.loading-screen {
+  display: grid;
+  place-items: center;
+}
+
+.loading-card {
+  width: 100%;
+  max-width: 360px;
+  text-align: center;
+}
+
+.spinner {
+  width: 54px;
+  height: 54px;
+  margin: 0 auto 24px;
+  border: 2px solid var(--line);
+  border-top-color: var(--accent);
+  border-radius: 50%;
+  animation: spin 850ms linear infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.loading-text {
+  min-height: 54px;
+  color: var(--accent);
+  font-size: 17px;
+  line-height: 1.6;
+  font-weight: 700;
+}
+
+.step-bars {
+  display: grid;
+  gap: 8px;
+  margin-top: 28px;
+}
+
+.step {
+  height: 4px;
+  overflow: hidden;
+  background: rgba(32, 36, 42, 0.09);
+}
+
+.step span {
+  display: block;
+  height: 100%;
+  width: 0;
+  background: var(--accent);
+  transition: width 300ms ease;
+}
+
+.step.done span {
+  width: 100%;
+}
+
+.result-screen {
+  padding: 22px 18px 30px;
+}
+
+.report {
+  padding: 22px 16px 18px;
+  border: 1px solid var(--line);
+  background: var(--paper);
+  box-shadow: var(--shadow);
+}
+
+.result-type {
+  margin: 8px 0 8px;
+  color: var(--accent);
+  font-size: 30px;
+  line-height: 1.15;
+  font-weight: 850;
+  text-align: center;
+}
+
+.result-subtitle {
+  margin: 0 auto 20px;
+  color: var(--muted);
+  font-size: 15px;
+  line-height: 1.7;
+  text-align: center;
+}
+
+.stamp-row {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px;
+  margin: 18px 0 20px;
+}
+
+.stamp {
+  padding: 12px 10px;
+  border: 1px solid var(--line);
+  background: #fbfaf7;
+}
+
+.stamp strong {
+  display: block;
+  margin-bottom: 4px;
+  color: var(--ink);
+  font-size: 20px;
+}
+
+.stamp span {
+  color: var(--muted);
+  font-size: 12px;
+}
+
+.section {
+  padding: 20px 0;
+  border-top: 1px solid var(--line);
+}
+
+.section h2 {
+  margin: 0 0 12px;
+  font-size: 18px;
+  color: var(--ink);
+}
+
+.section p {
+  margin: 0 0 12px;
+  color: rgba(32, 36, 42, 0.82);
+  font-size: 15px;
+  line-height: 1.85;
+}
+
+.quote {
+  padding: 15px;
+  border-left: 3px solid var(--accent);
+  background: var(--accent-soft);
+  color: #5b2d27;
+  line-height: 1.8;
+  font-weight: 700;
+}
+
+.meters {
+  display: grid;
+  gap: 14px;
+}
+
+.meter-head {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 7px;
+  color: var(--muted);
+  font-size: 13px;
+}
+
+.meter-track {
+  height: 8px;
+  background: rgba(32, 36, 42, 0.08);
+}
+
+.meter-fill {
+  height: 100%;
+  background: var(--accent);
+}
+
+.compare {
+  display: grid;
+  gap: 10px;
+}
+
+.compare-card {
+  padding: 14px;
+  border: 1px solid var(--line);
+  background: #fbfaf7;
+}
+
+.compare-card h3,
+.plan-card h3 {
+  margin: 0 0 8px;
+  font-size: 15px;
+}
+
+.compare-card p,
+.plan-card p {
+  font-size: 14px;
+}
+
+.tag-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.tag {
+  padding: 7px 9px;
+  border: 1px solid var(--line);
+  background: #fbfaf7;
+  color: var(--muted);
+  font-size: 13px;
+}
+
+.plan {
+  display: grid;
+  gap: 10px;
+}
+
+.plan-card {
+  padding: 14px;
+  border: 1px solid var(--line);
+  background: #fbfaf7;
+}
+
+.secondary-note {
+  padding: 14px;
+  border: 1px dashed var(--line-strong);
+  background: rgba(192, 150, 77, 0.12);
+  line-height: 1.75;
+  font-size: 14px;
+}
+
+.actions {
+  display: grid;
+  gap: 10px;
+  margin-top: 18px;
+}
+
+.toast {
+  position: fixed;
+  left: 50%;
+  bottom: 22px;
+  z-index: 20;
+  transform: translateX(-50%);
+  padding: 10px 14px;
+  background: var(--ink);
+  color: #fff;
+  font-size: 13px;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 180ms ease;
+}
+
+.toast.show {
+  opacity: 1;
+}
+
+.error {
+  display: grid;
+  place-items: center;
+  min-height: 100vh;
+  padding: 24px;
+  text-align: center;
+}
+
+.error p {
+  color: var(--muted);
+  line-height: 1.7;
+}
+
+@media (min-width: 700px) {
+  body {
+    padding: 28px 0;
+  }
+
+  .shell {
+    min-height: calc(100vh - 56px);
+    border: 1px solid var(--line);
+    box-shadow: var(--shadow);
+  }
+
+  .screen {
+    min-height: calc(100vh - 60px);
+  }
+}
+
+    </style>
+  </head>
+  <body>
+    <main id="app" aria-live="polite"></main>
+    <script>window.__QUIZ_CONFIG__ = {"slug":"test-shenxian-reincarnation","topic":"测测你是哪位神仙转世？","kicker":"32-Q Myth Archetype Test","title":"测测你是哪位神仙转世？","subtitle":"32 道题，测出你更像观音系、哪吒系、文曲星系，还是月老系神仙原型。","metaDescription":"完成 32 道神仙转世测试，生成你的神仙原型、人间课题和天赋报告。","startButton":"开始测试","resultKicker":"Myth Archetype Report","quizHint":"凭第一反应选择，系统会自动进入下一题","copyButton":"复制我的结果","restartButton":"重新测试","scoreLabel":"神仙原型清晰度","stageLabel":"当前人间课题","stageLabels":[{"max":55,"label":"灵光初现期"},{"max":72,"label":"原型觉察期"},{"max":86,"label":"天赋显化期"},{"max":100,"label":"人间修炼期"}],"compareLabels":["如果只把它当玄学","如果看见背后的性格原型"],"disclaimer":"本测试借用中国神话意象做趣味人格原型分析，仅供娱乐和自我观察参考，不代表真实转世、宗教判断、命运预测、心理诊断或人生建议。结果请以轻松心态观看。","secondaryThreshold":4,"dimensions":["共情力","破局力","洞察力","连接力"],"intro":["很多人想测自己是哪位神仙转世，其实不是为了知道前世。","真正想知道的是：你身上那种反复出现的天赋、脾气、敏感点和人生课题，到底像哪一种神仙原型。","32 道题会从天命反应、人间课题、情绪能量、处事方式、天赋显化、关系磁场、命格阴影和转世印记 8 个模块，生成你的神仙原型报告。"],"loadingMessages":["正在读取你的第一反应...","正在拆分共情力、破局力、洞察力和连接力...","正在匹配你的神仙原型和人间课题...","正在生成 32 题神仙转世报告...","分析完成。"],"questions":[{"id":1,"module":"天命反应","text":"别人一开口说“我最近真的撑不住了”，你第一反应是：","options":[{"key":"A","text":"先接住对方情绪，哪怕不知道怎么解决，也想让 TA 不那么孤单"},{"key":"B","text":"直接问发生了什么，想马上把问题拆开、解决、反击回去"},{"key":"C","text":"先听完全部细节，再判断真正卡住 TA 的点在哪里"},{"key":"D","text":"会想这件事牵扯到哪些人，谁和谁之间没有沟通好"}]},{"id":2,"module":"天命反应","text":"你最容易被哪种“求助”击中：","options":[{"key":"A","text":"对方表面没事，但你能感觉 TA 快碎掉了"},{"key":"B","text":"对方被欺负、被压制、明明有理却说不出来"},{"key":"C","text":"对方一直绕圈子，其实只差一个清醒判断"},{"key":"D","text":"两个人明明在意彼此，却因为误会越走越远"}]},{"id":3,"module":"天命反应","text":"如果你突然拥有一种能力，你最想要：","options":[{"key":"A","text":"让一个人的痛苦被看见、被安放"},{"key":"B","text":"一眼看穿谁在欺负人，然后把局面掀翻"},{"key":"C","text":"快速看懂一件事的因果和走向"},{"key":"D","text":"看见人与人之间的缘分、心结和暗线"}]},{"id":4,"module":"天命反应","text":"你身边的人更常说你像：","options":[{"key":"A","text":"很能安慰人，跟你说完话会松一口气"},{"key":"B","text":"很有劲，不服就干，不爱忍气吞声"},{"key":"C","text":"很清醒，经常一句话点醒别人"},{"key":"D","text":"很懂关系，谁喜欢谁、谁别扭你都看得出来"}]},{"id":5,"module":"人间课题","text":"你最见不得哪种场面：","options":[{"key":"A","text":"一个人明明很痛苦，却还在替别人着想"},{"key":"B","text":"好人被欺负，还要被劝“大度一点”"},{"key":"C","text":"一群人情绪上头，却没有人看事实"},{"key":"D","text":"明明可以好好说，却因为嘴硬和误会错过"}]},{"id":6,"module":"人间课题","text":"当你自己很累时，你通常会：","options":[{"key":"A","text":"先照顾别人，等没人看见时才慢慢消化"},{"key":"B","text":"越累越想证明自己，不能让人看扁"},{"key":"C","text":"把事情写下来、想清楚，再决定下一步"},{"key":"D","text":"找一个信任的人聊聊，把关系和情绪理顺"}]},{"id":7,"module":"人间课题","text":"你最怕自己变成哪种状态：","options":[{"key":"A","text":"一直渡别人，最后没人看见自己的委屈"},{"key":"B","text":"一直战斗，最后连休息都觉得羞耻"},{"key":"C","text":"一直清醒，最后很难真正放松和投入"},{"key":"D","text":"一直顾及关系，最后忘了自己的立场"}]},{"id":8,"module":"人间课题","text":"你最容易反复遇到的人生主题是：","options":[{"key":"A","text":"为什么我总会心软，总想救别人"},{"key":"B","text":"为什么我总要跟不公平的人和事硬碰硬"},{"key":"C","text":"为什么别人混乱时，总要我来做判断"},{"key":"D","text":"为什么我总能看见别人关系里的暗流"}]},{"id":9,"module":"情绪能量","text":"你情绪上头时，更像：","options":[{"key":"A","text":"表面很温和，心里其实已经替所有人难过了一遍"},{"key":"B","text":"忍不了，话会变直，行动会变快"},{"key":"C","text":"会突然抽离，像站在旁边观察整件事"},{"key":"D","text":"会反复想对方到底是什么意思，关系有没有变"}]},{"id":10,"module":"情绪能量","text":"你最需要别人理解你哪一点：","options":[{"key":"A","text":"我不是好欺负，我只是太容易共情"},{"key":"B","text":"我不是冲动，我只是受不了假装没事"},{"key":"C","text":"我不是冷漠，我只是在努力保持判断"},{"key":"D","text":"我不是想太多，我只是对关系变化很敏感"}]},{"id":11,"module":"情绪能量","text":"遇到低谷，你真正靠什么撑过去：","options":[{"key":"A","text":"心里还保留一点善意，不想让自己变硬"},{"key":"B","text":"一口气，不甘心，不想就这样认输"},{"key":"C","text":"理智分析，找到可控的那一步"},{"key":"D","text":"重要的人还在，关系里还有牵挂"}]},{"id":12,"module":"情绪能量","text":"你最容易被哪句话安慰到：","options":[{"key":"A","text":"你已经做得很好了，不用一直照顾所有人"},{"key":"B","text":"你没有错，该反击的时候就反击"},{"key":"C","text":"先别急着崩，把这件事拆开看"},{"key":"D","text":"真正的缘分不会靠你一个人硬撑"}]},{"id":13,"module":"处事方式","text":"遇到复杂问题，你更习惯：","options":[{"key":"A","text":"先照顾人，再处理事"},{"key":"B","text":"先破局，再慢慢收拾残局"},{"key":"C","text":"先找逻辑，再决定动作"},{"key":"D","text":"先看关系，再找切入口"}]},{"id":14,"module":"处事方式","text":"别人犯错时，你更可能：","options":[{"key":"A","text":"先想对方是不是也有难处"},{"key":"B","text":"直接指出来，别让问题继续烂下去"},{"key":"C","text":"分清事实、动机和后果，再决定怎么说"},{"key":"D","text":"看这句话怎么说才不会把关系彻底弄僵"}]},{"id":15,"module":"处事方式","text":"你最受不了别人对你哪种误解：","options":[{"key":"A","text":"把你的善良当成理所当然"},{"key":"B","text":"把你的锋芒当成不懂事"},{"key":"C","text":"把你的清醒当成没感情"},{"key":"D","text":"把你的圆融当成没原则"}]},{"id":16,"module":"处事方式","text":"你做决定时，最看重：","options":[{"key":"A","text":"这个决定会不会伤到无辜的人"},{"key":"B","text":"这个决定能不能把局面真正打开"},{"key":"C","text":"这个决定是不是长期来看更合理"},{"key":"D","text":"这个决定会不会影响关键关系和信任"}]},{"id":17,"module":"天赋显化","text":"你最像哪种“隐藏天赋”：","options":[{"key":"A","text":"让别人说出压在心里很久的话"},{"key":"B","text":"在别人不敢动的时候先站出来"},{"key":"C","text":"从混乱里提炼出一句最关键的话"},{"key":"D","text":"把尴尬、误会、冷场重新接起来"}]},{"id":18,"module":"天赋显化","text":"朋友最常找你解决哪类问题：","options":[{"key":"A","text":"情绪崩溃、失恋、委屈、家庭压力"},{"key":"B","text":"被欺负、被甩锅、要不要硬刚"},{"key":"C","text":"选择困难、职业判断、人生方向"},{"key":"D","text":"暧昧、关系、沟通、谁到底怎么想"}]},{"id":19,"module":"天赋显化","text":"如果把你放进一个团队，你最自然的位置是：","options":[{"key":"A","text":"稳定人心的人"},{"key":"B","text":"冲锋破局的人"},{"key":"C","text":"制定判断标准的人"},{"key":"D","text":"协调关系和气氛的人"}]},{"id":20,"module":"天赋显化","text":"你最容易在哪个瞬间发光：","options":[{"key":"A","text":"别人快撑不住时，你安静地陪在旁边"},{"key":"B","text":"所有人都退缩时，你第一个站出来"},{"key":"C","text":"大家吵成一团时，你说出问题本质"},{"key":"D","text":"气氛快冷掉时，你把人重新拉回一起"}]},{"id":21,"module":"关系磁场","text":"你吸引来的朋友，通常是：","options":[{"key":"A","text":"有很多心事、很需要被理解的人"},{"key":"B","text":"有棱角、有委屈、想变强的人"},{"key":"C","text":"脑子很乱、需要建议和判断的人"},{"key":"D","text":"感情丰富、关系复杂、很重视缘分的人"}]},{"id":22,"module":"关系磁场","text":"别人靠近你，多半是因为你让人觉得：","options":[{"key":"A","text":"安全、柔软、不会随便评判"},{"key":"B","text":"有力量、真实、不虚伪"},{"key":"C","text":"清醒、靠谱、能给方向"},{"key":"D","text":"舒服、懂分寸、很会让人连接"}]},{"id":23,"module":"关系磁场","text":"你最想远离哪种人：","options":[{"key":"A","text":"消耗你善意、只索取不珍惜的人"},{"key":"B","text":"欺软怕硬、爱甩锅、还装无辜的人"},{"key":"C","text":"逻辑混乱、情绪勒索、拒绝面对事实的人"},{"key":"D","text":"关系里反复拉扯、暧昧不清、说话不真诚的人"}]},{"id":24,"module":"关系磁场","text":"如果有人喜欢你，通常会喜欢你的：","options":[{"key":"A","text":"温柔和接纳感"},{"key":"B","text":"生命力和反骨感"},{"key":"C","text":"脑子清楚和判断力"},{"key":"D","text":"松弛感、人情味和相处舒服"}]},{"id":25,"module":"命格阴影","text":"你的“神性”最容易变成哪种消耗：","options":[{"key":"A","text":"过度共情，别人还没哭，你已经先替 TA 痛了"},{"key":"B","text":"过度战斗，明明可以绕开，却非要硬碰硬"},{"key":"C","text":"过度分析，什么都懂，但行动变慢"},{"key":"D","text":"过度牵挂，关系里一点风吹草动都会影响你"}]},{"id":26,"module":"命格阴影","text":"你最需要修的一课是：","options":[{"key":"A","text":"不是所有人都值得你渡"},{"key":"B","text":"不是所有战斗都需要你赢"},{"key":"C","text":"不是所有问题都能靠想明白解决"},{"key":"D","text":"不是所有缘分都需要你亲手挽回"}]},{"id":27,"module":"命格阴影","text":"你最容易后悔的是：","options":[{"key":"A","text":"又一次心软，替别人承担了太多"},{"key":"B","text":"话说太冲，把能合作的人也推远了"},{"key":"C","text":"想得太久，错过了最好的行动窗口"},{"key":"D","text":"顾虑太多，把自己的真实感受藏起来"}]},{"id":28,"module":"命格阴影","text":"你最怕被别人看穿的是：","options":[{"key":"A","text":"其实你也很需要被照顾"},{"key":"B","text":"其实你也会害怕自己不够强"},{"key":"C","text":"其实你也会迷茫，只是不表现出来"},{"key":"D","text":"其实你很怕失去重要的人"}]},{"id":29,"module":"转世印记","text":"如果你的人生有一个“隐藏任务”，更像：","options":[{"key":"A","text":"学会在渡人之前，先把自己放回岸上"},{"key":"B","text":"学会把反骨变成真正能改变局面的力量"},{"key":"C","text":"学会用清醒服务行动，而不是困住自己"},{"key":"D","text":"学会珍惜缘分，但不强求每一段关系"}]},{"id":30,"module":"转世印记","text":"你最想从测试里确认的是：","options":[{"key":"A","text":"我为什么总是心软、共情、想救人"},{"key":"B","text":"我为什么总是有一股不服输的劲"},{"key":"C","text":"我为什么总是比别人更早看清问题"},{"key":"D","text":"我为什么总是对缘分和关系特别敏感"}]},{"id":31,"module":"转世印记","text":"如果只能选一个关键词代表你，你会选：","options":[{"key":"A","text":"渡"},{"key":"B","text":"破"},{"key":"C","text":"明"},{"key":"D","text":"牵"}]},{"id":32,"module":"转世印记","text":"做完这 32 题，你最想得到的答案是：","options":[{"key":"A","text":"我身上的温柔到底是哪种力量"},{"key":"B","text":"我身上的反骨到底该怎么用"},{"key":"C","text":"我身上的清醒到底有什么天赋"},{"key":"D","text":"我身上的人缘和感应到底说明什么"}]}],"results":{"A":{"typeName":"观音系转世","subtitle":"你的底色是共情、守护和接住别人。你像一盏很安静的灯，总能让崩溃的人慢慢缓下来。","posterSubtext":"你不是天生爱受累，你只是对别人的痛苦太敏感。","maturityScore":87,"coreConclusion":"你的答案显示，你的第一反应常常不是判断对错，而是先感受到对方的痛。你很容易发现别人语气里的委屈、沉默里的求救和笑容背后的疲惫。别人靠近你，是因为你身上有一种不随便审判人的安全感。 你真正的天赋不是无限付出，而是让人重新相信自己值得被温柔对待。但你的课题也很明显：不是所有人都值得你渡，不是所有痛苦都要由你来承担。","diagnosis":"你的答案显示，你的第一反应常常不是判断对错，而是先感受到对方的痛。你很容易发现别人语气里的委屈、沉默里的求救和笑容背后的疲惫。别人靠近你，是因为你身上有一种不随便审判人的安全感。","whatYouReallyWant":"你真正的天赋不是无限付出，而是让人重新相信自己值得被温柔对待。但你的课题也很明显：不是所有人都值得你渡，不是所有痛苦都要由你来承担。","mechanism":{"title":"慈悲守护机制","content":"观音系原型代表高共情、高接纳和情绪托底。你会天然进入照顾者位置，也会比别人更早捕捉到情绪细节。优势是让人安心，风险是被消耗型关系反复索取。"},"professionalBasis":["从天命反应看，你会先接住情绪，再处理问题。","从关系磁场看，你吸引来的多半是需要被理解、被安放的人。","从命格阴影看，你最需要练习把共情和边界分开。"],"coreTensions":["高共情","容易心软","常被倾诉","怕别人失望","需要边界"],"suitableIf":["疗愈型表达","情绪支持","服务体验","陪伴型内容","用户洞察"],"cautionIf":["把所有人都当成责任","用付出来换安全感","被消耗后还自责","不敢拒绝求助"],"indices":[{"label":"共情感知力","value":92},{"label":"情绪托底力","value":89},{"label":"自我边界课题","value":78},{"label":"关系消耗风险","value":74}],"ifStay":"如果你继续什么都接，温柔会变成疲惫，善意会变成别人默认可以索取的入口。","ifChange":"如果你学会只渡愿意自救的人，你的共情会变成真正有力量的天赋。","notRecommended":["把所有人都当成责任","用付出来换安全感","被消耗后还自责","不敢拒绝求助"],"plan90":[{"title":"第 1 周：列出你的边界红线","content":"写下哪些忙可以帮，哪些情绪不能替别人扛。"},{"title":"第 2-3 周：练习延迟回应","content":"别人倾诉时先问自己：我现在有没有余力接住。"},{"title":"第 4-6 周：把共情变成表达","content":"适合做情绪文案、陪伴型内容、疗愈型产品体验。"},{"title":"第 7-12 周：筛选值得的人","content":"只把能量给珍惜你的人，而不是只会消耗你的人。"}],"closing":"你的神性不是牺牲自己，而是在保住自己的前提下，让别人看见一点光。"},"B":{"typeName":"哪吒系转世","subtitle":"你的底色是反骨、破局和不服输。你不是喜欢冲突，你只是受不了世界把人压扁。","posterSubtext":"你身上有一股不肯认命的劲，越被压越想翻盘。","maturityScore":84,"coreConclusion":"你的答案显示，你对不公平、甩锅、压制和虚伪非常敏感。你很难假装没看见，也很难在该站出来的时候继续忍。你身上有很强的破局能量，适合在混乱、卡住、没人敢动的地方打开局面。 你真正想要的不是赢过所有人，而是证明自己没有被命运拿捏。你的力量很珍贵，但也需要方向感：不是所有战斗都值得你亲自下场。","diagnosis":"你的答案显示，你对不公平、甩锅、压制和虚伪非常敏感。你很难假装没看见，也很难在该站出来的时候继续忍。你身上有很强的破局能量，适合在混乱、卡住、没人敢动的地方打开局面。","whatYouReallyWant":"你真正想要的不是赢过所有人，而是证明自己没有被命运拿捏。你的力量很珍贵，但也需要方向感：不是所有战斗都值得你亲自下场。","mechanism":{"title":"破局战斗机制","content":"哪吒系原型代表反压迫、行动力和边界反击。你会天然对权力压制和不公平场景产生强反应。优势是敢动，风险是过度战斗，把每个问题都变成硬碰硬。"},"professionalBasis":["从人间课题看，你最见不得好人被欺负还被劝忍耐。","从处事方式看，你倾向先破局，再处理细节。","从命格阴影看，你需要区分真正的战场和情绪性的消耗。"],"coreTensions":["反骨强","行动快","不服输","讨厌虚伪","容易硬刚"],"suitableIf":["破局项目","表达观点","创业副业","维权议题","高压环境"],"cautionIf":["把所有问题都当战斗","话太直伤到盟友","赢了局面输了关系","长期处于高燃消耗"],"indices":[{"label":"破局行动力","value":94},{"label":"不公平敏感度","value":91},{"label":"反骨能量","value":88},{"label":"冲动消耗风险","value":76}],"ifStay":"如果你一直靠硬刚解决问题，很容易把自己燃尽，也容易把原本能合作的人推远。","ifChange":"如果你把反骨变成策略，把冲劲变成节奏，你会非常适合做那个真正改局的人。","notRecommended":["把所有问题都当战斗","话太直伤到盟友","赢了局面输了关系","长期处于高燃消耗"],"plan90":[{"title":"第 1 周：区分战场","content":"判断这件事是原则问题、利益问题，还是一时情绪问题。"},{"title":"第 2-3 周：先找盟友","content":"破局不是单打独斗，先找到同立场的人。"},{"title":"第 4-6 周：把锋芒变成作品","content":"适合做观点内容、测评拆解、职场反内耗选题。"},{"title":"第 7-12 周：建立恢复机制","content":"每次高强度输出后，给自己留出休息和复盘时间。"}],"closing":"你的神性不是永远战斗，而是在关键时刻敢把不合理的局面撕开。"},"C":{"typeName":"文曲星系转世","subtitle":"你的底色是清醒、洞察和判断力。别人困在情绪里时，你常常能一眼看见问题的结构。","posterSubtext":"你不是冷，你只是太习惯先看清楚再投入。","maturityScore":90,"coreConclusion":"你的答案显示，你很容易从混乱里找到线索。别人还在纠结谁对谁错，你已经开始看因果、动机、代价和长期结果。你身上有很强的智性天赋，适合做判断、分析、拆解和给方向。 你真正想要的不是永远正确，而是让自己和身边的人少走弯路。但你的课题是：清醒不能只停在脑子里，它最终要变成行动。","diagnosis":"你的答案显示，你很容易从混乱里找到线索。别人还在纠结谁对谁错，你已经开始看因果、动机、代价和长期结果。你身上有很强的智性天赋，适合做判断、分析、拆解和给方向。","whatYouReallyWant":"你真正想要的不是永远正确，而是让自己和身边的人少走弯路。但你的课题是：清醒不能只停在脑子里，它最终要变成行动。","mechanism":{"title":"清醒洞察机制","content":"文曲星系原型代表逻辑、表达、判断和知识转化。你会天然拆结构、找规律、提炼关键词。优势是看得准，风险是过度分析，导致行动变慢或情感表达变弱。"},"professionalBasis":["从处事方式看，你会先找逻辑，再决定动作。","从天赋显化看，你擅长把复杂问题提炼成关键判断。","从命格阴影看，你需要避免想太多、做太少。"],"coreTensions":["很清醒","会拆解","判断准","怕混乱","行动易延迟"],"suitableIf":["知识内容","咨询分析","策略判断","写作表达","学习型产品"],"cautionIf":["把理解当行动","用理智压住感受","过度追求正确","别人需要陪伴时只给分析"],"indices":[{"label":"洞察判断力","value":94},{"label":"结构化能力","value":91},{"label":"表达提炼力","value":87},{"label":"行动延迟风险","value":70}],"ifStay":"如果你一直停在想明白，很多机会会在你还没出手前就过去。","ifChange":"如果你把清醒变成一个个可执行动作，你的判断力会成为非常稀缺的优势。","notRecommended":["把理解当行动","用理智压住感受","过度追求正确","别人需要陪伴时只给分析"],"plan90":[{"title":"第 1 周：把判断写成一句话","content":"每次纠结时，把问题压缩成一个真正要回答的问题。"},{"title":"第 2-3 周：给自己设行动截止点","content":"分析到 70 分就先做，不等完美答案。"},{"title":"第 4-6 周：做可传播的拆解","content":"适合做测试题、报告、知识卡片和判断模型。"},{"title":"第 7-12 周：练习带着感受表达","content":"别人不是只需要答案，也需要知道你站在 TA 这边。"}],"closing":"你的神性不是永远旁观，而是把看见的东西变成能照亮别人的判断。"},"D":{"typeName":"月老系转世","subtitle":"你的底色是缘分、人情和连接力。你很容易看见人与人之间那些说不出口的暗线。","posterSubtext":"你不是想太多，你只是对关系里的细节太敏感。","maturityScore":82,"coreConclusion":"你的答案显示，你对关系变化、气氛冷暖、话外之音和人心靠近非常敏感。你很擅长把尴尬的场面接起来，也能看出谁在意谁、谁嘴硬、谁其实舍不得。你身上有很强的连接力和人情洞察。 你真正想要的不是控制关系走向，而是让重要的人不要因为误会错过。但你的课题是：缘分可以珍惜，不能强求；关系可以经营，不能只靠你一个人维系。","diagnosis":"你的答案显示，你对关系变化、气氛冷暖、话外之音和人心靠近非常敏感。你很擅长把尴尬的场面接起来，也能看出谁在意谁、谁嘴硬、谁其实舍不得。你身上有很强的连接力和人情洞察。","whatYouReallyWant":"你真正想要的不是控制关系走向，而是让重要的人不要因为误会错过。但你的课题是：缘分可以珍惜，不能强求；关系可以经营，不能只靠你一个人维系。","mechanism":{"title":"缘分连接机制","content":"月老系原型代表关系感知、气氛调和和连接能力。你会天然关注人和人之间的互动细节。优势是懂人情，风险是过度牵挂，把别人的关系也背到自己身上。"},"professionalBasis":["从关系磁场看，你容易成为别人聊感情、聊人际的对象。","从处事方式看，你会先看关系，再找切入口。","从命格阴影看，你需要练习不替所有缘分收尾。"],"coreTensions":["关系敏感","懂暗线","会调和","怕失去","容易牵挂"],"suitableIf":["情感内容","社群运营","用户关系","沟通协调","故事型表达"],"cautionIf":["替别人维持关系","过度解读信号","害怕尴尬而委屈自己","把缘分看得太重"],"indices":[{"label":"关系感知力","value":93},{"label":"气氛修复力","value":86},{"label":"人缘连接度","value":89},{"label":"过度牵挂风险","value":77}],"ifStay":"如果你一直替所有关系收尾，会很容易在别人的故事里消耗自己。","ifChange":"如果你学会只经营双向奔赴的关系，你的连接力会变成非常强的人生资源。","notRecommended":["替别人维持关系","过度解读信号","害怕尴尬而委屈自己","把缘分看得太重"],"plan90":[{"title":"第 1 周：分清谁的关系谁负责","content":"别人的误会可以提醒，但不能替他们解决。"},{"title":"第 2-3 周：减少过度解读","content":"看行动，不只看语气、表情和朋友圈暗示。"},{"title":"第 4-6 周：把关系洞察做成内容","content":"适合做情感测试、人际分析、社群互动选题。"},{"title":"第 7-12 周：保留自己的立场","content":"关系再重要，也不要为了不尴尬牺牲真实感受。"}],"closing":"你的神性不是替所有人牵线，而是看懂缘分，也看懂什么时候该松手。"}},"secondaryNotes":{"A":{"B":"你的主原型是「观音系转世」，但也带有「哪吒系转世」的影子。主结果代表你最强的天赋反应，副结果提醒你：所谓神仙转世，本质是在看你的共情、破局、洞察和连接方式。","C":"你的主原型是「观音系转世」，但也带有「文曲星系转世」的影子。主结果代表你最强的天赋反应，副结果提醒你：所谓神仙转世，本质是在看你的共情、破局、洞察和连接方式。","D":"你的主原型是「观音系转世」，但也带有「月老系转世」的影子。主结果代表你最强的天赋反应，副结果提醒你：所谓神仙转世，本质是在看你的共情、破局、洞察和连接方式。"},"B":{"A":"你的主原型是「哪吒系转世」，但也带有「观音系转世」的影子。主结果代表你最强的天赋反应，副结果提醒你：所谓神仙转世，本质是在看你的共情、破局、洞察和连接方式。","C":"你的主原型是「哪吒系转世」，但也带有「文曲星系转世」的影子。主结果代表你最强的天赋反应，副结果提醒你：所谓神仙转世，本质是在看你的共情、破局、洞察和连接方式。","D":"你的主原型是「哪吒系转世」，但也带有「月老系转世」的影子。主结果代表你最强的天赋反应，副结果提醒你：所谓神仙转世，本质是在看你的共情、破局、洞察和连接方式。"},"C":{"A":"你的主原型是「文曲星系转世」，但也带有「观音系转世」的影子。主结果代表你最强的天赋反应，副结果提醒你：所谓神仙转世，本质是在看你的共情、破局、洞察和连接方式。","B":"你的主原型是「文曲星系转世」，但也带有「哪吒系转世」的影子。主结果代表你最强的天赋反应，副结果提醒你：所谓神仙转世，本质是在看你的共情、破局、洞察和连接方式。","D":"你的主原型是「文曲星系转世」，但也带有「月老系转世」的影子。主结果代表你最强的天赋反应，副结果提醒你：所谓神仙转世，本质是在看你的共情、破局、洞察和连接方式。"},"D":{"A":"你的主原型是「月老系转世」，但也带有「观音系转世」的影子。主结果代表你最强的天赋反应，副结果提醒你：所谓神仙转世，本质是在看你的共情、破局、洞察和连接方式。","B":"你的主原型是「月老系转世」，但也带有「哪吒系转世」的影子。主结果代表你最强的天赋反应，副结果提醒你：所谓神仙转世，本质是在看你的共情、破局、洞察和连接方式。","C":"你的主原型是「月老系转世」，但也带有「文曲星系转世」的影子。主结果代表你最强的天赋反应，副结果提醒你：所谓神仙转世，本质是在看你的共情、破局、洞察和连接方式。"}},"shareTemplate":["我测出来了：{{typeName}}","{{posterSubtext}}","{{secondaryLine}}","","测测你是哪位神仙转世？32题神仙原型测试"]};</script>
+    <script>
+(function () {
+  const app = document.getElementById("app");
+  const configPaths = ["./configs/site-config.json", "./configs/career-change.json"];
+
+  const state = {
+    config: null,
+    answers: {},
+    currentIndex: 0,
+    selected: null,
+    locked: false,
+    loadingStep: 0,
+    route: "home",
+    resultData: null,
+  };
+
+  const defaultLoadingMessages = [
+    "正在读取你的选择倾向...",
+    "正在识别隐藏动机...",
+    "正在计算结果分布...",
+    "正在生成专属报告...",
+    "分析完成。",
+  ];
+
+  init();
+
+  async function init() {
+    try {
+      state.config = await fetchConfig();
+      applyDocumentMeta(state.config);
+
+      const saved = sessionStorage.getItem(getStorageKey());
+      if (saved) {
+        state.answers = JSON.parse(saved);
+      }
+
+      routeFromHash();
+      window.addEventListener("hashchange", routeFromHash);
+    } catch (error) {
+      app.innerHTML = `
+        <div class="error">
+          <div>
+            <h1>测试加载失败</h1>
+            <p>请确认你是通过网页链接打开页面，而不是直接双击 HTML 文件。</p>
+          </div>
+        </div>
+      `;
+      console.error(error);
+    }
+  }
+
+  async function fetchConfig() {
+    if (window.__QUIZ_CONFIG__) return window.__QUIZ_CONFIG__;
+    let lastError;
+    for (const path of configPaths) {
+      try {
+        const response = await fetch(path, { cache: "no-store" });
+        if (!response.ok) throw new Error(`${path} ${response.status}`);
+        return response.json();
+      } catch (error) {
+        lastError = error;
+      }
+    }
+    throw lastError;
+  }
+
+  function applyDocumentMeta(cfg) {
+    const title = cfg.title || "趣味测试";
+    const description = cfg.metaDescription || cfg.subtitle || "完成测试，生成你的专属报告。";
+    document.title = title;
+    setMeta("name", "description", description);
+    setMeta("property", "og:title", title);
+    setMeta("property", "og:description", description);
+  }
+
+  function setMeta(attr, key, content) {
+    let node = document.querySelector(`meta[${attr}="${key}"]`);
+    if (!node) {
+      node = document.createElement("meta");
+      node.setAttribute(attr, key);
+      document.head.appendChild(node);
+    }
+    node.setAttribute("content", content);
+  }
+
+  function routeFromHash() {
+    const route = (location.hash || "#/").replace("#/", "") || "home";
+    renderRoute(route);
+  }
+
+  function navigate(route) {
+    const nextHash = `#/${route}`;
+    if (location.hash === nextHash) {
+      renderRoute(route);
+      return;
+    }
+    location.hash = nextHash;
+  }
+
+  function renderRoute(route) {
+    state.route = route;
+    if (route === "quiz") renderQuiz();
+    else if (route === "loading") startLoading();
+    else if (route === "result") renderResult();
+    else renderHome();
+  }
+
+  function renderShell(content, extraClass = "") {
+    app.innerHTML = `
+      <div class="shell">
+        <div class="top-rule"></div>
+        <section class="screen ${extraClass}">${content}</section>
+      </div>
+      <div id="toast" class="toast">已复制</div>
+    `;
+  }
+
+  function renderHome() {
+    const cfg = state.config;
+    renderShell(
+      `
+      <div class="home">
+        <div class="kicker"><span class="dot"></span><span>${text(cfg.kicker)}</span><span class="dot"></span></div>
+        <h1 class="hero-title">${text(cfg.title)}</h1>
+        <p class="hero-subtitle">${text(cfg.subtitle)}</p>
+        <div class="hairline"></div>
+        <div class="intro">
+          ${(cfg.intro || []).map((p, index) => `<p class="${index === cfg.intro.length - 1 ? "strong" : ""}">${text(p)}</p>`).join("")}
+        </div>
+        <div class="pill-grid">
+          ${(cfg.dimensions || []).map((item) => `<div class="pill">${text(item)}</div>`).join("")}
+        </div>
+        <button class="primary-btn" data-action="start">${text(cfg.startButton || "开始测试")}</button>
+        <p class="disclaimer">${text(cfg.disclaimer || "本测试为趣味内容，仅供娱乐参考。")}</p>
+      </div>
+      `,
+      "home"
+    );
+    const startButton = app.querySelector("[data-action='start']");
+    let started = false;
+    const startQuiz = () => {
+      if (started) return;
+      started = true;
+      state.answers = {};
+      state.currentIndex = 0;
+      sessionStorage.removeItem(getStorageKey());
+      navigate("quiz");
+    };
+    startButton.addEventListener("click", startQuiz);
+    startButton.addEventListener(
+      "touchend",
+      (event) => {
+        event.preventDefault();
+        startQuiz();
+      },
+      { passive: false }
+    );
+  }
+
+  function renderQuiz() {
+    const questions = state.config.questions || [];
+    const question = questions[state.currentIndex];
+    if (!question) {
+      renderHome();
+      return;
+    }
+
+    const progress = ((state.currentIndex + 1) / questions.length) * 100;
+
+    renderShell(
+      `
+      <div class="sticky-head">
+        <div class="quiz-meta">
+          <span>${String(state.currentIndex + 1).padStart(2, "0")} / ${questions.length}</span>
+          <span>${text(question.module)}</span>
+        </div>
+        <div class="progress-track"><div class="progress-bar" style="width:${progress}%"></div></div>
+      </div>
+      <div class="question-no">${String(state.currentIndex + 1).padStart(2, "0")}</div>
+      <h1 class="question-title">${text(question.text)}</h1>
+      <div class="options">
+        ${(question.options || [])
+          .map(
+            (option) => `
+            <button class="option" data-option="${text(option.key)}">
+              <span class="option-key">${text(option.key)}</span>
+              <span class="option-text">${text(option.text)}</span>
+            </button>
+          `
+          )
+          .join("")}
+      </div>
+      <p class="hint">${text(state.config.quizHint || "选择后自动进入下一题")}</p>
+      `,
+      "quiz-screen"
+    );
+
+    app.querySelectorAll("[data-option]").forEach((button) => {
+      button.addEventListener("click", () => selectOption(button.dataset.option));
+    });
+  }
+
+  function selectOption(key) {
+    if (state.locked) return;
+    state.locked = true;
+    state.selected = key;
+    const question = state.config.questions[state.currentIndex];
+    state.answers[question.id] = key;
+
+    app.querySelectorAll(".option").forEach((button) => {
+      const selected = button.dataset.option === key;
+      button.classList.toggle("selected", selected);
+      button.classList.toggle("dimmed", !selected);
+    });
+
+    window.setTimeout(() => {
+      if (state.currentIndex < state.config.questions.length - 1) {
+        state.currentIndex += 1;
+        state.locked = false;
+        state.selected = null;
+        renderQuiz();
+      } else {
+        sessionStorage.setItem(getStorageKey(), JSON.stringify(state.answers));
+        state.locked = false;
+        navigate("loading");
+      }
+    }, 420);
+  }
+
+  function startLoading() {
+    state.loadingStep = 0;
+    renderLoading("");
+    tickLoading();
+  }
+
+  function renderLoading(value) {
+    const loadingMessages = getLoadingMessages();
+    renderShell(
+      `
+      <div class="loading-card">
+        <div class="spinner"></div>
+        <div class="loading-text">${text(value)}<span class="cursor">|</span></div>
+        <div class="step-bars">
+          ${loadingMessages.map((_, index) => `<div class="step ${index < state.loadingStep ? "done" : ""}"><span></span></div>`).join("")}
+        </div>
+      </div>
+      `,
+      "loading-screen"
+    );
+  }
+
+  function tickLoading() {
+    if (state.route !== "loading") return;
+    const loadingMessages = getLoadingMessages();
+    if (state.loadingStep >= loadingMessages.length) {
+      window.setTimeout(() => navigate("result"), 700);
+      return;
+    }
+    const message = loadingMessages[state.loadingStep];
+    let chars = 0;
+    const interval = window.setInterval(() => {
+      chars += 1;
+      renderLoading(message.slice(0, chars));
+      if (chars >= message.length) {
+        window.clearInterval(interval);
+        window.setTimeout(() => {
+          state.loadingStep += 1;
+          tickLoading();
+        }, 520);
+      }
+    }, 35);
+  }
+
+  function renderResult() {
+    const saved = sessionStorage.getItem(getStorageKey());
+    if (saved) state.answers = JSON.parse(saved);
+    if (Object.keys(state.answers).length < state.config.questions.length) {
+      renderHome();
+      return;
+    }
+
+    const scored = scoreAnswers(state.answers);
+    const primary = state.config.results[scored.primary];
+    const secondary = scored.secondary ? state.config.secondaryNotes?.[scored.primary]?.[scored.secondary] : null;
+    const stage = getStage(primary.maturityScore);
+    const shareText = buildShareText(primary, secondary);
+    const compareLabels = state.config.compareLabels || ["如果继续原路", "如果换一种做法"];
+    state.resultData = { scored, primary, secondary, stage, shareText };
+
+    renderShell(
+      `
+      <article class="report">
+        <div class="kicker"><span class="dot"></span><span>${text(state.config.resultKicker || "Result Report")}</span><span class="dot"></span></div>
+        <h1 class="result-type">${text(primary.typeName)}</h1>
+        <p class="result-subtitle">${text(primary.subtitle)}</p>
+        <div class="stamp-row">
+          <div class="stamp"><strong>${text(primary.maturityScore)}</strong><span>${text(state.config.scoreLabel || "决策成熟度")}</span></div>
+          <div class="stamp"><strong>${text(stage)}</strong><span>${text(state.config.stageLabel || "当前行动阶段")}</span></div>
+        </div>
+
+        <section class="section">
+          <h2>你的答案分布</h2>
+          <div class="meters">
+            ${Object.entries(scored.counts)
+              .map(([key, value]) => {
+                const typeData = state.config.results[key];
+                const width = (value / state.config.questions.length) * 100;
+                return `
+                  <div>
+                    <div class="meter-head"><span>${text(key)} · ${text(typeData.typeName)}</span><span>${value} 题</span></div>
+                    <div class="meter-track"><div class="meter-fill" style="width:${width}%"></div></div>
+                  </div>
+                `;
+              })
+              .join("")}
+          </div>
+        </section>
+
+        ${secondary ? `<section class="section"><h2>副倾向提示</h2><div class="secondary-note">${text(secondary)}</div></section>` : ""}
+
+        <section class="section">
+          <h2>诊断结论</h2>
+          <div class="quote">${text(primary.coreConclusion)}</div>
+        </section>
+
+        <section class="section">
+          <h2>为什么你会这样</h2>
+          <p>${text(primary.diagnosis)}</p>
+          <p>${text(primary.whatYouReallyWant)}</p>
+        </section>
+
+        <section class="section">
+          <h2>${text(primary.mechanism.title)}</h2>
+          <p>${text(primary.mechanism.content)}</p>
+        </section>
+
+        ${renderParagraphSection("专业解读框架", primary.professionalBasis)}
+        ${renderTagSection("你的关键矛盾", primary.coreTensions)}
+        ${renderCompareListSection("适合推进的条件", "需要谨慎的信号", primary.suitableIf, primary.cautionIf)}
+
+        <section class="section">
+          <h2>关键指数</h2>
+          <div class="meters">
+            ${(primary.indices || [])
+              .map(
+                (item) => `
+                <div>
+                  <div class="meter-head"><span>${text(item.label)}</span><span>${text(item.value)}</span></div>
+                  <div class="meter-track"><div class="meter-fill" style="width:${number(item.value)}%"></div></div>
+                </div>
+              `
+              )
+              .join("")}
+          </div>
+        </section>
+
+        <section class="section">
+          <h2>两条路径对比</h2>
+          <div class="compare">
+            <div class="compare-card"><h3>${text(compareLabels[0])}</h3><p>${text(primary.ifStay)}</p></div>
+            <div class="compare-card"><h3>${text(compareLabels[1])}</h3><p>${text(primary.ifChange)}</p></div>
+          </div>
+        </section>
+
+        <section class="section">
+          <h2>现在最不建议你做</h2>
+          <div class="tag-list">${(primary.notRecommended || []).map((item) => `<span class="tag">${text(item)}</span>`).join("")}</div>
+        </section>
+
+        <section class="section">
+          <h2>未来 90 天验证方案</h2>
+          <div class="plan">
+            ${(primary.plan90 || [])
+              .map(
+                (item, index) => `
+                <div class="plan-card">
+                  <h3>${index + 1}. ${text(item.title)}</h3>
+                  <p>${text(item.content)}</p>
+                </div>
+              `
+              )
+              .join("")}
+          </div>
+        </section>
+
+        <section class="section">
+          <h2>最后一句话</h2>
+          <p>${text(primary.closing)}</p>
+        </section>
+
+        <div class="actions">
+          <button class="primary-btn" data-action="copy">${text(state.config.copyButton || "复制我的结果")}</button>
+          <button class="ghost-btn" data-action="restart">${text(state.config.restartButton || "重新测试")}</button>
+        </div>
+      </article>
+      `,
+      "result-screen"
+    );
+
+    app.querySelector("[data-action='copy']").addEventListener("click", () => copyShareText(shareText));
+    app.querySelector("[data-action='restart']").addEventListener("click", () => {
+      sessionStorage.removeItem(getStorageKey());
+      state.answers = {};
+      state.currentIndex = 0;
+      navigate("home");
+    });
+  }
+
+  function renderParagraphSection(title, paragraphs) {
+    if (!Array.isArray(paragraphs) || !paragraphs.length) return "";
+    return `
+      <section class="section">
+        <h2>${text(title)}</h2>
+        ${paragraphs.map((item) => `<p>${text(item)}</p>`).join("")}
+      </section>
+    `;
+  }
+
+  function renderTagSection(title, items) {
+    if (!Array.isArray(items) || !items.length) return "";
+    return `
+      <section class="section">
+        <h2>${text(title)}</h2>
+        <div class="tag-list">${items.map((item) => `<span class="tag">${text(item)}</span>`).join("")}</div>
+      </section>
+    `;
+  }
+
+  function renderCompareListSection(leftTitle, rightTitle, leftItems, rightItems) {
+    const hasLeft = Array.isArray(leftItems) && leftItems.length;
+    const hasRight = Array.isArray(rightItems) && rightItems.length;
+    if (!hasLeft && !hasRight) return "";
+    return `
+      <section class="section">
+        <h2>适用边界</h2>
+        <div class="compare">
+          <div class="compare-card">
+            <h3>${text(leftTitle)}</h3>
+            ${(leftItems || []).map((item) => `<p>${text(item)}</p>`).join("")}
+          </div>
+          <div class="compare-card">
+            <h3>${text(rightTitle)}</h3>
+            ${(rightItems || []).map((item) => `<p>${text(item)}</p>`).join("")}
+          </div>
+        </div>
+      </section>
+    `;
+  }
+
+  function scoreAnswers(answers) {
+    const counts = { A: 0, B: 0, C: 0, D: 0 };
+    Object.values(answers).forEach((key) => {
+      if (counts[key] !== undefined) counts[key] += 1;
+    });
+    const sorted = Object.entries(counts).sort((a, b) => b[1] - a[1]);
+    const threshold = state.config.secondaryThreshold ?? 2;
+    const primary = sorted[0][0];
+    const secondary = sorted[1][1] > 0 && sorted[0][1] - sorted[1][1] <= threshold ? sorted[1][0] : null;
+    return { counts, primary, secondary };
+  }
+
+  function getStage(score) {
+    const labels = state.config.stageLabels || [
+      { max: 45, label: "观察期" },
+      { max: 65, label: "验证期" },
+      { max: 82, label: "规划期" },
+      { max: 100, label: "行动期" },
+    ];
+    const hit = labels.find((item) => score <= item.max);
+    return hit ? hit.label : labels[labels.length - 1].label;
+  }
+
+  function buildShareText(primary, secondary) {
+    const template = state.config.shareTemplate || [
+      "我测出了：{{typeName}}",
+      "{{posterSubtext}}",
+      "{{secondaryLine}}",
+      "",
+      "{{title}}",
+    ];
+    const values = {
+      title: state.config.title,
+      typeName: primary.typeName,
+      posterSubtext: primary.posterSubtext,
+      secondary: secondary || "",
+      secondaryLine: secondary ? `副倾向：${secondary}` : "",
+    };
+    return template
+      .map((line) => fillTemplate(line, values))
+      .filter((line, index, arr) => line || arr[index - 1])
+      .join("\n")
+      .trim();
+  }
+
+  async function copyShareText(value) {
+    try {
+      await navigator.clipboard.writeText(value);
+      showToast("结果文案已复制");
+    } catch (error) {
+      showToast("复制失败，可长按手动复制");
+    }
+  }
+
+  function showToast(value) {
+    const toast = document.getElementById("toast");
+    if (!toast) return;
+    toast.textContent = value;
+    toast.classList.add("show");
+    window.setTimeout(() => toast.classList.remove("show"), 1600);
+  }
+
+  function getLoadingMessages() {
+    return state.config.loadingMessages || defaultLoadingMessages;
+  }
+
+  function getStorageKey() {
+    return `xhsTestAnswers:${state.config.slug || "default"}`;
+  }
+
+  function fillTemplate(template, values) {
+    return String(template).replace(/\{\{(\w+)\}\}/g, (_, key) => values[key] || "");
+  }
+
+  function number(value) {
+    const parsed = Number(value);
+    if (Number.isNaN(parsed)) return 0;
+    return Math.max(0, Math.min(100, parsed));
+  }
+
+  function text(value) {
+    return String(value ?? "")
+      .replace(/&/g, "&amp;")
+      .replace(/</g, "&lt;")
+      .replace(/>/g, "&gt;")
+      .replace(/"/g, "&quot;");
+  }
+})();
+
+    </script>
+  </body>
+</html>
