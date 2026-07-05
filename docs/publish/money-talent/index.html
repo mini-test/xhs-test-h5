@@ -1,0 +1,651 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="format-detection" content="telephone=no" />
+    <title>你的搞钱天赋是什么？｜小红书发布助手</title>
+    <style>
+      * { box-sizing: border-box; }
+      :root {
+        color-scheme: light;
+        --ink: #171717;
+        --muted: #666;
+        --line: #e6e2dc;
+        --paper: #fffaf4;
+        --bg: #f5f1ea;
+        --accent: #c7332b;
+        --accent-dark: #8f1f1b;
+        --green: #246c4f;
+      }
+      html { scroll-behavior: smooth; }
+      body {
+        margin: 0;
+        color: var(--ink);
+        background:
+          linear-gradient(180deg, rgba(255,255,255,.7), rgba(255,255,255,0) 220px),
+          var(--bg);
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Microsoft YaHei", sans-serif;
+        overflow-x: hidden;
+      }
+      button, input, textarea { font: inherit; }
+      .shell {
+        width: min(100%, 560px);
+        margin: 0 auto;
+        padding: 14px 12px 34px;
+      }
+      .hero {
+        position: sticky;
+        top: 0;
+        z-index: 5;
+        margin: -14px -12px 12px;
+        padding: 14px 12px 12px;
+        border-bottom: 1px solid rgba(0,0,0,.08);
+        background: rgba(245,241,234,.94);
+        backdrop-filter: blur(14px);
+      }
+      .eyebrow {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 10px;
+        margin-bottom: 8px;
+        color: var(--accent-dark);
+        font-size: 12px;
+        font-weight: 900;
+      }
+      .eyebrow span {
+        display: inline-flex;
+        align-items: center;
+        min-height: 26px;
+        padding: 0 10px;
+        border: 1px solid rgba(199,51,43,.28);
+        border-radius: 999px;
+        background: rgba(255,255,255,.6);
+      }
+      h1 {
+        margin: 0;
+        font-size: 24px;
+        line-height: 1.22;
+        letter-spacing: 0;
+      }
+      .topic {
+        margin-top: 6px;
+        color: var(--muted);
+        font-size: 13px;
+        line-height: 1.45;
+      }
+      .panel {
+        margin: 12px 0;
+        padding: 14px;
+        border: 1px solid var(--line);
+        border-radius: 8px;
+        background: rgba(255,250,244,.86);
+        box-shadow: 0 10px 26px rgba(60,42,20,.06);
+      }
+      .panel h2 {
+        margin: 0 0 10px;
+        font-size: 16px;
+        line-height: 1.35;
+        letter-spacing: 0;
+      }
+      .quick-actions {
+        display: grid;
+        grid-template-columns: minmax(0, 1fr);
+        gap: 8px;
+        min-width: 0;
+      }
+      .quick-actions > * { min-width: 0; }
+      .quick-actions .wide { grid-column: auto; }
+      .copy-btn,
+      .primary-link,
+      .asset-actions a {
+        min-height: 44px;
+        border: 1px solid var(--ink);
+        border-radius: 8px;
+        background: #fff;
+        color: var(--ink);
+        text-decoration: none;
+        font-weight: 900;
+        letter-spacing: 0;
+      }
+      .copy-btn {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        width: 100%;
+        min-width: 0;
+        padding: 0 12px;
+        text-align: center;
+        white-space: normal;
+        cursor: pointer;
+      }
+      .copy-btn.primary,
+      .primary-link {
+        background: var(--ink);
+        color: #fff;
+      }
+      .primary-link {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-top: 8px;
+        padding: 0 12px;
+      }
+      .helper {
+        margin: 10px 0 0;
+        color: var(--muted);
+        font-size: 12px;
+        line-height: 1.55;
+      }
+      .field-label {
+        display: flex;
+        justify-content: space-between;
+        gap: 10px;
+        margin: 12px 0 6px;
+        color: var(--muted);
+        font-size: 12px;
+        font-weight: 900;
+      }
+      .text-box {
+        width: 100%;
+        min-height: 54px;
+        resize: vertical;
+        padding: 11px 12px;
+        border: 1px solid var(--line);
+        border-radius: 8px;
+        background: #fff;
+        color: var(--ink);
+        font-size: 14px;
+        line-height: 1.62;
+      }
+      #bodyText { min-height: 280px; }
+      #fullText { min-height: 160px; }
+      .asset-card {
+        overflow: hidden;
+        margin: 0 0 12px;
+        border: 1px solid var(--line);
+        border-radius: 8px;
+        background: #fff;
+      }
+      .asset-head {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        padding: 10px 12px;
+        border-bottom: 1px solid var(--line);
+      }
+      .asset-head span {
+        display: grid;
+        place-items: center;
+        width: 34px;
+        height: 28px;
+        border-radius: 6px;
+        background: var(--accent);
+        color: #fff;
+        font-size: 12px;
+        font-weight: 900;
+      }
+      .asset-head strong {
+        font-size: 14px;
+      }
+      .image-link {
+        display: block;
+        background: #f2f2f2;
+      }
+      .image-link img {
+        display: block;
+        width: 100%;
+        height: auto;
+      }
+      .asset-actions {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 8px;
+        padding: 10px;
+      }
+      .asset-actions a {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        min-height: 40px;
+        font-size: 13px;
+      }
+      .checklist {
+        display: grid;
+        gap: 8px;
+        margin: 0;
+        padding: 0;
+        list-style: none;
+      }
+      .checklist li {
+        display: grid;
+        grid-template-columns: 22px 1fr;
+        gap: 8px;
+        align-items: start;
+        color: #333;
+        font-size: 13px;
+        line-height: 1.55;
+      }
+      .checklist span {
+        display: grid;
+        place-items: center;
+        width: 22px;
+        height: 22px;
+        border-radius: 50%;
+        background: rgba(36,108,79,.12);
+        color: var(--green);
+        font-weight: 900;
+      }
+      .footer-link {
+        overflow-wrap: anywhere;
+        color: var(--muted);
+        font-size: 12px;
+        line-height: 1.55;
+      }
+      .toast {
+        position: fixed;
+        left: 50%;
+        bottom: 18px;
+        z-index: 20;
+        width: min(92vw, 420px);
+        padding: 12px 14px;
+        border-radius: 8px;
+        background: rgba(23,23,23,.94);
+        color: #fff;
+        text-align: center;
+        font-size: 14px;
+        font-weight: 800;
+        transform: translate(-50%, 20px);
+        opacity: 0;
+        pointer-events: none;
+        transition: opacity .18s ease, transform .18s ease;
+      }
+      .toast.show {
+        opacity: 1;
+        transform: translate(-50%, 0);
+      }
+      @media (max-width: 380px) {
+        h1 { font-size: 22px; }
+      }
+    </style>
+  </head>
+  <body data-assistant="xhs-publish-assistant" data-build-id="1783258466885-46212b">
+    <div class="shell">
+      <header class="hero">
+        <div class="eyebrow">
+          <span>小红书发布助手</span>
+          <span>自用草稿</span>
+        </div>
+        <h1>你的搞钱天赋是什么？</h1>
+        <div class="topic">你的搞钱天赋是什么？</div>
+      </header>
+
+      <section class="panel">
+        <h2>发布前操作</h2>
+        <div class="quick-actions">
+          <button class="copy-btn primary" data-copy-target="titleText">复制标题</button>
+          <button class="copy-btn primary" data-copy-target="bodyText">复制正文</button>
+          <button class="copy-btn wide" data-copy-target="fullText">复制标题 + 正文</button>
+          <button class="copy-btn wide" data-copy-value="https://mini-test.github.io/xhs-test-h5/publish/money-talent/">复制本页链接</button>
+        </div>
+        <a class="primary-link" href="https://mini-test.github.io/xhs-test-h5/test-money-talent/" target="_blank" rel="noopener">打开完整测试链接</a>
+        <a class="primary-link" href="https://www.xiaohongshu.com/" target="_blank" rel="noopener">打开小红书</a>
+        <p class="helper">手机端建议先保存下方图片，再复制标题和正文到小红书发布。图片点“打开原图”后长按保存最稳。</p>
+      </section>
+
+      <section class="panel">
+        <h2>文案</h2>
+        <label class="field-label" for="titleText">标题 <span>10 字</span></label>
+        <textarea id="titleText" class="text-box" readonly>你的搞钱天赋是什么？</textarea>
+        <label class="field-label" for="bodyText">正文</label>
+        <textarea id="bodyText" class="text-box" readonly>## 小红书笔记正文
+
+很多人以为自己赚不到钱，是因为不够努力。
+
+但我现在越来越觉得，不是每个人都适合同一种搞钱方式。
+
+有的人靠信息差。
+
+别人还没看见机会，他已经闻到入口了。
+
+有的人靠表达。
+
+同样一个东西，别人说出来没人听，他一包装就有人愿意停下来。
+
+有的人靠成交。
+
+他能听懂客户真正卡在哪里，也敢把需求推进到付费。
+
+还有的人靠系统。
+
+不追一时热闹，但很会把一次经验做成流程、模板和长期复利。
+
+这份《32 题搞钱天赋测试》，不是测你能赚多少钱。
+
+它更想帮你看清：你到底适合靠什么能力变现。
+
+完整测试会从 8 个维度看：
+
+机会嗅觉  
+价值创造  
+变现路径  
+风险偏好  
+执行节奏  
+资源关系  
+表达获客  
+长期复利
+
+做完后你会得到一份个人报告，内容包括：
+
+你的搞钱天赋类型  
+你的变现优势  
+你最容易卡住的短板  
+适合你的赚钱入口  
+不建议你硬走的路径  
+下一步行动提醒
+
+适合最近正在想：
+
+我到底适不适合做副业  
+我适合做内容还是做销售  
+我为什么总是忙但不赚钱  
+我该靠个人 IP、成交、资源，还是产品化变现  
+我身上的能力到底怎么换成收入
+
+图里先放前 5 题。
+
+别想太久，凭第一反应选。
+
+完整测试链接：https://mini-test.github.io/xhs-test-h5/test-money-talent/
+
+温馨说明：本测试仅用于趣味自我观察，不构成投资建议、职业建议、创业建议、财务规划或收入承诺。
+
+#搞钱天赋 #副业测试 #赚钱能力 #变现路径 #个人IP #职业测试 #小红书测试
+
+## 个人售卖详情
+
+你是不是也有这种感觉：
+
+明明自己不懒，也愿意学东西，但一到搞钱就不知道该从哪里下手。
+
+看别人做副业，你也心动。
+
+看别人做内容，你也想试。
+
+看别人接单、卖课、做咨询、做社群，好像每条路都能赚钱。
+
+但问题是：哪条路适合你？
+
+这份《32 题搞钱天赋测试》，不是告诉你一定能赚多少钱，也不是给你投资建议。
+
+它更像一份变现方式自测，帮你看清自己更适合靠哪一种能力赚钱：
+
+机会捕手型：靠信息差、资源连接、发现入口变现  
+表达变现型：靠内容、人设、共鸣和影响力变现  
+成交破局型：靠需求洞察、信任建立和推动购买变现  
+系统复利型：靠产品化、流程、模板和长期沉淀变现
+
+完成测试后，你会获得一份个人报告，包括：
+
+你的主搞钱天赋  
+你的副天赋影子  
+你的优势能力  
+你的变现短板  
+适合你的副业/内容/服务方向  
+下一步更适合先做什么
+
+适合正在做副业、想做小红书变现、想做个人 IP、接单服务、知识付费、咨询产品，或者正在纠结自己到底适合哪条赚钱路径的人。
+
+全程约 3-5 分钟。付款后自动发测试链接，无需下载 App，无需登录，用手机浏览器即可完成。
+
+本产品为数字内容，不寄送实体物品。测试结果仅供娱乐和自我探索参考，不构成投资建议、职业建议、创业建议、财务规划或任何收入承诺。实际行动请结合自身情况谨慎判断。</textarea>
+        <textarea id="fullText" class="text-box" readonly hidden>你的搞钱天赋是什么？
+
+## 小红书笔记正文
+
+很多人以为自己赚不到钱，是因为不够努力。
+
+但我现在越来越觉得，不是每个人都适合同一种搞钱方式。
+
+有的人靠信息差。
+
+别人还没看见机会，他已经闻到入口了。
+
+有的人靠表达。
+
+同样一个东西，别人说出来没人听，他一包装就有人愿意停下来。
+
+有的人靠成交。
+
+他能听懂客户真正卡在哪里，也敢把需求推进到付费。
+
+还有的人靠系统。
+
+不追一时热闹，但很会把一次经验做成流程、模板和长期复利。
+
+这份《32 题搞钱天赋测试》，不是测你能赚多少钱。
+
+它更想帮你看清：你到底适合靠什么能力变现。
+
+完整测试会从 8 个维度看：
+
+机会嗅觉  
+价值创造  
+变现路径  
+风险偏好  
+执行节奏  
+资源关系  
+表达获客  
+长期复利
+
+做完后你会得到一份个人报告，内容包括：
+
+你的搞钱天赋类型  
+你的变现优势  
+你最容易卡住的短板  
+适合你的赚钱入口  
+不建议你硬走的路径  
+下一步行动提醒
+
+适合最近正在想：
+
+我到底适不适合做副业  
+我适合做内容还是做销售  
+我为什么总是忙但不赚钱  
+我该靠个人 IP、成交、资源，还是产品化变现  
+我身上的能力到底怎么换成收入
+
+图里先放前 5 题。
+
+别想太久，凭第一反应选。
+
+完整测试链接：https://mini-test.github.io/xhs-test-h5/test-money-talent/
+
+温馨说明：本测试仅用于趣味自我观察，不构成投资建议、职业建议、创业建议、财务规划或收入承诺。
+
+#搞钱天赋 #副业测试 #赚钱能力 #变现路径 #个人IP #职业测试 #小红书测试
+
+## 个人售卖详情
+
+你是不是也有这种感觉：
+
+明明自己不懒，也愿意学东西，但一到搞钱就不知道该从哪里下手。
+
+看别人做副业，你也心动。
+
+看别人做内容，你也想试。
+
+看别人接单、卖课、做咨询、做社群，好像每条路都能赚钱。
+
+但问题是：哪条路适合你？
+
+这份《32 题搞钱天赋测试》，不是告诉你一定能赚多少钱，也不是给你投资建议。
+
+它更像一份变现方式自测，帮你看清自己更适合靠哪一种能力赚钱：
+
+机会捕手型：靠信息差、资源连接、发现入口变现  
+表达变现型：靠内容、人设、共鸣和影响力变现  
+成交破局型：靠需求洞察、信任建立和推动购买变现  
+系统复利型：靠产品化、流程、模板和长期沉淀变现
+
+完成测试后，你会获得一份个人报告，包括：
+
+你的主搞钱天赋  
+你的副天赋影子  
+你的优势能力  
+你的变现短板  
+适合你的副业/内容/服务方向  
+下一步更适合先做什么
+
+适合正在做副业、想做小红书变现、想做个人 IP、接单服务、知识付费、咨询产品，或者正在纠结自己到底适合哪条赚钱路径的人。
+
+全程约 3-5 分钟。付款后自动发测试链接，无需下载 App，无需登录，用手机浏览器即可完成。
+
+本产品为数字内容，不寄送实体物品。测试结果仅供娱乐和自我探索参考，不构成投资建议、职业建议、创业建议、财务规划或任何收入承诺。实际行动请结合自身情况谨慎判断。</textarea>
+      </section>
+
+      <section class="panel">
+        <h2>图片素材</h2>
+        
+      <article class="asset-card">
+        <div class="asset-head">
+          <span>01</span>
+          <strong>封面图</strong>
+        </div>
+        <a class="image-link" href="./cover.png" target="_blank" rel="noopener">
+          <img src="./cover.png" alt="封面图" loading="lazy" />
+        </a>
+        <div class="asset-actions">
+          <a href="./cover.png" target="_blank" rel="noopener">打开原图</a>
+          <a href="./cover.png" download>下载图片</a>
+        </div>
+      </article>
+    
+
+      <article class="asset-card">
+        <div class="asset-head">
+          <span>02</span>
+          <strong>题目图 1</strong>
+        </div>
+        <a class="image-link" href="./questions-01.png" target="_blank" rel="noopener">
+          <img src="./questions-01.png" alt="题目图 1" loading="lazy" />
+        </a>
+        <div class="asset-actions">
+          <a href="./questions-01.png" target="_blank" rel="noopener">打开原图</a>
+          <a href="./questions-01.png" download>下载图片</a>
+        </div>
+      </article>
+    
+
+      <article class="asset-card">
+        <div class="asset-head">
+          <span>03</span>
+          <strong>题目图 2</strong>
+        </div>
+        <a class="image-link" href="./questions-02.png" target="_blank" rel="noopener">
+          <img src="./questions-02.png" alt="题目图 2" loading="lazy" />
+        </a>
+        <div class="asset-actions">
+          <a href="./questions-02.png" target="_blank" rel="noopener">打开原图</a>
+          <a href="./questions-02.png" download>下载图片</a>
+        </div>
+      </article>
+    
+
+      <article class="asset-card">
+        <div class="asset-head">
+          <span>04</span>
+          <strong>选项图</strong>
+        </div>
+        <a class="image-link" href="./options.png" target="_blank" rel="noopener">
+          <img src="./options.png" alt="选项图" loading="lazy" />
+        </a>
+        <div class="asset-actions">
+          <a href="./options.png" target="_blank" rel="noopener">打开原图</a>
+          <a href="./options.png" download>下载图片</a>
+        </div>
+      </article>
+    
+
+      <article class="asset-card">
+        <div class="asset-head">
+          <span>05</span>
+          <strong>结果模糊图</strong>
+        </div>
+        <a class="image-link" href="./result-blur.png" target="_blank" rel="noopener">
+          <img src="./result-blur.png" alt="结果模糊图" loading="lazy" />
+        </a>
+        <div class="asset-actions">
+          <a href="./result-blur.png" target="_blank" rel="noopener">打开原图</a>
+          <a href="./result-blur.png" download>下载图片</a>
+        </div>
+      </article>
+    
+      </section>
+
+      <section class="panel">
+        <h2>发布检查</h2>
+        <ul class="checklist">
+          <li><span>1</span><div>第一张放封面图，后面按顺序放题目图和结果图。</div></li>
+          <li><span>2</span><div>正文里的完整测试链接保留，方便用户从笔记跳到 H5。</div></li>
+          <li><span>3</span><div>发出前检查标题、标签和图片顺序，避免把预览页当成正式测试页。</div></li>
+        </ul>
+      </section>
+
+      <section class="panel">
+        <h2>链接</h2>
+        <div class="footer-link">https://mini-test.github.io/xhs-test-h5/publish/money-talent/</div>
+      </section>
+    </div>
+
+    <div id="toast" class="toast" role="status" aria-live="polite"></div>
+
+    <script>
+      const toast = document.getElementById("toast");
+      let toastTimer = null;
+
+      document.querySelectorAll("[data-copy-target], [data-copy-value]").forEach((button) => {
+        button.addEventListener("click", async () => {
+          const targetId = button.getAttribute("data-copy-target");
+          const directValue = button.getAttribute("data-copy-value");
+          const target = targetId ? document.getElementById(targetId) : null;
+          const value = directValue || (target ? target.value : "");
+          const ok = await copyText(value);
+          showToast(ok ? "已复制，可以去小红书粘贴了" : "复制失败，请长按文本手动复制");
+        });
+      });
+
+      async function copyText(value) {
+        try {
+          if (navigator.clipboard && window.isSecureContext) {
+            await navigator.clipboard.writeText(value);
+            return true;
+          }
+        } catch {}
+
+        const helper = document.createElement("textarea");
+        helper.value = value;
+        helper.setAttribute("readonly", "");
+        helper.style.position = "fixed";
+        helper.style.left = "-9999px";
+        document.body.appendChild(helper);
+        helper.select();
+        helper.setSelectionRange(0, helper.value.length);
+        let ok = false;
+        try {
+          ok = document.execCommand("copy");
+        } catch {}
+        document.body.removeChild(helper);
+        return ok;
+      }
+
+      function showToast(message) {
+        toast.textContent = message;
+        toast.classList.add("show");
+        clearTimeout(toastTimer);
+        toastTimer = setTimeout(() => toast.classList.remove("show"), 1800);
+      }
+    </script>
+  </body>
+</html>
