@@ -1,0 +1,1125 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <meta name="description" content="完成 32 道隐形贵气测试，生成你的气质类型、优势来源和修炼提醒。" />
+    <meta property="og:title" content="你身上自带哪种隐形贵气？" />
+    <meta property="og:description" content="完成 32 道隐形贵气测试，生成你的气质类型、优势来源和修炼提醒。" />
+    <title>你身上自带哪种隐形贵气？</title>
+    <style>
+:root {
+  --bg: #fbfaf7;
+  --paper: #fffefd;
+  --ink: #20242a;
+  --muted: #65707d;
+  --line: #d9d4ca;
+  --line-strong: #b9afa0;
+  --accent: #9b4339;
+  --accent-soft: #f1dfd7;
+  --gold: #c0964d;
+  --sage: #66795f;
+  --blue: #526a86;
+  --shadow: 0 16px 36px rgba(60, 47, 38, 0.1);
+  --radius: 8px;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  min-height: 100%;
+  background:
+    linear-gradient(rgba(32, 36, 42, 0.035) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(32, 36, 42, 0.035) 1px, transparent 1px),
+    var(--bg);
+  background-size: 24px 24px;
+}
+
+body {
+  min-height: 100vh;
+  margin: 0;
+  color: var(--ink);
+  font-family:
+    "PingFang SC",
+    "Microsoft YaHei",
+    "Noto Sans SC",
+    system-ui,
+    -apple-system,
+    BlinkMacSystemFont,
+    sans-serif;
+  letter-spacing: 0;
+}
+
+button {
+  font: inherit;
+}
+
+.shell {
+  width: min(100%, 480px);
+  min-height: 100vh;
+  margin: 0 auto;
+  background: rgba(251, 250, 247, 0.88);
+}
+
+.top-rule {
+  height: 4px;
+  background: var(--accent);
+}
+
+.screen {
+  min-height: calc(100vh - 4px);
+  padding: 28px 22px 32px;
+}
+
+.home {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.kicker {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  color: var(--muted);
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  font-size: 11px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+.dot {
+  width: 7px;
+  height: 7px;
+  background: var(--accent);
+  border-radius: 50%;
+}
+
+.hero-title {
+  margin: 26px 0 14px;
+  color: var(--ink);
+  font-size: 30px;
+  line-height: 1.2;
+  text-align: center;
+  font-weight: 800;
+}
+
+.hero-subtitle {
+  margin: 0 auto 28px;
+  max-width: 340px;
+  color: var(--muted);
+  font-size: 15px;
+  line-height: 1.75;
+  text-align: center;
+}
+
+.hairline {
+  width: 64px;
+  height: 1px;
+  margin: 0 auto 30px;
+  background: var(--line-strong);
+}
+
+.intro {
+  margin: 0 auto;
+  max-width: 380px;
+}
+
+.intro p {
+  margin: 0 0 15px;
+  color: rgba(32, 36, 42, 0.82);
+  font-size: 15px;
+  line-height: 1.8;
+}
+
+.intro .strong {
+  color: var(--accent);
+  font-weight: 700;
+}
+
+.pill-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px;
+  margin: 28px 0;
+}
+
+.pill {
+  min-height: 42px;
+  display: grid;
+  place-items: center;
+  border: 1px solid var(--line);
+  color: var(--muted);
+  background: rgba(255, 255, 255, 0.44);
+  font-size: 13px;
+}
+
+.primary-btn,
+.ghost-btn,
+.copy-btn {
+  width: 100%;
+  min-height: 48px;
+  border: 1px solid var(--ink);
+  border-radius: 0;
+  cursor: pointer;
+  transition: transform 150ms ease, background 150ms ease, color 150ms ease, border-color 150ms ease;
+}
+
+.primary-btn {
+  background: var(--ink);
+  color: #fff;
+  font-weight: 700;
+}
+
+.ghost-btn,
+.copy-btn {
+  background: transparent;
+  color: var(--ink);
+}
+
+.primary-btn:active,
+.ghost-btn:active,
+.copy-btn:active,
+.option:active {
+  transform: translateY(1px);
+}
+
+.disclaimer {
+  margin: 18px auto 0;
+  max-width: 340px;
+  color: var(--muted);
+  font-size: 12px;
+  line-height: 1.65;
+  text-align: center;
+}
+
+.quiz-screen {
+  padding-top: 0;
+}
+
+.sticky-head {
+  position: sticky;
+  top: 0;
+  z-index: 5;
+  margin: 0 -22px 26px;
+  padding: 14px 22px 12px;
+  background: rgba(251, 250, 247, 0.95);
+  border-bottom: 1px solid var(--line);
+  backdrop-filter: blur(12px);
+}
+
+.quiz-meta {
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+  color: var(--muted);
+  font-size: 12px;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+}
+
+.progress-track {
+  height: 4px;
+  margin-top: 10px;
+  background: rgba(32, 36, 42, 0.09);
+}
+
+.progress-bar {
+  height: 100%;
+  background: var(--accent);
+  transition: width 260ms ease;
+}
+
+.question-no {
+  color: rgba(155, 67, 57, 0.18);
+  font-size: 48px;
+  line-height: 1;
+  font-weight: 800;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+}
+
+.question-title {
+  margin: 18px 0 24px;
+  font-size: 22px;
+  line-height: 1.5;
+  font-weight: 750;
+}
+
+.options {
+  display: grid;
+  gap: 12px;
+}
+
+.option {
+  min-height: 66px;
+  display: grid;
+  grid-template-columns: 30px 1fr;
+  gap: 12px;
+  align-items: start;
+  width: 100%;
+  padding: 15px;
+  border: 1px solid var(--line);
+  background: rgba(255, 255, 255, 0.68);
+  color: var(--ink);
+  text-align: left;
+  cursor: pointer;
+  transition: background 160ms ease, border-color 160ms ease, color 160ms ease, opacity 160ms ease;
+}
+
+.option-key {
+  display: grid;
+  place-items: center;
+  width: 28px;
+  height: 28px;
+  border: 1px solid var(--line-strong);
+  font-size: 13px;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+}
+
+.option-text {
+  padding-top: 2px;
+  font-size: 15px;
+  line-height: 1.55;
+}
+
+.option.selected {
+  border-color: var(--accent);
+  background: var(--accent);
+  color: #fff;
+}
+
+.option.selected .option-key {
+  border-color: rgba(255, 255, 255, 0.8);
+}
+
+.option.dimmed {
+  opacity: 0.42;
+}
+
+.hint {
+  margin: 18px 0 0;
+  color: var(--muted);
+  font-size: 12px;
+  text-align: center;
+}
+
+.loading-screen {
+  display: grid;
+  place-items: center;
+}
+
+.loading-card {
+  width: 100%;
+  max-width: 360px;
+  text-align: center;
+}
+
+.spinner {
+  width: 54px;
+  height: 54px;
+  margin: 0 auto 24px;
+  border: 2px solid var(--line);
+  border-top-color: var(--accent);
+  border-radius: 50%;
+  animation: spin 850ms linear infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.loading-text {
+  min-height: 54px;
+  color: var(--accent);
+  font-size: 17px;
+  line-height: 1.6;
+  font-weight: 700;
+}
+
+.step-bars {
+  display: grid;
+  gap: 8px;
+  margin-top: 28px;
+}
+
+.step {
+  height: 4px;
+  overflow: hidden;
+  background: rgba(32, 36, 42, 0.09);
+}
+
+.step span {
+  display: block;
+  height: 100%;
+  width: 0;
+  background: var(--accent);
+  transition: width 300ms ease;
+}
+
+.step.done span {
+  width: 100%;
+}
+
+.result-screen {
+  padding: 22px 18px 30px;
+}
+
+.report {
+  padding: 22px 16px 18px;
+  border: 1px solid var(--line);
+  background: var(--paper);
+  box-shadow: var(--shadow);
+}
+
+.result-type {
+  margin: 8px 0 8px;
+  color: var(--accent);
+  font-size: 30px;
+  line-height: 1.15;
+  font-weight: 850;
+  text-align: center;
+}
+
+.result-subtitle {
+  margin: 0 auto 20px;
+  color: var(--muted);
+  font-size: 15px;
+  line-height: 1.7;
+  text-align: center;
+}
+
+.stamp-row {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px;
+  margin: 18px 0 20px;
+}
+
+.stamp {
+  padding: 12px 10px;
+  border: 1px solid var(--line);
+  background: #fbfaf7;
+}
+
+.stamp strong {
+  display: block;
+  margin-bottom: 4px;
+  color: var(--ink);
+  font-size: 20px;
+}
+
+.stamp span {
+  color: var(--muted);
+  font-size: 12px;
+}
+
+.section {
+  padding: 20px 0;
+  border-top: 1px solid var(--line);
+}
+
+.section h2 {
+  margin: 0 0 12px;
+  font-size: 18px;
+  color: var(--ink);
+}
+
+.section p {
+  margin: 0 0 12px;
+  color: rgba(32, 36, 42, 0.82);
+  font-size: 15px;
+  line-height: 1.85;
+}
+
+.quote {
+  padding: 15px;
+  border-left: 3px solid var(--accent);
+  background: var(--accent-soft);
+  color: #5b2d27;
+  line-height: 1.8;
+  font-weight: 700;
+}
+
+.meters {
+  display: grid;
+  gap: 14px;
+}
+
+.meter-head {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 7px;
+  color: var(--muted);
+  font-size: 13px;
+}
+
+.meter-track {
+  height: 8px;
+  background: rgba(32, 36, 42, 0.08);
+}
+
+.meter-fill {
+  height: 100%;
+  background: var(--accent);
+}
+
+.compare {
+  display: grid;
+  gap: 10px;
+}
+
+.compare-card {
+  padding: 14px;
+  border: 1px solid var(--line);
+  background: #fbfaf7;
+}
+
+.compare-card h3,
+.plan-card h3 {
+  margin: 0 0 8px;
+  font-size: 15px;
+}
+
+.compare-card p,
+.plan-card p {
+  font-size: 14px;
+}
+
+.tag-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.tag {
+  padding: 7px 9px;
+  border: 1px solid var(--line);
+  background: #fbfaf7;
+  color: var(--muted);
+  font-size: 13px;
+}
+
+.plan {
+  display: grid;
+  gap: 10px;
+}
+
+.plan-card {
+  padding: 14px;
+  border: 1px solid var(--line);
+  background: #fbfaf7;
+}
+
+.secondary-note {
+  padding: 14px;
+  border: 1px dashed var(--line-strong);
+  background: rgba(192, 150, 77, 0.12);
+  line-height: 1.75;
+  font-size: 14px;
+}
+
+.actions {
+  display: grid;
+  gap: 10px;
+  margin-top: 18px;
+}
+
+.toast {
+  position: fixed;
+  left: 50%;
+  bottom: 22px;
+  z-index: 20;
+  transform: translateX(-50%);
+  padding: 10px 14px;
+  background: var(--ink);
+  color: #fff;
+  font-size: 13px;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 180ms ease;
+}
+
+.toast.show {
+  opacity: 1;
+}
+
+.error {
+  display: grid;
+  place-items: center;
+  min-height: 100vh;
+  padding: 24px;
+  text-align: center;
+}
+
+.error p {
+  color: var(--muted);
+  line-height: 1.7;
+}
+
+@media (min-width: 700px) {
+  body {
+    padding: 28px 0;
+  }
+
+  .shell {
+    min-height: calc(100vh - 56px);
+    border: 1px solid var(--line);
+    box-shadow: var(--shadow);
+  }
+
+  .screen {
+    min-height: calc(100vh - 60px);
+  }
+}
+
+    </style>
+  </head>
+  <body>
+    <main id="app" aria-live="polite"></main>
+    <script>window.__QUIZ_CONFIG__ = {"slug":"test-invisible-noble-aura","topic":"你身上自带哪种隐形贵气？","kicker":"32-Q Noble Aura Test","title":"你身上自带哪种隐形贵气？","subtitle":"32 道题，测出你更像松弛底气、清冷边界、温柔教养，还是格局掌控型贵气。","metaDescription":"完成 32 道隐形贵气测试，生成你的气质类型、优势来源和修炼提醒。","startButton":"开始测试","resultKicker":"Noble Aura Report","quizHint":"凭第一反应选择，系统会自动进入下一题","copyButton":"复制我的结果","restartButton":"重新测试","scoreLabel":"贵气清晰度","stageLabel":"当前气质阶段","stageLabels":[{"max":55,"label":"气质觉察期"},{"max":72,"label":"底气养成期"},{"max":86,"label":"风格显化期"},{"max":100,"label":"贵气稳定期"}],"compareLabels":["如果只看外在包装","如果修炼内在气质"],"disclaimer":"本测试为趣味气质自我观察工具，仅讨论行为习惯、情绪模式和社交风格，不代表阶层、财富、身份、外貌评价或心理诊断。结果仅供娱乐和自我复盘参考。","secondaryThreshold":4,"dimensions":["松弛感","边界感","教养感","格局感"],"intro":["很多人说一个人有贵气，其实不是在说她穿得多贵。","真正的隐形贵气，往往藏在不慌不忙的底气、清醒的边界、细节里的教养，以及看得远的格局里。","32 道题会从第一印象、情绪底盘、社交边界、说话方式、审美习惯、处事风格、内在底气和长期气质 8 个模块，生成你的隐形贵气报告。"],"loadingMessages":["正在读取你的第一印象气场...","正在拆分松弛感、边界感、教养感和格局感...","正在识别你最容易被感受到的贵气来源...","正在生成 32 题隐形贵气报告...","分析完成。"],"questions":[{"id":1,"module":"第一印象","text":"第一次见面，别人更容易觉得你：","options":[{"key":"A","text":"不急不抢，整个人有种很稳的松弛感"},{"key":"B","text":"不太好靠近，但气场干净、有距离感"},{"key":"C","text":"说话舒服、分寸感好，让人觉得被照顾到"},{"key":"D","text":"眼神和表达都很笃定，像知道自己要什么"}]},{"id":2,"module":"第一印象","text":"如果一个人夸你有气质，你觉得更可能是因为：","options":[{"key":"A","text":"你不慌不忙，很少被外界节奏带着跑"},{"key":"B","text":"你不讨好，也不会为了合群勉强自己"},{"key":"C","text":"你待人有礼貌，细节里很有教养"},{"key":"D","text":"你看问题有层次，不容易被小事绊住"}]},{"id":3,"module":"第一印象","text":"在人群里，你最不想呈现的状态是：","options":[{"key":"A","text":"看起来很用力，像一直在证明自己"},{"key":"B","text":"太容易被人看透，边界被随便闯进来"},{"key":"C","text":"说话做事粗糙，让别人不舒服"},{"key":"D","text":"被眼前的小情绪和小输赢牵着走"}]},{"id":4,"module":"第一印象","text":"你最希望别人记住你的哪一点：","options":[{"key":"A","text":"和你待在一起很安心，不压迫也不紧绷"},{"key":"B","text":"你有自己的世界，不是谁都能随便进入"},{"key":"C","text":"你很体面，连拒绝都让人觉得舒服"},{"key":"D","text":"你很有主心骨，关键时刻能稳住局面"}]},{"id":5,"module":"情绪底盘","text":"遇到突然的麻烦，你第一反应更像：","options":[{"key":"A","text":"先把自己稳住，再慢慢处理"},{"key":"B","text":"先拉开距离，不让别人的情绪影响自己"},{"key":"C","text":"先照顾场面和对方感受，但心里会有判断"},{"key":"D","text":"先判断这件事的真正影响，再决定怎么出手"}]},{"id":6,"module":"情绪底盘","text":"你最受不了别人哪种情绪方式：","options":[{"key":"A","text":"一点小事就慌，反复把焦虑传给别人"},{"key":"B","text":"没有边界地倾倒情绪，还要求你立刻接住"},{"key":"C","text":"说话难听，却说自己只是直性子"},{"key":"D","text":"看不清大局，只盯着当下输赢不放"}]},{"id":7,"module":"情绪底盘","text":"你真正厉害的地方更像：","options":[{"key":"A","text":"越乱越能慢下来，不轻易失态"},{"key":"B","text":"再喜欢也能保持清醒，不轻易失控"},{"key":"C","text":"再不舒服也尽量不让情绪伤到无关的人"},{"key":"D","text":"再有压力也能分清优先级，不被细节拖垮"}]},{"id":8,"module":"情绪底盘","text":"别人觉得你“贵气”，可能是因为你很少：","options":[{"key":"A","text":"急着解释、急着证明、急着被认可"},{"key":"B","text":"为了关系放低底线、反复内耗"},{"key":"C","text":"用难听的话暴露自己的情绪和修养"},{"key":"D","text":"为了一点短期得失破坏长期节奏"}]},{"id":9,"module":"社交边界","text":"面对不熟的人突然过度打探，你会：","options":[{"key":"A","text":"轻轻带过，不让气氛尴尬，也不多透露"},{"key":"B","text":"直接把边界立起来，不给对方继续的空间"},{"key":"C","text":"用礼貌的话挡回去，让对方知道不合适"},{"key":"D","text":"判断对方意图，再决定要不要继续来往"}]},{"id":10,"module":"社交边界","text":"你最欣赏哪种社交状态：","options":[{"key":"A","text":"舒服自然，不用一直表演热情"},{"key":"B","text":"亲疏有别，不是谁都能进入核心圈"},{"key":"C","text":"来往有分寸，说话做事都让人舒服"},{"key":"D","text":"有选择地经营关系，把时间给值得的人"}]},{"id":11,"module":"社交边界","text":"你最容易被哪类人消耗：","options":[{"key":"A","text":"一直制造焦虑、把小事搞得很紧张的人"},{"key":"B","text":"总想越界、控制你、打探你的人"},{"key":"C","text":"不懂礼貌、说话冒犯还不自知的人"},{"key":"D","text":"格局太小、只会纠结眼前利益的人"}]},{"id":12,"module":"社交边界","text":"如果你要拒绝一个请求，你更倾向于：","options":[{"key":"A","text":"语气平和，但不勉强自己"},{"key":"B","text":"简单明确，不解释太多"},{"key":"C","text":"把话说得体面，给彼此留余地"},{"key":"D","text":"说明原则和边界，让对方知道你的标准"}]},{"id":13,"module":"说话方式","text":"你说话最自然的风格是：","options":[{"key":"A","text":"不急，慢慢说，但能让人放松下来"},{"key":"B","text":"少说废话，表达直接，有边界"},{"key":"C","text":"照顾对方感受，措辞很有分寸"},{"key":"D","text":"抓重点、讲逻辑，能把局面说清楚"}]},{"id":14,"module":"说话方式","text":"别人向你倾诉时，你通常会：","options":[{"key":"A","text":"先让对方缓下来，不急着给建议"},{"key":"B","text":"听到越界或不合理的地方，会提醒对方清醒"},{"key":"C","text":"认真听完，用温和的话帮对方整理情绪"},{"key":"D","text":"帮对方看清问题结构和真正选择"}]},{"id":15,"module":"说话方式","text":"你最不想让自己说出口的是：","options":[{"key":"A","text":"因为慌乱而说出没必要的解释"},{"key":"B","text":"因为怕失去而说出讨好的话"},{"key":"C","text":"因为生气而说出伤人和失礼的话"},{"key":"D","text":"因为短视而说出没有格局的话"}]},{"id":16,"module":"说话方式","text":"你觉得最有质感的表达是：","options":[{"key":"A","text":"不急着赢，但听完让人心里很稳"},{"key":"B","text":"不拖泥带水，清楚地表达立场"},{"key":"C","text":"既真实又体面，让人下得来台"},{"key":"D","text":"能把复杂问题说得清楚、有远见"}]},{"id":17,"module":"审美习惯","text":"你对“贵气”的理解更接近：","options":[{"key":"A","text":"不是穿多贵，而是整个人不局促"},{"key":"B","text":"不是被所有人喜欢，而是有自己的标准"},{"key":"C","text":"不是堆满精致，而是细节干净、有礼"},{"key":"D","text":"不是显摆资源，而是有眼界和底气"}]},{"id":18,"module":"审美习惯","text":"你更喜欢哪种生活质感：","options":[{"key":"A","text":"简单、舒服、有呼吸感"},{"key":"B","text":"干净、克制、有一点冷感"},{"key":"C","text":"温和、精致、照顾细节"},{"key":"D","text":"有规划、有秩序、有长期感"}]},{"id":19,"module":"审美习惯","text":"你最容易对哪种东西产生好感：","options":[{"key":"A","text":"看起来不费力，但用起来很舒服的东西"},{"key":"B","text":"线条干净、质感清冷、不喧哗的东西"},{"key":"C","text":"细节周到、让人觉得被认真对待的东西"},{"key":"D","text":"经得起时间检验、有价值沉淀的东西"}]},{"id":20,"module":"审美习惯","text":"你最不喜欢哪种“精致”：","options":[{"key":"A","text":"看起来很用力，反而让人紧张"},{"key":"B","text":"为了迎合别人，把自己弄得没有个性"},{"key":"C","text":"只顾表面好看，细节和礼貌都很粗糙"},{"key":"D","text":"只追短期潮流，没有自己的判断和积累"}]},{"id":21,"module":"处事风格","text":"遇到被误解时，你更像：","options":[{"key":"A","text":"能解释就解释，解释不了也不急着自证"},{"key":"B","text":"如果对方不值得，就不浪费情绪"},{"key":"C","text":"尽量把话说清楚，不让关系变得难看"},{"key":"D","text":"看这件事是否影响长期目标，再决定处理程度"}]},{"id":22,"module":"处事风格","text":"面对竞争，你更容易：","options":[{"key":"A","text":"按自己的节奏走，不被别人带乱"},{"key":"B","text":"不主动攀比，也不允许别人踩你的边界"},{"key":"C","text":"赢也体面，输也不失态"},{"key":"D","text":"看长期位置，不为一时输赢乱阵脚"}]},{"id":23,"module":"处事风格","text":"你最在意自己处理事情时有没有：","options":[{"key":"A","text":"从容感"},{"key":"B","text":"边界感"},{"key":"C","text":"体面感"},{"key":"D","text":"大局感"}]},{"id":24,"module":"处事风格","text":"别人真正佩服你，通常不是因为你多高调，而是因为：","options":[{"key":"A","text":"你很稳，不容易被带节奏"},{"key":"B","text":"你很清醒，不随便被拿捏"},{"key":"C","text":"你很有分寸，让人舒服又尊重"},{"key":"D","text":"你看得远，关键时刻能做判断"}]},{"id":25,"module":"内在底气","text":"你最希望自己拥有的底气是：","options":[{"key":"A","text":"不管外界多乱，我都能慢慢把日子过稳"},{"key":"B","text":"不管多喜欢谁，我都不会丢掉自己"},{"key":"C","text":"不管处在什么关系里，我都能保持教养和体面"},{"key":"D","text":"不管短期多难，我都知道自己要往哪里走"}]},{"id":26,"module":"内在底气","text":"你最怕哪种状态把自己的贵气耗掉：","options":[{"key":"A","text":"长期焦虑，把自己活得很紧绷"},{"key":"B","text":"长期讨好，把边界一点点让出去"},{"key":"C","text":"长期情绪化，把话说得难听又后悔"},{"key":"D","text":"长期短视，被眼前小事困住"}]},{"id":27,"module":"内在底气","text":"你觉得自己最该修炼的是：","options":[{"key":"A","text":"不急"},{"key":"B","text":"不讨好"},{"key":"C","text":"不失礼"},{"key":"D","text":"不短视"}]},{"id":28,"module":"内在底气","text":"你最想被别人感受到的气场是：","options":[{"key":"A","text":"安静但很有力量"},{"key":"B","text":"冷静且不好拿捏"},{"key":"C","text":"温柔但很有质感"},{"key":"D","text":"低调但很有格局"}]},{"id":29,"module":"长期气质","text":"如果你的贵气会越来越明显，最可能来自：","options":[{"key":"A","text":"你越来越不急着证明自己"},{"key":"B","text":"你越来越敢筛选关系和环境"},{"key":"C","text":"你越来越懂得在细节里保持体面"},{"key":"D","text":"你越来越能为长期目标做取舍"}]},{"id":30,"module":"长期气质","text":"你最想摆脱哪种低能量状态：","options":[{"key":"A","text":"一焦虑就慌，一慌就乱"},{"key":"B","text":"一在意就讨好，一讨好就内耗"},{"key":"C","text":"一生气就失礼，一失礼就后悔"},{"key":"D","text":"一受挫就短视，一短视就乱选"}]},{"id":31,"module":"长期气质","text":"如果用一个词形容你身上的隐形贵气，你会选：","options":[{"key":"A","text":"松弛"},{"key":"B","text":"清冷"},{"key":"C","text":"教养"},{"key":"D","text":"格局"}]},{"id":32,"module":"长期气质","text":"做完这 32 题，你最想得到的答案是：","options":[{"key":"A","text":"我身上的松弛感到底从哪里来"},{"key":"B","text":"我为什么越有边界越显贵"},{"key":"C","text":"我的温柔和教养是不是一种优势"},{"key":"D","text":"我身上的格局感如何变得更明显"}]}],"results":{"A":{"typeName":"松弛底气型","subtitle":"你的贵气藏在不慌不忙里。你不是没有压力，而是越重要的时刻越能把自己稳住。","posterSubtext":"你最显贵的地方，是不急着证明自己。","maturityScore":86,"coreConclusion":"你的答案显示，你身上最明显的气质是松弛和稳定。你不喜欢把自己活得太用力，也不太会为了短期认可过度解释。别人和你待在一起，容易感觉节奏慢下来，心也跟着稳一点。 你真正的贵气不是懒散，而是内在有秩序。你知道什么值得急，什么不值得。你的课题是别把松弛变成拖延，要让稳定感落到行动和选择里。","diagnosis":"你的答案显示，你身上最明显的气质是松弛和稳定。你不喜欢把自己活得太用力，也不太会为了短期认可过度解释。别人和你待在一起，容易感觉节奏慢下来，心也跟着稳一点。","whatYouReallyWant":"你真正的贵气不是懒散，而是内在有秩序。你知道什么值得急，什么不值得。你的课题是别把松弛变成拖延，要让稳定感落到行动和选择里。","mechanism":{"title":"稳定松弛机制","content":"松弛底气型的核心，是情绪调节能力和自我节奏感。你不会轻易被外界比较、焦虑和评价带走。优势是稳，风险是太慢热、太不想解释，容易错过主动表达自己的机会。"},"professionalBasis":["从第一印象看，你给人的感觉是不急不抢，有天然的稳定感。","从情绪底盘看，你越乱越能慢下来，不容易被带节奏。","从长期气质看，你的贵气会随着自我节奏越来越清晰而显出来。"],"coreTensions":["不慌不忙","讨厌用力感","节奏稳定","容易慢热","需要主动表达"],"suitableIf":["长期主义","生活方式内容","稳定型关系","体验型服务","审美表达"],"cautionIf":["把松弛变成拖延","太少解释导致误会","机会来了反应偏慢","不争不抢到被忽视"],"indices":[{"label":"松弛感","value":92},{"label":"情绪稳定度","value":89},{"label":"自我节奏感","value":87},{"label":"主动表达课题","value":70}],"ifStay":"如果你一直只保持松弛，但不主动表达和行动，别人可能只看到你的稳，却看不见你的能力。","ifChange":"如果你把松弛感和清晰行动结合起来，你会越来越有一种不费力的高级感。","notRecommended":["把松弛变成拖延","太少解释导致误会","机会来了反应偏慢","不争不抢到被忽视"],"plan90":[{"title":"第 1 周：减少无效自证","content":"遇到误解时只解释一次，把精力留给真正重要的人和事。"},{"title":"第 2-3 周：固定自己的节奏","content":"建立一个稳定作息或输出节奏，让松弛感有现实支撑。"},{"title":"第 4-6 周：练习主动表达","content":"不是讨好别人，而是让别人知道你的能力、边界和需求。"},{"title":"第 7-12 周：做长期积累","content":"选择一个能慢慢变好的方向，把稳定变成复利。"}],"closing":"你身上的贵气，是那种越不急，越让人觉得你有底气的气场。"},"B":{"typeName":"清冷边界型","subtitle":"你的贵气藏在边界感里。你不需要被所有人喜欢，也不会为了合群丢掉自己。","posterSubtext":"你越不讨好，越有一种干净的高级感。","maturityScore":88,"coreConclusion":"你的答案显示，你身上有很强的边界感和清醒感。你不轻易把所有人放进生活里，也不喜欢被人随便打探、评价或拿捏。你给人的贵气不是热闹，而是干净、克制、有距离。 你真正的贵气来自自我尊重。你知道什么关系值得靠近，什么关系该保持距离。你的课题是别让边界变成冷硬，要让别人感受到你有原则，也有温度。","diagnosis":"你的答案显示，你身上有很强的边界感和清醒感。你不轻易把所有人放进生活里，也不喜欢被人随便打探、评价或拿捏。你给人的贵气不是热闹，而是干净、克制、有距离。","whatYouReallyWant":"你真正的贵气来自自我尊重。你知道什么关系值得靠近，什么关系该保持距离。你的课题是别让边界变成冷硬，要让别人感受到你有原则，也有温度。","mechanism":{"title":"清醒边界机制","content":"清冷边界型的核心，是自我保护能力和筛选能力。你不容易在关系里失控或讨好。优势是清醒，风险是看起来不好接近，或因为太习惯独立而错过真实连接。"},"professionalBasis":["从社交边界看，你很重视亲疏有别，不是谁都能进入核心圈。","从说话方式看，你更倾向少说废话，表达立场清楚。","从内在底气看，你最在意的是不讨好、不丢掉自己。"],"coreTensions":["边界清楚","不爱讨好","清醒克制","距离感强","需要柔软表达"],"suitableIf":["高质感人设","专业服务","筛选型关系","个人品牌","审美内容"],"cautionIf":["把边界变成冷漠","拒绝表达脆弱","过度防御","让真正想靠近的人无从进入"],"indices":[{"label":"边界感","value":94},{"label":"清醒度","value":90},{"label":"自我尊重感","value":88},{"label":"亲近表达课题","value":66}],"ifStay":"如果你一直只保持距离，别人会觉得你很有气场，但不一定知道怎么靠近你。","ifChange":"如果你在边界清楚的同时保留一点柔软，你的清冷感会更有层次。","notRecommended":["把边界变成冷漠","拒绝表达脆弱","过度防御","让真正想靠近的人无从进入"],"plan90":[{"title":"第 1 周：保留必要拒绝","content":"拒绝时不用过度解释，清楚表达就好。"},{"title":"第 2-3 周：筛选亲密圈","content":"把精力留给尊重你边界的人。"},{"title":"第 4-6 周：练习温和表达","content":"可以坚定，也可以不伤人。"},{"title":"第 7-12 周：建立个人标准","content":"穿搭、内容、社交和工作都围绕自己的标准做选择。"}],"closing":"你身上的贵气，是不靠热闹证明存在，也依然让人无法忽视。"},"C":{"typeName":"温柔教养型","subtitle":"你的贵气藏在细节和分寸里。你不是没有脾气，而是懂得把真实表达得体面。","posterSubtext":"你最显贵的地方，是温柔但不廉价。","maturityScore":84,"coreConclusion":"你的答案显示，你很重视礼貌、分寸、体面和细节。你会照顾场面，也会照顾人的感受。别人和你相处，会觉得舒服、被尊重、不被冒犯。你的贵气不是高冷，而是温润、细腻、有教养。 你真正的贵气来自对细节的尊重。你知道一句话怎么说会让人舒服，也知道什么样的失礼会暴露一个人的底色。你的课题是别为了体面压住真实需求。","diagnosis":"你的答案显示，你很重视礼貌、分寸、体面和细节。你会照顾场面，也会照顾人的感受。别人和你相处，会觉得舒服、被尊重、不被冒犯。你的贵气不是高冷，而是温润、细腻、有教养。","whatYouReallyWant":"你真正的贵气来自对细节的尊重。你知道一句话怎么说会让人舒服，也知道什么样的失礼会暴露一个人的底色。你的课题是别为了体面压住真实需求。","mechanism":{"title":"细节体面机制","content":"温柔教养型的核心，是高分寸感和情绪表达能力。你擅长让关系不难看，也能在细节里体现质感。优势是舒服，风险是太顾及别人，容易委屈自己。"},"professionalBasis":["从说话方式看，你会照顾对方感受，措辞很有分寸。","从审美习惯看，你重视干净、礼貌和让人舒服的细节。","从处事风格看，你赢也体面，输也不失态。"],"coreTensions":["分寸感强","很会照顾人","细节体面","容易心软","需要表达需求"],"suitableIf":["情感内容","服务体验","社交关系","审美生活","温柔型个人 IP"],"cautionIf":["为了体面委屈自己","过度照顾别人感受","不敢表达不满","把教养变成讨好"],"indices":[{"label":"教养感","value":92},{"label":"分寸感","value":90},{"label":"细节感知力","value":87},{"label":"自我表达课题","value":72}],"ifStay":"如果你一直只顾体面，很容易让别人舒服了，却让自己越来越累。","ifChange":"如果你把温柔和边界结合起来，你会拥有很强的人际吸引力。","notRecommended":["为了体面委屈自己","过度照顾别人感受","不敢表达不满","把教养变成讨好"],"plan90":[{"title":"第 1 周：区分教养和讨好","content":"礼貌是你的选择，不是别人消耗你的理由。"},{"title":"第 2-3 周：练习表达不舒服","content":"用温和但明确的话说出你的感受。"},{"title":"第 4-6 周：放大细节优势","content":"把你的审美、体面和分寸感用在内容、服务或关系经营里。"},{"title":"第 7-12 周：建立真实边界","content":"让别人知道你温柔，但不是没有底线。"}],"closing":"你身上的贵气，是那种不张扬，却让人越相处越觉得舒服的质感。"},"D":{"typeName":"格局掌控型","subtitle":"你的贵气藏在眼界和判断里。你不太容易被眼前的小输赢困住，更看重长期位置。","posterSubtext":"你最显贵的地方，是看得远，也稳得住。","maturityScore":90,"coreConclusion":"你的答案显示，你习惯从更大的视角看问题。别人纠结当下情绪和短期得失时，你会下意识判断长期影响、资源配置和真正目标。你身上的贵气更像一种掌控感和格局感。 你真正的贵气来自长期视角。你知道什么值得争，什么不值得。你的课题是别让格局变成疏离，也别因为太理性忽略具体人的感受。","diagnosis":"你的答案显示，你习惯从更大的视角看问题。别人纠结当下情绪和短期得失时，你会下意识判断长期影响、资源配置和真正目标。你身上的贵气更像一种掌控感和格局感。","whatYouReallyWant":"你真正的贵气来自长期视角。你知道什么值得争，什么不值得。你的课题是别让格局变成疏离，也别因为太理性忽略具体人的感受。","mechanism":{"title":"长期格局机制","content":"格局掌控型的核心，是战略感、取舍能力和大局判断。你擅长把复杂局面看清楚，也能在关键时刻稳住方向。优势是有主心骨，风险是给人压力，或太快跳到理性结论。"},"professionalBasis":["从处事风格看，你更在意大局感和长期影响。","从内在底气看，你希望自己不短视，知道要往哪里走。","从长期气质看，你的贵气会随着取舍能力变强而显现。"],"coreTensions":["看得远","有主心骨","擅长取舍","容易显强势","需要照顾感受"],"suitableIf":["管理决策","职业规划","高阶表达","资源整合","策略型内容"],"cautionIf":["太理性忽略情绪","给人压迫感","不屑解释过程","把格局变成距离"],"indices":[{"label":"格局感","value":94},{"label":"判断力","value":91},{"label":"掌控感","value":88},{"label":"情绪照顾课题","value":69}],"ifStay":"如果你一直只讲大局，别人会认可你厉害，但可能感受不到你愿意靠近。","ifChange":"如果你把远见和共情结合起来，你的气场会更有说服力，也更让人愿意跟随。","notRecommended":["太理性忽略情绪","给人压迫感","不屑解释过程","把格局变成距离"],"plan90":[{"title":"第 1 周：明确长期目标","content":"把你真正想要的位置写清楚，不被短期情绪带偏。"},{"title":"第 2-3 周：练习解释取舍","content":"不是所有人都能立刻理解你的判断，适当说明会减少误会。"},{"title":"第 4-6 周：照顾具体感受","content":"有格局的人也需要看见身边人的情绪。"},{"title":"第 7-12 周：建立长期资产","content":"把眼界落到行动、作品、能力和关系沉淀上。"}],"closing":"你身上的贵气，是不被眼前的小局困住，始终知道自己往哪里走。"}},"secondaryNotes":{"A":{"B":"你的主气质是「松弛底气型」，但也带有「清冷边界型」的影子。主结果代表你最容易被别人感受到的贵气来源，副结果提醒你：真正的贵气不是单一标签，而是松弛、边界、教养和格局的组合。","C":"你的主气质是「松弛底气型」，但也带有「温柔教养型」的影子。主结果代表你最容易被别人感受到的贵气来源，副结果提醒你：真正的贵气不是单一标签，而是松弛、边界、教养和格局的组合。","D":"你的主气质是「松弛底气型」，但也带有「格局掌控型」的影子。主结果代表你最容易被别人感受到的贵气来源，副结果提醒你：真正的贵气不是单一标签，而是松弛、边界、教养和格局的组合。"},"B":{"A":"你的主气质是「清冷边界型」，但也带有「松弛底气型」的影子。主结果代表你最容易被别人感受到的贵气来源，副结果提醒你：真正的贵气不是单一标签，而是松弛、边界、教养和格局的组合。","C":"你的主气质是「清冷边界型」，但也带有「温柔教养型」的影子。主结果代表你最容易被别人感受到的贵气来源，副结果提醒你：真正的贵气不是单一标签，而是松弛、边界、教养和格局的组合。","D":"你的主气质是「清冷边界型」，但也带有「格局掌控型」的影子。主结果代表你最容易被别人感受到的贵气来源，副结果提醒你：真正的贵气不是单一标签，而是松弛、边界、教养和格局的组合。"},"C":{"A":"你的主气质是「温柔教养型」，但也带有「松弛底气型」的影子。主结果代表你最容易被别人感受到的贵气来源，副结果提醒你：真正的贵气不是单一标签，而是松弛、边界、教养和格局的组合。","B":"你的主气质是「温柔教养型」，但也带有「清冷边界型」的影子。主结果代表你最容易被别人感受到的贵气来源，副结果提醒你：真正的贵气不是单一标签，而是松弛、边界、教养和格局的组合。","D":"你的主气质是「温柔教养型」，但也带有「格局掌控型」的影子。主结果代表你最容易被别人感受到的贵气来源，副结果提醒你：真正的贵气不是单一标签，而是松弛、边界、教养和格局的组合。"},"D":{"A":"你的主气质是「格局掌控型」，但也带有「松弛底气型」的影子。主结果代表你最容易被别人感受到的贵气来源，副结果提醒你：真正的贵气不是单一标签，而是松弛、边界、教养和格局的组合。","B":"你的主气质是「格局掌控型」，但也带有「清冷边界型」的影子。主结果代表你最容易被别人感受到的贵气来源，副结果提醒你：真正的贵气不是单一标签，而是松弛、边界、教养和格局的组合。","C":"你的主气质是「格局掌控型」，但也带有「温柔教养型」的影子。主结果代表你最容易被别人感受到的贵气来源，副结果提醒你：真正的贵气不是单一标签，而是松弛、边界、教养和格局的组合。"}},"shareTemplate":["我测出来了：{{typeName}}","{{posterSubtext}}","{{secondaryLine}}","","你身上自带哪种隐形贵气？32题气质测试"]};</script>
+    <script>
+(function () {
+  const app = document.getElementById("app");
+  const configPaths = ["./configs/site-config.json", "./configs/career-change.json"];
+
+  const state = {
+    config: null,
+    answers: {},
+    currentIndex: 0,
+    selected: null,
+    locked: false,
+    loadingStep: 0,
+    route: "home",
+    resultData: null,
+  };
+
+  const defaultLoadingMessages = [
+    "正在读取你的选择倾向...",
+    "正在识别隐藏动机...",
+    "正在计算结果分布...",
+    "正在生成专属报告...",
+    "分析完成。",
+  ];
+
+  init();
+
+  async function init() {
+    try {
+      state.config = await fetchConfig();
+      applyDocumentMeta(state.config);
+
+      const saved = sessionStorage.getItem(getStorageKey());
+      if (saved) {
+        state.answers = JSON.parse(saved);
+      }
+
+      routeFromHash();
+      window.addEventListener("hashchange", routeFromHash);
+    } catch (error) {
+      app.innerHTML = `
+        <div class="error">
+          <div>
+            <h1>测试加载失败</h1>
+            <p>请确认你是通过网页链接打开页面，而不是直接双击 HTML 文件。</p>
+          </div>
+        </div>
+      `;
+      console.error(error);
+    }
+  }
+
+  async function fetchConfig() {
+    if (window.__QUIZ_CONFIG__) return window.__QUIZ_CONFIG__;
+    let lastError;
+    for (const path of configPaths) {
+      try {
+        const response = await fetch(path, { cache: "no-store" });
+        if (!response.ok) throw new Error(`${path} ${response.status}`);
+        return response.json();
+      } catch (error) {
+        lastError = error;
+      }
+    }
+    throw lastError;
+  }
+
+  function applyDocumentMeta(cfg) {
+    const title = cfg.title || "趣味测试";
+    const description = cfg.metaDescription || cfg.subtitle || "完成测试，生成你的专属报告。";
+    document.title = title;
+    setMeta("name", "description", description);
+    setMeta("property", "og:title", title);
+    setMeta("property", "og:description", description);
+  }
+
+  function setMeta(attr, key, content) {
+    let node = document.querySelector(`meta[${attr}="${key}"]`);
+    if (!node) {
+      node = document.createElement("meta");
+      node.setAttribute(attr, key);
+      document.head.appendChild(node);
+    }
+    node.setAttribute("content", content);
+  }
+
+  function routeFromHash() {
+    const route = (location.hash || "#/").replace("#/", "") || "home";
+    renderRoute(route);
+  }
+
+  function navigate(route) {
+    const nextHash = `#/${route}`;
+    if (location.hash === nextHash) {
+      renderRoute(route);
+      return;
+    }
+    location.hash = nextHash;
+  }
+
+  function renderRoute(route) {
+    state.route = route;
+    if (route === "quiz") renderQuiz();
+    else if (route === "loading") startLoading();
+    else if (route === "result") renderResult();
+    else renderHome();
+  }
+
+  function renderShell(content, extraClass = "") {
+    app.innerHTML = `
+      <div class="shell">
+        <div class="top-rule"></div>
+        <section class="screen ${extraClass}">${content}</section>
+      </div>
+      <div id="toast" class="toast">已复制</div>
+    `;
+  }
+
+  function renderHome() {
+    const cfg = state.config;
+    renderShell(
+      `
+      <div class="home">
+        <div class="kicker"><span class="dot"></span><span>${text(cfg.kicker)}</span><span class="dot"></span></div>
+        <h1 class="hero-title">${text(cfg.title)}</h1>
+        <p class="hero-subtitle">${text(cfg.subtitle)}</p>
+        <div class="hairline"></div>
+        <div class="intro">
+          ${(cfg.intro || []).map((p, index) => `<p class="${index === cfg.intro.length - 1 ? "strong" : ""}">${text(p)}</p>`).join("")}
+        </div>
+        <div class="pill-grid">
+          ${(cfg.dimensions || []).map((item) => `<div class="pill">${text(item)}</div>`).join("")}
+        </div>
+        <button class="primary-btn" data-action="start">${text(cfg.startButton || "开始测试")}</button>
+        <p class="disclaimer">${text(cfg.disclaimer || "本测试为趣味内容，仅供娱乐参考。")}</p>
+      </div>
+      `,
+      "home"
+    );
+    const startButton = app.querySelector("[data-action='start']");
+    let started = false;
+    const startQuiz = () => {
+      if (started) return;
+      started = true;
+      state.answers = {};
+      state.currentIndex = 0;
+      sessionStorage.removeItem(getStorageKey());
+      navigate("quiz");
+    };
+    startButton.addEventListener("click", startQuiz);
+    startButton.addEventListener(
+      "touchend",
+      (event) => {
+        event.preventDefault();
+        startQuiz();
+      },
+      { passive: false }
+    );
+  }
+
+  function renderQuiz() {
+    const questions = state.config.questions || [];
+    const question = questions[state.currentIndex];
+    if (!question) {
+      renderHome();
+      return;
+    }
+
+    const progress = ((state.currentIndex + 1) / questions.length) * 100;
+
+    renderShell(
+      `
+      <div class="sticky-head">
+        <div class="quiz-meta">
+          <span>${String(state.currentIndex + 1).padStart(2, "0")} / ${questions.length}</span>
+          <span>${text(question.module)}</span>
+        </div>
+        <div class="progress-track"><div class="progress-bar" style="width:${progress}%"></div></div>
+      </div>
+      <div class="question-no">${String(state.currentIndex + 1).padStart(2, "0")}</div>
+      <h1 class="question-title">${text(question.text)}</h1>
+      <div class="options">
+        ${(question.options || [])
+          .map(
+            (option) => `
+            <button class="option" data-option="${text(option.key)}">
+              <span class="option-key">${text(option.key)}</span>
+              <span class="option-text">${text(option.text)}</span>
+            </button>
+          `
+          )
+          .join("")}
+      </div>
+      <p class="hint">${text(state.config.quizHint || "选择后自动进入下一题")}</p>
+      `,
+      "quiz-screen"
+    );
+
+    app.querySelectorAll("[data-option]").forEach((button) => {
+      button.addEventListener("click", () => selectOption(button.dataset.option));
+    });
+  }
+
+  function selectOption(key) {
+    if (state.locked) return;
+    state.locked = true;
+    state.selected = key;
+    const question = state.config.questions[state.currentIndex];
+    state.answers[question.id] = key;
+
+    app.querySelectorAll(".option").forEach((button) => {
+      const selected = button.dataset.option === key;
+      button.classList.toggle("selected", selected);
+      button.classList.toggle("dimmed", !selected);
+    });
+
+    window.setTimeout(() => {
+      if (state.currentIndex < state.config.questions.length - 1) {
+        state.currentIndex += 1;
+        state.locked = false;
+        state.selected = null;
+        renderQuiz();
+      } else {
+        sessionStorage.setItem(getStorageKey(), JSON.stringify(state.answers));
+        state.locked = false;
+        navigate("loading");
+      }
+    }, 420);
+  }
+
+  function startLoading() {
+    state.loadingStep = 0;
+    renderLoading("");
+    tickLoading();
+  }
+
+  function renderLoading(value) {
+    const loadingMessages = getLoadingMessages();
+    renderShell(
+      `
+      <div class="loading-card">
+        <div class="spinner"></div>
+        <div class="loading-text">${text(value)}<span class="cursor">|</span></div>
+        <div class="step-bars">
+          ${loadingMessages.map((_, index) => `<div class="step ${index < state.loadingStep ? "done" : ""}"><span></span></div>`).join("")}
+        </div>
+      </div>
+      `,
+      "loading-screen"
+    );
+  }
+
+  function tickLoading() {
+    if (state.route !== "loading") return;
+    const loadingMessages = getLoadingMessages();
+    if (state.loadingStep >= loadingMessages.length) {
+      window.setTimeout(() => navigate("result"), 700);
+      return;
+    }
+    const message = loadingMessages[state.loadingStep];
+    let chars = 0;
+    const interval = window.setInterval(() => {
+      chars += 1;
+      renderLoading(message.slice(0, chars));
+      if (chars >= message.length) {
+        window.clearInterval(interval);
+        window.setTimeout(() => {
+          state.loadingStep += 1;
+          tickLoading();
+        }, 520);
+      }
+    }, 35);
+  }
+
+  function renderResult() {
+    const saved = sessionStorage.getItem(getStorageKey());
+    if (saved) state.answers = JSON.parse(saved);
+    if (Object.keys(state.answers).length < state.config.questions.length) {
+      renderHome();
+      return;
+    }
+
+    const scored = scoreAnswers(state.answers);
+    const primary = state.config.results[scored.primary];
+    const secondary = scored.secondary ? state.config.secondaryNotes?.[scored.primary]?.[scored.secondary] : null;
+    const stage = getStage(primary.maturityScore);
+    const shareText = buildShareText(primary, secondary);
+    const compareLabels = state.config.compareLabels || ["如果继续原路", "如果换一种做法"];
+    state.resultData = { scored, primary, secondary, stage, shareText };
+
+    renderShell(
+      `
+      <article class="report">
+        <div class="kicker"><span class="dot"></span><span>${text(state.config.resultKicker || "Result Report")}</span><span class="dot"></span></div>
+        <h1 class="result-type">${text(primary.typeName)}</h1>
+        <p class="result-subtitle">${text(primary.subtitle)}</p>
+        <div class="stamp-row">
+          <div class="stamp"><strong>${text(primary.maturityScore)}</strong><span>${text(state.config.scoreLabel || "决策成熟度")}</span></div>
+          <div class="stamp"><strong>${text(stage)}</strong><span>${text(state.config.stageLabel || "当前行动阶段")}</span></div>
+        </div>
+
+        <section class="section">
+          <h2>你的答案分布</h2>
+          <div class="meters">
+            ${Object.entries(scored.counts)
+              .map(([key, value]) => {
+                const typeData = state.config.results[key];
+                const width = (value / state.config.questions.length) * 100;
+                return `
+                  <div>
+                    <div class="meter-head"><span>${text(key)} · ${text(typeData.typeName)}</span><span>${value} 题</span></div>
+                    <div class="meter-track"><div class="meter-fill" style="width:${width}%"></div></div>
+                  </div>
+                `;
+              })
+              .join("")}
+          </div>
+        </section>
+
+        ${secondary ? `<section class="section"><h2>副倾向提示</h2><div class="secondary-note">${text(secondary)}</div></section>` : ""}
+
+        <section class="section">
+          <h2>诊断结论</h2>
+          <div class="quote">${text(primary.coreConclusion)}</div>
+        </section>
+
+        <section class="section">
+          <h2>为什么你会这样</h2>
+          <p>${text(primary.diagnosis)}</p>
+          <p>${text(primary.whatYouReallyWant)}</p>
+        </section>
+
+        <section class="section">
+          <h2>${text(primary.mechanism.title)}</h2>
+          <p>${text(primary.mechanism.content)}</p>
+        </section>
+
+        ${renderParagraphSection("专业解读框架", primary.professionalBasis)}
+        ${renderTagSection("你的关键矛盾", primary.coreTensions)}
+        ${renderCompareListSection("适合推进的条件", "需要谨慎的信号", primary.suitableIf, primary.cautionIf)}
+
+        <section class="section">
+          <h2>关键指数</h2>
+          <div class="meters">
+            ${(primary.indices || [])
+              .map(
+                (item) => `
+                <div>
+                  <div class="meter-head"><span>${text(item.label)}</span><span>${text(item.value)}</span></div>
+                  <div class="meter-track"><div class="meter-fill" style="width:${number(item.value)}%"></div></div>
+                </div>
+              `
+              )
+              .join("")}
+          </div>
+        </section>
+
+        <section class="section">
+          <h2>两条路径对比</h2>
+          <div class="compare">
+            <div class="compare-card"><h3>${text(compareLabels[0])}</h3><p>${text(primary.ifStay)}</p></div>
+            <div class="compare-card"><h3>${text(compareLabels[1])}</h3><p>${text(primary.ifChange)}</p></div>
+          </div>
+        </section>
+
+        <section class="section">
+          <h2>现在最不建议你做</h2>
+          <div class="tag-list">${(primary.notRecommended || []).map((item) => `<span class="tag">${text(item)}</span>`).join("")}</div>
+        </section>
+
+        <section class="section">
+          <h2>未来 90 天验证方案</h2>
+          <div class="plan">
+            ${(primary.plan90 || [])
+              .map(
+                (item, index) => `
+                <div class="plan-card">
+                  <h3>${index + 1}. ${text(item.title)}</h3>
+                  <p>${text(item.content)}</p>
+                </div>
+              `
+              )
+              .join("")}
+          </div>
+        </section>
+
+        <section class="section">
+          <h2>最后一句话</h2>
+          <p>${text(primary.closing)}</p>
+        </section>
+
+        <div class="actions">
+          <button class="primary-btn" data-action="copy">${text(state.config.copyButton || "复制我的结果")}</button>
+          <button class="ghost-btn" data-action="restart">${text(state.config.restartButton || "重新测试")}</button>
+        </div>
+      </article>
+      `,
+      "result-screen"
+    );
+
+    app.querySelector("[data-action='copy']").addEventListener("click", () => copyShareText(shareText));
+    app.querySelector("[data-action='restart']").addEventListener("click", () => {
+      sessionStorage.removeItem(getStorageKey());
+      state.answers = {};
+      state.currentIndex = 0;
+      navigate("home");
+    });
+  }
+
+  function renderParagraphSection(title, paragraphs) {
+    if (!Array.isArray(paragraphs) || !paragraphs.length) return "";
+    return `
+      <section class="section">
+        <h2>${text(title)}</h2>
+        ${paragraphs.map((item) => `<p>${text(item)}</p>`).join("")}
+      </section>
+    `;
+  }
+
+  function renderTagSection(title, items) {
+    if (!Array.isArray(items) || !items.length) return "";
+    return `
+      <section class="section">
+        <h2>${text(title)}</h2>
+        <div class="tag-list">${items.map((item) => `<span class="tag">${text(item)}</span>`).join("")}</div>
+      </section>
+    `;
+  }
+
+  function renderCompareListSection(leftTitle, rightTitle, leftItems, rightItems) {
+    const hasLeft = Array.isArray(leftItems) && leftItems.length;
+    const hasRight = Array.isArray(rightItems) && rightItems.length;
+    if (!hasLeft && !hasRight) return "";
+    return `
+      <section class="section">
+        <h2>适用边界</h2>
+        <div class="compare">
+          <div class="compare-card">
+            <h3>${text(leftTitle)}</h3>
+            ${(leftItems || []).map((item) => `<p>${text(item)}</p>`).join("")}
+          </div>
+          <div class="compare-card">
+            <h3>${text(rightTitle)}</h3>
+            ${(rightItems || []).map((item) => `<p>${text(item)}</p>`).join("")}
+          </div>
+        </div>
+      </section>
+    `;
+  }
+
+  function scoreAnswers(answers) {
+    const counts = { A: 0, B: 0, C: 0, D: 0 };
+    Object.values(answers).forEach((key) => {
+      if (counts[key] !== undefined) counts[key] += 1;
+    });
+    const sorted = Object.entries(counts).sort((a, b) => b[1] - a[1]);
+    const threshold = state.config.secondaryThreshold ?? 2;
+    const primary = sorted[0][0];
+    const secondary = sorted[1][1] > 0 && sorted[0][1] - sorted[1][1] <= threshold ? sorted[1][0] : null;
+    return { counts, primary, secondary };
+  }
+
+  function getStage(score) {
+    const labels = state.config.stageLabels || [
+      { max: 45, label: "观察期" },
+      { max: 65, label: "验证期" },
+      { max: 82, label: "规划期" },
+      { max: 100, label: "行动期" },
+    ];
+    const hit = labels.find((item) => score <= item.max);
+    return hit ? hit.label : labels[labels.length - 1].label;
+  }
+
+  function buildShareText(primary, secondary) {
+    const template = state.config.shareTemplate || [
+      "我测出了：{{typeName}}",
+      "{{posterSubtext}}",
+      "{{secondaryLine}}",
+      "",
+      "{{title}}",
+    ];
+    const values = {
+      title: state.config.title,
+      typeName: primary.typeName,
+      posterSubtext: primary.posterSubtext,
+      secondary: secondary || "",
+      secondaryLine: secondary ? `副倾向：${secondary}` : "",
+    };
+    return template
+      .map((line) => fillTemplate(line, values))
+      .filter((line, index, arr) => line || arr[index - 1])
+      .join("\n")
+      .trim();
+  }
+
+  async function copyShareText(value) {
+    try {
+      await navigator.clipboard.writeText(value);
+      showToast("结果文案已复制");
+    } catch (error) {
+      showToast("复制失败，可长按手动复制");
+    }
+  }
+
+  function showToast(value) {
+    const toast = document.getElementById("toast");
+    if (!toast) return;
+    toast.textContent = value;
+    toast.classList.add("show");
+    window.setTimeout(() => toast.classList.remove("show"), 1600);
+  }
+
+  function getLoadingMessages() {
+    return state.config.loadingMessages || defaultLoadingMessages;
+  }
+
+  function getStorageKey() {
+    return `xhsTestAnswers:${state.config.slug || "default"}`;
+  }
+
+  function fillTemplate(template, values) {
+    return String(template).replace(/\{\{(\w+)\}\}/g, (_, key) => values[key] || "");
+  }
+
+  function number(value) {
+    const parsed = Number(value);
+    if (Number.isNaN(parsed)) return 0;
+    return Math.max(0, Math.min(100, parsed));
+  }
+
+  function text(value) {
+    return String(value ?? "")
+      .replace(/&/g, "&amp;")
+      .replace(/</g, "&lt;")
+      .replace(/>/g, "&gt;")
+      .replace(/"/g, "&quot;");
+  }
+})();
+
+    </script>
+  </body>
+</html>
