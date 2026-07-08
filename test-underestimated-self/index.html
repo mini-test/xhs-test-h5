@@ -1,0 +1,1125 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <meta name="description" content="完成 32 道隐藏优势测试，生成你的被低估能力类型、优势来源和行动提醒。" />
+    <meta property="og:title" content="你低估了自己什么？" />
+    <meta property="og:description" content="完成 32 道隐藏优势测试，生成你的被低估能力类型、优势来源和行动提醒。" />
+    <title>你低估了自己什么？</title>
+    <style>
+:root {
+  --bg: #fbfaf7;
+  --paper: #fffefd;
+  --ink: #20242a;
+  --muted: #65707d;
+  --line: #d9d4ca;
+  --line-strong: #b9afa0;
+  --accent: #9b4339;
+  --accent-soft: #f1dfd7;
+  --gold: #c0964d;
+  --sage: #66795f;
+  --blue: #526a86;
+  --shadow: 0 16px 36px rgba(60, 47, 38, 0.1);
+  --radius: 8px;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  min-height: 100%;
+  background:
+    linear-gradient(rgba(32, 36, 42, 0.035) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(32, 36, 42, 0.035) 1px, transparent 1px),
+    var(--bg);
+  background-size: 24px 24px;
+}
+
+body {
+  min-height: 100vh;
+  margin: 0;
+  color: var(--ink);
+  font-family:
+    "PingFang SC",
+    "Microsoft YaHei",
+    "Noto Sans SC",
+    system-ui,
+    -apple-system,
+    BlinkMacSystemFont,
+    sans-serif;
+  letter-spacing: 0;
+}
+
+button {
+  font: inherit;
+}
+
+.shell {
+  width: min(100%, 480px);
+  min-height: 100vh;
+  margin: 0 auto;
+  background: rgba(251, 250, 247, 0.88);
+}
+
+.top-rule {
+  height: 4px;
+  background: var(--accent);
+}
+
+.screen {
+  min-height: calc(100vh - 4px);
+  padding: 28px 22px 32px;
+}
+
+.home {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.kicker {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  color: var(--muted);
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  font-size: 11px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+.dot {
+  width: 7px;
+  height: 7px;
+  background: var(--accent);
+  border-radius: 50%;
+}
+
+.hero-title {
+  margin: 26px 0 14px;
+  color: var(--ink);
+  font-size: 30px;
+  line-height: 1.2;
+  text-align: center;
+  font-weight: 800;
+}
+
+.hero-subtitle {
+  margin: 0 auto 28px;
+  max-width: 340px;
+  color: var(--muted);
+  font-size: 15px;
+  line-height: 1.75;
+  text-align: center;
+}
+
+.hairline {
+  width: 64px;
+  height: 1px;
+  margin: 0 auto 30px;
+  background: var(--line-strong);
+}
+
+.intro {
+  margin: 0 auto;
+  max-width: 380px;
+}
+
+.intro p {
+  margin: 0 0 15px;
+  color: rgba(32, 36, 42, 0.82);
+  font-size: 15px;
+  line-height: 1.8;
+}
+
+.intro .strong {
+  color: var(--accent);
+  font-weight: 700;
+}
+
+.pill-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px;
+  margin: 28px 0;
+}
+
+.pill {
+  min-height: 42px;
+  display: grid;
+  place-items: center;
+  border: 1px solid var(--line);
+  color: var(--muted);
+  background: rgba(255, 255, 255, 0.44);
+  font-size: 13px;
+}
+
+.primary-btn,
+.ghost-btn,
+.copy-btn {
+  width: 100%;
+  min-height: 48px;
+  border: 1px solid var(--ink);
+  border-radius: 0;
+  cursor: pointer;
+  transition: transform 150ms ease, background 150ms ease, color 150ms ease, border-color 150ms ease;
+}
+
+.primary-btn {
+  background: var(--ink);
+  color: #fff;
+  font-weight: 700;
+}
+
+.ghost-btn,
+.copy-btn {
+  background: transparent;
+  color: var(--ink);
+}
+
+.primary-btn:active,
+.ghost-btn:active,
+.copy-btn:active,
+.option:active {
+  transform: translateY(1px);
+}
+
+.disclaimer {
+  margin: 18px auto 0;
+  max-width: 340px;
+  color: var(--muted);
+  font-size: 12px;
+  line-height: 1.65;
+  text-align: center;
+}
+
+.quiz-screen {
+  padding-top: 0;
+}
+
+.sticky-head {
+  position: sticky;
+  top: 0;
+  z-index: 5;
+  margin: 0 -22px 26px;
+  padding: 14px 22px 12px;
+  background: rgba(251, 250, 247, 0.95);
+  border-bottom: 1px solid var(--line);
+  backdrop-filter: blur(12px);
+}
+
+.quiz-meta {
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+  color: var(--muted);
+  font-size: 12px;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+}
+
+.progress-track {
+  height: 4px;
+  margin-top: 10px;
+  background: rgba(32, 36, 42, 0.09);
+}
+
+.progress-bar {
+  height: 100%;
+  background: var(--accent);
+  transition: width 260ms ease;
+}
+
+.question-no {
+  color: rgba(155, 67, 57, 0.18);
+  font-size: 48px;
+  line-height: 1;
+  font-weight: 800;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+}
+
+.question-title {
+  margin: 18px 0 24px;
+  font-size: 22px;
+  line-height: 1.5;
+  font-weight: 750;
+}
+
+.options {
+  display: grid;
+  gap: 12px;
+}
+
+.option {
+  min-height: 66px;
+  display: grid;
+  grid-template-columns: 30px 1fr;
+  gap: 12px;
+  align-items: start;
+  width: 100%;
+  padding: 15px;
+  border: 1px solid var(--line);
+  background: rgba(255, 255, 255, 0.68);
+  color: var(--ink);
+  text-align: left;
+  cursor: pointer;
+  transition: background 160ms ease, border-color 160ms ease, color 160ms ease, opacity 160ms ease;
+}
+
+.option-key {
+  display: grid;
+  place-items: center;
+  width: 28px;
+  height: 28px;
+  border: 1px solid var(--line-strong);
+  font-size: 13px;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+}
+
+.option-text {
+  padding-top: 2px;
+  font-size: 15px;
+  line-height: 1.55;
+}
+
+.option.selected {
+  border-color: var(--accent);
+  background: var(--accent);
+  color: #fff;
+}
+
+.option.selected .option-key {
+  border-color: rgba(255, 255, 255, 0.8);
+}
+
+.option.dimmed {
+  opacity: 0.42;
+}
+
+.hint {
+  margin: 18px 0 0;
+  color: var(--muted);
+  font-size: 12px;
+  text-align: center;
+}
+
+.loading-screen {
+  display: grid;
+  place-items: center;
+}
+
+.loading-card {
+  width: 100%;
+  max-width: 360px;
+  text-align: center;
+}
+
+.spinner {
+  width: 54px;
+  height: 54px;
+  margin: 0 auto 24px;
+  border: 2px solid var(--line);
+  border-top-color: var(--accent);
+  border-radius: 50%;
+  animation: spin 850ms linear infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.loading-text {
+  min-height: 54px;
+  color: var(--accent);
+  font-size: 17px;
+  line-height: 1.6;
+  font-weight: 700;
+}
+
+.step-bars {
+  display: grid;
+  gap: 8px;
+  margin-top: 28px;
+}
+
+.step {
+  height: 4px;
+  overflow: hidden;
+  background: rgba(32, 36, 42, 0.09);
+}
+
+.step span {
+  display: block;
+  height: 100%;
+  width: 0;
+  background: var(--accent);
+  transition: width 300ms ease;
+}
+
+.step.done span {
+  width: 100%;
+}
+
+.result-screen {
+  padding: 22px 18px 30px;
+}
+
+.report {
+  padding: 22px 16px 18px;
+  border: 1px solid var(--line);
+  background: var(--paper);
+  box-shadow: var(--shadow);
+}
+
+.result-type {
+  margin: 8px 0 8px;
+  color: var(--accent);
+  font-size: 30px;
+  line-height: 1.15;
+  font-weight: 850;
+  text-align: center;
+}
+
+.result-subtitle {
+  margin: 0 auto 20px;
+  color: var(--muted);
+  font-size: 15px;
+  line-height: 1.7;
+  text-align: center;
+}
+
+.stamp-row {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px;
+  margin: 18px 0 20px;
+}
+
+.stamp {
+  padding: 12px 10px;
+  border: 1px solid var(--line);
+  background: #fbfaf7;
+}
+
+.stamp strong {
+  display: block;
+  margin-bottom: 4px;
+  color: var(--ink);
+  font-size: 20px;
+}
+
+.stamp span {
+  color: var(--muted);
+  font-size: 12px;
+}
+
+.section {
+  padding: 20px 0;
+  border-top: 1px solid var(--line);
+}
+
+.section h2 {
+  margin: 0 0 12px;
+  font-size: 18px;
+  color: var(--ink);
+}
+
+.section p {
+  margin: 0 0 12px;
+  color: rgba(32, 36, 42, 0.82);
+  font-size: 15px;
+  line-height: 1.85;
+}
+
+.quote {
+  padding: 15px;
+  border-left: 3px solid var(--accent);
+  background: var(--accent-soft);
+  color: #5b2d27;
+  line-height: 1.8;
+  font-weight: 700;
+}
+
+.meters {
+  display: grid;
+  gap: 14px;
+}
+
+.meter-head {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 7px;
+  color: var(--muted);
+  font-size: 13px;
+}
+
+.meter-track {
+  height: 8px;
+  background: rgba(32, 36, 42, 0.08);
+}
+
+.meter-fill {
+  height: 100%;
+  background: var(--accent);
+}
+
+.compare {
+  display: grid;
+  gap: 10px;
+}
+
+.compare-card {
+  padding: 14px;
+  border: 1px solid var(--line);
+  background: #fbfaf7;
+}
+
+.compare-card h3,
+.plan-card h3 {
+  margin: 0 0 8px;
+  font-size: 15px;
+}
+
+.compare-card p,
+.plan-card p {
+  font-size: 14px;
+}
+
+.tag-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.tag {
+  padding: 7px 9px;
+  border: 1px solid var(--line);
+  background: #fbfaf7;
+  color: var(--muted);
+  font-size: 13px;
+}
+
+.plan {
+  display: grid;
+  gap: 10px;
+}
+
+.plan-card {
+  padding: 14px;
+  border: 1px solid var(--line);
+  background: #fbfaf7;
+}
+
+.secondary-note {
+  padding: 14px;
+  border: 1px dashed var(--line-strong);
+  background: rgba(192, 150, 77, 0.12);
+  line-height: 1.75;
+  font-size: 14px;
+}
+
+.actions {
+  display: grid;
+  gap: 10px;
+  margin-top: 18px;
+}
+
+.toast {
+  position: fixed;
+  left: 50%;
+  bottom: 22px;
+  z-index: 20;
+  transform: translateX(-50%);
+  padding: 10px 14px;
+  background: var(--ink);
+  color: #fff;
+  font-size: 13px;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 180ms ease;
+}
+
+.toast.show {
+  opacity: 1;
+}
+
+.error {
+  display: grid;
+  place-items: center;
+  min-height: 100vh;
+  padding: 24px;
+  text-align: center;
+}
+
+.error p {
+  color: var(--muted);
+  line-height: 1.7;
+}
+
+@media (min-width: 700px) {
+  body {
+    padding: 28px 0;
+  }
+
+  .shell {
+    min-height: calc(100vh - 56px);
+    border: 1px solid var(--line);
+    box-shadow: var(--shadow);
+  }
+
+  .screen {
+    min-height: calc(100vh - 60px);
+  }
+}
+
+    </style>
+  </head>
+  <body>
+    <main id="app" aria-live="polite"></main>
+    <script>window.__QUIZ_CONFIG__ = {"slug":"test-underestimated-self","topic":"你低估了自己什么？","kicker":"32-Q Hidden Strength Test","title":"你低估了自己什么？","subtitle":"32 道题，看清你最容易低估的是扛事力、生长力、影响力，还是判断力。","metaDescription":"完成 32 道隐藏优势测试，生成你的被低估能力类型、优势来源和行动提醒。","startButton":"开始测试","resultKicker":"Hidden Strength Report","quizHint":"凭第一反应选择，系统会自动进入下一题","copyButton":"复制我的结果","restartButton":"重新测试","scoreLabel":"优势清晰度","stageLabel":"当前显化阶段","stageLabels":[{"max":55,"label":"优势觉察期"},{"max":72,"label":"能力确认期"},{"max":86,"label":"潜力显化期"},{"max":100,"label":"稳定发力期"}],"compareLabels":["如果继续低估自己","如果开始看见优势"],"disclaimer":"本测试为趣味自我观察工具，仅讨论行为习惯、能力倾向和自我评价模式，不代表心理诊断、职业评估或现实承诺。结果仅供娱乐和自我复盘参考。","secondaryThreshold":4,"dimensions":["扛事力","生长力","影响力","判断力"],"intro":["很多人不是没有能力，而是太习惯把自己的能力说成没什么。","你扛过的事、学会的东西、影响过的人、判断对的方向，可能都被你轻轻带过了。","32 道题会从第一反应、压力状态、成长方式、关系互动、自我评价、机会选择、隐藏优势和未来潜力 8 个模块，生成你的被低估能力报告。"],"loadingMessages":["正在读取你的第一反应...","正在拆分扛事力、生长力、影响力和判断力...","正在识别你最容易低估的能力来源...","正在生成 32 题隐藏优势报告...","分析完成。"],"questions":[{"id":1,"module":"第一反应","text":"别人夸你“其实挺厉害的”，你第一反应更像：","options":[{"key":"A","text":"觉得自己只是撑住了而已，没什么好夸的"},{"key":"B","text":"觉得自己只是学得比较快，还不算真正会"},{"key":"C","text":"觉得自己只是刚好让别人舒服，不算有影响力"},{"key":"D","text":"觉得自己只是想清楚了利弊，不算判断准"}]},{"id":2,"module":"第一反应","text":"你最容易把哪种能力当成“应该的”：","options":[{"key":"A","text":"压力很大也能把事情扛下来"},{"key":"B","text":"换到陌生环境也能很快摸清规则"},{"key":"C","text":"能感受到别人没说出口的情绪和需求"},{"key":"D","text":"能在混乱里抓到真正关键的问题"}]},{"id":3,"module":"第一反应","text":"如果一件事最后做成了，你更容易归因于：","options":[{"key":"A","text":"只是自己比较能忍、比较能熬"},{"key":"B","text":"只是边做边学，运气还不错"},{"key":"C","text":"只是大家配合，氛围刚好比较顺"},{"key":"D","text":"只是选对了方向，没有什么特别"}]},{"id":4,"module":"第一反应","text":"你最常低估自己哪一点：","options":[{"key":"A","text":"我其实已经熬过很多不容易的阶段"},{"key":"B","text":"我其实比想象中更会进化和调整"},{"key":"C","text":"我其实能影响别人的感受和选择"},{"key":"D","text":"我其实有自己的判断，不是只会跟着走"}]},{"id":5,"module":"压力状态","text":"遇到突发麻烦时，你更像：","options":[{"key":"A","text":"先稳住局面，把最急的事情处理掉"},{"key":"B","text":"快速查信息、问人、试方法，边做边补课"},{"key":"C","text":"先安抚人和场面，让大家别一起乱"},{"key":"D","text":"先拆问题，判断到底是哪一步出了错"}]},{"id":6,"module":"压力状态","text":"别人觉得你可靠，可能是因为你：","options":[{"key":"A","text":"关键时刻不容易垮，能顶住压力"},{"key":"B","text":"不会一直卡住，能很快找到新办法"},{"key":"C","text":"会让人愿意靠近，也愿意听你说"},{"key":"D","text":"能把复杂问题讲清楚，让人知道怎么选"}]},{"id":7,"module":"压力状态","text":"你最不想让别人看到的状态是：","options":[{"key":"A","text":"自己快撑不住了，还在硬扛"},{"key":"B","text":"自己其实还不会，需要从零学起"},{"key":"C","text":"自己很在意别人的反应和评价"},{"key":"D","text":"自己也会犹豫，也会怕选错方向"}]},{"id":8,"module":"压力状态","text":"真正困难的时候，你身上最先冒出来的是：","options":[{"key":"A","text":"一种先把今天过完的韧劲"},{"key":"B","text":"一种赶紧学会、赶紧适应的劲头"},{"key":"C","text":"一种把人心先稳住的本能"},{"key":"D","text":"一种把局面重新拆开的冷静"}]},{"id":9,"module":"成长方式","text":"你学习一件新东西时，最自然的方式是：","options":[{"key":"A","text":"先坚持做，哪怕笨一点也慢慢磨出来"},{"key":"B","text":"快速拆步骤，边试边修正，很快找到感觉"},{"key":"C","text":"看别人怎么理解、怎么反馈，再调整表达"},{"key":"D","text":"先看底层逻辑，知道它为什么这样运转"}]},{"id":10,"module":"成长方式","text":"你最容易忽略自己的哪种进步：","options":[{"key":"A","text":"抗压能力比以前强了很多"},{"key":"B","text":"学习速度和适应速度越来越快"},{"key":"C","text":"表达和共情能力越来越有分量"},{"key":"D","text":"判断和取舍能力越来越清楚"}]},{"id":11,"module":"成长方式","text":"别人做不到时，你却能做到的事更像：","options":[{"key":"A","text":"明明很累，还是能坚持把结果交出来"},{"key":"B","text":"没有人教，也能自己摸出一套方法"},{"key":"C","text":"把尴尬、紧张或误会慢慢化开"},{"key":"D","text":"在很多声音里分辨哪个才是真问题"}]},{"id":12,"module":"成长方式","text":"你最应该停止小看自己的地方是：","options":[{"key":"A","text":"别总说自己只是能熬，其实那是承压能力"},{"key":"B","text":"别总说自己只是会学，其实那是生长能力"},{"key":"C","text":"别总说自己只是会照顾人，其实那是影响能力"},{"key":"D","text":"别总说自己只是想太多，其实那是判断能力"}]},{"id":13,"module":"关系互动","text":"在一群人里，你常常承担的角色是：","options":[{"key":"A","text":"不一定最显眼，但出了事会有人找你"},{"key":"B","text":"哪里不懂就去搞懂，然后带着大家往前走"},{"key":"C","text":"让气氛缓下来，让彼此更好沟通"},{"key":"D","text":"指出重点，帮大家别在无效问题上绕圈"}]},{"id":14,"module":"关系互动","text":"别人愿意跟你说真话，可能是因为你：","options":[{"key":"A","text":"给人一种能接住事、不轻易崩的感觉"},{"key":"B","text":"愿意理解新情况，不会固执地只按老办法"},{"key":"C","text":"能听懂话外音，不会只看表面"},{"key":"D","text":"能帮对方把混乱想法整理成清楚选择"}]},{"id":15,"module":"关系互动","text":"你最容易被别人低估的地方是：","options":[{"key":"A","text":"你看起来安静，其实很能扛事"},{"key":"B","text":"你看起来普通，其实成长速度很快"},{"key":"C","text":"你看起来温和，其实很能影响气氛和人心"},{"key":"D","text":"你看起来不争，其实心里很有判断"}]},{"id":16,"module":"关系互动","text":"如果别人误解你，你更希望对方知道：","options":[{"key":"A","text":"我不是没脾气，我只是先把事扛住"},{"key":"B","text":"我不是没基础，我只是需要一点时间生长"},{"key":"C","text":"我不是好说话，我是能看见别人的处境"},{"key":"D","text":"我不是没主见，我是在看更长远的结果"}]},{"id":17,"module":"自我评价","text":"你最常对自己说哪句话：","options":[{"key":"A","text":"这点事都扛不住也太差了"},{"key":"B","text":"我还不够厉害，还差很多"},{"key":"C","text":"我好像没什么存在感"},{"key":"D","text":"我是不是想太多、太犹豫了"}]},{"id":18,"module":"自我评价","text":"你最容易忽视哪种证据：","options":[{"key":"A","text":"你已经独自撑过很多别人不知道的难关"},{"key":"B","text":"你每次换环境都会比上一次适应得更快"},{"key":"C","text":"你说过的话、做过的事，真的改变过别人"},{"key":"D","text":"你很多判断后来被事实证明是对的"}]},{"id":19,"module":"自我评价","text":"你最想从这个测试里确认：","options":[{"key":"A","text":"我是不是比自己以为的更能撑"},{"key":"B","text":"我是不是比自己以为的更有潜力"},{"key":"C","text":"我是不是比自己以为的更有影响力"},{"key":"D","text":"我是不是比自己以为的更有判断力"}]},{"id":20,"module":"自我评价","text":"你最需要被提醒的是：","options":[{"key":"A","text":"别把扛过的苦都当成没什么"},{"key":"B","text":"别把快速成长都当成运气"},{"key":"C","text":"别把别人因你改变都当成巧合"},{"key":"D","text":"别把自己的清醒判断都当成多虑"}]},{"id":21,"module":"机会选择","text":"面对一个新机会，你更容易：","options":[{"key":"A","text":"担心自己扛不住后面的压力"},{"key":"B","text":"担心自己还不够成熟、不够专业"},{"key":"C","text":"担心自己没有说服别人、影响别人的能力"},{"key":"D","text":"担心自己判断错，最后选了一条不对的路"}]},{"id":22,"module":"机会选择","text":"如果你真的迈出去，最可能靠什么打开局面：","options":[{"key":"A","text":"靠韧性和稳定执行，把一件事慢慢做出来"},{"key":"B","text":"靠学习和适应速度，在过程中变强"},{"key":"C","text":"靠表达和连接，让更多人愿意相信你"},{"key":"D","text":"靠判断和取舍，选对更关键的方向"}]},{"id":23,"module":"机会选择","text":"你最容易错过机会，是因为：","options":[{"key":"A","text":"总觉得自己还没准备好承受压力"},{"key":"B","text":"总觉得自己还没学够、还不配开始"},{"key":"C","text":"总觉得自己没有吸引别人注意的能力"},{"key":"D","text":"总觉得自己必须想清楚全部风险才行动"}]},{"id":24,"module":"机会选择","text":"别人如果要给你一句提醒，最像：","options":[{"key":"A","text":"你不是不行，你只是忘了自己已经扛过很多次"},{"key":"B","text":"你不是太晚，你只是低估了自己的生长速度"},{"key":"C","text":"你不是没存在感，你只是没看见自己能带动别人"},{"key":"D","text":"你不是想太多，你只是需要相信自己的判断"}]},{"id":25,"module":"隐藏优势","text":"你身上最容易被藏起来的优势是：","options":[{"key":"A","text":"越难越能稳住的底盘"},{"key":"B","text":"越新越能学会的弹性"},{"key":"C","text":"越细越能感受到人的敏锐"},{"key":"D","text":"越乱越能抓重点的清醒"}]},{"id":26,"module":"隐藏优势","text":"如果你的优势被放大，最可能变成：","options":[{"key":"A","text":"别人愿意把重要的事交给你"},{"key":"B","text":"你能不断跨到新的领域和位置"},{"key":"C","text":"你能用表达、共情和审美建立个人吸引力"},{"key":"D","text":"你能在关键节点做出更好的选择"}]},{"id":27,"module":"隐藏优势","text":"你最该重新定义自己的哪一点：","options":[{"key":"A","text":"能忍不是没用，是很强的承载力"},{"key":"B","text":"会学不是普通，是复利型能力"},{"key":"C","text":"敏感不是脆弱，是关系和表达的雷达"},{"key":"D","text":"想得深不是内耗，是判断力的雏形"}]},{"id":28,"module":"隐藏优势","text":"你最怕被别人看见，又最该被看见的是：","options":[{"key":"A","text":"你其实很累，但还是一直在撑"},{"key":"B","text":"你其实很想变强，也真的变得很快"},{"key":"C","text":"你其实很在意别人，也很能影响别人"},{"key":"D","text":"你其实很有主见，只是还不够敢确认"}]},{"id":29,"module":"未来潜力","text":"未来一年，你最可能被自己惊到的地方是：","options":[{"key":"A","text":"原来我真的能把很难的阶段撑过去"},{"key":"B","text":"原来我学会一件事的速度比想象中快"},{"key":"C","text":"原来我说出的话、做出的东西真的有人在意"},{"key":"D","text":"原来我早就知道什么选择更适合自己"}]},{"id":30,"module":"未来潜力","text":"你最需要少一点哪种自我否定：","options":[{"key":"A","text":"我撑住了只是因为没得选"},{"key":"B","text":"我学会了只是因为这件事不难"},{"key":"C","text":"别人喜欢我只是因为他们刚好需要"},{"key":"D","text":"我判断对了只是因为碰巧"}]},{"id":31,"module":"未来潜力","text":"如果用一句话概括你低估自己的地方，更像：","options":[{"key":"A","text":"你低估了自己在难处里不散架的能力"},{"key":"B","text":"你低估了自己边走边变强的速度"},{"key":"C","text":"你低估了自己让别人被打动的力量"},{"key":"D","text":"你低估了自己看清局势、做出选择的能力"}]},{"id":32,"module":"未来潜力","text":"做完这 32 题，你最想得到的答案是：","options":[{"key":"A","text":"我到底是不是比自己想象中更能扛"},{"key":"B","text":"我的潜力到底藏在哪些成长方式里"},{"key":"C","text":"我为什么总觉得自己没影响力"},{"key":"D","text":"我该怎么更相信自己的判断和选择"}]}],"results":{"A":{"typeName":"扛事韧性型","subtitle":"你低估的不是能力，而是自己在难处里不散架的底盘。","posterSubtext":"你以为自己只是能熬，其实你很能扛事。","maturityScore":84,"coreConclusion":"你的答案显示，你身上最容易被低估的是承压和稳定能力。很多时候你并不是不害怕，也不是不累，而是即使心里已经很乱，还是能先把眼前的事撑住。你总把这种能力说成没办法、只能硬扛，却忽略了不是每个人都能在压力里保持基本运转。 你真正该重新看见的是自己的承载力。你不是只有在顺境里才行，你反而常常是在麻烦、责任和压力里被逼出真正的底气。你的课题是别把扛事变成长期硬撑，要学会在能撑的时候也给自己补能量。","diagnosis":"你的答案显示，你身上最容易被低估的是承压和稳定能力。很多时候你并不是不害怕，也不是不累，而是即使心里已经很乱，还是能先把眼前的事撑住。你总把这种能力说成没办法、只能硬扛，却忽略了不是每个人都能在压力里保持基本运转。","whatYouReallyWant":"你真正该重新看见的是自己的承载力。你不是只有在顺境里才行，你反而常常是在麻烦、责任和压力里被逼出真正的底气。你的课题是别把扛事变成长期硬撑，要学会在能撑的时候也给自己补能量。","mechanism":{"title":"承压稳定机制","content":"扛事韧性型的核心，是情绪承载力和现实执行力。优势是关键时刻稳，风险是习惯把疲惫藏起来，最后把自己用到透支。"},"professionalBasis":["从压力状态看，你遇事会先稳住局面，而不是马上失控。","从自我评价看，你容易忽视自己已经撑过很多阶段的事实。","从未来潜力看，你真正的优势会在高压和长期责任里越来越明显。"],"coreTensions":["很能扛事","不爱示弱","稳定可靠","容易硬撑","需要补能量"],"suitableIf":["项目推进","长期主义","稳定型服务","复杂事务管理","需要责任感的合作"],"cautionIf":["把疲惫说成没事","长期独自承担","不主动求助","把能扛误会成必须扛"],"indices":[{"label":"承压能力","value":92},{"label":"稳定执行","value":88},{"label":"现实感","value":86},{"label":"自我照顾课题","value":68}],"ifStay":"如果你一直只靠硬撑，你会越来越可靠，也越来越累。","ifChange":"如果你在扛事的同时学会求助和补能量，你的韧性会变成真正可持续的底气。","notRecommended":["把疲惫说成没事","长期独自承担","不主动求助","把能扛误会成必须扛"],"plan90":[{"title":"第 1 周：承认自己已经很能扛","content":"不要把每一次撑住都归因于没得选，先看见自己的能力。"},{"title":"第 2-3 周：把压力分层","content":"区分必须你扛的事、可以交出去的事、其实不该你背的事。"},{"title":"第 4-6 周：建立补能量机制","content":"给自己固定休息、复盘和求助出口。"},{"title":"第 7-12 周：把韧性转成作品","content":"把你扛过的经验沉淀成方法、流程或稳定输出。"}],"closing":"你不是普通地熬过来了，你是一次次把自己从难处里带了出来。"},"B":{"typeName":"快速生长型","subtitle":"你低估的是自己的进化速度。你总觉得还不够，其实你一直在变强。","posterSubtext":"你以为自己只是会学，其实你很会生长。","maturityScore":86,"coreConclusion":"你的答案显示，你最容易低估自己的学习、适应和更新能力。你常觉得自己还没准备好、还不够专业、还差很多，但你忽略了自己每次进入新环境、新任务、新领域时，都能很快找到入口并修正方法。 你真正该相信的是自己的生长性。你不是一开始就很强的人，但你是那种只要开始，就会越做越清楚的人。你的课题是别把准备当成拖延，也别因为暂时不会，就否定自己后面会变强。","diagnosis":"你的答案显示，你最容易低估自己的学习、适应和更新能力。你常觉得自己还没准备好、还不够专业、还差很多，但你忽略了自己每次进入新环境、新任务、新领域时，都能很快找到入口并修正方法。","whatYouReallyWant":"你真正该相信的是自己的生长性。你不是一开始就很强的人，但你是那种只要开始，就会越做越清楚的人。你的课题是别把准备当成拖延，也别因为暂时不会，就否定自己后面会变强。","mechanism":{"title":"适应生长机制","content":"快速生长型的核心，是学习迁移能力和环境适应能力。优势是能进化，风险是总觉得自己还没准备好，迟迟不敢把半成品推到现实里验证。"},"professionalBasis":["从成长方式看，你擅长边做边学，快速形成自己的方法。","从机会选择看，你最容易被还不够好、还不够专业卡住。","从隐藏优势看，你的优势不是已经完美，而是能持续升级。"],"coreTensions":["学得很快","适应力强","边做边变强","容易准备过度","需要更早开始"],"suitableIf":["新媒体测试","副业探索","跨领域学习","产品迭代","技能升级"],"cautionIf":["一直等准备好","低估自己的学习曲线","用别人终点要求自己起点","把不会误会成不行"],"indices":[{"label":"学习速度","value":93},{"label":"适应能力","value":90},{"label":"方法迭代","value":87},{"label":"行动启动课题","value":70}],"ifStay":"如果你一直等自己完全准备好，你会把很多能在路上学会的机会等没。","ifChange":"如果你允许自己先用 60 分开始，再用反馈升级，你会比想象中成长得更快。","notRecommended":["一直等准备好","低估自己的学习曲线","用别人终点要求自己起点","把不会误会成不行"],"plan90":[{"title":"第 1 周：降低开始门槛","content":"把目标拆成一个可以立刻做的小版本。"},{"title":"第 2-3 周：用反馈替代空想","content":"不要只在脑子里准备，拿真实反馈修正方向。"},{"title":"第 4-6 周：记录成长证据","content":"保存每一次从不会到会的过程，让自己看见生长速度。"},{"title":"第 7-12 周：形成可复用方法","content":"把学会的东西整理成模板、清单或流程。"}],"closing":"你不用一开始就很厉害，因为你真正厉害的地方，是会越来越厉害。"},"C":{"typeName":"影响连接型","subtitle":"你低估了自己对人的影响力。你以为只是温和，其实你能让别人被打动。","posterSubtext":"你以为自己没存在感，其实你很能影响人。","maturityScore":82,"coreConclusion":"你的答案显示，你身上最容易被低估的是表达、共情和连接能力。你很容易感受到别人的情绪、需求和没说出口的话，也常常能用一种不压迫的方式让对方放松、相信、被安抚。你以为这只是会照顾人，其实这是一种影响力。 你真正该看见的是自己让关系变好、让信息被听见、让人愿意靠近的能力。你不是没有存在感，而是你的力量经常不是大声出现，而是慢慢改变气氛和人心。你的课题是别只在背后托住别人，也要把自己的表达放到台前。","diagnosis":"你的答案显示，你身上最容易被低估的是表达、共情和连接能力。你很容易感受到别人的情绪、需求和没说出口的话，也常常能用一种不压迫的方式让对方放松、相信、被安抚。你以为这只是会照顾人，其实这是一种影响力。","whatYouReallyWant":"你真正该看见的是自己让关系变好、让信息被听见、让人愿意靠近的能力。你不是没有存在感，而是你的力量经常不是大声出现，而是慢慢改变气氛和人心。你的课题是别只在背后托住别人，也要把自己的表达放到台前。","mechanism":{"title":"共情影响机制","content":"影响连接型的核心，是情绪感知、表达转化和信任建立。优势是能打动人，风险是太习惯照顾别人，反而低估自己的表达价值。"},"professionalBasis":["从关系互动看，你能让别人愿意说真话，也能缓和关系里的紧张。","从自我评价看，你容易把自己的影响说成只是刚好、只是别人配合。","从隐藏优势看，你的敏感不是脆弱，而是人与内容之间的雷达。"],"coreTensions":["共情敏锐","表达有温度","能建立信任","容易隐身","需要主动展示"],"suitableIf":["内容表达","情感服务","社群运营","个人 IP","咨询陪伴类产品"],"cautionIf":["只照顾别人不表达自己","把影响力说成巧合","害怕被看见","不敢定价自己的理解力"],"indices":[{"label":"共情感知","value":92},{"label":"表达感染力","value":88},{"label":"信任建立","value":86},{"label":"自我展示课题","value":67}],"ifStay":"如果你一直让自己躲在别人背后，你的影响力会被使用，却不一定被看见。","ifChange":"如果你把共情和表达变成内容、服务或作品，你会发现很多人真的需要你的理解。","notRecommended":["只照顾别人不表达自己","把影响力说成巧合","害怕被看见","不敢定价自己的理解力"],"plan90":[{"title":"第 1 周：记录你影响过的人","content":"写下别人因为你而被安抚、被启发、做出改变的证据。"},{"title":"第 2-3 周：把感受说出来","content":"不要只在心里懂别人，练习把你的理解变成清楚表达。"},{"title":"第 4-6 周：建立表达场域","content":"用笔记、朋友圈、社群或小产品承接你的影响力。"},{"title":"第 7-12 周：给影响力定边界","content":"你可以帮助别人，但不必无限免费消耗自己。"}],"closing":"你不是没有光，你只是习惯把光打在别人身上。"},"D":{"typeName":"判断破局型","subtitle":"你低估的是自己的判断力。你不是想太多，你是在提前看见关键问题。","posterSubtext":"你以为自己只是多虑，其实你很会看局。","maturityScore":88,"coreConclusion":"你的答案显示，你最容易低估的是判断、取舍和破局能力。你常常能在一堆信息里抓到重点，也会比别人更早看到风险、机会和真正的矛盾。只是因为你想得深、看得远，所以经常怀疑自己是不是太复杂、太犹豫。 你真正该相信的是自己的清醒。你不是没主见，也不是想太多，你只是需要把判断落到行动里，用结果不断校准自己。你的课题是别让分析停在脑子里，要把看见的问题变成可执行的选择。","diagnosis":"你的答案显示，你最容易低估的是判断、取舍和破局能力。你常常能在一堆信息里抓到重点，也会比别人更早看到风险、机会和真正的矛盾。只是因为你想得深、看得远，所以经常怀疑自己是不是太复杂、太犹豫。","whatYouReallyWant":"你真正该相信的是自己的清醒。你不是没主见，也不是想太多，你只是需要把判断落到行动里，用结果不断校准自己。你的课题是别让分析停在脑子里，要把看见的问题变成可执行的选择。","mechanism":{"title":"结构判断机制","content":"判断破局型的核心，是信息筛选、问题拆解和取舍能力。优势是看得清，风险是想得太完整才行动，容易错过试错窗口。"},"professionalBasis":["从压力状态看，你遇事会先拆问题，判断关键环节。","从机会选择看，你担心判断错，所以容易延迟行动。","从未来潜力看，你很多判断需要被现实验证，而不是一直留在脑中反复推演。"],"coreTensions":["判断清醒","会抓重点","有取舍感","容易想太久","需要落地验证"],"suitableIf":["选题判断","策略规划","产品设计","职业决策","复杂问题拆解"],"cautionIf":["过度推演","害怕选错","把判断藏起来","没有用小行动验证大判断"],"indices":[{"label":"判断力","value":94},{"label":"问题拆解","value":91},{"label":"取舍能力","value":88},{"label":"行动验证课题","value":69}],"ifStay":"如果你一直只在脑子里分析，你会越来越清醒，也越来越难开始。","ifChange":"如果你用小成本行动验证判断，你的清醒会变成真正的破局能力。","notRecommended":["过度推演","害怕选错","把判断藏起来","没有用小行动验证大判断"],"plan90":[{"title":"第 1 周：写下你的判断","content":"把模糊直觉变成一句清楚判断。"},{"title":"第 2-3 周：做小验证","content":"不要一次押全部，用一个小动作测试判断是否成立。"},{"title":"第 4-6 周：复盘命中率","content":"记录哪些判断被事实验证，哪些需要修正。"},{"title":"第 7-12 周：建立决策模板","content":"把你的判断方式沉淀成可复用的方法。"}],"closing":"你不是想太多，你只是还没完全相信自己已经看见了重点。"}},"secondaryNotes":{"A":{"B":"你的主优势是「扛事韧性型」，但也带有「快速生长型」的影子。主结果代表你最容易低估的核心能力，副结果提醒你：一个人的潜力通常不是单点爆发，而是扛事、生长、影响和判断之间的组合。","C":"你的主优势是「扛事韧性型」，但也带有「影响连接型」的影子。主结果代表你最容易低估的核心能力，副结果提醒你：一个人的潜力通常不是单点爆发，而是扛事、生长、影响和判断之间的组合。","D":"你的主优势是「扛事韧性型」，但也带有「判断破局型」的影子。主结果代表你最容易低估的核心能力，副结果提醒你：一个人的潜力通常不是单点爆发，而是扛事、生长、影响和判断之间的组合。"},"B":{"A":"你的主优势是「快速生长型」，但也带有「扛事韧性型」的影子。主结果代表你最容易低估的核心能力，副结果提醒你：一个人的潜力通常不是单点爆发，而是扛事、生长、影响和判断之间的组合。","C":"你的主优势是「快速生长型」，但也带有「影响连接型」的影子。主结果代表你最容易低估的核心能力，副结果提醒你：一个人的潜力通常不是单点爆发，而是扛事、生长、影响和判断之间的组合。","D":"你的主优势是「快速生长型」，但也带有「判断破局型」的影子。主结果代表你最容易低估的核心能力，副结果提醒你：一个人的潜力通常不是单点爆发，而是扛事、生长、影响和判断之间的组合。"},"C":{"A":"你的主优势是「影响连接型」，但也带有「扛事韧性型」的影子。主结果代表你最容易低估的核心能力，副结果提醒你：一个人的潜力通常不是单点爆发，而是扛事、生长、影响和判断之间的组合。","B":"你的主优势是「影响连接型」，但也带有「快速生长型」的影子。主结果代表你最容易低估的核心能力，副结果提醒你：一个人的潜力通常不是单点爆发，而是扛事、生长、影响和判断之间的组合。","D":"你的主优势是「影响连接型」，但也带有「判断破局型」的影子。主结果代表你最容易低估的核心能力，副结果提醒你：一个人的潜力通常不是单点爆发，而是扛事、生长、影响和判断之间的组合。"},"D":{"A":"你的主优势是「判断破局型」，但也带有「扛事韧性型」的影子。主结果代表你最容易低估的核心能力，副结果提醒你：一个人的潜力通常不是单点爆发，而是扛事、生长、影响和判断之间的组合。","B":"你的主优势是「判断破局型」，但也带有「快速生长型」的影子。主结果代表你最容易低估的核心能力，副结果提醒你：一个人的潜力通常不是单点爆发，而是扛事、生长、影响和判断之间的组合。","C":"你的主优势是「判断破局型」，但也带有「影响连接型」的影子。主结果代表你最容易低估的核心能力，副结果提醒你：一个人的潜力通常不是单点爆发，而是扛事、生长、影响和判断之间的组合。"}},"shareTemplate":["我测出来了：{{typeName}}","{{posterSubtext}}","{{secondaryLine}}","","你低估了自己什么？32题隐藏优势测试"]};</script>
+    <script>
+(function () {
+  const app = document.getElementById("app");
+  const configPaths = ["./configs/site-config.json", "./configs/career-change.json"];
+
+  const state = {
+    config: null,
+    answers: {},
+    currentIndex: 0,
+    selected: null,
+    locked: false,
+    loadingStep: 0,
+    route: "home",
+    resultData: null,
+  };
+
+  const defaultLoadingMessages = [
+    "正在读取你的选择倾向...",
+    "正在识别隐藏动机...",
+    "正在计算结果分布...",
+    "正在生成专属报告...",
+    "分析完成。",
+  ];
+
+  init();
+
+  async function init() {
+    try {
+      state.config = await fetchConfig();
+      applyDocumentMeta(state.config);
+
+      const saved = sessionStorage.getItem(getStorageKey());
+      if (saved) {
+        state.answers = JSON.parse(saved);
+      }
+
+      routeFromHash();
+      window.addEventListener("hashchange", routeFromHash);
+    } catch (error) {
+      app.innerHTML = `
+        <div class="error">
+          <div>
+            <h1>测试加载失败</h1>
+            <p>请确认你是通过网页链接打开页面，而不是直接双击 HTML 文件。</p>
+          </div>
+        </div>
+      `;
+      console.error(error);
+    }
+  }
+
+  async function fetchConfig() {
+    if (window.__QUIZ_CONFIG__) return window.__QUIZ_CONFIG__;
+    let lastError;
+    for (const path of configPaths) {
+      try {
+        const response = await fetch(path, { cache: "no-store" });
+        if (!response.ok) throw new Error(`${path} ${response.status}`);
+        return response.json();
+      } catch (error) {
+        lastError = error;
+      }
+    }
+    throw lastError;
+  }
+
+  function applyDocumentMeta(cfg) {
+    const title = cfg.title || "趣味测试";
+    const description = cfg.metaDescription || cfg.subtitle || "完成测试，生成你的专属报告。";
+    document.title = title;
+    setMeta("name", "description", description);
+    setMeta("property", "og:title", title);
+    setMeta("property", "og:description", description);
+  }
+
+  function setMeta(attr, key, content) {
+    let node = document.querySelector(`meta[${attr}="${key}"]`);
+    if (!node) {
+      node = document.createElement("meta");
+      node.setAttribute(attr, key);
+      document.head.appendChild(node);
+    }
+    node.setAttribute("content", content);
+  }
+
+  function routeFromHash() {
+    const route = (location.hash || "#/").replace("#/", "") || "home";
+    renderRoute(route);
+  }
+
+  function navigate(route) {
+    const nextHash = `#/${route}`;
+    if (location.hash === nextHash) {
+      renderRoute(route);
+      return;
+    }
+    location.hash = nextHash;
+  }
+
+  function renderRoute(route) {
+    state.route = route;
+    if (route === "quiz") renderQuiz();
+    else if (route === "loading") startLoading();
+    else if (route === "result") renderResult();
+    else renderHome();
+  }
+
+  function renderShell(content, extraClass = "") {
+    app.innerHTML = `
+      <div class="shell">
+        <div class="top-rule"></div>
+        <section class="screen ${extraClass}">${content}</section>
+      </div>
+      <div id="toast" class="toast">已复制</div>
+    `;
+  }
+
+  function renderHome() {
+    const cfg = state.config;
+    renderShell(
+      `
+      <div class="home">
+        <div class="kicker"><span class="dot"></span><span>${text(cfg.kicker)}</span><span class="dot"></span></div>
+        <h1 class="hero-title">${text(cfg.title)}</h1>
+        <p class="hero-subtitle">${text(cfg.subtitle)}</p>
+        <div class="hairline"></div>
+        <div class="intro">
+          ${(cfg.intro || []).map((p, index) => `<p class="${index === cfg.intro.length - 1 ? "strong" : ""}">${text(p)}</p>`).join("")}
+        </div>
+        <div class="pill-grid">
+          ${(cfg.dimensions || []).map((item) => `<div class="pill">${text(item)}</div>`).join("")}
+        </div>
+        <button class="primary-btn" data-action="start">${text(cfg.startButton || "开始测试")}</button>
+        <p class="disclaimer">${text(cfg.disclaimer || "本测试为趣味内容，仅供娱乐参考。")}</p>
+      </div>
+      `,
+      "home"
+    );
+    const startButton = app.querySelector("[data-action='start']");
+    let started = false;
+    const startQuiz = () => {
+      if (started) return;
+      started = true;
+      state.answers = {};
+      state.currentIndex = 0;
+      sessionStorage.removeItem(getStorageKey());
+      navigate("quiz");
+    };
+    startButton.addEventListener("click", startQuiz);
+    startButton.addEventListener(
+      "touchend",
+      (event) => {
+        event.preventDefault();
+        startQuiz();
+      },
+      { passive: false }
+    );
+  }
+
+  function renderQuiz() {
+    const questions = state.config.questions || [];
+    const question = questions[state.currentIndex];
+    if (!question) {
+      renderHome();
+      return;
+    }
+
+    const progress = ((state.currentIndex + 1) / questions.length) * 100;
+
+    renderShell(
+      `
+      <div class="sticky-head">
+        <div class="quiz-meta">
+          <span>${String(state.currentIndex + 1).padStart(2, "0")} / ${questions.length}</span>
+          <span>${text(question.module)}</span>
+        </div>
+        <div class="progress-track"><div class="progress-bar" style="width:${progress}%"></div></div>
+      </div>
+      <div class="question-no">${String(state.currentIndex + 1).padStart(2, "0")}</div>
+      <h1 class="question-title">${text(question.text)}</h1>
+      <div class="options">
+        ${(question.options || [])
+          .map(
+            (option) => `
+            <button class="option" data-option="${text(option.key)}">
+              <span class="option-key">${text(option.key)}</span>
+              <span class="option-text">${text(option.text)}</span>
+            </button>
+          `
+          )
+          .join("")}
+      </div>
+      <p class="hint">${text(state.config.quizHint || "选择后自动进入下一题")}</p>
+      `,
+      "quiz-screen"
+    );
+
+    app.querySelectorAll("[data-option]").forEach((button) => {
+      button.addEventListener("click", () => selectOption(button.dataset.option));
+    });
+  }
+
+  function selectOption(key) {
+    if (state.locked) return;
+    state.locked = true;
+    state.selected = key;
+    const question = state.config.questions[state.currentIndex];
+    state.answers[question.id] = key;
+
+    app.querySelectorAll(".option").forEach((button) => {
+      const selected = button.dataset.option === key;
+      button.classList.toggle("selected", selected);
+      button.classList.toggle("dimmed", !selected);
+    });
+
+    window.setTimeout(() => {
+      if (state.currentIndex < state.config.questions.length - 1) {
+        state.currentIndex += 1;
+        state.locked = false;
+        state.selected = null;
+        renderQuiz();
+      } else {
+        sessionStorage.setItem(getStorageKey(), JSON.stringify(state.answers));
+        state.locked = false;
+        navigate("loading");
+      }
+    }, 420);
+  }
+
+  function startLoading() {
+    state.loadingStep = 0;
+    renderLoading("");
+    tickLoading();
+  }
+
+  function renderLoading(value) {
+    const loadingMessages = getLoadingMessages();
+    renderShell(
+      `
+      <div class="loading-card">
+        <div class="spinner"></div>
+        <div class="loading-text">${text(value)}<span class="cursor">|</span></div>
+        <div class="step-bars">
+          ${loadingMessages.map((_, index) => `<div class="step ${index < state.loadingStep ? "done" : ""}"><span></span></div>`).join("")}
+        </div>
+      </div>
+      `,
+      "loading-screen"
+    );
+  }
+
+  function tickLoading() {
+    if (state.route !== "loading") return;
+    const loadingMessages = getLoadingMessages();
+    if (state.loadingStep >= loadingMessages.length) {
+      window.setTimeout(() => navigate("result"), 700);
+      return;
+    }
+    const message = loadingMessages[state.loadingStep];
+    let chars = 0;
+    const interval = window.setInterval(() => {
+      chars += 1;
+      renderLoading(message.slice(0, chars));
+      if (chars >= message.length) {
+        window.clearInterval(interval);
+        window.setTimeout(() => {
+          state.loadingStep += 1;
+          tickLoading();
+        }, 520);
+      }
+    }, 35);
+  }
+
+  function renderResult() {
+    const saved = sessionStorage.getItem(getStorageKey());
+    if (saved) state.answers = JSON.parse(saved);
+    if (Object.keys(state.answers).length < state.config.questions.length) {
+      renderHome();
+      return;
+    }
+
+    const scored = scoreAnswers(state.answers);
+    const primary = state.config.results[scored.primary];
+    const secondary = scored.secondary ? state.config.secondaryNotes?.[scored.primary]?.[scored.secondary] : null;
+    const stage = getStage(primary.maturityScore);
+    const shareText = buildShareText(primary, secondary);
+    const compareLabels = state.config.compareLabels || ["如果继续原路", "如果换一种做法"];
+    state.resultData = { scored, primary, secondary, stage, shareText };
+
+    renderShell(
+      `
+      <article class="report">
+        <div class="kicker"><span class="dot"></span><span>${text(state.config.resultKicker || "Result Report")}</span><span class="dot"></span></div>
+        <h1 class="result-type">${text(primary.typeName)}</h1>
+        <p class="result-subtitle">${text(primary.subtitle)}</p>
+        <div class="stamp-row">
+          <div class="stamp"><strong>${text(primary.maturityScore)}</strong><span>${text(state.config.scoreLabel || "决策成熟度")}</span></div>
+          <div class="stamp"><strong>${text(stage)}</strong><span>${text(state.config.stageLabel || "当前行动阶段")}</span></div>
+        </div>
+
+        <section class="section">
+          <h2>你的答案分布</h2>
+          <div class="meters">
+            ${Object.entries(scored.counts)
+              .map(([key, value]) => {
+                const typeData = state.config.results[key];
+                const width = (value / state.config.questions.length) * 100;
+                return `
+                  <div>
+                    <div class="meter-head"><span>${text(key)} · ${text(typeData.typeName)}</span><span>${value} 题</span></div>
+                    <div class="meter-track"><div class="meter-fill" style="width:${width}%"></div></div>
+                  </div>
+                `;
+              })
+              .join("")}
+          </div>
+        </section>
+
+        ${secondary ? `<section class="section"><h2>副倾向提示</h2><div class="secondary-note">${text(secondary)}</div></section>` : ""}
+
+        <section class="section">
+          <h2>诊断结论</h2>
+          <div class="quote">${text(primary.coreConclusion)}</div>
+        </section>
+
+        <section class="section">
+          <h2>为什么你会这样</h2>
+          <p>${text(primary.diagnosis)}</p>
+          <p>${text(primary.whatYouReallyWant)}</p>
+        </section>
+
+        <section class="section">
+          <h2>${text(primary.mechanism.title)}</h2>
+          <p>${text(primary.mechanism.content)}</p>
+        </section>
+
+        ${renderParagraphSection("专业解读框架", primary.professionalBasis)}
+        ${renderTagSection("你的关键矛盾", primary.coreTensions)}
+        ${renderCompareListSection("适合推进的条件", "需要谨慎的信号", primary.suitableIf, primary.cautionIf)}
+
+        <section class="section">
+          <h2>关键指数</h2>
+          <div class="meters">
+            ${(primary.indices || [])
+              .map(
+                (item) => `
+                <div>
+                  <div class="meter-head"><span>${text(item.label)}</span><span>${text(item.value)}</span></div>
+                  <div class="meter-track"><div class="meter-fill" style="width:${number(item.value)}%"></div></div>
+                </div>
+              `
+              )
+              .join("")}
+          </div>
+        </section>
+
+        <section class="section">
+          <h2>两条路径对比</h2>
+          <div class="compare">
+            <div class="compare-card"><h3>${text(compareLabels[0])}</h3><p>${text(primary.ifStay)}</p></div>
+            <div class="compare-card"><h3>${text(compareLabels[1])}</h3><p>${text(primary.ifChange)}</p></div>
+          </div>
+        </section>
+
+        <section class="section">
+          <h2>现在最不建议你做</h2>
+          <div class="tag-list">${(primary.notRecommended || []).map((item) => `<span class="tag">${text(item)}</span>`).join("")}</div>
+        </section>
+
+        <section class="section">
+          <h2>未来 90 天验证方案</h2>
+          <div class="plan">
+            ${(primary.plan90 || [])
+              .map(
+                (item, index) => `
+                <div class="plan-card">
+                  <h3>${index + 1}. ${text(item.title)}</h3>
+                  <p>${text(item.content)}</p>
+                </div>
+              `
+              )
+              .join("")}
+          </div>
+        </section>
+
+        <section class="section">
+          <h2>最后一句话</h2>
+          <p>${text(primary.closing)}</p>
+        </section>
+
+        <div class="actions">
+          <button class="primary-btn" data-action="copy">${text(state.config.copyButton || "复制我的结果")}</button>
+          <button class="ghost-btn" data-action="restart">${text(state.config.restartButton || "重新测试")}</button>
+        </div>
+      </article>
+      `,
+      "result-screen"
+    );
+
+    app.querySelector("[data-action='copy']").addEventListener("click", () => copyShareText(shareText));
+    app.querySelector("[data-action='restart']").addEventListener("click", () => {
+      sessionStorage.removeItem(getStorageKey());
+      state.answers = {};
+      state.currentIndex = 0;
+      navigate("home");
+    });
+  }
+
+  function renderParagraphSection(title, paragraphs) {
+    if (!Array.isArray(paragraphs) || !paragraphs.length) return "";
+    return `
+      <section class="section">
+        <h2>${text(title)}</h2>
+        ${paragraphs.map((item) => `<p>${text(item)}</p>`).join("")}
+      </section>
+    `;
+  }
+
+  function renderTagSection(title, items) {
+    if (!Array.isArray(items) || !items.length) return "";
+    return `
+      <section class="section">
+        <h2>${text(title)}</h2>
+        <div class="tag-list">${items.map((item) => `<span class="tag">${text(item)}</span>`).join("")}</div>
+      </section>
+    `;
+  }
+
+  function renderCompareListSection(leftTitle, rightTitle, leftItems, rightItems) {
+    const hasLeft = Array.isArray(leftItems) && leftItems.length;
+    const hasRight = Array.isArray(rightItems) && rightItems.length;
+    if (!hasLeft && !hasRight) return "";
+    return `
+      <section class="section">
+        <h2>适用边界</h2>
+        <div class="compare">
+          <div class="compare-card">
+            <h3>${text(leftTitle)}</h3>
+            ${(leftItems || []).map((item) => `<p>${text(item)}</p>`).join("")}
+          </div>
+          <div class="compare-card">
+            <h3>${text(rightTitle)}</h3>
+            ${(rightItems || []).map((item) => `<p>${text(item)}</p>`).join("")}
+          </div>
+        </div>
+      </section>
+    `;
+  }
+
+  function scoreAnswers(answers) {
+    const counts = { A: 0, B: 0, C: 0, D: 0 };
+    Object.values(answers).forEach((key) => {
+      if (counts[key] !== undefined) counts[key] += 1;
+    });
+    const sorted = Object.entries(counts).sort((a, b) => b[1] - a[1]);
+    const threshold = state.config.secondaryThreshold ?? 2;
+    const primary = sorted[0][0];
+    const secondary = sorted[1][1] > 0 && sorted[0][1] - sorted[1][1] <= threshold ? sorted[1][0] : null;
+    return { counts, primary, secondary };
+  }
+
+  function getStage(score) {
+    const labels = state.config.stageLabels || [
+      { max: 45, label: "观察期" },
+      { max: 65, label: "验证期" },
+      { max: 82, label: "规划期" },
+      { max: 100, label: "行动期" },
+    ];
+    const hit = labels.find((item) => score <= item.max);
+    return hit ? hit.label : labels[labels.length - 1].label;
+  }
+
+  function buildShareText(primary, secondary) {
+    const template = state.config.shareTemplate || [
+      "我测出了：{{typeName}}",
+      "{{posterSubtext}}",
+      "{{secondaryLine}}",
+      "",
+      "{{title}}",
+    ];
+    const values = {
+      title: state.config.title,
+      typeName: primary.typeName,
+      posterSubtext: primary.posterSubtext,
+      secondary: secondary || "",
+      secondaryLine: secondary ? `副倾向：${secondary}` : "",
+    };
+    return template
+      .map((line) => fillTemplate(line, values))
+      .filter((line, index, arr) => line || arr[index - 1])
+      .join("\n")
+      .trim();
+  }
+
+  async function copyShareText(value) {
+    try {
+      await navigator.clipboard.writeText(value);
+      showToast("结果文案已复制");
+    } catch (error) {
+      showToast("复制失败，可长按手动复制");
+    }
+  }
+
+  function showToast(value) {
+    const toast = document.getElementById("toast");
+    if (!toast) return;
+    toast.textContent = value;
+    toast.classList.add("show");
+    window.setTimeout(() => toast.classList.remove("show"), 1600);
+  }
+
+  function getLoadingMessages() {
+    return state.config.loadingMessages || defaultLoadingMessages;
+  }
+
+  function getStorageKey() {
+    return `xhsTestAnswers:${state.config.slug || "default"}`;
+  }
+
+  function fillTemplate(template, values) {
+    return String(template).replace(/\{\{(\w+)\}\}/g, (_, key) => values[key] || "");
+  }
+
+  function number(value) {
+    const parsed = Number(value);
+    if (Number.isNaN(parsed)) return 0;
+    return Math.max(0, Math.min(100, parsed));
+  }
+
+  function text(value) {
+    return String(value ?? "")
+      .replace(/&/g, "&amp;")
+      .replace(/</g, "&lt;")
+      .replace(/>/g, "&gt;")
+      .replace(/"/g, "&quot;");
+  }
+})();
+
+    </script>
+  </body>
+</html>
