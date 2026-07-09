@@ -1,0 +1,1125 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <meta name="description" content="完成32道职业路径倾向测试，生成你的核心类型、能力证据、风险提醒和未来90天验证方案。" />
+    <meta property="og:title" content="你适合从政还是从商？" />
+    <meta property="og:description" content="完成32道职业路径倾向测试，生成你的核心类型、能力证据、风险提醒和未来90天验证方案。" />
+    <title>你适合从政还是从商？</title>
+    <style>
+:root {
+  --bg: #fbfaf7;
+  --paper: #fffefd;
+  --ink: #20242a;
+  --muted: #65707d;
+  --line: #d9d4ca;
+  --line-strong: #b9afa0;
+  --accent: #9b4339;
+  --accent-soft: #f1dfd7;
+  --gold: #c0964d;
+  --sage: #66795f;
+  --blue: #526a86;
+  --shadow: 0 16px 36px rgba(60, 47, 38, 0.1);
+  --radius: 8px;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  min-height: 100%;
+  background:
+    linear-gradient(rgba(32, 36, 42, 0.035) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(32, 36, 42, 0.035) 1px, transparent 1px),
+    var(--bg);
+  background-size: 24px 24px;
+}
+
+body {
+  min-height: 100vh;
+  margin: 0;
+  color: var(--ink);
+  font-family:
+    "PingFang SC",
+    "Microsoft YaHei",
+    "Noto Sans SC",
+    system-ui,
+    -apple-system,
+    BlinkMacSystemFont,
+    sans-serif;
+  letter-spacing: 0;
+}
+
+button {
+  font: inherit;
+}
+
+.shell {
+  width: min(100%, 480px);
+  min-height: 100vh;
+  margin: 0 auto;
+  background: rgba(251, 250, 247, 0.88);
+}
+
+.top-rule {
+  height: 4px;
+  background: var(--accent);
+}
+
+.screen {
+  min-height: calc(100vh - 4px);
+  padding: 28px 22px 32px;
+}
+
+.home {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.kicker {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  color: var(--muted);
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  font-size: 11px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+.dot {
+  width: 7px;
+  height: 7px;
+  background: var(--accent);
+  border-radius: 50%;
+}
+
+.hero-title {
+  margin: 26px 0 14px;
+  color: var(--ink);
+  font-size: 30px;
+  line-height: 1.2;
+  text-align: center;
+  font-weight: 800;
+}
+
+.hero-subtitle {
+  margin: 0 auto 28px;
+  max-width: 340px;
+  color: var(--muted);
+  font-size: 15px;
+  line-height: 1.75;
+  text-align: center;
+}
+
+.hairline {
+  width: 64px;
+  height: 1px;
+  margin: 0 auto 30px;
+  background: var(--line-strong);
+}
+
+.intro {
+  margin: 0 auto;
+  max-width: 380px;
+}
+
+.intro p {
+  margin: 0 0 15px;
+  color: rgba(32, 36, 42, 0.82);
+  font-size: 15px;
+  line-height: 1.8;
+}
+
+.intro .strong {
+  color: var(--accent);
+  font-weight: 700;
+}
+
+.pill-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px;
+  margin: 28px 0;
+}
+
+.pill {
+  min-height: 42px;
+  display: grid;
+  place-items: center;
+  border: 1px solid var(--line);
+  color: var(--muted);
+  background: rgba(255, 255, 255, 0.44);
+  font-size: 13px;
+}
+
+.primary-btn,
+.ghost-btn,
+.copy-btn {
+  width: 100%;
+  min-height: 48px;
+  border: 1px solid var(--ink);
+  border-radius: 0;
+  cursor: pointer;
+  transition: transform 150ms ease, background 150ms ease, color 150ms ease, border-color 150ms ease;
+}
+
+.primary-btn {
+  background: var(--ink);
+  color: #fff;
+  font-weight: 700;
+}
+
+.ghost-btn,
+.copy-btn {
+  background: transparent;
+  color: var(--ink);
+}
+
+.primary-btn:active,
+.ghost-btn:active,
+.copy-btn:active,
+.option:active {
+  transform: translateY(1px);
+}
+
+.disclaimer {
+  margin: 18px auto 0;
+  max-width: 340px;
+  color: var(--muted);
+  font-size: 12px;
+  line-height: 1.65;
+  text-align: center;
+}
+
+.quiz-screen {
+  padding-top: 0;
+}
+
+.sticky-head {
+  position: sticky;
+  top: 0;
+  z-index: 5;
+  margin: 0 -22px 26px;
+  padding: 14px 22px 12px;
+  background: rgba(251, 250, 247, 0.95);
+  border-bottom: 1px solid var(--line);
+  backdrop-filter: blur(12px);
+}
+
+.quiz-meta {
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+  color: var(--muted);
+  font-size: 12px;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+}
+
+.progress-track {
+  height: 4px;
+  margin-top: 10px;
+  background: rgba(32, 36, 42, 0.09);
+}
+
+.progress-bar {
+  height: 100%;
+  background: var(--accent);
+  transition: width 260ms ease;
+}
+
+.question-no {
+  color: rgba(155, 67, 57, 0.18);
+  font-size: 48px;
+  line-height: 1;
+  font-weight: 800;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+}
+
+.question-title {
+  margin: 18px 0 24px;
+  font-size: 22px;
+  line-height: 1.5;
+  font-weight: 750;
+}
+
+.options {
+  display: grid;
+  gap: 12px;
+}
+
+.option {
+  min-height: 66px;
+  display: grid;
+  grid-template-columns: 30px 1fr;
+  gap: 12px;
+  align-items: start;
+  width: 100%;
+  padding: 15px;
+  border: 1px solid var(--line);
+  background: rgba(255, 255, 255, 0.68);
+  color: var(--ink);
+  text-align: left;
+  cursor: pointer;
+  transition: background 160ms ease, border-color 160ms ease, color 160ms ease, opacity 160ms ease;
+}
+
+.option-key {
+  display: grid;
+  place-items: center;
+  width: 28px;
+  height: 28px;
+  border: 1px solid var(--line-strong);
+  font-size: 13px;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+}
+
+.option-text {
+  padding-top: 2px;
+  font-size: 15px;
+  line-height: 1.55;
+}
+
+.option.selected {
+  border-color: var(--accent);
+  background: var(--accent);
+  color: #fff;
+}
+
+.option.selected .option-key {
+  border-color: rgba(255, 255, 255, 0.8);
+}
+
+.option.dimmed {
+  opacity: 0.42;
+}
+
+.hint {
+  margin: 18px 0 0;
+  color: var(--muted);
+  font-size: 12px;
+  text-align: center;
+}
+
+.loading-screen {
+  display: grid;
+  place-items: center;
+}
+
+.loading-card {
+  width: 100%;
+  max-width: 360px;
+  text-align: center;
+}
+
+.spinner {
+  width: 54px;
+  height: 54px;
+  margin: 0 auto 24px;
+  border: 2px solid var(--line);
+  border-top-color: var(--accent);
+  border-radius: 50%;
+  animation: spin 850ms linear infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.loading-text {
+  min-height: 54px;
+  color: var(--accent);
+  font-size: 17px;
+  line-height: 1.6;
+  font-weight: 700;
+}
+
+.step-bars {
+  display: grid;
+  gap: 8px;
+  margin-top: 28px;
+}
+
+.step {
+  height: 4px;
+  overflow: hidden;
+  background: rgba(32, 36, 42, 0.09);
+}
+
+.step span {
+  display: block;
+  height: 100%;
+  width: 0;
+  background: var(--accent);
+  transition: width 300ms ease;
+}
+
+.step.done span {
+  width: 100%;
+}
+
+.result-screen {
+  padding: 22px 18px 30px;
+}
+
+.report {
+  padding: 22px 16px 18px;
+  border: 1px solid var(--line);
+  background: var(--paper);
+  box-shadow: var(--shadow);
+}
+
+.result-type {
+  margin: 8px 0 8px;
+  color: var(--accent);
+  font-size: 30px;
+  line-height: 1.15;
+  font-weight: 850;
+  text-align: center;
+}
+
+.result-subtitle {
+  margin: 0 auto 20px;
+  color: var(--muted);
+  font-size: 15px;
+  line-height: 1.7;
+  text-align: center;
+}
+
+.stamp-row {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px;
+  margin: 18px 0 20px;
+}
+
+.stamp {
+  padding: 12px 10px;
+  border: 1px solid var(--line);
+  background: #fbfaf7;
+}
+
+.stamp strong {
+  display: block;
+  margin-bottom: 4px;
+  color: var(--ink);
+  font-size: 20px;
+}
+
+.stamp span {
+  color: var(--muted);
+  font-size: 12px;
+}
+
+.section {
+  padding: 20px 0;
+  border-top: 1px solid var(--line);
+}
+
+.section h2 {
+  margin: 0 0 12px;
+  font-size: 18px;
+  color: var(--ink);
+}
+
+.section p {
+  margin: 0 0 12px;
+  color: rgba(32, 36, 42, 0.82);
+  font-size: 15px;
+  line-height: 1.85;
+}
+
+.quote {
+  padding: 15px;
+  border-left: 3px solid var(--accent);
+  background: var(--accent-soft);
+  color: #5b2d27;
+  line-height: 1.8;
+  font-weight: 700;
+}
+
+.meters {
+  display: grid;
+  gap: 14px;
+}
+
+.meter-head {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 7px;
+  color: var(--muted);
+  font-size: 13px;
+}
+
+.meter-track {
+  height: 8px;
+  background: rgba(32, 36, 42, 0.08);
+}
+
+.meter-fill {
+  height: 100%;
+  background: var(--accent);
+}
+
+.compare {
+  display: grid;
+  gap: 10px;
+}
+
+.compare-card {
+  padding: 14px;
+  border: 1px solid var(--line);
+  background: #fbfaf7;
+}
+
+.compare-card h3,
+.plan-card h3 {
+  margin: 0 0 8px;
+  font-size: 15px;
+}
+
+.compare-card p,
+.plan-card p {
+  font-size: 14px;
+}
+
+.tag-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.tag {
+  padding: 7px 9px;
+  border: 1px solid var(--line);
+  background: #fbfaf7;
+  color: var(--muted);
+  font-size: 13px;
+}
+
+.plan {
+  display: grid;
+  gap: 10px;
+}
+
+.plan-card {
+  padding: 14px;
+  border: 1px solid var(--line);
+  background: #fbfaf7;
+}
+
+.secondary-note {
+  padding: 14px;
+  border: 1px dashed var(--line-strong);
+  background: rgba(192, 150, 77, 0.12);
+  line-height: 1.75;
+  font-size: 14px;
+}
+
+.actions {
+  display: grid;
+  gap: 10px;
+  margin-top: 18px;
+}
+
+.toast {
+  position: fixed;
+  left: 50%;
+  bottom: 22px;
+  z-index: 20;
+  transform: translateX(-50%);
+  padding: 10px 14px;
+  background: var(--ink);
+  color: #fff;
+  font-size: 13px;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 180ms ease;
+}
+
+.toast.show {
+  opacity: 1;
+}
+
+.error {
+  display: grid;
+  place-items: center;
+  min-height: 100vh;
+  padding: 24px;
+  text-align: center;
+}
+
+.error p {
+  color: var(--muted);
+  line-height: 1.7;
+}
+
+@media (min-width: 700px) {
+  body {
+    padding: 28px 0;
+  }
+
+  .shell {
+    min-height: calc(100vh - 56px);
+    border: 1px solid var(--line);
+    box-shadow: var(--shadow);
+  }
+
+  .screen {
+    min-height: calc(100vh - 60px);
+  }
+}
+
+    </style>
+  </head>
+  <body>
+    <main id="app" aria-live="polite"></main>
+    <script>window.__QUIZ_CONFIG__ = {"slug":"test-public-or-business","topic":"你适合从政还是从商？","kicker":"32-Q Career Path Test","title":"你适合从政还是从商？","subtitle":"32 道真实情境题，测出你更偏公共事务、商业经营、资源整合，还是专业深耕。","metaDescription":"完成32道职业路径倾向测试，生成你的核心类型、能力证据、风险提醒和未来90天验证方案。","startButton":"开始测试","resultKicker":"Career Path Report","quizHint":"按真实的你选择，不按理想中的自己选择","copyButton":"复制我的结果","restartButton":"重新测试","scoreLabel":"路径清晰度","stageLabel":"当前验证阶段","stageLabels":[{"max":55,"label":"方向观察期"},{"max":72,"label":"能力验证期"},{"max":86,"label":"路径聚焦期"},{"max":100,"label":"优势放大期"}],"compareLabels":["如果继续沿用旧方式","如果开始主动验证"],"disclaimer":"本测试为趣味职业倾向观察工具，仅讨论行为偏好、能力组合和发展环境，不代表公务员招录、职业测评、商业投资或现实决策建议。结果仅供娱乐和自我复盘参考。","secondaryThreshold":4,"dimensions":["公共协调","商业经营","资源整合","专业深耕"],"intro":["真正决定你适合哪条路的，不是你会不会说漂亮话，而是你在规则、利益、风险和责任面前会怎样选择。","有人擅长让复杂系统稳定运转，有人擅长把需求变成生意，也有人能连接不同资源，或靠专业能力建立不可替代性。","32 道题会从决策偏好、权力责任、资源交换、风险收益、人际博弈、长期动力、现实约束和场景验证 8 个维度，生成你的职业路径报告。"],"loadingMessages":["正在读取你的决策偏好...","正在分析你对规则、市场、资源和专业的真实反应...","正在识别最适合你的能力环境...","正在生成32题职业路径报告...","分析完成。"],"questions":[{"id":1,"module":"决策偏好","text":"一个新项目目标很模糊，但领导让你先推进。你最自然的起手式是：","options":[{"key":"A","text":"先确认政策边界、责任主体和各方诉求"},{"key":"B","text":"先找真实需求，尽快做出能收费的小方案"},{"key":"C","text":"先找关键人聊清利益，再设计各方都能接受的路径"},{"key":"D","text":"先把专业问题研究透，给出可靠的技术判断"}]},{"id":2,"module":"决策偏好","text":"四个任务同时压过来，你更愿意优先处理：","options":[{"key":"A","text":"影响面最大、最需要协调多个部门的事"},{"key":"B","text":"最接近成交、收入或增长结果的事"},{"key":"C","text":"能连接关键资源、撬动后续机会的事"},{"key":"D","text":"最能体现专业壁垒、避免重大失误的事"}]},{"id":3,"module":"决策偏好","text":"面对一个争议很大的方案，你通常先问：","options":[{"key":"A","text":"它是否公平、合规，能否向所有相关方解释"},{"key":"B","text":"用户会不会买单，投入产出是否划算"},{"key":"C","text":"谁会支持、谁会反对，怎样形成可执行共识"},{"key":"D","text":"证据是否充分，方案本身是否经得起推敲"}]},{"id":4,"module":"决策偏好","text":"一件事做成后，哪种反馈最让你有成就感？","options":[{"key":"A","text":"“你把一团乱麻协调顺了，大家都能往前走”"},{"key":"B","text":"“这个结果带来了真实订单、利润或增长”"},{"key":"C","text":"“因为你牵线和判断，原本不可能的合作成了”"},{"key":"D","text":"“这个难题只有你懂，而且你给出了最可靠的解法”"}]},{"id":5,"module":"权力与责任","text":"如果你获得更大决定权，你最想用它来：","options":[{"key":"A","text":"建立更清楚的规则，让资源分配更有秩序"},{"key":"B","text":"快速试错，把好机会变成可持续的生意"},{"key":"C","text":"调动不同资源，让复杂目标真正落地"},{"key":"D","text":"保证专业标准不被短期意见牺牲"}]},{"id":6,"module":"权力与责任","text":"当所有人都等你表态时，你最担心的是：","options":[{"key":"A","text":"决定影响太多人，却没有兼顾程序和后果"},{"key":"B","text":"窗口期过去，团队因为犹豫错失市场"},{"key":"C","text":"关键关系没有处理好，正确方案也推不动"},{"key":"D","text":"信息不够完整，仓促决定留下专业漏洞"}]},{"id":7,"module":"权力与责任","text":"你更能接受哪一种压力？","options":[{"key":"A","text":"长期被监督、被评价，但事情具有公共影响力"},{"key":"B","text":"结果直接与收入挂钩，输赢都由自己承担"},{"key":"C","text":"持续在不同立场之间斡旋，争取最大公约数"},{"key":"D","text":"在少数人看懂的领域里承担最终专业责任"}]},{"id":8,"module":"权力与责任","text":"如果必须得罪一部分人，你更可能因为：","options":[{"key":"A","text":"守住规则和整体利益，不能给个别人开口子"},{"key":"B","text":"砍掉低效投入，把资源放到更有回报的地方"},{"key":"C","text":"推动合作落地，要求各方都让出一部分利益"},{"key":"D","text":"坚持事实和专业标准，不接受外行拍板"}]},{"id":9,"module":"资源交换","text":"你发现一个好机会时，第一反应更像：","options":[{"key":"A","text":"先判断它能否纳入现有体系并获得正式支持"},{"key":"B","text":"先算客户、成本和回款，尽快做最小验证"},{"key":"C","text":"先盘点谁有资源、谁有需求，设计合作结构"},{"key":"D","text":"先评估自己是否具备不可替代的专业能力"}]},{"id":10,"module":"资源交换","text":"别人来找你帮忙，你更习惯提供：","options":[{"key":"A","text":"流程指引、规则解释和跨部门协调"},{"key":"B","text":"产品方案、成交思路和结果承诺"},{"key":"C","text":"关键联系人、合作切口和资源组合"},{"key":"D","text":"专业判断、方法工具和质量把关"}]},{"id":11,"module":"资源交换","text":"在一次饭局或行业活动里，你最容易注意到：","options":[{"key":"A","text":"每个人的身份、职责和正式影响范围"},{"key":"B","text":"谁掌握客户、渠道或真实购买需求"},{"key":"C","text":"谁和谁能互补，哪些关系值得长期经营"},{"key":"D","text":"谁真正懂行，谈话里有哪些高质量信息"}]},{"id":12,"module":"资源交换","text":"对“人脉”这件事，你更认同：","options":[{"key":"A","text":"信誉来自长期履责，关系不能越过规则"},{"key":"B","text":"关系要能形成交易和价值，否则只是热闹"},{"key":"C","text":"关系本身就是资源，但必须让各方都有所得"},{"key":"D","text":"能力才是根基，专业足够强自然会有人来找"}]},{"id":13,"module":"风险收益","text":"有一份稳定但晋升较慢的机会，另一份收入浮动但上限高。你更先考虑：","options":[{"key":"A","text":"长期稳定、组织平台和公共价值是否匹配"},{"key":"B","text":"市场空间、利润模型和最坏亏损能否承受"},{"key":"C","text":"这份机会能否积累资源、信用和更大选择权"},{"key":"D","text":"哪一份更有利于形成不可替代的专业积累"}]},{"id":14,"module":"风险收益","text":"当规则还不清楚、机会却已经出现时，你会：","options":[{"key":"A","text":"先确认边界，宁可慢一点也不踩红线"},{"key":"B","text":"控制成本先试，边做边根据反馈调整"},{"key":"C","text":"找熟悉规则和市场的人共同判断、共同推进"},{"key":"D","text":"继续收集信息，等关键不确定性下降再行动"}]},{"id":15,"module":"风险收益","text":"你眼中的“安全感”更接近：","options":[{"key":"A","text":"清楚的制度、稳定的平台和可预期的成长"},{"key":"B","text":"持续赚钱的能力，不依赖任何单一组织"},{"key":"C","text":"无论环境怎么变，都有资源和关系可以转身"},{"key":"D","text":"掌握稀缺能力，到哪里都有专业议价权"}]},{"id":16,"module":"风险收益","text":"一次失败后，你最先复盘什么？","options":[{"key":"A","text":"流程哪里失灵，责任与协同是否清楚"},{"key":"B","text":"需求是否真实，产品、定价或获客哪里错了"},{"key":"C","text":"关键人是否判断错，利益安排是否失衡"},{"key":"D","text":"专业假设是否错误，证据和方法哪里不严谨"}]},{"id":17,"module":"人际博弈","text":"两位重要人物意见完全相反，你通常会：","options":[{"key":"A","text":"把分歧放回共同规则和整体目标中讨论"},{"key":"B","text":"用数据和结果验证，谁的方案有效就选谁"},{"key":"C","text":"分别理解底线，设计一个双方能接受的交换"},{"key":"D","text":"拆开事实与观点，指出专业上真正成立的部分"}]},{"id":18,"module":"人际博弈","text":"你最擅长建立哪种信任？","options":[{"key":"A","text":"让人相信你稳妥、负责、不会乱来"},{"key":"B","text":"让人相信你能带来结果和实际收益"},{"key":"C","text":"让不同的人都愿意把真实想法告诉你"},{"key":"D","text":"让人相信你的判断准确、标准可靠"}]},{"id":19,"module":"人际博弈","text":"遇到一个很会说但总不交付的人，你会：","options":[{"key":"A","text":"明确职责、节点和问责方式"},{"key":"B","text":"停止无效沟通，直接看结果决定是否合作"},{"key":"C","text":"找到他真正看重的东西，重新设定合作条件"},{"key":"D","text":"要求证据和标准，不让表达替代专业质量"}]},{"id":20,"module":"人际博弈","text":"在团队里，你最常扮演：","options":[{"key":"A","text":"稳住秩序、协调分工的人"},{"key":"B","text":"盯着目标、推动结果的人"},{"key":"C","text":"连接资源、化解冲突的人"},{"key":"D","text":"发现问题、守住质量的人"}]},{"id":21,"module":"长期动力","text":"如果未来十年只能积累一种东西，你更想要：","options":[{"key":"A","text":"公共信用和组织影响力"},{"key":"B","text":"商业资产和持续盈利能力"},{"key":"C","text":"跨圈层资源与合作信用"},{"key":"D","text":"深厚专业能力和行业声誉"}]},{"id":22,"module":"长期动力","text":"哪种工作状态最容易让你忘记时间？","options":[{"key":"A","text":"处理复杂事务，让许多人最终达成一致"},{"key":"B","text":"发现需求、设计产品、看到数字持续增长"},{"key":"C","text":"穿梭在不同角色之间，把资源拼成新机会"},{"key":"D","text":"深入研究一个难题，直到找到准确答案"}]},{"id":23,"module":"长期动力","text":"你更希望别人怎样介绍你？","options":[{"key":"A","text":"“这个人靠谱，复杂的公共事务交给他能放心”"},{"key":"B","text":"“这个人很会做生意，能把机会变成结果”"},{"key":"C","text":"“这个人会整合资源，很多难合作都能被他做成”"},{"key":"D","text":"“这个人是真专家，关键问题必须听他的”"}]},{"id":24,"module":"长期动力","text":"即使短期没有奖励，你仍愿意坚持的是：","options":[{"key":"A","text":"让制度更合理、事情更有秩序"},{"key":"B","text":"持续接触客户、验证新的赚钱路径"},{"key":"C","text":"经营长期关系，帮助不同资源彼此连接"},{"key":"D","text":"不断学习，磨深一个真正喜欢的专业"}]},{"id":25,"module":"现实约束","text":"目前最限制你发展的因素更像：","options":[{"key":"A","text":"缺少进入合适平台的路径和长期耐心"},{"key":"B","text":"不懂获客、销售、现金流或风险控制"},{"key":"C","text":"认识的人不少，但缺少可交换的核心价值"},{"key":"D","text":"专业不错，却不擅长把能力变成影响力和机会"}]},{"id":26,"module":"现实约束","text":"如果明年收入没有明显增长，你最能接受的理由是：","options":[{"key":"A","text":"获得了更稳定的平台、更清晰的晋升路径"},{"key":"B","text":"业务模型还在验证，但关键数据持续变好"},{"key":"C","text":"搭建了高质量合作网络，机会正在累积"},{"key":"D","text":"完成了重要资质或专业能力明显跃迁"}]},{"id":27,"module":"现实约束","text":"哪种代价最让你难以接受？","options":[{"key":"A","text":"长期漂浮，没有身份归属和明确发展路径"},{"key":"B","text":"收入上限被锁死，努力与回报长期脱节"},{"key":"C","text":"手里有好想法，却因为没有资源始终推不动"},{"key":"D","text":"每天都在应付关系，专业能力越来越空"}]},{"id":28,"module":"现实约束","text":"当家人希望你选“更稳的路”时，你会：","options":[{"key":"A","text":"认真考虑，因为稳定和责任本来就是重要变量"},{"key":"B","text":"听取意见，但最终用自己的市场验证说话"},{"key":"C","text":"争取折中，先保底再逐步积累资源和机会"},{"key":"D","text":"选择最能形成长期专业壁垒的路径"}]},{"id":29,"module":"场景验证","text":"假设给你一年时间负责一个县域文旅项目，你最想负责：","options":[{"key":"A","text":"多部门协调、公共服务和项目整体推进"},{"key":"B","text":"产品设计、营销获客和营收增长"},{"key":"C","text":"政府、企业、村民与渠道之间的合作机制"},{"key":"D","text":"产业研究、数据分析和专业方案"}]},{"id":30,"module":"场景验证","text":"一家小公司邀请你做核心合伙人，你最先核实：","options":[{"key":"A","text":"治理结构、职责边界和合规风险"},{"key":"B","text":"客户来源、利润空间和现金流"},{"key":"C","text":"合伙人关系、资源承诺和退出机制"},{"key":"D","text":"产品是否真正有技术或专业壁垒"}]},{"id":31,"module":"场景验证","text":"如果让你从零建立个人影响力，你会先：","options":[{"key":"A","text":"持续输出可靠观点，建立值得信任的公共形象"},{"key":"B","text":"找到付费痛点，用产品和案例证明自己"},{"key":"C","text":"连接一批互补的人，发起有结果的合作"},{"key":"D","text":"深耕一个细分领域，用高质量内容建立权威"}]},{"id":32,"module":"场景验证","text":"不考虑社会评价，你内心真正向往的画面是：","options":[{"key":"A","text":"在重要平台参与复杂决策，让更多人受益"},{"key":"B","text":"掌握自己的生意，选择客户并决定增长方向"},{"key":"C","text":"成为连接不同世界的人，让资源因你重新组合"},{"key":"D","text":"安静但有分量地成为某个领域不可替代的人"}]}],"results":{"A":{"typeName":"公共事务协调型","subtitle":"你更适合在规则、责任与长期信用中积累影响力","posterSubtext":"你不是迷恋稳定，而是擅长让复杂系统变得可执行。","maturityScore":88,"coreConclusion":"你的优势不在于短期抢机会，而在于理解规则、承担责任、协调多方，并让一件影响很多人的事稳稳落地。 你真正看重的是可持续的影响力、清楚的责任边界，以及被长期信任的职业位置。","diagnosis":"你的优势不在于短期抢机会，而在于理解规则、承担责任、协调多方，并让一件影响很多人的事稳稳落地。","whatYouReallyWant":"你真正看重的是可持续的影响力、清楚的责任边界，以及被长期信任的职业位置。","mechanism":{"title":"制度协调与公共责任机制","content":"你做判断时会自然考虑程序、公平、整体后果和长期信用。这类能力适合公共事务、大型组织管理、政策执行、行业协会和高协同岗位。风险是把谨慎变成等待，或把组织身份误当成个人能力。"},"professionalBasis":["面对模糊任务时，你优先确认边界、责任和相关方诉求。","面对冲突时，你倾向用共同规则和整体目标建立共识。","面对长期选择时，你愿意用短期回报换取平台、信用与持续影响。"],"coreTensions":["规则意识强","责任感稳定","多方协调","长期主义","可能过度谨慎"],"suitableIf":["公共事务","政策与项目执行","大型组织管理","政企服务","行业协会","合规与综合协调"],"cautionIf":["只追求身份而忽略真实能力","等待完美平台","害怕承担结果","把服从误当成协调"],"indices":[{"label":"公共责任感","value":94},{"label":"组织协调力","value":91},{"label":"规则敏感度","value":93},{"label":"市场进攻性","value":67}],"ifStay":"如果你只追求稳定和身份，你会逐渐失去主动性，也很难形成真正可迁移的能力。","ifChange":"如果你同时训练结果意识、表达能力和项目闭环，你的稳会变成可信赖的影响力。","notRecommended":["只追求身份而忽略真实能力","等待完美平台","害怕承担结果","把服从误当成协调"],"plan90":[{"title":"第1周：验证公共动机","content":"记录三次你主动承担复杂协调的场景，分清你喜欢的是影响力还是身份感。"},{"title":"第2-3周：练项目闭环","content":"选择一件跨角色任务，从目标、节点、责任到复盘完整做一遍。"},{"title":"第4-6周：补结果表达","content":"用数据和事实说明你的协调带来了什么改变，不只写“参与过”。"},{"title":"第7-12周：建立进入路径","content":"梳理考试、招聘、遴选或行业平台所需条件，制定可验证的时间表。"}],"closing":"你适合的不是“看起来体面”的位置，而是那些需要长期信誉、复杂协调和公共责任的真实岗位。"},"B":{"typeName":"商业经营开拓型","subtitle":"你更适合在需求、交易与结果反馈中建立自己的筹码","posterSubtext":"你不是单纯爱冒险，而是习惯让价值接受市场检验。","maturityScore":91,"coreConclusion":"你对需求、回报、速度和机会窗口更敏感，愿意用真实交易验证判断，也更能接受结果与收入直接挂钩。 你真正想要的是自主权、增长空间和清晰反馈，不愿长期把命运交给单一组织或固定上限。","diagnosis":"你对需求、回报、速度和机会窗口更敏感，愿意用真实交易验证判断，也更能接受结果与收入直接挂钩。","whatYouReallyWant":"你真正想要的是自主权、增长空间和清晰反馈，不愿长期把命运交给单一组织或固定上限。","mechanism":{"title":"市场验证与经营闭环机制","content":"你习惯从客户、产品、成本、获客和现金流看问题。适合创业、销售、增长、产品商业化、项目经营与自由职业。风险是高估机会、低估交付和现金流，或把短期收入当成长期生意。"},"professionalBasis":["面对机会时，你会先判断需求、成本、回款和最小验证路径。","面对争议时，你更相信数据、客户反馈和实际结果。","面对长期选择时，你希望积累持续赚钱的能力，而非只依赖平台。"],"coreTensions":["市场敏锐","结果导向","行动速度快","自主性强","可能低估风险"],"suitableIf":["创业经营","销售与商务","增长运营","产品商业化","渠道拓展","自由职业"],"cautionIf":["冲动辞职创业","只看流水不看利润","忽略合规与交付","项目太多却没有复购"],"indices":[{"label":"市场敏感度","value":95},{"label":"行动验证力","value":93},{"label":"经营自主性","value":92},{"label":"长期耐心","value":72}],"ifStay":"如果你只追逐新机会，你会一直很忙，却难以沉淀产品、客户和复利。","ifChange":"如果你建立稳定获客、交付、复购和现金流管理，你的进攻性会变成真正的经营能力。","notRecommended":["冲动辞职创业","只看流水不看利润","忽略合规与交付","项目太多却没有复购"],"plan90":[{"title":"第1周：找到付费痛点","content":"访谈5个真实目标用户，只记录他们已经为哪些问题花过钱。"},{"title":"第2-3周：做最小成交","content":"设计一个低成本、可交付的小产品，用真实付款而非点赞验证。"},{"title":"第4-6周：算清经营账","content":"记录获客成本、交付时间、毛利和复购，不再只看收入数字。"},{"title":"第7-12周：形成可复制流程","content":"固定产品、报价、交付和售后，减少每单从零开始。"}],"closing":"你适合的不是盲目冒险，而是把不确定机会变成可计算、可成交、可复利的经营系统。"},"C":{"typeName":"政商复合连接型","subtitle":"你更适合在多方利益、资源整合与合作结构中创造机会","posterSubtext":"你真正擅长的，是让不同世界的人愿意坐到同一张桌子上。","maturityScore":89,"coreConclusion":"你既能理解规则和正式结构，也能感知市场与利益变化，优势在于识别人、连接资源、设计合作并推动复杂事项落地。 你真正想要的不是单一身份，而是更大的活动空间、跨圈层信用和把复杂资源重新组合的能力。","diagnosis":"你既能理解规则和正式结构，也能感知市场与利益变化，优势在于识别人、连接资源、设计合作并推动复杂事项落地。","whatYouReallyWant":"你真正想要的不是单一身份，而是更大的活动空间、跨圈层信用和把复杂资源重新组合的能力。","mechanism":{"title":"资源整合与合作设计机制","content":"你对关键人、利益结构、资源互补和合作节奏敏感。适合政企合作、产业招商、商务拓展、咨询顾问、平台型项目与生态运营。风险是关系很多但价值不硬，或过度圆融导致边界模糊。"},"professionalBasis":["面对冲突时，你会先理解各方底线，再设计可以交换的条件。","面对机会时，你擅长盘点资源、找到关键人并组织合作。","面对长期发展时，你希望积累跨圈层信用和更大的选择权。"],"coreTensions":["关系洞察","资源整合","合作设计","场面适应力","核心价值需加固"],"suitableIf":["政企合作","产业招商","商务拓展","咨询顾问","生态运营","平台型项目"],"cautionIf":["只有人脉没有产品","承诺过多","利益边界不清","用关系替代专业与交付"],"indices":[{"label":"资源整合力","value":96},{"label":"利益洞察力","value":93},{"label":"合作推动力","value":91},{"label":"专业壁垒","value":74}],"ifStay":"如果你只积累联系人而没有可交换价值，关系会越来越多，真正机会却不会变多。","ifChange":"如果你把资源连接建立在清晰产品、专业能力和可信交付上，你会成为稀缺的复合型推动者。","notRecommended":["只有人脉没有产品","承诺过多","利益边界不清","用关系替代专业与交付"],"plan90":[{"title":"第1周：盘点可交换价值","content":"列出你能提供的三项具体价值，不写“认识人”，只写可验证的结果。"},{"title":"第2-3周：做一次小型撮合","content":"选择需求互补的两方，明确目标、边界、责任与回报。"},{"title":"第4-6周：沉淀合作模板","content":"把成功合作复盘成筛选、沟通、协议、交付和复盘流程。"},{"title":"第7-12周：建立专业锚点","content":"选择一个产业或业务领域持续深耕，让关系网络围绕能力生长。"}],"closing":"你最强的不是会来事，而是看懂不同人的真实需要，并把分散资源变成共同结果。"},"D":{"typeName":"专业深耕积累型","subtitle":"比起站队从政或从商，你更需要先建立不可替代的专业筹码","posterSubtext":"你不是不适合做大事，只是不愿让关系和速度盖过专业本身。","maturityScore":86,"coreConclusion":"你更相信事实、方法、标准和长期积累，对“靠身份”或“靠关系”天然谨慎。你适合先成为某个领域真正有分量的人。 你真正想要的是专业自主、稳定价值感和不依赖讨好任何人的议价能力。","diagnosis":"你更相信事实、方法、标准和长期积累，对“靠身份”或“靠关系”天然谨慎。你适合先成为某个领域真正有分量的人。","whatYouReallyWant":"你真正想要的是专业自主、稳定价值感和不依赖讨好任何人的议价能力。","mechanism":{"title":"专业壁垒与可信判断机制","content":"你会优先关注证据、质量、技术壁垒和长期能力。适合研究、技术、法务、财务、医疗、设计、专业咨询等路径。风险是沉浸专业却不表达价值，或用“还没准备好”长期推迟进入真实世界。"},"professionalBasis":["面对模糊问题时，你更愿意先把事实和专业逻辑研究清楚。","面对压力时，你坚持标准，不愿让短期意见牺牲长期质量。","面对长期选择时，你更愿意积累资质、作品和稀缺能力。"],"coreTensions":["专业严谨","独立判断","质量意识","长期积累","商业表达偏弱"],"suitableIf":["专业咨询","研究分析","技术研发","法务财务","产品与设计","专业服务"],"cautionIf":["闭门造车","不愿展示成果","过度追求完美","把市场沟通视为不专业"],"indices":[{"label":"专业深度","value":96},{"label":"独立判断力","value":94},{"label":"质量稳定度","value":92},{"label":"资源经营力","value":65}],"ifStay":"如果你只积累能力却不进入真实项目，你可能越来越专业，却始终没有相应的影响力和收入。","ifChange":"如果你学会把专业翻译成可理解、可购买、可传播的结果，你会同时拥有安全感与选择权。","notRecommended":["闭门造车","不愿展示成果","过度追求完美","把市场沟通视为不专业"],"plan90":[{"title":"第1周：确定专业锚点","content":"选择一个愿意深耕三年的细分问题，停止同时追逐多个方向。"},{"title":"第2-3周：建立成果证据","content":"整理作品、案例、数据或资质，让能力有可验证载体。"},{"title":"第4-6周：训练价值表达","content":"用客户听得懂的语言说明你解决什么问题、减少什么损失。"},{"title":"第7-12周：进入真实项目","content":"争取一次付费项目、公开分享或跨团队合作，用反馈校准专业方向。"}],"closing":"你不必急着证明自己适合从政还是从商，先让专业成为别人绕不开你的理由。"}},"secondaryNotes":{"A":{"B":"你的主倾向是「公共事务协调型」，同时带有「商业经营开拓型」的能力影子。这说明你不必把职业路径理解成非黑即白，更值得关注的是：在哪种环境里，你的能力组合最容易形成长期筹码。","C":"你的主倾向是「公共事务协调型」，同时带有「政商复合连接型」的能力影子。这说明你不必把职业路径理解成非黑即白，更值得关注的是：在哪种环境里，你的能力组合最容易形成长期筹码。","D":"你的主倾向是「公共事务协调型」，同时带有「专业深耕积累型」的能力影子。这说明你不必把职业路径理解成非黑即白，更值得关注的是：在哪种环境里，你的能力组合最容易形成长期筹码。"},"B":{"A":"你的主倾向是「商业经营开拓型」，同时带有「公共事务协调型」的能力影子。这说明你不必把职业路径理解成非黑即白，更值得关注的是：在哪种环境里，你的能力组合最容易形成长期筹码。","C":"你的主倾向是「商业经营开拓型」，同时带有「政商复合连接型」的能力影子。这说明你不必把职业路径理解成非黑即白，更值得关注的是：在哪种环境里，你的能力组合最容易形成长期筹码。","D":"你的主倾向是「商业经营开拓型」，同时带有「专业深耕积累型」的能力影子。这说明你不必把职业路径理解成非黑即白，更值得关注的是：在哪种环境里，你的能力组合最容易形成长期筹码。"},"C":{"A":"你的主倾向是「政商复合连接型」，同时带有「公共事务协调型」的能力影子。这说明你不必把职业路径理解成非黑即白，更值得关注的是：在哪种环境里，你的能力组合最容易形成长期筹码。","B":"你的主倾向是「政商复合连接型」，同时带有「商业经营开拓型」的能力影子。这说明你不必把职业路径理解成非黑即白，更值得关注的是：在哪种环境里，你的能力组合最容易形成长期筹码。","D":"你的主倾向是「政商复合连接型」，同时带有「专业深耕积累型」的能力影子。这说明你不必把职业路径理解成非黑即白，更值得关注的是：在哪种环境里，你的能力组合最容易形成长期筹码。"},"D":{"A":"你的主倾向是「专业深耕积累型」，同时带有「公共事务协调型」的能力影子。这说明你不必把职业路径理解成非黑即白，更值得关注的是：在哪种环境里，你的能力组合最容易形成长期筹码。","B":"你的主倾向是「专业深耕积累型」，同时带有「商业经营开拓型」的能力影子。这说明你不必把职业路径理解成非黑即白，更值得关注的是：在哪种环境里，你的能力组合最容易形成长期筹码。","C":"你的主倾向是「专业深耕积累型」，同时带有「政商复合连接型」的能力影子。这说明你不必把职业路径理解成非黑即白，更值得关注的是：在哪种环境里，你的能力组合最容易形成长期筹码。"}},"shareTemplate":["我测出来是：{{typeName}}","{{posterSubtext}}","{{secondaryLine}}","","你适合从政还是从商？32题职业路径测试"]};</script>
+    <script>
+(function () {
+  const app = document.getElementById("app");
+  const configPaths = ["./configs/site-config.json", "./configs/career-change.json"];
+
+  const state = {
+    config: null,
+    answers: {},
+    currentIndex: 0,
+    selected: null,
+    locked: false,
+    loadingStep: 0,
+    route: "home",
+    resultData: null,
+  };
+
+  const defaultLoadingMessages = [
+    "正在读取你的选择倾向...",
+    "正在识别隐藏动机...",
+    "正在计算结果分布...",
+    "正在生成专属报告...",
+    "分析完成。",
+  ];
+
+  init();
+
+  async function init() {
+    try {
+      state.config = await fetchConfig();
+      applyDocumentMeta(state.config);
+
+      const saved = sessionStorage.getItem(getStorageKey());
+      if (saved) {
+        state.answers = JSON.parse(saved);
+      }
+
+      routeFromHash();
+      window.addEventListener("hashchange", routeFromHash);
+    } catch (error) {
+      app.innerHTML = `
+        <div class="error">
+          <div>
+            <h1>测试加载失败</h1>
+            <p>请确认你是通过网页链接打开页面，而不是直接双击 HTML 文件。</p>
+          </div>
+        </div>
+      `;
+      console.error(error);
+    }
+  }
+
+  async function fetchConfig() {
+    if (window.__QUIZ_CONFIG__) return window.__QUIZ_CONFIG__;
+    let lastError;
+    for (const path of configPaths) {
+      try {
+        const response = await fetch(path, { cache: "no-store" });
+        if (!response.ok) throw new Error(`${path} ${response.status}`);
+        return response.json();
+      } catch (error) {
+        lastError = error;
+      }
+    }
+    throw lastError;
+  }
+
+  function applyDocumentMeta(cfg) {
+    const title = cfg.title || "趣味测试";
+    const description = cfg.metaDescription || cfg.subtitle || "完成测试，生成你的专属报告。";
+    document.title = title;
+    setMeta("name", "description", description);
+    setMeta("property", "og:title", title);
+    setMeta("property", "og:description", description);
+  }
+
+  function setMeta(attr, key, content) {
+    let node = document.querySelector(`meta[${attr}="${key}"]`);
+    if (!node) {
+      node = document.createElement("meta");
+      node.setAttribute(attr, key);
+      document.head.appendChild(node);
+    }
+    node.setAttribute("content", content);
+  }
+
+  function routeFromHash() {
+    const route = (location.hash || "#/").replace("#/", "") || "home";
+    renderRoute(route);
+  }
+
+  function navigate(route) {
+    const nextHash = `#/${route}`;
+    if (location.hash === nextHash) {
+      renderRoute(route);
+      return;
+    }
+    location.hash = nextHash;
+  }
+
+  function renderRoute(route) {
+    state.route = route;
+    if (route === "quiz") renderQuiz();
+    else if (route === "loading") startLoading();
+    else if (route === "result") renderResult();
+    else renderHome();
+  }
+
+  function renderShell(content, extraClass = "") {
+    app.innerHTML = `
+      <div class="shell">
+        <div class="top-rule"></div>
+        <section class="screen ${extraClass}">${content}</section>
+      </div>
+      <div id="toast" class="toast">已复制</div>
+    `;
+  }
+
+  function renderHome() {
+    const cfg = state.config;
+    renderShell(
+      `
+      <div class="home">
+        <div class="kicker"><span class="dot"></span><span>${text(cfg.kicker)}</span><span class="dot"></span></div>
+        <h1 class="hero-title">${text(cfg.title)}</h1>
+        <p class="hero-subtitle">${text(cfg.subtitle)}</p>
+        <div class="hairline"></div>
+        <div class="intro">
+          ${(cfg.intro || []).map((p, index) => `<p class="${index === cfg.intro.length - 1 ? "strong" : ""}">${text(p)}</p>`).join("")}
+        </div>
+        <div class="pill-grid">
+          ${(cfg.dimensions || []).map((item) => `<div class="pill">${text(item)}</div>`).join("")}
+        </div>
+        <button class="primary-btn" data-action="start">${text(cfg.startButton || "开始测试")}</button>
+        <p class="disclaimer">${text(cfg.disclaimer || "本测试为趣味内容，仅供娱乐参考。")}</p>
+      </div>
+      `,
+      "home"
+    );
+    const startButton = app.querySelector("[data-action='start']");
+    let started = false;
+    const startQuiz = () => {
+      if (started) return;
+      started = true;
+      state.answers = {};
+      state.currentIndex = 0;
+      sessionStorage.removeItem(getStorageKey());
+      navigate("quiz");
+    };
+    startButton.addEventListener("click", startQuiz);
+    startButton.addEventListener(
+      "touchend",
+      (event) => {
+        event.preventDefault();
+        startQuiz();
+      },
+      { passive: false }
+    );
+  }
+
+  function renderQuiz() {
+    const questions = state.config.questions || [];
+    const question = questions[state.currentIndex];
+    if (!question) {
+      renderHome();
+      return;
+    }
+
+    const progress = ((state.currentIndex + 1) / questions.length) * 100;
+
+    renderShell(
+      `
+      <div class="sticky-head">
+        <div class="quiz-meta">
+          <span>${String(state.currentIndex + 1).padStart(2, "0")} / ${questions.length}</span>
+          <span>${text(question.module)}</span>
+        </div>
+        <div class="progress-track"><div class="progress-bar" style="width:${progress}%"></div></div>
+      </div>
+      <div class="question-no">${String(state.currentIndex + 1).padStart(2, "0")}</div>
+      <h1 class="question-title">${text(question.text)}</h1>
+      <div class="options">
+        ${(question.options || [])
+          .map(
+            (option) => `
+            <button class="option" data-option="${text(option.key)}">
+              <span class="option-key">${text(option.key)}</span>
+              <span class="option-text">${text(option.text)}</span>
+            </button>
+          `
+          )
+          .join("")}
+      </div>
+      <p class="hint">${text(state.config.quizHint || "选择后自动进入下一题")}</p>
+      `,
+      "quiz-screen"
+    );
+
+    app.querySelectorAll("[data-option]").forEach((button) => {
+      button.addEventListener("click", () => selectOption(button.dataset.option));
+    });
+  }
+
+  function selectOption(key) {
+    if (state.locked) return;
+    state.locked = true;
+    state.selected = key;
+    const question = state.config.questions[state.currentIndex];
+    state.answers[question.id] = key;
+
+    app.querySelectorAll(".option").forEach((button) => {
+      const selected = button.dataset.option === key;
+      button.classList.toggle("selected", selected);
+      button.classList.toggle("dimmed", !selected);
+    });
+
+    window.setTimeout(() => {
+      if (state.currentIndex < state.config.questions.length - 1) {
+        state.currentIndex += 1;
+        state.locked = false;
+        state.selected = null;
+        renderQuiz();
+      } else {
+        sessionStorage.setItem(getStorageKey(), JSON.stringify(state.answers));
+        state.locked = false;
+        navigate("loading");
+      }
+    }, 420);
+  }
+
+  function startLoading() {
+    state.loadingStep = 0;
+    renderLoading("");
+    tickLoading();
+  }
+
+  function renderLoading(value) {
+    const loadingMessages = getLoadingMessages();
+    renderShell(
+      `
+      <div class="loading-card">
+        <div class="spinner"></div>
+        <div class="loading-text">${text(value)}<span class="cursor">|</span></div>
+        <div class="step-bars">
+          ${loadingMessages.map((_, index) => `<div class="step ${index < state.loadingStep ? "done" : ""}"><span></span></div>`).join("")}
+        </div>
+      </div>
+      `,
+      "loading-screen"
+    );
+  }
+
+  function tickLoading() {
+    if (state.route !== "loading") return;
+    const loadingMessages = getLoadingMessages();
+    if (state.loadingStep >= loadingMessages.length) {
+      window.setTimeout(() => navigate("result"), 700);
+      return;
+    }
+    const message = loadingMessages[state.loadingStep];
+    let chars = 0;
+    const interval = window.setInterval(() => {
+      chars += 1;
+      renderLoading(message.slice(0, chars));
+      if (chars >= message.length) {
+        window.clearInterval(interval);
+        window.setTimeout(() => {
+          state.loadingStep += 1;
+          tickLoading();
+        }, 520);
+      }
+    }, 35);
+  }
+
+  function renderResult() {
+    const saved = sessionStorage.getItem(getStorageKey());
+    if (saved) state.answers = JSON.parse(saved);
+    if (Object.keys(state.answers).length < state.config.questions.length) {
+      renderHome();
+      return;
+    }
+
+    const scored = scoreAnswers(state.answers);
+    const primary = state.config.results[scored.primary];
+    const secondary = scored.secondary ? state.config.secondaryNotes?.[scored.primary]?.[scored.secondary] : null;
+    const stage = getStage(primary.maturityScore);
+    const shareText = buildShareText(primary, secondary);
+    const compareLabels = state.config.compareLabels || ["如果继续原路", "如果换一种做法"];
+    state.resultData = { scored, primary, secondary, stage, shareText };
+
+    renderShell(
+      `
+      <article class="report">
+        <div class="kicker"><span class="dot"></span><span>${text(state.config.resultKicker || "Result Report")}</span><span class="dot"></span></div>
+        <h1 class="result-type">${text(primary.typeName)}</h1>
+        <p class="result-subtitle">${text(primary.subtitle)}</p>
+        <div class="stamp-row">
+          <div class="stamp"><strong>${text(primary.maturityScore)}</strong><span>${text(state.config.scoreLabel || "决策成熟度")}</span></div>
+          <div class="stamp"><strong>${text(stage)}</strong><span>${text(state.config.stageLabel || "当前行动阶段")}</span></div>
+        </div>
+
+        <section class="section">
+          <h2>你的答案分布</h2>
+          <div class="meters">
+            ${Object.entries(scored.counts)
+              .map(([key, value]) => {
+                const typeData = state.config.results[key];
+                const width = (value / state.config.questions.length) * 100;
+                return `
+                  <div>
+                    <div class="meter-head"><span>${text(key)} · ${text(typeData.typeName)}</span><span>${value} 题</span></div>
+                    <div class="meter-track"><div class="meter-fill" style="width:${width}%"></div></div>
+                  </div>
+                `;
+              })
+              .join("")}
+          </div>
+        </section>
+
+        ${secondary ? `<section class="section"><h2>副倾向提示</h2><div class="secondary-note">${text(secondary)}</div></section>` : ""}
+
+        <section class="section">
+          <h2>诊断结论</h2>
+          <div class="quote">${text(primary.coreConclusion)}</div>
+        </section>
+
+        <section class="section">
+          <h2>为什么你会这样</h2>
+          <p>${text(primary.diagnosis)}</p>
+          <p>${text(primary.whatYouReallyWant)}</p>
+        </section>
+
+        <section class="section">
+          <h2>${text(primary.mechanism.title)}</h2>
+          <p>${text(primary.mechanism.content)}</p>
+        </section>
+
+        ${renderParagraphSection("专业解读框架", primary.professionalBasis)}
+        ${renderTagSection("你的关键矛盾", primary.coreTensions)}
+        ${renderCompareListSection("适合推进的条件", "需要谨慎的信号", primary.suitableIf, primary.cautionIf)}
+
+        <section class="section">
+          <h2>关键指数</h2>
+          <div class="meters">
+            ${(primary.indices || [])
+              .map(
+                (item) => `
+                <div>
+                  <div class="meter-head"><span>${text(item.label)}</span><span>${text(item.value)}</span></div>
+                  <div class="meter-track"><div class="meter-fill" style="width:${number(item.value)}%"></div></div>
+                </div>
+              `
+              )
+              .join("")}
+          </div>
+        </section>
+
+        <section class="section">
+          <h2>两条路径对比</h2>
+          <div class="compare">
+            <div class="compare-card"><h3>${text(compareLabels[0])}</h3><p>${text(primary.ifStay)}</p></div>
+            <div class="compare-card"><h3>${text(compareLabels[1])}</h3><p>${text(primary.ifChange)}</p></div>
+          </div>
+        </section>
+
+        <section class="section">
+          <h2>现在最不建议你做</h2>
+          <div class="tag-list">${(primary.notRecommended || []).map((item) => `<span class="tag">${text(item)}</span>`).join("")}</div>
+        </section>
+
+        <section class="section">
+          <h2>未来 90 天验证方案</h2>
+          <div class="plan">
+            ${(primary.plan90 || [])
+              .map(
+                (item, index) => `
+                <div class="plan-card">
+                  <h3>${index + 1}. ${text(item.title)}</h3>
+                  <p>${text(item.content)}</p>
+                </div>
+              `
+              )
+              .join("")}
+          </div>
+        </section>
+
+        <section class="section">
+          <h2>最后一句话</h2>
+          <p>${text(primary.closing)}</p>
+        </section>
+
+        <div class="actions">
+          <button class="primary-btn" data-action="copy">${text(state.config.copyButton || "复制我的结果")}</button>
+          <button class="ghost-btn" data-action="restart">${text(state.config.restartButton || "重新测试")}</button>
+        </div>
+      </article>
+      `,
+      "result-screen"
+    );
+
+    app.querySelector("[data-action='copy']").addEventListener("click", () => copyShareText(shareText));
+    app.querySelector("[data-action='restart']").addEventListener("click", () => {
+      sessionStorage.removeItem(getStorageKey());
+      state.answers = {};
+      state.currentIndex = 0;
+      navigate("home");
+    });
+  }
+
+  function renderParagraphSection(title, paragraphs) {
+    if (!Array.isArray(paragraphs) || !paragraphs.length) return "";
+    return `
+      <section class="section">
+        <h2>${text(title)}</h2>
+        ${paragraphs.map((item) => `<p>${text(item)}</p>`).join("")}
+      </section>
+    `;
+  }
+
+  function renderTagSection(title, items) {
+    if (!Array.isArray(items) || !items.length) return "";
+    return `
+      <section class="section">
+        <h2>${text(title)}</h2>
+        <div class="tag-list">${items.map((item) => `<span class="tag">${text(item)}</span>`).join("")}</div>
+      </section>
+    `;
+  }
+
+  function renderCompareListSection(leftTitle, rightTitle, leftItems, rightItems) {
+    const hasLeft = Array.isArray(leftItems) && leftItems.length;
+    const hasRight = Array.isArray(rightItems) && rightItems.length;
+    if (!hasLeft && !hasRight) return "";
+    return `
+      <section class="section">
+        <h2>适用边界</h2>
+        <div class="compare">
+          <div class="compare-card">
+            <h3>${text(leftTitle)}</h3>
+            ${(leftItems || []).map((item) => `<p>${text(item)}</p>`).join("")}
+          </div>
+          <div class="compare-card">
+            <h3>${text(rightTitle)}</h3>
+            ${(rightItems || []).map((item) => `<p>${text(item)}</p>`).join("")}
+          </div>
+        </div>
+      </section>
+    `;
+  }
+
+  function scoreAnswers(answers) {
+    const counts = { A: 0, B: 0, C: 0, D: 0 };
+    Object.values(answers).forEach((key) => {
+      if (counts[key] !== undefined) counts[key] += 1;
+    });
+    const sorted = Object.entries(counts).sort((a, b) => b[1] - a[1]);
+    const threshold = state.config.secondaryThreshold ?? 2;
+    const primary = sorted[0][0];
+    const secondary = sorted[1][1] > 0 && sorted[0][1] - sorted[1][1] <= threshold ? sorted[1][0] : null;
+    return { counts, primary, secondary };
+  }
+
+  function getStage(score) {
+    const labels = state.config.stageLabels || [
+      { max: 45, label: "观察期" },
+      { max: 65, label: "验证期" },
+      { max: 82, label: "规划期" },
+      { max: 100, label: "行动期" },
+    ];
+    const hit = labels.find((item) => score <= item.max);
+    return hit ? hit.label : labels[labels.length - 1].label;
+  }
+
+  function buildShareText(primary, secondary) {
+    const template = state.config.shareTemplate || [
+      "我测出了：{{typeName}}",
+      "{{posterSubtext}}",
+      "{{secondaryLine}}",
+      "",
+      "{{title}}",
+    ];
+    const values = {
+      title: state.config.title,
+      typeName: primary.typeName,
+      posterSubtext: primary.posterSubtext,
+      secondary: secondary || "",
+      secondaryLine: secondary ? `副倾向：${secondary}` : "",
+    };
+    return template
+      .map((line) => fillTemplate(line, values))
+      .filter((line, index, arr) => line || arr[index - 1])
+      .join("\n")
+      .trim();
+  }
+
+  async function copyShareText(value) {
+    try {
+      await navigator.clipboard.writeText(value);
+      showToast("结果文案已复制");
+    } catch (error) {
+      showToast("复制失败，可长按手动复制");
+    }
+  }
+
+  function showToast(value) {
+    const toast = document.getElementById("toast");
+    if (!toast) return;
+    toast.textContent = value;
+    toast.classList.add("show");
+    window.setTimeout(() => toast.classList.remove("show"), 1600);
+  }
+
+  function getLoadingMessages() {
+    return state.config.loadingMessages || defaultLoadingMessages;
+  }
+
+  function getStorageKey() {
+    return `xhsTestAnswers:${state.config.slug || "default"}`;
+  }
+
+  function fillTemplate(template, values) {
+    return String(template).replace(/\{\{(\w+)\}\}/g, (_, key) => values[key] || "");
+  }
+
+  function number(value) {
+    const parsed = Number(value);
+    if (Number.isNaN(parsed)) return 0;
+    return Math.max(0, Math.min(100, parsed));
+  }
+
+  function text(value) {
+    return String(value ?? "")
+      .replace(/&/g, "&amp;")
+      .replace(/</g, "&lt;")
+      .replace(/>/g, "&gt;")
+      .replace(/"/g, "&quot;");
+  }
+})();
+
+    </script>
+  </body>
+</html>
