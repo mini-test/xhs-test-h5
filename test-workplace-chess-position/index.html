@@ -1,0 +1,1125 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <meta name="description" content="完成 32 道职场棋局位置测试，生成你的棋手/棋子/局外人/暗棋破局型报告。" />
+    <meta property="og:title" content="你在职场里是棋手、棋子还是局外人？" />
+    <meta property="og:description" content="完成 32 道职场棋局位置测试，生成你的棋手/棋子/局外人/暗棋破局型报告。" />
+    <title>你在职场里是棋手、棋子还是局外人？</title>
+    <style>
+:root {
+  --bg: #fbfaf7;
+  --paper: #fffefd;
+  --ink: #20242a;
+  --muted: #65707d;
+  --line: #d9d4ca;
+  --line-strong: #b9afa0;
+  --accent: #9b4339;
+  --accent-soft: #f1dfd7;
+  --gold: #c0964d;
+  --sage: #66795f;
+  --blue: #526a86;
+  --shadow: 0 16px 36px rgba(60, 47, 38, 0.1);
+  --radius: 8px;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  min-height: 100%;
+  background:
+    linear-gradient(rgba(32, 36, 42, 0.035) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(32, 36, 42, 0.035) 1px, transparent 1px),
+    var(--bg);
+  background-size: 24px 24px;
+}
+
+body {
+  min-height: 100vh;
+  margin: 0;
+  color: var(--ink);
+  font-family:
+    "PingFang SC",
+    "Microsoft YaHei",
+    "Noto Sans SC",
+    system-ui,
+    -apple-system,
+    BlinkMacSystemFont,
+    sans-serif;
+  letter-spacing: 0;
+}
+
+button {
+  font: inherit;
+}
+
+.shell {
+  width: min(100%, 480px);
+  min-height: 100vh;
+  margin: 0 auto;
+  background: rgba(251, 250, 247, 0.88);
+}
+
+.top-rule {
+  height: 4px;
+  background: var(--accent);
+}
+
+.screen {
+  min-height: calc(100vh - 4px);
+  padding: 28px 22px 32px;
+}
+
+.home {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.kicker {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  color: var(--muted);
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  font-size: 11px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+.dot {
+  width: 7px;
+  height: 7px;
+  background: var(--accent);
+  border-radius: 50%;
+}
+
+.hero-title {
+  margin: 26px 0 14px;
+  color: var(--ink);
+  font-size: 30px;
+  line-height: 1.2;
+  text-align: center;
+  font-weight: 800;
+}
+
+.hero-subtitle {
+  margin: 0 auto 28px;
+  max-width: 340px;
+  color: var(--muted);
+  font-size: 15px;
+  line-height: 1.75;
+  text-align: center;
+}
+
+.hairline {
+  width: 64px;
+  height: 1px;
+  margin: 0 auto 30px;
+  background: var(--line-strong);
+}
+
+.intro {
+  margin: 0 auto;
+  max-width: 380px;
+}
+
+.intro p {
+  margin: 0 0 15px;
+  color: rgba(32, 36, 42, 0.82);
+  font-size: 15px;
+  line-height: 1.8;
+}
+
+.intro .strong {
+  color: var(--accent);
+  font-weight: 700;
+}
+
+.pill-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px;
+  margin: 28px 0;
+}
+
+.pill {
+  min-height: 42px;
+  display: grid;
+  place-items: center;
+  border: 1px solid var(--line);
+  color: var(--muted);
+  background: rgba(255, 255, 255, 0.44);
+  font-size: 13px;
+}
+
+.primary-btn,
+.ghost-btn,
+.copy-btn {
+  width: 100%;
+  min-height: 48px;
+  border: 1px solid var(--ink);
+  border-radius: 0;
+  cursor: pointer;
+  transition: transform 150ms ease, background 150ms ease, color 150ms ease, border-color 150ms ease;
+}
+
+.primary-btn {
+  background: var(--ink);
+  color: #fff;
+  font-weight: 700;
+}
+
+.ghost-btn,
+.copy-btn {
+  background: transparent;
+  color: var(--ink);
+}
+
+.primary-btn:active,
+.ghost-btn:active,
+.copy-btn:active,
+.option:active {
+  transform: translateY(1px);
+}
+
+.disclaimer {
+  margin: 18px auto 0;
+  max-width: 340px;
+  color: var(--muted);
+  font-size: 12px;
+  line-height: 1.65;
+  text-align: center;
+}
+
+.quiz-screen {
+  padding-top: 0;
+}
+
+.sticky-head {
+  position: sticky;
+  top: 0;
+  z-index: 5;
+  margin: 0 -22px 26px;
+  padding: 14px 22px 12px;
+  background: rgba(251, 250, 247, 0.95);
+  border-bottom: 1px solid var(--line);
+  backdrop-filter: blur(12px);
+}
+
+.quiz-meta {
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+  color: var(--muted);
+  font-size: 12px;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+}
+
+.progress-track {
+  height: 4px;
+  margin-top: 10px;
+  background: rgba(32, 36, 42, 0.09);
+}
+
+.progress-bar {
+  height: 100%;
+  background: var(--accent);
+  transition: width 260ms ease;
+}
+
+.question-no {
+  color: rgba(155, 67, 57, 0.18);
+  font-size: 48px;
+  line-height: 1;
+  font-weight: 800;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+}
+
+.question-title {
+  margin: 18px 0 24px;
+  font-size: 22px;
+  line-height: 1.5;
+  font-weight: 750;
+}
+
+.options {
+  display: grid;
+  gap: 12px;
+}
+
+.option {
+  min-height: 66px;
+  display: grid;
+  grid-template-columns: 30px 1fr;
+  gap: 12px;
+  align-items: start;
+  width: 100%;
+  padding: 15px;
+  border: 1px solid var(--line);
+  background: rgba(255, 255, 255, 0.68);
+  color: var(--ink);
+  text-align: left;
+  cursor: pointer;
+  transition: background 160ms ease, border-color 160ms ease, color 160ms ease, opacity 160ms ease;
+}
+
+.option-key {
+  display: grid;
+  place-items: center;
+  width: 28px;
+  height: 28px;
+  border: 1px solid var(--line-strong);
+  font-size: 13px;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+}
+
+.option-text {
+  padding-top: 2px;
+  font-size: 15px;
+  line-height: 1.55;
+}
+
+.option.selected {
+  border-color: var(--accent);
+  background: var(--accent);
+  color: #fff;
+}
+
+.option.selected .option-key {
+  border-color: rgba(255, 255, 255, 0.8);
+}
+
+.option.dimmed {
+  opacity: 0.42;
+}
+
+.hint {
+  margin: 18px 0 0;
+  color: var(--muted);
+  font-size: 12px;
+  text-align: center;
+}
+
+.loading-screen {
+  display: grid;
+  place-items: center;
+}
+
+.loading-card {
+  width: 100%;
+  max-width: 360px;
+  text-align: center;
+}
+
+.spinner {
+  width: 54px;
+  height: 54px;
+  margin: 0 auto 24px;
+  border: 2px solid var(--line);
+  border-top-color: var(--accent);
+  border-radius: 50%;
+  animation: spin 850ms linear infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.loading-text {
+  min-height: 54px;
+  color: var(--accent);
+  font-size: 17px;
+  line-height: 1.6;
+  font-weight: 700;
+}
+
+.step-bars {
+  display: grid;
+  gap: 8px;
+  margin-top: 28px;
+}
+
+.step {
+  height: 4px;
+  overflow: hidden;
+  background: rgba(32, 36, 42, 0.09);
+}
+
+.step span {
+  display: block;
+  height: 100%;
+  width: 0;
+  background: var(--accent);
+  transition: width 300ms ease;
+}
+
+.step.done span {
+  width: 100%;
+}
+
+.result-screen {
+  padding: 22px 18px 30px;
+}
+
+.report {
+  padding: 22px 16px 18px;
+  border: 1px solid var(--line);
+  background: var(--paper);
+  box-shadow: var(--shadow);
+}
+
+.result-type {
+  margin: 8px 0 8px;
+  color: var(--accent);
+  font-size: 30px;
+  line-height: 1.15;
+  font-weight: 850;
+  text-align: center;
+}
+
+.result-subtitle {
+  margin: 0 auto 20px;
+  color: var(--muted);
+  font-size: 15px;
+  line-height: 1.7;
+  text-align: center;
+}
+
+.stamp-row {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px;
+  margin: 18px 0 20px;
+}
+
+.stamp {
+  padding: 12px 10px;
+  border: 1px solid var(--line);
+  background: #fbfaf7;
+}
+
+.stamp strong {
+  display: block;
+  margin-bottom: 4px;
+  color: var(--ink);
+  font-size: 20px;
+}
+
+.stamp span {
+  color: var(--muted);
+  font-size: 12px;
+}
+
+.section {
+  padding: 20px 0;
+  border-top: 1px solid var(--line);
+}
+
+.section h2 {
+  margin: 0 0 12px;
+  font-size: 18px;
+  color: var(--ink);
+}
+
+.section p {
+  margin: 0 0 12px;
+  color: rgba(32, 36, 42, 0.82);
+  font-size: 15px;
+  line-height: 1.85;
+}
+
+.quote {
+  padding: 15px;
+  border-left: 3px solid var(--accent);
+  background: var(--accent-soft);
+  color: #5b2d27;
+  line-height: 1.8;
+  font-weight: 700;
+}
+
+.meters {
+  display: grid;
+  gap: 14px;
+}
+
+.meter-head {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 7px;
+  color: var(--muted);
+  font-size: 13px;
+}
+
+.meter-track {
+  height: 8px;
+  background: rgba(32, 36, 42, 0.08);
+}
+
+.meter-fill {
+  height: 100%;
+  background: var(--accent);
+}
+
+.compare {
+  display: grid;
+  gap: 10px;
+}
+
+.compare-card {
+  padding: 14px;
+  border: 1px solid var(--line);
+  background: #fbfaf7;
+}
+
+.compare-card h3,
+.plan-card h3 {
+  margin: 0 0 8px;
+  font-size: 15px;
+}
+
+.compare-card p,
+.plan-card p {
+  font-size: 14px;
+}
+
+.tag-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.tag {
+  padding: 7px 9px;
+  border: 1px solid var(--line);
+  background: #fbfaf7;
+  color: var(--muted);
+  font-size: 13px;
+}
+
+.plan {
+  display: grid;
+  gap: 10px;
+}
+
+.plan-card {
+  padding: 14px;
+  border: 1px solid var(--line);
+  background: #fbfaf7;
+}
+
+.secondary-note {
+  padding: 14px;
+  border: 1px dashed var(--line-strong);
+  background: rgba(192, 150, 77, 0.12);
+  line-height: 1.75;
+  font-size: 14px;
+}
+
+.actions {
+  display: grid;
+  gap: 10px;
+  margin-top: 18px;
+}
+
+.toast {
+  position: fixed;
+  left: 50%;
+  bottom: 22px;
+  z-index: 20;
+  transform: translateX(-50%);
+  padding: 10px 14px;
+  background: var(--ink);
+  color: #fff;
+  font-size: 13px;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 180ms ease;
+}
+
+.toast.show {
+  opacity: 1;
+}
+
+.error {
+  display: grid;
+  place-items: center;
+  min-height: 100vh;
+  padding: 24px;
+  text-align: center;
+}
+
+.error p {
+  color: var(--muted);
+  line-height: 1.7;
+}
+
+@media (min-width: 700px) {
+  body {
+    padding: 28px 0;
+  }
+
+  .shell {
+    min-height: calc(100vh - 56px);
+    border: 1px solid var(--line);
+    box-shadow: var(--shadow);
+  }
+
+  .screen {
+    min-height: calc(100vh - 60px);
+  }
+}
+
+    </style>
+  </head>
+  <body>
+    <main id="app" aria-live="polite"></main>
+    <script>window.__QUIZ_CONFIG__ = {"slug":"test-workplace-chess-position","topic":"你在职场里是棋手、棋子还是局外人？","kicker":"32-Q Workplace Chess Test","title":"你在职场里是棋手、棋子还是局外人？","subtitle":"32 道题，从局势感知、任务反应、汇报表达、资源筹码、人际站位、风险边界、晋升路径和终局判断，看你到底是在控局、被安排，还是早就想站到棋盘外。","metaDescription":"完成 32 道职场棋局位置测试，生成你的棋手/棋子/局外人/暗棋破局型报告。","startButton":"开始测试","resultKicker":"Workplace Chess Report","quizHint":"凭第一反应选择，系统会自动进入下一题。","copyButton":"复制我的结果","restartButton":"重新测试","scoreLabel":"位置清醒度","stageLabel":"当前职场阶段","stageLabels":[{"max":55,"label":"承压觉察期"},{"max":72,"label":"边界修复期"},{"max":86,"label":"换位蓄力期"},{"max":100,"label":"主动掌局期"}],"compareLabels":["如果继续原来的站位","如果开始换一种走法"],"disclaimer":"本测试为趣味自我观察工具，非科学测评、心理诊断、职业咨询、劳动法律建议或重大职业决策依据。结果仅供娱乐和自我梳理参考。","secondaryThreshold":4,"dimensions":["局势感知","资源筹码","边界风险","换位路径"],"intro":["同一个职场，有人在下棋，有人在被安排走位，有人站在棋盘外看得很清楚，还有人平时不显眼，关键时刻却能改变局面。","这不是测你会不会心机，而是测你在组织里的真实位置感：你是在控局，还是在承压；是在旁观，还是拥有隐藏筹码。","32 道题会从 8 个维度拆开你的第一反应，最后生成一份职场棋局位置报告。"],"loadingMessages":["正在读取你的职场第一反应...","正在拆分棋手、棋子、局外人和暗棋倾向...","正在识别你的资源筹码和风险边界...","正在生成 32 题职场棋局位置报告...","分析完成。"],"questions":[{"id":1,"module":"局势感知","text":"刚进一个新团队，你最先会注意什么？","options":[{"key":"A","text":"谁给我安排任务、谁会验收结果，我先把分内事做好"},{"key":"B","text":"这个团队真正看重什么，谁说话有分量，资源从哪里来"},{"key":"C","text":"这里是不是消耗人，我要不要保持一点距离，不太快卷进去"},{"key":"D","text":"有没有没人处理但会影响全局的缝隙，我能不能在关键处补位"}]},{"id":2,"module":"局势感知","text":"会议上大家都在争一个方案，你更容易先看到：","options":[{"key":"A","text":"领导最后想让我做哪一块，我得赶紧理解清楚"},{"key":"B","text":"每个人背后的利益和顾虑，以及谁能决定方向"},{"key":"C","text":"这场争论是不是值得参与，还是只是消耗情绪"},{"key":"D","text":"真正卡住的不是方案，而是没人愿意说破的前提"}]},{"id":3,"module":"局势感知","text":"领导说“这个事你先推进一下”，但信息很模糊，你会：","options":[{"key":"A","text":"先接下来，边做边问，不能显得不配合"},{"key":"B","text":"先确认目标、资源、截止时间和谁有最终拍板权"},{"key":"C","text":"先判断这件事是不是会变成无底洞，不急着全身投入"},{"key":"D","text":"把模糊任务拆成几个可确认节点，让责任和规则浮出来"}]},{"id":4,"module":"局势感知","text":"你发现一个项目表面顺利，其实风险很大，你更像：","options":[{"key":"A","text":"提醒直属上级，然后继续把自己那部分做稳"},{"key":"B","text":"提前设计备选方案，把关键人拉到同一张桌上"},{"key":"C","text":"先观察风险会不会落到自己身上，避免无谓背锅"},{"key":"D","text":"找一个最小动作先止损，不等所有人都意识到问题"}]},{"id":5,"module":"任务反应","text":"别人临时把一堆活塞给你，你第一反应更接近：","options":[{"key":"A","text":"虽然不舒服，但还是先扛住，别影响大家进度"},{"key":"B","text":"先问优先级和取舍，不能让所有事都变成我的责任"},{"key":"C","text":"我会警惕自己是不是又被卷进别人的混乱里"},{"key":"D","text":"先抓会影响结果的那一块，其他部分推动重新分工"}]},{"id":6,"module":"任务反应","text":"你最怕自己在工作里变成哪种状态？","options":[{"key":"A","text":"做了很多，但功劳、话语权和成长都不在我这里"},{"key":"B","text":"只会干活，不会设计局面，永远被别人的节奏牵着走"},{"key":"C","text":"明明看得很清楚，却被迫陪一群人消耗"},{"key":"D","text":"总在关键时刻救火，但平时没人真正看见我的价值"}]},{"id":7,"module":"任务反应","text":"同事说“这个你顺手帮一下”，但你手上已经很满，你会：","options":[{"key":"A","text":"如果不是特别过分，可能还是会帮，怕关系变僵"},{"key":"B","text":"直接确认这件事是否进入我的优先级，以及谁来调整排期"},{"key":"C","text":"能不接就不接，我不想被临时需求吞掉生活"},{"key":"D","text":"只帮最关键的一小段，同时把后续责任交还给对方"}]},{"id":8,"module":"任务反应","text":"你做事最稳定的动力来自哪里？","options":[{"key":"A","text":"有人信任我、需要我，我会想把事情做好"},{"key":"B","text":"我知道这件事如何影响最终结果和我的位置"},{"key":"C","text":"这件事符合我的节奏，不会过度侵入我的边界"},{"key":"D","text":"我看见它是一个撬动局面的关键点，值得出手"}]},{"id":9,"module":"汇报表达","text":"汇报时被追问细节，你更容易：","options":[{"key":"A","text":"解释很多，怕对方觉得我没做事或没想清楚"},{"key":"B","text":"先讲结论，再讲依据、风险和需要对方拍板的点"},{"key":"C","text":"只讲必要信息，不太想把所有底牌和过程都摊开"},{"key":"D","text":"借这个机会把隐藏问题摆出来，让讨论回到关键处"}]},{"id":10,"module":"汇报表达","text":"你最想练成哪种表达能力？","options":[{"key":"A","text":"让别人知道我确实做了很多，不要把我当透明人"},{"key":"B","text":"一句话抓住重点，让资源和决策往我需要的方向走"},{"key":"C","text":"不用解释太多，也能保护自己的边界和情绪"},{"key":"D","text":"在不撕破脸的情况下，把问题重新定义清楚"}]},{"id":11,"module":"汇报表达","text":"别人抢了你的功劳，你会更倾向：","options":[{"key":"A","text":"很委屈，但可能先忍着，之后找机会说明"},{"key":"B","text":"用过程记录和关键节点，把贡献公开化、可追溯"},{"key":"C","text":"看清这个环境的规则，以后减少无效投入"},{"key":"D","text":"不只澄清功劳，还推动建立复盘和署名机制"}]},{"id":12,"module":"汇报表达","text":"你最容易吃亏的表达习惯是：","options":[{"key":"A","text":"太怕别人误会，所以说得太满、太细、太急"},{"key":"B","text":"想控局时显得强势，让别人有防备心"},{"key":"C","text":"太少表达需求，别人以为你无所谓或不在乎"},{"key":"D","text":"平时不争不抢，关键贡献容易被别人当成理所当然"}]},{"id":13,"module":"资源筹码","text":"你理解的“职场筹码”更接近：","options":[{"key":"A","text":"稳定交付、靠谱、领导愿意把事交给我"},{"key":"B","text":"关键资源、关键关系、可替代性低的能力组合"},{"key":"C","text":"我有选择离开的能力，不把人生全押在一个组织里"},{"key":"D","text":"别人不知道我很重要，但关键环节离不开我"}]},{"id":14,"module":"资源筹码","text":"你现在最缺的筹码可能是：","options":[{"key":"A","text":"让别人看见我价值的证据，而不只是默默做事"},{"key":"B","text":"能影响决策的人脉、信息和向上管理能力"},{"key":"C","text":"不被组织牵着走的第二选择和心理余地"},{"key":"D","text":"把隐性贡献变成显性影响力的包装方式"}]},{"id":15,"module":"资源筹码","text":"如果公司突然调整岗位，你最先会想：","options":[{"key":"A","text":"我还能不能把新岗位做好，会不会被认为不适应"},{"key":"B","text":"这次调整背后的权力和资源流向是什么"},{"key":"C","text":"这是不是提醒我不能把安全感全放在公司身上"},{"key":"D","text":"新位置有没有隐藏机会，能不能借势换到更有价值的点"}]},{"id":16,"module":"资源筹码","text":"你最想拥有哪种职场底气？","options":[{"key":"A","text":"我认真负责，所以在哪里都有人愿意用我"},{"key":"B","text":"我能看懂局面，也能调动人和资源做成事"},{"key":"C","text":"我不依赖单一评价体系，离开也能活得不错"},{"key":"D","text":"我不一定站在台前，但能在关键时刻改变结果"}]},{"id":17,"module":"人际站位","text":"团队里两个关键人物有矛盾，你会：","options":[{"key":"A","text":"尽量不站队，把自己的任务做好，别被牵连"},{"key":"B","text":"判断谁掌握资源、谁代表长期方向，再决定怎么沟通"},{"key":"C","text":"保持距离，这种人际消耗我能避开就避开"},{"key":"D","text":"找到双方都能接受的共同目标，借事不借人来降温"}]},{"id":18,"module":"人际站位","text":"你对“站队”的真实态度更接近：","options":[{"key":"A","text":"不喜欢，但现实里有时不得不配合上级安排"},{"key":"B","text":"站队不如站价值和资源，关键是别站错长期趋势"},{"key":"C","text":"我不想把自己绑定到任何派系里，太累也太危险"},{"key":"D","text":"我未必站在谁身后，但会让自己成为双方都需要的人"}]},{"id":19,"module":"人际站位","text":"别人突然对你特别热情，你会：","options":[{"key":"A","text":"有点开心，也会认真回应这份善意"},{"key":"B","text":"看他最近是不是有事需要我配合或背书"},{"key":"C","text":"礼貌回应，但不会太快把关系拉近"},{"key":"D","text":"判断这份热情能不能转化成合作，而不是人情债"}]},{"id":20,"module":"人际站位","text":"你最容易被哪类人影响？","options":[{"key":"A","text":"会肯定我、需要我、让我觉得自己有价值的人"},{"key":"B","text":"有资源、有判断力、能让我进入更大局面的人"},{"key":"C","text":"很懂分寸、不强迫我卷入复杂关系的人"},{"key":"D","text":"能看出我隐藏能力，并给我关键机会的人"}]},{"id":21,"module":"风险边界","text":"项目出了问题，有人暗示你一起承担责任，你会：","options":[{"key":"A","text":"先想是不是自己也有没做好的地方，容易先自责"},{"key":"B","text":"立刻拆清责任链、证据链和决策链，不能糊成一团"},{"key":"C","text":"保持距离，不把别人的锅变成我的情绪负担"},{"key":"D","text":"把问题从个人责任拉回流程漏洞，避免以后继续发生"}]},{"id":22,"module":"风险边界","text":"你最需要补上的边界课是：","options":[{"key":"A","text":"不要因为怕别人失望，就接下超出职责的事"},{"key":"B","text":"不要为了控局，把所有风险都揽到自己手里"},{"key":"C","text":"不要因为想保持自由，就错过必要的承诺和协作"},{"key":"D","text":"不要一直做幕后补锅的人，却不争取相应位置"}]},{"id":23,"module":"风险边界","text":"当你发现一个人总在利用你的好说话，你会：","options":[{"key":"A","text":"心里不舒服，但很难立刻翻脸或拒绝"},{"key":"B","text":"明确规则和代价，以后所有请求都走边界"},{"key":"C","text":"减少接触，不解释太多，把距离拉开"},{"key":"D","text":"不跟他纠缠，把个人请求改成公开流程"}]},{"id":24,"module":"风险边界","text":"你心里的“安全感”更像什么？","options":[{"key":"A","text":"有人认可我、需要我，我就会稳定很多"},{"key":"B","text":"我知道自己能影响结果，不只是等别人安排"},{"key":"C","text":"我随时有退路，不必为了生存委屈自己"},{"key":"D","text":"我有隐藏筹码，即使局面变坏也能找到破口"}]},{"id":25,"module":"晋升路径","text":"如果想升职，你觉得自己最该补什么？","options":[{"key":"A","text":"把贡献说出来，让别人知道我不只是能干活"},{"key":"B","text":"从执行思维切到经营思维，学会带人、拿资源、定方向"},{"key":"C","text":"先确认这是不是我真的想走的路，而不是别人期待我走"},{"key":"D","text":"把关键项目做成自己的代表作，别再只做隐形贡献"}]},{"id":26,"module":"晋升路径","text":"你对管理岗的感受更接近：","options":[{"key":"A","text":"有点向往，但担心自己扛不住更多压力"},{"key":"B","text":"如果有资源和授权，我愿意承担更大的盘子"},{"key":"C","text":"我不确定自己想不想管人，可能更想保持专业自由"},{"key":"D","text":"我适合解决复杂问题，但不一定喜欢站到最前面"}]},{"id":27,"module":"晋升路径","text":"你在职场里最想被认可的是：","options":[{"key":"A","text":"我很靠谱、很能扛事，不要忽视我的付出"},{"key":"B","text":"我能看清方向、组织资源、带出结果"},{"key":"C","text":"我有自己的判断，不想被单一标准定义价值"},{"key":"D","text":"我能在关键时候解决别人解决不了的问题"}]},{"id":28,"module":"晋升路径","text":"如果长期没有晋升，你会先怀疑：","options":[{"key":"A","text":"是不是我太不会表现，做了事却没被看见"},{"key":"B","text":"是不是我还停留在执行层，没有让上面看到战略价值"},{"key":"C","text":"是不是这条路本来就不适合我，我该换一种活法"},{"key":"D","text":"是不是我总在救场，却没有把救场变成可谈判筹码"}]},{"id":29,"module":"终局判断","text":"你最不想在职场里活成什么样？","options":[{"key":"A","text":"一直被安排、被催、被消耗，却不好意思拒绝"},{"key":"B","text":"永远只看眼前任务，没有自己的局和长期位置"},{"key":"C","text":"明明看透了很多，却还是被迫困在不喜欢的规则里"},{"key":"D","text":"一直有能力破局，却总被当成临时救火的人"}]},{"id":30,"module":"终局判断","text":"你觉得真正厉害的职场人是：","options":[{"key":"A","text":"可靠、踏实、让人放心，关键时刻不掉链子"},{"key":"B","text":"能设计局面，而不是只在局面里努力奔跑"},{"key":"C","text":"能进能退，不被组织和评价体系完全吞掉"},{"key":"D","text":"不一定声音最大，但能在关键节点改变走向"}]},{"id":31,"module":"终局判断","text":"做完这个测试，你最想知道的是：","options":[{"key":"A","text":"我为什么总觉得自己在被安排、被消耗"},{"key":"B","text":"我有没有成为掌局者的潜力，下一步该补什么"},{"key":"C","text":"我到底是不适合这个职场，还是只是不想再入局"},{"key":"D","text":"我的隐藏筹码在哪里，怎么把它变成真正的位置"}]},{"id":32,"module":"终局判断","text":"如果把职场比作一盘棋，你现在最像：","options":[{"key":"A","text":"被推着往前走的棋子，能扛但有点累"},{"key":"B","text":"开始学会布局的棋手，想拿回主动权"},{"key":"C","text":"站在棋盘外的人，看得清但不想被绑住"},{"key":"D","text":"藏在关键位置的暗棋，不显眼但能破局"}]}],"results":{"A":{"typeName":"棋子承压型","subtitle":"你不是没有能力，而是太容易把“靠谱”活成“被安排”。你能扛事、能交付、责任感强，但也最容易在别人设好的局里消耗自己。","posterSubtext":"你的问题不是不努力，而是太多努力没有变成筹码。","maturityScore":72,"coreConclusion":"你更像职场棋局里的“高承压棋子”：能走、能扛、能补位，也很容易被别人默认成最可靠的执行资源。你真正要学的不是变圆滑，而是把付出变成可见贡献，把任务边界说清楚，把“我可以做”改成“我做这件事需要什么资源和确认”。","diagnosis":"你的答案显示，你对责任、交付和他人期待高度敏感。别人把事情交给你，你往往会先想怎么完成，而不是先确认这件事是否该由你承担、做成后谁受益、失败后谁负责。这让你在组织里很容易被信任，也很容易被过度使用。","whatYouReallyWant":"你真正想要的不是不工作，而是被公平看见。你希望自己的努力有回报，能力有成长，责任和认可成正比，而不是一直做那个“好用但不贵”的人。","mechanism":{"title":"承压执行机制","content":"棋子承压型的人通常有强责任感、强交付欲和较低拒绝阈值。优势是稳定、可靠、上手快；风险是边界被侵蚀，功劳被稀释，长期停留在执行层。你需要训练的不是少做事，而是让每一次做事都留下证据、边界和议价空间。"},"professionalBasis":["从任务反应看，你容易先接住压力，再考虑取舍。这会让你成为团队里的“兜底资源”，但也容易让你的时间和精力被别人随意调用。","从汇报表达看，你可能会解释过多、证明过多，却没有把贡献转化为上级能理解的结果、风险和价值。","从晋升路径看，你的核心卡点不是能力不够，而是长期用执行证明自己，缺少对资源、优先级和可见度的主动经营。"],"coreTensions":["能扛但不想一直扛","靠谱但容易透明","怕拒绝影响关系","做了很多但筹码不足","想被看见又不想太用力争"],"suitableIf":["任务边界清晰","贡献可被记录","有人给你授权和反馈","工作能带来真实成长"],"cautionIf":["长期兜底别人烂摊子","被临时需求吞掉核心工作","只做执行没有决策参与","功劳总被集体化或上级化"],"indices":[{"label":"承压执行力","value":92},{"label":"边界稳定度","value":58},{"label":"贡献可见度","value":61},{"label":"主动控局力","value":55}],"ifStay":"如果你继续只靠“把活做好”证明自己，你会越来越可靠，也越来越容易被默认成公共资源。别人会需要你，但未必会把更大的机会交给你。","ifChange":"如果你开始记录贡献、确认边界、争取资源，你不会失去靠谱，反而会让靠谱变得有价格、有位置、有成长性。","notRecommended":["不问边界就接任务","把加班当忠诚证明","只在心里委屈不表达","等别人主动发现你的价值","用情绪解释贡献"],"plan90":[{"title":"第1-2周：给任务加边界","content":"每接一个模糊任务，都补问目标、优先级、截止时间、协作人和验收标准。不要先答应，再一个人硬扛。"},{"title":"第3-4周：建立贡献记录","content":"把你做过的关键交付、解决的问题、避免的风险写成周记录，用结果语言而不是辛苦语言表达。"},{"title":"第2个月：减少无效兜底","content":"筛掉至少两类不该你负责的临时需求，只保留真正影响核心目标的任务。"},{"title":"第3个月：争取一次小型掌控权","content":"主动承接一个可控小项目，要求明确资源和决策空间，让别人看到你不只是能执行，也能推进局面。"}],"closing":"你不是棋盘上没有价值的棋子。你真正要做的是让自己的每一步，都不再被别人随便挪动。"},"B":{"typeName":"棋手掌局型","subtitle":"你更容易看见目标、资源、关系和长期位置。你不满足于只把活做完，而是会想这件事如何影响全局，以及自己能不能拿回主动权。","posterSubtext":"你不是爱控制，你只是受不了所有人都在低效乱走。","maturityScore":90,"coreConclusion":"你更像职场棋局里的“棋手”：会看目标、看人、看资源、看规则，也会思考怎样把事情推向你想要的结果。你的优势是局面感和组织能力，风险是容易过度承担掌局责任，或者在别人还没跟上时显得强势。","diagnosis":"你的答案显示，你很少只停留在任务表面。你会追问谁拍板、资源在哪里、这件事服务什么目标、哪一步会改变结果。这种思维适合项目推进、管理协作、业务统筹和复杂问题解决。","whatYouReallyWant":"你想要的是主动权。你不只是想被安排一个好岗位，而是想进入能影响方向、调动资源、制定规则的位置。","mechanism":{"title":"掌局整合机制","content":"棋手掌局型的人擅长把分散信息整合成行动路径。优势是目标感强、资源意识强、能推动复杂协作；风险是容易把所有事都看成棋局，忽略人的情绪、信任和承受力。你需要训练的不是更会控，而是让别人愿意跟你一起走。"},"professionalBasis":["从局势感知看，你会优先确认目标、权力结构和关键资源，而不是立刻陷入执行细节。","从资源筹码看，你已经意识到职场不是只拼努力，还要经营可替代性、关键关系和可见影响力。","从晋升路径看，你更适合从执行骨干往项目负责人、业务负责人或小团队管理者方向验证。"],"coreTensions":["想掌控全局","容易替别人着急","对低效不耐烦","需要资源和授权","要学会柔性影响"],"suitableIf":["目标复杂但资源可协调","你有一定授权","团队需要有人定节奏","成果能被量化和复盘"],"cautionIf":["只有责任没有权力","所有人都等你兜底","你开始把同事都当变量","为了控局牺牲休息和关系"],"indices":[{"label":"局势判断力","value":94},{"label":"资源整合力","value":90},{"label":"向上管理力","value":86},{"label":"情绪缓冲力","value":70}],"ifStay":"如果你一直停在执行层，你会越来越憋屈，因为你看得到问题，却没有足够权限改变问题。","ifChange":"如果你开始争取项目权、资源权和复盘权，你的能力会从“很能干”升级成“能带结果”。","notRecommended":["没有授权就替所有人掌局","用强逻辑压过别人的情绪","把职场只看成输赢","过早站队","为了证明自己能控而过度加班"],"plan90":[{"title":"第1-2周：确认你真正能影响的盘子","content":"列出你手里能改变的目标、资源、关系和数据，别把不属于你的全局压力背到自己身上。"},{"title":"第3-4周：拿一个可见项目做样板","content":"选择一个能复盘、能量化、能展示协作价值的项目，主动提出推进框架。"},{"title":"第2个月：练习柔性掌局","content":"少用命令，多用目标、风险、选择题和共识，让别人觉得你是在降低混乱，而不是抢控制权。"},{"title":"第3个月：沉淀你的掌局证据","content":"把项目成果整理成目标、动作、资源、结果、复盘五段式，为晋升、转岗或谈判做准备。"}],"closing":"真正的棋手不是每一步都亲自走，而是让局面因为你的存在变得更清楚、更有方向。"},"C":{"typeName":"局外清醒型","subtitle":"你看得清很多职场规则，但未必愿意深度入局。你最在乎的是自由、边界和不被组织吞掉的自己。","posterSubtext":"你不是不合群，你只是很怕把人生交给一盘不值得的棋。","maturityScore":80,"coreConclusion":"你更像站在棋盘外的人：看得清、感受敏锐、边界意识强，但也容易因为太清醒而减少投入。你的优势是不会轻易被组织叙事绑架，风险是长期旁观会让你错过本来可以争取的位置和资源。","diagnosis":"你的答案显示，你对消耗、站队、无效会议、权力游戏和人际内耗有较高警觉。你不太愿意为了融入而牺牲自我，也不喜欢把全部安全感放进公司体系里。","whatYouReallyWant":"你真正想要的是选择权和心理余地。你希望自己可以工作，但不是被工作完全定义；可以合作，但不是被关系绑住；可以努力，但不是被组织无限占用。","mechanism":{"title":"局外观察机制","content":"局外清醒型的人擅长看见系统问题和个人边界。优势是独立、冷静、不容易被画饼；风险是把很多机会也归类为消耗，从而过早撤退。你需要训练的是选择性入局：不是所有局都值得进，但值得的局要敢拿位置。"},"professionalBasis":["从人际站位看，你倾向保持距离，不愿意被复杂关系绑定。这能保护你，也可能让别人低估你的投入度。","从风险边界看，你比很多人更早意识到退路和第二选择的重要性。","从终局判断看，你对“自由”和“不被吞掉”的需求很强，适合建立组织外的个人能力资产。"],"coreTensions":["看得清但不想卷","需要自由和退路","对组织叙事警惕","容易旁观过久","投入感不稳定"],"suitableIf":["有清晰边界的岗位","远离无效站队","能保留专业自主性","有机会发展副业或个人品牌"],"cautionIf":["把所有合作都看成消耗","长期不表达真实野心","只想离开但没有替代路径","因为清醒而变得被动"],"indices":[{"label":"边界意识","value":93},{"label":"组织距离感","value":88},{"label":"独立判断力","value":90},{"label":"主动争取度","value":60}],"ifStay":"如果你一直站在棋盘外，你会保住清醒，但可能缺少足够的资源、履历和成果来支撑真正的自由。","ifChange":"如果你选择性入局，只进入能给你筹码的项目，你会既保留边界，又开始积累可迁移的资本。","notRecommended":["因为讨厌内耗就拒绝所有协作","只保持清醒不做行动","把离开当成唯一解","不经营可迁移能力","让别人误以为你没野心"],"plan90":[{"title":"第1-2周：筛选值得入局的事","content":"把当前工作分成消耗型、维持型、增值型。只对增值型任务提高投入。"},{"title":"第3-4周：建立组织外筹码","content":"选一个可迁移能力做作品、案例或副业测试，不把安全感只押在公司评价上。"},{"title":"第2个月：练习表达边界和野心","content":"不要只用沉默保持距离，明确告诉关键人你想要什么资源、机会或空间。"},{"title":"第3个月：做一次去留判断","content":"看当前平台是否还能给你成长、资源和作品。如果不能，就开始准备更好的棋盘。"}],"closing":"你可以不入所有局，但不能永远只做旁观者。自由不是退到场外，而是有能力选择进哪一盘棋。"},"D":{"typeName":"暗棋破局型","subtitle":"你不一定站在台前，也不一定最会表现，但你常常能在关键节点看见破口，解决别人没处理好的问题。","posterSubtext":"你最大的浪费，是明明能破局，却一直被当成临时救火的人。","maturityScore":86,"coreConclusion":"你更像职场棋局里的“暗棋”：平时不一定高调，但关键时刻能补位、止损、转向、破局。你的优势是敏锐、灵活、会抓关键点；风险是贡献太隐形，容易被组织当成应急工具，而不是值得培养和授权的人。","diagnosis":"你的答案显示，你习惯看见隐藏矛盾、流程漏洞和关键节点。你不一定喜欢正面争夺权力，但很擅长在局面混乱时找到能推动变化的那个点。","whatYouReallyWant":"你真正想要的是被识别为“关键能力”，而不是永远做幕后补锅的人。你希望别人知道，你不是只会救火，而是能设计解决方案。","mechanism":{"title":"关键破局机制","content":"暗棋破局型的人擅长低调观察、快速判断、抓住杠杆点。优势是能处理复杂和突发；风险是价值不被看见，长期被动响应。你需要把破局能力产品化、流程化、可汇报化，让它成为位置，而不是临时劳动。"},"professionalBasis":["从局势感知看，你经常能发现表面问题背后的真正卡点。","从任务反应看，你倾向先处理最关键的一段，而不是平均用力。","从晋升路径看，你需要把救火能力转化成代表项目，否则很容易一直隐形。"],"coreTensions":["能破局但不显眼","关键时刻被需要","平时价值被低估","不喜欢无谓争抢","需要把能力显性化"],"suitableIf":["复杂项目","流程优化","危机处理","跨部门协作","需要快速止损的业务场景"],"cautionIf":["总被临时拉去救火","成果没有署名和复盘","只解决问题不争取位置","别人只在出事时想起你"],"indices":[{"label":"破局敏锐度","value":91},{"label":"隐藏筹码","value":88},{"label":"贡献显性化","value":62},{"label":"关键节点判断","value":90}],"ifStay":"如果你继续只在幕后解决问题，你会越来越强，但也越来越容易被当成隐形工具。别人会依赖你，却未必给你位置。","ifChange":"如果你把每一次破局都沉淀成方法、案例和复盘，你会从救火人变成解决方案负责人。","notRecommended":["只救火不复盘","只做幕后不署名","替别人补锅却不谈边界","把关键能力藏得太深","等别人主动给你位置"],"plan90":[{"title":"第1-2周：记录你的破局场景","content":"把最近三次你解决过的复杂问题写成背景、卡点、动作、结果和可复用方法。"},{"title":"第3-4周：让贡献被看见","content":"在复盘、周报或项目同步里呈现你的关键判断，而不是只呈现最后做了什么。"},{"title":"第2个月：争取一个明确身份","content":"把“临时帮忙”变成“负责某个流程优化/风险处理/跨部门推进”的正式角色。"},{"title":"第3个月：把破局能力变成筹码","content":"整理代表案例，用它去谈资源、岗位边界、晋升机会或外部机会。"}],"closing":"暗棋不是永远藏起来。真正高级的暗棋，会在关键时刻亮出来，让所有人知道这一步是谁走的。"}},"secondaryNotes":{"A":{"B":"你的主倾向是「棋子承压型」，同时带有「棋手掌局型」的影子。主结果代表你最稳定的职场反应，副倾向提醒你：你不是固定角色，而是在不同局面里切换自己的站位。","C":"你的主倾向是「棋子承压型」，同时带有「局外清醒型」的影子。主结果代表你最稳定的职场反应，副倾向提醒你：你不是固定角色，而是在不同局面里切换自己的站位。","D":"你的主倾向是「棋子承压型」，同时带有「暗棋破局型」的影子。主结果代表你最稳定的职场反应，副倾向提醒你：你不是固定角色，而是在不同局面里切换自己的站位。"},"B":{"A":"你的主倾向是「棋手掌局型」，同时带有「棋子承压型」的影子。主结果代表你最稳定的职场反应，副倾向提醒你：你不是固定角色，而是在不同局面里切换自己的站位。","C":"你的主倾向是「棋手掌局型」，同时带有「局外清醒型」的影子。主结果代表你最稳定的职场反应，副倾向提醒你：你不是固定角色，而是在不同局面里切换自己的站位。","D":"你的主倾向是「棋手掌局型」，同时带有「暗棋破局型」的影子。主结果代表你最稳定的职场反应，副倾向提醒你：你不是固定角色，而是在不同局面里切换自己的站位。"},"C":{"A":"你的主倾向是「局外清醒型」，同时带有「棋子承压型」的影子。主结果代表你最稳定的职场反应，副倾向提醒你：你不是固定角色，而是在不同局面里切换自己的站位。","B":"你的主倾向是「局外清醒型」，同时带有「棋手掌局型」的影子。主结果代表你最稳定的职场反应，副倾向提醒你：你不是固定角色，而是在不同局面里切换自己的站位。","D":"你的主倾向是「局外清醒型」，同时带有「暗棋破局型」的影子。主结果代表你最稳定的职场反应，副倾向提醒你：你不是固定角色，而是在不同局面里切换自己的站位。"},"D":{"A":"你的主倾向是「暗棋破局型」，同时带有「棋子承压型」的影子。主结果代表你最稳定的职场反应，副倾向提醒你：你不是固定角色，而是在不同局面里切换自己的站位。","B":"你的主倾向是「暗棋破局型」，同时带有「棋手掌局型」的影子。主结果代表你最稳定的职场反应，副倾向提醒你：你不是固定角色，而是在不同局面里切换自己的站位。","C":"你的主倾向是「暗棋破局型」，同时带有「局外清醒型」的影子。主结果代表你最稳定的职场反应，副倾向提醒你：你不是固定角色，而是在不同局面里切换自己的站位。"}},"shareTemplate":["我测出来了：{{typeName}}","{{posterSubtext}}","{{secondaryLine}}","","你在职场里是棋手、棋子还是局外人？32题职场棋局位置测试。"]};</script>
+    <script>
+(function () {
+  const app = document.getElementById("app");
+  const configPaths = ["./configs/site-config.json", "./configs/career-change.json"];
+
+  const state = {
+    config: null,
+    answers: {},
+    currentIndex: 0,
+    selected: null,
+    locked: false,
+    loadingStep: 0,
+    route: "home",
+    resultData: null,
+  };
+
+  const defaultLoadingMessages = [
+    "正在读取你的选择倾向...",
+    "正在识别隐藏动机...",
+    "正在计算结果分布...",
+    "正在生成专属报告...",
+    "分析完成。",
+  ];
+
+  init();
+
+  async function init() {
+    try {
+      state.config = await fetchConfig();
+      applyDocumentMeta(state.config);
+
+      const saved = sessionStorage.getItem(getStorageKey());
+      if (saved) {
+        state.answers = JSON.parse(saved);
+      }
+
+      routeFromHash();
+      window.addEventListener("hashchange", routeFromHash);
+    } catch (error) {
+      app.innerHTML = `
+        <div class="error">
+          <div>
+            <h1>测试加载失败</h1>
+            <p>请确认你是通过网页链接打开页面，而不是直接双击 HTML 文件。</p>
+          </div>
+        </div>
+      `;
+      console.error(error);
+    }
+  }
+
+  async function fetchConfig() {
+    if (window.__QUIZ_CONFIG__) return window.__QUIZ_CONFIG__;
+    let lastError;
+    for (const path of configPaths) {
+      try {
+        const response = await fetch(path, { cache: "no-store" });
+        if (!response.ok) throw new Error(`${path} ${response.status}`);
+        return response.json();
+      } catch (error) {
+        lastError = error;
+      }
+    }
+    throw lastError;
+  }
+
+  function applyDocumentMeta(cfg) {
+    const title = cfg.title || "趣味测试";
+    const description = cfg.metaDescription || cfg.subtitle || "完成测试，生成你的专属报告。";
+    document.title = title;
+    setMeta("name", "description", description);
+    setMeta("property", "og:title", title);
+    setMeta("property", "og:description", description);
+  }
+
+  function setMeta(attr, key, content) {
+    let node = document.querySelector(`meta[${attr}="${key}"]`);
+    if (!node) {
+      node = document.createElement("meta");
+      node.setAttribute(attr, key);
+      document.head.appendChild(node);
+    }
+    node.setAttribute("content", content);
+  }
+
+  function routeFromHash() {
+    const route = (location.hash || "#/").replace("#/", "") || "home";
+    renderRoute(route);
+  }
+
+  function navigate(route) {
+    const nextHash = `#/${route}`;
+    if (location.hash === nextHash) {
+      renderRoute(route);
+      return;
+    }
+    location.hash = nextHash;
+  }
+
+  function renderRoute(route) {
+    state.route = route;
+    if (route === "quiz") renderQuiz();
+    else if (route === "loading") startLoading();
+    else if (route === "result") renderResult();
+    else renderHome();
+  }
+
+  function renderShell(content, extraClass = "") {
+    app.innerHTML = `
+      <div class="shell">
+        <div class="top-rule"></div>
+        <section class="screen ${extraClass}">${content}</section>
+      </div>
+      <div id="toast" class="toast">已复制</div>
+    `;
+  }
+
+  function renderHome() {
+    const cfg = state.config;
+    renderShell(
+      `
+      <div class="home">
+        <div class="kicker"><span class="dot"></span><span>${text(cfg.kicker)}</span><span class="dot"></span></div>
+        <h1 class="hero-title">${text(cfg.title)}</h1>
+        <p class="hero-subtitle">${text(cfg.subtitle)}</p>
+        <div class="hairline"></div>
+        <div class="intro">
+          ${(cfg.intro || []).map((p, index) => `<p class="${index === cfg.intro.length - 1 ? "strong" : ""}">${text(p)}</p>`).join("")}
+        </div>
+        <div class="pill-grid">
+          ${(cfg.dimensions || []).map((item) => `<div class="pill">${text(item)}</div>`).join("")}
+        </div>
+        <button class="primary-btn" data-action="start">${text(cfg.startButton || "开始测试")}</button>
+        <p class="disclaimer">${text(cfg.disclaimer || "本测试为趣味内容，仅供娱乐参考。")}</p>
+      </div>
+      `,
+      "home"
+    );
+    const startButton = app.querySelector("[data-action='start']");
+    let started = false;
+    const startQuiz = () => {
+      if (started) return;
+      started = true;
+      state.answers = {};
+      state.currentIndex = 0;
+      sessionStorage.removeItem(getStorageKey());
+      navigate("quiz");
+    };
+    startButton.addEventListener("click", startQuiz);
+    startButton.addEventListener(
+      "touchend",
+      (event) => {
+        event.preventDefault();
+        startQuiz();
+      },
+      { passive: false }
+    );
+  }
+
+  function renderQuiz() {
+    const questions = state.config.questions || [];
+    const question = questions[state.currentIndex];
+    if (!question) {
+      renderHome();
+      return;
+    }
+
+    const progress = ((state.currentIndex + 1) / questions.length) * 100;
+
+    renderShell(
+      `
+      <div class="sticky-head">
+        <div class="quiz-meta">
+          <span>${String(state.currentIndex + 1).padStart(2, "0")} / ${questions.length}</span>
+          <span>${text(question.module)}</span>
+        </div>
+        <div class="progress-track"><div class="progress-bar" style="width:${progress}%"></div></div>
+      </div>
+      <div class="question-no">${String(state.currentIndex + 1).padStart(2, "0")}</div>
+      <h1 class="question-title">${text(question.text)}</h1>
+      <div class="options">
+        ${(question.options || [])
+          .map(
+            (option) => `
+            <button class="option" data-option="${text(option.key)}">
+              <span class="option-key">${text(option.key)}</span>
+              <span class="option-text">${text(option.text)}</span>
+            </button>
+          `
+          )
+          .join("")}
+      </div>
+      <p class="hint">${text(state.config.quizHint || "选择后自动进入下一题")}</p>
+      `,
+      "quiz-screen"
+    );
+
+    app.querySelectorAll("[data-option]").forEach((button) => {
+      button.addEventListener("click", () => selectOption(button.dataset.option));
+    });
+  }
+
+  function selectOption(key) {
+    if (state.locked) return;
+    state.locked = true;
+    state.selected = key;
+    const question = state.config.questions[state.currentIndex];
+    state.answers[question.id] = key;
+
+    app.querySelectorAll(".option").forEach((button) => {
+      const selected = button.dataset.option === key;
+      button.classList.toggle("selected", selected);
+      button.classList.toggle("dimmed", !selected);
+    });
+
+    window.setTimeout(() => {
+      if (state.currentIndex < state.config.questions.length - 1) {
+        state.currentIndex += 1;
+        state.locked = false;
+        state.selected = null;
+        renderQuiz();
+      } else {
+        sessionStorage.setItem(getStorageKey(), JSON.stringify(state.answers));
+        state.locked = false;
+        navigate("loading");
+      }
+    }, 420);
+  }
+
+  function startLoading() {
+    state.loadingStep = 0;
+    renderLoading("");
+    tickLoading();
+  }
+
+  function renderLoading(value) {
+    const loadingMessages = getLoadingMessages();
+    renderShell(
+      `
+      <div class="loading-card">
+        <div class="spinner"></div>
+        <div class="loading-text">${text(value)}<span class="cursor">|</span></div>
+        <div class="step-bars">
+          ${loadingMessages.map((_, index) => `<div class="step ${index < state.loadingStep ? "done" : ""}"><span></span></div>`).join("")}
+        </div>
+      </div>
+      `,
+      "loading-screen"
+    );
+  }
+
+  function tickLoading() {
+    if (state.route !== "loading") return;
+    const loadingMessages = getLoadingMessages();
+    if (state.loadingStep >= loadingMessages.length) {
+      window.setTimeout(() => navigate("result"), 700);
+      return;
+    }
+    const message = loadingMessages[state.loadingStep];
+    let chars = 0;
+    const interval = window.setInterval(() => {
+      chars += 1;
+      renderLoading(message.slice(0, chars));
+      if (chars >= message.length) {
+        window.clearInterval(interval);
+        window.setTimeout(() => {
+          state.loadingStep += 1;
+          tickLoading();
+        }, 520);
+      }
+    }, 35);
+  }
+
+  function renderResult() {
+    const saved = sessionStorage.getItem(getStorageKey());
+    if (saved) state.answers = JSON.parse(saved);
+    if (Object.keys(state.answers).length < state.config.questions.length) {
+      renderHome();
+      return;
+    }
+
+    const scored = scoreAnswers(state.answers);
+    const primary = state.config.results[scored.primary];
+    const secondary = scored.secondary ? state.config.secondaryNotes?.[scored.primary]?.[scored.secondary] : null;
+    const stage = getStage(primary.maturityScore);
+    const shareText = buildShareText(primary, secondary);
+    const compareLabels = state.config.compareLabels || ["如果继续原路", "如果换一种做法"];
+    state.resultData = { scored, primary, secondary, stage, shareText };
+
+    renderShell(
+      `
+      <article class="report">
+        <div class="kicker"><span class="dot"></span><span>${text(state.config.resultKicker || "Result Report")}</span><span class="dot"></span></div>
+        <h1 class="result-type">${text(primary.typeName)}</h1>
+        <p class="result-subtitle">${text(primary.subtitle)}</p>
+        <div class="stamp-row">
+          <div class="stamp"><strong>${text(primary.maturityScore)}</strong><span>${text(state.config.scoreLabel || "决策成熟度")}</span></div>
+          <div class="stamp"><strong>${text(stage)}</strong><span>${text(state.config.stageLabel || "当前行动阶段")}</span></div>
+        </div>
+
+        <section class="section">
+          <h2>你的答案分布</h2>
+          <div class="meters">
+            ${Object.entries(scored.counts)
+              .map(([key, value]) => {
+                const typeData = state.config.results[key];
+                const width = (value / state.config.questions.length) * 100;
+                return `
+                  <div>
+                    <div class="meter-head"><span>${text(key)} · ${text(typeData.typeName)}</span><span>${value} 题</span></div>
+                    <div class="meter-track"><div class="meter-fill" style="width:${width}%"></div></div>
+                  </div>
+                `;
+              })
+              .join("")}
+          </div>
+        </section>
+
+        ${secondary ? `<section class="section"><h2>副倾向提示</h2><div class="secondary-note">${text(secondary)}</div></section>` : ""}
+
+        <section class="section">
+          <h2>诊断结论</h2>
+          <div class="quote">${text(primary.coreConclusion)}</div>
+        </section>
+
+        <section class="section">
+          <h2>为什么你会这样</h2>
+          <p>${text(primary.diagnosis)}</p>
+          <p>${text(primary.whatYouReallyWant)}</p>
+        </section>
+
+        <section class="section">
+          <h2>${text(primary.mechanism.title)}</h2>
+          <p>${text(primary.mechanism.content)}</p>
+        </section>
+
+        ${renderParagraphSection("专业解读框架", primary.professionalBasis)}
+        ${renderTagSection("你的关键矛盾", primary.coreTensions)}
+        ${renderCompareListSection("适合推进的条件", "需要谨慎的信号", primary.suitableIf, primary.cautionIf)}
+
+        <section class="section">
+          <h2>关键指数</h2>
+          <div class="meters">
+            ${(primary.indices || [])
+              .map(
+                (item) => `
+                <div>
+                  <div class="meter-head"><span>${text(item.label)}</span><span>${text(item.value)}</span></div>
+                  <div class="meter-track"><div class="meter-fill" style="width:${number(item.value)}%"></div></div>
+                </div>
+              `
+              )
+              .join("")}
+          </div>
+        </section>
+
+        <section class="section">
+          <h2>两条路径对比</h2>
+          <div class="compare">
+            <div class="compare-card"><h3>${text(compareLabels[0])}</h3><p>${text(primary.ifStay)}</p></div>
+            <div class="compare-card"><h3>${text(compareLabels[1])}</h3><p>${text(primary.ifChange)}</p></div>
+          </div>
+        </section>
+
+        <section class="section">
+          <h2>现在最不建议你做</h2>
+          <div class="tag-list">${(primary.notRecommended || []).map((item) => `<span class="tag">${text(item)}</span>`).join("")}</div>
+        </section>
+
+        <section class="section">
+          <h2>未来 90 天验证方案</h2>
+          <div class="plan">
+            ${(primary.plan90 || [])
+              .map(
+                (item, index) => `
+                <div class="plan-card">
+                  <h3>${index + 1}. ${text(item.title)}</h3>
+                  <p>${text(item.content)}</p>
+                </div>
+              `
+              )
+              .join("")}
+          </div>
+        </section>
+
+        <section class="section">
+          <h2>最后一句话</h2>
+          <p>${text(primary.closing)}</p>
+        </section>
+
+        <div class="actions">
+          <button class="primary-btn" data-action="copy">${text(state.config.copyButton || "复制我的结果")}</button>
+          <button class="ghost-btn" data-action="restart">${text(state.config.restartButton || "重新测试")}</button>
+        </div>
+      </article>
+      `,
+      "result-screen"
+    );
+
+    app.querySelector("[data-action='copy']").addEventListener("click", () => copyShareText(shareText));
+    app.querySelector("[data-action='restart']").addEventListener("click", () => {
+      sessionStorage.removeItem(getStorageKey());
+      state.answers = {};
+      state.currentIndex = 0;
+      navigate("home");
+    });
+  }
+
+  function renderParagraphSection(title, paragraphs) {
+    if (!Array.isArray(paragraphs) || !paragraphs.length) return "";
+    return `
+      <section class="section">
+        <h2>${text(title)}</h2>
+        ${paragraphs.map((item) => `<p>${text(item)}</p>`).join("")}
+      </section>
+    `;
+  }
+
+  function renderTagSection(title, items) {
+    if (!Array.isArray(items) || !items.length) return "";
+    return `
+      <section class="section">
+        <h2>${text(title)}</h2>
+        <div class="tag-list">${items.map((item) => `<span class="tag">${text(item)}</span>`).join("")}</div>
+      </section>
+    `;
+  }
+
+  function renderCompareListSection(leftTitle, rightTitle, leftItems, rightItems) {
+    const hasLeft = Array.isArray(leftItems) && leftItems.length;
+    const hasRight = Array.isArray(rightItems) && rightItems.length;
+    if (!hasLeft && !hasRight) return "";
+    return `
+      <section class="section">
+        <h2>适用边界</h2>
+        <div class="compare">
+          <div class="compare-card">
+            <h3>${text(leftTitle)}</h3>
+            ${(leftItems || []).map((item) => `<p>${text(item)}</p>`).join("")}
+          </div>
+          <div class="compare-card">
+            <h3>${text(rightTitle)}</h3>
+            ${(rightItems || []).map((item) => `<p>${text(item)}</p>`).join("")}
+          </div>
+        </div>
+      </section>
+    `;
+  }
+
+  function scoreAnswers(answers) {
+    const counts = { A: 0, B: 0, C: 0, D: 0 };
+    Object.values(answers).forEach((key) => {
+      if (counts[key] !== undefined) counts[key] += 1;
+    });
+    const sorted = Object.entries(counts).sort((a, b) => b[1] - a[1]);
+    const threshold = state.config.secondaryThreshold ?? 2;
+    const primary = sorted[0][0];
+    const secondary = sorted[1][1] > 0 && sorted[0][1] - sorted[1][1] <= threshold ? sorted[1][0] : null;
+    return { counts, primary, secondary };
+  }
+
+  function getStage(score) {
+    const labels = state.config.stageLabels || [
+      { max: 45, label: "观察期" },
+      { max: 65, label: "验证期" },
+      { max: 82, label: "规划期" },
+      { max: 100, label: "行动期" },
+    ];
+    const hit = labels.find((item) => score <= item.max);
+    return hit ? hit.label : labels[labels.length - 1].label;
+  }
+
+  function buildShareText(primary, secondary) {
+    const template = state.config.shareTemplate || [
+      "我测出了：{{typeName}}",
+      "{{posterSubtext}}",
+      "{{secondaryLine}}",
+      "",
+      "{{title}}",
+    ];
+    const values = {
+      title: state.config.title,
+      typeName: primary.typeName,
+      posterSubtext: primary.posterSubtext,
+      secondary: secondary || "",
+      secondaryLine: secondary ? `副倾向：${secondary}` : "",
+    };
+    return template
+      .map((line) => fillTemplate(line, values))
+      .filter((line, index, arr) => line || arr[index - 1])
+      .join("\n")
+      .trim();
+  }
+
+  async function copyShareText(value) {
+    try {
+      await navigator.clipboard.writeText(value);
+      showToast("结果文案已复制");
+    } catch (error) {
+      showToast("复制失败，可长按手动复制");
+    }
+  }
+
+  function showToast(value) {
+    const toast = document.getElementById("toast");
+    if (!toast) return;
+    toast.textContent = value;
+    toast.classList.add("show");
+    window.setTimeout(() => toast.classList.remove("show"), 1600);
+  }
+
+  function getLoadingMessages() {
+    return state.config.loadingMessages || defaultLoadingMessages;
+  }
+
+  function getStorageKey() {
+    return `xhsTestAnswers:${state.config.slug || "default"}`;
+  }
+
+  function fillTemplate(template, values) {
+    return String(template).replace(/\{\{(\w+)\}\}/g, (_, key) => values[key] || "");
+  }
+
+  function number(value) {
+    const parsed = Number(value);
+    if (Number.isNaN(parsed)) return 0;
+    return Math.max(0, Math.min(100, parsed));
+  }
+
+  function text(value) {
+    return String(value ?? "")
+      .replace(/&/g, "&amp;")
+      .replace(/</g, "&lt;")
+      .replace(/>/g, "&gt;")
+      .replace(/"/g, "&quot;");
+  }
+})();
+
+    </script>
+  </body>
+</html>
