@@ -1,0 +1,1125 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <meta name="description" content="完成 32 道贵妃命、皇后命、女帝命人格原型测试，生成你的关系位置、隐藏贵气、权力感和行动建议。" />
+    <meta property="og:title" content="你是贵妃命、皇后命还是女帝命？" />
+    <meta property="og:description" content="完成 32 道贵妃命、皇后命、女帝命人格原型测试，生成你的关系位置、隐藏贵气、权力感和行动建议。" />
+    <title>你是贵妃命、皇后命还是女帝命？</title>
+    <style>
+:root {
+  --bg: #fbfaf7;
+  --paper: #fffefd;
+  --ink: #20242a;
+  --muted: #65707d;
+  --line: #d9d4ca;
+  --line-strong: #b9afa0;
+  --accent: #9b4339;
+  --accent-soft: #f1dfd7;
+  --gold: #c0964d;
+  --sage: #66795f;
+  --blue: #526a86;
+  --shadow: 0 16px 36px rgba(60, 47, 38, 0.1);
+  --radius: 8px;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  min-height: 100%;
+  background:
+    linear-gradient(rgba(32, 36, 42, 0.035) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(32, 36, 42, 0.035) 1px, transparent 1px),
+    var(--bg);
+  background-size: 24px 24px;
+}
+
+body {
+  min-height: 100vh;
+  margin: 0;
+  color: var(--ink);
+  font-family:
+    "PingFang SC",
+    "Microsoft YaHei",
+    "Noto Sans SC",
+    system-ui,
+    -apple-system,
+    BlinkMacSystemFont,
+    sans-serif;
+  letter-spacing: 0;
+}
+
+button {
+  font: inherit;
+}
+
+.shell {
+  width: min(100%, 480px);
+  min-height: 100vh;
+  margin: 0 auto;
+  background: rgba(251, 250, 247, 0.88);
+}
+
+.top-rule {
+  height: 4px;
+  background: var(--accent);
+}
+
+.screen {
+  min-height: calc(100vh - 4px);
+  padding: 28px 22px 32px;
+}
+
+.home {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.kicker {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  color: var(--muted);
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  font-size: 11px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+.dot {
+  width: 7px;
+  height: 7px;
+  background: var(--accent);
+  border-radius: 50%;
+}
+
+.hero-title {
+  margin: 26px 0 14px;
+  color: var(--ink);
+  font-size: 30px;
+  line-height: 1.2;
+  text-align: center;
+  font-weight: 800;
+}
+
+.hero-subtitle {
+  margin: 0 auto 28px;
+  max-width: 340px;
+  color: var(--muted);
+  font-size: 15px;
+  line-height: 1.75;
+  text-align: center;
+}
+
+.hairline {
+  width: 64px;
+  height: 1px;
+  margin: 0 auto 30px;
+  background: var(--line-strong);
+}
+
+.intro {
+  margin: 0 auto;
+  max-width: 380px;
+}
+
+.intro p {
+  margin: 0 0 15px;
+  color: rgba(32, 36, 42, 0.82);
+  font-size: 15px;
+  line-height: 1.8;
+}
+
+.intro .strong {
+  color: var(--accent);
+  font-weight: 700;
+}
+
+.pill-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px;
+  margin: 28px 0;
+}
+
+.pill {
+  min-height: 42px;
+  display: grid;
+  place-items: center;
+  border: 1px solid var(--line);
+  color: var(--muted);
+  background: rgba(255, 255, 255, 0.44);
+  font-size: 13px;
+}
+
+.primary-btn,
+.ghost-btn,
+.copy-btn {
+  width: 100%;
+  min-height: 48px;
+  border: 1px solid var(--ink);
+  border-radius: 0;
+  cursor: pointer;
+  transition: transform 150ms ease, background 150ms ease, color 150ms ease, border-color 150ms ease;
+}
+
+.primary-btn {
+  background: var(--ink);
+  color: #fff;
+  font-weight: 700;
+}
+
+.ghost-btn,
+.copy-btn {
+  background: transparent;
+  color: var(--ink);
+}
+
+.primary-btn:active,
+.ghost-btn:active,
+.copy-btn:active,
+.option:active {
+  transform: translateY(1px);
+}
+
+.disclaimer {
+  margin: 18px auto 0;
+  max-width: 340px;
+  color: var(--muted);
+  font-size: 12px;
+  line-height: 1.65;
+  text-align: center;
+}
+
+.quiz-screen {
+  padding-top: 0;
+}
+
+.sticky-head {
+  position: sticky;
+  top: 0;
+  z-index: 5;
+  margin: 0 -22px 26px;
+  padding: 14px 22px 12px;
+  background: rgba(251, 250, 247, 0.95);
+  border-bottom: 1px solid var(--line);
+  backdrop-filter: blur(12px);
+}
+
+.quiz-meta {
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+  color: var(--muted);
+  font-size: 12px;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+}
+
+.progress-track {
+  height: 4px;
+  margin-top: 10px;
+  background: rgba(32, 36, 42, 0.09);
+}
+
+.progress-bar {
+  height: 100%;
+  background: var(--accent);
+  transition: width 260ms ease;
+}
+
+.question-no {
+  color: rgba(155, 67, 57, 0.18);
+  font-size: 48px;
+  line-height: 1;
+  font-weight: 800;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+}
+
+.question-title {
+  margin: 18px 0 24px;
+  font-size: 22px;
+  line-height: 1.5;
+  font-weight: 750;
+}
+
+.options {
+  display: grid;
+  gap: 12px;
+}
+
+.option {
+  min-height: 66px;
+  display: grid;
+  grid-template-columns: 30px 1fr;
+  gap: 12px;
+  align-items: start;
+  width: 100%;
+  padding: 15px;
+  border: 1px solid var(--line);
+  background: rgba(255, 255, 255, 0.68);
+  color: var(--ink);
+  text-align: left;
+  cursor: pointer;
+  transition: background 160ms ease, border-color 160ms ease, color 160ms ease, opacity 160ms ease;
+}
+
+.option-key {
+  display: grid;
+  place-items: center;
+  width: 28px;
+  height: 28px;
+  border: 1px solid var(--line-strong);
+  font-size: 13px;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+}
+
+.option-text {
+  padding-top: 2px;
+  font-size: 15px;
+  line-height: 1.55;
+}
+
+.option.selected {
+  border-color: var(--accent);
+  background: var(--accent);
+  color: #fff;
+}
+
+.option.selected .option-key {
+  border-color: rgba(255, 255, 255, 0.8);
+}
+
+.option.dimmed {
+  opacity: 0.42;
+}
+
+.hint {
+  margin: 18px 0 0;
+  color: var(--muted);
+  font-size: 12px;
+  text-align: center;
+}
+
+.loading-screen {
+  display: grid;
+  place-items: center;
+}
+
+.loading-card {
+  width: 100%;
+  max-width: 360px;
+  text-align: center;
+}
+
+.spinner {
+  width: 54px;
+  height: 54px;
+  margin: 0 auto 24px;
+  border: 2px solid var(--line);
+  border-top-color: var(--accent);
+  border-radius: 50%;
+  animation: spin 850ms linear infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.loading-text {
+  min-height: 54px;
+  color: var(--accent);
+  font-size: 17px;
+  line-height: 1.6;
+  font-weight: 700;
+}
+
+.step-bars {
+  display: grid;
+  gap: 8px;
+  margin-top: 28px;
+}
+
+.step {
+  height: 4px;
+  overflow: hidden;
+  background: rgba(32, 36, 42, 0.09);
+}
+
+.step span {
+  display: block;
+  height: 100%;
+  width: 0;
+  background: var(--accent);
+  transition: width 300ms ease;
+}
+
+.step.done span {
+  width: 100%;
+}
+
+.result-screen {
+  padding: 22px 18px 30px;
+}
+
+.report {
+  padding: 22px 16px 18px;
+  border: 1px solid var(--line);
+  background: var(--paper);
+  box-shadow: var(--shadow);
+}
+
+.result-type {
+  margin: 8px 0 8px;
+  color: var(--accent);
+  font-size: 30px;
+  line-height: 1.15;
+  font-weight: 850;
+  text-align: center;
+}
+
+.result-subtitle {
+  margin: 0 auto 20px;
+  color: var(--muted);
+  font-size: 15px;
+  line-height: 1.7;
+  text-align: center;
+}
+
+.stamp-row {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px;
+  margin: 18px 0 20px;
+}
+
+.stamp {
+  padding: 12px 10px;
+  border: 1px solid var(--line);
+  background: #fbfaf7;
+}
+
+.stamp strong {
+  display: block;
+  margin-bottom: 4px;
+  color: var(--ink);
+  font-size: 20px;
+}
+
+.stamp span {
+  color: var(--muted);
+  font-size: 12px;
+}
+
+.section {
+  padding: 20px 0;
+  border-top: 1px solid var(--line);
+}
+
+.section h2 {
+  margin: 0 0 12px;
+  font-size: 18px;
+  color: var(--ink);
+}
+
+.section p {
+  margin: 0 0 12px;
+  color: rgba(32, 36, 42, 0.82);
+  font-size: 15px;
+  line-height: 1.85;
+}
+
+.quote {
+  padding: 15px;
+  border-left: 3px solid var(--accent);
+  background: var(--accent-soft);
+  color: #5b2d27;
+  line-height: 1.8;
+  font-weight: 700;
+}
+
+.meters {
+  display: grid;
+  gap: 14px;
+}
+
+.meter-head {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 7px;
+  color: var(--muted);
+  font-size: 13px;
+}
+
+.meter-track {
+  height: 8px;
+  background: rgba(32, 36, 42, 0.08);
+}
+
+.meter-fill {
+  height: 100%;
+  background: var(--accent);
+}
+
+.compare {
+  display: grid;
+  gap: 10px;
+}
+
+.compare-card {
+  padding: 14px;
+  border: 1px solid var(--line);
+  background: #fbfaf7;
+}
+
+.compare-card h3,
+.plan-card h3 {
+  margin: 0 0 8px;
+  font-size: 15px;
+}
+
+.compare-card p,
+.plan-card p {
+  font-size: 14px;
+}
+
+.tag-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.tag {
+  padding: 7px 9px;
+  border: 1px solid var(--line);
+  background: #fbfaf7;
+  color: var(--muted);
+  font-size: 13px;
+}
+
+.plan {
+  display: grid;
+  gap: 10px;
+}
+
+.plan-card {
+  padding: 14px;
+  border: 1px solid var(--line);
+  background: #fbfaf7;
+}
+
+.secondary-note {
+  padding: 14px;
+  border: 1px dashed var(--line-strong);
+  background: rgba(192, 150, 77, 0.12);
+  line-height: 1.75;
+  font-size: 14px;
+}
+
+.actions {
+  display: grid;
+  gap: 10px;
+  margin-top: 18px;
+}
+
+.toast {
+  position: fixed;
+  left: 50%;
+  bottom: 22px;
+  z-index: 20;
+  transform: translateX(-50%);
+  padding: 10px 14px;
+  background: var(--ink);
+  color: #fff;
+  font-size: 13px;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 180ms ease;
+}
+
+.toast.show {
+  opacity: 1;
+}
+
+.error {
+  display: grid;
+  place-items: center;
+  min-height: 100vh;
+  padding: 24px;
+  text-align: center;
+}
+
+.error p {
+  color: var(--muted);
+  line-height: 1.7;
+}
+
+@media (min-width: 700px) {
+  body {
+    padding: 28px 0;
+  }
+
+  .shell {
+    min-height: calc(100vh - 56px);
+    border: 1px solid var(--line);
+    box-shadow: var(--shadow);
+  }
+
+  .screen {
+    min-height: calc(100vh - 60px);
+  }
+}
+
+    </style>
+  </head>
+  <body>
+    <main id="app" aria-live="polite"></main>
+    <script>window.__QUIZ_CONFIG__ = {"slug":"test-royal-destiny","topic":"你是贵妃命、皇后命还是女帝命？","kicker":"32-Q Royal Destiny Archetype Test","title":"你是贵妃命、皇后命还是女帝命？","subtitle":"32 道题，测出你更像贵妃命、皇后命、女帝命，还是长公主命。看清你在关系、权力、审美、事业和自由感里的底层原型。","metaDescription":"完成 32 道贵妃命、皇后命、女帝命人格原型测试，生成你的关系位置、隐藏贵气、权力感和行动建议。","startButton":"开始测试","resultKicker":"Royal Archetype Report","quizHint":"凭第一反应选择，系统会自动进入下一题。","copyButton":"复制我的结果","restartButton":"重新测试","scoreLabel":"原型清晰度","stageLabel":"当前课题","stageLabels":[{"max":55,"label":"觉察期"},{"max":72,"label":"定价期"},{"max":86,"label":"显化期"},{"max":100,"label":"掌命期"}],"compareLabels":["如果只把它当成命格","如果看见背后的原型"],"disclaimer":"本测试借用贵妃、皇后、女帝、长公主等意象做趣味人格原型分析，仅供娱乐和自我观察参考，不代表命运预测、心理诊断、关系建议、职业建议或任何重大人生决策依据。","secondaryThreshold":4,"dimensions":["偏爱吸引","秩序统筹","女帝掌局","自由贵气"],"intro":["很多人想知道自己是贵妃命、皇后命还是女帝命，其实不是为了真的算命。","真正想知道的是：你在关系里要偏爱，还是要尊重；在事业里要稳定，还是要掌权；在生活里要亲密，还是要自由。","32 道题会从被看见方式、关系位置、权力边界、情绪安全、资源审美、冲突处理、事业野心和终局剧本 8 个维度，生成你的专属原型报告。"],"loadingMessages":["正在读取你的第一反应...","正在拆分贵妃、皇后、女帝和长公主倾向...","正在识别你的隐藏贵气和权力感...","正在生成 32 题专属报告...","分析完成。"],"questions":[{"id":1,"module":"被看见方式","text":"走进一个新环境，你最容易先被别人记住的是：","options":[{"key":"A","text":"气质、审美、说话的柔软感，容易让人想靠近"},{"key":"B","text":"稳、靠谱、有分寸，好像什么场面都能撑住"},{"key":"C","text":"气场强、有主意，不太像会被别人安排的人"},{"key":"D","text":"有距离感，不刻意合群，但让人觉得不好随便拿捏"}]},{"id":2,"module":"被看见方式","text":"别人夸你时，哪句话最容易戳中你？","options":[{"key":"A","text":"你身上有种很贵、很被偏爱的感觉"},{"key":"B","text":"你很稳，跟你在一起就觉得事情不会乱"},{"key":"C","text":"你真的有野心，也有把局面拿回来的能力"},{"key":"D","text":"你很清醒，不会为了讨好谁把自己放低"}]},{"id":3,"module":"被看见方式","text":"你最希望自己散发出来的吸引力是：","options":[{"key":"A","text":"让人忍不住偏爱、照顾、想把好东西给我"},{"key":"B","text":"让人信任、尊重，愿意把重要的事交给我"},{"key":"C","text":"让人意识到我不是陪衬，我有自己的主场"},{"key":"D","text":"让人知道我可以亲近，但绝不廉价和随便"}]},{"id":4,"module":"被看见方式","text":"你最怕别人误解你哪一点？","options":[{"key":"A","text":"以为我只是会撒娇、会被爱，其实我也有判断"},{"key":"B","text":"以为我只会照顾大局，其实我也有自己的欲望"},{"key":"C","text":"以为我强势冷硬，其实我只是不能忍受被控制"},{"key":"D","text":"以为我不在乎关系，其实我只是更在乎自由和尊严"}]},{"id":5,"module":"关系位置","text":"在亲密关系里，你最想要的位置更接近：","options":[{"key":"A","text":"被偏爱、被珍惜，哪怕我不用一直证明自己"},{"key":"B","text":"被尊重、被认真对待，两个人能共同经营生活"},{"key":"C","text":"保持主动权，不因为爱一个人就失去自己"},{"key":"D","text":"有亲密，也有边界，不必每天被关系捆住"}]},{"id":6,"module":"关系位置","text":"当对方冷淡时，你第一反应更像：","options":[{"key":"A","text":"会想是不是我不够被在乎，忍不住反复确认"},{"key":"B","text":"先观察关系是不是出了结构性问题，需要沟通和修复"},{"key":"C","text":"迅速收回投入，不允许自己一直处在低位"},{"key":"D","text":"给对方空间，也给自己退路，不追着问太多"}]},{"id":7,"module":"关系位置","text":"你最不想在关系里变成：","options":[{"key":"A","text":"明明值得被爱，却一直小心翼翼讨一个回应"},{"key":"B","text":"一直维持关系的秩序，却没人看见我的辛苦"},{"key":"C","text":"为了爱放弃判断，被别人牵着情绪走"},{"key":"D","text":"为了维持亲密，把自己的自由和节奏交出去"}]},{"id":8,"module":"关系位置","text":"如果被喜欢的人忽视，你更可能：","options":[{"key":"A","text":"心里很受伤，但还是会希望对方重新看见我"},{"key":"B","text":"找一次合适机会把问题说清楚，不让关系继续糊着"},{"key":"C","text":"直接降低对方权重，把注意力收回自己身上"},{"key":"D","text":"安静退开，确认这段关系值不值得继续投入"}]},{"id":9,"module":"权力边界","text":"面对一个想控制你的人，你最自然的反应是：","options":[{"key":"A","text":"先用柔软方式化解，但心里会很抗拒被管太多"},{"key":"B","text":"把规则和边界讲清楚，不能让关系失序"},{"key":"C","text":"直接反控制，我不接受别人替我决定人生"},{"key":"D","text":"拉开距离，减少对方能影响我的入口"}]},{"id":10,"module":"权力边界","text":"你对“掌控感”的真实态度是：","options":[{"key":"A","text":"我不一定想掌控全局，但我想被好好对待"},{"key":"B","text":"我需要可预期、可沟通、有秩序的生活"},{"key":"C","text":"我必须拥有主动权，否则会非常焦虑和不甘心"},{"key":"D","text":"我不想掌控别人，也不想被任何人掌控"}]},{"id":11,"module":"权力边界","text":"别人越界占你便宜，你更容易：","options":[{"key":"A","text":"一开始不好意思翻脸，但会慢慢冷下来"},{"key":"B","text":"体面指出问题，让对方知道什么能做什么不能做"},{"key":"C","text":"立刻把话说重，不给对方继续试探的机会"},{"key":"D","text":"不解释太多，直接把这个人从我的生活范围里移走"}]},{"id":12,"module":"权力边界","text":"你最需要补上的一课是：","options":[{"key":"A","text":"不要把被偏爱当成唯一的安全感来源"},{"key":"B","text":"不要为了顾全大局，把自己的需求一直往后放"},{"key":"C","text":"不要把所有关系都变成输赢和控制权争夺"},{"key":"D","text":"不要因为害怕被束缚，就拒绝所有深度连接"}]},{"id":13,"module":"情绪安全","text":"你情绪不稳定时，最需要什么？","options":[{"key":"A","text":"有人明确告诉我：你很重要，我没有忽视你"},{"key":"B","text":"有人愿意坐下来把事情讲清楚，而不是让我猜"},{"key":"C","text":"一个能重新掌控局面的动作，让我不再被动"},{"key":"D","text":"独处空间，让我先把自己从情绪里拿回来"}]},{"id":14,"module":"情绪安全","text":"你最容易被哪种感觉击中？","options":[{"key":"A","text":"明明付出了很多温柔，却没有被珍惜"},{"key":"B","text":"我一直维持秩序，最后却没人站在我这边"},{"key":"C","text":"我有能力，却被别人放在低位或替代品的位置"},{"key":"D","text":"我本来很自由，却被关系、人情或期待慢慢困住"}]},{"id":15,"module":"情绪安全","text":"你最常见的自我保护方式是：","options":[{"key":"A","text":"把自己打扮好、状态调整好，不让别人看出失落"},{"key":"B","text":"把生活和关系重新整理，先恢复秩序"},{"key":"C","text":"立刻制定计划，用行动证明我不会输"},{"key":"D","text":"消失一阵子，等自己恢复清醒再回来"}]},{"id":16,"module":"情绪安全","text":"你最想被别人理解的是：","options":[{"key":"A","text":"我不是只想被宠，我也有很深的情绪和自尊"},{"key":"B","text":"我不是天生爱管事，我只是受不了混乱和敷衍"},{"key":"C","text":"我不是强势，我只是不能接受人生被别人安排"},{"key":"D","text":"我不是冷淡，我只是需要不被打扰的完整自我"}]},{"id":17,"module":"资源审美","text":"如果拥有一段“富贵人生”，你最想要的是：","options":[{"key":"A","text":"好看的生活、被偏爱的关系、稳定的情绪滋养"},{"key":"B","text":"体面的家、稳固的资源、被尊重的长期位置"},{"key":"C","text":"可以做主的事业、财富和不必仰人鼻息的选择权"},{"key":"D","text":"自由的时间、可进可退的资产和不被束缚的空间"}]},{"id":18,"module":"资源审美","text":"你花钱时最容易为哪类东西买单？","options":[{"key":"A","text":"提升气质、审美、仪式感和被自己宠爱的东西"},{"key":"B","text":"让生活更稳定、更有秩序、更长期有用的东西"},{"key":"C","text":"能提升能力、影响力、赚钱效率和个人势能的东西"},{"key":"D","text":"能换来自由、体验、独处和精神空间的东西"}]},{"id":19,"module":"资源审美","text":"你理解的“贵气”更接近：","options":[{"key":"A","text":"被爱滋养出来的松弛、柔软和漂亮状态"},{"key":"B","text":"稳定、体面、有规矩，不轻易失态的底气"},{"key":"C","text":"不求人、不低头，能自己决定命运的力量"},{"key":"D","text":"有选择权，不被任何身份和关系框死的自在"}]},{"id":20,"module":"资源审美","text":"如果要经营个人形象，你会更偏向：","options":[{"key":"A","text":"氛围感、精致感、柔软但不廉价的吸引力"},{"key":"B","text":"端庄、稳定、可信赖，有长期口碑的形象"},{"key":"C","text":"强识别度、强表达、强能量，让人记住我不是陪衬"},{"key":"D","text":"清冷、独立、不费力，带一点难以靠近的距离"}]},{"id":21,"module":"冲突处理","text":"有人当众让你难堪，你更可能：","options":[{"key":"A","text":"表面保持体面，心里会记住这次被轻视的感觉"},{"key":"B","text":"稳住场面，事后把规则和责任说清楚"},{"key":"C","text":"当场反击，不能让别人以为我好欺负"},{"key":"D","text":"不急着争，直接降低对这个人的信任和权重"}]},{"id":22,"module":"冲突处理","text":"你在冲突里最强的能力是：","options":[{"key":"A","text":"让尖锐局面软下来，保留一点情面和吸引力"},{"key":"B","text":"把混乱拆成规则、责任和解决方案"},{"key":"C","text":"迅速抓住核心矛盾，把主动权拿回来"},{"key":"D","text":"不被情绪拖走，知道何时退出这场消耗"}]},{"id":23,"module":"冲突处理","text":"冲突结束后，你最容易后悔：","options":[{"key":"A","text":"为什么当时没有让对方更在意我的感受"},{"key":"B","text":"是不是又为了场面稳定，压下了自己的委屈"},{"key":"C","text":"话说得太狠，让关系没有回旋余地"},{"key":"D","text":"退得太快，没有把真正的立场讲出来"}]},{"id":24,"module":"冲突处理","text":"你心里真正的胜利是：","options":[{"key":"A","text":"对方意识到我的珍贵，不再随便忽视我"},{"key":"B","text":"关系和秩序都被修复，事情往长期方向走"},{"key":"C","text":"我拿回决定权，不再被别人定义位置"},{"key":"D","text":"我保住自由和尊严，不被烂局困住"}]},{"id":25,"module":"事业野心","text":"你对事业的真实欲望更接近：","options":[{"key":"A","text":"我希望它让我更闪亮、更有选择、更被看见"},{"key":"B","text":"我希望它让我稳定、有地位、有长期积累"},{"key":"C","text":"我希望它让我掌握资源和话语权，真正能做主"},{"key":"D","text":"我希望它给我自由，而不是把我绑进另一套规则"}]},{"id":26,"module":"事业野心","text":"面对一个大机会，你最先问自己：","options":[{"key":"A","text":"它能不能让我进入更好的圈层和状态"},{"key":"B","text":"它是否稳定、体面、可持续，能不能长期经营"},{"key":"C","text":"它能不能让我上一个台阶，拥有更大主导权"},{"key":"D","text":"它会不会吞掉我的生活、自由和个人节奏"}]},{"id":27,"module":"事业野心","text":"你最不想活成：","options":[{"key":"A","text":"有魅力却总在等待别人给我安全感的人"},{"key":"B","text":"什么都照顾到了，唯独忘了自己的人"},{"key":"C","text":"明明有能力，却一辈子站在别人身后的人"},{"key":"D","text":"为了所谓成功，把自己困进不喜欢身份的人"}]},{"id":28,"module":"事业野心","text":"你最应该发展的一项能力是：","options":[{"key":"A","text":"把魅力、审美和人缘转成真实资源"},{"key":"B","text":"把稳定、责任和统筹转成长期话语权"},{"key":"C","text":"把野心、判断和行动转成自己的事业版图"},{"key":"D","text":"把清醒、边界和自由转成可持续收入"}]},{"id":29,"module":"终局剧本","text":"如果人生像一部宫廷剧，你最想拿到的剧本是：","options":[{"key":"A","text":"不必争到最高，但一定要被真心偏爱、活得漂亮"},{"key":"B","text":"稳坐中宫，掌秩序、守底线，也拥有自己的尊严"},{"key":"C","text":"从不被看好一路走到最高处，命运由我改写"},{"key":"D","text":"不困在宫墙里，有身份、有退路，也有自己的天地"}]},{"id":30,"module":"终局剧本","text":"你最想证明给自己看的事是：","options":[{"key":"A","text":"我值得被珍惜，不必一直讨一个回应"},{"key":"B","text":"我能把日子和关系经营好，也不丢掉自己"},{"key":"C","text":"我不是配角，我有能力成为自己人生的主角"},{"key":"D","text":"我可以亲密，也可以自由，不必被任何关系定义"}]},{"id":31,"module":"终局剧本","text":"这个测试里，你最想知道的是：","options":[{"key":"A","text":"我是不是天生容易吸引偏爱和资源"},{"key":"B","text":"我是不是适合长期经营、稳定掌家和掌局"},{"key":"C","text":"我是不是有女帝一样的野心和上位能力"},{"key":"D","text":"我是不是更适合做不入局也很贵的长公主"}]},{"id":32,"module":"终局剧本","text":"凭第一直觉，你觉得自己更像：","options":[{"key":"A","text":"贵妃命：被偏爱、懂审美、有吸引力，但要学会不依赖偏爱"},{"key":"B","text":"皇后命：稳、能统筹、有长期位置，但要学会别总顾全大局"},{"key":"C","text":"女帝命：强、要主动权、有野心，但要学会别把自己逼太紧"},{"key":"D","text":"长公主命：清醒、自由、有距离感，但要学会允许深度连接"}]}],"results":{"A":{"typeName":"贵妃命","subtitle":"你的底色是魅力、审美、柔软感和被偏爱的吸引力。你很容易让人想靠近，也很需要被认真珍惜。","posterSubtext":"你不是只想被宠，你是需要在关系里确认自己值得被好好对待。","maturityScore":82,"coreConclusion":"你的答案显示，你对氛围、情绪、偏爱和细节非常敏感。你能给人松弛、漂亮、柔软的感受，也很容易在关系里捕捉对方是否真的把你放在心上。你的优势是吸引力、审美感、情绪流动和人缘资源；风险是把安全感过度寄托在别人是否偏爱你。 你真正想要的不是单纯被宠，而是被坚定选择。你希望自己的温柔、漂亮、情绪价值和细腻感受被看见，也希望自己不用一直证明“我值得”。","diagnosis":"你的答案显示，你对氛围、情绪、偏爱和细节非常敏感。你能给人松弛、漂亮、柔软的感受，也很容易在关系里捕捉对方是否真的把你放在心上。你的优势是吸引力、审美感、情绪流动和人缘资源；风险是把安全感过度寄托在别人是否偏爱你。","whatYouReallyWant":"你真正想要的不是单纯被宠，而是被坚定选择。你希望自己的温柔、漂亮、情绪价值和细腻感受被看见，也希望自己不用一直证明“我值得”。","mechanism":{"title":"偏爱吸引机制","content":"贵妃命的核心不是依附，而是吸引力和情绪滋养。你擅长营造氛围、连接人心、让关系变得柔软有温度。需要警惕的是：当偏爱变少时，你容易怀疑自己，而不是先判断这段关系是否值得继续投入。"},"professionalBasis":["从被看见方式看，你更容易被气质、审美、柔软感和亲和力记住。","从关系位置看，你重视被珍惜、被偏爱和被认真回应。","从资源审美看，你很适合把审美、状态、气质和人缘转成真实资源。"],"coreTensions":["需要偏爱","审美敏锐","情绪细腻","容易反复确认","要学会自我定价"],"suitableIf":["审美内容","情绪文案","穿搭美学","关系经营","个人品牌","高氛围感表达"],"cautionIf":["把冷淡理解成自己不够好","用讨好换安全感","过度在意别人眼光","只等别人给资源"],"indices":[{"label":"偏爱吸引力","value":94},{"label":"审美氛围感","value":91},{"label":"情绪感知力","value":88},{"label":"自我定价力","value":66}],"ifStay":"如果你一直把安全感交给别人的偏爱，你会在关系里忽冷忽热，也很容易被对方的态度牵着走。","ifChange":"如果你把吸引力变成作品、表达、审美资产和可持续人缘，你会越来越贵，而不是只等别人宠。","notRecommended":["把冷淡理解成自己不够好","用讨好换安全感","过度在意别人眼光","只等别人给资源"],"plan90":[{"title":"第1-2周：停止用回应定义价值","content":"记录让你不安的瞬间，先问事实是什么，再问自己真正需要什么。"},{"title":"第3-4周：把审美转成资产","content":"整理你的穿搭、审美、文案、情绪洞察，做成可持续输出的内容栏目。"},{"title":"第2个月：练习清晰表达需求","content":"不要用试探换安全感，直接说出你希望被怎样对待。"},{"title":"第3个月：建立自己的资源池","content":"把人缘、审美和表达转成作品、合作、收入或个人品牌，而不是停留在被喜欢。"}],"closing":"真正的贵妃命，不是等人偏爱一辈子，而是明白自己本来就值得被郑重对待。"},"B":{"typeName":"皇后命","subtitle":"你的底色是稳定、秩序、统筹和长期经营。你不是一定要最高的位置，但你需要被尊重、被信任，也需要关系有规矩。","posterSubtext":"你不是天生爱管事，你只是受不了混乱、敷衍和没有交代。","maturityScore":88,"coreConclusion":"你的答案显示，你在关系和事业里都很重视秩序、责任、长期性和体面。你擅长把混乱整理清楚，把关系经营稳定，把事情从情绪拉回规则和解决方案。你的优势是统筹力、可靠感、长期口碑；风险是为了大局一直压住自己的需求。 你真正想要的是稳定且被尊重的位置。你希望自己不是临时被需要的人，而是有长期话语权、有身份感、有边界和尊严的人。","diagnosis":"你的答案显示，你在关系和事业里都很重视秩序、责任、长期性和体面。你擅长把混乱整理清楚，把关系经营稳定，把事情从情绪拉回规则和解决方案。你的优势是统筹力、可靠感、长期口碑；风险是为了大局一直压住自己的需求。","whatYouReallyWant":"你真正想要的是稳定且被尊重的位置。你希望自己不是临时被需要的人，而是有长期话语权、有身份感、有边界和尊严的人。","mechanism":{"title":"中宫统筹机制","content":"皇后命的核心是秩序感和长期经营能力。你会自然承担整理、协调、修复和兜底的角色。你需要练习的是：不要把顾全大局变成牺牲自己，也不要把所有人的稳定都背到自己身上。"},"professionalBasis":["从权力边界看，你倾向用规则和分寸处理越界，而不是一味情绪化反击。","从冲突处理看，你能把混乱拆成责任、秩序和解决方案。","从事业野心看，你适合长期积累、组织统筹和需要口碑的路线。"],"coreTensions":["稳定可靠","责任感强","重视体面","容易顾全大局","需要被尊重"],"suitableIf":["团队管理","运营统筹","客户关系","项目管理","家庭/生活规划","长期品牌经营"],"cautionIf":["总替别人收拾残局","不敢说自己的委屈","用体面压住真实需求","把稳定看得比快乐还重要"],"indices":[{"label":"秩序统筹力","value":95},{"label":"长期经营力","value":92},{"label":"关系修复力","value":86},{"label":"自我优先度","value":63}],"ifStay":"如果你一直只做那个维持稳定的人，别人会依赖你，却未必知道你也需要被照顾。","ifChange":"如果你学会把规则说在前面，把需求摆到台面，你的稳定感会变成真正的话语权。","notRecommended":["总替别人收拾残局","不敢说自己的委屈","用体面压住真实需求","把稳定看得比快乐还重要"],"plan90":[{"title":"第1-2周：把责任分清楚","content":"列出你正在承担的关系和事务，标出哪些其实不该全部由你负责。"},{"title":"第3-4周：练习提出规则","content":"遇到模糊关系或模糊任务时，先说清边界、分工和期待。"},{"title":"第2个月：把统筹力可视化","content":"用表格、复盘、案例记录你的协调成果，让价值被看见。"},{"title":"第3个月：减少隐形牺牲","content":"每周至少拒绝一次不合理请求，把稳定留给值得的人和事。"}],"closing":"真正的皇后命，不是永远替所有人撑住场面，而是在秩序里也保留自己的位置。"},"C":{"typeName":"女帝命","subtitle":"你的底色是野心、主动权、掌控感和改写局面的欲望。你不甘心只是被安排，也很难接受别人替你定义人生。","posterSubtext":"你不是强势，你只是终于不想再把人生交给别人决定。","maturityScore":92,"coreConclusion":"你的答案显示，你对权力、位置、资源和选择权非常敏感。你不一定喜欢争，但你受不了一直处在被动、低位和替代品的位置。你很适合做需要判断、决策、突破和主导的事；风险是容易把所有关系都看成控制权问题，把自己逼得太紧。 你真正想要的是做主。不是所有人都听你的，而是你的命运、事业、关系和生活，不能长期由别人安排。","diagnosis":"你的答案显示，你对权力、位置、资源和选择权非常敏感。你不一定喜欢争，但你受不了一直处在被动、低位和替代品的位置。你很适合做需要判断、决策、突破和主导的事；风险是容易把所有关系都看成控制权问题，把自己逼得太紧。","whatYouReallyWant":"你真正想要的是做主。不是所有人都听你的，而是你的命运、事业、关系和生活，不能长期由别人安排。","mechanism":{"title":"女帝掌局机制","content":"女帝命的核心是强主动权和上升欲。你会本能地寻找更高的位置、更大的版图和更稳的资源控制力。你的天赋是战略判断和破局能力；你的课题是让强大变得可持续，不要为了赢把柔软、休息和信任全部牺牲掉。"},"professionalBasis":["从权力边界看，你很难接受被控制，会迅速争回主动权。","从事业野心看，你关注资源、影响力、赚钱效率和个人势能。","从终局剧本看，你最想证明自己不是配角，而是能成为人生主角。"],"coreTensions":["野心强","不甘低位","主动权需求高","容易紧绷","不愿被定义"],"suitableIf":["创业副业","管理岗位","商业策略","个人IP","高挑战项目","需要破局的赛道"],"cautionIf":["把示弱当失败","对自己过度苛刻","不信任别人","用控制感代替安全感"],"indices":[{"label":"掌局野心","value":96},{"label":"资源争取力","value":93},{"label":"破局行动力","value":90},{"label":"柔性连接力","value":62}],"ifStay":"如果你长期压抑自己的野心，你会越来越烦躁，也会对身边所有低效和控制异常敏感。","ifChange":"如果你把野心拆成目标、资源和行动路径，你会非常适合做能改变局面的事。","notRecommended":["把示弱当失败","对自己过度苛刻","不信任别人","用控制感代替安全感"],"plan90":[{"title":"第1-2周：写清你的版图","content":"把你真正想要的事业、钱、位置和自由度写下来，不再用无所谓掩饰。"},{"title":"第3-4周：选一个可控战场","content":"不要同时开太多局，先选一个最能出结果的方向集中突破。"},{"title":"第2个月：建立资源杠杆","content":"梳理人脉、技能、内容、渠道和资金，把努力变成可放大的系统。"},{"title":"第3个月：练习柔性领导","content":"让别人愿意跟随你，而不是只被你的强势推动。"}],"closing":"真正的女帝命，不是每一步都赢，而是你终于拥有选择战场的能力。"},"D":{"typeName":"长公主命","subtitle":"你的底色是清醒、距离感、自由和不被任何关系定义的尊严。你可以入局，但不会轻易把自己交出去。","posterSubtext":"你不是冷淡，你只是比很多人更早知道：自由也是一种富贵。","maturityScore":84,"coreConclusion":"你的答案显示，你对束缚、控制、过度亲密和身份规训非常敏感。你不一定想站到最高的位置，也不一定想被所有人偏爱；你更在乎能不能保留退路、边界、空间和自我完整性。你的优势是清醒、独立和选择权；风险是过早退开，错过值得深度连接的人和事。 你真正想要的是自由而体面地生活。你可以亲密，可以努力，也可以投入，但前提是你仍然是你自己。","diagnosis":"你的答案显示，你对束缚、控制、过度亲密和身份规训非常敏感。你不一定想站到最高的位置，也不一定想被所有人偏爱；你更在乎能不能保留退路、边界、空间和自我完整性。你的优势是清醒、独立和选择权；风险是过早退开，错过值得深度连接的人和事。","whatYouReallyWant":"你真正想要的是自由而体面地生活。你可以亲密，可以努力，也可以投入，但前提是你仍然是你自己。","mechanism":{"title":"自由贵气机制","content":"长公主命的核心不是逃避，而是高边界感和高选择权。你不喜欢被单一身份框住，也不愿为了关系、婚恋或世俗成功失去自己的节奏。你需要练习的是：保留自由的同时，也允许真正值得的人靠近。"},"professionalBasis":["从关系位置看，你需要亲密与边界同时存在，不想被关系完全捆住。","从资源审美看，你更重视自由时间、精神空间和可进可退的资产。","从终局剧本看，你不想被宫墙困住，更想拥有自己的天地。"],"coreTensions":["边界感强","自由需求高","清醒独立","距离感明显","需要允许连接"],"suitableIf":["自由职业","轻资产副业","独立内容","旅行体验","咨询服务","需要个人判断的工作"],"cautionIf":["把所有深度关系都看成束缚","过早抽离","不表达真实需求","用冷淡保护自己"],"indices":[{"label":"自由需求","value":95},{"label":"边界稳定度","value":91},{"label":"独立判断力","value":89},{"label":"亲密开放度","value":60}],"ifStay":"如果你一直只退到安全距离之外，你会很清醒，但也可能越来越难真正被理解。","ifChange":"如果你在自由和连接之间找到比例，你会拥有一种很稀缺的松弛贵气。","notRecommended":["把所有深度关系都看成束缚","过早抽离","不表达真实需求","用冷淡保护自己"],"plan90":[{"title":"第1-2周：定义你的不可牺牲项","content":"写下你最不能交出去的时间、空间、金钱和精神边界。"},{"title":"第3-4周：筛选值得靠近的人","content":"不是所有关系都会困住你，练习识别尊重你边界的人。"},{"title":"第2个月：建立自由资产","content":"为自由感配置真实支撑，比如副业、存款、技能、作品和可迁移关系。"},{"title":"第3个月：练习温和表达","content":"不要只用消失保护自己，试着清楚说出你的边界和在意。"}],"closing":"真正的长公主命，不是永远不入局，而是你有资格选择何时靠近、何时离开。"}},"secondaryNotes":{"A":{"B":"你的主原型是「贵妃命」，同时带有「皇后命」的影子。主结果代表你最稳定的关系和人生反应，副结果提醒你：所谓“命”，不是玄学定论，而是你习惯使用的安全感、权力感和自我保护方式。","C":"你的主原型是「贵妃命」，同时带有「女帝命」的影子。主结果代表你最稳定的关系和人生反应，副结果提醒你：所谓“命”，不是玄学定论，而是你习惯使用的安全感、权力感和自我保护方式。","D":"你的主原型是「贵妃命」，同时带有「长公主命」的影子。主结果代表你最稳定的关系和人生反应，副结果提醒你：所谓“命”，不是玄学定论，而是你习惯使用的安全感、权力感和自我保护方式。"},"B":{"A":"你的主原型是「皇后命」，同时带有「贵妃命」的影子。主结果代表你最稳定的关系和人生反应，副结果提醒你：所谓“命”，不是玄学定论，而是你习惯使用的安全感、权力感和自我保护方式。","C":"你的主原型是「皇后命」，同时带有「女帝命」的影子。主结果代表你最稳定的关系和人生反应，副结果提醒你：所谓“命”，不是玄学定论，而是你习惯使用的安全感、权力感和自我保护方式。","D":"你的主原型是「皇后命」，同时带有「长公主命」的影子。主结果代表你最稳定的关系和人生反应，副结果提醒你：所谓“命”，不是玄学定论，而是你习惯使用的安全感、权力感和自我保护方式。"},"C":{"A":"你的主原型是「女帝命」，同时带有「贵妃命」的影子。主结果代表你最稳定的关系和人生反应，副结果提醒你：所谓“命”，不是玄学定论，而是你习惯使用的安全感、权力感和自我保护方式。","B":"你的主原型是「女帝命」，同时带有「皇后命」的影子。主结果代表你最稳定的关系和人生反应，副结果提醒你：所谓“命”，不是玄学定论，而是你习惯使用的安全感、权力感和自我保护方式。","D":"你的主原型是「女帝命」，同时带有「长公主命」的影子。主结果代表你最稳定的关系和人生反应，副结果提醒你：所谓“命”，不是玄学定论，而是你习惯使用的安全感、权力感和自我保护方式。"},"D":{"A":"你的主原型是「长公主命」，同时带有「贵妃命」的影子。主结果代表你最稳定的关系和人生反应，副结果提醒你：所谓“命”，不是玄学定论，而是你习惯使用的安全感、权力感和自我保护方式。","B":"你的主原型是「长公主命」，同时带有「皇后命」的影子。主结果代表你最稳定的关系和人生反应，副结果提醒你：所谓“命”，不是玄学定论，而是你习惯使用的安全感、权力感和自我保护方式。","C":"你的主原型是「长公主命」，同时带有「女帝命」的影子。主结果代表你最稳定的关系和人生反应，副结果提醒你：所谓“命”，不是玄学定论，而是你习惯使用的安全感、权力感和自我保护方式。"}},"shareTemplate":["我测出来了：{{typeName}}","{{posterSubtext}}","{{secondaryLine}}","","你是贵妃命、皇后命还是女帝命？32题人格原型测试。"]};</script>
+    <script>
+(function () {
+  const app = document.getElementById("app");
+  const configPaths = ["./configs/site-config.json", "./configs/career-change.json"];
+
+  const state = {
+    config: null,
+    answers: {},
+    currentIndex: 0,
+    selected: null,
+    locked: false,
+    loadingStep: 0,
+    route: "home",
+    resultData: null,
+  };
+
+  const defaultLoadingMessages = [
+    "正在读取你的选择倾向...",
+    "正在识别隐藏动机...",
+    "正在计算结果分布...",
+    "正在生成专属报告...",
+    "分析完成。",
+  ];
+
+  init();
+
+  async function init() {
+    try {
+      state.config = await fetchConfig();
+      applyDocumentMeta(state.config);
+
+      const saved = sessionStorage.getItem(getStorageKey());
+      if (saved) {
+        state.answers = JSON.parse(saved);
+      }
+
+      routeFromHash();
+      window.addEventListener("hashchange", routeFromHash);
+    } catch (error) {
+      app.innerHTML = `
+        <div class="error">
+          <div>
+            <h1>测试加载失败</h1>
+            <p>请确认你是通过网页链接打开页面，而不是直接双击 HTML 文件。</p>
+          </div>
+        </div>
+      `;
+      console.error(error);
+    }
+  }
+
+  async function fetchConfig() {
+    if (window.__QUIZ_CONFIG__) return window.__QUIZ_CONFIG__;
+    let lastError;
+    for (const path of configPaths) {
+      try {
+        const response = await fetch(path, { cache: "no-store" });
+        if (!response.ok) throw new Error(`${path} ${response.status}`);
+        return response.json();
+      } catch (error) {
+        lastError = error;
+      }
+    }
+    throw lastError;
+  }
+
+  function applyDocumentMeta(cfg) {
+    const title = cfg.title || "趣味测试";
+    const description = cfg.metaDescription || cfg.subtitle || "完成测试，生成你的专属报告。";
+    document.title = title;
+    setMeta("name", "description", description);
+    setMeta("property", "og:title", title);
+    setMeta("property", "og:description", description);
+  }
+
+  function setMeta(attr, key, content) {
+    let node = document.querySelector(`meta[${attr}="${key}"]`);
+    if (!node) {
+      node = document.createElement("meta");
+      node.setAttribute(attr, key);
+      document.head.appendChild(node);
+    }
+    node.setAttribute("content", content);
+  }
+
+  function routeFromHash() {
+    const route = (location.hash || "#/").replace("#/", "") || "home";
+    renderRoute(route);
+  }
+
+  function navigate(route) {
+    const nextHash = `#/${route}`;
+    if (location.hash === nextHash) {
+      renderRoute(route);
+      return;
+    }
+    location.hash = nextHash;
+  }
+
+  function renderRoute(route) {
+    state.route = route;
+    if (route === "quiz") renderQuiz();
+    else if (route === "loading") startLoading();
+    else if (route === "result") renderResult();
+    else renderHome();
+  }
+
+  function renderShell(content, extraClass = "") {
+    app.innerHTML = `
+      <div class="shell">
+        <div class="top-rule"></div>
+        <section class="screen ${extraClass}">${content}</section>
+      </div>
+      <div id="toast" class="toast">已复制</div>
+    `;
+  }
+
+  function renderHome() {
+    const cfg = state.config;
+    renderShell(
+      `
+      <div class="home">
+        <div class="kicker"><span class="dot"></span><span>${text(cfg.kicker)}</span><span class="dot"></span></div>
+        <h1 class="hero-title">${text(cfg.title)}</h1>
+        <p class="hero-subtitle">${text(cfg.subtitle)}</p>
+        <div class="hairline"></div>
+        <div class="intro">
+          ${(cfg.intro || []).map((p, index) => `<p class="${index === cfg.intro.length - 1 ? "strong" : ""}">${text(p)}</p>`).join("")}
+        </div>
+        <div class="pill-grid">
+          ${(cfg.dimensions || []).map((item) => `<div class="pill">${text(item)}</div>`).join("")}
+        </div>
+        <button class="primary-btn" data-action="start">${text(cfg.startButton || "开始测试")}</button>
+        <p class="disclaimer">${text(cfg.disclaimer || "本测试为趣味内容，仅供娱乐参考。")}</p>
+      </div>
+      `,
+      "home"
+    );
+    const startButton = app.querySelector("[data-action='start']");
+    let started = false;
+    const startQuiz = () => {
+      if (started) return;
+      started = true;
+      state.answers = {};
+      state.currentIndex = 0;
+      sessionStorage.removeItem(getStorageKey());
+      navigate("quiz");
+    };
+    startButton.addEventListener("click", startQuiz);
+    startButton.addEventListener(
+      "touchend",
+      (event) => {
+        event.preventDefault();
+        startQuiz();
+      },
+      { passive: false }
+    );
+  }
+
+  function renderQuiz() {
+    const questions = state.config.questions || [];
+    const question = questions[state.currentIndex];
+    if (!question) {
+      renderHome();
+      return;
+    }
+
+    const progress = ((state.currentIndex + 1) / questions.length) * 100;
+
+    renderShell(
+      `
+      <div class="sticky-head">
+        <div class="quiz-meta">
+          <span>${String(state.currentIndex + 1).padStart(2, "0")} / ${questions.length}</span>
+          <span>${text(question.module)}</span>
+        </div>
+        <div class="progress-track"><div class="progress-bar" style="width:${progress}%"></div></div>
+      </div>
+      <div class="question-no">${String(state.currentIndex + 1).padStart(2, "0")}</div>
+      <h1 class="question-title">${text(question.text)}</h1>
+      <div class="options">
+        ${(question.options || [])
+          .map(
+            (option) => `
+            <button class="option" data-option="${text(option.key)}">
+              <span class="option-key">${text(option.key)}</span>
+              <span class="option-text">${text(option.text)}</span>
+            </button>
+          `
+          )
+          .join("")}
+      </div>
+      <p class="hint">${text(state.config.quizHint || "选择后自动进入下一题")}</p>
+      `,
+      "quiz-screen"
+    );
+
+    app.querySelectorAll("[data-option]").forEach((button) => {
+      button.addEventListener("click", () => selectOption(button.dataset.option));
+    });
+  }
+
+  function selectOption(key) {
+    if (state.locked) return;
+    state.locked = true;
+    state.selected = key;
+    const question = state.config.questions[state.currentIndex];
+    state.answers[question.id] = key;
+
+    app.querySelectorAll(".option").forEach((button) => {
+      const selected = button.dataset.option === key;
+      button.classList.toggle("selected", selected);
+      button.classList.toggle("dimmed", !selected);
+    });
+
+    window.setTimeout(() => {
+      if (state.currentIndex < state.config.questions.length - 1) {
+        state.currentIndex += 1;
+        state.locked = false;
+        state.selected = null;
+        renderQuiz();
+      } else {
+        sessionStorage.setItem(getStorageKey(), JSON.stringify(state.answers));
+        state.locked = false;
+        navigate("loading");
+      }
+    }, 420);
+  }
+
+  function startLoading() {
+    state.loadingStep = 0;
+    renderLoading("");
+    tickLoading();
+  }
+
+  function renderLoading(value) {
+    const loadingMessages = getLoadingMessages();
+    renderShell(
+      `
+      <div class="loading-card">
+        <div class="spinner"></div>
+        <div class="loading-text">${text(value)}<span class="cursor">|</span></div>
+        <div class="step-bars">
+          ${loadingMessages.map((_, index) => `<div class="step ${index < state.loadingStep ? "done" : ""}"><span></span></div>`).join("")}
+        </div>
+      </div>
+      `,
+      "loading-screen"
+    );
+  }
+
+  function tickLoading() {
+    if (state.route !== "loading") return;
+    const loadingMessages = getLoadingMessages();
+    if (state.loadingStep >= loadingMessages.length) {
+      window.setTimeout(() => navigate("result"), 700);
+      return;
+    }
+    const message = loadingMessages[state.loadingStep];
+    let chars = 0;
+    const interval = window.setInterval(() => {
+      chars += 1;
+      renderLoading(message.slice(0, chars));
+      if (chars >= message.length) {
+        window.clearInterval(interval);
+        window.setTimeout(() => {
+          state.loadingStep += 1;
+          tickLoading();
+        }, 520);
+      }
+    }, 35);
+  }
+
+  function renderResult() {
+    const saved = sessionStorage.getItem(getStorageKey());
+    if (saved) state.answers = JSON.parse(saved);
+    if (Object.keys(state.answers).length < state.config.questions.length) {
+      renderHome();
+      return;
+    }
+
+    const scored = scoreAnswers(state.answers);
+    const primary = state.config.results[scored.primary];
+    const secondary = scored.secondary ? state.config.secondaryNotes?.[scored.primary]?.[scored.secondary] : null;
+    const stage = getStage(primary.maturityScore);
+    const shareText = buildShareText(primary, secondary);
+    const compareLabels = state.config.compareLabels || ["如果继续原路", "如果换一种做法"];
+    state.resultData = { scored, primary, secondary, stage, shareText };
+
+    renderShell(
+      `
+      <article class="report">
+        <div class="kicker"><span class="dot"></span><span>${text(state.config.resultKicker || "Result Report")}</span><span class="dot"></span></div>
+        <h1 class="result-type">${text(primary.typeName)}</h1>
+        <p class="result-subtitle">${text(primary.subtitle)}</p>
+        <div class="stamp-row">
+          <div class="stamp"><strong>${text(primary.maturityScore)}</strong><span>${text(state.config.scoreLabel || "决策成熟度")}</span></div>
+          <div class="stamp"><strong>${text(stage)}</strong><span>${text(state.config.stageLabel || "当前行动阶段")}</span></div>
+        </div>
+
+        <section class="section">
+          <h2>你的答案分布</h2>
+          <div class="meters">
+            ${Object.entries(scored.counts)
+              .map(([key, value]) => {
+                const typeData = state.config.results[key];
+                const width = (value / state.config.questions.length) * 100;
+                return `
+                  <div>
+                    <div class="meter-head"><span>${text(key)} · ${text(typeData.typeName)}</span><span>${value} 题</span></div>
+                    <div class="meter-track"><div class="meter-fill" style="width:${width}%"></div></div>
+                  </div>
+                `;
+              })
+              .join("")}
+          </div>
+        </section>
+
+        ${secondary ? `<section class="section"><h2>副倾向提示</h2><div class="secondary-note">${text(secondary)}</div></section>` : ""}
+
+        <section class="section">
+          <h2>诊断结论</h2>
+          <div class="quote">${text(primary.coreConclusion)}</div>
+        </section>
+
+        <section class="section">
+          <h2>为什么你会这样</h2>
+          <p>${text(primary.diagnosis)}</p>
+          <p>${text(primary.whatYouReallyWant)}</p>
+        </section>
+
+        <section class="section">
+          <h2>${text(primary.mechanism.title)}</h2>
+          <p>${text(primary.mechanism.content)}</p>
+        </section>
+
+        ${renderParagraphSection("专业解读框架", primary.professionalBasis)}
+        ${renderTagSection("你的关键矛盾", primary.coreTensions)}
+        ${renderCompareListSection("适合推进的条件", "需要谨慎的信号", primary.suitableIf, primary.cautionIf)}
+
+        <section class="section">
+          <h2>关键指数</h2>
+          <div class="meters">
+            ${(primary.indices || [])
+              .map(
+                (item) => `
+                <div>
+                  <div class="meter-head"><span>${text(item.label)}</span><span>${text(item.value)}</span></div>
+                  <div class="meter-track"><div class="meter-fill" style="width:${number(item.value)}%"></div></div>
+                </div>
+              `
+              )
+              .join("")}
+          </div>
+        </section>
+
+        <section class="section">
+          <h2>两条路径对比</h2>
+          <div class="compare">
+            <div class="compare-card"><h3>${text(compareLabels[0])}</h3><p>${text(primary.ifStay)}</p></div>
+            <div class="compare-card"><h3>${text(compareLabels[1])}</h3><p>${text(primary.ifChange)}</p></div>
+          </div>
+        </section>
+
+        <section class="section">
+          <h2>现在最不建议你做</h2>
+          <div class="tag-list">${(primary.notRecommended || []).map((item) => `<span class="tag">${text(item)}</span>`).join("")}</div>
+        </section>
+
+        <section class="section">
+          <h2>未来 90 天验证方案</h2>
+          <div class="plan">
+            ${(primary.plan90 || [])
+              .map(
+                (item, index) => `
+                <div class="plan-card">
+                  <h3>${index + 1}. ${text(item.title)}</h3>
+                  <p>${text(item.content)}</p>
+                </div>
+              `
+              )
+              .join("")}
+          </div>
+        </section>
+
+        <section class="section">
+          <h2>最后一句话</h2>
+          <p>${text(primary.closing)}</p>
+        </section>
+
+        <div class="actions">
+          <button class="primary-btn" data-action="copy">${text(state.config.copyButton || "复制我的结果")}</button>
+          <button class="ghost-btn" data-action="restart">${text(state.config.restartButton || "重新测试")}</button>
+        </div>
+      </article>
+      `,
+      "result-screen"
+    );
+
+    app.querySelector("[data-action='copy']").addEventListener("click", () => copyShareText(shareText));
+    app.querySelector("[data-action='restart']").addEventListener("click", () => {
+      sessionStorage.removeItem(getStorageKey());
+      state.answers = {};
+      state.currentIndex = 0;
+      navigate("home");
+    });
+  }
+
+  function renderParagraphSection(title, paragraphs) {
+    if (!Array.isArray(paragraphs) || !paragraphs.length) return "";
+    return `
+      <section class="section">
+        <h2>${text(title)}</h2>
+        ${paragraphs.map((item) => `<p>${text(item)}</p>`).join("")}
+      </section>
+    `;
+  }
+
+  function renderTagSection(title, items) {
+    if (!Array.isArray(items) || !items.length) return "";
+    return `
+      <section class="section">
+        <h2>${text(title)}</h2>
+        <div class="tag-list">${items.map((item) => `<span class="tag">${text(item)}</span>`).join("")}</div>
+      </section>
+    `;
+  }
+
+  function renderCompareListSection(leftTitle, rightTitle, leftItems, rightItems) {
+    const hasLeft = Array.isArray(leftItems) && leftItems.length;
+    const hasRight = Array.isArray(rightItems) && rightItems.length;
+    if (!hasLeft && !hasRight) return "";
+    return `
+      <section class="section">
+        <h2>适用边界</h2>
+        <div class="compare">
+          <div class="compare-card">
+            <h3>${text(leftTitle)}</h3>
+            ${(leftItems || []).map((item) => `<p>${text(item)}</p>`).join("")}
+          </div>
+          <div class="compare-card">
+            <h3>${text(rightTitle)}</h3>
+            ${(rightItems || []).map((item) => `<p>${text(item)}</p>`).join("")}
+          </div>
+        </div>
+      </section>
+    `;
+  }
+
+  function scoreAnswers(answers) {
+    const counts = { A: 0, B: 0, C: 0, D: 0 };
+    Object.values(answers).forEach((key) => {
+      if (counts[key] !== undefined) counts[key] += 1;
+    });
+    const sorted = Object.entries(counts).sort((a, b) => b[1] - a[1]);
+    const threshold = state.config.secondaryThreshold ?? 2;
+    const primary = sorted[0][0];
+    const secondary = sorted[1][1] > 0 && sorted[0][1] - sorted[1][1] <= threshold ? sorted[1][0] : null;
+    return { counts, primary, secondary };
+  }
+
+  function getStage(score) {
+    const labels = state.config.stageLabels || [
+      { max: 45, label: "观察期" },
+      { max: 65, label: "验证期" },
+      { max: 82, label: "规划期" },
+      { max: 100, label: "行动期" },
+    ];
+    const hit = labels.find((item) => score <= item.max);
+    return hit ? hit.label : labels[labels.length - 1].label;
+  }
+
+  function buildShareText(primary, secondary) {
+    const template = state.config.shareTemplate || [
+      "我测出了：{{typeName}}",
+      "{{posterSubtext}}",
+      "{{secondaryLine}}",
+      "",
+      "{{title}}",
+    ];
+    const values = {
+      title: state.config.title,
+      typeName: primary.typeName,
+      posterSubtext: primary.posterSubtext,
+      secondary: secondary || "",
+      secondaryLine: secondary ? `副倾向：${secondary}` : "",
+    };
+    return template
+      .map((line) => fillTemplate(line, values))
+      .filter((line, index, arr) => line || arr[index - 1])
+      .join("\n")
+      .trim();
+  }
+
+  async function copyShareText(value) {
+    try {
+      await navigator.clipboard.writeText(value);
+      showToast("结果文案已复制");
+    } catch (error) {
+      showToast("复制失败，可长按手动复制");
+    }
+  }
+
+  function showToast(value) {
+    const toast = document.getElementById("toast");
+    if (!toast) return;
+    toast.textContent = value;
+    toast.classList.add("show");
+    window.setTimeout(() => toast.classList.remove("show"), 1600);
+  }
+
+  function getLoadingMessages() {
+    return state.config.loadingMessages || defaultLoadingMessages;
+  }
+
+  function getStorageKey() {
+    return `xhsTestAnswers:${state.config.slug || "default"}`;
+  }
+
+  function fillTemplate(template, values) {
+    return String(template).replace(/\{\{(\w+)\}\}/g, (_, key) => values[key] || "");
+  }
+
+  function number(value) {
+    const parsed = Number(value);
+    if (Number.isNaN(parsed)) return 0;
+    return Math.max(0, Math.min(100, parsed));
+  }
+
+  function text(value) {
+    return String(value ?? "")
+      .replace(/&/g, "&amp;")
+      .replace(/</g, "&lt;")
+      .replace(/>/g, "&gt;")
+      .replace(/"/g, "&quot;");
+  }
+})();
+
+    </script>
+  </body>
+</html>
