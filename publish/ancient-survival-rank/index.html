@@ -1,0 +1,623 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="format-detection" content="telephone=no" />
+    <title>你的城府段位，放在古代能活到第几集？｜小红书发布助手</title>
+    <style>
+      * { box-sizing: border-box; }
+      :root {
+        color-scheme: light;
+        --ink: #171717;
+        --muted: #666;
+        --line: #e6e2dc;
+        --paper: #fffaf4;
+        --bg: #f5f1ea;
+        --accent: #c7332b;
+        --accent-dark: #8f1f1b;
+        --green: #246c4f;
+      }
+      html { scroll-behavior: smooth; }
+      body {
+        margin: 0;
+        color: var(--ink);
+        background:
+          linear-gradient(180deg, rgba(255,255,255,.7), rgba(255,255,255,0) 220px),
+          var(--bg);
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Microsoft YaHei", sans-serif;
+        overflow-x: hidden;
+      }
+      button, input, textarea { font: inherit; }
+      .shell {
+        width: min(100%, 560px);
+        margin: 0 auto;
+        padding: 14px 12px 34px;
+      }
+      .hero {
+        position: sticky;
+        top: 0;
+        z-index: 5;
+        margin: -14px -12px 12px;
+        padding: 14px 12px 12px;
+        border-bottom: 1px solid rgba(0,0,0,.08);
+        background: rgba(245,241,234,.94);
+        backdrop-filter: blur(14px);
+      }
+      .eyebrow {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 10px;
+        margin-bottom: 8px;
+        color: var(--accent-dark);
+        font-size: 12px;
+        font-weight: 900;
+      }
+      .eyebrow span {
+        display: inline-flex;
+        align-items: center;
+        min-height: 26px;
+        padding: 0 10px;
+        border: 1px solid rgba(199,51,43,.28);
+        border-radius: 999px;
+        background: rgba(255,255,255,.6);
+      }
+      h1 {
+        margin: 0;
+        font-size: 24px;
+        line-height: 1.22;
+        letter-spacing: 0;
+      }
+      .topic {
+        margin-top: 6px;
+        color: var(--muted);
+        font-size: 13px;
+        line-height: 1.45;
+      }
+      .panel {
+        margin: 12px 0;
+        padding: 14px;
+        border: 1px solid var(--line);
+        border-radius: 8px;
+        background: rgba(255,250,244,.86);
+        box-shadow: 0 10px 26px rgba(60,42,20,.06);
+      }
+      .panel h2 {
+        margin: 0 0 10px;
+        font-size: 16px;
+        line-height: 1.35;
+        letter-spacing: 0;
+      }
+      .quick-actions {
+        display: grid;
+        grid-template-columns: minmax(0, 1fr);
+        gap: 8px;
+        min-width: 0;
+      }
+      .quick-actions > * { min-width: 0; }
+      .quick-actions .wide { grid-column: auto; }
+      .copy-btn,
+      .primary-link,
+      .asset-actions a {
+        min-height: 44px;
+        border: 1px solid var(--ink);
+        border-radius: 8px;
+        background: #fff;
+        color: var(--ink);
+        text-decoration: none;
+        font-weight: 900;
+        letter-spacing: 0;
+      }
+      .copy-btn {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        width: 100%;
+        min-width: 0;
+        padding: 0 12px;
+        text-align: center;
+        white-space: normal;
+        cursor: pointer;
+      }
+      .copy-btn.primary,
+      .primary-link {
+        background: var(--ink);
+        color: #fff;
+      }
+      .primary-link {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-top: 8px;
+        padding: 0 12px;
+      }
+      .helper {
+        margin: 10px 0 0;
+        color: var(--muted);
+        font-size: 12px;
+        line-height: 1.55;
+      }
+      .field-label {
+        display: flex;
+        justify-content: space-between;
+        gap: 10px;
+        margin: 12px 0 6px;
+        color: var(--muted);
+        font-size: 12px;
+        font-weight: 900;
+      }
+      .text-box {
+        width: 100%;
+        min-height: 54px;
+        resize: vertical;
+        padding: 11px 12px;
+        border: 1px solid var(--line);
+        border-radius: 8px;
+        background: #fff;
+        color: var(--ink);
+        font-size: 14px;
+        line-height: 1.62;
+      }
+      #bodyText { min-height: 280px; }
+      #fullText { min-height: 160px; }
+      .asset-card {
+        overflow: hidden;
+        margin: 0 0 12px;
+        border: 1px solid var(--line);
+        border-radius: 8px;
+        background: #fff;
+      }
+      .asset-head {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        padding: 10px 12px;
+        border-bottom: 1px solid var(--line);
+      }
+      .asset-head span {
+        display: grid;
+        place-items: center;
+        width: 34px;
+        height: 28px;
+        border-radius: 6px;
+        background: var(--accent);
+        color: #fff;
+        font-size: 12px;
+        font-weight: 900;
+      }
+      .asset-head strong {
+        font-size: 14px;
+      }
+      .image-link {
+        display: block;
+        background: #f2f2f2;
+      }
+      .image-link img {
+        display: block;
+        width: 100%;
+        height: auto;
+      }
+      .asset-actions {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 8px;
+        padding: 10px;
+      }
+      .asset-actions a {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        min-height: 40px;
+        font-size: 13px;
+      }
+      .checklist {
+        display: grid;
+        gap: 8px;
+        margin: 0;
+        padding: 0;
+        list-style: none;
+      }
+      .checklist li {
+        display: grid;
+        grid-template-columns: 22px 1fr;
+        gap: 8px;
+        align-items: start;
+        color: #333;
+        font-size: 13px;
+        line-height: 1.55;
+      }
+      .checklist span {
+        display: grid;
+        place-items: center;
+        width: 22px;
+        height: 22px;
+        border-radius: 50%;
+        background: rgba(36,108,79,.12);
+        color: var(--green);
+        font-weight: 900;
+      }
+      .footer-link {
+        overflow-wrap: anywhere;
+        color: var(--muted);
+        font-size: 12px;
+        line-height: 1.55;
+      }
+      .toast {
+        position: fixed;
+        left: 50%;
+        bottom: 18px;
+        z-index: 20;
+        width: min(92vw, 420px);
+        padding: 12px 14px;
+        border-radius: 8px;
+        background: rgba(23,23,23,.94);
+        color: #fff;
+        text-align: center;
+        font-size: 14px;
+        font-weight: 800;
+        transform: translate(-50%, 20px);
+        opacity: 0;
+        pointer-events: none;
+        transition: opacity .18s ease, transform .18s ease;
+      }
+      .toast.show {
+        opacity: 1;
+        transform: translate(-50%, 0);
+      }
+      @media (max-width: 380px) {
+        h1 { font-size: 22px; }
+      }
+    </style>
+  </head>
+  <body data-assistant="xhs-publish-assistant" data-build-id="1783690860044-668b35">
+    <div class="shell">
+      <header class="hero">
+        <div class="eyebrow">
+          <span>小红书发布助手</span>
+          <span>自用草稿</span>
+        </div>
+        <h1>你的城府段位，放在古代能活到第几集？</h1>
+        <div class="topic">你的城府段位，放在古代能活到第几集？</div>
+      </header>
+
+      <section class="panel">
+        <h2>发布前操作</h2>
+        <div class="quick-actions">
+          <button class="copy-btn primary" data-copy-target="titleText">复制标题</button>
+          <button class="copy-btn primary" data-copy-target="bodyText">复制正文</button>
+          <button class="copy-btn wide" data-copy-target="fullText">复制标题 + 正文</button>
+          <button class="copy-btn wide" data-copy-value="https://mini-test.github.io/xhs-test-h5/publish/ancient-survival-rank/">复制本页链接</button>
+        </div>
+        <a class="primary-link" href="https://mini-test.github.io/xhs-test-h5/test-ancient-survival-rank/" target="_blank" rel="noopener">打开完整测试链接</a>
+        <a class="primary-link" href="https://www.xiaohongshu.com/" target="_blank" rel="noopener">打开小红书</a>
+        <p class="helper">手机端建议先保存下方图片，再复制标题和正文到小红书发布。图片点“打开原图”后长按保存最稳。</p>
+      </section>
+
+      <section class="panel">
+        <h2>文案</h2>
+        <label class="field-label" for="titleText">标题 <span>18 字</span></label>
+        <textarea id="titleText" class="text-box" readonly>你的城府段位，放在古代能活到第几集？</textarea>
+        <label class="field-label" for="bodyText">正文</label>
+        <textarea id="bodyText" class="text-box" readonly>## 小红书笔记正文
+
+有些人放进古代剧，第一集刚进门，第三集就因为太真诚下线。  
+有些人能活久一点，因为知道少说多看。  
+有些人前期不显山不露水，中后段突然反转。  
+还有些人从一开始就不争一口气，争的是最后那盘棋。
+
+我做了一个 32 题测试，测的不是你会不会“害人”。
+
+真正高级的城府，也不是算计别人。
+
+而是你能不能在关系、冲突、试探、利益和情绪里：
+
+看懂话外音。  
+守住自己的边界。  
+不轻易交底。  
+不被别人牵着走。  
+知道什么时候该说，什么时候该停。
+
+测试结果会分成 4 种古代生存段位：
+
+三集下线直球型：太快解释，容易心软，底牌藏不住。  
+十二集自保型：少说多看，能避坑，但容易错过机会。  
+二十八集反转型：看懂人心和时机，关键时候能翻盘。  
+大结局执棋型：不争一时输赢，更会看终局和规则。
+
+完整测试共 32 道，会从 8 个维度拆：
+
+第一反应  
+情绪藏法  
+人情识别  
+冲突处理  
+利益边界  
+表达策略  
+职场局面  
+终局判断
+
+图里先放前 5 题。  
+别按“我希望自己很聪明”选，按你真的第一反应选。
+
+完整测试链接：  
+https://mini-test.github.io/xhs-test-h5/test-ancient-survival-rank/
+
+温馨说明：本测试是趣味人格分析，不鼓励操纵、欺骗或伤害他人，也不构成心理诊断、职业建议或关系建议，仅供自我观察和内容互动参考。
+
+#城府测试 #趣味测试 #性格测试 #心理测试 #人情世故 #职场生存 #小红书测试
+
+## 个人售卖详情
+
+你的城府段位，放在古代能活到第几集？
+
+这不是教你“算计别人”的测试。
+
+它更像一份人情世故自查：
+
+你是不是太容易交底。  
+你是不是一紧张就解释太多。  
+你是不是明明看懂了，却不敢行动。  
+你是不是总把情绪写在脸上。  
+你是不是在人情、利益和边界里经常吃亏。
+
+这份《32 题古代生存段位测试》会从 8 个维度帮你拆：
+
+第一反应：遇到试探时，你是急着解释，还是先观察。  
+情绪藏法：你能不能把情绪先放住，不让别人一眼看穿。  
+人情识别：你是否能看懂热情、夸奖、靠近背后的真实目的。  
+冲突处理：被甩锅、被针对时，你会怎么保护自己。  
+利益边界：你是否容易因为心软接下不属于自己的责任。  
+表达策略：你说话是太直、太绕，还是能留有余地。  
+职场局面：复杂环境里，你能不能看懂规则和风险。  
+终局判断：你是争一口气，还是看长期主动权。
+
+完成测试后，你会获得一份个人报告，内容包括：
+
+一句话结论  
+你的古代生存段位  
+四维能力画像  
+最容易吃亏的地方  
+人情关系里的风险点  
+适合你的表达和自保方式  
+未来 90 天修炼建议
+
+适合最近在职场、关系、人情往来里总觉得被消耗、被误解、被拿捏，或者想知道自己“到底有没有城府”的人。
+
+全程约 5 分钟。付款后自动发送测试链接，无需下载 App，无需登录，用手机浏览器即可完成。
+
+本商品为数字内容，不寄送实物。测试结果仅供娱乐和自我观察，不构成心理诊断、职业咨询、法律建议、关系建议或任何重大人生决策依据。</textarea>
+        <textarea id="fullText" class="text-box" readonly hidden>你的城府段位，放在古代能活到第几集？
+
+## 小红书笔记正文
+
+有些人放进古代剧，第一集刚进门，第三集就因为太真诚下线。  
+有些人能活久一点，因为知道少说多看。  
+有些人前期不显山不露水，中后段突然反转。  
+还有些人从一开始就不争一口气，争的是最后那盘棋。
+
+我做了一个 32 题测试，测的不是你会不会“害人”。
+
+真正高级的城府，也不是算计别人。
+
+而是你能不能在关系、冲突、试探、利益和情绪里：
+
+看懂话外音。  
+守住自己的边界。  
+不轻易交底。  
+不被别人牵着走。  
+知道什么时候该说，什么时候该停。
+
+测试结果会分成 4 种古代生存段位：
+
+三集下线直球型：太快解释，容易心软，底牌藏不住。  
+十二集自保型：少说多看，能避坑，但容易错过机会。  
+二十八集反转型：看懂人心和时机，关键时候能翻盘。  
+大结局执棋型：不争一时输赢，更会看终局和规则。
+
+完整测试共 32 道，会从 8 个维度拆：
+
+第一反应  
+情绪藏法  
+人情识别  
+冲突处理  
+利益边界  
+表达策略  
+职场局面  
+终局判断
+
+图里先放前 5 题。  
+别按“我希望自己很聪明”选，按你真的第一反应选。
+
+完整测试链接：  
+https://mini-test.github.io/xhs-test-h5/test-ancient-survival-rank/
+
+温馨说明：本测试是趣味人格分析，不鼓励操纵、欺骗或伤害他人，也不构成心理诊断、职业建议或关系建议，仅供自我观察和内容互动参考。
+
+#城府测试 #趣味测试 #性格测试 #心理测试 #人情世故 #职场生存 #小红书测试
+
+## 个人售卖详情
+
+你的城府段位，放在古代能活到第几集？
+
+这不是教你“算计别人”的测试。
+
+它更像一份人情世故自查：
+
+你是不是太容易交底。  
+你是不是一紧张就解释太多。  
+你是不是明明看懂了，却不敢行动。  
+你是不是总把情绪写在脸上。  
+你是不是在人情、利益和边界里经常吃亏。
+
+这份《32 题古代生存段位测试》会从 8 个维度帮你拆：
+
+第一反应：遇到试探时，你是急着解释，还是先观察。  
+情绪藏法：你能不能把情绪先放住，不让别人一眼看穿。  
+人情识别：你是否能看懂热情、夸奖、靠近背后的真实目的。  
+冲突处理：被甩锅、被针对时，你会怎么保护自己。  
+利益边界：你是否容易因为心软接下不属于自己的责任。  
+表达策略：你说话是太直、太绕，还是能留有余地。  
+职场局面：复杂环境里，你能不能看懂规则和风险。  
+终局判断：你是争一口气，还是看长期主动权。
+
+完成测试后，你会获得一份个人报告，内容包括：
+
+一句话结论  
+你的古代生存段位  
+四维能力画像  
+最容易吃亏的地方  
+人情关系里的风险点  
+适合你的表达和自保方式  
+未来 90 天修炼建议
+
+适合最近在职场、关系、人情往来里总觉得被消耗、被误解、被拿捏，或者想知道自己“到底有没有城府”的人。
+
+全程约 5 分钟。付款后自动发送测试链接，无需下载 App，无需登录，用手机浏览器即可完成。
+
+本商品为数字内容，不寄送实物。测试结果仅供娱乐和自我观察，不构成心理诊断、职业咨询、法律建议、关系建议或任何重大人生决策依据。</textarea>
+      </section>
+
+      <section class="panel">
+        <h2>图片素材</h2>
+        
+      <article class="asset-card">
+        <div class="asset-head">
+          <span>01</span>
+          <strong>封面图</strong>
+        </div>
+        <a class="image-link" href="./cover.png" target="_blank" rel="noopener">
+          <img src="./cover.png" alt="封面图" loading="lazy" />
+        </a>
+        <div class="asset-actions">
+          <a href="./cover.png" target="_blank" rel="noopener">打开原图</a>
+          <a href="./cover.png" download>下载图片</a>
+        </div>
+      </article>
+    
+
+      <article class="asset-card">
+        <div class="asset-head">
+          <span>02</span>
+          <strong>题目图 1</strong>
+        </div>
+        <a class="image-link" href="./questions-01.png" target="_blank" rel="noopener">
+          <img src="./questions-01.png" alt="题目图 1" loading="lazy" />
+        </a>
+        <div class="asset-actions">
+          <a href="./questions-01.png" target="_blank" rel="noopener">打开原图</a>
+          <a href="./questions-01.png" download>下载图片</a>
+        </div>
+      </article>
+    
+
+      <article class="asset-card">
+        <div class="asset-head">
+          <span>03</span>
+          <strong>题目图 2</strong>
+        </div>
+        <a class="image-link" href="./questions-02.png" target="_blank" rel="noopener">
+          <img src="./questions-02.png" alt="题目图 2" loading="lazy" />
+        </a>
+        <div class="asset-actions">
+          <a href="./questions-02.png" target="_blank" rel="noopener">打开原图</a>
+          <a href="./questions-02.png" download>下载图片</a>
+        </div>
+      </article>
+    
+
+      <article class="asset-card">
+        <div class="asset-head">
+          <span>04</span>
+          <strong>选项图</strong>
+        </div>
+        <a class="image-link" href="./options.png" target="_blank" rel="noopener">
+          <img src="./options.png" alt="选项图" loading="lazy" />
+        </a>
+        <div class="asset-actions">
+          <a href="./options.png" target="_blank" rel="noopener">打开原图</a>
+          <a href="./options.png" download>下载图片</a>
+        </div>
+      </article>
+    
+
+      <article class="asset-card">
+        <div class="asset-head">
+          <span>05</span>
+          <strong>结果模糊图</strong>
+        </div>
+        <a class="image-link" href="./result-blur.png" target="_blank" rel="noopener">
+          <img src="./result-blur.png" alt="结果模糊图" loading="lazy" />
+        </a>
+        <div class="asset-actions">
+          <a href="./result-blur.png" target="_blank" rel="noopener">打开原图</a>
+          <a href="./result-blur.png" download>下载图片</a>
+        </div>
+      </article>
+    
+      </section>
+
+      <section class="panel">
+        <h2>发布检查</h2>
+        <ul class="checklist">
+          <li><span>1</span><div>第一张放封面图，后面按顺序放题目图和结果图。</div></li>
+          <li><span>2</span><div>正文里的完整测试链接保留，方便用户从笔记跳到 H5。</div></li>
+          <li><span>3</span><div>发出前检查标题、标签和图片顺序，避免把预览页当成正式测试页。</div></li>
+        </ul>
+      </section>
+
+      <section class="panel">
+        <h2>链接</h2>
+        <div class="footer-link">https://mini-test.github.io/xhs-test-h5/publish/ancient-survival-rank/</div>
+      </section>
+    </div>
+
+    <div id="toast" class="toast" role="status" aria-live="polite"></div>
+
+    <script>
+      const toast = document.getElementById("toast");
+      let toastTimer = null;
+
+      document.querySelectorAll("[data-copy-target], [data-copy-value]").forEach((button) => {
+        button.addEventListener("click", async () => {
+          const targetId = button.getAttribute("data-copy-target");
+          const directValue = button.getAttribute("data-copy-value");
+          const target = targetId ? document.getElementById(targetId) : null;
+          const value = directValue || (target ? target.value : "");
+          const ok = await copyText(value);
+          showToast(ok ? "已复制，可以去小红书粘贴了" : "复制失败，请长按文本手动复制");
+        });
+      });
+
+      async function copyText(value) {
+        try {
+          if (navigator.clipboard && window.isSecureContext) {
+            await navigator.clipboard.writeText(value);
+            return true;
+          }
+        } catch {}
+
+        const helper = document.createElement("textarea");
+        helper.value = value;
+        helper.setAttribute("readonly", "");
+        helper.style.position = "fixed";
+        helper.style.left = "-9999px";
+        document.body.appendChild(helper);
+        helper.select();
+        helper.setSelectionRange(0, helper.value.length);
+        let ok = false;
+        try {
+          ok = document.execCommand("copy");
+        } catch {}
+        document.body.removeChild(helper);
+        return ok;
+      }
+
+      function showToast(message) {
+        toast.textContent = message;
+        toast.classList.add("show");
+        clearTimeout(toastTimer);
+        toastTimer = setTimeout(() => toast.classList.remove("show"), 1800);
+      }
+    </script>
+  </body>
+</html>
