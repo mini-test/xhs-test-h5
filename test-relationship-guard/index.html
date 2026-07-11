@@ -1,0 +1,1125 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <meta name="description" content="完成32道人际边界测试，生成你的关系风险画像、识别信号、边界建议和未来30天行动方案。" />
+    <meta property="og:title" content="你在人际关系里，最该防谁？" />
+    <meta property="og:description" content="完成32道人际边界测试，生成你的关系风险画像、识别信号、边界建议和未来30天行动方案。" />
+    <title>你在人际关系里，最该防谁？</title>
+    <style>
+:root {
+  --bg: #fbfaf7;
+  --paper: #fffefd;
+  --ink: #20242a;
+  --muted: #65707d;
+  --line: #d9d4ca;
+  --line-strong: #b9afa0;
+  --accent: #9b4339;
+  --accent-soft: #f1dfd7;
+  --gold: #c0964d;
+  --sage: #66795f;
+  --blue: #526a86;
+  --shadow: 0 16px 36px rgba(60, 47, 38, 0.1);
+  --radius: 8px;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  min-height: 100%;
+  background:
+    linear-gradient(rgba(32, 36, 42, 0.035) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(32, 36, 42, 0.035) 1px, transparent 1px),
+    var(--bg);
+  background-size: 24px 24px;
+}
+
+body {
+  min-height: 100vh;
+  margin: 0;
+  color: var(--ink);
+  font-family:
+    "PingFang SC",
+    "Microsoft YaHei",
+    "Noto Sans SC",
+    system-ui,
+    -apple-system,
+    BlinkMacSystemFont,
+    sans-serif;
+  letter-spacing: 0;
+}
+
+button {
+  font: inherit;
+}
+
+.shell {
+  width: min(100%, 480px);
+  min-height: 100vh;
+  margin: 0 auto;
+  background: rgba(251, 250, 247, 0.88);
+}
+
+.top-rule {
+  height: 4px;
+  background: var(--accent);
+}
+
+.screen {
+  min-height: calc(100vh - 4px);
+  padding: 28px 22px 32px;
+}
+
+.home {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.kicker {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  color: var(--muted);
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  font-size: 11px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+.dot {
+  width: 7px;
+  height: 7px;
+  background: var(--accent);
+  border-radius: 50%;
+}
+
+.hero-title {
+  margin: 26px 0 14px;
+  color: var(--ink);
+  font-size: 30px;
+  line-height: 1.2;
+  text-align: center;
+  font-weight: 800;
+}
+
+.hero-subtitle {
+  margin: 0 auto 28px;
+  max-width: 340px;
+  color: var(--muted);
+  font-size: 15px;
+  line-height: 1.75;
+  text-align: center;
+}
+
+.hairline {
+  width: 64px;
+  height: 1px;
+  margin: 0 auto 30px;
+  background: var(--line-strong);
+}
+
+.intro {
+  margin: 0 auto;
+  max-width: 380px;
+}
+
+.intro p {
+  margin: 0 0 15px;
+  color: rgba(32, 36, 42, 0.82);
+  font-size: 15px;
+  line-height: 1.8;
+}
+
+.intro .strong {
+  color: var(--accent);
+  font-weight: 700;
+}
+
+.pill-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px;
+  margin: 28px 0;
+}
+
+.pill {
+  min-height: 42px;
+  display: grid;
+  place-items: center;
+  border: 1px solid var(--line);
+  color: var(--muted);
+  background: rgba(255, 255, 255, 0.44);
+  font-size: 13px;
+}
+
+.primary-btn,
+.ghost-btn,
+.copy-btn {
+  width: 100%;
+  min-height: 48px;
+  border: 1px solid var(--ink);
+  border-radius: 0;
+  cursor: pointer;
+  transition: transform 150ms ease, background 150ms ease, color 150ms ease, border-color 150ms ease;
+}
+
+.primary-btn {
+  background: var(--ink);
+  color: #fff;
+  font-weight: 700;
+}
+
+.ghost-btn,
+.copy-btn {
+  background: transparent;
+  color: var(--ink);
+}
+
+.primary-btn:active,
+.ghost-btn:active,
+.copy-btn:active,
+.option:active {
+  transform: translateY(1px);
+}
+
+.disclaimer {
+  margin: 18px auto 0;
+  max-width: 340px;
+  color: var(--muted);
+  font-size: 12px;
+  line-height: 1.65;
+  text-align: center;
+}
+
+.quiz-screen {
+  padding-top: 0;
+}
+
+.sticky-head {
+  position: sticky;
+  top: 0;
+  z-index: 5;
+  margin: 0 -22px 26px;
+  padding: 14px 22px 12px;
+  background: rgba(251, 250, 247, 0.95);
+  border-bottom: 1px solid var(--line);
+  backdrop-filter: blur(12px);
+}
+
+.quiz-meta {
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+  color: var(--muted);
+  font-size: 12px;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+}
+
+.progress-track {
+  height: 4px;
+  margin-top: 10px;
+  background: rgba(32, 36, 42, 0.09);
+}
+
+.progress-bar {
+  height: 100%;
+  background: var(--accent);
+  transition: width 260ms ease;
+}
+
+.question-no {
+  color: rgba(155, 67, 57, 0.18);
+  font-size: 48px;
+  line-height: 1;
+  font-weight: 800;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+}
+
+.question-title {
+  margin: 18px 0 24px;
+  font-size: 22px;
+  line-height: 1.5;
+  font-weight: 750;
+}
+
+.options {
+  display: grid;
+  gap: 12px;
+}
+
+.option {
+  min-height: 66px;
+  display: grid;
+  grid-template-columns: 30px 1fr;
+  gap: 12px;
+  align-items: start;
+  width: 100%;
+  padding: 15px;
+  border: 1px solid var(--line);
+  background: rgba(255, 255, 255, 0.68);
+  color: var(--ink);
+  text-align: left;
+  cursor: pointer;
+  transition: background 160ms ease, border-color 160ms ease, color 160ms ease, opacity 160ms ease;
+}
+
+.option-key {
+  display: grid;
+  place-items: center;
+  width: 28px;
+  height: 28px;
+  border: 1px solid var(--line-strong);
+  font-size: 13px;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+}
+
+.option-text {
+  padding-top: 2px;
+  font-size: 15px;
+  line-height: 1.55;
+}
+
+.option.selected {
+  border-color: var(--accent);
+  background: var(--accent);
+  color: #fff;
+}
+
+.option.selected .option-key {
+  border-color: rgba(255, 255, 255, 0.8);
+}
+
+.option.dimmed {
+  opacity: 0.42;
+}
+
+.hint {
+  margin: 18px 0 0;
+  color: var(--muted);
+  font-size: 12px;
+  text-align: center;
+}
+
+.loading-screen {
+  display: grid;
+  place-items: center;
+}
+
+.loading-card {
+  width: 100%;
+  max-width: 360px;
+  text-align: center;
+}
+
+.spinner {
+  width: 54px;
+  height: 54px;
+  margin: 0 auto 24px;
+  border: 2px solid var(--line);
+  border-top-color: var(--accent);
+  border-radius: 50%;
+  animation: spin 850ms linear infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.loading-text {
+  min-height: 54px;
+  color: var(--accent);
+  font-size: 17px;
+  line-height: 1.6;
+  font-weight: 700;
+}
+
+.step-bars {
+  display: grid;
+  gap: 8px;
+  margin-top: 28px;
+}
+
+.step {
+  height: 4px;
+  overflow: hidden;
+  background: rgba(32, 36, 42, 0.09);
+}
+
+.step span {
+  display: block;
+  height: 100%;
+  width: 0;
+  background: var(--accent);
+  transition: width 300ms ease;
+}
+
+.step.done span {
+  width: 100%;
+}
+
+.result-screen {
+  padding: 22px 18px 30px;
+}
+
+.report {
+  padding: 22px 16px 18px;
+  border: 1px solid var(--line);
+  background: var(--paper);
+  box-shadow: var(--shadow);
+}
+
+.result-type {
+  margin: 8px 0 8px;
+  color: var(--accent);
+  font-size: 30px;
+  line-height: 1.15;
+  font-weight: 850;
+  text-align: center;
+}
+
+.result-subtitle {
+  margin: 0 auto 20px;
+  color: var(--muted);
+  font-size: 15px;
+  line-height: 1.7;
+  text-align: center;
+}
+
+.stamp-row {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px;
+  margin: 18px 0 20px;
+}
+
+.stamp {
+  padding: 12px 10px;
+  border: 1px solid var(--line);
+  background: #fbfaf7;
+}
+
+.stamp strong {
+  display: block;
+  margin-bottom: 4px;
+  color: var(--ink);
+  font-size: 20px;
+}
+
+.stamp span {
+  color: var(--muted);
+  font-size: 12px;
+}
+
+.section {
+  padding: 20px 0;
+  border-top: 1px solid var(--line);
+}
+
+.section h2 {
+  margin: 0 0 12px;
+  font-size: 18px;
+  color: var(--ink);
+}
+
+.section p {
+  margin: 0 0 12px;
+  color: rgba(32, 36, 42, 0.82);
+  font-size: 15px;
+  line-height: 1.85;
+}
+
+.quote {
+  padding: 15px;
+  border-left: 3px solid var(--accent);
+  background: var(--accent-soft);
+  color: #5b2d27;
+  line-height: 1.8;
+  font-weight: 700;
+}
+
+.meters {
+  display: grid;
+  gap: 14px;
+}
+
+.meter-head {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 7px;
+  color: var(--muted);
+  font-size: 13px;
+}
+
+.meter-track {
+  height: 8px;
+  background: rgba(32, 36, 42, 0.08);
+}
+
+.meter-fill {
+  height: 100%;
+  background: var(--accent);
+}
+
+.compare {
+  display: grid;
+  gap: 10px;
+}
+
+.compare-card {
+  padding: 14px;
+  border: 1px solid var(--line);
+  background: #fbfaf7;
+}
+
+.compare-card h3,
+.plan-card h3 {
+  margin: 0 0 8px;
+  font-size: 15px;
+}
+
+.compare-card p,
+.plan-card p {
+  font-size: 14px;
+}
+
+.tag-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.tag {
+  padding: 7px 9px;
+  border: 1px solid var(--line);
+  background: #fbfaf7;
+  color: var(--muted);
+  font-size: 13px;
+}
+
+.plan {
+  display: grid;
+  gap: 10px;
+}
+
+.plan-card {
+  padding: 14px;
+  border: 1px solid var(--line);
+  background: #fbfaf7;
+}
+
+.secondary-note {
+  padding: 14px;
+  border: 1px dashed var(--line-strong);
+  background: rgba(192, 150, 77, 0.12);
+  line-height: 1.75;
+  font-size: 14px;
+}
+
+.actions {
+  display: grid;
+  gap: 10px;
+  margin-top: 18px;
+}
+
+.toast {
+  position: fixed;
+  left: 50%;
+  bottom: 22px;
+  z-index: 20;
+  transform: translateX(-50%);
+  padding: 10px 14px;
+  background: var(--ink);
+  color: #fff;
+  font-size: 13px;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 180ms ease;
+}
+
+.toast.show {
+  opacity: 1;
+}
+
+.error {
+  display: grid;
+  place-items: center;
+  min-height: 100vh;
+  padding: 24px;
+  text-align: center;
+}
+
+.error p {
+  color: var(--muted);
+  line-height: 1.7;
+}
+
+@media (min-width: 700px) {
+  body {
+    padding: 28px 0;
+  }
+
+  .shell {
+    min-height: calc(100vh - 56px);
+    border: 1px solid var(--line);
+    box-shadow: var(--shadow);
+  }
+
+  .screen {
+    min-height: calc(100vh - 60px);
+  }
+}
+
+    </style>
+  </head>
+  <body>
+    <main id="app" aria-live="polite"></main>
+    <script>window.__QUIZ_CONFIG__ = {"slug":"test-relationship-guard","topic":"你在人际关系里，最该防谁？","kicker":"32-Q Relationship Boundary Test","title":"你在人际关系里，最该防谁？","subtitle":"32 道真实关系情境题，测出你最容易被哪类人消耗：情绪债主、利益索取者、信息操控者，还是熟人式越界者。","metaDescription":"完成32道人际边界测试，生成你的关系风险画像、识别信号、边界建议和未来30天行动方案。","startButton":"开始测试","resultKicker":"Relationship Boundary Report","quizHint":"按真实反应选，不按理想中的高情商人设选","copyButton":"复制我的结果","restartButton":"重新测试","scoreLabel":"边界清醒度","stageLabel":"当前防御阶段","stageLabels":[{"max":55,"label":"容易心软期"},{"max":72,"label":"边界觉察期"},{"max":86,"label":"关系筛选期"},{"max":100,"label":"清醒设防期"}],"compareLabels":["如果继续习惯性忍让","如果开始建立边界"],"disclaimer":"本测试为趣味人际关系观察工具，只讨论关系边界、沟通习惯和自我保护倾向，不用于诊断任何人，也不建议给现实中的具体对象贴标签。结果仅供娱乐和自我复盘参考。","secondaryThreshold":4,"dimensions":["情绪勒索","利益索取","信息操控","边界侵占"],"intro":["很多人关系里吃亏，不是因为傻，而是因为太怕自己不够好、太想把关系维持体面。","真正消耗你的，往往不是明面上的坏人，而是那些让你内疚、让你付出、让你站队，或者借着熟悉一点点越界的人。","这 32 道题会从初始信任、边界测试、情绪反应、利益交换、信息圈层、冲突处理、亲密关系和自我盲区 8 个维度，生成你的人际防御报告。"],"loadingMessages":["正在读取你的关系反应...","正在识别你最容易心软的场景...","正在分析你的边界薄弱点...","正在生成你的人际风险画像...","分析完成。"],"questions":[{"id":1,"module":"初始信任","text":"刚认识一个人，对方很快向你诉苦，说自己最近真的没人懂。你最容易：","options":[{"key":"A","text":"心软，忍不住多安慰几句，怕自己显得冷漠"},{"key":"B","text":"想帮对方解决现实问题，甚至主动介绍资源"},{"key":"C","text":"先听TA怎么讲别人，从细节里判断这个人靠不靠谱"},{"key":"D","text":"被对方的亲近感带进去，很快把聊天频率提上来"}]},{"id":2,"module":"初始信任","text":"朋友突然说：我只信你，你别告诉别人。你的第一反应更像：","options":[{"key":"A","text":"有点被需要的感动，觉得不能辜负这份信任"},{"key":"B","text":"想知道这件事具体要你帮到什么程度"},{"key":"C","text":"警觉TA是不是在用秘密把你绑到同一边"},{"key":"D","text":"不好意思拒绝，只好先答应替TA保密"}]},{"id":3,"module":"初始信任","text":"一个人第一次见面就夸你特别懂事、特别善良。你更可能：","options":[{"key":"A","text":"觉得被看见了，于是对TA更客气一点"},{"key":"B","text":"观察TA后面会不会顺势提要求"},{"key":"C","text":"怀疑这是不是一种快速拉近关系的铺垫"},{"key":"D","text":"放松戒备，觉得对方应该挺好相处"}]},{"id":4,"module":"初始信任","text":"你最容易相信哪一种人？","options":[{"key":"A","text":"看起来很脆弱、很需要被照顾的人"},{"key":"B","text":"表达很直接，说清楚需要什么回报什么的人"},{"key":"C","text":"很会分析局势、说话总能说到点上的人"},{"key":"D","text":"相处很自然，很快让你觉得像熟人一样的人"}]},{"id":5,"module":"边界测试","text":"别人临时让你帮一个忙，但你其实已经很累了。你最常见的反应是：","options":[{"key":"A","text":"答应，因为拒绝后会一直内疚"},{"key":"B","text":"先衡量这件事会不会影响自己的时间和收益"},{"key":"C","text":"先问清楚TA为什么找我，而不是找别人"},{"key":"D","text":"嘴上说可以，心里却很烦但不敢表现出来"}]},{"id":6,"module":"边界测试","text":"对方说：这点小事你都不愿意帮我？你会更容易被哪句话击中？","options":[{"key":"A","text":"是不是我真的太自私了"},{"key":"B","text":"TA是不是只在要用我的时候才想起我"},{"key":"C","text":"TA这句话是不是在逼我站队或表忠心"},{"key":"D","text":"关系都这么近了，我拒绝是不是太难看"}]},{"id":7,"module":"边界测试","text":"有人开始频繁打听你的收入、人脉、感情和家庭情况。你会：","options":[{"key":"A","text":"觉得对方关心你，不太好意思防备"},{"key":"B","text":"判断这些信息会不会被TA拿去换利益"},{"key":"C","text":"减少透露，观察TA是否也在套别人的话"},{"key":"D","text":"先说一点，毕竟关系熟了不说也尴尬"}]},{"id":8,"module":"边界测试","text":"你最容易在哪个地方失守？","options":[{"key":"A","text":"别人一委屈，你就开始解释和补偿"},{"key":"B","text":"别人一提机会，你就投入时间精力"},{"key":"C","text":"别人一讲内幕，你就想知道更多"},{"key":"D","text":"别人一靠近，你就默认TA可以越过一点边界"}]},{"id":9,"module":"情绪反应","text":"当你拒绝别人后，对方明显冷淡下来。你最可能：","options":[{"key":"A","text":"反复想是不是自己说得太重了"},{"key":"B","text":"觉得这段关系可能本来就带有目的"},{"key":"C","text":"分析对方冷淡是不是一种惩罚手段"},{"key":"D","text":"主动缓和气氛，避免关系变僵"}]},{"id":10,"module":"情绪反应","text":"你最怕别人怎么评价你？","options":[{"key":"A","text":"不近人情、没良心、只顾自己"},{"key":"B","text":"没价值、不值得合作、帮不上忙"},{"key":"C","text":"不站队、不忠诚、心里有别的算盘"},{"key":"D","text":"变了、疏远了、没有以前那么亲近"}]},{"id":11,"module":"情绪反应","text":"有人连续几天给你发负面情绪，你最容易：","options":[{"key":"A","text":"认真接住，哪怕自己也被拖得很累"},{"key":"B","text":"开始烦，因为对方没有实际改变行动"},{"key":"C","text":"留意TA是不是只对你释放情绪却对别人很体面"},{"key":"D","text":"把回复变成习惯，不回就有负罪感"}]},{"id":12,"module":"情绪反应","text":"你心里最难承受的关系状态是：","options":[{"key":"A","text":"别人因为你不帮忙而难过"},{"key":"B","text":"你付出很多却没有任何回报"},{"key":"C","text":"你被卷进别人的是非和站队"},{"key":"D","text":"你想退后一点，对方却越来越靠近"}]},{"id":13,"module":"利益交换","text":"朋友找你借钱或借资源，你最容易：","options":[{"key":"A","text":"先考虑对方是不是走投无路了"},{"key":"B","text":"先问用途、期限、凭什么还"},{"key":"C","text":"先判断中间有没有信息不透明的地方"},{"key":"D","text":"因为关系近，不好意思把规则说得太清楚"}]},{"id":14,"module":"利益交换","text":"一个人总说以后有机会一定带你，但眼下经常让你先付出。你会：","options":[{"key":"A","text":"怕错过关系里的信任，所以继续撑一撑"},{"key":"B","text":"要求看到具体回报、时间表和责任边界"},{"key":"C","text":"怀疑TA是不是在用模糊承诺调动你"},{"key":"D","text":"不好意思突然计较，怕显得小气"}]},{"id":15,"module":"利益交换","text":"你最容易被哪种承诺吸引？","options":[{"key":"A","text":"我不会忘记你对我的好"},{"key":"B","text":"这件事成了，你肯定也有份"},{"key":"C","text":"我知道很多别人不知道的信息"},{"key":"D","text":"我们都这么熟了，不用分那么清楚"}]},{"id":16,"module":"利益交换","text":"当你发现自己总在帮同一个人收拾烂摊子，你更可能先想到：","options":[{"key":"A","text":"TA是不是太可怜了，没人帮就真的撑不住"},{"key":"B","text":"这段关系的投入产出已经明显失衡"},{"key":"C","text":"TA是不是故意把责任转移给我"},{"key":"D","text":"是不是因为我之前太好说话，才让TA越来越自然"}]},{"id":17,"module":"信息与圈层","text":"有人把另一个朋友的坏话告诉你，还说只跟你讲。你会：","options":[{"key":"A","text":"担心如果不回应，对方会觉得你不站在TA这边"},{"key":"B","text":"觉得这类信息没实际价值，不想卷进去"},{"key":"C","text":"立刻警觉：TA可能也会这样讲我"},{"key":"D","text":"表面听着，心里想着别把关系弄尴尬"}]},{"id":18,"module":"信息与圈层","text":"你最容易被哪种人带节奏？","options":[{"key":"A","text":"反复强调自己受了很多委屈的人"},{"key":"B","text":"总能给你画出机会和资源的人"},{"key":"C","text":"掌握很多信息、很会判断人心的人"},{"key":"D","text":"跟你关系很近、讲话很自然的人"}]},{"id":19,"module":"信息与圈层","text":"别人问你：你觉得TA这个人怎么样？你最容易：","options":[{"key":"A","text":"怕伤害提问者感受，说得很委婉"},{"key":"B","text":"只讲事实，不做情绪判断"},{"key":"C","text":"先问TA为什么想知道，避免被当工具"},{"key":"D","text":"随口说一点真实想法，后来才发现不该说"}]},{"id":20,"module":"信息与圈层","text":"一个人让你在两边关系中间传话。你更容易：","options":[{"key":"A","text":"觉得对方信任你，于是帮忙缓和矛盾"},{"key":"B","text":"拒绝做无效沟通，只让当事人自己谈"},{"key":"C","text":"意识到自己可能被放到替罪羊位置"},{"key":"D","text":"碍于熟人关系，帮TA带一句"}]},{"id":21,"module":"冲突处理","text":"你和别人发生矛盾，对方不谈事实，只说你让我很失望。你会：","options":[{"key":"A","text":"立刻想补救关系，甚至忘了原本问题是什么"},{"key":"B","text":"把话题拉回具体事实和责任"},{"key":"C","text":"识别这是情绪压制，暂停沟通"},{"key":"D","text":"开始解释很多，试图证明自己不是故意的"}]},{"id":22,"module":"冲突处理","text":"对方做错事后先哭、先沉默、先说自己也不容易。你最容易：","options":[{"key":"A","text":"心软，把追责降到最低"},{"key":"B","text":"要求问题照样解决，情绪另说"},{"key":"C","text":"判断TA是不是用弱势姿态逃避责任"},{"key":"D","text":"觉得再追究会伤感情，于是算了"}]},{"id":23,"module":"冲突处理","text":"别人越界后说：你怎么突然这么计较？你会：","options":[{"key":"A","text":"怀疑自己是不是太敏感了"},{"key":"B","text":"直接说明这是规则，不是计较"},{"key":"C","text":"指出TA在重新定义问题"},{"key":"D","text":"退一步，怕关系从此变得别扭"}]},{"id":24,"module":"冲突处理","text":"争执中你最容易吃亏的点是：","options":[{"key":"A","text":"太想证明自己不是坏人"},{"key":"B","text":"太快投入资源解决别人的问题"},{"key":"C","text":"太容易被复杂信息绕进去"},{"key":"D","text":"太怕关系破裂，所以底线一降再降"}]},{"id":25,"module":"亲密关系","text":"亲近的人说：你以前不是这样的。你最容易：","options":[{"key":"A","text":"愧疚，觉得自己是不是变冷漠了"},{"key":"B","text":"想到以前自己是不是付出太多了"},{"key":"C","text":"警觉TA在用旧版本的你控制现在的你"},{"key":"D","text":"为了回到以前的亲密感，主动让步"}]},{"id":26,"module":"亲密关系","text":"你最容易被哪种亲密感打动？","options":[{"key":"A","text":"对方说离不开你、只有你懂TA"},{"key":"B","text":"对方说你们可以一起变得更好、更有资源"},{"key":"C","text":"对方说别人都不懂局势，只有你们看得明白"},{"key":"D","text":"对方很自然地进入你的生活，让你觉得安稳"}]},{"id":27,"module":"亲密关系","text":"当你想独处，对方却说你是不是不在乎我了。你会：","options":[{"key":"A","text":"马上解释，并压缩自己的独处时间"},{"key":"B","text":"说明独处是需求，不等于关系降级"},{"key":"C","text":"判断这是不是用焦虑换取控制感"},{"key":"D","text":"先陪TA一会儿，自己的安排往后放"}]},{"id":28,"module":"亲密关系","text":"你在关系里最该练习的是：","options":[{"key":"A","text":"不把别人的失落自动当成自己的责任"},{"key":"B","text":"不把帮忙当成维系关系的唯一筹码"},{"key":"C","text":"不把秘密和站队误认为亲密"},{"key":"D","text":"不因为熟悉就取消自己的边界"}]},{"id":29,"module":"自我盲区","text":"回头看，你最常后悔的是：","options":[{"key":"A","text":"当时太心软，替别人承担了不属于自己的情绪"},{"key":"B","text":"当时太大方，把时间资源给了不值得的人"},{"key":"C","text":"当时太相信对方的话，卷进了不该卷的是非"},{"key":"D","text":"当时太不好意思拒绝，让别人一步步越界"}]},{"id":30,"module":"自我盲区","text":"如果让你给自己一句提醒，你最需要的是：","options":[{"key":"A","text":"可以善良，但不要用内疚证明善良"},{"key":"B","text":"可以帮人，但要先看对方是否尊重你的成本"},{"key":"C","text":"可以听人说话，但不要被别人的叙事收编"},{"key":"D","text":"可以亲近，但边界不是关系变差的证据"}]},{"id":31,"module":"自我盲区","text":"你最容易忽略的危险信号是：","options":[{"key":"A","text":"对方让你频繁感到亏欠"},{"key":"B","text":"对方只在需要你时热情"},{"key":"C","text":"对方总把你拉进某个阵营"},{"key":"D","text":"对方不断把小越界说成开玩笑"}]},{"id":32,"module":"自我盲区","text":"真正让你变清醒的，通常是哪一刻？","options":[{"key":"A","text":"发现自己一直在哄对方，却没人照顾你的感受"},{"key":"B","text":"发现你提供了很多，对方却从没兑现承诺"},{"key":"C","text":"发现你听到的故事只有对方允许你听到的一面"},{"key":"D","text":"发现你已经默认别人可以占用你的时间和空间"}]}],"results":{"A":{"typeName":"情绪债主型风险","subtitle":"你最该防的，是总让你内疚、让你负责TA情绪的人","posterSubtext":"你不是太冷漠，你只是太容易把别人的失落背到自己身上。","maturityScore":87,"coreConclusion":"你的关系弱点不是不懂人情，而是太容易在别人委屈、失望、沉默、哭诉时进入补偿模式。对方只要表现得很难过，你就会下意识怀疑自己是不是不够好、不够善良、不够体贴。 你真正想守住的是善良、体面和被认可的关系形象。但如果没有边界，你会把善良用成一种自我消耗，把共情用成替别人负责。","diagnosis":"你的关系弱点不是不懂人情，而是太容易在别人委屈、失望、沉默、哭诉时进入补偿模式。对方只要表现得很难过，你就会下意识怀疑自己是不是不够好、不够善良、不够体贴。","whatYouReallyWant":"你真正想守住的是善良、体面和被认可的关系形象。但如果没有边界，你会把善良用成一种自我消耗，把共情用成替别人负责。","mechanism":{"title":"情绪勒索与内疚绑定机制","content":"这类人不一定大吵大闹，他们更常用失望、沉默、脆弱、受伤感来让你让步。你越怕自己成为坏人，越容易在关系里主动降底线。真正要练习的不是变冷，而是把别人的情绪和自己的责任重新分开。"},"professionalBasis":["你在拒绝后更容易反复复盘自己是不是说重了，而不是先判断要求是否合理。","你对脆弱、诉苦、失望这类信号非常敏感，常常先安抚，再处理事实。","你害怕被评价为不近人情，因此容易用额外付出来证明自己不是坏人。"],"coreTensions":["容易内疚","共情过量","怕被讨厌","解释欲强","责任边界模糊"],"suitableIf":["先问事实再安抚情绪","拒绝时只解释一遍","允许别人短暂失望","把帮助限定在自己能承受的范围"],"cautionIf":["对方每次受伤都要求你补偿","你一拒绝TA就冷暴力","TA很少处理问题，只让你处理TA的情绪","你们的关系越来越像照顾与被照顾"],"indices":[{"label":"情绪卷入度","value":93},{"label":"内疚敏感度","value":95},{"label":"共情能力","value":89},{"label":"边界稳定度","value":62}],"ifStay":"如果你继续把别人的不开心自动理解成自己的错，你会越来越怕拒绝，关系表面和平，内心却越来越委屈。","ifChange":"如果你开始区分情绪和责任，你的善良会变得更稳定，也更不容易被消耗型关系套牢。","notRecommended":["对方每次受伤都要求你补偿","你一拒绝TA就冷暴力","TA很少处理问题，只让你处理TA的情绪","你们的关系越来越像照顾与被照顾"],"plan90":[{"title":"第1周：延迟回应","content":"遇到诉苦或指责，先不要立刻答应，给自己一句固定话术：我听到了，但我需要想一下能不能帮。"},{"title":"第2-3周：只解释一次","content":"拒绝时说明事实和边界，不反复自证善良。对方继续情绪施压时，重复边界，不继续辩论。"},{"title":"第4-6周：建立责任清单","content":"把每段关系里哪些是你的责任、哪些不是你的责任写下来，尤其标出你常常替别人承担的部分。"},{"title":"第7-12周：练习低负罪感边界","content":"从小事开始拒绝三次，观察真实后果。你会发现，健康关系不会因为一次合理拒绝就崩掉。"}],"closing":"你要防的不是所有脆弱的人，而是那些把脆弱变成长期通行证的人。"},"B":{"typeName":"利益索取型风险","subtitle":"你最该防的，是只在需要你时出现、把你当资源的人","posterSubtext":"你不是小气，你只是该看清谁在珍惜你，谁在使用你。","maturityScore":90,"coreConclusion":"你容易在人际关系里承担实际成本：时间、钱、资源、人脉、机会、执行力。别人一说有事找你，你会先进入解决问题的状态，却可能忽略对方有没有尊重你的成本。 你真正想要的是互相成就，而不是单方面被需要。你需要的关系不是永远算计，而是至少有清楚的边界、兑现和基本回报。","diagnosis":"你容易在人际关系里承担实际成本：时间、钱、资源、人脉、机会、执行力。别人一说有事找你，你会先进入解决问题的状态，却可能忽略对方有没有尊重你的成本。","whatYouReallyWant":"你真正想要的是互相成就，而不是单方面被需要。你需要的关系不是永远算计，而是至少有清楚的边界、兑现和基本回报。","mechanism":{"title":"资源消耗与模糊回报机制","content":"这类人常常不直接伤害你，而是用以后、机会、熟人、顺手、下次补你来延迟回报。你越能干、越好说话、越愿意解决问题，就越容易被放到工具位。识别重点不是TA有没有困难，而是TA是否尊重你的成本。"},"professionalBasis":["你容易主动提供方案、资源和帮助，却不一定先问清责任和回报。","你对机会和合作比较敏感，容易被模糊承诺吸引。","当关系投入产出失衡时，你常常已经付出了很多才开始警觉。"],"coreTensions":["资源感强","容易被需要","回报规则模糊","不擅长先谈条件","付出后才后悔"],"suitableIf":["帮忙前先限定范围","涉及钱和资源必须说清规则","用小成本验证对方信用","把承诺落到时间、动作和责任人"],"cautionIf":["只在有事时热情","长期画饼但不兑现","把你的资源说成大家的资源","一谈规则就说你现实"],"indices":[{"label":"资源消耗风险","value":94},{"label":"机会敏感度","value":88},{"label":"成本意识","value":72},{"label":"规则谈判力","value":66}],"ifStay":"如果你继续靠付出来维持关系，你会吸引越来越多只会消耗你的人，真正珍惜你的人反而被挤到后面。","ifChange":"如果你开始先谈边界、成本和兑现，你会筛掉大量低质量关系，留下真正能互相支持的人。","notRecommended":["只在有事时热情","长期画饼但不兑现","把你的资源说成大家的资源","一谈规则就说你现实"],"plan90":[{"title":"第1周：所有帮忙先问三句","content":"这件事具体要我做什么、什么时候结束、如果做不到谁负责。"},{"title":"第2-3周：停止免费兜底","content":"对反复找你救急的人，只提供一次建议，不再替TA承担执行和后果。"},{"title":"第4-6周：建立资源价格感","content":"列出你的时间、人脉、经验和执行力分别值多少钱，别再把成本当成顺手。"},{"title":"第7-12周：筛选互惠关系","content":"只把重要资源投入给三类人：会兑现的人、会感谢的人、也愿意为你付出的人。"}],"closing":"你要防的不是向你求助的人，而是那些从不把你的付出当成本的人。"},"C":{"typeName":"信息操控型风险","subtitle":"你最该防的，是用秘密、站队和叙事带你入局的人","posterSubtext":"你不是想太多，你只是已经感觉到：有些话不是信息，是钩子。","maturityScore":88,"coreConclusion":"你在人际里容易被复杂信息吸引，也容易因为想看清真相而听进去更多细节。但信息越多，不一定越清醒；有时对方给你的不是事实，而是一套让你站到TA那边的叙事。 你真正想要的是判断力和安全感。你希望自己不是被蒙在鼓里的人，但也需要避免被别人的故事、秘密和阵营拖进关系漩涡。","diagnosis":"你在人际里容易被复杂信息吸引，也容易因为想看清真相而听进去更多细节。但信息越多，不一定越清醒；有时对方给你的不是事实，而是一套让你站到TA那边的叙事。","whatYouReallyWant":"你真正想要的是判断力和安全感。你希望自己不是被蒙在鼓里的人，但也需要避免被别人的故事、秘密和阵营拖进关系漩涡。","mechanism":{"title":"叙事控制与站队绑定机制","content":"这类人很会讲故事、分阵营、制造只有我们懂的亲密感。他们可能把秘密当筹码，把倾诉当拉拢，把评价别人当测试。你要防的不是信息本身，而是那些让你在没看见全貌前就开始表态的人。"},"professionalBasis":["你会留意别人如何讲第三方，也能感到信息背后的立场变化。","你容易被内幕、秘密、真实想法吸引，想通过更多信息获得安全感。","你在冲突里容易被复杂叙事绕进去，忘记先看事实和边界。"],"coreTensions":["洞察力强","容易卷入是非","对秘密敏感","站队压力高","需要事实锚点"],"suitableIf":["不替任何人传话","不对缺席的人下结论","听完信息先延迟表态","把关系判断建立在事实而非单方叙事上"],"cautionIf":["对方总说只告诉你","频繁让你评价别人","把你拉进二选一阵营","TA讲每个人都带强烈立场"],"indices":[{"label":"信息敏感度","value":96},{"label":"站队风险","value":90},{"label":"叙事识别力","value":84},{"label":"事实锚定力","value":70}],"ifStay":"如果你继续为了看清真相而听太多单方故事，你会不知不觉变成别人的情绪同盟或信息工具。","ifChange":"如果你开始减少表态、只看事实、拒绝传话，你的判断力会更干净，关系也会更安全。","notRecommended":["对方总说只告诉你","频繁让你评价别人","把你拉进二选一阵营","TA讲每个人都带强烈立场"],"plan90":[{"title":"第1周：不接传话任务","content":"任何让我帮你跟TA说的话，统一回复：这句话最好你自己跟TA说。"},{"title":"第2-3周：听完不表态","content":"遇到别人讲第三方，只回应事实层，不接谁对谁错。"},{"title":"第4-6周：建立信息隔离","content":"不把A处听来的话带到B处，也不把秘密当成亲密证明。"},{"title":"第7-12周：练习事实复盘","content":"判断一个人，只看TA对你做了什么、是否稳定兑现，而不是TA如何讲述别人。"}],"closing":"你要防的不是会说话的人，而是那些用说法替代事实、用秘密换你站队的人。"},"D":{"typeName":"边界侵占型风险","subtitle":"你最该防的，是借着熟悉一点点越界的人","posterSubtext":"真正难防的不是陌生恶意，而是熟人式的一点点得寸进尺。","maturityScore":86,"coreConclusion":"你在关系里容易因为熟悉、亲近、自然、开玩笑而降低防备。很多越界不是突然发生的，而是从一次随口打听、一次临时占用、一次无伤大雅开始，慢慢变成默认。 你真正想要的是舒服、自然、不需要时时防备的关系。但舒服不等于没有边界，亲近也不等于对方可以随意占用你的时间、空间和隐私。","diagnosis":"你在关系里容易因为熟悉、亲近、自然、开玩笑而降低防备。很多越界不是突然发生的，而是从一次随口打听、一次临时占用、一次无伤大雅开始，慢慢变成默认。","whatYouReallyWant":"你真正想要的是舒服、自然、不需要时时防备的关系。但舒服不等于没有边界，亲近也不等于对方可以随意占用你的时间、空间和隐私。","mechanism":{"title":"熟人特权与边界递进机制","content":"这类人常用我们都这么熟了、别这么见外、开个玩笑而已来模糊边界。你越怕关系尴尬，越容易把不舒服压下去。真正的边界不是翻脸，而是在小越界刚出现时就轻轻挡住。"},"professionalBasis":["你容易因为熟悉感而放松信息、时间和空间边界。","你担心拒绝会让气氛变僵，所以常常先忍一下。","你对大冲突有警觉，但对小越界、小玩笑、小占用更容易后知后觉。"],"coreTensions":["熟人感强","怕尴尬","小事容易忍","隐私边界薄","后知后觉生气"],"suitableIf":["不舒服当场轻提醒","把玩笑和冒犯分开","亲近关系也保留隐私","拒绝时不用过度解释"],"cautionIf":["频繁打听隐私","未经允许替你做决定","把占用你说成顺手","你表达不舒服后TA说你开不起玩笑"],"indices":[{"label":"边界被侵占风险","value":95},{"label":"熟人信任度","value":89},{"label":"当场表达力","value":61},{"label":"隐私保护度","value":68}],"ifStay":"如果你继续把小不舒服都咽下去，关系会从一点点越界变成长期默认，最后你只能用爆发来收回边界。","ifChange":"如果你开始在小事上温和但清楚地表达，你会少很多后续消耗，也更容易留下真正尊重你的人。","notRecommended":["频繁打听隐私","未经允许替你做决定","把占用你说成顺手","你表达不舒服后TA说你开不起玩笑"],"plan90":[{"title":"第1周：记录三次不舒服","content":"不用判断对方是不是故意，只记录你身体和情绪的反应。"},{"title":"第2-3周：练一句轻边界","content":"比如这个我不太想聊、这个时间不方便、下次提前跟我说。"},{"title":"第4-6周：停止自动让步","content":"对临时占用你的人，不再默认配合，先看自己的安排。"},{"title":"第7-12周：升级边界表达","content":"如果同一类越界重复三次，直接说明规则：这个以后不要再这样。"}],"closing":"你要防的不是跟你亲近的人，而是那些把亲近当成通行证的人。"}},"secondaryNotes":{"A":{"B":"你的主风险是「情绪债主型风险」，同时带有「利益索取型风险」的副倾向。这说明你不是只会被一种人消耗，而是在特定关系压力下，会同时暴露两个边界弱点。优先处理主风险，再观察副风险出现在哪些熟人关系里。","C":"你的主风险是「情绪债主型风险」，同时带有「信息操控型风险」的副倾向。这说明你不是只会被一种人消耗，而是在特定关系压力下，会同时暴露两个边界弱点。优先处理主风险，再观察副风险出现在哪些熟人关系里。","D":"你的主风险是「情绪债主型风险」，同时带有「边界侵占型风险」的副倾向。这说明你不是只会被一种人消耗，而是在特定关系压力下，会同时暴露两个边界弱点。优先处理主风险，再观察副风险出现在哪些熟人关系里。"},"B":{"A":"你的主风险是「利益索取型风险」，同时带有「情绪债主型风险」的副倾向。这说明你不是只会被一种人消耗，而是在特定关系压力下，会同时暴露两个边界弱点。优先处理主风险，再观察副风险出现在哪些熟人关系里。","C":"你的主风险是「利益索取型风险」，同时带有「信息操控型风险」的副倾向。这说明你不是只会被一种人消耗，而是在特定关系压力下，会同时暴露两个边界弱点。优先处理主风险，再观察副风险出现在哪些熟人关系里。","D":"你的主风险是「利益索取型风险」，同时带有「边界侵占型风险」的副倾向。这说明你不是只会被一种人消耗，而是在特定关系压力下，会同时暴露两个边界弱点。优先处理主风险，再观察副风险出现在哪些熟人关系里。"},"C":{"A":"你的主风险是「信息操控型风险」，同时带有「情绪债主型风险」的副倾向。这说明你不是只会被一种人消耗，而是在特定关系压力下，会同时暴露两个边界弱点。优先处理主风险，再观察副风险出现在哪些熟人关系里。","B":"你的主风险是「信息操控型风险」，同时带有「利益索取型风险」的副倾向。这说明你不是只会被一种人消耗，而是在特定关系压力下，会同时暴露两个边界弱点。优先处理主风险，再观察副风险出现在哪些熟人关系里。","D":"你的主风险是「信息操控型风险」，同时带有「边界侵占型风险」的副倾向。这说明你不是只会被一种人消耗，而是在特定关系压力下，会同时暴露两个边界弱点。优先处理主风险，再观察副风险出现在哪些熟人关系里。"},"D":{"A":"你的主风险是「边界侵占型风险」，同时带有「情绪债主型风险」的副倾向。这说明你不是只会被一种人消耗，而是在特定关系压力下，会同时暴露两个边界弱点。优先处理主风险，再观察副风险出现在哪些熟人关系里。","B":"你的主风险是「边界侵占型风险」，同时带有「利益索取型风险」的副倾向。这说明你不是只会被一种人消耗，而是在特定关系压力下，会同时暴露两个边界弱点。优先处理主风险，再观察副风险出现在哪些熟人关系里。","C":"你的主风险是「边界侵占型风险」，同时带有「信息操控型风险」的副倾向。这说明你不是只会被一种人消耗，而是在特定关系压力下，会同时暴露两个边界弱点。优先处理主风险，再观察副风险出现在哪些熟人关系里。"}},"shareTemplate":["我测出来是：{{typeName}}","{{posterSubtext}}","{{secondaryLine}}","","你在人际关系里，最该防谁？32题人际边界测试"]};</script>
+    <script>
+(function () {
+  const app = document.getElementById("app");
+  const configPaths = ["./configs/site-config.json", "./configs/career-change.json"];
+
+  const state = {
+    config: null,
+    answers: {},
+    currentIndex: 0,
+    selected: null,
+    locked: false,
+    loadingStep: 0,
+    route: "home",
+    resultData: null,
+  };
+
+  const defaultLoadingMessages = [
+    "正在读取你的选择倾向...",
+    "正在识别隐藏动机...",
+    "正在计算结果分布...",
+    "正在生成专属报告...",
+    "分析完成。",
+  ];
+
+  init();
+
+  async function init() {
+    try {
+      state.config = await fetchConfig();
+      applyDocumentMeta(state.config);
+
+      const saved = sessionStorage.getItem(getStorageKey());
+      if (saved) {
+        state.answers = JSON.parse(saved);
+      }
+
+      routeFromHash();
+      window.addEventListener("hashchange", routeFromHash);
+    } catch (error) {
+      app.innerHTML = `
+        <div class="error">
+          <div>
+            <h1>测试加载失败</h1>
+            <p>请确认你是通过网页链接打开页面，而不是直接双击 HTML 文件。</p>
+          </div>
+        </div>
+      `;
+      console.error(error);
+    }
+  }
+
+  async function fetchConfig() {
+    if (window.__QUIZ_CONFIG__) return window.__QUIZ_CONFIG__;
+    let lastError;
+    for (const path of configPaths) {
+      try {
+        const response = await fetch(path, { cache: "no-store" });
+        if (!response.ok) throw new Error(`${path} ${response.status}`);
+        return response.json();
+      } catch (error) {
+        lastError = error;
+      }
+    }
+    throw lastError;
+  }
+
+  function applyDocumentMeta(cfg) {
+    const title = cfg.title || "趣味测试";
+    const description = cfg.metaDescription || cfg.subtitle || "完成测试，生成你的专属报告。";
+    document.title = title;
+    setMeta("name", "description", description);
+    setMeta("property", "og:title", title);
+    setMeta("property", "og:description", description);
+  }
+
+  function setMeta(attr, key, content) {
+    let node = document.querySelector(`meta[${attr}="${key}"]`);
+    if (!node) {
+      node = document.createElement("meta");
+      node.setAttribute(attr, key);
+      document.head.appendChild(node);
+    }
+    node.setAttribute("content", content);
+  }
+
+  function routeFromHash() {
+    const route = (location.hash || "#/").replace("#/", "") || "home";
+    renderRoute(route);
+  }
+
+  function navigate(route) {
+    const nextHash = `#/${route}`;
+    if (location.hash === nextHash) {
+      renderRoute(route);
+      return;
+    }
+    location.hash = nextHash;
+  }
+
+  function renderRoute(route) {
+    state.route = route;
+    if (route === "quiz") renderQuiz();
+    else if (route === "loading") startLoading();
+    else if (route === "result") renderResult();
+    else renderHome();
+  }
+
+  function renderShell(content, extraClass = "") {
+    app.innerHTML = `
+      <div class="shell">
+        <div class="top-rule"></div>
+        <section class="screen ${extraClass}">${content}</section>
+      </div>
+      <div id="toast" class="toast">已复制</div>
+    `;
+  }
+
+  function renderHome() {
+    const cfg = state.config;
+    renderShell(
+      `
+      <div class="home">
+        <div class="kicker"><span class="dot"></span><span>${text(cfg.kicker)}</span><span class="dot"></span></div>
+        <h1 class="hero-title">${text(cfg.title)}</h1>
+        <p class="hero-subtitle">${text(cfg.subtitle)}</p>
+        <div class="hairline"></div>
+        <div class="intro">
+          ${(cfg.intro || []).map((p, index) => `<p class="${index === cfg.intro.length - 1 ? "strong" : ""}">${text(p)}</p>`).join("")}
+        </div>
+        <div class="pill-grid">
+          ${(cfg.dimensions || []).map((item) => `<div class="pill">${text(item)}</div>`).join("")}
+        </div>
+        <button class="primary-btn" data-action="start">${text(cfg.startButton || "开始测试")}</button>
+        <p class="disclaimer">${text(cfg.disclaimer || "本测试为趣味内容，仅供娱乐参考。")}</p>
+      </div>
+      `,
+      "home"
+    );
+    const startButton = app.querySelector("[data-action='start']");
+    let started = false;
+    const startQuiz = () => {
+      if (started) return;
+      started = true;
+      state.answers = {};
+      state.currentIndex = 0;
+      sessionStorage.removeItem(getStorageKey());
+      navigate("quiz");
+    };
+    startButton.addEventListener("click", startQuiz);
+    startButton.addEventListener(
+      "touchend",
+      (event) => {
+        event.preventDefault();
+        startQuiz();
+      },
+      { passive: false }
+    );
+  }
+
+  function renderQuiz() {
+    const questions = state.config.questions || [];
+    const question = questions[state.currentIndex];
+    if (!question) {
+      renderHome();
+      return;
+    }
+
+    const progress = ((state.currentIndex + 1) / questions.length) * 100;
+
+    renderShell(
+      `
+      <div class="sticky-head">
+        <div class="quiz-meta">
+          <span>${String(state.currentIndex + 1).padStart(2, "0")} / ${questions.length}</span>
+          <span>${text(question.module)}</span>
+        </div>
+        <div class="progress-track"><div class="progress-bar" style="width:${progress}%"></div></div>
+      </div>
+      <div class="question-no">${String(state.currentIndex + 1).padStart(2, "0")}</div>
+      <h1 class="question-title">${text(question.text)}</h1>
+      <div class="options">
+        ${(question.options || [])
+          .map(
+            (option) => `
+            <button class="option" data-option="${text(option.key)}">
+              <span class="option-key">${text(option.key)}</span>
+              <span class="option-text">${text(option.text)}</span>
+            </button>
+          `
+          )
+          .join("")}
+      </div>
+      <p class="hint">${text(state.config.quizHint || "选择后自动进入下一题")}</p>
+      `,
+      "quiz-screen"
+    );
+
+    app.querySelectorAll("[data-option]").forEach((button) => {
+      button.addEventListener("click", () => selectOption(button.dataset.option));
+    });
+  }
+
+  function selectOption(key) {
+    if (state.locked) return;
+    state.locked = true;
+    state.selected = key;
+    const question = state.config.questions[state.currentIndex];
+    state.answers[question.id] = key;
+
+    app.querySelectorAll(".option").forEach((button) => {
+      const selected = button.dataset.option === key;
+      button.classList.toggle("selected", selected);
+      button.classList.toggle("dimmed", !selected);
+    });
+
+    window.setTimeout(() => {
+      if (state.currentIndex < state.config.questions.length - 1) {
+        state.currentIndex += 1;
+        state.locked = false;
+        state.selected = null;
+        renderQuiz();
+      } else {
+        sessionStorage.setItem(getStorageKey(), JSON.stringify(state.answers));
+        state.locked = false;
+        navigate("loading");
+      }
+    }, 420);
+  }
+
+  function startLoading() {
+    state.loadingStep = 0;
+    renderLoading("");
+    tickLoading();
+  }
+
+  function renderLoading(value) {
+    const loadingMessages = getLoadingMessages();
+    renderShell(
+      `
+      <div class="loading-card">
+        <div class="spinner"></div>
+        <div class="loading-text">${text(value)}<span class="cursor">|</span></div>
+        <div class="step-bars">
+          ${loadingMessages.map((_, index) => `<div class="step ${index < state.loadingStep ? "done" : ""}"><span></span></div>`).join("")}
+        </div>
+      </div>
+      `,
+      "loading-screen"
+    );
+  }
+
+  function tickLoading() {
+    if (state.route !== "loading") return;
+    const loadingMessages = getLoadingMessages();
+    if (state.loadingStep >= loadingMessages.length) {
+      window.setTimeout(() => navigate("result"), 700);
+      return;
+    }
+    const message = loadingMessages[state.loadingStep];
+    let chars = 0;
+    const interval = window.setInterval(() => {
+      chars += 1;
+      renderLoading(message.slice(0, chars));
+      if (chars >= message.length) {
+        window.clearInterval(interval);
+        window.setTimeout(() => {
+          state.loadingStep += 1;
+          tickLoading();
+        }, 520);
+      }
+    }, 35);
+  }
+
+  function renderResult() {
+    const saved = sessionStorage.getItem(getStorageKey());
+    if (saved) state.answers = JSON.parse(saved);
+    if (Object.keys(state.answers).length < state.config.questions.length) {
+      renderHome();
+      return;
+    }
+
+    const scored = scoreAnswers(state.answers);
+    const primary = state.config.results[scored.primary];
+    const secondary = scored.secondary ? state.config.secondaryNotes?.[scored.primary]?.[scored.secondary] : null;
+    const stage = getStage(primary.maturityScore);
+    const shareText = buildShareText(primary, secondary);
+    const compareLabels = state.config.compareLabels || ["如果继续原路", "如果换一种做法"];
+    state.resultData = { scored, primary, secondary, stage, shareText };
+
+    renderShell(
+      `
+      <article class="report">
+        <div class="kicker"><span class="dot"></span><span>${text(state.config.resultKicker || "Result Report")}</span><span class="dot"></span></div>
+        <h1 class="result-type">${text(primary.typeName)}</h1>
+        <p class="result-subtitle">${text(primary.subtitle)}</p>
+        <div class="stamp-row">
+          <div class="stamp"><strong>${text(primary.maturityScore)}</strong><span>${text(state.config.scoreLabel || "决策成熟度")}</span></div>
+          <div class="stamp"><strong>${text(stage)}</strong><span>${text(state.config.stageLabel || "当前行动阶段")}</span></div>
+        </div>
+
+        <section class="section">
+          <h2>你的答案分布</h2>
+          <div class="meters">
+            ${Object.entries(scored.counts)
+              .map(([key, value]) => {
+                const typeData = state.config.results[key];
+                const width = (value / state.config.questions.length) * 100;
+                return `
+                  <div>
+                    <div class="meter-head"><span>${text(key)} · ${text(typeData.typeName)}</span><span>${value} 题</span></div>
+                    <div class="meter-track"><div class="meter-fill" style="width:${width}%"></div></div>
+                  </div>
+                `;
+              })
+              .join("")}
+          </div>
+        </section>
+
+        ${secondary ? `<section class="section"><h2>副倾向提示</h2><div class="secondary-note">${text(secondary)}</div></section>` : ""}
+
+        <section class="section">
+          <h2>诊断结论</h2>
+          <div class="quote">${text(primary.coreConclusion)}</div>
+        </section>
+
+        <section class="section">
+          <h2>为什么你会这样</h2>
+          <p>${text(primary.diagnosis)}</p>
+          <p>${text(primary.whatYouReallyWant)}</p>
+        </section>
+
+        <section class="section">
+          <h2>${text(primary.mechanism.title)}</h2>
+          <p>${text(primary.mechanism.content)}</p>
+        </section>
+
+        ${renderParagraphSection("专业解读框架", primary.professionalBasis)}
+        ${renderTagSection("你的关键矛盾", primary.coreTensions)}
+        ${renderCompareListSection("适合推进的条件", "需要谨慎的信号", primary.suitableIf, primary.cautionIf)}
+
+        <section class="section">
+          <h2>关键指数</h2>
+          <div class="meters">
+            ${(primary.indices || [])
+              .map(
+                (item) => `
+                <div>
+                  <div class="meter-head"><span>${text(item.label)}</span><span>${text(item.value)}</span></div>
+                  <div class="meter-track"><div class="meter-fill" style="width:${number(item.value)}%"></div></div>
+                </div>
+              `
+              )
+              .join("")}
+          </div>
+        </section>
+
+        <section class="section">
+          <h2>两条路径对比</h2>
+          <div class="compare">
+            <div class="compare-card"><h3>${text(compareLabels[0])}</h3><p>${text(primary.ifStay)}</p></div>
+            <div class="compare-card"><h3>${text(compareLabels[1])}</h3><p>${text(primary.ifChange)}</p></div>
+          </div>
+        </section>
+
+        <section class="section">
+          <h2>现在最不建议你做</h2>
+          <div class="tag-list">${(primary.notRecommended || []).map((item) => `<span class="tag">${text(item)}</span>`).join("")}</div>
+        </section>
+
+        <section class="section">
+          <h2>未来 90 天验证方案</h2>
+          <div class="plan">
+            ${(primary.plan90 || [])
+              .map(
+                (item, index) => `
+                <div class="plan-card">
+                  <h3>${index + 1}. ${text(item.title)}</h3>
+                  <p>${text(item.content)}</p>
+                </div>
+              `
+              )
+              .join("")}
+          </div>
+        </section>
+
+        <section class="section">
+          <h2>最后一句话</h2>
+          <p>${text(primary.closing)}</p>
+        </section>
+
+        <div class="actions">
+          <button class="primary-btn" data-action="copy">${text(state.config.copyButton || "复制我的结果")}</button>
+          <button class="ghost-btn" data-action="restart">${text(state.config.restartButton || "重新测试")}</button>
+        </div>
+      </article>
+      `,
+      "result-screen"
+    );
+
+    app.querySelector("[data-action='copy']").addEventListener("click", () => copyShareText(shareText));
+    app.querySelector("[data-action='restart']").addEventListener("click", () => {
+      sessionStorage.removeItem(getStorageKey());
+      state.answers = {};
+      state.currentIndex = 0;
+      navigate("home");
+    });
+  }
+
+  function renderParagraphSection(title, paragraphs) {
+    if (!Array.isArray(paragraphs) || !paragraphs.length) return "";
+    return `
+      <section class="section">
+        <h2>${text(title)}</h2>
+        ${paragraphs.map((item) => `<p>${text(item)}</p>`).join("")}
+      </section>
+    `;
+  }
+
+  function renderTagSection(title, items) {
+    if (!Array.isArray(items) || !items.length) return "";
+    return `
+      <section class="section">
+        <h2>${text(title)}</h2>
+        <div class="tag-list">${items.map((item) => `<span class="tag">${text(item)}</span>`).join("")}</div>
+      </section>
+    `;
+  }
+
+  function renderCompareListSection(leftTitle, rightTitle, leftItems, rightItems) {
+    const hasLeft = Array.isArray(leftItems) && leftItems.length;
+    const hasRight = Array.isArray(rightItems) && rightItems.length;
+    if (!hasLeft && !hasRight) return "";
+    return `
+      <section class="section">
+        <h2>适用边界</h2>
+        <div class="compare">
+          <div class="compare-card">
+            <h3>${text(leftTitle)}</h3>
+            ${(leftItems || []).map((item) => `<p>${text(item)}</p>`).join("")}
+          </div>
+          <div class="compare-card">
+            <h3>${text(rightTitle)}</h3>
+            ${(rightItems || []).map((item) => `<p>${text(item)}</p>`).join("")}
+          </div>
+        </div>
+      </section>
+    `;
+  }
+
+  function scoreAnswers(answers) {
+    const counts = { A: 0, B: 0, C: 0, D: 0 };
+    Object.values(answers).forEach((key) => {
+      if (counts[key] !== undefined) counts[key] += 1;
+    });
+    const sorted = Object.entries(counts).sort((a, b) => b[1] - a[1]);
+    const threshold = state.config.secondaryThreshold ?? 2;
+    const primary = sorted[0][0];
+    const secondary = sorted[1][1] > 0 && sorted[0][1] - sorted[1][1] <= threshold ? sorted[1][0] : null;
+    return { counts, primary, secondary };
+  }
+
+  function getStage(score) {
+    const labels = state.config.stageLabels || [
+      { max: 45, label: "观察期" },
+      { max: 65, label: "验证期" },
+      { max: 82, label: "规划期" },
+      { max: 100, label: "行动期" },
+    ];
+    const hit = labels.find((item) => score <= item.max);
+    return hit ? hit.label : labels[labels.length - 1].label;
+  }
+
+  function buildShareText(primary, secondary) {
+    const template = state.config.shareTemplate || [
+      "我测出了：{{typeName}}",
+      "{{posterSubtext}}",
+      "{{secondaryLine}}",
+      "",
+      "{{title}}",
+    ];
+    const values = {
+      title: state.config.title,
+      typeName: primary.typeName,
+      posterSubtext: primary.posterSubtext,
+      secondary: secondary || "",
+      secondaryLine: secondary ? `副倾向：${secondary}` : "",
+    };
+    return template
+      .map((line) => fillTemplate(line, values))
+      .filter((line, index, arr) => line || arr[index - 1])
+      .join("\n")
+      .trim();
+  }
+
+  async function copyShareText(value) {
+    try {
+      await navigator.clipboard.writeText(value);
+      showToast("结果文案已复制");
+    } catch (error) {
+      showToast("复制失败，可长按手动复制");
+    }
+  }
+
+  function showToast(value) {
+    const toast = document.getElementById("toast");
+    if (!toast) return;
+    toast.textContent = value;
+    toast.classList.add("show");
+    window.setTimeout(() => toast.classList.remove("show"), 1600);
+  }
+
+  function getLoadingMessages() {
+    return state.config.loadingMessages || defaultLoadingMessages;
+  }
+
+  function getStorageKey() {
+    return `xhsTestAnswers:${state.config.slug || "default"}`;
+  }
+
+  function fillTemplate(template, values) {
+    return String(template).replace(/\{\{(\w+)\}\}/g, (_, key) => values[key] || "");
+  }
+
+  function number(value) {
+    const parsed = Number(value);
+    if (Number.isNaN(parsed)) return 0;
+    return Math.max(0, Math.min(100, parsed));
+  }
+
+  function text(value) {
+    return String(value ?? "")
+      .replace(/&/g, "&amp;")
+      .replace(/</g, "&lt;")
+      .replace(/>/g, "&gt;")
+      .replace(/"/g, "&quot;");
+  }
+})();
+
+    </script>
+  </body>
+</html>
