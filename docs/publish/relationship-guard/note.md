@@ -93,4 +93,4 @@ https://mini-test.github.io/xhs-test-h5/test-relationship-guard/
 2. questions-01.png：第1-2题
 3. questions-02.png：第3-5题
 4. result-blur.png：结果模糊图
-5. options.png：卖点/选项图
+5. options.png：5题总览备用图
