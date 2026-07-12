@@ -1,0 +1,1125 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <meta name="description" content="完成 32 道古代位置测试，生成你的上位路径、终局位置、优势风险和 90 天能力建议。" />
+    <meta property="og:title" content="你若穿越回古代，最后能坐到什么位置？" />
+    <meta property="og:description" content="完成 32 道古代位置测试，生成你的上位路径、终局位置、优势风险和 90 天能力建议。" />
+    <title>你若穿越回古代，最后能坐到什么位置？</title>
+    <style>
+:root {
+  --bg: #fbfaf7;
+  --paper: #fffefd;
+  --ink: #20242a;
+  --muted: #65707d;
+  --line: #d9d4ca;
+  --line-strong: #b9afa0;
+  --accent: #9b4339;
+  --accent-soft: #f1dfd7;
+  --gold: #c0964d;
+  --sage: #66795f;
+  --blue: #526a86;
+  --shadow: 0 16px 36px rgba(60, 47, 38, 0.1);
+  --radius: 8px;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  min-height: 100%;
+  background:
+    linear-gradient(rgba(32, 36, 42, 0.035) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(32, 36, 42, 0.035) 1px, transparent 1px),
+    var(--bg);
+  background-size: 24px 24px;
+}
+
+body {
+  min-height: 100vh;
+  margin: 0;
+  color: var(--ink);
+  font-family:
+    "PingFang SC",
+    "Microsoft YaHei",
+    "Noto Sans SC",
+    system-ui,
+    -apple-system,
+    BlinkMacSystemFont,
+    sans-serif;
+  letter-spacing: 0;
+}
+
+button {
+  font: inherit;
+}
+
+.shell {
+  width: min(100%, 480px);
+  min-height: 100vh;
+  margin: 0 auto;
+  background: rgba(251, 250, 247, 0.88);
+}
+
+.top-rule {
+  height: 4px;
+  background: var(--accent);
+}
+
+.screen {
+  min-height: calc(100vh - 4px);
+  padding: 28px 22px 32px;
+}
+
+.home {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.kicker {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  color: var(--muted);
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  font-size: 11px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+.dot {
+  width: 7px;
+  height: 7px;
+  background: var(--accent);
+  border-radius: 50%;
+}
+
+.hero-title {
+  margin: 26px 0 14px;
+  color: var(--ink);
+  font-size: 30px;
+  line-height: 1.2;
+  text-align: center;
+  font-weight: 800;
+}
+
+.hero-subtitle {
+  margin: 0 auto 28px;
+  max-width: 340px;
+  color: var(--muted);
+  font-size: 15px;
+  line-height: 1.75;
+  text-align: center;
+}
+
+.hairline {
+  width: 64px;
+  height: 1px;
+  margin: 0 auto 30px;
+  background: var(--line-strong);
+}
+
+.intro {
+  margin: 0 auto;
+  max-width: 380px;
+}
+
+.intro p {
+  margin: 0 0 15px;
+  color: rgba(32, 36, 42, 0.82);
+  font-size: 15px;
+  line-height: 1.8;
+}
+
+.intro .strong {
+  color: var(--accent);
+  font-weight: 700;
+}
+
+.pill-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px;
+  margin: 28px 0;
+}
+
+.pill {
+  min-height: 42px;
+  display: grid;
+  place-items: center;
+  border: 1px solid var(--line);
+  color: var(--muted);
+  background: rgba(255, 255, 255, 0.44);
+  font-size: 13px;
+}
+
+.primary-btn,
+.ghost-btn,
+.copy-btn {
+  width: 100%;
+  min-height: 48px;
+  border: 1px solid var(--ink);
+  border-radius: 0;
+  cursor: pointer;
+  transition: transform 150ms ease, background 150ms ease, color 150ms ease, border-color 150ms ease;
+}
+
+.primary-btn {
+  background: var(--ink);
+  color: #fff;
+  font-weight: 700;
+}
+
+.ghost-btn,
+.copy-btn {
+  background: transparent;
+  color: var(--ink);
+}
+
+.primary-btn:active,
+.ghost-btn:active,
+.copy-btn:active,
+.option:active {
+  transform: translateY(1px);
+}
+
+.disclaimer {
+  margin: 18px auto 0;
+  max-width: 340px;
+  color: var(--muted);
+  font-size: 12px;
+  line-height: 1.65;
+  text-align: center;
+}
+
+.quiz-screen {
+  padding-top: 0;
+}
+
+.sticky-head {
+  position: sticky;
+  top: 0;
+  z-index: 5;
+  margin: 0 -22px 26px;
+  padding: 14px 22px 12px;
+  background: rgba(251, 250, 247, 0.95);
+  border-bottom: 1px solid var(--line);
+  backdrop-filter: blur(12px);
+}
+
+.quiz-meta {
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+  color: var(--muted);
+  font-size: 12px;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+}
+
+.progress-track {
+  height: 4px;
+  margin-top: 10px;
+  background: rgba(32, 36, 42, 0.09);
+}
+
+.progress-bar {
+  height: 100%;
+  background: var(--accent);
+  transition: width 260ms ease;
+}
+
+.question-no {
+  color: rgba(155, 67, 57, 0.18);
+  font-size: 48px;
+  line-height: 1;
+  font-weight: 800;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+}
+
+.question-title {
+  margin: 18px 0 24px;
+  font-size: 22px;
+  line-height: 1.5;
+  font-weight: 750;
+}
+
+.options {
+  display: grid;
+  gap: 12px;
+}
+
+.option {
+  min-height: 66px;
+  display: grid;
+  grid-template-columns: 30px 1fr;
+  gap: 12px;
+  align-items: start;
+  width: 100%;
+  padding: 15px;
+  border: 1px solid var(--line);
+  background: rgba(255, 255, 255, 0.68);
+  color: var(--ink);
+  text-align: left;
+  cursor: pointer;
+  transition: background 160ms ease, border-color 160ms ease, color 160ms ease, opacity 160ms ease;
+}
+
+.option-key {
+  display: grid;
+  place-items: center;
+  width: 28px;
+  height: 28px;
+  border: 1px solid var(--line-strong);
+  font-size: 13px;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+}
+
+.option-text {
+  padding-top: 2px;
+  font-size: 15px;
+  line-height: 1.55;
+}
+
+.option.selected {
+  border-color: var(--accent);
+  background: var(--accent);
+  color: #fff;
+}
+
+.option.selected .option-key {
+  border-color: rgba(255, 255, 255, 0.8);
+}
+
+.option.dimmed {
+  opacity: 0.42;
+}
+
+.hint {
+  margin: 18px 0 0;
+  color: var(--muted);
+  font-size: 12px;
+  text-align: center;
+}
+
+.loading-screen {
+  display: grid;
+  place-items: center;
+}
+
+.loading-card {
+  width: 100%;
+  max-width: 360px;
+  text-align: center;
+}
+
+.spinner {
+  width: 54px;
+  height: 54px;
+  margin: 0 auto 24px;
+  border: 2px solid var(--line);
+  border-top-color: var(--accent);
+  border-radius: 50%;
+  animation: spin 850ms linear infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.loading-text {
+  min-height: 54px;
+  color: var(--accent);
+  font-size: 17px;
+  line-height: 1.6;
+  font-weight: 700;
+}
+
+.step-bars {
+  display: grid;
+  gap: 8px;
+  margin-top: 28px;
+}
+
+.step {
+  height: 4px;
+  overflow: hidden;
+  background: rgba(32, 36, 42, 0.09);
+}
+
+.step span {
+  display: block;
+  height: 100%;
+  width: 0;
+  background: var(--accent);
+  transition: width 300ms ease;
+}
+
+.step.done span {
+  width: 100%;
+}
+
+.result-screen {
+  padding: 22px 18px 30px;
+}
+
+.report {
+  padding: 22px 16px 18px;
+  border: 1px solid var(--line);
+  background: var(--paper);
+  box-shadow: var(--shadow);
+}
+
+.result-type {
+  margin: 8px 0 8px;
+  color: var(--accent);
+  font-size: 30px;
+  line-height: 1.15;
+  font-weight: 850;
+  text-align: center;
+}
+
+.result-subtitle {
+  margin: 0 auto 20px;
+  color: var(--muted);
+  font-size: 15px;
+  line-height: 1.7;
+  text-align: center;
+}
+
+.stamp-row {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px;
+  margin: 18px 0 20px;
+}
+
+.stamp {
+  padding: 12px 10px;
+  border: 1px solid var(--line);
+  background: #fbfaf7;
+}
+
+.stamp strong {
+  display: block;
+  margin-bottom: 4px;
+  color: var(--ink);
+  font-size: 20px;
+}
+
+.stamp span {
+  color: var(--muted);
+  font-size: 12px;
+}
+
+.section {
+  padding: 20px 0;
+  border-top: 1px solid var(--line);
+}
+
+.section h2 {
+  margin: 0 0 12px;
+  font-size: 18px;
+  color: var(--ink);
+}
+
+.section p {
+  margin: 0 0 12px;
+  color: rgba(32, 36, 42, 0.82);
+  font-size: 15px;
+  line-height: 1.85;
+}
+
+.quote {
+  padding: 15px;
+  border-left: 3px solid var(--accent);
+  background: var(--accent-soft);
+  color: #5b2d27;
+  line-height: 1.8;
+  font-weight: 700;
+}
+
+.meters {
+  display: grid;
+  gap: 14px;
+}
+
+.meter-head {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 7px;
+  color: var(--muted);
+  font-size: 13px;
+}
+
+.meter-track {
+  height: 8px;
+  background: rgba(32, 36, 42, 0.08);
+}
+
+.meter-fill {
+  height: 100%;
+  background: var(--accent);
+}
+
+.compare {
+  display: grid;
+  gap: 10px;
+}
+
+.compare-card {
+  padding: 14px;
+  border: 1px solid var(--line);
+  background: #fbfaf7;
+}
+
+.compare-card h3,
+.plan-card h3 {
+  margin: 0 0 8px;
+  font-size: 15px;
+}
+
+.compare-card p,
+.plan-card p {
+  font-size: 14px;
+}
+
+.tag-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.tag {
+  padding: 7px 9px;
+  border: 1px solid var(--line);
+  background: #fbfaf7;
+  color: var(--muted);
+  font-size: 13px;
+}
+
+.plan {
+  display: grid;
+  gap: 10px;
+}
+
+.plan-card {
+  padding: 14px;
+  border: 1px solid var(--line);
+  background: #fbfaf7;
+}
+
+.secondary-note {
+  padding: 14px;
+  border: 1px dashed var(--line-strong);
+  background: rgba(192, 150, 77, 0.12);
+  line-height: 1.75;
+  font-size: 14px;
+}
+
+.actions {
+  display: grid;
+  gap: 10px;
+  margin-top: 18px;
+}
+
+.toast {
+  position: fixed;
+  left: 50%;
+  bottom: 22px;
+  z-index: 20;
+  transform: translateX(-50%);
+  padding: 10px 14px;
+  background: var(--ink);
+  color: #fff;
+  font-size: 13px;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 180ms ease;
+}
+
+.toast.show {
+  opacity: 1;
+}
+
+.error {
+  display: grid;
+  place-items: center;
+  min-height: 100vh;
+  padding: 24px;
+  text-align: center;
+}
+
+.error p {
+  color: var(--muted);
+  line-height: 1.7;
+}
+
+@media (min-width: 700px) {
+  body {
+    padding: 28px 0;
+  }
+
+  .shell {
+    min-height: calc(100vh - 56px);
+    border: 1px solid var(--line);
+    box-shadow: var(--shadow);
+  }
+
+  .screen {
+    min-height: calc(100vh - 60px);
+  }
+}
+
+    </style>
+  </head>
+  <body>
+    <main id="app" aria-live="polite"></main>
+    <script>window.__QUIZ_CONFIG__ = {"slug":"test-ancient-position-rank","topic":"你若穿越回古代，最后能坐到什么位置？","kicker":"32-Q Ancient Position Test","title":"你若穿越回古代，最后能坐到什么位置？","subtitle":"32 道真实情境题，测出你在古代更可能靠战功、谋略、治理，还是资源经营坐稳位置。","metaDescription":"完成 32 道古代位置测试，生成你的上位路径、终局位置、优势风险和 90 天能力建议。","startButton":"开始测试","resultKicker":"Ancient Position Report","quizHint":"按真实第一反应选，不按爽文主角人设选。","copyButton":"复制我的结果","restartButton":"重新测试","scoreLabel":"上位清醒度","stageLabel":"当前位置","stageLabels":[{"max":55,"label":"求生摸索期"},{"max":72,"label":"入局试探期"},{"max":86,"label":"位置成型期"},{"max":100,"label":"终局坐稳期"}],"compareLabels":["如果继续按旧反应生存","如果开始训练上位能力"],"disclaimer":"本测试借用古代穿越和位置设定做趣味人格分析，仅供娱乐和自我观察参考，不构成职业建议、心理诊断、投资建议或人生决策依据。","secondaryThreshold":4,"dimensions":["战功力","谋略力","治理力","根基力"],"intro":["穿越回古代，真正难的不是开局拿什么身份。","难的是你在没有现代外挂、没有稳定规则、没有熟人背景的局里，最后靠什么坐稳位置。","这 32 道题会从初入局面、生存底线、权力嗅觉、人情经营、冲突取舍、资源经营、长期上升和终局位置 8 个维度，测出你更像边关统帅、王府谋士、中枢宰辅，还是世家掌舵人。"],"loadingMessages":["正在读取你的古代开局反应...","正在分析你的战功力、谋略力、治理力和根基力...","正在匹配你的古代终局位置...","正在生成 32 题位置报告...","分析完成。"],"questions":[{"id":1,"module":"初入局面","text":"你一睁眼发现自己穿越到古代，身无背景，第一反应更像：","options":[{"key":"A","text":"先找活路，能做事、能立功、能被人看见最重要"},{"key":"B","text":"先闭嘴观察，弄清楚谁有权、谁有势、谁能决定你的命"},{"key":"C","text":"先摸清规则，知道身份、法度、资源和上升通道"},{"key":"D","text":"先保住安全，找稳定落脚点，不急着暴露自己"}]},{"id":2,"module":"初入局面","text":"你最不能接受自己在古代变成哪种人？","options":[{"key":"A","text":"明明有能力，却一直被安排做杂事，没机会出头"},{"key":"B","text":"看懂了局，却因为说错一句话被人记恨"},{"key":"C","text":"被卷进一堆烂账，替别人背责任还没话语权"},{"key":"D","text":"为了往上爬，把自己的退路和底牌全交出去"}]},{"id":3,"module":"初入局面","text":"刚进一个府衙或王府，你最先观察的是：","options":[{"key":"A","text":"哪些事没人敢扛，谁能靠解决难题出头"},{"key":"B","text":"谁说话最有分量，谁只是表面风光"},{"key":"C","text":"权力怎么流动，真正的流程和规矩是谁定的"},{"key":"D","text":"哪些人不能得罪，哪些关系可以慢慢经营"}]},{"id":4,"module":"初入局面","text":"如果必须先选一个靠山，你会更看重：","options":[{"key":"A","text":"对方给不给实战机会，能不能让你立功"},{"key":"B","text":"对方有没有识人能力，能不能听懂你的判断"},{"key":"C","text":"对方手里有没有制度位置和正式资源"},{"key":"D","text":"对方是否稳定、守信、不会随便牺牲身边人"}]},{"id":5,"module":"生存底线","text":"古代最危险的一点，在你看来是：","options":[{"key":"A","text":"没有实力和功劳，任何时候都可能被替代"},{"key":"B","text":"不知道哪句话会触碰到别人的忌讳"},{"key":"C","text":"规则不清，责任和权力完全不对等"},{"key":"D","text":"退路太少，一次站错队就可能回不了头"}]},{"id":6,"module":"生存底线","text":"别人试探你时，你更自然的反应是：","options":[{"key":"A","text":"用结果证明自己，不和对方绕太久"},{"key":"B","text":"顺着话题反问，看对方到底想套什么"},{"key":"C","text":"把边界讲清楚，避免被临时加责"},{"key":"D","text":"先给一个温和回应，关系没稳前不亮底牌"}]},{"id":7,"module":"生存底线","text":"你最想练成的古代生存能力是：","options":[{"key":"A","text":"关键时候敢站出来，把事情办成"},{"key":"B","text":"一句话看出人心，一眼看懂局势"},{"key":"C","text":"能定规则、分责任、让局面稳定运转"},{"key":"D","text":"能保住自己和身边人，慢慢积累根基"}]},{"id":8,"module":"生存底线","text":"如果有人故意压你一头，你最可能：","options":[{"key":"A","text":"找机会做出一个他绕不开的成绩"},{"key":"B","text":"先不翻脸，记下他怎么压人、靠谁压人"},{"key":"C","text":"把问题拉回职责和流程，不在情绪里纠缠"},{"key":"D","text":"减少暴露，暂时避开锋芒，先留住退路"}]},{"id":9,"module":"权力嗅觉","text":"你判断一个人有没有前途，最看重：","options":[{"key":"A","text":"他有没有胆识，关键时刻敢不敢担事"},{"key":"B","text":"他身边有没有真正会出主意的人"},{"key":"C","text":"他能不能把散乱的人和事统起来"},{"key":"D","text":"他是否懂得蓄势，不会因为一时风光赌光全部"}]},{"id":10,"module":"权力嗅觉","text":"你最容易注意到哪类机会？","options":[{"key":"A","text":"别人都嫌麻烦但办成就能立刻被看见的事"},{"key":"B","text":"众人争吵时，被忽略的那条真正关键线索"},{"key":"C","text":"一个混乱系统里可以重整规则的位置"},{"key":"D","text":"一个不起眼但能长期积累人脉和资源的入口"}]},{"id":11,"module":"权力嗅觉","text":"如果你在朝堂旁听一次争论，你会更关注：","options":[{"key":"A","text":"谁敢拍板，谁只会推责任"},{"key":"B","text":"谁的话听起来温和，但真正改变了方向"},{"key":"C","text":"这个争论背后的制度漏洞在哪里"},{"key":"D","text":"谁在保全自己，谁在悄悄积累筹码"}]},{"id":12,"module":"权力嗅觉","text":"你认为真正的上位，靠的是：","options":[{"key":"A","text":"关键事件里拿到不可替代的功劳"},{"key":"B","text":"成为掌权者离不开的判断系统"},{"key":"C","text":"掌握规则和资源分配方式"},{"key":"D","text":"让自己拥有稳定根基，不被单一权力控制"}]},{"id":13,"module":"人情经营","text":"你在古代最可能用哪种方式建立关系？","options":[{"key":"A","text":"一起做事，靠可靠和结果赢信任"},{"key":"B","text":"少说废话，关键时刻给对方一个有用判断"},{"key":"C","text":"把合作边界和利益分配讲清楚"},{"key":"D","text":"平时慢慢维护，礼数、人情和往来都不断"}]},{"id":14,"module":"人情经营","text":"饭局上有人一直夸你，你会：","options":[{"key":"A","text":"接住好意，但更想知道有没有实际机会"},{"key":"B","text":"听他夸的是哪一点，判断他想把你放进什么位置"},{"key":"C","text":"不被情绪带走，观察这桌人的真实利益关系"},{"key":"D","text":"保持礼貌，不轻易把关系推进太快"}]},{"id":15,"module":"人情经营","text":"你最怕自己在人情局里犯什么错？","options":[{"key":"A","text":"太直，得罪人还不知道哪里得罪的"},{"key":"B","text":"看懂太多，显得不够真诚"},{"key":"C","text":"只讲规则，忽略了人情的缓冲作用"},{"key":"D","text":"太顾及关系，错过该争取的位置"}]},{"id":16,"module":"人情经营","text":"你会怎么对待一个暂时没用但人品不错的人？","options":[{"key":"A","text":"只要一起做事靠谱，就愿意继续合作"},{"key":"B","text":"留着观察，也许未来能成为关键信息点"},{"key":"C","text":"保持清楚边界，能合作就按规则合作"},{"key":"D","text":"认真维护，很多关系都是后来才显出价值"}]},{"id":17,"module":"冲突取舍","text":"有人把难题推到你面前，你更可能：","options":[{"key":"A","text":"接，但要做成漂亮结果，让所有人看见"},{"key":"B","text":"先判断这是不是别人设的局，再决定接不接"},{"key":"C","text":"明确权责和资源，没有条件就不盲目背锅"},{"key":"D","text":"看这件事会不会毁掉长期退路，不值得就避开"}]},{"id":18,"module":"冲突取舍","text":"被人当众质疑时，你更像：","options":[{"key":"A","text":"当场拿结果和事实回击"},{"key":"B","text":"不急着正面硬碰，先让对方暴露逻辑漏洞"},{"key":"C","text":"把争执从个人攻击拉回制度和职责"},{"key":"D","text":"先稳住场面，事后再通过关系和证据处理"}]},{"id":19,"module":"冲突取舍","text":"你最看不起哪种古代上位方式？","options":[{"key":"A","text":"什么事都不做，只靠背景占位置"},{"key":"B","text":"没有真判断，只会说掌权者爱听的话"},{"key":"C","text":"只会争宠，不解决真正的问题"},{"key":"D","text":"为了短期利益，连退路和信用都不要"}]},{"id":20,"module":"冲突取舍","text":"如果必须得罪一部分人，你会选择：","options":[{"key":"A","text":"为了把事做成，得罪拖后腿的人也没办法"},{"key":"B","text":"尽量让对方不是败在你手上，而是败在局势里"},{"key":"C","text":"按规则处理，让得罪变成可解释的结果"},{"key":"D","text":"能少树敌就少树敌，除非这一步关系到根基"}]},{"id":21,"module":"资源经营","text":"你手里突然有一笔银子，你最想先用来：","options":[{"key":"A","text":"换装备、学本事、让自己更能办硬事"},{"key":"B","text":"结识关键人物，换信息和入场机会"},{"key":"C","text":"搭一个能稳定运转的小团队或小生意"},{"key":"D","text":"置办田产、铺子或可靠退路"}]},{"id":22,"module":"资源经营","text":"你对资源的理解更接近：","options":[{"key":"A","text":"资源是拿来解决问题、换取战功的"},{"key":"B","text":"资源是信息和筹码，关键时刻能改变判断"},{"key":"C","text":"资源是系统配置，谁掌握分配谁就有话语权"},{"key":"D","text":"资源是安全垫，能让人不被局势轻易拿捏"}]},{"id":23,"module":"资源经营","text":"如果你有机会培养下属，你会优先挑：","options":[{"key":"A","text":"能吃苦、执行强、关键时刻不掉链子的人"},{"key":"B","text":"脑子清楚、嘴严、看得懂暗线的人"},{"key":"C","text":"讲规则、能统筹、能把事推进到结果的人"},{"key":"D","text":"忠厚稳定、适合长期放在身边的人"}]},{"id":24,"module":"资源经营","text":"你最想拥有哪种古代资产？","options":[{"key":"A","text":"一支能打硬仗、听你调度的人马"},{"key":"B","text":"一张信息灵通、能提前预警的关系网"},{"key":"C","text":"一个能调配人财物的正式职位"},{"key":"D","text":"一份不靠别人脸色也能活下去的家业"}]},{"id":25,"module":"长期上升","text":"如果给你 10 年时间，你更想把自己养成：","options":[{"key":"A","text":"有战功、有威望，关键时候能镇场的人"},{"key":"B","text":"谁遇到大事都想来问一句的人"},{"key":"C","text":"能让一个地方或部门稳定运转的人"},{"key":"D","text":"家底、人脉、名声都慢慢变厚的人"}]},{"id":26,"module":"长期上升","text":"你觉得自己最容易在哪一步卡住？","options":[{"key":"A","text":"太想快点证明自己，容易硬扛太多"},{"key":"B","text":"想太多、看太透，有时行动慢半拍"},{"key":"C","text":"责任心太强，容易替烂系统兜底"},{"key":"D","text":"太求稳，机会来的时候不敢下注"}]},{"id":27,"module":"长期上升","text":"你最希望别人怎么评价你？","options":[{"key":"A","text":"这个人能扛事，真到关键时候靠得住"},{"key":"B","text":"这个人看局很准，不说废话但句句有用"},{"key":"C","text":"这个人能把乱局理顺，让所有人各归其位"},{"key":"D","text":"这个人稳，跟他合作不用担心突然翻船"}]},{"id":28,"module":"长期上升","text":"你认为高位最难的不是上去，而是：","options":[{"key":"A","text":"上去后还能继续打胜仗，不被名声拖累"},{"key":"B","text":"知道什么时候该说，什么时候该闭嘴"},{"key":"C","text":"权力越大，越能把责任和规则管清楚"},{"key":"D","text":"风浪再大，也能保住根基和身边人"}]},{"id":29,"module":"终局位置","text":"穿越古代后，你最想坐到的位置是：","options":[{"key":"A","text":"边关统帅，靠战功和威望站稳"},{"key":"B","text":"王府首席谋士，靠判断影响大局"},{"key":"C","text":"中枢宰辅，靠治理和规则掌住局面"},{"key":"D","text":"世家掌舵人，靠资源和根基稳坐一方"}]},{"id":30,"module":"终局位置","text":"如果大结局给你一个镜头，你希望是：","options":[{"key":"A","text":"城门大开，你带人解决最难的一战"},{"key":"B","text":"灯下推演，你一句话改变整盘棋的走向"},{"key":"C","text":"朝堂之上，你把混乱的局面重新定规矩"},{"key":"D","text":"风波过后，你的家业、人脉和退路都还在"}]},{"id":31,"module":"终局位置","text":"你觉得真正的坐稳位置，靠的是：","options":[{"key":"A","text":"别人知道你能解决硬问题"},{"key":"B","text":"别人知道你有不可替代的判断力"},{"key":"C","text":"别人知道你能把权力变成秩序"},{"key":"D","text":"别人知道你有根基，不会轻易被拿捏"}]},{"id":32,"module":"终局位置","text":"做完 32 题，你最想知道的是：","options":[{"key":"A","text":"我是不是适合靠能力和战功杀出来"},{"key":"B","text":"我是不是适合做真正影响决策的人"},{"key":"C","text":"我是不是有坐到中枢位置的治理能力"},{"key":"D","text":"我是不是更适合稳扎稳打，经营自己的根基"}]}],"results":{"A":{"typeName":"边关统帅位","subtitle":"你靠执行、胆识和硬结果上位，越是没人敢接的局，越容易让你被看见。","posterSubtext":"你不是最会绕的人，但你最容易在关键时刻靠一场硬仗翻身。","maturityScore":84,"coreConclusion":"你的古代上位路径偏向「战功立身」。你更相信事情要做成，问题要解决，关键时刻不能只靠嘴。放在古代，你不是一开始就坐在朝堂中心的人，而是会先在边地、府衙、军务或危机现场被看见。你的优势是行动快、扛事强、抗压高，别人犹豫的时候你能站出来。短板是容易太早把自己推到前线，替别人扛了风险，却没有同步拿到相应的位置和筹码。 你真正想要的不是辛苦被夸，而是能力被承认、结果能换位置。你需要学会在立功之前先谈清权责，在冲锋之后及时固化成果，否则你会一直成为最好用的人，却未必成为最后坐上去的人。","diagnosis":"你的古代上位路径偏向「战功立身」。你更相信事情要做成，问题要解决，关键时刻不能只靠嘴。放在古代，你不是一开始就坐在朝堂中心的人，而是会先在边地、府衙、军务或危机现场被看见。你的优势是行动快、扛事强、抗压高，别人犹豫的时候你能站出来。短板是容易太早把自己推到前线，替别人扛了风险，却没有同步拿到相应的位置和筹码。","whatYouReallyWant":"你真正想要的不是辛苦被夸，而是能力被承认、结果能换位置。你需要学会在立功之前先谈清权责，在冲锋之后及时固化成果，否则你会一直成为最好用的人，却未必成为最后坐上去的人。","mechanism":{"title":"战功上升机制","content":"边关统帅型的人靠硬结果建立信用。你适合在混乱、危机、开荒、竞争强的环境里出头，因为你能把别人不敢碰的事变成结果。但你要记住，古代真正的统帅不只会打仗，还要会要粮、要人、要名分。只会解决问题的人，会被反复派去解决问题；会把问题变成位置的人，才会坐稳。"},"professionalBasis":["你在陌生局面里更关注机会和功劳，而不是先慢慢经营安全感。","你对无能占位、推卸责任和空谈最敏感，说明你有强烈的结果导向。","你遇到冲突时倾向于用事实和成绩回应，这能建立威望，也容易暴露锋芒。"],"coreTensions":["行动快","扛事强","结果导向","容易硬扛","需要筹码意识"],"suitableIf":["开荒项目","危机处理","强执行岗位","带团队冲结果","需要快速破局的环境"],"cautionIf":["替别人背风险","只立功不谈名分","太早硬碰硬","被当成好用的工具人"],"indices":[{"label":"破局执行力","value":94},{"label":"临场胆识","value":90},{"label":"权责谈判","value":68},{"label":"长期坐稳度","value":74}],"ifStay":"如果你继续只靠硬扛，你会不断赢下具体战役，却可能错过真正能让你升阶的位置。","ifChange":"如果你学会把功劳、资源和名分一起拿回来，你的上升速度会明显变快。","notRecommended":["替别人背风险","只立功不谈名分","太早硬碰硬","被当成好用的工具人"],"plan90":[{"title":"第 1 周：先定权责","content":"任何难题开始前，先确认目标、资源、边界和最终署名。"},{"title":"第 2-3 周：留出战果证据","content":"把你的贡献变成可被看见的记录，而不是只靠别人良心记得。"},{"title":"第 4-6 周：减少无效硬扛","content":"不是所有难事都值得接，先判断这件事能不能换来位置或筹码。"},{"title":"第 7-12 周：练习向上汇报","content":"把结果讲成价值，把执行讲成能力，让别人知道你不只是能干活。"}],"closing":"你若穿越回古代，最后最可能坐到边关统帅位。不是因为你爱冒险，而是你身上有一种能把烂局打穿的硬劲。"},"B":{"typeName":"王府首席谋士位","subtitle":"你靠观察、人心和判断力靠近权力中心，真正厉害的是一句话改变局势。","posterSubtext":"你未必站在最前面，但很多关键决定会绕不开你的判断。","maturityScore":88,"coreConclusion":"你的古代上位路径偏向「谋略入局」。你不是最急着表现的人，反而会先看人、看关系、看暗线。放在古代，你很适合成为王府、幕府、权贵身边的核心谋士。你的优势是会观察、能听出话外音、懂得时机和分寸，关键时候能给出一句真正有用的判断。短板是容易想太多，或者看懂了局却行动慢半拍，导致机会被更敢下注的人拿走。 你真正想要的是影响力，而不是表面风光。你不一定要坐在最显眼的位置，但你希望重要决策里有你的声音。你需要练习把判断变成行动建议，不要只停留在「我早就看出来了」。","diagnosis":"你的古代上位路径偏向「谋略入局」。你不是最急着表现的人，反而会先看人、看关系、看暗线。放在古代，你很适合成为王府、幕府、权贵身边的核心谋士。你的优势是会观察、能听出话外音、懂得时机和分寸，关键时候能给出一句真正有用的判断。短板是容易想太多，或者看懂了局却行动慢半拍，导致机会被更敢下注的人拿走。","whatYouReallyWant":"你真正想要的是影响力，而不是表面风光。你不一定要坐在最显眼的位置，但你希望重要决策里有你的声音。你需要练习把判断变成行动建议，不要只停留在「我早就看出来了」。","mechanism":{"title":"谋略影响机制","content":"首席谋士型的人靠判断力获得位置。你的价值不是替别人做杂事，而是帮掌权者减少误判。你适合在复杂关系、转折节点、资源有限的环境里发挥作用。但谋士最大的风险，是永远站在别人身后。你需要在关键贡献之后建立自己的名分和不可替代性。"},"professionalBasis":["你在陌生环境里会先观察权力和人心，而不是马上冲出去表现。","你对试探、暗线和话外音敏感，适合处理复杂关系。","你重视时机和表达分寸，说明你的影响力常常来自间接推动。"],"coreTensions":["洞察强","会看人","懂时机","行动偏慢","需要名分意识"],"suitableIf":["策略判断","关系协调","内容策划","咨询顾问","复杂谈判","领导参谋"],"cautionIf":["只看懂不落子","贡献被别人拿走","过度试探","一直做幕后却没有自己的位置"],"indices":[{"label":"人心洞察","value":94},{"label":"局势判断","value":92},{"label":"行动落地","value":72},{"label":"名分争取","value":69}],"ifStay":"如果你一直只做幕后判断，你会被需要，却未必被公开承认。","ifChange":"如果你把判断变成可执行方案，并在关键节点留下署名，你会更容易进入真正的核心圈。","notRecommended":["只看懂不落子","贡献被别人拿走","过度试探","一直做幕后却没有自己的位置"],"plan90":[{"title":"第 1 周：判断写下来","content":"不要只在心里想，把你的判断变成一句清楚结论和三条依据。"},{"title":"第 2-3 周：给方案而非点评","content":"少说这不对，多说下一步可以怎么做。"},{"title":"第 4-6 周：建立可见贡献","content":"让你的策略被记录、被复盘、被证明有效。"},{"title":"第 7-12 周：争取独立位置","content":"不要永远只做谁的影子，要逐步形成自己的标签和领域。"}],"closing":"你若穿越回古代，最后最可能坐到王府首席谋士位。你靠的不是嗓门，而是能在乱局里看见真正的棋眼。"},"C":{"typeName":"中枢宰辅位","subtitle":"你靠治理、规则和统筹能力坐进核心位置，不只解决一件事，而是重整一套秩序。","posterSubtext":"你真正厉害的地方，是能把混乱的人和事放回正确位置。","maturityScore":92,"coreConclusion":"你的古代上位路径偏向「治理掌局」。你不满足于解决单个问题，更关心权责、流程、资源和长期稳定。放在古代，你更像能进入朝堂中枢的人，适合做六部主官、地方大员，甚至宰辅型角色。你的优势是系统感强、责任感重、能把乱局理顺。短板是容易替烂系统兜底，也容易因为太讲规则，让人觉得不够圆融。 你真正想要的是秩序感和掌控感。你不是只想赢一次，而是想让局面以后都不要再乱。你需要学会在规则之外保留人情缓冲，否则你的正确会变成压力，让别人想逃离你的管理。","diagnosis":"你的古代上位路径偏向「治理掌局」。你不满足于解决单个问题，更关心权责、流程、资源和长期稳定。放在古代，你更像能进入朝堂中枢的人，适合做六部主官、地方大员，甚至宰辅型角色。你的优势是系统感强、责任感重、能把乱局理顺。短板是容易替烂系统兜底，也容易因为太讲规则，让人觉得不够圆融。","whatYouReallyWant":"你真正想要的是秩序感和掌控感。你不是只想赢一次，而是想让局面以后都不要再乱。你需要学会在规则之外保留人情缓冲，否则你的正确会变成压力，让别人想逃离你的管理。","mechanism":{"title":"治理坐稳机制","content":"中枢宰辅型的人靠系统能力获得位置。你能看到问题背后的结构，而不是只看表面冲突。你适合负责流程、组织、团队、资源配置和长期项目。真正的宰辅不是最会表现的人，而是让所有人离不开他的秩序。风险是责任心过重，什么都想管，最后把自己耗成系统的补丁。"},"professionalBasis":["你倾向于把个人冲突拉回权责和规则，说明你有治理视角。","你关注资源分配和流程稳定，不满足于单次胜负。","你希望别人评价你能把乱局理顺，这是典型的中枢型能力。"],"coreTensions":["系统感强","责任心重","能定规则","容易兜底","需要人情弹性"],"suitableIf":["组织管理","项目统筹","流程搭建","运营管理","制度设计","长期治理"],"cautionIf":["替烂系统背锅","过度讲规则","忽略人情缓冲","把所有责任揽到自己身上"],"indices":[{"label":"治理统筹","value":96},{"label":"规则意识","value":93},{"label":"资源配置","value":89},{"label":"人情弹性","value":70}],"ifStay":"如果你继续什么都兜底，你会越来越重要，也会越来越累。","ifChange":"如果你学会让规则分担责任，而不是自己分担一切，你会真正坐稳核心位置。","notRecommended":["替烂系统背锅","过度讲规则","忽略人情缓冲","把所有责任揽到自己身上"],"plan90":[{"title":"第 1 周：拆清权责","content":"把每件复杂事拆成责任人、资源、时间和验收标准。"},{"title":"第 2-3 周：减少个人兜底","content":"能用流程解决的，不要靠你个人临时救火。"},{"title":"第 4-6 周：加入人情缓冲","content":"规则要清楚，但表达要留余地，让人愿意配合。"},{"title":"第 7-12 周：沉淀治理模板","content":"把你理顺乱局的方法做成固定流程，变成你的核心资产。"}],"closing":"你若穿越回古代，最后最可能坐到中枢宰辅位。你不是只会赢一局的人，你更擅长改写整套规则。"},"D":{"typeName":"世家掌舵位","subtitle":"你靠资源、人脉和长期经营坐稳一方，不急着显眼，但很难被轻易拿捏。","posterSubtext":"你不一定冲得最快，但你最懂得给自己留下根基和退路。","maturityScore":86,"coreConclusion":"你的古代上位路径偏向「经营根基」。你不喜欢把命运押在单一靠山或一次机会里，更在意安全、信用、关系和长期资产。放在古代，你未必最想站到风口浪尖，但很可能慢慢经营成一方世家、商号主理人、地方实际掌舵者。你的优势是稳、耐心、懂退路，能在风波里保住根基。短板是太求稳时容易错过关键跃迁机会。 你真正想要的是可持续的安全感。你不是不上进，而是不想为了上位把自己全部押出去。你需要练习在安全边界内适度下注，不然你会越来越稳，却也可能一直停在舒适区外侧。","diagnosis":"你的古代上位路径偏向「经营根基」。你不喜欢把命运押在单一靠山或一次机会里，更在意安全、信用、关系和长期资产。放在古代，你未必最想站到风口浪尖，但很可能慢慢经营成一方世家、商号主理人、地方实际掌舵者。你的优势是稳、耐心、懂退路，能在风波里保住根基。短板是太求稳时容易错过关键跃迁机会。","whatYouReallyWant":"你真正想要的是可持续的安全感。你不是不上进，而是不想为了上位把自己全部押出去。你需要练习在安全边界内适度下注，不然你会越来越稳，却也可能一直停在舒适区外侧。","mechanism":{"title":"根基经营机制","content":"世家掌舵型的人靠长期复利获得位置。你重视信用、人情、资产和退路，适合做能沉淀资源的事情。你的上升不是爆发式，而是越到后期越稳。真正的掌舵人不一定最会争一时高低，但能让自己在多次风浪后仍然有选择权。风险是过度保守，别人已经进场，你还在等万无一失。"},"professionalBasis":["你在危险局面里会优先保退路，说明你有强自保和长期意识。","你重视稳定关系、可靠资产和信用积累，适合做长期经营。","你不喜欢短期豪赌，更倾向于让资源慢慢变厚。"],"coreTensions":["稳健耐心","重视信用","有退路意识","机会启动慢","需要下注能力"],"suitableIf":["长期副业","资源积累","私域经营","客户维护","家庭资产规划","稳健型项目"],"cautionIf":["太晚下注","过度求稳","不敢争取位置","把安全感误认为上升"],"indices":[{"label":"资源经营","value":92},{"label":"风险控制","value":94},{"label":"长期复利","value":90},{"label":"跃迁胆量","value":66}],"ifStay":"如果你一直只求稳，你会保住很多东西，但也可能错过本该属于你的跃迁窗口。","ifChange":"如果你能在确定性够高时大胆一步，你的长期积累会变成真正的位置。","notRecommended":["太晚下注","过度求稳","不敢争取位置","把安全感误认为上升"],"plan90":[{"title":"第 1 周：盘点根基","content":"列出你已有的人脉、技能、资产和可复用资源。"},{"title":"第 2-3 周：选择一个小下注","content":"在可承受范围内做一次主动争取，不要等到完全安全才行动。"},{"title":"第 4-6 周：经营长期信用","content":"持续交付、稳定回应、守住承诺，让别人愿意长期与你合作。"},{"title":"第 7-12 周：形成资源闭环","content":"把关系、内容、产品或服务连起来，让积累不再只是零散优势。"}],"closing":"你若穿越回古代，最后最可能坐到世家掌舵位。你靠的不是一夜翻身，而是让自己越来越难被局势带走。"}},"secondaryNotes":{"A":{"B":"你的主位置是「边关统帅位」，同时带有「王府首席谋士位」的副倾向。主结果代表你最稳定的上位方式，副结果代表你在压力升级或机会出现时，会启动的第二套生存策略。","C":"你的主位置是「边关统帅位」，同时带有「中枢宰辅位」的副倾向。主结果代表你最稳定的上位方式，副结果代表你在压力升级或机会出现时，会启动的第二套生存策略。","D":"你的主位置是「边关统帅位」，同时带有「世家掌舵位」的副倾向。主结果代表你最稳定的上位方式，副结果代表你在压力升级或机会出现时，会启动的第二套生存策略。"},"B":{"A":"你的主位置是「王府首席谋士位」，同时带有「边关统帅位」的副倾向。主结果代表你最稳定的上位方式，副结果代表你在压力升级或机会出现时，会启动的第二套生存策略。","C":"你的主位置是「王府首席谋士位」，同时带有「中枢宰辅位」的副倾向。主结果代表你最稳定的上位方式，副结果代表你在压力升级或机会出现时，会启动的第二套生存策略。","D":"你的主位置是「王府首席谋士位」，同时带有「世家掌舵位」的副倾向。主结果代表你最稳定的上位方式，副结果代表你在压力升级或机会出现时，会启动的第二套生存策略。"},"C":{"A":"你的主位置是「中枢宰辅位」，同时带有「边关统帅位」的副倾向。主结果代表你最稳定的上位方式，副结果代表你在压力升级或机会出现时，会启动的第二套生存策略。","B":"你的主位置是「中枢宰辅位」，同时带有「王府首席谋士位」的副倾向。主结果代表你最稳定的上位方式，副结果代表你在压力升级或机会出现时，会启动的第二套生存策略。","D":"你的主位置是「中枢宰辅位」，同时带有「世家掌舵位」的副倾向。主结果代表你最稳定的上位方式，副结果代表你在压力升级或机会出现时，会启动的第二套生存策略。"},"D":{"A":"你的主位置是「世家掌舵位」，同时带有「边关统帅位」的副倾向。主结果代表你最稳定的上位方式，副结果代表你在压力升级或机会出现时，会启动的第二套生存策略。","B":"你的主位置是「世家掌舵位」，同时带有「王府首席谋士位」的副倾向。主结果代表你最稳定的上位方式，副结果代表你在压力升级或机会出现时，会启动的第二套生存策略。","C":"你的主位置是「世家掌舵位」，同时带有「中枢宰辅位」的副倾向。主结果代表你最稳定的上位方式，副结果代表你在压力升级或机会出现时，会启动的第二套生存策略。"}},"shareTemplate":["我测出来是：{{typeName}}","{{posterSubtext}}","{{secondaryLine}}","","你若穿越回古代，最后能坐到什么位置？32题古代位置测试"]};</script>
+    <script>
+(function () {
+  const app = document.getElementById("app");
+  const configPaths = ["./configs/site-config.json", "./configs/career-change.json"];
+
+  const state = {
+    config: null,
+    answers: {},
+    currentIndex: 0,
+    selected: null,
+    locked: false,
+    loadingStep: 0,
+    route: "home",
+    resultData: null,
+  };
+
+  const defaultLoadingMessages = [
+    "正在读取你的选择倾向...",
+    "正在识别隐藏动机...",
+    "正在计算结果分布...",
+    "正在生成专属报告...",
+    "分析完成。",
+  ];
+
+  init();
+
+  async function init() {
+    try {
+      state.config = await fetchConfig();
+      applyDocumentMeta(state.config);
+
+      const saved = sessionStorage.getItem(getStorageKey());
+      if (saved) {
+        state.answers = JSON.parse(saved);
+      }
+
+      routeFromHash();
+      window.addEventListener("hashchange", routeFromHash);
+    } catch (error) {
+      app.innerHTML = `
+        <div class="error">
+          <div>
+            <h1>测试加载失败</h1>
+            <p>请确认你是通过网页链接打开页面，而不是直接双击 HTML 文件。</p>
+          </div>
+        </div>
+      `;
+      console.error(error);
+    }
+  }
+
+  async function fetchConfig() {
+    if (window.__QUIZ_CONFIG__) return window.__QUIZ_CONFIG__;
+    let lastError;
+    for (const path of configPaths) {
+      try {
+        const response = await fetch(path, { cache: "no-store" });
+        if (!response.ok) throw new Error(`${path} ${response.status}`);
+        return response.json();
+      } catch (error) {
+        lastError = error;
+      }
+    }
+    throw lastError;
+  }
+
+  function applyDocumentMeta(cfg) {
+    const title = cfg.title || "趣味测试";
+    const description = cfg.metaDescription || cfg.subtitle || "完成测试，生成你的专属报告。";
+    document.title = title;
+    setMeta("name", "description", description);
+    setMeta("property", "og:title", title);
+    setMeta("property", "og:description", description);
+  }
+
+  function setMeta(attr, key, content) {
+    let node = document.querySelector(`meta[${attr}="${key}"]`);
+    if (!node) {
+      node = document.createElement("meta");
+      node.setAttribute(attr, key);
+      document.head.appendChild(node);
+    }
+    node.setAttribute("content", content);
+  }
+
+  function routeFromHash() {
+    const route = (location.hash || "#/").replace("#/", "") || "home";
+    renderRoute(route);
+  }
+
+  function navigate(route) {
+    const nextHash = `#/${route}`;
+    if (location.hash === nextHash) {
+      renderRoute(route);
+      return;
+    }
+    location.hash = nextHash;
+  }
+
+  function renderRoute(route) {
+    state.route = route;
+    if (route === "quiz") renderQuiz();
+    else if (route === "loading") startLoading();
+    else if (route === "result") renderResult();
+    else renderHome();
+  }
+
+  function renderShell(content, extraClass = "") {
+    app.innerHTML = `
+      <div class="shell">
+        <div class="top-rule"></div>
+        <section class="screen ${extraClass}">${content}</section>
+      </div>
+      <div id="toast" class="toast">已复制</div>
+    `;
+  }
+
+  function renderHome() {
+    const cfg = state.config;
+    renderShell(
+      `
+      <div class="home">
+        <div class="kicker"><span class="dot"></span><span>${text(cfg.kicker)}</span><span class="dot"></span></div>
+        <h1 class="hero-title">${text(cfg.title)}</h1>
+        <p class="hero-subtitle">${text(cfg.subtitle)}</p>
+        <div class="hairline"></div>
+        <div class="intro">
+          ${(cfg.intro || []).map((p, index) => `<p class="${index === cfg.intro.length - 1 ? "strong" : ""}">${text(p)}</p>`).join("")}
+        </div>
+        <div class="pill-grid">
+          ${(cfg.dimensions || []).map((item) => `<div class="pill">${text(item)}</div>`).join("")}
+        </div>
+        <button class="primary-btn" data-action="start">${text(cfg.startButton || "开始测试")}</button>
+        <p class="disclaimer">${text(cfg.disclaimer || "本测试为趣味内容，仅供娱乐参考。")}</p>
+      </div>
+      `,
+      "home"
+    );
+    const startButton = app.querySelector("[data-action='start']");
+    let started = false;
+    const startQuiz = () => {
+      if (started) return;
+      started = true;
+      state.answers = {};
+      state.currentIndex = 0;
+      sessionStorage.removeItem(getStorageKey());
+      navigate("quiz");
+    };
+    startButton.addEventListener("click", startQuiz);
+    startButton.addEventListener(
+      "touchend",
+      (event) => {
+        event.preventDefault();
+        startQuiz();
+      },
+      { passive: false }
+    );
+  }
+
+  function renderQuiz() {
+    const questions = state.config.questions || [];
+    const question = questions[state.currentIndex];
+    if (!question) {
+      renderHome();
+      return;
+    }
+
+    const progress = ((state.currentIndex + 1) / questions.length) * 100;
+
+    renderShell(
+      `
+      <div class="sticky-head">
+        <div class="quiz-meta">
+          <span>${String(state.currentIndex + 1).padStart(2, "0")} / ${questions.length}</span>
+          <span>${text(question.module)}</span>
+        </div>
+        <div class="progress-track"><div class="progress-bar" style="width:${progress}%"></div></div>
+      </div>
+      <div class="question-no">${String(state.currentIndex + 1).padStart(2, "0")}</div>
+      <h1 class="question-title">${text(question.text)}</h1>
+      <div class="options">
+        ${(question.options || [])
+          .map(
+            (option) => `
+            <button class="option" data-option="${text(option.key)}">
+              <span class="option-key">${text(option.key)}</span>
+              <span class="option-text">${text(option.text)}</span>
+            </button>
+          `
+          )
+          .join("")}
+      </div>
+      <p class="hint">${text(state.config.quizHint || "选择后自动进入下一题")}</p>
+      `,
+      "quiz-screen"
+    );
+
+    app.querySelectorAll("[data-option]").forEach((button) => {
+      button.addEventListener("click", () => selectOption(button.dataset.option));
+    });
+  }
+
+  function selectOption(key) {
+    if (state.locked) return;
+    state.locked = true;
+    state.selected = key;
+    const question = state.config.questions[state.currentIndex];
+    state.answers[question.id] = key;
+
+    app.querySelectorAll(".option").forEach((button) => {
+      const selected = button.dataset.option === key;
+      button.classList.toggle("selected", selected);
+      button.classList.toggle("dimmed", !selected);
+    });
+
+    window.setTimeout(() => {
+      if (state.currentIndex < state.config.questions.length - 1) {
+        state.currentIndex += 1;
+        state.locked = false;
+        state.selected = null;
+        renderQuiz();
+      } else {
+        sessionStorage.setItem(getStorageKey(), JSON.stringify(state.answers));
+        state.locked = false;
+        navigate("loading");
+      }
+    }, 420);
+  }
+
+  function startLoading() {
+    state.loadingStep = 0;
+    renderLoading("");
+    tickLoading();
+  }
+
+  function renderLoading(value) {
+    const loadingMessages = getLoadingMessages();
+    renderShell(
+      `
+      <div class="loading-card">
+        <div class="spinner"></div>
+        <div class="loading-text">${text(value)}<span class="cursor">|</span></div>
+        <div class="step-bars">
+          ${loadingMessages.map((_, index) => `<div class="step ${index < state.loadingStep ? "done" : ""}"><span></span></div>`).join("")}
+        </div>
+      </div>
+      `,
+      "loading-screen"
+    );
+  }
+
+  function tickLoading() {
+    if (state.route !== "loading") return;
+    const loadingMessages = getLoadingMessages();
+    if (state.loadingStep >= loadingMessages.length) {
+      window.setTimeout(() => navigate("result"), 700);
+      return;
+    }
+    const message = loadingMessages[state.loadingStep];
+    let chars = 0;
+    const interval = window.setInterval(() => {
+      chars += 1;
+      renderLoading(message.slice(0, chars));
+      if (chars >= message.length) {
+        window.clearInterval(interval);
+        window.setTimeout(() => {
+          state.loadingStep += 1;
+          tickLoading();
+        }, 520);
+      }
+    }, 35);
+  }
+
+  function renderResult() {
+    const saved = sessionStorage.getItem(getStorageKey());
+    if (saved) state.answers = JSON.parse(saved);
+    if (Object.keys(state.answers).length < state.config.questions.length) {
+      renderHome();
+      return;
+    }
+
+    const scored = scoreAnswers(state.answers);
+    const primary = state.config.results[scored.primary];
+    const secondary = scored.secondary ? state.config.secondaryNotes?.[scored.primary]?.[scored.secondary] : null;
+    const stage = getStage(primary.maturityScore);
+    const shareText = buildShareText(primary, secondary);
+    const compareLabels = state.config.compareLabels || ["如果继续原路", "如果换一种做法"];
+    state.resultData = { scored, primary, secondary, stage, shareText };
+
+    renderShell(
+      `
+      <article class="report">
+        <div class="kicker"><span class="dot"></span><span>${text(state.config.resultKicker || "Result Report")}</span><span class="dot"></span></div>
+        <h1 class="result-type">${text(primary.typeName)}</h1>
+        <p class="result-subtitle">${text(primary.subtitle)}</p>
+        <div class="stamp-row">
+          <div class="stamp"><strong>${text(primary.maturityScore)}</strong><span>${text(state.config.scoreLabel || "决策成熟度")}</span></div>
+          <div class="stamp"><strong>${text(stage)}</strong><span>${text(state.config.stageLabel || "当前行动阶段")}</span></div>
+        </div>
+
+        <section class="section">
+          <h2>你的答案分布</h2>
+          <div class="meters">
+            ${Object.entries(scored.counts)
+              .map(([key, value]) => {
+                const typeData = state.config.results[key];
+                const width = (value / state.config.questions.length) * 100;
+                return `
+                  <div>
+                    <div class="meter-head"><span>${text(key)} · ${text(typeData.typeName)}</span><span>${value} 题</span></div>
+                    <div class="meter-track"><div class="meter-fill" style="width:${width}%"></div></div>
+                  </div>
+                `;
+              })
+              .join("")}
+          </div>
+        </section>
+
+        ${secondary ? `<section class="section"><h2>副倾向提示</h2><div class="secondary-note">${text(secondary)}</div></section>` : ""}
+
+        <section class="section">
+          <h2>诊断结论</h2>
+          <div class="quote">${text(primary.coreConclusion)}</div>
+        </section>
+
+        <section class="section">
+          <h2>为什么你会这样</h2>
+          <p>${text(primary.diagnosis)}</p>
+          <p>${text(primary.whatYouReallyWant)}</p>
+        </section>
+
+        <section class="section">
+          <h2>${text(primary.mechanism.title)}</h2>
+          <p>${text(primary.mechanism.content)}</p>
+        </section>
+
+        ${renderParagraphSection("专业解读框架", primary.professionalBasis)}
+        ${renderTagSection("你的关键矛盾", primary.coreTensions)}
+        ${renderCompareListSection("适合推进的条件", "需要谨慎的信号", primary.suitableIf, primary.cautionIf)}
+
+        <section class="section">
+          <h2>关键指数</h2>
+          <div class="meters">
+            ${(primary.indices || [])
+              .map(
+                (item) => `
+                <div>
+                  <div class="meter-head"><span>${text(item.label)}</span><span>${text(item.value)}</span></div>
+                  <div class="meter-track"><div class="meter-fill" style="width:${number(item.value)}%"></div></div>
+                </div>
+              `
+              )
+              .join("")}
+          </div>
+        </section>
+
+        <section class="section">
+          <h2>两条路径对比</h2>
+          <div class="compare">
+            <div class="compare-card"><h3>${text(compareLabels[0])}</h3><p>${text(primary.ifStay)}</p></div>
+            <div class="compare-card"><h3>${text(compareLabels[1])}</h3><p>${text(primary.ifChange)}</p></div>
+          </div>
+        </section>
+
+        <section class="section">
+          <h2>现在最不建议你做</h2>
+          <div class="tag-list">${(primary.notRecommended || []).map((item) => `<span class="tag">${text(item)}</span>`).join("")}</div>
+        </section>
+
+        <section class="section">
+          <h2>未来 90 天验证方案</h2>
+          <div class="plan">
+            ${(primary.plan90 || [])
+              .map(
+                (item, index) => `
+                <div class="plan-card">
+                  <h3>${index + 1}. ${text(item.title)}</h3>
+                  <p>${text(item.content)}</p>
+                </div>
+              `
+              )
+              .join("")}
+          </div>
+        </section>
+
+        <section class="section">
+          <h2>最后一句话</h2>
+          <p>${text(primary.closing)}</p>
+        </section>
+
+        <div class="actions">
+          <button class="primary-btn" data-action="copy">${text(state.config.copyButton || "复制我的结果")}</button>
+          <button class="ghost-btn" data-action="restart">${text(state.config.restartButton || "重新测试")}</button>
+        </div>
+      </article>
+      `,
+      "result-screen"
+    );
+
+    app.querySelector("[data-action='copy']").addEventListener("click", () => copyShareText(shareText));
+    app.querySelector("[data-action='restart']").addEventListener("click", () => {
+      sessionStorage.removeItem(getStorageKey());
+      state.answers = {};
+      state.currentIndex = 0;
+      navigate("home");
+    });
+  }
+
+  function renderParagraphSection(title, paragraphs) {
+    if (!Array.isArray(paragraphs) || !paragraphs.length) return "";
+    return `
+      <section class="section">
+        <h2>${text(title)}</h2>
+        ${paragraphs.map((item) => `<p>${text(item)}</p>`).join("")}
+      </section>
+    `;
+  }
+
+  function renderTagSection(title, items) {
+    if (!Array.isArray(items) || !items.length) return "";
+    return `
+      <section class="section">
+        <h2>${text(title)}</h2>
+        <div class="tag-list">${items.map((item) => `<span class="tag">${text(item)}</span>`).join("")}</div>
+      </section>
+    `;
+  }
+
+  function renderCompareListSection(leftTitle, rightTitle, leftItems, rightItems) {
+    const hasLeft = Array.isArray(leftItems) && leftItems.length;
+    const hasRight = Array.isArray(rightItems) && rightItems.length;
+    if (!hasLeft && !hasRight) return "";
+    return `
+      <section class="section">
+        <h2>适用边界</h2>
+        <div class="compare">
+          <div class="compare-card">
+            <h3>${text(leftTitle)}</h3>
+            ${(leftItems || []).map((item) => `<p>${text(item)}</p>`).join("")}
+          </div>
+          <div class="compare-card">
+            <h3>${text(rightTitle)}</h3>
+            ${(rightItems || []).map((item) => `<p>${text(item)}</p>`).join("")}
+          </div>
+        </div>
+      </section>
+    `;
+  }
+
+  function scoreAnswers(answers) {
+    const counts = { A: 0, B: 0, C: 0, D: 0 };
+    Object.values(answers).forEach((key) => {
+      if (counts[key] !== undefined) counts[key] += 1;
+    });
+    const sorted = Object.entries(counts).sort((a, b) => b[1] - a[1]);
+    const threshold = state.config.secondaryThreshold ?? 2;
+    const primary = sorted[0][0];
+    const secondary = sorted[1][1] > 0 && sorted[0][1] - sorted[1][1] <= threshold ? sorted[1][0] : null;
+    return { counts, primary, secondary };
+  }
+
+  function getStage(score) {
+    const labels = state.config.stageLabels || [
+      { max: 45, label: "观察期" },
+      { max: 65, label: "验证期" },
+      { max: 82, label: "规划期" },
+      { max: 100, label: "行动期" },
+    ];
+    const hit = labels.find((item) => score <= item.max);
+    return hit ? hit.label : labels[labels.length - 1].label;
+  }
+
+  function buildShareText(primary, secondary) {
+    const template = state.config.shareTemplate || [
+      "我测出了：{{typeName}}",
+      "{{posterSubtext}}",
+      "{{secondaryLine}}",
+      "",
+      "{{title}}",
+    ];
+    const values = {
+      title: state.config.title,
+      typeName: primary.typeName,
+      posterSubtext: primary.posterSubtext,
+      secondary: secondary || "",
+      secondaryLine: secondary ? `副倾向：${secondary}` : "",
+    };
+    return template
+      .map((line) => fillTemplate(line, values))
+      .filter((line, index, arr) => line || arr[index - 1])
+      .join("\n")
+      .trim();
+  }
+
+  async function copyShareText(value) {
+    try {
+      await navigator.clipboard.writeText(value);
+      showToast("结果文案已复制");
+    } catch (error) {
+      showToast("复制失败，可长按手动复制");
+    }
+  }
+
+  function showToast(value) {
+    const toast = document.getElementById("toast");
+    if (!toast) return;
+    toast.textContent = value;
+    toast.classList.add("show");
+    window.setTimeout(() => toast.classList.remove("show"), 1600);
+  }
+
+  function getLoadingMessages() {
+    return state.config.loadingMessages || defaultLoadingMessages;
+  }
+
+  function getStorageKey() {
+    return `xhsTestAnswers:${state.config.slug || "default"}`;
+  }
+
+  function fillTemplate(template, values) {
+    return String(template).replace(/\{\{(\w+)\}\}/g, (_, key) => values[key] || "");
+  }
+
+  function number(value) {
+    const parsed = Number(value);
+    if (Number.isNaN(parsed)) return 0;
+    return Math.max(0, Math.min(100, parsed));
+  }
+
+  function text(value) {
+    return String(value ?? "")
+      .replace(/&/g, "&amp;")
+      .replace(/</g, "&lt;")
+      .replace(/>/g, "&gt;")
+      .replace(/"/g, "&quot;");
+  }
+})();
+
+    </script>
+  </body>
+</html>
