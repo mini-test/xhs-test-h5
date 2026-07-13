@@ -1,0 +1,1130 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <meta name="description" content="完成 32 道人生剧本测试，生成你的书籍人格匹配、性格、爱情、财富、事业、朋友、晚年和 90 天行动建议。" />
+    <meta property="og:title" content="你的人生剧本是哪本古书？" />
+    <meta property="og:description" content="完成 32 道人生剧本测试，生成你的书籍人格匹配、性格、爱情、财富、事业、朋友、晚年和 90 天行动建议。" />
+    <title>你的人生剧本是哪本古书？</title>
+    <style>
+:root {
+  --bg: #fbfaf7;
+  --paper: #fffefd;
+  --ink: #20242a;
+  --muted: #65707d;
+  --line: #d9d4ca;
+  --line-strong: #b9afa0;
+  --accent: #9b4339;
+  --accent-soft: #f1dfd7;
+  --gold: #c0964d;
+  --sage: #66795f;
+  --blue: #526a86;
+  --shadow: 0 16px 36px rgba(60, 47, 38, 0.1);
+  --radius: 8px;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  min-height: 100%;
+  background:
+    linear-gradient(rgba(32, 36, 42, 0.035) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(32, 36, 42, 0.035) 1px, transparent 1px),
+    var(--bg);
+  background-size: 24px 24px;
+}
+
+body {
+  min-height: 100vh;
+  margin: 0;
+  color: var(--ink);
+  font-family:
+    "PingFang SC",
+    "Microsoft YaHei",
+    "Noto Sans SC",
+    system-ui,
+    -apple-system,
+    BlinkMacSystemFont,
+    sans-serif;
+  letter-spacing: 0;
+}
+
+button {
+  font: inherit;
+}
+
+.shell {
+  width: min(100%, 480px);
+  min-height: 100vh;
+  margin: 0 auto;
+  background: rgba(251, 250, 247, 0.88);
+}
+
+.top-rule {
+  height: 4px;
+  background: var(--accent);
+}
+
+.screen {
+  min-height: calc(100vh - 4px);
+  padding: 28px 22px 32px;
+}
+
+.home {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.kicker {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  color: var(--muted);
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  font-size: 11px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+.dot {
+  width: 7px;
+  height: 7px;
+  background: var(--accent);
+  border-radius: 50%;
+}
+
+.hero-title {
+  margin: 26px 0 14px;
+  color: var(--ink);
+  font-size: 30px;
+  line-height: 1.2;
+  text-align: center;
+  font-weight: 800;
+}
+
+.hero-subtitle {
+  margin: 0 auto 28px;
+  max-width: 340px;
+  color: var(--muted);
+  font-size: 15px;
+  line-height: 1.75;
+  text-align: center;
+}
+
+.hairline {
+  width: 64px;
+  height: 1px;
+  margin: 0 auto 30px;
+  background: var(--line-strong);
+}
+
+.intro {
+  margin: 0 auto;
+  max-width: 380px;
+}
+
+.intro p {
+  margin: 0 0 15px;
+  color: rgba(32, 36, 42, 0.82);
+  font-size: 15px;
+  line-height: 1.8;
+}
+
+.intro .strong {
+  color: var(--accent);
+  font-weight: 700;
+}
+
+.pill-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px;
+  margin: 28px 0;
+}
+
+.pill {
+  min-height: 42px;
+  display: grid;
+  place-items: center;
+  border: 1px solid var(--line);
+  color: var(--muted);
+  background: rgba(255, 255, 255, 0.44);
+  font-size: 13px;
+}
+
+.primary-btn,
+.ghost-btn,
+.copy-btn {
+  width: 100%;
+  min-height: 48px;
+  border: 1px solid var(--ink);
+  border-radius: 0;
+  cursor: pointer;
+  transition: transform 150ms ease, background 150ms ease, color 150ms ease, border-color 150ms ease;
+}
+
+.primary-btn {
+  background: var(--ink);
+  color: #fff;
+  font-weight: 700;
+}
+
+.ghost-btn,
+.copy-btn {
+  background: transparent;
+  color: var(--ink);
+}
+
+.primary-btn:active,
+.ghost-btn:active,
+.copy-btn:active,
+.option:active {
+  transform: translateY(1px);
+}
+
+.disclaimer {
+  margin: 18px auto 0;
+  max-width: 340px;
+  color: var(--muted);
+  font-size: 12px;
+  line-height: 1.65;
+  text-align: center;
+}
+
+.quiz-screen {
+  padding-top: 0;
+}
+
+.sticky-head {
+  position: sticky;
+  top: 0;
+  z-index: 5;
+  margin: 0 -22px 26px;
+  padding: 14px 22px 12px;
+  background: rgba(251, 250, 247, 0.95);
+  border-bottom: 1px solid var(--line);
+  backdrop-filter: blur(12px);
+}
+
+.quiz-meta {
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+  color: var(--muted);
+  font-size: 12px;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+}
+
+.progress-track {
+  height: 4px;
+  margin-top: 10px;
+  background: rgba(32, 36, 42, 0.09);
+}
+
+.progress-bar {
+  height: 100%;
+  background: var(--accent);
+  transition: width 260ms ease;
+}
+
+.question-no {
+  color: rgba(155, 67, 57, 0.18);
+  font-size: 48px;
+  line-height: 1;
+  font-weight: 800;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+}
+
+.question-title {
+  margin: 18px 0 24px;
+  font-size: 22px;
+  line-height: 1.5;
+  font-weight: 750;
+}
+
+.options {
+  display: grid;
+  gap: 12px;
+}
+
+.option {
+  min-height: 66px;
+  display: grid;
+  grid-template-columns: 30px 1fr;
+  gap: 12px;
+  align-items: start;
+  width: 100%;
+  padding: 15px;
+  border: 1px solid var(--line);
+  background: rgba(255, 255, 255, 0.68);
+  color: var(--ink);
+  text-align: left;
+  cursor: pointer;
+  transition: background 160ms ease, border-color 160ms ease, color 160ms ease, opacity 160ms ease;
+}
+
+.option-key {
+  display: grid;
+  place-items: center;
+  width: 28px;
+  height: 28px;
+  border: 1px solid var(--line-strong);
+  font-size: 13px;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+}
+
+.option-text {
+  padding-top: 2px;
+  font-size: 15px;
+  line-height: 1.55;
+}
+
+.option.selected {
+  border-color: var(--accent);
+  background: var(--accent);
+  color: #fff;
+}
+
+.option.selected .option-key {
+  border-color: rgba(255, 255, 255, 0.8);
+}
+
+.option.dimmed {
+  opacity: 0.42;
+}
+
+.hint {
+  margin: 18px 0 0;
+  color: var(--muted);
+  font-size: 12px;
+  text-align: center;
+}
+
+.loading-screen {
+  display: grid;
+  place-items: center;
+}
+
+.loading-card {
+  width: 100%;
+  max-width: 360px;
+  text-align: center;
+}
+
+.spinner {
+  width: 54px;
+  height: 54px;
+  margin: 0 auto 24px;
+  border: 2px solid var(--line);
+  border-top-color: var(--accent);
+  border-radius: 50%;
+  animation: spin 850ms linear infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.loading-text {
+  min-height: 54px;
+  color: var(--accent);
+  font-size: 17px;
+  line-height: 1.6;
+  font-weight: 700;
+}
+
+.step-bars {
+  display: grid;
+  gap: 8px;
+  margin-top: 28px;
+}
+
+.step {
+  height: 4px;
+  overflow: hidden;
+  background: rgba(32, 36, 42, 0.09);
+}
+
+.step span {
+  display: block;
+  height: 100%;
+  width: 0;
+  background: var(--accent);
+  transition: width 300ms ease;
+}
+
+.step.done span {
+  width: 100%;
+}
+
+.result-screen {
+  padding: 22px 18px 30px;
+}
+
+.report {
+  padding: 22px 16px 18px;
+  border: 1px solid var(--line);
+  background: var(--paper);
+  box-shadow: var(--shadow);
+}
+
+.result-type {
+  margin: 8px 0 8px;
+  color: var(--accent);
+  font-size: 30px;
+  line-height: 1.15;
+  font-weight: 850;
+  text-align: center;
+}
+
+.result-subtitle {
+  margin: 0 auto 20px;
+  color: var(--muted);
+  font-size: 15px;
+  line-height: 1.7;
+  text-align: center;
+}
+
+.stamp-row {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px;
+  margin: 18px 0 20px;
+}
+
+.stamp {
+  padding: 12px 10px;
+  border: 1px solid var(--line);
+  background: #fbfaf7;
+}
+
+.stamp strong {
+  display: block;
+  margin-bottom: 4px;
+  color: var(--ink);
+  font-size: 20px;
+}
+
+.stamp span {
+  color: var(--muted);
+  font-size: 12px;
+}
+
+.section {
+  padding: 20px 0;
+  border-top: 1px solid var(--line);
+}
+
+.section h2 {
+  margin: 0 0 12px;
+  font-size: 18px;
+  color: var(--ink);
+}
+
+.section p {
+  margin: 0 0 12px;
+  color: rgba(32, 36, 42, 0.82);
+  font-size: 15px;
+  line-height: 1.85;
+}
+
+.quote {
+  padding: 15px;
+  border-left: 3px solid var(--accent);
+  background: var(--accent-soft);
+  color: #5b2d27;
+  line-height: 1.8;
+  font-weight: 700;
+}
+
+.meters {
+  display: grid;
+  gap: 14px;
+}
+
+.meter-head {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 7px;
+  color: var(--muted);
+  font-size: 13px;
+}
+
+.meter-track {
+  height: 8px;
+  background: rgba(32, 36, 42, 0.08);
+}
+
+.meter-fill {
+  height: 100%;
+  background: var(--accent);
+}
+
+.compare {
+  display: grid;
+  gap: 10px;
+}
+
+.compare-card {
+  padding: 14px;
+  border: 1px solid var(--line);
+  background: #fbfaf7;
+}
+
+.compare-card h3,
+.plan-card h3 {
+  margin: 0 0 8px;
+  font-size: 15px;
+}
+
+.compare-card p,
+.plan-card p {
+  font-size: 14px;
+}
+
+.tag-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.tag {
+  padding: 7px 9px;
+  border: 1px solid var(--line);
+  background: #fbfaf7;
+  color: var(--muted);
+  font-size: 13px;
+}
+
+.plan {
+  display: grid;
+  gap: 10px;
+}
+
+.plan-card {
+  padding: 14px;
+  border: 1px solid var(--line);
+  background: #fbfaf7;
+}
+
+.secondary-note {
+  padding: 14px;
+  border: 1px dashed var(--line-strong);
+  background: rgba(192, 150, 77, 0.12);
+  line-height: 1.75;
+  font-size: 14px;
+}
+
+.actions {
+  display: grid;
+  gap: 10px;
+  margin-top: 18px;
+}
+
+.toast {
+  position: fixed;
+  left: 50%;
+  bottom: 22px;
+  z-index: 20;
+  transform: translateX(-50%);
+  padding: 10px 14px;
+  background: var(--ink);
+  color: #fff;
+  font-size: 13px;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 180ms ease;
+}
+
+.toast.show {
+  opacity: 1;
+}
+
+.error {
+  display: grid;
+  place-items: center;
+  min-height: 100vh;
+  padding: 24px;
+  text-align: center;
+}
+
+.error p {
+  color: var(--muted);
+  line-height: 1.7;
+}
+
+@media (min-width: 700px) {
+  body {
+    padding: 28px 0;
+  }
+
+  .shell {
+    min-height: calc(100vh - 56px);
+    border: 1px solid var(--line);
+    box-shadow: var(--shadow);
+  }
+
+  .screen {
+    min-height: calc(100vh - 60px);
+  }
+}
+
+    </style>
+  </head>
+  <body>
+    <main id="app" aria-live="polite"></main>
+    <script>window.__QUIZ_CONFIG__ = {"slug":"test-life-book-script","topic":"你的人生剧本是哪本古书？","kicker":"32-Q Life Book Script Test","title":"你的人生剧本是哪本古书？","subtitle":"32 道真实场景题，测出你的人生更像《史记》《资治通鉴》《三国志》《世说新语》《红楼梦》还是《山海经》。报告会拆解性格、爱情、财富、事业、朋友和晚年。","metaDescription":"完成 32 道人生剧本测试，生成你的书籍人格匹配、性格、爱情、财富、事业、朋友、晚年和 90 天行动建议。","startButton":"开始测试","resultKicker":"Life Book Script Report","quizHint":"凭第一反应选择，系统会自动进入下一题。","copyButton":"复制我的结果","restartButton":"重新测试","scoreLabel":"剧本清晰度","stageLabel":"当前章节","indexTitle":"人生六维指数","tensionTitle":"你的剧本冲突","planTitle":"90天改写建议","blurSummary":"做完 32 道题，查看你的古籍人生剧本、六维指数和改写建议。","stageLabels":[{"max":55,"label":"序章"},{"max":72,"label":"转折章"},{"max":86,"label":"成局章"},{"max":100,"label":"定稿章"}],"compareLabels":["如果只照旧剧本走","如果主动改写剧本"],"disclaimer":"本测试借用经典书籍作为趣味人格原型分析，仅供娱乐和自我观察参考，不代表文学评价、命运预测、心理诊断、职业建议或任何重大人生决策依据。","secondaryThreshold":4,"dimensions":["史记","通鉴","三国","世说","红楼","山海"],"intro":["不是每个人的人生都像同一种书。","有的人是人物列传，有的人是成败复盘，有的人是乱世入局，有的人是风流人物，有的人是情感长卷，也有的人根本属于异闻图志。","32 道题会从性格、爱情、财富、事业、朋友和晚年六个维度，生成你的人生剧本报告。"],"loadingMessages":["正在读取你的第一反应...","正在匹配《史记》《资治通鉴》《三国志》《世说新语》《红楼梦》《山海经》倾向...","正在拆解性格、爱情、财富、事业、朋友和晚年...","正在生成你的人生剧本报告...","分析完成。"],"questions":[{"id":1,"module":"开篇气质","text":"如果把你的人生写成一本书，开篇最像：","options":[{"key":"A","text":"一个人带着强烈命运感登场，注定要留下名字"},{"key":"B","text":"局势复杂，先看清成败规律再决定怎么走"},{"key":"C","text":"多方势力登场，机会、联盟和竞争同时出现"},{"key":"D","text":"几个有趣的人物出场，气质和风骨先立住"},{"key":"E","text":"繁华里藏着敏感心事，关系和情绪慢慢铺开"},{"key":"F","text":"世界很奇异，主角天赋特殊，没人能按常理解释"}]},{"id":2,"module":"开篇气质","text":"别人最容易从你身上读到哪种底色？","options":[{"key":"A","text":"真实、有分量，像经历过大起大落的人"},{"key":"B","text":"清醒、谨慎，像很早就懂得现实规律的人"},{"key":"C","text":"有斗志、有策略，像随时准备进入一场局"},{"key":"D","text":"有品味、有个性，不太愿意活得庸俗"},{"key":"E","text":"细腻、敏感，能读懂关系里没说出口的东西"},{"key":"F","text":"独特、跳脱，像不属于普通分类的人"}]},{"id":3,"module":"开篇气质","text":"你最不想被写成哪种人？","options":[{"key":"A","text":"一生平淡，没有任何值得记下来的转折"},{"key":"B","text":"看不懂局势，反复踩同一种坑"},{"key":"C","text":"没有胜负心，也没有进入牌桌的资格"},{"key":"D","text":"没有风格，只会跟着别人过标准人生"},{"key":"E","text":"感情粗糙，不懂人心，也不懂自己的心"},{"key":"F","text":"被迫正常，天赋和怪异都被磨平"}]},{"id":4,"module":"开篇气质","text":"你的故事最需要哪种叙事视角？","options":[{"key":"A","text":"人物传记：看一个人如何被命运推到台前"},{"key":"B","text":"历史镜头：看选择背后的规律和代价"},{"key":"C","text":"群雄叙事：看资源、竞争和机会如何变化"},{"key":"D","text":"人物清谈：看气质、审美和一句话里的锋芒"},{"key":"E","text":"家族长卷：看关系、情感和命运如何牵动彼此"},{"key":"F","text":"异闻图志：看那些无法被常规解释的天赋和欲望"}]},{"id":5,"module":"性格底色","text":"你做选择时最像哪种人？","options":[{"key":"A","text":"会问这件事值不值得我拿人生去赌一次"},{"key":"B","text":"会先看前人怎么输、怎么赢，再下判断"},{"key":"C","text":"会判断谁是盟友、谁是对手、机会在哪里"},{"key":"D","text":"会看这件事是否符合我的风格和尊严"},{"key":"E","text":"会先感受这件事会不会伤害关系和内心秩序"},{"key":"F","text":"会问它能不能打开一个我没见过的新世界"}]},{"id":6,"module":"性格底色","text":"你最明显的性格优势是：","options":[{"key":"A","text":"真实、有骨气，关键时刻能扛命运"},{"key":"B","text":"理性、懂复盘，能从规律里避开大坑"},{"key":"C","text":"敏锐、有胜负感，懂得抓机会和站位置"},{"key":"D","text":"有审美、有风骨，活得不想太俗"},{"key":"E","text":"情感细腻，能看见人心深处的变化"},{"key":"F","text":"想象力强，能长出别人没有的路径"}]},{"id":7,"module":"性格底色","text":"你最容易被哪句话说中？","options":[{"key":"A","text":"你不是不怕输，你是觉得有些事必须亲自经历"},{"key":"B","text":"你不是悲观，你只是太知道现实会怎么运转"},{"key":"C","text":"你不是爱争，你只是受不了一直在局外"},{"key":"D","text":"你不是清高，你只是对生活质感有要求"},{"key":"E","text":"你不是多愁善感，你只是对关系变化太敏锐"},{"key":"F","text":"你不是奇怪，你只是很难被普通剧本装下"}]},{"id":8,"module":"性格底色","text":"你最需要补的一课是：","options":[{"key":"A","text":"别把所有起伏都当成宿命，也要学会经营日常"},{"key":"B","text":"别只看风险和代价，也要允许自己真正投入"},{"key":"C","text":"别把人生都变成竞争，也要学会长期建设"},{"key":"D","text":"别只保留姿态，也要让才华落到现实结果"},{"key":"E","text":"别把所有情绪都内化，也要学会清楚表达"},{"key":"F","text":"别只停在想象，也要把天赋变成可见作品"}]},{"id":9,"module":"爱情剧本","text":"你的爱情最像哪种叙事？","options":[{"key":"A","text":"轰烈、真实，有情义也有命运感"},{"key":"B","text":"谨慎观察，先判断关系是否能长久和稳定"},{"key":"C","text":"像一场博弈，吸引和试探同时存在"},{"key":"D","text":"重在精神相投，对方必须懂你的风格"},{"key":"E","text":"细腻深重，容易被微小变化牵动心绪"},{"key":"F","text":"不按常规发生，灵魂吸引比现实条件更重要"}]},{"id":10,"module":"爱情剧本","text":"你最容易在感情里卡在哪里？","options":[{"key":"A","text":"太看重真心和义气，一旦投入就不想轻易收回"},{"key":"B","text":"太怕重蹈覆辙，容易先把风险算得很清楚"},{"key":"C","text":"太在意主动权，不想在关系里输掉位置"},{"key":"D","text":"太看重感觉和品味，不愿意将就粗糙关系"},{"key":"E","text":"太敏感，对方一点变化就会牵动你很多情绪"},{"key":"F","text":"太需要灵魂共振，普通稳定反而不够吸引你"}]},{"id":11,"module":"爱情剧本","text":"你在亲密关系里真正想要的是：","options":[{"key":"A","text":"被真心选择，彼此有情有义，不辜负这段相遇"},{"key":"B","text":"安全、稳定、可预期，关系不要反复消耗"},{"key":"C","text":"互相欣赏也互相较量，最好能一起变强"},{"key":"D","text":"精神同频、表达自由，不用把自己变俗"},{"key":"E","text":"被细致理解，心里的褶皱也有人看见"},{"key":"F","text":"一种命中注定般的特别感，不像普通人的关系"}]},{"id":12,"module":"爱情剧本","text":"你的爱情最怕变成：","options":[{"key":"A","text":"轰轰烈烈后只剩遗憾，真心没有好结局"},{"key":"B","text":"明知有问题还继续走，最后验证了最坏判断"},{"key":"C","text":"双方互相消耗，谁都不肯放下胜负心"},{"key":"D","text":"为了现实凑合，慢慢失去精神吸引"},{"key":"E","text":"爱得太深太细，最后把自己困在情绪里"},{"key":"F","text":"特别感消失，被普通日子磨成无趣关系"}]},{"id":13,"module":"财富剧本","text":"你对钱的真实态度更接近：","options":[{"key":"A","text":"钱要能撑起人生关键转折，不只是数字"},{"key":"B","text":"钱是安全边界，越稳定越能减少风险"},{"key":"C","text":"钱是筹码和资源，决定你能不能上牌桌"},{"key":"D","text":"钱要服务生活质感，不能把人变得太俗"},{"key":"E","text":"钱要带来安心和体面，也要照顾关系里的感受"},{"key":"F","text":"钱最好来自独特天赋，而不是标准路径"}]},{"id":14,"module":"财富剧本","text":"你最容易在哪种赚钱方式里有优势？","options":[{"key":"A","text":"个人经历、真实表达、强人物感带来的信任"},{"key":"B","text":"复盘规律、方法论、避坑指南、长期规划"},{"key":"C","text":"资源整合、竞争机会、交易判断、增长项目"},{"key":"D","text":"审美、品味、文化表达、风格化内容"},{"key":"E","text":"情绪价值、关系洞察、女性成长、细腻表达"},{"key":"F","text":"新奇创意、非标产品、奇特人设、探索型内容"}]},{"id":15,"module":"财富剧本","text":"你最该避免的财富陷阱是：","options":[{"key":"A","text":"只靠一时命运转折，不做长期积累"},{"key":"B","text":"过度保守，错过真正值得下注的机会"},{"key":"C","text":"太想赢，进入高消耗竞争和短线赌博"},{"key":"D","text":"只追求格调，不愿面对商业转化"},{"key":"E","text":"容易因为关系和情绪影响金钱判断"},{"key":"F","text":"想法太多，落地太少，无法形成稳定收入"}]},{"id":16,"module":"财富剧本","text":"当你真正开始变有钱，最可能因为：","options":[{"key":"A","text":"你把真实人生经历变成了别人愿意相信的价值"},{"key":"B","text":"你总结出一套可复制、可避坑、可长期用的方法"},{"key":"C","text":"你抓住了一个关键机会，并敢于进入竞争场"},{"key":"D","text":"你把风格、审美和表达变成了可购买的产品"},{"key":"E","text":"你把情绪理解和关系洞察变成了内容或服务"},{"key":"F","text":"你把奇特想法做成了别人没见过的新东西"}]},{"id":17,"module":"事业剧本","text":"你的事业更适合哪种主线？","options":[{"key":"A","text":"强个人叙事：用经历、魄力和真实感建立影响力"},{"key":"B","text":"长期方法论：用规律、系统和复盘积累信任"},{"key":"C","text":"竞争型成长：在机会和变化里不断抢位置"},{"key":"D","text":"风格型路线：用审美、表达和人格辨识度出圈"},{"key":"E","text":"关系型洞察：用细腻理解和情绪表达建立连接"},{"key":"F","text":"异质型创造：用奇思、探索和非标路径形成差异"}]},{"id":18,"module":"事业剧本","text":"你最适合被放大的能力是：","options":[{"key":"A","text":"人物感和命运感"},{"key":"B","text":"理性判断和系统复盘"},{"key":"C","text":"机会捕捉和竞争策略"},{"key":"D","text":"审美风格和表达锋芒"},{"key":"E","text":"情绪感知和关系理解"},{"key":"F","text":"想象力和非标准创造"}]},{"id":19,"module":"事业剧本","text":"你在工作里最受不了：","options":[{"key":"A","text":"没有转折、没有成长，只是重复消耗"},{"key":"B","text":"没有规律、没有复盘，总在同一个坑里摔"},{"key":"C","text":"没有机会、没有位置，只能旁观别人赢"},{"key":"D","text":"没有风格、没有表达，一切都很平庸粗糙"},{"key":"E","text":"没有人情味，关系和感受都被粗暴处理"},{"key":"F","text":"没有想象空间，只允许按标准答案活着"}]},{"id":20,"module":"事业剧本","text":"你的事业上限取决于：","options":[{"key":"A","text":"能否把强烈的人生体验转成真正的作品和影响力"},{"key":"B","text":"能否把清醒判断转成可交付的系统和方法"},{"key":"C","text":"能否把胜负心转成长期稳定的竞争优势"},{"key":"D","text":"能否把审美和风骨转成清晰的商业定位"},{"key":"E","text":"能否把敏感和共情转成可持续的表达与服务"},{"key":"F","text":"能否把异想天开转成别人愿意使用的新产品"}]},{"id":21,"module":"朋友剧本","text":"你最适合和哪种人成为朋友？","options":[{"key":"A","text":"真诚、有义气，能一起经历大事的人"},{"key":"B","text":"清醒、靠谱，能互相复盘和提醒的人"},{"key":"C","text":"有野心、有行动力，能一起抢机会的人"},{"key":"D","text":"有趣、有品味，能互相欣赏风格的人"},{"key":"E","text":"细腻、懂分寸，能理解情绪变化的人"},{"key":"F","text":"奇特、开放，能接住你怪想法的人"}]},{"id":22,"module":"朋友剧本","text":"你最怕朋友关系变成：","options":[{"key":"A","text":"只有热闹，没有真正情义"},{"key":"B","text":"没有边界，总是让你替别人兜底"},{"key":"C","text":"暗中较劲，谁都不愿承认谁更强"},{"key":"D","text":"审美和价值观完全不同，聊不到一起"},{"key":"E","text":"表面亲近，实际没人照顾你的情绪"},{"key":"F","text":"所有人都要求你正常，不允许你特别"}]},{"id":23,"module":"朋友剧本","text":"你在朋友里常扮演：","options":[{"key":"A","text":"关键时刻能出头、能扛事的人"},{"key":"B","text":"帮大家看清问题、避免踩坑的人"},{"key":"C","text":"带大家行动、找机会、开新局的人"},{"key":"D","text":"提供审美、观点和趣味的人"},{"key":"E","text":"察觉气氛、照顾情绪和关系细节的人"},{"key":"F","text":"带来新想法、新体验、新世界的人"}]},{"id":24,"module":"朋友剧本","text":"你真正想要的朋友状态是：","options":[{"key":"A","text":"有事真上，不只是嘴上热闹"},{"key":"B","text":"互相清醒，不拉着彼此踩坑"},{"key":"C","text":"互相成就，不害怕彼此变强"},{"key":"D","text":"彼此欣赏，保留风格和自由"},{"key":"E","text":"细腻稳定，不粗暴消耗情绪"},{"key":"F","text":"开放好玩，可以一起探索未知"}]},{"id":25,"module":"晚年剧本","text":"你理想中的晚年更像：","options":[{"key":"A","text":"回头看一生，有起伏、有故事，也有值得写下的名字"},{"key":"B","text":"少走很多弯路，清醒稳妥地留下自己的方法和经验"},{"key":"C","text":"经历过竞争和变化，最终拥有自己的位置和资源"},{"key":"D","text":"活得有品味、有风格，哪怕老了也不俗"},{"key":"E","text":"关系柔软，情感有归处，内心不再反复漂泊"},{"key":"F","text":"依然好奇，依然在探索没人见过的新世界"}]},{"id":26,"module":"晚年剧本","text":"你最怕晚年回头看见：","options":[{"key":"A","text":"一生太平淡，没有真正为自己活过"},{"key":"B","text":"明明看见规律，却还是反复输给同样的问题"},{"key":"C","text":"一直在场外观望，没有真正进入自己的战场"},{"key":"D","text":"为了现实丢掉了审美、风骨和个人气质"},{"key":"E","text":"被太多情绪和关系消耗，没有好好爱自己"},{"key":"F","text":"把天赋压成普通，把想象力藏了一辈子"}]},{"id":27,"module":"晚年剧本","text":"你希望别人最后怎么评价你？","options":[{"key":"A","text":"这个人一生真实，有命运感，也有重量"},{"key":"B","text":"这个人很清醒，留下了有用的经验和判断"},{"key":"C","text":"这个人没有认命，最后真的闯出了位置"},{"key":"D","text":"这个人活得有风格，不随便被时代磨平"},{"key":"E","text":"这个人懂爱、懂人心，也懂得珍惜细节"},{"key":"F","text":"这个人一直特别，像从另一个世界来过"}]},{"id":28,"module":"晚年剧本","text":"你的终局最需要避免：","options":[{"key":"A","text":"只追求大起大落，却忽视稳定幸福"},{"key":"B","text":"只求安全无错，却少了真正体验"},{"key":"C","text":"只顾争位置，忘了自己为什么上场"},{"key":"D","text":"只守住姿态，没有形成现实成果"},{"key":"E","text":"只困在情绪，没有活出自己的主线"},{"key":"F","text":"只保留想象，没有把奇异天赋留给世界"}]},{"id":29,"module":"最终定型","text":"如果只能选一本书写你的人生，你最像：","options":[{"key":"A","text":"《史记》：人物立传，大开大合，真实而有重量"},{"key":"B","text":"《资治通鉴》：清醒复盘，懂规律，也懂代价"},{"key":"C","text":"《三国志》：群雄竞逐，机会、位置和胜负都很重要"},{"key":"D","text":"《世说新语》：人物风流，风格、审美和一句话的锋芒"},{"key":"E","text":"《红楼梦》：情感细密，关系、盛衰和人心最动人"},{"key":"F","text":"《山海经》：奇异非标，天赋怪诞，适合另开世界"}]},{"id":30,"module":"最终定型","text":"你现在最该升级的是：","options":[{"key":"A","text":"把命运感变成稳定作品，而不是只靠经历本身"},{"key":"B","text":"把清醒变成行动，而不是只停留在复盘"},{"key":"C","text":"把胜负心变成长期优势，而不是短期较劲"},{"key":"D","text":"把风格变成商业定位，而不是只停留在姿态"},{"key":"E","text":"把细腻变成表达和边界，而不是反复内耗"},{"key":"F","text":"把想象变成产品和作品，而不是只在脑子里发光"}]},{"id":31,"module":"最终定型","text":"你做这个测试最想确认：","options":[{"key":"A","text":"我的人生是不是有一种很强的人物传记感"},{"key":"B","text":"我是不是天生适合从规律里找到出路"},{"key":"C","text":"我是不是适合进入竞争、抓机会、抢位置"},{"key":"D","text":"我是不是适合靠风格、审美和表达被记住"},{"key":"E","text":"我是不是情感和关系感知远比别人更深"},{"key":"F","text":"我是不是不适合普通剧本，应该走非标路线"}]},{"id":32,"module":"最终定型","text":"凭第一反应，你的人生底稿更像：","options":[{"key":"A","text":"《史记》型：真实、有重量，人生必须留下人物弧光"},{"key":"B","text":"《资治通鉴》型：清醒、会复盘，擅长从成败里找规律"},{"key":"C","text":"《三国志》型：有野心、有策略，适合在竞争中成局"},{"key":"D","text":"《世说新语》型：有风格、有审美，靠人格辨识度出圈"},{"key":"E","text":"《红楼梦》型：细腻、深情，擅长读懂关系和人心盛衰"},{"key":"F","text":"《山海经》型：奇异、非标，天赋适合打开新世界"}]}],"results":{"A":{"typeName":"《史记》型","subtitle":"你的人生像人物列传：真实、有重量，关键转折明显，适合把经历活成自己的名场面。","posterSubtext":"你不是只想过日子，你更想知道这一生有没有值得写下来的东西。","maturityScore":88,"coreConclusion":"你的答案显示，你身上有很强的人物感和命运感。你在意真心、义气、转折和关键选择，不太满足于一眼看到头的普通日子。你的优势是真实、有担当、经历感强，能让别人相信你；风险是容易把人生过成大起大落，忽视长期稳定的经营。 你真正想要的是一条有重量的人生线。你希望自己不是被生活磨平的人，而是经历过选择、转折和成长之后，能留下清楚的人物弧光。","diagnosis":"你的答案显示，你身上有很强的人物感和命运感。你在意真心、义气、转折和关键选择，不太满足于一眼看到头的普通日子。你的优势是真实、有担当、经历感强，能让别人相信你；风险是容易把人生过成大起大落，忽视长期稳定的经营。","whatYouReallyWant":"你真正想要的是一条有重量的人生线。你希望自己不是被生活磨平的人，而是经历过选择、转折和成长之后，能留下清楚的人物弧光。","mechanism":{"title":"六维人生剧本","content":"性格：真实有骨气。爱情：重情重义。财富：适合靠个人故事、信任和强人物感变现。事业：适合个人品牌、表达、领导型角色。朋友：重情义，关键时刻看行动。晚年：希望一生有故事，有值得回头看的转折。"},"professionalBasis":["你更在意人生是否有关键转折，而不是只追求无风险。","你适合把真实经历、个人故事和责任感转成影响力。","你的风险是太相信命运的大开大合，忽视日常系统建设。"],"coreTensions":["人物感强","重情义","命运感高","容易大起大落","需要长期经营"],"suitableIf":["个人IP","故事表达","成长叙事","领导角色","真实测评","经历型内容"],"cautionIf":["只靠经历不做产品","过度相信转折","情义影响判断","忽视稳定现金流"],"indices":[{"label":"主角指数","value":94},{"label":"宿命指数","value":91},{"label":"情义指数","value":88},{"label":"财富稳定","value":66},{"label":"成事韧性","value":86}],"ifStay":"如果你只追求人生的强烈情节，会有很多故事，但稳定成果可能不足。","ifChange":"当你把经历变成作品、产品和长期资产，《史记》型的人生会真正有分量。","notRecommended":["只靠经历不做产品","过度相信转折","情义影响判断","忽视稳定现金流"],"plan90":[{"title":"第1-2周：整理人生素材","content":"列出你最有转折感的 5 个经历，提炼它们能帮助谁。"},{"title":"第3-4周：做一个人物型内容栏目","content":"用真实经历切入观点，建立信任感。"},{"title":"第2个月：把故事变成产品","content":"把你的经验沉淀成咨询、模板、课程或测试。"},{"title":"第3个月：建立稳定节奏","content":"固定更新、固定复盘、固定转化，减少只靠灵感和情绪。"}],"closing":"《史记》型的人生，真正重要的不是波澜，而是你能不能把波澜写成自己的传记。"},"B":{"typeName":"《资治通鉴》型","subtitle":"你的人生像一部成败复盘：清醒、谨慎、重规律，擅长从别人的坑里找到自己的出路。","posterSubtext":"你不是悲观，你只是太早明白很多事都有代价。","maturityScore":91,"coreConclusion":"你的答案显示，你很擅长观察规律、复盘风险、提前避坑。你不喜欢盲目冲动，也不喜欢重复犯错。你的优势是理性、稳定、方法论强；风险是过度谨慎，容易把人生变成风险控制，而不是充分体验。 你真正想要的是可控和清醒。你希望选择有依据，努力有路径，不想把人生交给情绪和运气。","diagnosis":"你的答案显示，你很擅长观察规律、复盘风险、提前避坑。你不喜欢盲目冲动，也不喜欢重复犯错。你的优势是理性、稳定、方法论强；风险是过度谨慎，容易把人生变成风险控制，而不是充分体验。","whatYouReallyWant":"你真正想要的是可控和清醒。你希望选择有依据，努力有路径，不想把人生交给情绪和运气。","mechanism":{"title":"六维人生剧本","content":"性格：理性清醒。爱情：重稳定和可预期。财富：适合方法论、避坑、规划型变现。事业：适合咨询、运营、管理、复盘型内容。朋友：适合靠谱互相提醒的人。晚年：希望少走弯路，留下经验和方法。"},"professionalBasis":["你会从历史和经验里找规律，而不是只凭冲动做决定。","你适合把复杂问题拆成框架、步骤和避坑指南。","你的风险是过度复盘，导致行动慢，体验少。"],"coreTensions":["清醒理性","风险敏感","复盘能力强","行动偏慢","需要允许体验"],"suitableIf":["咨询规划","避坑内容","方法论产品","运营管理","知识付费","长期陪跑"],"cautionIf":["过度保守","只分析不行动","把风险看得过重","错过情感体验"],"indices":[{"label":"清醒指数","value":96},{"label":"复盘指数","value":94},{"label":"稳定指数","value":90},{"label":"冒险指数","value":52},{"label":"方法论指数","value":92}],"ifStay":"如果你一直只追求安全无错，你会少走弯路，也可能少很多真正属于自己的体验。","ifChange":"当你把清醒转成行动和产品，你的复盘能力会变成很强的现实竞争力。","notRecommended":["过度保守","只分析不行动","把风险看得过重","错过情感体验"],"plan90":[{"title":"第1-2周：选一个可验证行动","content":"不要只分析，选一个低风险试点先做。"},{"title":"第3-4周：沉淀避坑框架","content":"把你最擅长的复盘写成清单、流程或内容。"},{"title":"第2个月：建立方法论产品","content":"把经验转成模板、测试、咨询或陪跑服务。"},{"title":"第3个月：增加体验比例","content":"每周做一件没有绝对把握、但值得尝试的事。"}],"closing":"《资治通鉴》型的人生，不是为了永远不犯错，而是把每次选择都变得更清醒。"},"C":{"typeName":"《三国志》型","subtitle":"你的人生像群雄入局：机会、竞争、联盟和位置都很重要，适合在变化里抢到自己的地盘。","posterSubtext":"你不是爱争，你只是知道很多机会不会自动分给局外人。","maturityScore":87,"coreConclusion":"你的答案显示，你有明显的机会感、胜负心和位置意识。你不喜欢一直旁观，也不愿意在关键牌桌外等别人安排。你的优势是竞争意识、策略行动和资源整合；风险是容易过度较劲，把关系和事业都看成输赢。 你真正想要的是进入牌桌。你希望自己有位置、有资源、有选择权，而不是一直做旁观者。","diagnosis":"你的答案显示，你有明显的机会感、胜负心和位置意识。你不喜欢一直旁观，也不愿意在关键牌桌外等别人安排。你的优势是竞争意识、策略行动和资源整合；风险是容易过度较劲，把关系和事业都看成输赢。","whatYouReallyWant":"你真正想要的是进入牌桌。你希望自己有位置、有资源、有选择权，而不是一直做旁观者。","mechanism":{"title":"六维人生剧本","content":"性格：有野心和策略。爱情：吸引与博弈并存。财富：适合竞争型机会、资源整合和增长项目。事业：适合开疆拓土、销售增长、副业破局。朋友：适合互相成就的人。晚年：希望最终拥有自己的位置和版图。"},"professionalBasis":["你在关系和事业中都很在意位置、资源和机会。","你适合进入变化中的赛道，用策略和行动抢到优势。","你的风险是把一切都竞技化，导致长期紧绷。"],"coreTensions":["机会感强","胜负心强","资源敏感","容易较劲","需要长期建设"],"suitableIf":["销售增长","副业破局","商业合作","资源整合","竞争项目","个人品牌增长"],"cautionIf":["短线赌博","过度竞争","暗中较劲","忽视关系信任"],"indices":[{"label":"野心指数","value":94},{"label":"机会指数","value":93},{"label":"竞争指数","value":90},{"label":"长期建设","value":67},{"label":"联盟能力","value":86}],"ifStay":"如果你只追求赢，你会很容易进入高消耗竞争，最后忘了自己为什么上场。","ifChange":"当你把胜负心转成长期系统，《三国志》型的人生会真正从入局走向成局。","notRecommended":["短线赌博","过度竞争","暗中较劲","忽视关系信任"],"plan90":[{"title":"第1-2周：确定主战场","content":"不要哪里有机会就冲哪里，先选一个最值得抢的位置。"},{"title":"第3-4周：建立联盟清单","content":"列出能互相成就的人，而不是只看对手。"},{"title":"第2个月：沉淀竞争优势","content":"把你的资源、能力和渠道做成可持续壁垒。"},{"title":"第3个月：减少无效较劲","content":"只打和主线相关的仗，避免被小胜负拖走。"}],"closing":"《三国志》型的人生，关键不是每战必胜，而是最后能不能拥有自己的地盘。"},"D":{"typeName":"《世说新语》型","subtitle":"你的人生像人物风流：有审美、有风格、有一句话让人记住的锋芒，不适合被粗糙标准磨平。","posterSubtext":"你不是清高，你只是不能接受把人生过得没有质感。","maturityScore":84,"coreConclusion":"你的答案显示，你对气质、语言、审美、风格和精神自由很敏感。你不一定追求最大的权力或财富，但你很在意自己活出来的样子。你的优势是人格辨识度、表达力和审美判断；风险是停留在姿态和品味里，没有转成现实成果。 你真正想要的是有风格地活着。你希望自己不是标准化的人，而是被人记住气质、观点和表达。","diagnosis":"你的答案显示，你对气质、语言、审美、风格和精神自由很敏感。你不一定追求最大的权力或财富，但你很在意自己活出来的样子。你的优势是人格辨识度、表达力和审美判断；风险是停留在姿态和品味里，没有转成现实成果。","whatYouReallyWant":"你真正想要的是有风格地活着。你希望自己不是标准化的人，而是被人记住气质、观点和表达。","mechanism":{"title":"六维人生剧本","content":"性格：有风骨和审美。爱情：要精神同频和品味相投。财富：适合审美、表达、文化和风格化内容。事业：适合个人风格IP、内容创作、审美品牌。朋友：重趣味和欣赏。晚年：希望活得不俗，有自己的风格遗产。"},"professionalBasis":["你很在意生活质感，不愿意一切都被现实粗暴压平。","你适合用审美、观点和表达建立个人辨识度。","你的风险是风格有余，落地不足。"],"coreTensions":["审美强","风格明确","表达锋利","商业落地弱","不愿将就"],"suitableIf":["审美账号","文化内容","个人风格IP","写作评论","设计策划","品味型产品"],"cautionIf":["只保留姿态","商业化迟缓","过度挑剔","不愿面对转化"],"indices":[{"label":"风格指数","value":96},{"label":"审美指数","value":94},{"label":"表达指数","value":90},{"label":"商业转化","value":62},{"label":"精神自由","value":91}],"ifStay":"如果你只停留在风格和姿态里，别人会记得你特别，但不一定愿意为你的价值买单。","ifChange":"当你把审美和表达做成明确产品，《世说新语》型的人生会从风流变成资产。","notRecommended":["只保留姿态","商业化迟缓","过度挑剔","不愿面对转化"],"plan90":[{"title":"第1-2周：明确个人风格词","content":"选出 3 个最能代表你的审美和表达关键词。"},{"title":"第3-4周：做固定表达栏目","content":"用稳定格式输出观点、审美或生活方式内容。"},{"title":"第2个月：设计可购买产品","content":"把风格转成模板、咨询、选品、课程或服务。"},{"title":"第3个月：减少无效挑剔","content":"用发布和反馈修正，而不是等到完美再开始。"}],"closing":"《世说新语》型的人生，真正的价值不是不俗，而是把不俗变成别人能感知的作品。"},"E":{"typeName":"《红楼梦》型","subtitle":"你的人生像一部情感长卷：细腻、深情，能看见关系里的盛衰，也容易被人心和情绪牵动。","posterSubtext":"你不是太敏感，你只是比很多人更早听见关系里的风声。","maturityScore":85,"coreConclusion":"你的答案显示，你对情绪、关系、细节和盛衰变化非常敏感。你很容易读懂别人没说出口的心事，也容易被关系里的微妙变化影响。你的优势是共情、洞察、审美和情感表达；风险是内耗过重，把别人的情绪和关系变化都放进自己心里。 你真正想要的是被细致理解。你希望有人看见你的敏感不是矫情，而是一种深度感知。","diagnosis":"你的答案显示，你对情绪、关系、细节和盛衰变化非常敏感。你很容易读懂别人没说出口的心事，也容易被关系里的微妙变化影响。你的优势是共情、洞察、审美和情感表达；风险是内耗过重，把别人的情绪和关系变化都放进自己心里。","whatYouReallyWant":"你真正想要的是被细致理解。你希望有人看见你的敏感不是矫情，而是一种深度感知。","mechanism":{"title":"六维人生剧本","content":"性格：细腻深情。爱情：重理解和心意。财富：适合情绪价值、女性成长、关系洞察、审美表达。事业：适合内容、疗愈、陪伴型产品。朋友：需要分寸和情绪稳定。晚年：希望情感有归处，不再被关系反复牵动。"},"professionalBasis":["你能捕捉关系里很细的变化，也容易被这些变化消耗。","你适合把情感洞察、关系理解和审美表达变成内容或服务。","你的风险是太容易把别人的情绪内化。"],"coreTensions":["情感细腻","关系洞察强","容易内耗","审美敏锐","需要边界"],"suitableIf":["情感内容","女性成长","关系测试","疗愈表达","审美生活","陪伴型服务"],"cautionIf":["情绪过载","边界模糊","用敏感折磨自己","关系影响金钱判断"],"indices":[{"label":"情感指数","value":97},{"label":"关系感知","value":95},{"label":"审美指数","value":88},{"label":"边界指数","value":58},{"label":"表达潜力","value":86}],"ifStay":"如果你一直把所有情绪都收进心里，你会越来越懂人，也越来越累。","ifChange":"当你把细腻变成表达、作品和清晰边界，《红楼梦》型的人生会从内耗变成影响力。","notRecommended":["情绪过载","边界模糊","用敏感折磨自己","关系影响金钱判断"],"plan90":[{"title":"第1-2周：记录情绪触发点","content":"把让你反复内耗的关系细节写下来，区分事实和想象。"},{"title":"第3-4周：练习表达需求","content":"不要只等别人懂，直接说出你的感受和边界。"},{"title":"第2个月：建立情感内容栏目","content":"把关系洞察做成固定输出，形成可被看见的价值。"},{"title":"第3个月：减少高消耗关系","content":"把时间留给能稳定回应你的人，而不是只让你猜的人。"}],"closing":"《红楼梦》型的人生，不是注定被情绪困住，而是你有能力把细腻写成自己的价值。"},"F":{"typeName":"《山海经》型","subtitle":"你的人生像一部异闻图志：奇异、非标、想象力强，不适合被普通剧本完全解释。","posterSubtext":"你不是奇怪，你只是很难被标准答案装下。","maturityScore":86,"coreConclusion":"你的答案显示，你有很强的想象力、非标感和探索欲。你容易对普通路径失去兴趣，更想创造一个别人没见过的世界。你的优势是创新、差异化、概念能力和新鲜感；风险是想法太多，落地太少，难以形成稳定收入和持续作品。 你真正想要的是打开新世界。你希望自己的天赋不被正常化，也不想把人生过成只有标准答案的样子。","diagnosis":"你的答案显示，你有很强的想象力、非标感和探索欲。你容易对普通路径失去兴趣，更想创造一个别人没见过的世界。你的优势是创新、差异化、概念能力和新鲜感；风险是想法太多，落地太少，难以形成稳定收入和持续作品。","whatYouReallyWant":"你真正想要的是打开新世界。你希望自己的天赋不被正常化，也不想把人生过成只有标准答案的样子。","mechanism":{"title":"六维人生剧本","content":"性格：奇异非标。爱情：灵魂吸引比条件更重要。财富：适合新奇产品、概念内容、非标服务。事业：适合创新、设计、AI工具、游戏化内容。朋友：需要开放和包容。晚年：希望一直探索，留下一些别人没见过的东西。"},"professionalBasis":["你天然适合非标路线，不适合长期只做标准答案。","你适合把想象力做成产品、内容、工具或体验。","你的风险是创意过剩，执行不足。"],"coreTensions":["想象力强","非标气质","探索欲高","执行分散","需要产品化"],"suitableIf":["AI工具","游戏化测试","创意内容","非标产品","概念设计","小众社群"],"cautionIf":["只想不做","方向太散","无法持续","被新鲜感带走"],"indices":[{"label":"异想指数","value":98},{"label":"天赋指数","value":94},{"label":"探索指数","value":96},{"label":"落地指数","value":60},{"label":"商业化指数","value":68}],"ifStay":"如果你只在脑子里建造奇异世界，别人会觉得你有趣，但很难真正购买你的价值。","ifChange":"当你把想象力转成可体验、可使用、可传播的产品，《山海经》型的人生会非常有竞争力。","notRecommended":["只想不做","方向太散","无法持续","被新鲜感带走"],"plan90":[{"title":"第1-2周：收束一个奇特概念","content":"从很多想法里选一个最容易做出样品的方向。"},{"title":"第3-4周：做最小可见作品","content":"先做一个页面、一张图、一套题或一个小工具。"},{"title":"第2个月：测试用户反馈","content":"让真实用户使用，而不是只在脑内完善。"},{"title":"第3个月：固定产品化节奏","content":"每周发布一个小版本，把非标天赋变成可持续资产。"}],"closing":"《山海经》型的人生，真正的任务不是显得特别，而是把特别变成别人能进入的新世界。"}},"secondaryNotes":{"A":{"B":"你的主剧本是「《史记》型」，同时带有「《资治通鉴》型」的影子。主剧本代表你最稳定的人生底色，副剧本代表你在爱情、财富、事业或关系里会被激活的另一种倾向。","C":"你的主剧本是「《史记》型」，同时带有「《三国志》型」的影子。主剧本代表你最稳定的人生底色，副剧本代表你在爱情、财富、事业或关系里会被激活的另一种倾向。","D":"你的主剧本是「《史记》型」，同时带有「《世说新语》型」的影子。主剧本代表你最稳定的人生底色，副剧本代表你在爱情、财富、事业或关系里会被激活的另一种倾向。","E":"你的主剧本是「《史记》型」，同时带有「《红楼梦》型」的影子。主剧本代表你最稳定的人生底色，副剧本代表你在爱情、财富、事业或关系里会被激活的另一种倾向。","F":"你的主剧本是「《史记》型」，同时带有「《山海经》型」的影子。主剧本代表你最稳定的人生底色，副剧本代表你在爱情、财富、事业或关系里会被激活的另一种倾向。"},"B":{"A":"你的主剧本是「《资治通鉴》型」，同时带有「《史记》型」的影子。主剧本代表你最稳定的人生底色，副剧本代表你在爱情、财富、事业或关系里会被激活的另一种倾向。","C":"你的主剧本是「《资治通鉴》型」，同时带有「《三国志》型」的影子。主剧本代表你最稳定的人生底色，副剧本代表你在爱情、财富、事业或关系里会被激活的另一种倾向。","D":"你的主剧本是「《资治通鉴》型」，同时带有「《世说新语》型」的影子。主剧本代表你最稳定的人生底色，副剧本代表你在爱情、财富、事业或关系里会被激活的另一种倾向。","E":"你的主剧本是「《资治通鉴》型」，同时带有「《红楼梦》型」的影子。主剧本代表你最稳定的人生底色，副剧本代表你在爱情、财富、事业或关系里会被激活的另一种倾向。","F":"你的主剧本是「《资治通鉴》型」，同时带有「《山海经》型」的影子。主剧本代表你最稳定的人生底色，副剧本代表你在爱情、财富、事业或关系里会被激活的另一种倾向。"},"C":{"A":"你的主剧本是「《三国志》型」，同时带有「《史记》型」的影子。主剧本代表你最稳定的人生底色，副剧本代表你在爱情、财富、事业或关系里会被激活的另一种倾向。","B":"你的主剧本是「《三国志》型」，同时带有「《资治通鉴》型」的影子。主剧本代表你最稳定的人生底色，副剧本代表你在爱情、财富、事业或关系里会被激活的另一种倾向。","D":"你的主剧本是「《三国志》型」，同时带有「《世说新语》型」的影子。主剧本代表你最稳定的人生底色，副剧本代表你在爱情、财富、事业或关系里会被激活的另一种倾向。","E":"你的主剧本是「《三国志》型」，同时带有「《红楼梦》型」的影子。主剧本代表你最稳定的人生底色，副剧本代表你在爱情、财富、事业或关系里会被激活的另一种倾向。","F":"你的主剧本是「《三国志》型」，同时带有「《山海经》型」的影子。主剧本代表你最稳定的人生底色，副剧本代表你在爱情、财富、事业或关系里会被激活的另一种倾向。"},"D":{"A":"你的主剧本是「《世说新语》型」，同时带有「《史记》型」的影子。主剧本代表你最稳定的人生底色，副剧本代表你在爱情、财富、事业或关系里会被激活的另一种倾向。","B":"你的主剧本是「《世说新语》型」，同时带有「《资治通鉴》型」的影子。主剧本代表你最稳定的人生底色，副剧本代表你在爱情、财富、事业或关系里会被激活的另一种倾向。","C":"你的主剧本是「《世说新语》型」，同时带有「《三国志》型」的影子。主剧本代表你最稳定的人生底色，副剧本代表你在爱情、财富、事业或关系里会被激活的另一种倾向。","E":"你的主剧本是「《世说新语》型」，同时带有「《红楼梦》型」的影子。主剧本代表你最稳定的人生底色，副剧本代表你在爱情、财富、事业或关系里会被激活的另一种倾向。","F":"你的主剧本是「《世说新语》型」，同时带有「《山海经》型」的影子。主剧本代表你最稳定的人生底色，副剧本代表你在爱情、财富、事业或关系里会被激活的另一种倾向。"},"E":{"A":"你的主剧本是「《红楼梦》型」，同时带有「《史记》型」的影子。主剧本代表你最稳定的人生底色，副剧本代表你在爱情、财富、事业或关系里会被激活的另一种倾向。","B":"你的主剧本是「《红楼梦》型」，同时带有「《资治通鉴》型」的影子。主剧本代表你最稳定的人生底色，副剧本代表你在爱情、财富、事业或关系里会被激活的另一种倾向。","C":"你的主剧本是「《红楼梦》型」，同时带有「《三国志》型」的影子。主剧本代表你最稳定的人生底色，副剧本代表你在爱情、财富、事业或关系里会被激活的另一种倾向。","D":"你的主剧本是「《红楼梦》型」，同时带有「《世说新语》型」的影子。主剧本代表你最稳定的人生底色，副剧本代表你在爱情、财富、事业或关系里会被激活的另一种倾向。","F":"你的主剧本是「《红楼梦》型」，同时带有「《山海经》型」的影子。主剧本代表你最稳定的人生底色，副剧本代表你在爱情、财富、事业或关系里会被激活的另一种倾向。"},"F":{"A":"你的主剧本是「《山海经》型」，同时带有「《史记》型」的影子。主剧本代表你最稳定的人生底色，副剧本代表你在爱情、财富、事业或关系里会被激活的另一种倾向。","B":"你的主剧本是「《山海经》型」，同时带有「《资治通鉴》型」的影子。主剧本代表你最稳定的人生底色，副剧本代表你在爱情、财富、事业或关系里会被激活的另一种倾向。","C":"你的主剧本是「《山海经》型」，同时带有「《三国志》型」的影子。主剧本代表你最稳定的人生底色，副剧本代表你在爱情、财富、事业或关系里会被激活的另一种倾向。","D":"你的主剧本是「《山海经》型」，同时带有「《世说新语》型」的影子。主剧本代表你最稳定的人生底色，副剧本代表你在爱情、财富、事业或关系里会被激活的另一种倾向。","E":"你的主剧本是「《山海经》型」，同时带有「《红楼梦》型」的影子。主剧本代表你最稳定的人生底色，副剧本代表你在爱情、财富、事业或关系里会被激活的另一种倾向。"}},"shareTemplate":["我测出来了：{{typeName}}","{{posterSubtext}}","{{secondaryLine}}","","你的人生剧本是哪本书？32题人生剧本测试。"]};</script>
+    <script>
+(function () {
+  const app = document.getElementById("app");
+  const configPaths = ["./configs/site-config.json", "./configs/career-change.json"];
+
+  const state = {
+    config: null,
+    answers: {},
+    currentIndex: 0,
+    selected: null,
+    locked: false,
+    loadingStep: 0,
+    route: "home",
+    resultData: null,
+  };
+
+  const defaultLoadingMessages = [
+    "正在读取你的选择倾向...",
+    "正在识别隐藏动机...",
+    "正在计算结果分布...",
+    "正在生成专属报告...",
+    "分析完成。",
+  ];
+
+  init();
+
+  async function init() {
+    try {
+      state.config = await fetchConfig();
+      applyDocumentMeta(state.config);
+
+      const saved = sessionStorage.getItem(getStorageKey());
+      if (saved) {
+        state.answers = JSON.parse(saved);
+      }
+
+      routeFromHash();
+      window.addEventListener("hashchange", routeFromHash);
+    } catch (error) {
+      app.innerHTML = `
+        <div class="error">
+          <div>
+            <h1>测试加载失败</h1>
+            <p>请确认你是通过网页链接打开页面，而不是直接双击 HTML 文件。</p>
+          </div>
+        </div>
+      `;
+      console.error(error);
+    }
+  }
+
+  async function fetchConfig() {
+    if (window.__QUIZ_CONFIG__) return window.__QUIZ_CONFIG__;
+    let lastError;
+    for (const path of configPaths) {
+      try {
+        const response = await fetch(path, { cache: "no-store" });
+        if (!response.ok) throw new Error(`${path} ${response.status}`);
+        return response.json();
+      } catch (error) {
+        lastError = error;
+      }
+    }
+    throw lastError;
+  }
+
+  function applyDocumentMeta(cfg) {
+    const title = cfg.title || "趣味测试";
+    const description = cfg.metaDescription || cfg.subtitle || "完成测试，生成你的专属报告。";
+    document.title = title;
+    setMeta("name", "description", description);
+    setMeta("property", "og:title", title);
+    setMeta("property", "og:description", description);
+  }
+
+  function setMeta(attr, key, content) {
+    let node = document.querySelector(`meta[${attr}="${key}"]`);
+    if (!node) {
+      node = document.createElement("meta");
+      node.setAttribute(attr, key);
+      document.head.appendChild(node);
+    }
+    node.setAttribute("content", content);
+  }
+
+  function routeFromHash() {
+    const route = (location.hash || "#/").replace("#/", "") || "home";
+    renderRoute(route);
+  }
+
+  function navigate(route) {
+    const nextHash = `#/${route}`;
+    if (location.hash === nextHash) {
+      renderRoute(route);
+      return;
+    }
+    location.hash = nextHash;
+  }
+
+  function renderRoute(route) {
+    state.route = route;
+    if (route === "quiz") renderQuiz();
+    else if (route === "loading") startLoading();
+    else if (route === "result") renderResult();
+    else renderHome();
+  }
+
+  function renderShell(content, extraClass = "") {
+    app.innerHTML = `
+      <div class="shell">
+        <div class="top-rule"></div>
+        <section class="screen ${extraClass}">${content}</section>
+      </div>
+      <div id="toast" class="toast">已复制</div>
+    `;
+  }
+
+  function renderHome() {
+    const cfg = state.config;
+    renderShell(
+      `
+      <div class="home">
+        <div class="kicker"><span class="dot"></span><span>${text(cfg.kicker)}</span><span class="dot"></span></div>
+        <h1 class="hero-title">${text(cfg.title)}</h1>
+        <p class="hero-subtitle">${text(cfg.subtitle)}</p>
+        <div class="hairline"></div>
+        <div class="intro">
+          ${(cfg.intro || []).map((p, index) => `<p class="${index === cfg.intro.length - 1 ? "strong" : ""}">${text(p)}</p>`).join("")}
+        </div>
+        <div class="pill-grid">
+          ${(cfg.dimensions || []).map((item) => `<div class="pill">${text(item)}</div>`).join("")}
+        </div>
+        <button class="primary-btn" data-action="start">${text(cfg.startButton || "开始测试")}</button>
+        <p class="disclaimer">${text(cfg.disclaimer || "本测试为趣味内容，仅供娱乐参考。")}</p>
+      </div>
+      `,
+      "home"
+    );
+    const startButton = app.querySelector("[data-action='start']");
+    let started = false;
+    const startQuiz = () => {
+      if (started) return;
+      started = true;
+      state.answers = {};
+      state.currentIndex = 0;
+      sessionStorage.removeItem(getStorageKey());
+      navigate("quiz");
+    };
+    startButton.addEventListener("click", startQuiz);
+    startButton.addEventListener(
+      "touchend",
+      (event) => {
+        event.preventDefault();
+        startQuiz();
+      },
+      { passive: false }
+    );
+  }
+
+  function renderQuiz() {
+    const questions = state.config.questions || [];
+    const question = questions[state.currentIndex];
+    if (!question) {
+      renderHome();
+      return;
+    }
+
+    const progress = ((state.currentIndex + 1) / questions.length) * 100;
+
+    renderShell(
+      `
+      <div class="sticky-head">
+        <div class="quiz-meta">
+          <span>${String(state.currentIndex + 1).padStart(2, "0")} / ${questions.length}</span>
+          <span>${text(question.module)}</span>
+        </div>
+        <div class="progress-track"><div class="progress-bar" style="width:${progress}%"></div></div>
+      </div>
+      <div class="question-no">${String(state.currentIndex + 1).padStart(2, "0")}</div>
+      <h1 class="question-title">${text(question.text)}</h1>
+      <div class="options">
+        ${(question.options || [])
+          .map(
+            (option) => `
+            <button class="option" data-option="${text(option.key)}">
+              <span class="option-key">${text(option.key)}</span>
+              <span class="option-text">${text(option.text)}</span>
+            </button>
+          `
+          )
+          .join("")}
+      </div>
+      <p class="hint">${text(state.config.quizHint || "选择后自动进入下一题")}</p>
+      `,
+      "quiz-screen"
+    );
+
+    app.querySelectorAll("[data-option]").forEach((button) => {
+      button.addEventListener("click", () => selectOption(button.dataset.option));
+    });
+  }
+
+  function selectOption(key) {
+    if (state.locked) return;
+    state.locked = true;
+    state.selected = key;
+    const question = state.config.questions[state.currentIndex];
+    state.answers[question.id] = key;
+
+    app.querySelectorAll(".option").forEach((button) => {
+      const selected = button.dataset.option === key;
+      button.classList.toggle("selected", selected);
+      button.classList.toggle("dimmed", !selected);
+    });
+
+    window.setTimeout(() => {
+      if (state.currentIndex < state.config.questions.length - 1) {
+        state.currentIndex += 1;
+        state.locked = false;
+        state.selected = null;
+        renderQuiz();
+      } else {
+        sessionStorage.setItem(getStorageKey(), JSON.stringify(state.answers));
+        state.locked = false;
+        navigate("loading");
+      }
+    }, 420);
+  }
+
+  function startLoading() {
+    state.loadingStep = 0;
+    renderLoading("");
+    tickLoading();
+  }
+
+  function renderLoading(value) {
+    const loadingMessages = getLoadingMessages();
+    renderShell(
+      `
+      <div class="loading-card">
+        <div class="spinner"></div>
+        <div class="loading-text">${text(value)}<span class="cursor">|</span></div>
+        <div class="step-bars">
+          ${loadingMessages.map((_, index) => `<div class="step ${index < state.loadingStep ? "done" : ""}"><span></span></div>`).join("")}
+        </div>
+      </div>
+      `,
+      "loading-screen"
+    );
+  }
+
+  function tickLoading() {
+    if (state.route !== "loading") return;
+    const loadingMessages = getLoadingMessages();
+    if (state.loadingStep >= loadingMessages.length) {
+      window.setTimeout(() => navigate("result"), 700);
+      return;
+    }
+    const message = loadingMessages[state.loadingStep];
+    let chars = 0;
+    const interval = window.setInterval(() => {
+      chars += 1;
+      renderLoading(message.slice(0, chars));
+      if (chars >= message.length) {
+        window.clearInterval(interval);
+        window.setTimeout(() => {
+          state.loadingStep += 1;
+          tickLoading();
+        }, 520);
+      }
+    }, 35);
+  }
+
+  function renderResult() {
+    const saved = sessionStorage.getItem(getStorageKey());
+    if (saved) state.answers = JSON.parse(saved);
+    if (Object.keys(state.answers).length < state.config.questions.length) {
+      renderHome();
+      return;
+    }
+
+    const scored = scoreAnswers(state.answers);
+    const primary = state.config.results[scored.primary];
+    const secondary = scored.secondary ? state.config.secondaryNotes?.[scored.primary]?.[scored.secondary] : null;
+    const stage = getStage(primary.maturityScore);
+    const shareText = buildShareText(primary, secondary);
+    const compareLabels = state.config.compareLabels || ["如果继续原路", "如果换一种做法"];
+    state.resultData = { scored, primary, secondary, stage, shareText };
+
+    renderShell(
+      `
+      <article class="report">
+        <div class="kicker"><span class="dot"></span><span>${text(state.config.resultKicker || "Result Report")}</span><span class="dot"></span></div>
+        <h1 class="result-type">${text(primary.typeName)}</h1>
+        <p class="result-subtitle">${text(primary.subtitle)}</p>
+        <div class="stamp-row">
+          <div class="stamp"><strong>${text(primary.maturityScore)}</strong><span>${text(state.config.scoreLabel || "决策成熟度")}</span></div>
+          <div class="stamp"><strong>${text(stage)}</strong><span>${text(state.config.stageLabel || "当前行动阶段")}</span></div>
+        </div>
+
+        <section class="section">
+          <h2>你的答案分布</h2>
+          <div class="meters">
+            ${Object.entries(scored.counts)
+              .map(([key, value]) => {
+                const typeData = state.config.results[key];
+                const width = (value / state.config.questions.length) * 100;
+                return `
+                  <div>
+                    <div class="meter-head"><span>${text(key)} · ${text(typeData.typeName)}</span><span>${value} 题</span></div>
+                    <div class="meter-track"><div class="meter-fill" style="width:${width}%"></div></div>
+                  </div>
+                `;
+              })
+              .join("")}
+          </div>
+        </section>
+
+        ${secondary ? `<section class="section"><h2>副倾向提示</h2><div class="secondary-note">${text(secondary)}</div></section>` : ""}
+
+        <section class="section">
+          <h2>诊断结论</h2>
+          <div class="quote">${text(primary.coreConclusion)}</div>
+        </section>
+
+        <section class="section">
+          <h2>为什么你会这样</h2>
+          <p>${text(primary.diagnosis)}</p>
+          <p>${text(primary.whatYouReallyWant)}</p>
+        </section>
+
+        <section class="section">
+          <h2>${text(primary.mechanism.title)}</h2>
+          <p>${text(primary.mechanism.content)}</p>
+        </section>
+
+        ${renderParagraphSection("专业解读框架", primary.professionalBasis)}
+        ${renderTagSection("你的关键矛盾", primary.coreTensions)}
+        ${renderCompareListSection("适合推进的条件", "需要谨慎的信号", primary.suitableIf, primary.cautionIf)}
+
+        <section class="section">
+          <h2>关键指数</h2>
+          <div class="meters">
+            ${(primary.indices || [])
+              .map(
+                (item) => `
+                <div>
+                  <div class="meter-head"><span>${text(item.label)}</span><span>${text(item.value)}</span></div>
+                  <div class="meter-track"><div class="meter-fill" style="width:${number(item.value)}%"></div></div>
+                </div>
+              `
+              )
+              .join("")}
+          </div>
+        </section>
+
+        <section class="section">
+          <h2>两条路径对比</h2>
+          <div class="compare">
+            <div class="compare-card"><h3>${text(compareLabels[0])}</h3><p>${text(primary.ifStay)}</p></div>
+            <div class="compare-card"><h3>${text(compareLabels[1])}</h3><p>${text(primary.ifChange)}</p></div>
+          </div>
+        </section>
+
+        <section class="section">
+          <h2>现在最不建议你做</h2>
+          <div class="tag-list">${(primary.notRecommended || []).map((item) => `<span class="tag">${text(item)}</span>`).join("")}</div>
+        </section>
+
+        <section class="section">
+          <h2>未来 90 天验证方案</h2>
+          <div class="plan">
+            ${(primary.plan90 || [])
+              .map(
+                (item, index) => `
+                <div class="plan-card">
+                  <h3>${index + 1}. ${text(item.title)}</h3>
+                  <p>${text(item.content)}</p>
+                </div>
+              `
+              )
+              .join("")}
+          </div>
+        </section>
+
+        <section class="section">
+          <h2>最后一句话</h2>
+          <p>${text(primary.closing)}</p>
+        </section>
+
+        <div class="actions">
+          <button class="primary-btn" data-action="copy">${text(state.config.copyButton || "复制我的结果")}</button>
+          <button class="ghost-btn" data-action="restart">${text(state.config.restartButton || "重新测试")}</button>
+        </div>
+      </article>
+      `,
+      "result-screen"
+    );
+
+    app.querySelector("[data-action='copy']").addEventListener("click", () => copyShareText(shareText));
+    app.querySelector("[data-action='restart']").addEventListener("click", () => {
+      sessionStorage.removeItem(getStorageKey());
+      state.answers = {};
+      state.currentIndex = 0;
+      navigate("home");
+    });
+  }
+
+  function renderParagraphSection(title, paragraphs) {
+    if (!Array.isArray(paragraphs) || !paragraphs.length) return "";
+    return `
+      <section class="section">
+        <h2>${text(title)}</h2>
+        ${paragraphs.map((item) => `<p>${text(item)}</p>`).join("")}
+      </section>
+    `;
+  }
+
+  function renderTagSection(title, items) {
+    if (!Array.isArray(items) || !items.length) return "";
+    return `
+      <section class="section">
+        <h2>${text(title)}</h2>
+        <div class="tag-list">${items.map((item) => `<span class="tag">${text(item)}</span>`).join("")}</div>
+      </section>
+    `;
+  }
+
+  function renderCompareListSection(leftTitle, rightTitle, leftItems, rightItems) {
+    const hasLeft = Array.isArray(leftItems) && leftItems.length;
+    const hasRight = Array.isArray(rightItems) && rightItems.length;
+    if (!hasLeft && !hasRight) return "";
+    return `
+      <section class="section">
+        <h2>适用边界</h2>
+        <div class="compare">
+          <div class="compare-card">
+            <h3>${text(leftTitle)}</h3>
+            ${(leftItems || []).map((item) => `<p>${text(item)}</p>`).join("")}
+          </div>
+          <div class="compare-card">
+            <h3>${text(rightTitle)}</h3>
+            ${(rightItems || []).map((item) => `<p>${text(item)}</p>`).join("")}
+          </div>
+        </div>
+      </section>
+    `;
+  }
+
+  function scoreAnswers(answers) {
+    const resultKeys = Object.keys(state.config.results || {});
+    const counts = Object.fromEntries(resultKeys.map((key) => [key, 0]));
+    (state.config.questions || []).forEach((question) => {
+      const answerKey = answers[question.id];
+      if (!answerKey) return;
+      const option = (question.options || []).find((item) => item.key === answerKey);
+      const scoreKey = option?.score || option?.result || answerKey;
+      if (counts[scoreKey] !== undefined) counts[scoreKey] += 1;
+    });
+    const sorted = Object.entries(counts).sort((a, b) => b[1] - a[1]);
+    const threshold = state.config.secondaryThreshold ?? 2;
+    const primary = sorted[0][0];
+    const secondary = sorted[1][1] > 0 && sorted[0][1] - sorted[1][1] <= threshold ? sorted[1][0] : null;
+    return { counts, primary, secondary };
+  }
+
+  function getStage(score) {
+    const labels = state.config.stageLabels || [
+      { max: 45, label: "观察期" },
+      { max: 65, label: "验证期" },
+      { max: 82, label: "规划期" },
+      { max: 100, label: "行动期" },
+    ];
+    const hit = labels.find((item) => score <= item.max);
+    return hit ? hit.label : labels[labels.length - 1].label;
+  }
+
+  function buildShareText(primary, secondary) {
+    const template = state.config.shareTemplate || [
+      "我测出了：{{typeName}}",
+      "{{posterSubtext}}",
+      "{{secondaryLine}}",
+      "",
+      "{{title}}",
+    ];
+    const values = {
+      title: state.config.title,
+      typeName: primary.typeName,
+      posterSubtext: primary.posterSubtext,
+      secondary: secondary || "",
+      secondaryLine: secondary ? `副倾向：${secondary}` : "",
+    };
+    return template
+      .map((line) => fillTemplate(line, values))
+      .filter((line, index, arr) => line || arr[index - 1])
+      .join("\n")
+      .trim();
+  }
+
+  async function copyShareText(value) {
+    try {
+      await navigator.clipboard.writeText(value);
+      showToast("结果文案已复制");
+    } catch (error) {
+      showToast("复制失败，可长按手动复制");
+    }
+  }
+
+  function showToast(value) {
+    const toast = document.getElementById("toast");
+    if (!toast) return;
+    toast.textContent = value;
+    toast.classList.add("show");
+    window.setTimeout(() => toast.classList.remove("show"), 1600);
+  }
+
+  function getLoadingMessages() {
+    return state.config.loadingMessages || defaultLoadingMessages;
+  }
+
+  function getStorageKey() {
+    return `xhsTestAnswers:${state.config.slug || "default"}`;
+  }
+
+  function fillTemplate(template, values) {
+    return String(template).replace(/\{\{(\w+)\}\}/g, (_, key) => values[key] || "");
+  }
+
+  function number(value) {
+    const parsed = Number(value);
+    if (Number.isNaN(parsed)) return 0;
+    return Math.max(0, Math.min(100, parsed));
+  }
+
+  function text(value) {
+    return String(value ?? "")
+      .replace(/&/g, "&amp;")
+      .replace(/</g, "&lt;")
+      .replace(/>/g, "&gt;")
+      .replace(/"/g, "&quot;");
+  }
+})();
+
+    </script>
+  </body>
+</html>
