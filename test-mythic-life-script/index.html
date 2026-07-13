@@ -1,0 +1,1130 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <meta name="description" content="完成 32 道神话人物测试，生成你的神话人格、神力指数、宿命指数、天赋指数和 90 天修炼建议。" />
+    <meta property="og:title" content="你的人生剧本最像哪位神话人物？" />
+    <meta property="og:description" content="完成 32 道神话人物测试，生成你的神话人格、神力指数、宿命指数、天赋指数和 90 天修炼建议。" />
+    <title>你的人生剧本最像哪位神话人物？</title>
+    <style>
+:root {
+  --bg: #fbfaf7;
+  --paper: #fffefd;
+  --ink: #20242a;
+  --muted: #65707d;
+  --line: #d9d4ca;
+  --line-strong: #b9afa0;
+  --accent: #9b4339;
+  --accent-soft: #f1dfd7;
+  --gold: #c0964d;
+  --sage: #66795f;
+  --blue: #526a86;
+  --shadow: 0 16px 36px rgba(60, 47, 38, 0.1);
+  --radius: 8px;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  min-height: 100%;
+  background:
+    linear-gradient(rgba(32, 36, 42, 0.035) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(32, 36, 42, 0.035) 1px, transparent 1px),
+    var(--bg);
+  background-size: 24px 24px;
+}
+
+body {
+  min-height: 100vh;
+  margin: 0;
+  color: var(--ink);
+  font-family:
+    "PingFang SC",
+    "Microsoft YaHei",
+    "Noto Sans SC",
+    system-ui,
+    -apple-system,
+    BlinkMacSystemFont,
+    sans-serif;
+  letter-spacing: 0;
+}
+
+button {
+  font: inherit;
+}
+
+.shell {
+  width: min(100%, 480px);
+  min-height: 100vh;
+  margin: 0 auto;
+  background: rgba(251, 250, 247, 0.88);
+}
+
+.top-rule {
+  height: 4px;
+  background: var(--accent);
+}
+
+.screen {
+  min-height: calc(100vh - 4px);
+  padding: 28px 22px 32px;
+}
+
+.home {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.kicker {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  color: var(--muted);
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  font-size: 11px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+.dot {
+  width: 7px;
+  height: 7px;
+  background: var(--accent);
+  border-radius: 50%;
+}
+
+.hero-title {
+  margin: 26px 0 14px;
+  color: var(--ink);
+  font-size: 30px;
+  line-height: 1.2;
+  text-align: center;
+  font-weight: 800;
+}
+
+.hero-subtitle {
+  margin: 0 auto 28px;
+  max-width: 340px;
+  color: var(--muted);
+  font-size: 15px;
+  line-height: 1.75;
+  text-align: center;
+}
+
+.hairline {
+  width: 64px;
+  height: 1px;
+  margin: 0 auto 30px;
+  background: var(--line-strong);
+}
+
+.intro {
+  margin: 0 auto;
+  max-width: 380px;
+}
+
+.intro p {
+  margin: 0 0 15px;
+  color: rgba(32, 36, 42, 0.82);
+  font-size: 15px;
+  line-height: 1.8;
+}
+
+.intro .strong {
+  color: var(--accent);
+  font-weight: 700;
+}
+
+.pill-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px;
+  margin: 28px 0;
+}
+
+.pill {
+  min-height: 42px;
+  display: grid;
+  place-items: center;
+  border: 1px solid var(--line);
+  color: var(--muted);
+  background: rgba(255, 255, 255, 0.44);
+  font-size: 13px;
+}
+
+.primary-btn,
+.ghost-btn,
+.copy-btn {
+  width: 100%;
+  min-height: 48px;
+  border: 1px solid var(--ink);
+  border-radius: 0;
+  cursor: pointer;
+  transition: transform 150ms ease, background 150ms ease, color 150ms ease, border-color 150ms ease;
+}
+
+.primary-btn {
+  background: var(--ink);
+  color: #fff;
+  font-weight: 700;
+}
+
+.ghost-btn,
+.copy-btn {
+  background: transparent;
+  color: var(--ink);
+}
+
+.primary-btn:active,
+.ghost-btn:active,
+.copy-btn:active,
+.option:active {
+  transform: translateY(1px);
+}
+
+.disclaimer {
+  margin: 18px auto 0;
+  max-width: 340px;
+  color: var(--muted);
+  font-size: 12px;
+  line-height: 1.65;
+  text-align: center;
+}
+
+.quiz-screen {
+  padding-top: 0;
+}
+
+.sticky-head {
+  position: sticky;
+  top: 0;
+  z-index: 5;
+  margin: 0 -22px 26px;
+  padding: 14px 22px 12px;
+  background: rgba(251, 250, 247, 0.95);
+  border-bottom: 1px solid var(--line);
+  backdrop-filter: blur(12px);
+}
+
+.quiz-meta {
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+  color: var(--muted);
+  font-size: 12px;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+}
+
+.progress-track {
+  height: 4px;
+  margin-top: 10px;
+  background: rgba(32, 36, 42, 0.09);
+}
+
+.progress-bar {
+  height: 100%;
+  background: var(--accent);
+  transition: width 260ms ease;
+}
+
+.question-no {
+  color: rgba(155, 67, 57, 0.18);
+  font-size: 48px;
+  line-height: 1;
+  font-weight: 800;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+}
+
+.question-title {
+  margin: 18px 0 24px;
+  font-size: 22px;
+  line-height: 1.5;
+  font-weight: 750;
+}
+
+.options {
+  display: grid;
+  gap: 12px;
+}
+
+.option {
+  min-height: 66px;
+  display: grid;
+  grid-template-columns: 30px 1fr;
+  gap: 12px;
+  align-items: start;
+  width: 100%;
+  padding: 15px;
+  border: 1px solid var(--line);
+  background: rgba(255, 255, 255, 0.68);
+  color: var(--ink);
+  text-align: left;
+  cursor: pointer;
+  transition: background 160ms ease, border-color 160ms ease, color 160ms ease, opacity 160ms ease;
+}
+
+.option-key {
+  display: grid;
+  place-items: center;
+  width: 28px;
+  height: 28px;
+  border: 1px solid var(--line-strong);
+  font-size: 13px;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+}
+
+.option-text {
+  padding-top: 2px;
+  font-size: 15px;
+  line-height: 1.55;
+}
+
+.option.selected {
+  border-color: var(--accent);
+  background: var(--accent);
+  color: #fff;
+}
+
+.option.selected .option-key {
+  border-color: rgba(255, 255, 255, 0.8);
+}
+
+.option.dimmed {
+  opacity: 0.42;
+}
+
+.hint {
+  margin: 18px 0 0;
+  color: var(--muted);
+  font-size: 12px;
+  text-align: center;
+}
+
+.loading-screen {
+  display: grid;
+  place-items: center;
+}
+
+.loading-card {
+  width: 100%;
+  max-width: 360px;
+  text-align: center;
+}
+
+.spinner {
+  width: 54px;
+  height: 54px;
+  margin: 0 auto 24px;
+  border: 2px solid var(--line);
+  border-top-color: var(--accent);
+  border-radius: 50%;
+  animation: spin 850ms linear infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.loading-text {
+  min-height: 54px;
+  color: var(--accent);
+  font-size: 17px;
+  line-height: 1.6;
+  font-weight: 700;
+}
+
+.step-bars {
+  display: grid;
+  gap: 8px;
+  margin-top: 28px;
+}
+
+.step {
+  height: 4px;
+  overflow: hidden;
+  background: rgba(32, 36, 42, 0.09);
+}
+
+.step span {
+  display: block;
+  height: 100%;
+  width: 0;
+  background: var(--accent);
+  transition: width 300ms ease;
+}
+
+.step.done span {
+  width: 100%;
+}
+
+.result-screen {
+  padding: 22px 18px 30px;
+}
+
+.report {
+  padding: 22px 16px 18px;
+  border: 1px solid var(--line);
+  background: var(--paper);
+  box-shadow: var(--shadow);
+}
+
+.result-type {
+  margin: 8px 0 8px;
+  color: var(--accent);
+  font-size: 30px;
+  line-height: 1.15;
+  font-weight: 850;
+  text-align: center;
+}
+
+.result-subtitle {
+  margin: 0 auto 20px;
+  color: var(--muted);
+  font-size: 15px;
+  line-height: 1.7;
+  text-align: center;
+}
+
+.stamp-row {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px;
+  margin: 18px 0 20px;
+}
+
+.stamp {
+  padding: 12px 10px;
+  border: 1px solid var(--line);
+  background: #fbfaf7;
+}
+
+.stamp strong {
+  display: block;
+  margin-bottom: 4px;
+  color: var(--ink);
+  font-size: 20px;
+}
+
+.stamp span {
+  color: var(--muted);
+  font-size: 12px;
+}
+
+.section {
+  padding: 20px 0;
+  border-top: 1px solid var(--line);
+}
+
+.section h2 {
+  margin: 0 0 12px;
+  font-size: 18px;
+  color: var(--ink);
+}
+
+.section p {
+  margin: 0 0 12px;
+  color: rgba(32, 36, 42, 0.82);
+  font-size: 15px;
+  line-height: 1.85;
+}
+
+.quote {
+  padding: 15px;
+  border-left: 3px solid var(--accent);
+  background: var(--accent-soft);
+  color: #5b2d27;
+  line-height: 1.8;
+  font-weight: 700;
+}
+
+.meters {
+  display: grid;
+  gap: 14px;
+}
+
+.meter-head {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 7px;
+  color: var(--muted);
+  font-size: 13px;
+}
+
+.meter-track {
+  height: 8px;
+  background: rgba(32, 36, 42, 0.08);
+}
+
+.meter-fill {
+  height: 100%;
+  background: var(--accent);
+}
+
+.compare {
+  display: grid;
+  gap: 10px;
+}
+
+.compare-card {
+  padding: 14px;
+  border: 1px solid var(--line);
+  background: #fbfaf7;
+}
+
+.compare-card h3,
+.plan-card h3 {
+  margin: 0 0 8px;
+  font-size: 15px;
+}
+
+.compare-card p,
+.plan-card p {
+  font-size: 14px;
+}
+
+.tag-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.tag {
+  padding: 7px 9px;
+  border: 1px solid var(--line);
+  background: #fbfaf7;
+  color: var(--muted);
+  font-size: 13px;
+}
+
+.plan {
+  display: grid;
+  gap: 10px;
+}
+
+.plan-card {
+  padding: 14px;
+  border: 1px solid var(--line);
+  background: #fbfaf7;
+}
+
+.secondary-note {
+  padding: 14px;
+  border: 1px dashed var(--line-strong);
+  background: rgba(192, 150, 77, 0.12);
+  line-height: 1.75;
+  font-size: 14px;
+}
+
+.actions {
+  display: grid;
+  gap: 10px;
+  margin-top: 18px;
+}
+
+.toast {
+  position: fixed;
+  left: 50%;
+  bottom: 22px;
+  z-index: 20;
+  transform: translateX(-50%);
+  padding: 10px 14px;
+  background: var(--ink);
+  color: #fff;
+  font-size: 13px;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 180ms ease;
+}
+
+.toast.show {
+  opacity: 1;
+}
+
+.error {
+  display: grid;
+  place-items: center;
+  min-height: 100vh;
+  padding: 24px;
+  text-align: center;
+}
+
+.error p {
+  color: var(--muted);
+  line-height: 1.7;
+}
+
+@media (min-width: 700px) {
+  body {
+    padding: 28px 0;
+  }
+
+  .shell {
+    min-height: calc(100vh - 56px);
+    border: 1px solid var(--line);
+    box-shadow: var(--shadow);
+  }
+
+  .screen {
+    min-height: calc(100vh - 60px);
+  }
+}
+
+    </style>
+  </head>
+  <body>
+    <main id="app" aria-live="polite"></main>
+    <script>window.__QUIZ_CONFIG__ = {"slug":"test-mythic-life-script","topic":"你的人生剧本最像哪位神话人物？","kicker":"32-Q Mythic Life Script Test","title":"你的人生剧本最像哪位神话人物？","subtitle":"32 道神话人格题，测出你更像孙悟空、杨戬、哪吒、嫦娥、姜子牙、白泽、东皇太一，还是九天玄女。","metaDescription":"完成 32 道神话人物测试，生成你的神话人格、神力指数、宿命指数、天赋指数和 90 天修炼建议。","startButton":"开始测试","resultKicker":"Mythic Life Script Report","quizHint":"按真实第一反应选，不按神话主角人设选。","copyButton":"复制我的结果","restartButton":"重新测试","scoreLabel":"神话觉醒度","stageLabel":"当前神位","stageLabels":[{"max":55,"label":"凡心未醒期"},{"max":72,"label":"神力显影期"},{"max":86,"label":"宿命转折期"},{"max":100,"label":"本命觉醒期"}],"compareLabels":["如果继续按旧剧本生活","如果开始修炼本命神力"],"disclaimer":"本测试借用中国神话人物做趣味人格分析，仅供娱乐和自我观察参考，不构成心理诊断、职业建议、情感建议或人生决策依据。","secondaryThreshold":2,"dimensions":["神力指数","宿命指数","天赋指数","孤高指数"],"intro":["神话人物迷人的地方，不是他们有多强。","而是每个人身上都有一种很明确的命运底色：反抗、清醒、重生、孤高、晚成、洞察、主位、授策。","这 32 道题会从命运开局、天赋本能、冲突方式、孤独关系、权力态度、洞察学习、逆风反应和终局使命 8 个维度，测出你的人生剧本最像哪位神话人物。"],"loadingMessages":["正在读取你的本命神话底色...","正在分析神力指数、宿命指数和天赋指数...","正在匹配你的神话人物原型...","正在生成 32 题人生剧本报告...","分析完成。"],"questions":[{"id":1,"module":"命运开局","text":"如果你一出生就被安排好命运，你第一反应更像：","options":[{"key":"A","text":"偏不按剧本走，先把束缚打碎","score":"SUN"},{"key":"B","text":"先忍住，看清规则再找破口","score":"ERLANG"},{"key":"C","text":"我凭什么要认命，越压我越反","score":"NEZHA"},{"key":"D","text":"先退到安静处，保住自己的心","score":"CHANG"}]},{"id":2,"module":"命运开局","text":"你最怕自己的人生变成哪种剧本？","options":[{"key":"A","text":"一身本事，却被规矩压到没脾气","score":"SUN"},{"key":"B","text":"看得太清醒，却永远只能替别人收拾局面","score":"BAIZE"},{"key":"C","text":"明明有野心，却被迫装成无欲无求","score":"DONGHUANG"},{"key":"D","text":"一直等机会，等到别人都忘了你的名字","score":"JIANG"}]},{"id":3,"module":"命运开局","text":"进入一个新环境，你最先观察的是：","options":[{"key":"A","text":"谁敢挑战规则，谁只是嘴上厉害","score":"NEZHA"},{"key":"B","text":"谁掌握真正的话语权和秩序","score":"DONGHUANG"},{"key":"C","text":"谁有信息差，谁知道别人不知道的事","score":"BAIZE"},{"key":"D","text":"谁能在关键时刻教你一招破局","score":"XUANNV"}]},{"id":4,"module":"命运开局","text":"你觉得真正的天命，更像：","options":[{"key":"A","text":"一路打出来，不服就改命","score":"SUN"},{"key":"B","text":"先被误解，后来用实力证明","score":"ERLANG"},{"key":"C","text":"带着反骨出生，注定不走普通路","score":"NEZHA"},{"key":"D","text":"越到后半场，越能等到属于自己的时机","score":"JIANG"}]},{"id":5,"module":"天赋本能","text":"你最自然的天赋通常藏在：","options":[{"key":"A","text":"现场反应很快，越乱越有办法","score":"SUN"},{"key":"B","text":"判断很准，一眼看出谁在演","score":"ERLANG"},{"key":"C","text":"情绪很烈，但也很有爆发力","score":"NEZHA"},{"key":"D","text":"气质疏离，别人很难真正看透你","score":"CHANG"}]},{"id":6,"module":"天赋本能","text":"别人最容易低估你的地方是：","options":[{"key":"A","text":"以为你只是冲动，其实你很能破局","score":"SUN"},{"key":"B","text":"以为你冷，其实你只是太清楚","score":"ERLANG"},{"key":"C","text":"以为你难管，其实你只是不能被羞辱","score":"NEZHA"},{"key":"D","text":"以为你温和，其实你内心有自己的月亮","score":"CHANG"}]},{"id":7,"module":"天赋本能","text":"你最想拥有哪种神力？","options":[{"key":"A","text":"七十二变，任何局都能找到出口","score":"SUN"},{"key":"B","text":"天眼，真假、人心和漏洞都能看穿","score":"ERLANG"},{"key":"C","text":"风火轮，想走就走，不被任何人拖住","score":"NEZHA"},{"key":"D","text":"月宫结界，让自己不被杂音消耗","score":"CHANG"}]},{"id":8,"module":"天赋本能","text":"你觉得自己最像哪种隐藏能力？","options":[{"key":"A","text":"越被压制，越容易突然爆发","score":"NEZHA"},{"key":"B","text":"懂得等风来，不急着证明","score":"JIANG"},{"key":"C","text":"知道太多规律，很难被表象骗","score":"BAIZE"},{"key":"D","text":"能在背后布阵，让别人走出死局","score":"XUANNV"}]},{"id":9,"module":"冲突方式","text":"被人当众否定时，你更像：","options":[{"key":"A","text":"直接回击，不想让对方以为你好欺负","score":"SUN"},{"key":"B","text":"不急着吵，先抓住对方逻辑漏洞","score":"ERLANG"},{"key":"C","text":"会被点燃，尤其受不了被冤枉","score":"NEZHA"},{"key":"D","text":"表面没事，心里从此拉开距离","score":"CHANG"}]},{"id":10,"module":"冲突方式","text":"真正惹怒你的通常是：","options":[{"key":"A","text":"别人拿规矩压你，却自己不守规矩","score":"SUN"},{"key":"B","text":"有人装无辜，其实一直在算计","score":"ERLANG"},{"key":"C","text":"别人用亲情、关系或身份绑架你","score":"NEZHA"},{"key":"D","text":"对方不停侵入你的边界和安静","score":"CHANG"}]},{"id":11,"module":"冲突方式","text":"你处理矛盾最容易走向哪一边？","options":[{"key":"A","text":"先掀桌，反正不能让假和平继续","score":"SUN"},{"key":"B","text":"先取证，等证据够了再出手","score":"ERLANG"},{"key":"C","text":"一旦伤到尊严，就很难再装没事","score":"NEZHA"},{"key":"D","text":"不解释，直接从关系里撤退","score":"CHANG"}]},{"id":12,"module":"冲突方式","text":"如果必须反击，你希望方式是：","options":[{"key":"A","text":"打得漂亮，让所有人记住","score":"SUN"},{"key":"B","text":"精准拆局，让对方自己露出破绽","score":"ERLANG"},{"key":"C","text":"把被压住的那口气彻底还回去","score":"NEZHA"},{"key":"D","text":"不动声色，让对方再也靠近不了你","score":"CHANG"}]},{"id":13,"module":"孤独与关系","text":"你在人群里最常有的感觉是：","options":[{"key":"A","text":"大家太守规矩，我忍不住想闯出去","score":"SUN"},{"key":"B","text":"很多人热闹，但真正清醒的人不多","score":"ERLANG"},{"key":"C","text":"我不是不合群，是不想被随便定义","score":"NEZHA"},{"key":"D","text":"我可以合群，但心里总留一块月亮","score":"CHANG"}]},{"id":14,"module":"孤独与关系","text":"你最渴望哪种关系？","options":[{"key":"A","text":"能一起闯、一起疯、一起破局的人","score":"SUN"},{"key":"B","text":"不用多解释，也能懂你判断的人","score":"ERLANG"},{"key":"C","text":"允许你有脾气，也不拿爱绑架你的人","score":"NEZHA"},{"key":"D","text":"靠近但不占有，理解你的安静和距离","score":"CHANG"}]},{"id":15,"module":"孤独与关系","text":"你最容易被哪类人消耗？","options":[{"key":"A","text":"处处限制你，还说是为你好的人","score":"SUN"},{"key":"B","text":"话说得漂亮，但实际很会甩锅的人","score":"BAIZE"},{"key":"C","text":"一边需要你，一边又否定你的人","score":"NEZHA"},{"key":"D","text":"过度索取情绪价值，不给你空间的人","score":"CHANG"}]},{"id":16,"module":"孤独与关系","text":"你更愿意把真正的自己交给：","options":[{"key":"A","text":"见过你狼狈，也还愿意陪你闯的人","score":"SUN"},{"key":"B","text":"懂规则，也懂你为什么不轻易相信的人","score":"ERLANG"},{"key":"C","text":"不逼你变乖，也不害怕你锋利的人","score":"NEZHA"},{"key":"D","text":"知道你需要独处，但从不误会你冷漠的人","score":"CHANG"}]},{"id":17,"module":"权力态度","text":"如果你拥有很大的权力，你会最想用它来：","options":[{"key":"A","text":"打破那些早就该碎掉的旧规矩","score":"SUN"},{"key":"B","text":"让秩序重新变得清楚、公平、可执行","score":"ERLANG"},{"key":"C","text":"保护不该被牺牲的人，也保护小时候的自己","score":"NEZHA"},{"key":"D","text":"让所有人知道，真正的主位不需要讨好","score":"DONGHUANG"}]},{"id":18,"module":"权力态度","text":"别人突然把你推到台前时，你会先想：","options":[{"key":"A","text":"这是不是一个能翻身的机会","score":"SUN"},{"key":"B","text":"谁在背后安排，谁想让我承担后果","score":"ERLANG"},{"key":"C","text":"他们是不是又想让我替谁牺牲","score":"NEZHA"},{"key":"D","text":"这一步会不会让我失去退路和清净","score":"CHANG"}]},{"id":19,"module":"权力态度","text":"你最想坐上的不是位置，而是：","options":[{"key":"A","text":"自由，不再被谁按头安排","score":"SUN"},{"key":"B","text":"判断权，重要的事不能再被糊弄过去","score":"ERLANG"},{"key":"C","text":"自我主权，任何关系都不能吞掉你","score":"NEZHA"},{"key":"D","text":"主位感，不争也没人敢轻看","score":"DONGHUANG"}]},{"id":20,"module":"权力态度","text":"你觉得强大最好的状态是：","options":[{"key":"A","text":"能闯能变，什么局都困不住","score":"SUN"},{"key":"B","text":"能看能断，出手就有分寸","score":"ERLANG"},{"key":"C","text":"能燃能护，锋芒不是为了伤人","score":"NEZHA"},{"key":"D","text":"能镇能定，不需要解释也自带压场","score":"DONGHUANG"}]},{"id":21,"module":"洞察学习","text":"你最像哪种学习方式？","options":[{"key":"A","text":"先上手再说，撞几次就悟了","score":"SUN"},{"key":"B","text":"拆规则、找结构、看底层逻辑","score":"ERLANG"},{"key":"C","text":"被刺激到才会突然爆发式成长","score":"NEZHA"},{"key":"D","text":"长期观察，等一个恰好出手的时机","score":"JIANG"}]},{"id":22,"module":"洞察学习","text":"别人来问你建议，你最容易给出：","options":[{"key":"A","text":"别想太久，先试一次再说","score":"SUN"},{"key":"B","text":"你真正的问题不是这个，而是另一个","score":"BAIZE"},{"key":"C","text":"你先别急着自责，问题不全在你","score":"NEZHA"},{"key":"D","text":"现在还不到出手的时候，再等一个信号","score":"JIANG"}]},{"id":23,"module":"洞察学习","text":"你更容易被哪种内容吸引？","options":[{"key":"A","text":"逆天改命、破局翻盘、从底层杀出来","score":"SUN"},{"key":"B","text":"权谋拆解、人心识别、规则漏洞","score":"ERLANG"},{"key":"C","text":"命运反抗、原生束缚、自我重生","score":"NEZHA"},{"key":"D","text":"冷知识、神秘体系、万物规律","score":"BAIZE"}]},{"id":24,"module":"洞察学习","text":"如果你要帮别人翻盘，你会先做：","options":[{"key":"A","text":"带他行动，先把局面撞开一个口","score":"SUN"},{"key":"B","text":"帮他看清谁是关键人、哪一步不能错","score":"ERLANG"},{"key":"C","text":"先把他从自责和羞耻里拉出来","score":"NEZHA"},{"key":"D","text":"给他一套路径，让他按步骤走出死局","score":"XUANNV"}]},{"id":25,"module":"逆风反应","text":"当你长期不被看见时，你更可能：","options":[{"key":"A","text":"憋到某一天直接爆发，做出大动静","score":"SUN"},{"key":"B","text":"继续打磨自己，等一个能证明的局","score":"ERLANG"},{"key":"C","text":"开始怀疑是不是自己生来就不该被安排","score":"NEZHA"},{"key":"D","text":"把期待收回来，去过更安静的生活","score":"CHANG"}]},{"id":26,"module":"逆风反应","text":"人生低谷里，你最需要的不是安慰，而是：","options":[{"key":"A","text":"一个可以重新出发的入口","score":"SUN"},{"key":"B","text":"一个能把混乱解释清楚的答案","score":"BAIZE"},{"key":"C","text":"一句允许你不再乖的确认","score":"NEZHA"},{"key":"D","text":"一个不用被打扰的恢复空间","score":"CHANG"}]},{"id":27,"module":"逆风反应","text":"如果所有人都说你不该这样，你会：","options":[{"key":"A","text":"偏要试，撞了也算自己的路","score":"SUN"},{"key":"B","text":"先判断他们是真懂，还是只是在害怕变化","score":"ERLANG"},{"key":"C","text":"越被否定越不想低头","score":"NEZHA"},{"key":"D","text":"不争辩，但会慢慢离开那些声音","score":"CHANG"}]},{"id":28,"module":"逆风反应","text":"你最强的恢复力来自：","options":[{"key":"A","text":"行动，一动起来就又活了","score":"SUN"},{"key":"B","text":"清醒，弄懂原因就没那么怕了","score":"ERLANG"},{"key":"C","text":"怒火，那口气会推着你重来","score":"NEZHA"},{"key":"D","text":"独处，安静会把你慢慢养回来","score":"CHANG"}]},{"id":29,"module":"终局使命","text":"你的人生剧本最想走向哪种结尾？","options":[{"key":"A","text":"从被压制到彻底自由，谁也困不住你","score":"SUN"},{"key":"B","text":"从旁观清醒到精准掌局，成为定局的人","score":"ERLANG"},{"key":"C","text":"从被定义到亲手重塑自己","score":"NEZHA"},{"key":"D","text":"从被喧闹消耗到拥有自己的月宫","score":"CHANG"}]},{"id":30,"module":"终局使命","text":"你最想被世界记住的方式是：","options":[{"key":"A","text":"一个打破不可能的人","score":"SUN"},{"key":"B","text":"一个看穿真相并守住秩序的人","score":"ERLANG"},{"key":"C","text":"一个不再为被爱而牺牲自己的人","score":"NEZHA"},{"key":"D","text":"一个安静但不可替代的存在","score":"CHANG"}]},{"id":31,"module":"终局使命","text":"如果给你一句神话判词，你更想要：","options":[{"key":"A","text":"生来不服天命，偏要把路打出来","score":"SUN"},{"key":"B","text":"眼中有天光，心中有法度","score":"ERLANG"},{"key":"C","text":"骨里有火，命里有反叛","score":"NEZHA"},{"key":"D","text":"月色孤高，退一步自成天地","score":"CHANG"}]},{"id":32,"module":"终局使命","text":"做完这套测试，你最想知道的是：","options":[{"key":"A","text":"我的神力到底藏在哪个破局点里","score":"SUN"},{"key":"B","text":"我的天赋到底是洞察、秩序还是谋略","score":"BAIZE"},{"key":"C","text":"我的宿命是不是一直在逼我长出反骨","score":"NEZHA"},{"key":"D","text":"我该怎样保护自己的能量和主位","score":"DONGHUANG"}]}],"results":{"SUN":{"typeName":"孙悟空 · 天命破局者","subtitle":"你的剧本不是安分守己，而是一路被压制、一路撞开新出口。","posterSubtext":"你最像孙悟空，不是因为爱闹，而是你生来就很难接受被安排。","maturityScore":91,"coreConclusion":"你的人生剧本带着很强的破局感。越是有人说不行、不能、别闹，你越容易被点燃。你讨厌不讲理的规矩，也讨厌别人用权威压住你的生命力。你的优势是行动快、恢复快、敢试错，很多人还在犹豫时，你已经撞出了第一条路。短板是容易先掀桌再想后果，赢下现场，却忘了给自己留一个长期位置。 你真正想要的不是被夸勇敢，而是不再被谁按头安排。你需要把反骨变成方法，把冲劲变成持续能力。真正的齐天大圣不是只会大闹天宫，而是闹完之后，还能知道自己要去哪里。","diagnosis":"你的人生剧本带着很强的破局感。越是有人说不行、不能、别闹，你越容易被点燃。你讨厌不讲理的规矩，也讨厌别人用权威压住你的生命力。你的优势是行动快、恢复快、敢试错，很多人还在犹豫时，你已经撞出了第一条路。短板是容易先掀桌再想后果，赢下现场，却忘了给自己留一个长期位置。","whatYouReallyWant":"你真正想要的不是被夸勇敢，而是不再被谁按头安排。你需要把反骨变成方法，把冲劲变成持续能力。真正的齐天大圣不是只会大闹天宫，而是闹完之后，还能知道自己要去哪里。","mechanism":{"title":"破局神力机制","content":"孙悟空型的人靠行动唤醒自己。你不是没有恐惧，而是一动起来恐惧就会变小。你适合开局难、变化快、需要创造出口的环境。但你要避免把所有限制都当成敌人，有些规则不是用来压你，而是让你的神力不被白白消耗。"},"professionalBasis":["你在被安排时会本能反抗，说明你的自我主权需求很强。","你更信行动而不是空想，低谷里最能救你的往往是先动起来。","你容易被不公和束缚点燃，这既是你的神力，也是你的修炼题。"],"coreTensions":["反骨强","行动快","不服输","容易上头","需要长期位置"],"suitableIf":["开荒破局","内容创作","创业副业","高变化环境","需要强生命力的项目"],"cautionIf":["为了反抗而反抗","冲太快不留证据","把提醒都听成打压","赢了场面输了长期"],"indices":[{"label":"神力指数","value":96},{"label":"宿命反抗","value":94},{"label":"变化天赋","value":92},{"label":"定心修炼","value":68}],"ifStay":"如果你只靠冲劲，你会一次次破局，也一次次因为消耗过大重新掉回原点。","ifChange":"如果你给自己的反骨配上计划和边界，你会从大闹一场的人，变成真正能开路的人。","notRecommended":["为了反抗而反抗","冲太快不留证据","把提醒都听成打压","赢了场面输了长期"],"plan90":[{"title":"第 1 周：确认你真正反抗的是什么","content":"把让你不服的事写下来，区分是规则不公，还是你不想被看见脆弱。"},{"title":"第 2-3 周：先做一个小破局","content":"选一个最小行动，不求一战成名，只求证明你能动起来。"},{"title":"第 4-6 周：把冲劲变成节奏","content":"给行动设定固定频率，不要只在愤怒时爆发。"},{"title":"第 7-12 周：建立长期位置","content":"把一次次破局沉淀成作品、能力或资源，不再只靠临场发挥。"}],"closing":"你的神话剧本不是被收服，而是学会驾驭自己的金箍棒。真正困住你的不是天庭，而是还没被训练好的力量。"},"ERLANG":{"typeName":"杨戬 · 天眼执法者","subtitle":"你的人生剧本是清醒、克制、精准出手，在混乱里看见真相。","posterSubtext":"你最像杨戬，外表冷静，内里有一只不容易被骗的天眼。","maturityScore":90,"coreConclusion":"你的神话人格带着强烈的洞察和秩序感。你不喜欢混乱，也不喜欢别人用情绪遮住事实。你常常能看出谁在演、谁在躲、谁在偷换概念。你的优势是判断准、执行稳、边界清楚，关键时刻能用很少的话切中问题。短板是有时太克制，别人看不见你的情绪，也误以为你不需要被理解。 你真正想要的是清楚、公正和可执行的秩序。你不是天生冷漠，只是太明白混乱会吞掉很多人。你的修炼不是变得更会看穿，而是允许自己在清醒之外，也被人靠近。","diagnosis":"你的神话人格带着强烈的洞察和秩序感。你不喜欢混乱，也不喜欢别人用情绪遮住事实。你常常能看出谁在演、谁在躲、谁在偷换概念。你的优势是判断准、执行稳、边界清楚，关键时刻能用很少的话切中问题。短板是有时太克制，别人看不见你的情绪，也误以为你不需要被理解。","whatYouReallyWant":"你真正想要的是清楚、公正和可执行的秩序。你不是天生冷漠，只是太明白混乱会吞掉很多人。你的修炼不是变得更会看穿，而是允许自己在清醒之外，也被人靠近。","mechanism":{"title":"天眼洞察机制","content":"杨戬型的人靠识别真相稳定局面。你适合负责判断、管理、策略、法务、风控、复盘和复杂沟通。你的天赋不是热闹，而是精准。但如果你一直站在审判者的位置，关系会变得很累。看穿之后，还要学会温和表达。"},"professionalBasis":["你倾向于先看规则和逻辑，而不是被现场情绪带走。","你对虚伪、甩锅、偷换概念非常敏感，说明你有强识别能力。","你处理冲突时更偏向取证和精准拆解，而不是直接爆炸。"],"coreTensions":["清醒","克制","判断准","不易亲近","情绪表达少"],"suitableIf":["管理统筹","策略分析","风控判断","复杂谈判","规则制定"],"cautionIf":["过度理性","把脆弱藏太深","看穿但不解释","让亲近的人觉得被审视"],"indices":[{"label":"天眼指数","value":96},{"label":"秩序指数","value":92},{"label":"神力指数","value":88},{"label":"柔软指数","value":64}],"ifStay":"如果你只靠清醒，你会越来越准，也越来越孤独。","ifChange":"如果你学会把判断说得有温度，你的天眼会从审判变成守护。","notRecommended":["过度理性","把脆弱藏太深","看穿但不解释","让亲近的人觉得被审视"],"plan90":[{"title":"第 1 周：把判断拆成证据","content":"不要只说感觉不对，写出你看到的三个事实。"},{"title":"第 2-3 周：练习温和指出问题","content":"把你错了换成我看到一个风险点。"},{"title":"第 4-6 周：允许自己被理解","content":"每周表达一次真实感受，不只表达结论。"},{"title":"第 7-12 周：建立你的秩序系统","content":"把你看穿问题的方法沉淀成流程、清单或模型。"}],"closing":"你的剧本不是成为最热闹的人，而是在众声喧哗里保留一只天眼。真正高级的清醒，是看穿之后仍然愿意守护。"},"NEZHA":{"typeName":"哪吒 · 逆命重生者","subtitle":"你的剧本自带反骨和重生感，越被定义，越要亲手改写自己。","posterSubtext":"你最像哪吒，不是因为脾气大，而是你太受不了被别人决定你是谁。","maturityScore":87,"coreConclusion":"你的人生剧本里有很强的逆命主题。你对羞辱、绑架、否定和牺牲非常敏感，一旦感觉自己被定义，就很难装作没事。你的优势是爆发力强、自我意识强、不会轻易把命运交给别人。短板是情绪一被点燃，就容易用过度反应保护自己，事后又陷入自责。 你真正想要的是自我主权。你不是不需要爱，而是不想再用乖、忍、牺牲换取被爱。你的修炼是把怒火变成边界，把反抗变成重生，而不是一次次把自己烧伤。","diagnosis":"你的人生剧本里有很强的逆命主题。你对羞辱、绑架、否定和牺牲非常敏感，一旦感觉自己被定义，就很难装作没事。你的优势是爆发力强、自我意识强、不会轻易把命运交给别人。短板是情绪一被点燃，就容易用过度反应保护自己，事后又陷入自责。","whatYouReallyWant":"你真正想要的是自我主权。你不是不需要爱，而是不想再用乖、忍、牺牲换取被爱。你的修炼是把怒火变成边界，把反抗变成重生，而不是一次次把自己烧伤。","mechanism":{"title":"逆命重生机制","content":"哪吒型的人靠强烈的自我意识完成重生。你适合做需要表达、突破、重塑身份的事。你的人生会不断经历旧身份碎裂、新身份长出来的过程。真正的成长不是把火灭掉，而是让火有方向。"},"professionalBasis":["你对关系绑架和被定义非常敏感，这是强自我边界的信号。","你在受委屈时很难继续表演温顺，说明你的情绪承载着真实需求。","你最需要的不是压住脾气，而是让脾气变成清楚的边界表达。"],"coreTensions":["反骨","自尊强","爆发力","容易自责","需要边界表达"],"suitableIf":["个人表达","内容创作","身份重塑","破除旧关系模式","需要勇气的转型"],"cautionIf":["用爆炸代替表达","把所有关心都听成控制","一边渴望爱一边推开爱","情绪过后过度自责"],"indices":[{"label":"逆命指数","value":97},{"label":"神力指数","value":90},{"label":"宿命张力","value":94},{"label":"稳定指数","value":63}],"ifStay":"如果你一直靠爆发保护自己，你会赢回尊严，也会消耗很多关系和能量。","ifChange":"如果你把反骨练成边界，你会从被命运刺激的人，变成亲手重塑命运的人。","notRecommended":["用爆炸代替表达","把所有关心都听成控制","一边渴望爱一边推开爱","情绪过后过度自责"],"plan90":[{"title":"第 1 周：识别你的怒火","content":"每次生气时，写下它保护的是尊严、自由、边界还是被爱需求。"},{"title":"第 2-3 周：练习不爆炸表达","content":"用我不接受这样代替你凭什么这样对我。"},{"title":"第 4-6 周：重塑一个身份标签","content":"给自己一个新的自我定义，不再只活在别人评价里。"},{"title":"第 7-12 周：建立稳定出口","content":"用作品、运动、行动计划承接你的火，不让它只在关系里燃烧。"}],"closing":"你的剧本不是被命运驯服，而是一次次重生。你不需要剪掉反骨，你需要给反骨装上方向。"},"CHANG":{"typeName":"嫦娥 · 月宫自守者","subtitle":"你的剧本带着疏离和清醒，你需要自己的月宫，才能保住真正的能量。","posterSubtext":"你最像嫦娥，不是因为冷，而是你的灵魂太需要一块不被打扰的地方。","maturityScore":84,"coreConclusion":"你的人生剧本有明显的月宫气质。你能进入人群，也能配合关系，但你内心始终需要一块安静、干净、属于自己的空间。你的优势是审美强、感受细、边界感强，能在独处里恢复能量。短板是容易撤退太快，不解释，不争取，最后让别人以为你真的不在乎。 你真正想要的是不被侵入的安宁。你不是不想连接，而是不想在连接里失去自己。你的修炼不是变得更合群，而是学会在保留距离的同时，让重要的人知道你仍然在场。","diagnosis":"你的人生剧本有明显的月宫气质。你能进入人群，也能配合关系，但你内心始终需要一块安静、干净、属于自己的空间。你的优势是审美强、感受细、边界感强，能在独处里恢复能量。短板是容易撤退太快，不解释，不争取，最后让别人以为你真的不在乎。","whatYouReallyWant":"你真正想要的是不被侵入的安宁。你不是不想连接，而是不想在连接里失去自己。你的修炼不是变得更合群，而是学会在保留距离的同时，让重要的人知道你仍然在场。","mechanism":{"title":"月宫能量机制","content":"嫦娥型的人靠独处修复，靠美感和精神世界维持自我。你适合创作、审美、研究、疗愈、私域表达和需要高敏感度的工作。你不是不适合人群，而是不适合长期被嘈杂消耗。你需要为自己设计能量边界。"},"professionalBasis":["你在冲突中更倾向撤退和拉开距离，说明你的自我保护方式偏安静。","你需要高质量独处，不然会很快被关系和环境消耗。","你最强的恢复力不是热闹，而是重新回到自己的节奏里。"],"coreTensions":["高敏感","需要独处","气质疏离","不爱解释","容易被误会冷漠"],"suitableIf":["审美创作","深度写作","疗愈内容","研究型工作","低噪音关系"],"cautionIf":["过快撤退","不表达需求","把孤独当成唯一安全感","重要关系里沉默太久"],"indices":[{"label":"月光指数","value":95},{"label":"孤高指数","value":92},{"label":"感受天赋","value":90},{"label":"入世指数","value":60}],"ifStay":"如果你只躲回月宫，你会保住自己，也可能错过真正温柔的连接。","ifChange":"如果你学会表达边界而不是直接消失，你会拥有既安静又不孤单的关系。","notRecommended":["过快撤退","不表达需求","把孤独当成唯一安全感","重要关系里沉默太久"],"plan90":[{"title":"第 1 周：设计能量边界","content":"明确哪些人、事、环境最消耗你，给它们设置时间上限。"},{"title":"第 2-3 周：练习低强度表达","content":"用我需要一点空间代替直接失联。"},{"title":"第 4-6 周：建立稳定独处仪式","content":"每天留一段固定时间给创作、阅读、散步或恢复。"},{"title":"第 7-12 周：筛选真正理解你的人","content":"不要用冷处理测试所有人，把解释留给值得的人。"}],"closing":"你的剧本不是逃离人间，而是在月宫里养回自己，再选择以什么姿态回到人间。"},"JIANG":{"typeName":"姜子牙 · 晚成执棋者","subtitle":"你的剧本不是早早爆红，而是越到后半场，越能等到自己的风口。","posterSubtext":"你最像姜子牙，厉害不在一时显眼，而在等得住，也看得远。","maturityScore":89,"coreConclusion":"你的人生剧本带着晚成气质。你不一定在前半场最亮眼，但你很适合长期积累、观察时机、等待真正适合自己的局。你的优势是耐心、战略感、能忍住不在错误时机出手。短板是有时等太久，把谨慎变成拖延，把未到时机变成不敢开始。 你真正想要的是一个值得你出手的局。你不是没有野心，只是不想把自己浪费在小场面里。你的修炼是分清等待和逃避，真正的执棋者不是一直等，而是在风来时敢下第一子。","diagnosis":"你的人生剧本带着晚成气质。你不一定在前半场最亮眼，但你很适合长期积累、观察时机、等待真正适合自己的局。你的优势是耐心、战略感、能忍住不在错误时机出手。短板是有时等太久，把谨慎变成拖延，把未到时机变成不敢开始。","whatYouReallyWant":"你真正想要的是一个值得你出手的局。你不是没有野心，只是不想把自己浪费在小场面里。你的修炼是分清等待和逃避，真正的执棋者不是一直等，而是在风来时敢下第一子。","mechanism":{"title":"晚成执棋机制","content":"姜子牙型的人靠长期判断和时机感起势。你适合战略规划、长期项目、内容体系、知识沉淀、资源整合和后发制人。你的人生节奏可能不是最快，但一旦进入自己的局，会越来越稳。"},"professionalBasis":["你更相信时机和长期积累，不容易被短期热闹带跑。","你能忍住不在不合适的局里消耗自己，这是很强的战略耐心。","你需要警惕把等待合理化，错过已经足够好的机会窗口。"],"coreTensions":["晚成","耐心","战略感","启动慢","需要下注"],"suitableIf":["长期项目","战略规划","知识产品","体系搭建","后发制人"],"cautionIf":["一直等完美时机","用谨慎掩盖害怕","前期存在感太低","不敢主动亮牌"],"indices":[{"label":"宿命指数","value":91},{"label":"时机指数","value":95},{"label":"天赋指数","value":86},{"label":"启动指数","value":62}],"ifStay":"如果你一直等，你会保留很多可能，也会失去很多现实入口。","ifChange":"如果你在六成把握时开始落子，你的后劲会比很多人更稳。","notRecommended":["一直等完美时机","用谨慎掩盖害怕","前期存在感太低","不敢主动亮牌"],"plan90":[{"title":"第 1 周：列出你等了很久的事","content":"判断它是真的时机未到，还是你在害怕开始。"},{"title":"第 2-3 周：选一个低风险落子","content":"不求大成，先让命运开始回应你的行动。"},{"title":"第 4-6 周：沉淀你的长期模型","content":"把经验整理成方法、内容或产品。"},{"title":"第 7-12 周：寻找你的周文王","content":"主动接近能识别你价值的人和平台。"}],"closing":"你的剧本不是输在前半场，而是后半场才真正开局。你要做的，是别在风来之前先放弃自己。"},"BAIZE":{"typeName":"白泽 · 万象知情者","subtitle":"你的剧本靠知识、洞察和规律感展开，你像一本会走路的神话图鉴。","posterSubtext":"你最像白泽，因为你总能知道别人没注意到的规律和暗线。","maturityScore":88,"coreConclusion":"你的人生剧本带着强信息感和认知优势。你喜欢弄懂系统、规律、冷知识和人心暗线，也常常能从杂乱信息里找到关键解释。你的优势是学习快、洞察广、能帮别人看清问题。短板是容易信息过载，知道很多，却不一定转化成行动和位置。 你真正想要的是用认知换取掌控感。你不是八卦，而是在寻找世界运行的说明书。你的修炼是把知道变成作品、产品、判断和影响力，而不是只停留在脑子里。","diagnosis":"你的人生剧本带着强信息感和认知优势。你喜欢弄懂系统、规律、冷知识和人心暗线，也常常能从杂乱信息里找到关键解释。你的优势是学习快、洞察广、能帮别人看清问题。短板是容易信息过载，知道很多，却不一定转化成行动和位置。","whatYouReallyWant":"你真正想要的是用认知换取掌控感。你不是八卦，而是在寻找世界运行的说明书。你的修炼是把知道变成作品、产品、判断和影响力，而不是只停留在脑子里。","mechanism":{"title":"万象洞察机制","content":"白泽型的人靠知识网络建立安全感。你适合研究、咨询、内容拆解、资料整理、趋势观察和复杂系统分析。你的神力是知道，但你的课题是转化。知识如果不能被表达、交付或应用，就会变成新的焦虑。"},"professionalBasis":["你对规律、体系、冷知识和隐藏信息非常敏感。","你能把别人的混乱讲清楚，这是很强的解释能力。","你需要从信息收集者升级为信息使用者。"],"coreTensions":["知识密度高","洞察广","解释力强","容易过载","行动转化弱"],"suitableIf":["知识内容","研究分析","咨询拆解","趋势观察","资料产品"],"cautionIf":["越学越焦虑","信息囤积","不敢输出","把复杂当成安全感"],"indices":[{"label":"天赋指数","value":94},{"label":"洞察指数","value":96},{"label":"神力指数","value":86},{"label":"行动指数","value":65}],"ifStay":"如果你一直只吸收信息，你会越来越懂，也越来越难开始。","ifChange":"如果你固定输出和交付，你的知识会变成别人愿意靠近你的理由。","notRecommended":["越学越焦虑","信息囤积","不敢输出","把复杂当成安全感"],"plan90":[{"title":"第 1 周：建立输出主题","content":"选一个你最懂也最愿意讲的领域。"},{"title":"第 2-3 周：每天输出一个判断","content":"不要等完整，先把一个小洞察说清楚。"},{"title":"第 4-6 周：做一份知识产品","content":"把你的资料整理成清单、报告、模板或系列笔记。"},{"title":"第 7-12 周：验证影响力","content":"看哪些内容能带来咨询、关注、收藏或真实反馈。"}],"closing":"你的剧本不是成为知道最多的人，而是让你的知道，真正改变自己和别人的处境。"},"DONGHUANG":{"typeName":"东皇太一 · 原初主位者","subtitle":"你的剧本带着强主位感，你不适合长期讨好，更适合站回自己的中心。","posterSubtext":"你最像东皇太一，因为你真正要修的，是不靠别人承认也能稳住主位。","maturityScore":93,"coreConclusion":"你的人生剧本带着强烈的主位意识。你不一定时时外放，但你很在意尊严、掌控感和核心位置。你讨厌被随意安排，也讨厌明明有能力却被边缘化。你的优势是气场强、目标感强、能镇住局面。短板是有时太在意主位，一旦被轻视，就容易进入防御或控制状态。 你真正想要的是不再向外求确认。你不是非要压过别人，而是不想被任何人拖离自己的中心。你的修炼是把主位感变成稳定内核，而不是时时证明自己重要。","diagnosis":"你的人生剧本带着强烈的主位意识。你不一定时时外放，但你很在意尊严、掌控感和核心位置。你讨厌被随意安排，也讨厌明明有能力却被边缘化。你的优势是气场强、目标感强、能镇住局面。短板是有时太在意主位，一旦被轻视，就容易进入防御或控制状态。","whatYouReallyWant":"你真正想要的是不再向外求确认。你不是非要压过别人，而是不想被任何人拖离自己的中心。你的修炼是把主位感变成稳定内核，而不是时时证明自己重要。","mechanism":{"title":"原初主位机制","content":"东皇太一型的人靠内在主权稳定全局。你适合做品牌、管理、资源整合、决策和高势能表达。你有压场能力，但要避免把所有关系都变成权力确认。真正的主位不是别人都围着你转，而是你不再因为别人是否围着你而失衡。"},"professionalBasis":["你对被边缘化和被轻视很敏感，说明你有强位置意识。","你更在意核心话语权，而不是表面热闹。","你需要从证明主位，升级到自然稳住主位。"],"coreTensions":["主位感强","气场强","目标感","怕被轻视","控制欲课题"],"suitableIf":["个人品牌","团队管理","决策位置","资源整合","高势能表达"],"cautionIf":["过度证明自己","把不同意见当挑战","关系里控制感太强","不愿示弱"],"indices":[{"label":"主位指数","value":97},{"label":"神力指数","value":93},{"label":"宿命指数","value":90},{"label":"柔软指数","value":58}],"ifStay":"如果你一直向外证明主位，你会很强，也会很累。","ifChange":"如果你把主位感放回内在，你会拥有更稳的气场和更少的消耗。","notRecommended":["过度证明自己","把不同意见当挑战","关系里控制感太强","不愿示弱"],"plan90":[{"title":"第 1 周：识别触发点","content":"记录哪些场景最容易让你觉得被轻视。"},{"title":"第 2-3 周：减少解释和证明","content":"先把注意力放回目标，不急着证明你重要。"},{"title":"第 4-6 周：建立稳定主场","content":"做一个你能长期掌控的作品、业务或内容阵地。"},{"title":"第 7-12 周：练习允许别人不同","content":"不把所有不同意见都理解成对你位置的挑战。"}],"closing":"你的剧本不是争一个位置，而是回到自己的中心。真正的东皇，不需要每天证明自己是太阳。"},"XUANNV":{"typeName":"九天玄女 · 隐秘授策者","subtitle":"你的剧本不是站在台前争光，而是在关键处给出破局之法。","posterSubtext":"你最像九天玄女，因为你真正厉害的地方，是让别人走出死局。","maturityScore":89,"coreConclusion":"你的人生剧本带着隐秘导师气质。你不一定抢最显眼的位置，却很擅长在关键时刻看见路径、给出方法、帮助别人破局。你的优势是战略感、步骤感、助人能力和背后布阵。短板是容易把自己的能量都用来成全别人，最后别人上岸了，你还留在原地。 你真正想要的是被看见的价值感。你不介意帮助别人，但不想永远只是幕后。你的修炼是给别人方法的同时，也把方法变成自己的资产。","diagnosis":"你的人生剧本带着隐秘导师气质。你不一定抢最显眼的位置，却很擅长在关键时刻看见路径、给出方法、帮助别人破局。你的优势是战略感、步骤感、助人能力和背后布阵。短板是容易把自己的能量都用来成全别人，最后别人上岸了，你还留在原地。","whatYouReallyWant":"你真正想要的是被看见的价值感。你不介意帮助别人，但不想永远只是幕后。你的修炼是给别人方法的同时，也把方法变成自己的资产。","mechanism":{"title":"授策破局机制","content":"九天玄女型的人靠路径设计和关键指引产生影响力。你适合做教练、咨询、课程、方法论、项目策略、幕后策划和成长陪跑。你的神力是把混乱拆成步骤，把困局变成路线。但你要记得，帮助别人不是消失自己。"},"professionalBasis":["你常常能看出别人下一步该怎么走，这是强路径设计能力。","你适合把复杂问题拆成可执行步骤。","你需要把助人经验沉淀成自己的方法论和产品。"],"coreTensions":["会授策","能拆路径","助人强","容易隐身","需要价值回收"],"suitableIf":["咨询陪跑","课程产品","项目策划","成长指导","方法论输出"],"cautionIf":["只帮别人不建设自己","价值免费流失","永远做幕后","不敢收费或署名"],"indices":[{"label":"授策指数","value":96},{"label":"天赋指数","value":91},{"label":"神力指数","value":88},{"label":"显化指数","value":62}],"ifStay":"如果你一直隐在幕后，你会帮助很多人，却很难让自己的价值被真正计算。","ifChange":"如果你把授策能力产品化，你会从幕后贵人，变成有自己主场的人。","notRecommended":["只帮别人不建设自己","价值免费流失","永远做幕后","不敢收费或署名"],"plan90":[{"title":"第 1 周：记录你的高频建议","content":"把你经常给别人的建议整理出来。"},{"title":"第 2-3 周：做成一套方法","content":"把零散经验变成步骤、模板或检查清单。"},{"title":"第 4-6 周：开始署名输出","content":"不要只私下帮人，公开表达你的方法论。"},{"title":"第 7-12 周：设计收费边界","content":"把深度陪跑、定制建议和免费分享区分开。"}],"closing":"你的剧本不是永远做别人命里的贵人。你也可以把那束光，照回自己身上。"}},"secondaryNotes":{"SUN":{"ERLANG":"你的主剧本是「孙悟空 · 天命破局者」，同时带有「杨戬 · 天眼执法者」的副倾向。主结果代表你最稳定的人生底色，副结果代表你在压力、关系或机会变化时会启动的第二套神力。","NEZHA":"你的主剧本是「孙悟空 · 天命破局者」，同时带有「哪吒 · 逆命重生者」的副倾向。主结果代表你最稳定的人生底色，副结果代表你在压力、关系或机会变化时会启动的第二套神力。","CHANG":"你的主剧本是「孙悟空 · 天命破局者」，同时带有「嫦娥 · 月宫自守者」的副倾向。主结果代表你最稳定的人生底色，副结果代表你在压力、关系或机会变化时会启动的第二套神力。","JIANG":"你的主剧本是「孙悟空 · 天命破局者」，同时带有「姜子牙 · 晚成执棋者」的副倾向。主结果代表你最稳定的人生底色，副结果代表你在压力、关系或机会变化时会启动的第二套神力。","BAIZE":"你的主剧本是「孙悟空 · 天命破局者」，同时带有「白泽 · 万象知情者」的副倾向。主结果代表你最稳定的人生底色，副结果代表你在压力、关系或机会变化时会启动的第二套神力。","DONGHUANG":"你的主剧本是「孙悟空 · 天命破局者」，同时带有「东皇太一 · 原初主位者」的副倾向。主结果代表你最稳定的人生底色，副结果代表你在压力、关系或机会变化时会启动的第二套神力。","XUANNV":"你的主剧本是「孙悟空 · 天命破局者」，同时带有「九天玄女 · 隐秘授策者」的副倾向。主结果代表你最稳定的人生底色，副结果代表你在压力、关系或机会变化时会启动的第二套神力。"},"ERLANG":{"SUN":"你的主剧本是「杨戬 · 天眼执法者」，同时带有「孙悟空 · 天命破局者」的副倾向。主结果代表你最稳定的人生底色，副结果代表你在压力、关系或机会变化时会启动的第二套神力。","NEZHA":"你的主剧本是「杨戬 · 天眼执法者」，同时带有「哪吒 · 逆命重生者」的副倾向。主结果代表你最稳定的人生底色，副结果代表你在压力、关系或机会变化时会启动的第二套神力。","CHANG":"你的主剧本是「杨戬 · 天眼执法者」，同时带有「嫦娥 · 月宫自守者」的副倾向。主结果代表你最稳定的人生底色，副结果代表你在压力、关系或机会变化时会启动的第二套神力。","JIANG":"你的主剧本是「杨戬 · 天眼执法者」，同时带有「姜子牙 · 晚成执棋者」的副倾向。主结果代表你最稳定的人生底色，副结果代表你在压力、关系或机会变化时会启动的第二套神力。","BAIZE":"你的主剧本是「杨戬 · 天眼执法者」，同时带有「白泽 · 万象知情者」的副倾向。主结果代表你最稳定的人生底色，副结果代表你在压力、关系或机会变化时会启动的第二套神力。","DONGHUANG":"你的主剧本是「杨戬 · 天眼执法者」，同时带有「东皇太一 · 原初主位者」的副倾向。主结果代表你最稳定的人生底色，副结果代表你在压力、关系或机会变化时会启动的第二套神力。","XUANNV":"你的主剧本是「杨戬 · 天眼执法者」，同时带有「九天玄女 · 隐秘授策者」的副倾向。主结果代表你最稳定的人生底色，副结果代表你在压力、关系或机会变化时会启动的第二套神力。"},"NEZHA":{"SUN":"你的主剧本是「哪吒 · 逆命重生者」，同时带有「孙悟空 · 天命破局者」的副倾向。主结果代表你最稳定的人生底色，副结果代表你在压力、关系或机会变化时会启动的第二套神力。","ERLANG":"你的主剧本是「哪吒 · 逆命重生者」，同时带有「杨戬 · 天眼执法者」的副倾向。主结果代表你最稳定的人生底色，副结果代表你在压力、关系或机会变化时会启动的第二套神力。","CHANG":"你的主剧本是「哪吒 · 逆命重生者」，同时带有「嫦娥 · 月宫自守者」的副倾向。主结果代表你最稳定的人生底色，副结果代表你在压力、关系或机会变化时会启动的第二套神力。","JIANG":"你的主剧本是「哪吒 · 逆命重生者」，同时带有「姜子牙 · 晚成执棋者」的副倾向。主结果代表你最稳定的人生底色，副结果代表你在压力、关系或机会变化时会启动的第二套神力。","BAIZE":"你的主剧本是「哪吒 · 逆命重生者」，同时带有「白泽 · 万象知情者」的副倾向。主结果代表你最稳定的人生底色，副结果代表你在压力、关系或机会变化时会启动的第二套神力。","DONGHUANG":"你的主剧本是「哪吒 · 逆命重生者」，同时带有「东皇太一 · 原初主位者」的副倾向。主结果代表你最稳定的人生底色，副结果代表你在压力、关系或机会变化时会启动的第二套神力。","XUANNV":"你的主剧本是「哪吒 · 逆命重生者」，同时带有「九天玄女 · 隐秘授策者」的副倾向。主结果代表你最稳定的人生底色，副结果代表你在压力、关系或机会变化时会启动的第二套神力。"},"CHANG":{"SUN":"你的主剧本是「嫦娥 · 月宫自守者」，同时带有「孙悟空 · 天命破局者」的副倾向。主结果代表你最稳定的人生底色，副结果代表你在压力、关系或机会变化时会启动的第二套神力。","ERLANG":"你的主剧本是「嫦娥 · 月宫自守者」，同时带有「杨戬 · 天眼执法者」的副倾向。主结果代表你最稳定的人生底色，副结果代表你在压力、关系或机会变化时会启动的第二套神力。","NEZHA":"你的主剧本是「嫦娥 · 月宫自守者」，同时带有「哪吒 · 逆命重生者」的副倾向。主结果代表你最稳定的人生底色，副结果代表你在压力、关系或机会变化时会启动的第二套神力。","JIANG":"你的主剧本是「嫦娥 · 月宫自守者」，同时带有「姜子牙 · 晚成执棋者」的副倾向。主结果代表你最稳定的人生底色，副结果代表你在压力、关系或机会变化时会启动的第二套神力。","BAIZE":"你的主剧本是「嫦娥 · 月宫自守者」，同时带有「白泽 · 万象知情者」的副倾向。主结果代表你最稳定的人生底色，副结果代表你在压力、关系或机会变化时会启动的第二套神力。","DONGHUANG":"你的主剧本是「嫦娥 · 月宫自守者」，同时带有「东皇太一 · 原初主位者」的副倾向。主结果代表你最稳定的人生底色，副结果代表你在压力、关系或机会变化时会启动的第二套神力。","XUANNV":"你的主剧本是「嫦娥 · 月宫自守者」，同时带有「九天玄女 · 隐秘授策者」的副倾向。主结果代表你最稳定的人生底色，副结果代表你在压力、关系或机会变化时会启动的第二套神力。"},"JIANG":{"SUN":"你的主剧本是「姜子牙 · 晚成执棋者」，同时带有「孙悟空 · 天命破局者」的副倾向。主结果代表你最稳定的人生底色，副结果代表你在压力、关系或机会变化时会启动的第二套神力。","ERLANG":"你的主剧本是「姜子牙 · 晚成执棋者」，同时带有「杨戬 · 天眼执法者」的副倾向。主结果代表你最稳定的人生底色，副结果代表你在压力、关系或机会变化时会启动的第二套神力。","NEZHA":"你的主剧本是「姜子牙 · 晚成执棋者」，同时带有「哪吒 · 逆命重生者」的副倾向。主结果代表你最稳定的人生底色，副结果代表你在压力、关系或机会变化时会启动的第二套神力。","CHANG":"你的主剧本是「姜子牙 · 晚成执棋者」，同时带有「嫦娥 · 月宫自守者」的副倾向。主结果代表你最稳定的人生底色，副结果代表你在压力、关系或机会变化时会启动的第二套神力。","BAIZE":"你的主剧本是「姜子牙 · 晚成执棋者」，同时带有「白泽 · 万象知情者」的副倾向。主结果代表你最稳定的人生底色，副结果代表你在压力、关系或机会变化时会启动的第二套神力。","DONGHUANG":"你的主剧本是「姜子牙 · 晚成执棋者」，同时带有「东皇太一 · 原初主位者」的副倾向。主结果代表你最稳定的人生底色，副结果代表你在压力、关系或机会变化时会启动的第二套神力。","XUANNV":"你的主剧本是「姜子牙 · 晚成执棋者」，同时带有「九天玄女 · 隐秘授策者」的副倾向。主结果代表你最稳定的人生底色，副结果代表你在压力、关系或机会变化时会启动的第二套神力。"},"BAIZE":{"SUN":"你的主剧本是「白泽 · 万象知情者」，同时带有「孙悟空 · 天命破局者」的副倾向。主结果代表你最稳定的人生底色，副结果代表你在压力、关系或机会变化时会启动的第二套神力。","ERLANG":"你的主剧本是「白泽 · 万象知情者」，同时带有「杨戬 · 天眼执法者」的副倾向。主结果代表你最稳定的人生底色，副结果代表你在压力、关系或机会变化时会启动的第二套神力。","NEZHA":"你的主剧本是「白泽 · 万象知情者」，同时带有「哪吒 · 逆命重生者」的副倾向。主结果代表你最稳定的人生底色，副结果代表你在压力、关系或机会变化时会启动的第二套神力。","CHANG":"你的主剧本是「白泽 · 万象知情者」，同时带有「嫦娥 · 月宫自守者」的副倾向。主结果代表你最稳定的人生底色，副结果代表你在压力、关系或机会变化时会启动的第二套神力。","JIANG":"你的主剧本是「白泽 · 万象知情者」，同时带有「姜子牙 · 晚成执棋者」的副倾向。主结果代表你最稳定的人生底色，副结果代表你在压力、关系或机会变化时会启动的第二套神力。","DONGHUANG":"你的主剧本是「白泽 · 万象知情者」，同时带有「东皇太一 · 原初主位者」的副倾向。主结果代表你最稳定的人生底色，副结果代表你在压力、关系或机会变化时会启动的第二套神力。","XUANNV":"你的主剧本是「白泽 · 万象知情者」，同时带有「九天玄女 · 隐秘授策者」的副倾向。主结果代表你最稳定的人生底色，副结果代表你在压力、关系或机会变化时会启动的第二套神力。"},"DONGHUANG":{"SUN":"你的主剧本是「东皇太一 · 原初主位者」，同时带有「孙悟空 · 天命破局者」的副倾向。主结果代表你最稳定的人生底色，副结果代表你在压力、关系或机会变化时会启动的第二套神力。","ERLANG":"你的主剧本是「东皇太一 · 原初主位者」，同时带有「杨戬 · 天眼执法者」的副倾向。主结果代表你最稳定的人生底色，副结果代表你在压力、关系或机会变化时会启动的第二套神力。","NEZHA":"你的主剧本是「东皇太一 · 原初主位者」，同时带有「哪吒 · 逆命重生者」的副倾向。主结果代表你最稳定的人生底色，副结果代表你在压力、关系或机会变化时会启动的第二套神力。","CHANG":"你的主剧本是「东皇太一 · 原初主位者」，同时带有「嫦娥 · 月宫自守者」的副倾向。主结果代表你最稳定的人生底色，副结果代表你在压力、关系或机会变化时会启动的第二套神力。","JIANG":"你的主剧本是「东皇太一 · 原初主位者」，同时带有「姜子牙 · 晚成执棋者」的副倾向。主结果代表你最稳定的人生底色，副结果代表你在压力、关系或机会变化时会启动的第二套神力。","BAIZE":"你的主剧本是「东皇太一 · 原初主位者」，同时带有「白泽 · 万象知情者」的副倾向。主结果代表你最稳定的人生底色，副结果代表你在压力、关系或机会变化时会启动的第二套神力。","XUANNV":"你的主剧本是「东皇太一 · 原初主位者」，同时带有「九天玄女 · 隐秘授策者」的副倾向。主结果代表你最稳定的人生底色，副结果代表你在压力、关系或机会变化时会启动的第二套神力。"},"XUANNV":{"SUN":"你的主剧本是「九天玄女 · 隐秘授策者」，同时带有「孙悟空 · 天命破局者」的副倾向。主结果代表你最稳定的人生底色，副结果代表你在压力、关系或机会变化时会启动的第二套神力。","ERLANG":"你的主剧本是「九天玄女 · 隐秘授策者」，同时带有「杨戬 · 天眼执法者」的副倾向。主结果代表你最稳定的人生底色，副结果代表你在压力、关系或机会变化时会启动的第二套神力。","NEZHA":"你的主剧本是「九天玄女 · 隐秘授策者」，同时带有「哪吒 · 逆命重生者」的副倾向。主结果代表你最稳定的人生底色，副结果代表你在压力、关系或机会变化时会启动的第二套神力。","CHANG":"你的主剧本是「九天玄女 · 隐秘授策者」，同时带有「嫦娥 · 月宫自守者」的副倾向。主结果代表你最稳定的人生底色，副结果代表你在压力、关系或机会变化时会启动的第二套神力。","JIANG":"你的主剧本是「九天玄女 · 隐秘授策者」，同时带有「姜子牙 · 晚成执棋者」的副倾向。主结果代表你最稳定的人生底色，副结果代表你在压力、关系或机会变化时会启动的第二套神力。","BAIZE":"你的主剧本是「九天玄女 · 隐秘授策者」，同时带有「白泽 · 万象知情者」的副倾向。主结果代表你最稳定的人生底色，副结果代表你在压力、关系或机会变化时会启动的第二套神力。","DONGHUANG":"你的主剧本是「九天玄女 · 隐秘授策者」，同时带有「东皇太一 · 原初主位者」的副倾向。主结果代表你最稳定的人生底色，副结果代表你在压力、关系或机会变化时会启动的第二套神力。"}},"shareTemplate":["我测出来是：{{typeName}}","{{posterSubtext}}","{{secondaryLine}}","","你的人生剧本最像哪位神话人物？32题神话人格测试"]};</script>
+    <script>
+(function () {
+  const app = document.getElementById("app");
+  const configPaths = ["./configs/site-config.json", "./configs/career-change.json"];
+
+  const state = {
+    config: null,
+    answers: {},
+    currentIndex: 0,
+    selected: null,
+    locked: false,
+    loadingStep: 0,
+    route: "home",
+    resultData: null,
+  };
+
+  const defaultLoadingMessages = [
+    "正在读取你的选择倾向...",
+    "正在识别隐藏动机...",
+    "正在计算结果分布...",
+    "正在生成专属报告...",
+    "分析完成。",
+  ];
+
+  init();
+
+  async function init() {
+    try {
+      state.config = await fetchConfig();
+      applyDocumentMeta(state.config);
+
+      const saved = sessionStorage.getItem(getStorageKey());
+      if (saved) {
+        state.answers = JSON.parse(saved);
+      }
+
+      routeFromHash();
+      window.addEventListener("hashchange", routeFromHash);
+    } catch (error) {
+      app.innerHTML = `
+        <div class="error">
+          <div>
+            <h1>测试加载失败</h1>
+            <p>请确认你是通过网页链接打开页面，而不是直接双击 HTML 文件。</p>
+          </div>
+        </div>
+      `;
+      console.error(error);
+    }
+  }
+
+  async function fetchConfig() {
+    if (window.__QUIZ_CONFIG__) return window.__QUIZ_CONFIG__;
+    let lastError;
+    for (const path of configPaths) {
+      try {
+        const response = await fetch(path, { cache: "no-store" });
+        if (!response.ok) throw new Error(`${path} ${response.status}`);
+        return response.json();
+      } catch (error) {
+        lastError = error;
+      }
+    }
+    throw lastError;
+  }
+
+  function applyDocumentMeta(cfg) {
+    const title = cfg.title || "趣味测试";
+    const description = cfg.metaDescription || cfg.subtitle || "完成测试，生成你的专属报告。";
+    document.title = title;
+    setMeta("name", "description", description);
+    setMeta("property", "og:title", title);
+    setMeta("property", "og:description", description);
+  }
+
+  function setMeta(attr, key, content) {
+    let node = document.querySelector(`meta[${attr}="${key}"]`);
+    if (!node) {
+      node = document.createElement("meta");
+      node.setAttribute(attr, key);
+      document.head.appendChild(node);
+    }
+    node.setAttribute("content", content);
+  }
+
+  function routeFromHash() {
+    const route = (location.hash || "#/").replace("#/", "") || "home";
+    renderRoute(route);
+  }
+
+  function navigate(route) {
+    const nextHash = `#/${route}`;
+    if (location.hash === nextHash) {
+      renderRoute(route);
+      return;
+    }
+    location.hash = nextHash;
+  }
+
+  function renderRoute(route) {
+    state.route = route;
+    if (route === "quiz") renderQuiz();
+    else if (route === "loading") startLoading();
+    else if (route === "result") renderResult();
+    else renderHome();
+  }
+
+  function renderShell(content, extraClass = "") {
+    app.innerHTML = `
+      <div class="shell">
+        <div class="top-rule"></div>
+        <section class="screen ${extraClass}">${content}</section>
+      </div>
+      <div id="toast" class="toast">已复制</div>
+    `;
+  }
+
+  function renderHome() {
+    const cfg = state.config;
+    renderShell(
+      `
+      <div class="home">
+        <div class="kicker"><span class="dot"></span><span>${text(cfg.kicker)}</span><span class="dot"></span></div>
+        <h1 class="hero-title">${text(cfg.title)}</h1>
+        <p class="hero-subtitle">${text(cfg.subtitle)}</p>
+        <div class="hairline"></div>
+        <div class="intro">
+          ${(cfg.intro || []).map((p, index) => `<p class="${index === cfg.intro.length - 1 ? "strong" : ""}">${text(p)}</p>`).join("")}
+        </div>
+        <div class="pill-grid">
+          ${(cfg.dimensions || []).map((item) => `<div class="pill">${text(item)}</div>`).join("")}
+        </div>
+        <button class="primary-btn" data-action="start">${text(cfg.startButton || "开始测试")}</button>
+        <p class="disclaimer">${text(cfg.disclaimer || "本测试为趣味内容，仅供娱乐参考。")}</p>
+      </div>
+      `,
+      "home"
+    );
+    const startButton = app.querySelector("[data-action='start']");
+    let started = false;
+    const startQuiz = () => {
+      if (started) return;
+      started = true;
+      state.answers = {};
+      state.currentIndex = 0;
+      sessionStorage.removeItem(getStorageKey());
+      navigate("quiz");
+    };
+    startButton.addEventListener("click", startQuiz);
+    startButton.addEventListener(
+      "touchend",
+      (event) => {
+        event.preventDefault();
+        startQuiz();
+      },
+      { passive: false }
+    );
+  }
+
+  function renderQuiz() {
+    const questions = state.config.questions || [];
+    const question = questions[state.currentIndex];
+    if (!question) {
+      renderHome();
+      return;
+    }
+
+    const progress = ((state.currentIndex + 1) / questions.length) * 100;
+
+    renderShell(
+      `
+      <div class="sticky-head">
+        <div class="quiz-meta">
+          <span>${String(state.currentIndex + 1).padStart(2, "0")} / ${questions.length}</span>
+          <span>${text(question.module)}</span>
+        </div>
+        <div class="progress-track"><div class="progress-bar" style="width:${progress}%"></div></div>
+      </div>
+      <div class="question-no">${String(state.currentIndex + 1).padStart(2, "0")}</div>
+      <h1 class="question-title">${text(question.text)}</h1>
+      <div class="options">
+        ${(question.options || [])
+          .map(
+            (option) => `
+            <button class="option" data-option="${text(option.key)}">
+              <span class="option-key">${text(option.key)}</span>
+              <span class="option-text">${text(option.text)}</span>
+            </button>
+          `
+          )
+          .join("")}
+      </div>
+      <p class="hint">${text(state.config.quizHint || "选择后自动进入下一题")}</p>
+      `,
+      "quiz-screen"
+    );
+
+    app.querySelectorAll("[data-option]").forEach((button) => {
+      button.addEventListener("click", () => selectOption(button.dataset.option));
+    });
+  }
+
+  function selectOption(key) {
+    if (state.locked) return;
+    state.locked = true;
+    state.selected = key;
+    const question = state.config.questions[state.currentIndex];
+    state.answers[question.id] = key;
+
+    app.querySelectorAll(".option").forEach((button) => {
+      const selected = button.dataset.option === key;
+      button.classList.toggle("selected", selected);
+      button.classList.toggle("dimmed", !selected);
+    });
+
+    window.setTimeout(() => {
+      if (state.currentIndex < state.config.questions.length - 1) {
+        state.currentIndex += 1;
+        state.locked = false;
+        state.selected = null;
+        renderQuiz();
+      } else {
+        sessionStorage.setItem(getStorageKey(), JSON.stringify(state.answers));
+        state.locked = false;
+        navigate("loading");
+      }
+    }, 420);
+  }
+
+  function startLoading() {
+    state.loadingStep = 0;
+    renderLoading("");
+    tickLoading();
+  }
+
+  function renderLoading(value) {
+    const loadingMessages = getLoadingMessages();
+    renderShell(
+      `
+      <div class="loading-card">
+        <div class="spinner"></div>
+        <div class="loading-text">${text(value)}<span class="cursor">|</span></div>
+        <div class="step-bars">
+          ${loadingMessages.map((_, index) => `<div class="step ${index < state.loadingStep ? "done" : ""}"><span></span></div>`).join("")}
+        </div>
+      </div>
+      `,
+      "loading-screen"
+    );
+  }
+
+  function tickLoading() {
+    if (state.route !== "loading") return;
+    const loadingMessages = getLoadingMessages();
+    if (state.loadingStep >= loadingMessages.length) {
+      window.setTimeout(() => navigate("result"), 700);
+      return;
+    }
+    const message = loadingMessages[state.loadingStep];
+    let chars = 0;
+    const interval = window.setInterval(() => {
+      chars += 1;
+      renderLoading(message.slice(0, chars));
+      if (chars >= message.length) {
+        window.clearInterval(interval);
+        window.setTimeout(() => {
+          state.loadingStep += 1;
+          tickLoading();
+        }, 520);
+      }
+    }, 35);
+  }
+
+  function renderResult() {
+    const saved = sessionStorage.getItem(getStorageKey());
+    if (saved) state.answers = JSON.parse(saved);
+    if (Object.keys(state.answers).length < state.config.questions.length) {
+      renderHome();
+      return;
+    }
+
+    const scored = scoreAnswers(state.answers);
+    const primary = state.config.results[scored.primary];
+    const secondary = scored.secondary ? state.config.secondaryNotes?.[scored.primary]?.[scored.secondary] : null;
+    const stage = getStage(primary.maturityScore);
+    const shareText = buildShareText(primary, secondary);
+    const compareLabels = state.config.compareLabels || ["如果继续原路", "如果换一种做法"];
+    state.resultData = { scored, primary, secondary, stage, shareText };
+
+    renderShell(
+      `
+      <article class="report">
+        <div class="kicker"><span class="dot"></span><span>${text(state.config.resultKicker || "Result Report")}</span><span class="dot"></span></div>
+        <h1 class="result-type">${text(primary.typeName)}</h1>
+        <p class="result-subtitle">${text(primary.subtitle)}</p>
+        <div class="stamp-row">
+          <div class="stamp"><strong>${text(primary.maturityScore)}</strong><span>${text(state.config.scoreLabel || "决策成熟度")}</span></div>
+          <div class="stamp"><strong>${text(stage)}</strong><span>${text(state.config.stageLabel || "当前行动阶段")}</span></div>
+        </div>
+
+        <section class="section">
+          <h2>你的答案分布</h2>
+          <div class="meters">
+            ${Object.entries(scored.counts)
+              .map(([key, value]) => {
+                const typeData = state.config.results[key];
+                const width = (value / state.config.questions.length) * 100;
+                return `
+                  <div>
+                    <div class="meter-head"><span>${text(key)} · ${text(typeData.typeName)}</span><span>${value} 题</span></div>
+                    <div class="meter-track"><div class="meter-fill" style="width:${width}%"></div></div>
+                  </div>
+                `;
+              })
+              .join("")}
+          </div>
+        </section>
+
+        ${secondary ? `<section class="section"><h2>副倾向提示</h2><div class="secondary-note">${text(secondary)}</div></section>` : ""}
+
+        <section class="section">
+          <h2>诊断结论</h2>
+          <div class="quote">${text(primary.coreConclusion)}</div>
+        </section>
+
+        <section class="section">
+          <h2>为什么你会这样</h2>
+          <p>${text(primary.diagnosis)}</p>
+          <p>${text(primary.whatYouReallyWant)}</p>
+        </section>
+
+        <section class="section">
+          <h2>${text(primary.mechanism.title)}</h2>
+          <p>${text(primary.mechanism.content)}</p>
+        </section>
+
+        ${renderParagraphSection("专业解读框架", primary.professionalBasis)}
+        ${renderTagSection("你的关键矛盾", primary.coreTensions)}
+        ${renderCompareListSection("适合推进的条件", "需要谨慎的信号", primary.suitableIf, primary.cautionIf)}
+
+        <section class="section">
+          <h2>关键指数</h2>
+          <div class="meters">
+            ${(primary.indices || [])
+              .map(
+                (item) => `
+                <div>
+                  <div class="meter-head"><span>${text(item.label)}</span><span>${text(item.value)}</span></div>
+                  <div class="meter-track"><div class="meter-fill" style="width:${number(item.value)}%"></div></div>
+                </div>
+              `
+              )
+              .join("")}
+          </div>
+        </section>
+
+        <section class="section">
+          <h2>两条路径对比</h2>
+          <div class="compare">
+            <div class="compare-card"><h3>${text(compareLabels[0])}</h3><p>${text(primary.ifStay)}</p></div>
+            <div class="compare-card"><h3>${text(compareLabels[1])}</h3><p>${text(primary.ifChange)}</p></div>
+          </div>
+        </section>
+
+        <section class="section">
+          <h2>现在最不建议你做</h2>
+          <div class="tag-list">${(primary.notRecommended || []).map((item) => `<span class="tag">${text(item)}</span>`).join("")}</div>
+        </section>
+
+        <section class="section">
+          <h2>未来 90 天验证方案</h2>
+          <div class="plan">
+            ${(primary.plan90 || [])
+              .map(
+                (item, index) => `
+                <div class="plan-card">
+                  <h3>${index + 1}. ${text(item.title)}</h3>
+                  <p>${text(item.content)}</p>
+                </div>
+              `
+              )
+              .join("")}
+          </div>
+        </section>
+
+        <section class="section">
+          <h2>最后一句话</h2>
+          <p>${text(primary.closing)}</p>
+        </section>
+
+        <div class="actions">
+          <button class="primary-btn" data-action="copy">${text(state.config.copyButton || "复制我的结果")}</button>
+          <button class="ghost-btn" data-action="restart">${text(state.config.restartButton || "重新测试")}</button>
+        </div>
+      </article>
+      `,
+      "result-screen"
+    );
+
+    app.querySelector("[data-action='copy']").addEventListener("click", () => copyShareText(shareText));
+    app.querySelector("[data-action='restart']").addEventListener("click", () => {
+      sessionStorage.removeItem(getStorageKey());
+      state.answers = {};
+      state.currentIndex = 0;
+      navigate("home");
+    });
+  }
+
+  function renderParagraphSection(title, paragraphs) {
+    if (!Array.isArray(paragraphs) || !paragraphs.length) return "";
+    return `
+      <section class="section">
+        <h2>${text(title)}</h2>
+        ${paragraphs.map((item) => `<p>${text(item)}</p>`).join("")}
+      </section>
+    `;
+  }
+
+  function renderTagSection(title, items) {
+    if (!Array.isArray(items) || !items.length) return "";
+    return `
+      <section class="section">
+        <h2>${text(title)}</h2>
+        <div class="tag-list">${items.map((item) => `<span class="tag">${text(item)}</span>`).join("")}</div>
+      </section>
+    `;
+  }
+
+  function renderCompareListSection(leftTitle, rightTitle, leftItems, rightItems) {
+    const hasLeft = Array.isArray(leftItems) && leftItems.length;
+    const hasRight = Array.isArray(rightItems) && rightItems.length;
+    if (!hasLeft && !hasRight) return "";
+    return `
+      <section class="section">
+        <h2>适用边界</h2>
+        <div class="compare">
+          <div class="compare-card">
+            <h3>${text(leftTitle)}</h3>
+            ${(leftItems || []).map((item) => `<p>${text(item)}</p>`).join("")}
+          </div>
+          <div class="compare-card">
+            <h3>${text(rightTitle)}</h3>
+            ${(rightItems || []).map((item) => `<p>${text(item)}</p>`).join("")}
+          </div>
+        </div>
+      </section>
+    `;
+  }
+
+  function scoreAnswers(answers) {
+    const resultKeys = Object.keys(state.config.results || {});
+    const counts = Object.fromEntries(resultKeys.map((key) => [key, 0]));
+    (state.config.questions || []).forEach((question) => {
+      const answerKey = answers[question.id];
+      if (!answerKey) return;
+      const option = (question.options || []).find((item) => item.key === answerKey);
+      const scoreKey = option?.score || option?.result || answerKey;
+      if (counts[scoreKey] !== undefined) counts[scoreKey] += 1;
+    });
+    const sorted = Object.entries(counts).sort((a, b) => b[1] - a[1]);
+    const threshold = state.config.secondaryThreshold ?? 2;
+    const primary = sorted[0][0];
+    const secondary = sorted[1][1] > 0 && sorted[0][1] - sorted[1][1] <= threshold ? sorted[1][0] : null;
+    return { counts, primary, secondary };
+  }
+
+  function getStage(score) {
+    const labels = state.config.stageLabels || [
+      { max: 45, label: "观察期" },
+      { max: 65, label: "验证期" },
+      { max: 82, label: "规划期" },
+      { max: 100, label: "行动期" },
+    ];
+    const hit = labels.find((item) => score <= item.max);
+    return hit ? hit.label : labels[labels.length - 1].label;
+  }
+
+  function buildShareText(primary, secondary) {
+    const template = state.config.shareTemplate || [
+      "我测出了：{{typeName}}",
+      "{{posterSubtext}}",
+      "{{secondaryLine}}",
+      "",
+      "{{title}}",
+    ];
+    const values = {
+      title: state.config.title,
+      typeName: primary.typeName,
+      posterSubtext: primary.posterSubtext,
+      secondary: secondary || "",
+      secondaryLine: secondary ? `副倾向：${secondary}` : "",
+    };
+    return template
+      .map((line) => fillTemplate(line, values))
+      .filter((line, index, arr) => line || arr[index - 1])
+      .join("\n")
+      .trim();
+  }
+
+  async function copyShareText(value) {
+    try {
+      await navigator.clipboard.writeText(value);
+      showToast("结果文案已复制");
+    } catch (error) {
+      showToast("复制失败，可长按手动复制");
+    }
+  }
+
+  function showToast(value) {
+    const toast = document.getElementById("toast");
+    if (!toast) return;
+    toast.textContent = value;
+    toast.classList.add("show");
+    window.setTimeout(() => toast.classList.remove("show"), 1600);
+  }
+
+  function getLoadingMessages() {
+    return state.config.loadingMessages || defaultLoadingMessages;
+  }
+
+  function getStorageKey() {
+    return `xhsTestAnswers:${state.config.slug || "default"}`;
+  }
+
+  function fillTemplate(template, values) {
+    return String(template).replace(/\{\{(\w+)\}\}/g, (_, key) => values[key] || "");
+  }
+
+  function number(value) {
+    const parsed = Number(value);
+    if (Number.isNaN(parsed)) return 0;
+    return Math.max(0, Math.min(100, parsed));
+  }
+
+  function text(value) {
+    return String(value ?? "")
+      .replace(/&/g, "&amp;")
+      .replace(/</g, "&lt;")
+      .replace(/>/g, "&gt;")
+      .replace(/"/g, "&quot;");
+  }
+})();
+
+    </script>
+  </body>
+</html>
