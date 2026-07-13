@@ -1,0 +1,1130 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <meta name="description" content="完成 32 道历史君主适配测试，生成你的君主/主公适配、被重用方式、风险指数、适合位置和 90 天行动建议。" />
+    <meta property="og:title" content="你的性格，历史上最适合投靠哪位君主？" />
+    <meta property="og:description" content="完成 32 道历史君主适配测试，生成你的君主/主公适配、被重用方式、风险指数、适合位置和 90 天行动建议。" />
+    <title>你的性格，历史上最适合投靠哪位君主？</title>
+    <style>
+:root {
+  --bg: #fbfaf7;
+  --paper: #fffefd;
+  --ink: #20242a;
+  --muted: #65707d;
+  --line: #d9d4ca;
+  --line-strong: #b9afa0;
+  --accent: #9b4339;
+  --accent-soft: #f1dfd7;
+  --gold: #c0964d;
+  --sage: #66795f;
+  --blue: #526a86;
+  --shadow: 0 16px 36px rgba(60, 47, 38, 0.1);
+  --radius: 8px;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  min-height: 100%;
+  background:
+    linear-gradient(rgba(32, 36, 42, 0.035) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(32, 36, 42, 0.035) 1px, transparent 1px),
+    var(--bg);
+  background-size: 24px 24px;
+}
+
+body {
+  min-height: 100vh;
+  margin: 0;
+  color: var(--ink);
+  font-family:
+    "PingFang SC",
+    "Microsoft YaHei",
+    "Noto Sans SC",
+    system-ui,
+    -apple-system,
+    BlinkMacSystemFont,
+    sans-serif;
+  letter-spacing: 0;
+}
+
+button {
+  font: inherit;
+}
+
+.shell {
+  width: min(100%, 480px);
+  min-height: 100vh;
+  margin: 0 auto;
+  background: rgba(251, 250, 247, 0.88);
+}
+
+.top-rule {
+  height: 4px;
+  background: var(--accent);
+}
+
+.screen {
+  min-height: calc(100vh - 4px);
+  padding: 28px 22px 32px;
+}
+
+.home {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.kicker {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  color: var(--muted);
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  font-size: 11px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+.dot {
+  width: 7px;
+  height: 7px;
+  background: var(--accent);
+  border-radius: 50%;
+}
+
+.hero-title {
+  margin: 26px 0 14px;
+  color: var(--ink);
+  font-size: 30px;
+  line-height: 1.2;
+  text-align: center;
+  font-weight: 800;
+}
+
+.hero-subtitle {
+  margin: 0 auto 28px;
+  max-width: 340px;
+  color: var(--muted);
+  font-size: 15px;
+  line-height: 1.75;
+  text-align: center;
+}
+
+.hairline {
+  width: 64px;
+  height: 1px;
+  margin: 0 auto 30px;
+  background: var(--line-strong);
+}
+
+.intro {
+  margin: 0 auto;
+  max-width: 380px;
+}
+
+.intro p {
+  margin: 0 0 15px;
+  color: rgba(32, 36, 42, 0.82);
+  font-size: 15px;
+  line-height: 1.8;
+}
+
+.intro .strong {
+  color: var(--accent);
+  font-weight: 700;
+}
+
+.pill-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px;
+  margin: 28px 0;
+}
+
+.pill {
+  min-height: 42px;
+  display: grid;
+  place-items: center;
+  border: 1px solid var(--line);
+  color: var(--muted);
+  background: rgba(255, 255, 255, 0.44);
+  font-size: 13px;
+}
+
+.primary-btn,
+.ghost-btn,
+.copy-btn {
+  width: 100%;
+  min-height: 48px;
+  border: 1px solid var(--ink);
+  border-radius: 0;
+  cursor: pointer;
+  transition: transform 150ms ease, background 150ms ease, color 150ms ease, border-color 150ms ease;
+}
+
+.primary-btn {
+  background: var(--ink);
+  color: #fff;
+  font-weight: 700;
+}
+
+.ghost-btn,
+.copy-btn {
+  background: transparent;
+  color: var(--ink);
+}
+
+.primary-btn:active,
+.ghost-btn:active,
+.copy-btn:active,
+.option:active {
+  transform: translateY(1px);
+}
+
+.disclaimer {
+  margin: 18px auto 0;
+  max-width: 340px;
+  color: var(--muted);
+  font-size: 12px;
+  line-height: 1.65;
+  text-align: center;
+}
+
+.quiz-screen {
+  padding-top: 0;
+}
+
+.sticky-head {
+  position: sticky;
+  top: 0;
+  z-index: 5;
+  margin: 0 -22px 26px;
+  padding: 14px 22px 12px;
+  background: rgba(251, 250, 247, 0.95);
+  border-bottom: 1px solid var(--line);
+  backdrop-filter: blur(12px);
+}
+
+.quiz-meta {
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+  color: var(--muted);
+  font-size: 12px;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+}
+
+.progress-track {
+  height: 4px;
+  margin-top: 10px;
+  background: rgba(32, 36, 42, 0.09);
+}
+
+.progress-bar {
+  height: 100%;
+  background: var(--accent);
+  transition: width 260ms ease;
+}
+
+.question-no {
+  color: rgba(155, 67, 57, 0.18);
+  font-size: 48px;
+  line-height: 1;
+  font-weight: 800;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+}
+
+.question-title {
+  margin: 18px 0 24px;
+  font-size: 22px;
+  line-height: 1.5;
+  font-weight: 750;
+}
+
+.options {
+  display: grid;
+  gap: 12px;
+}
+
+.option {
+  min-height: 66px;
+  display: grid;
+  grid-template-columns: 30px 1fr;
+  gap: 12px;
+  align-items: start;
+  width: 100%;
+  padding: 15px;
+  border: 1px solid var(--line);
+  background: rgba(255, 255, 255, 0.68);
+  color: var(--ink);
+  text-align: left;
+  cursor: pointer;
+  transition: background 160ms ease, border-color 160ms ease, color 160ms ease, opacity 160ms ease;
+}
+
+.option-key {
+  display: grid;
+  place-items: center;
+  width: 28px;
+  height: 28px;
+  border: 1px solid var(--line-strong);
+  font-size: 13px;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+}
+
+.option-text {
+  padding-top: 2px;
+  font-size: 15px;
+  line-height: 1.55;
+}
+
+.option.selected {
+  border-color: var(--accent);
+  background: var(--accent);
+  color: #fff;
+}
+
+.option.selected .option-key {
+  border-color: rgba(255, 255, 255, 0.8);
+}
+
+.option.dimmed {
+  opacity: 0.42;
+}
+
+.hint {
+  margin: 18px 0 0;
+  color: var(--muted);
+  font-size: 12px;
+  text-align: center;
+}
+
+.loading-screen {
+  display: grid;
+  place-items: center;
+}
+
+.loading-card {
+  width: 100%;
+  max-width: 360px;
+  text-align: center;
+}
+
+.spinner {
+  width: 54px;
+  height: 54px;
+  margin: 0 auto 24px;
+  border: 2px solid var(--line);
+  border-top-color: var(--accent);
+  border-radius: 50%;
+  animation: spin 850ms linear infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.loading-text {
+  min-height: 54px;
+  color: var(--accent);
+  font-size: 17px;
+  line-height: 1.6;
+  font-weight: 700;
+}
+
+.step-bars {
+  display: grid;
+  gap: 8px;
+  margin-top: 28px;
+}
+
+.step {
+  height: 4px;
+  overflow: hidden;
+  background: rgba(32, 36, 42, 0.09);
+}
+
+.step span {
+  display: block;
+  height: 100%;
+  width: 0;
+  background: var(--accent);
+  transition: width 300ms ease;
+}
+
+.step.done span {
+  width: 100%;
+}
+
+.result-screen {
+  padding: 22px 18px 30px;
+}
+
+.report {
+  padding: 22px 16px 18px;
+  border: 1px solid var(--line);
+  background: var(--paper);
+  box-shadow: var(--shadow);
+}
+
+.result-type {
+  margin: 8px 0 8px;
+  color: var(--accent);
+  font-size: 30px;
+  line-height: 1.15;
+  font-weight: 850;
+  text-align: center;
+}
+
+.result-subtitle {
+  margin: 0 auto 20px;
+  color: var(--muted);
+  font-size: 15px;
+  line-height: 1.7;
+  text-align: center;
+}
+
+.stamp-row {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px;
+  margin: 18px 0 20px;
+}
+
+.stamp {
+  padding: 12px 10px;
+  border: 1px solid var(--line);
+  background: #fbfaf7;
+}
+
+.stamp strong {
+  display: block;
+  margin-bottom: 4px;
+  color: var(--ink);
+  font-size: 20px;
+}
+
+.stamp span {
+  color: var(--muted);
+  font-size: 12px;
+}
+
+.section {
+  padding: 20px 0;
+  border-top: 1px solid var(--line);
+}
+
+.section h2 {
+  margin: 0 0 12px;
+  font-size: 18px;
+  color: var(--ink);
+}
+
+.section p {
+  margin: 0 0 12px;
+  color: rgba(32, 36, 42, 0.82);
+  font-size: 15px;
+  line-height: 1.85;
+}
+
+.quote {
+  padding: 15px;
+  border-left: 3px solid var(--accent);
+  background: var(--accent-soft);
+  color: #5b2d27;
+  line-height: 1.8;
+  font-weight: 700;
+}
+
+.meters {
+  display: grid;
+  gap: 14px;
+}
+
+.meter-head {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 7px;
+  color: var(--muted);
+  font-size: 13px;
+}
+
+.meter-track {
+  height: 8px;
+  background: rgba(32, 36, 42, 0.08);
+}
+
+.meter-fill {
+  height: 100%;
+  background: var(--accent);
+}
+
+.compare {
+  display: grid;
+  gap: 10px;
+}
+
+.compare-card {
+  padding: 14px;
+  border: 1px solid var(--line);
+  background: #fbfaf7;
+}
+
+.compare-card h3,
+.plan-card h3 {
+  margin: 0 0 8px;
+  font-size: 15px;
+}
+
+.compare-card p,
+.plan-card p {
+  font-size: 14px;
+}
+
+.tag-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.tag {
+  padding: 7px 9px;
+  border: 1px solid var(--line);
+  background: #fbfaf7;
+  color: var(--muted);
+  font-size: 13px;
+}
+
+.plan {
+  display: grid;
+  gap: 10px;
+}
+
+.plan-card {
+  padding: 14px;
+  border: 1px solid var(--line);
+  background: #fbfaf7;
+}
+
+.secondary-note {
+  padding: 14px;
+  border: 1px dashed var(--line-strong);
+  background: rgba(192, 150, 77, 0.12);
+  line-height: 1.75;
+  font-size: 14px;
+}
+
+.actions {
+  display: grid;
+  gap: 10px;
+  margin-top: 18px;
+}
+
+.toast {
+  position: fixed;
+  left: 50%;
+  bottom: 22px;
+  z-index: 20;
+  transform: translateX(-50%);
+  padding: 10px 14px;
+  background: var(--ink);
+  color: #fff;
+  font-size: 13px;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 180ms ease;
+}
+
+.toast.show {
+  opacity: 1;
+}
+
+.error {
+  display: grid;
+  place-items: center;
+  min-height: 100vh;
+  padding: 24px;
+  text-align: center;
+}
+
+.error p {
+  color: var(--muted);
+  line-height: 1.7;
+}
+
+@media (min-width: 700px) {
+  body {
+    padding: 28px 0;
+  }
+
+  .shell {
+    min-height: calc(100vh - 56px);
+    border: 1px solid var(--line);
+    box-shadow: var(--shadow);
+  }
+
+  .screen {
+    min-height: calc(100vh - 60px);
+  }
+}
+
+    </style>
+  </head>
+  <body>
+    <main id="app" aria-live="polite"></main>
+    <script>window.__QUIZ_CONFIG__ = {"slug":"test-ruler-allegiance","topic":"你的性格，历史上最适合投靠哪位君主？","kicker":"32-Q Historical Ruler Allegiance Test","title":"你的性格，历史上最适合投靠哪位君主？","subtitle":"32 道权力场选择题，测出你的性格更适合投靠刘邦、曹操、李世民、武则天、朱元璋还是康熙。结果会拆解你的被重用方式、风险点、适合位置和 90 天改写建议。","metaDescription":"完成 32 道历史君主适配测试，生成你的君主/主公适配、被重用方式、风险指数、适合位置和 90 天行动建议。","startButton":"开始测试","resultKicker":"Ruler Allegiance Report","quizHint":"凭第一反应选择，不要按你喜欢哪个历史人物来选。","copyButton":"复制我的结果","restartButton":"重新测试","scoreLabel":"适配清晰度","stageLabel":"当前臣位","indexTitle":"权力场指数","tensionTitle":"你的投靠风险","planTitle":"90天上位建议","blurSummary":"做完 32 道题，查看你最适合投靠的君主、被重用方式和权力场风险。","stageLabels":[{"max":55,"label":"旁观待诏"},{"max":72,"label":"入局试用"},{"max":86,"label":"核心近臣"},{"max":100,"label":"重臣成局"}],"compareLabels":["如果照旧性格入局","如果主动修炼上位策略"],"disclaimer":"本测试借用历史君主/主公作为趣味人格原型分析，仅供娱乐和自我观察参考，不代表历史评价、政治立场、职业建议、心理诊断或任何现实投靠建议。","secondaryThreshold":4,"dimensions":["刘邦","曹操","李世民","武则天","朱元璋","康熙"],"intro":["投靠谁，不只是看谁最强。","关键是你的性格能不能被他看见、能不能被他重用、能不能在他的权力场里活得久。","这 32 道题会从入局方式、能力底色、权力适应、风险边界、关系忠诚、成事风格、逆风反应和终局位置 8 个维度，匹配你的历史君主适配类型。"],"loadingMessages":["正在读取你的权力场第一反应...","正在匹配刘邦、曹操、李世民、武则天、朱元璋、康熙六类君主...","正在分析你的被重用方式和风险边界...","正在生成你的历史投靠报告...","分析完成。"],"questions":[{"id":1,"module":"入局方式","text":"如果你穿到乱世，第一件事会先做什么？","options":[{"key":"A","text":"先找能成事的人，判断谁值得跟"},{"key":"B","text":"先看哪里有机会，越乱越可能翻身"},{"key":"C","text":"先摸清制度和军政结构，不急着站队"},{"key":"D","text":"先隐藏锋芒，等别人低估你再反击"},{"key":"E","text":"先保命守规矩，别在新局里犯低级错"},{"key":"F","text":"先学习地理、人心和长期形势，慢慢布局"}]},{"id":2,"module":"入局方式","text":"新主公第一次见你，你最想让他看到：","options":[{"key":"A","text":"我懂人，也能把一群人撮合成局"},{"key":"B","text":"我敢出险招，关键时刻能打硬仗"},{"key":"C","text":"我有真本事，能把复杂问题讲清楚"},{"key":"D","text":"我不是花瓶，越被低估越能证明自己"},{"key":"E","text":"我可靠、听令、能把规矩执行到底"},{"key":"F","text":"我有耐心，能陪一个长期局慢慢长大"}]},{"id":3,"module":"入局方式","text":"你最不适合投靠哪种上位者？","options":[{"key":"A","text":"只看出身，不看真实能力的人"},{"key":"B","text":"怕冒险，什么机会都要拖到错过的人"},{"key":"C","text":"听不得不同意见，只喜欢被奉承的人"},{"key":"D","text":"天然不信任破格之人，喜欢把人按死在原位的人"},{"key":"E","text":"规矩模糊，赏罚全凭心情的人"},{"key":"F","text":"只要短期战果，不愿意做长期建设的人"}]},{"id":4,"module":"入局方式","text":"如果只能用一句话描述你的入局姿态，更像：","options":[{"key":"A","text":"先做人心局，人在，局就能活"},{"key":"B","text":"先抢窗口期，乱世不给慢人机会"},{"key":"C","text":"先立专业度，能解决问题才有位置"},{"key":"D","text":"先忍住被轻视，后面一击翻身"},{"key":"E","text":"先活下来，别让错误比功劳更显眼"},{"key":"F","text":"先做长线判断，别被一时风浪带走"}]},{"id":5,"module":"能力底色","text":"你最容易被君主重用的能力是：","options":[{"key":"A","text":"识人、联络、安抚、把人带到同一张桌上"},{"key":"B","text":"判断战机、快速执行、把危险变成机会"},{"key":"C","text":"谋划制度、提出方案、帮团队补结构"},{"key":"D","text":"在不公平环境里硬生生杀出证明"},{"key":"E","text":"落实铁令、清理混乱、把纪律立起来"},{"key":"F","text":"长期学习、治理细节、耐心做大盘"}]},{"id":6,"module":"能力底色","text":"别人最容易低估你的地方是：","options":[{"key":"A","text":"以为你好说话，其实你很会看人心"},{"key":"B","text":"以为你冲动，其实你很清楚机会窗口"},{"key":"C","text":"以为你温和，其实你的判断很硬"},{"key":"D","text":"以为你不够资格，其实你最擅长破格"},{"key":"E","text":"以为你只是执行，其实你最懂风险边界"},{"key":"F","text":"以为你慢，其实你在看十年后的局"}]},{"id":7,"module":"能力底色","text":"你最受不了团队里哪种人？","options":[{"key":"A","text":"只会拆台，不会把人聚起来的人"},{"key":"B","text":"机会来了还怕这怕那的人"},{"key":"C","text":"没有专业判断，只会站队表忠心的人"},{"key":"D","text":"用身份压人，不允许别人翻身的人"},{"key":"E","text":"不守规矩，还让别人替他兜底的人"},{"key":"F","text":"只顾眼前功劳，不顾后面治理的人"}]},{"id":8,"module":"能力底色","text":"你的优势如果用错，最容易变成：","options":[{"key":"A","text":"太讲情面，关键时刻下不了狠判断"},{"key":"B","text":"太敢赌，容易把自己也推到危险处"},{"key":"C","text":"太讲道理，忽略权力场里的情绪和猜忌"},{"key":"D","text":"太想证明，容易把所有轻视都当战场"},{"key":"E","text":"太谨慎，活得安全但不够显眼"},{"key":"F","text":"太长线，短期存在感不够强"}]},{"id":9,"module":"权力适应","text":"面对强势君主，你的本能反应是：","options":[{"key":"A","text":"先建立信任，再慢慢争取话语权"},{"key":"B","text":"用战果说话，别讲太多虚的"},{"key":"C","text":"用专业和事实让他不得不听"},{"key":"D","text":"不急着讨好，先证明我不可替代"},{"key":"E","text":"绝不越界，先守住安全距离"},{"key":"F","text":"看他是否有长期格局，再决定投入多少"}]},{"id":10,"module":"权力适应","text":"你最适合在君主身边扮演什么角色？","options":[{"key":"A","text":"能联络各方的开局合伙人"},{"key":"B","text":"乱世里能打能谋的急先锋"},{"key":"C","text":"敢谏敢谋的核心参谋"},{"key":"D","text":"从边缘被提拔起来的破格重臣"},{"key":"E","text":"铁面执行、守规矩的安全型臣子"},{"key":"F","text":"长期陪跑、稳住大盘的治理型臣子"}]},{"id":11,"module":"权力适应","text":"如果你要提反对意见，会怎么提？","options":[{"key":"A","text":"先顾全情面，再把利害说透"},{"key":"B","text":"直接讲结果：这仗这么打会输"},{"key":"C","text":"列证据、列方案、列替代路径"},{"key":"D","text":"等关键时刻拿出让人无法忽视的判断"},{"key":"E","text":"只在职责范围内提醒，不把自己推到台前"},{"key":"F","text":"从长期治理和后续成本慢慢说服"}]},{"id":12,"module":"权力适应","text":"你最怕遇到的职场/朝堂信号是：","options":[{"key":"A","text":"人心散了，表面一团和气，背后各算各的"},{"key":"B","text":"机会正在消失，但所有人还在开会犹豫"},{"key":"C","text":"专业意见被情绪和站队压过"},{"key":"D","text":"功劳被拿走，偏见还留在你身上"},{"key":"E","text":"规则突然变了，责任却让你背"},{"key":"F","text":"短期热闹很多，长期根基很虚"}]},{"id":13,"module":"风险边界","text":"你对“伴君如伴虎”的理解更接近：","options":[{"key":"A","text":"关键不是怕虎，而是先让虎把你当自己人"},{"key":"B","text":"越危险越要拿战果换安全感"},{"key":"C","text":"用价值和理性降低猜忌，但别太天真"},{"key":"D","text":"危险本来就在，不能因为怕就不争位置"},{"key":"E","text":"第一原则是别犯忌讳，别让刀口对准自己"},{"key":"F","text":"长期共事要看节奏，不能一开始押满"}]},{"id":14,"module":"风险边界","text":"你最容易在哪个地方踩雷？","options":[{"key":"A","text":"替别人兜太多情面，最后自己被牵连"},{"key":"B","text":"出手太猛，功劳大，风险也大"},{"key":"C","text":"话太真，低估了权力的自尊心"},{"key":"D","text":"太想翻身，容易让别人感到威胁"},{"key":"E","text":"太怕错，关键机会不敢主动争"},{"key":"F","text":"太慢热，前期没抢到足够信任"}]},{"id":15,"module":"风险边界","text":"如果君主开始猜忌你，你会先做什么？","options":[{"key":"A","text":"找中间人缓和，让关系重新有台阶"},{"key":"B","text":"交出一部分锋芒，用结果继续证明价值"},{"key":"C","text":"把账目、逻辑、证据都摆清楚"},{"key":"D","text":"减少表演欲，先把关键位置稳住"},{"key":"E","text":"立刻收边界，不多说、不越权、不碰敏感事"},{"key":"F","text":"降低短期存在感，转向长期可靠表现"}]},{"id":16,"module":"风险边界","text":"你认为最安全的上升方式是：","options":[{"key":"A","text":"靠信任和人情慢慢进入核心圈"},{"key":"B","text":"靠硬仗和关键胜利让别人不能不用你"},{"key":"C","text":"靠专业贡献成为制度里不可缺的人"},{"key":"D","text":"靠破格表现撕掉原来的标签"},{"key":"E","text":"靠稳定执行和谨慎边界慢慢被放心"},{"key":"F","text":"靠长期治理成果积累越来越深的信用"}]},{"id":17,"module":"关系忠诚","text":"你心里的忠诚更像：","options":[{"key":"A","text":"主公懂我，我就愿意一起扛事"},{"key":"B","text":"他给我舞台，我给他战果"},{"key":"C","text":"共同把事情做好，而不是无条件服从"},{"key":"D","text":"他敢破格用我，我就敢证明给所有人看"},{"key":"E","text":"守本分、守规矩、守底线"},{"key":"F","text":"长期相互成就，不靠一时热血"}]},{"id":18,"module":"关系忠诚","text":"你最希望君主怎么对待你？","options":[{"key":"A","text":"不只看出身，愿意把你当自己人"},{"key":"B","text":"给机会、给兵权、给你打仗的空间"},{"key":"C","text":"能听真话，也能容纳专业分歧"},{"key":"D","text":"敢打破偏见，把你放到真正的位置上"},{"key":"E","text":"赏罚分明，不让你卷进无意义斗争"},{"key":"F","text":"给时间、给资源，让你做长期建设"}]},{"id":19,"module":"关系忠诚","text":"你最不想成为哪种臣子？","options":[{"key":"A","text":"到处讨好，最后谁也不真正信任"},{"key":"B","text":"明明有能力，却一辈子没上过战场"},{"key":"C","text":"只会说漂亮话，不解决真实问题"},{"key":"D","text":"永远被身份和偏见卡在门外"},{"key":"E","text":"替上面背锅，却没有任何保护"},{"key":"F","text":"被短期任务耗尽，没机会留下长期成果"}]},{"id":20,"module":"关系忠诚","text":"你最愿意追随哪种承诺？","options":[{"key":"A","text":"一起从低处杀出来，富贵不相忘"},{"key":"B","text":"乱世给你战场，功劳按结果说话"},{"key":"C","text":"允许你讲真话，也承认你的专业价值"},{"key":"D","text":"不问旧标签，只看你能不能做到"},{"key":"E","text":"边界清楚，做对就赏，犯错就罚"},{"key":"F","text":"一起做一盘长期大棋，慢慢看成果"}]},{"id":21,"module":"成事风格","text":"你最擅长把事情做成的方式是：","options":[{"key":"A","text":"先让人愿意跟你，再一起解决问题"},{"key":"B","text":"先抓最关键窗口，速度比完美重要"},{"key":"C","text":"先拆结构，再给出可执行方案"},{"key":"D","text":"先拿出惊艳结果，让偏见失效"},{"key":"E","text":"先定规则和责任，再推进执行"},{"key":"F","text":"先搭长期系统，让事情越做越稳"}]},{"id":22,"module":"成事风格","text":"你的工作节奏更像：","options":[{"key":"A","text":"边走边聚人，局越做越大"},{"key":"B","text":"快判断、快试错、快拿结果"},{"key":"C","text":"先想透逻辑，再稳定推进"},{"key":"D","text":"前期忍，关键节点突然出手"},{"key":"E","text":"稳、准、守纪律，少犯错就是优势"},{"key":"F","text":"慢热但耐久，后劲比爆发更强"}]},{"id":23,"module":"成事风格","text":"你在团队里最能贡献什么？","options":[{"key":"A","text":"让不同的人愿意坐下来合作"},{"key":"B","text":"在危机里找到突破口"},{"key":"C","text":"把混乱变成方案和制度"},{"key":"D","text":"打破对你的低估，带来意外战力"},{"key":"E","text":"让流程、规矩和责任不再混乱"},{"key":"F","text":"把短期成果变成长期治理能力"}]},{"id":24,"module":"成事风格","text":"你最适合跟随的主公风格是：","options":[{"key":"A","text":"会用人，也知道人情的价值"},{"key":"B","text":"敢冒险，也敢给能人空间"},{"key":"C","text":"有格局，能听逆耳真话"},{"key":"D","text":"敢破格，愿意提拔被低估的人"},{"key":"E","text":"规矩严，但赏罚清楚"},{"key":"F","text":"有耐心，重视长期治理"}]},{"id":25,"module":"逆风反应","text":"你长期不被重用时，会更像：","options":[{"key":"A","text":"继续经营关系，等一个人愿意拉你进局"},{"key":"B","text":"找更乱的地方，那里反而有机会"},{"key":"C","text":"继续打磨专业，等能说话的时机"},{"key":"D","text":"把委屈变成证明自己的燃料"},{"key":"E","text":"先稳住位置，不让自己被踢出局"},{"key":"F","text":"保持学习和耐心，等长期机会成熟"}]},{"id":26,"module":"逆风反应","text":"被误解时，你最可能：","options":[{"key":"A","text":"先修复信任，不急着硬碰硬"},{"key":"B","text":"拿一次漂亮结果让人闭嘴"},{"key":"C","text":"讲清事实、逻辑和证据"},{"key":"D","text":"记住这次轻视，以后用位置回应"},{"key":"E","text":"少说话，先别让误解变成罪名"},{"key":"F","text":"不急着翻案，用长期表现慢慢洗清"}]},{"id":27,"module":"逆风反应","text":"如果上面突然换人，你第一反应是：","options":[{"key":"A","text":"重新判断人心和圈层，别站错情面"},{"key":"B","text":"看新局有没有新战场和新机会"},{"key":"C","text":"看制度和权力结构会怎么变"},{"key":"D","text":"看新主是否愿意破格用人"},{"key":"E","text":"先收敛动作，避免旧账被翻"},{"key":"F","text":"观察长期方向，不急着押注"}]},{"id":28,"module":"逆风反应","text":"你最强的抗压方式是：","options":[{"key":"A","text":"靠关系和信任重新找支点"},{"key":"B","text":"靠行动和胜利把局面打回来"},{"key":"C","text":"靠理性复盘找到出路"},{"key":"D","text":"靠不服输的劲撑过低谷"},{"key":"E","text":"靠谨慎和边界避开致命错误"},{"key":"F","text":"靠耐心和学习等待周期反转"}]},{"id":29,"module":"终局位置","text":"如果历史给你写一笔，你最想留下哪种位置？","options":[{"key":"A","text":"从低处一起起事，最后成了核心开国班底"},{"key":"B","text":"乱世里立下硬功，成为主公最敢用的刀"},{"key":"C","text":"靠真本事进入中枢，成为能影响决策的人"},{"key":"D","text":"从被低估到被破格重用，改写自己的命"},{"key":"E","text":"在高压体系里全身而退，还留下实际功劳"},{"key":"F","text":"陪一个长期王朝变稳，成为治理型功臣"}]},{"id":30,"module":"终局位置","text":"你最希望自己的上限来自：","options":[{"key":"A","text":"识人和聚人的能力"},{"key":"B","text":"敢打关键仗的魄力"},{"key":"C","text":"专业、判断和进谏能力"},{"key":"D","text":"被低估后反杀的证明欲"},{"key":"E","text":"纪律、边界和极强生存感"},{"key":"F","text":"长期学习和治理耐心"}]},{"id":31,"module":"终局位置","text":"做这个测试，你最想知道：","options":[{"key":"A","text":"我适不适合跟着一个能用人的草根老板翻身"},{"key":"B","text":"我适不适合投靠乱世型强主，靠战果上位"},{"key":"C","text":"我适不适合在明君身边靠专业被重用"},{"key":"D","text":"我适不适合被破格提拔，打破原本位置"},{"key":"E","text":"我能不能在高压权力场里活下来并被信任"},{"key":"F","text":"我适不适合陪长期型君主慢慢做大局"}]},{"id":32,"module":"终局位置","text":"凭第一反应，你更愿意把命押在哪种君主身边？","options":[{"key":"A","text":"刘邦型：会用人，重情义，适合一起从低处起势"},{"key":"B","text":"曹操型：乱世强主，给战场，敢用能人也敢试险招"},{"key":"C","text":"李世民型：能纳谏，重专业，适合真本事进入中枢"},{"key":"D","text":"武则天型：敢破格，能提拔被低估的人"},{"key":"E","text":"朱元璋型：高压立规，赏罚分明，极考验边界感"},{"key":"F","text":"康熙型：长期治理，重学习和耐心，适合陪跑大局"}]}],"results":{"A":{"typeName":"刘邦阵营 · 草莽开国合伙人","subtitle":"你最适合投靠会用人、懂人情、能从低处起势的君主。你不是标准型人才，但很适合在开局里被看见。","posterSubtext":"你适合跟刘邦，不是因为你爱冒险，而是你需要一个能看见真实人心和实际能力的主公。","maturityScore":88,"coreConclusion":"你的性格里有人情局、信任感和开局能力。你不一定最喜欢森严制度，但很懂人心、关系和关键时刻的情义。你适合跟随能识人、能容人、能让不同人各得其位的主公。刘邦阵营最能放大你的地方，是让你从非标准背景里被看见，而不是先被出身和履历卡死。 你真正想要的是被当成自己人，也希望自己的价值能在真实局面里被证明。你的课题是别只靠情面和信任吃饭，要把人情局沉淀成资源、组织和长期位置。","diagnosis":"你的性格里有人情局、信任感和开局能力。你不一定最喜欢森严制度，但很懂人心、关系和关键时刻的情义。你适合跟随能识人、能容人、能让不同人各得其位的主公。刘邦阵营最能放大你的地方，是让你从非标准背景里被看见，而不是先被出身和履历卡死。","whatYouReallyWant":"你真正想要的是被当成自己人，也希望自己的价值能在真实局面里被证明。你的课题是别只靠情面和信任吃饭，要把人情局沉淀成资源、组织和长期位置。","mechanism":{"title":"适配机制","content":"刘邦型主公看重能不能成事、能不能聚人、能不能在乱局里形成信任。你适合做开局合伙人、关系协调者、资源连接者和能扛事的核心班底。但你要避免过度替别人兜底，情义一旦没有边界，就会变成消耗。"},"professionalBasis":["你在选择里多次偏向信任、人心和关系修复，说明你适合在关系型权力场里发挥。","你对出身和标准履历没有强依赖，更需要一个重实际能力的上位者。","你的风险不是没人用你，而是太容易为关系承担额外成本。"],"coreTensions":["识人强","重情义","会聚人","容易兜底","边界需加强"],"suitableIf":["资源整合","关系协调","开局型项目","社群运营","个人IP合作","团队核心班底"],"cautionIf":["替人背锅","情面影响判断","边界不清","把信任当合同"],"indices":[{"label":"被重用指数","value":91},{"label":"人心指数","value":96},{"label":"谋略指数","value":82},{"label":"风险指数","value":68},{"label":"边界指数","value":61}],"ifStay":"如果你只靠情义做事，会被很多人喜欢，也会被很多人消耗。","ifChange":"当你把信任变成规则、资源和长期利益绑定，你会从好用的人变成离不开的人。","notRecommended":["替人背锅","情面影响判断","边界不清","把信任当合同"],"plan90":[{"title":"第1-2周：整理你的关系资产","content":"列出真正能互相成就的人，而不是只会消耗你的人。"},{"title":"第3-4周：建立合作边界","content":"把情义、职责和收益说清楚，不再只靠默契。"},{"title":"第2个月：做一个开局项目","content":"用你聚人和连接资源的能力，启动一个小合作。"},{"title":"第3个月：沉淀核心位置","content":"把一次次帮忙变成固定角色、固定价值和可见成果。"}],"closing":"你适合的不是冷冰冰的君主，而是能识人、能用人、能和你一起从低处杀出来的人。"},"B":{"typeName":"曹操阵营 · 乱世战功型能臣","subtitle":"你适合投靠敢用能人、敢冒风险、重结果和战机的强主。越是复杂变化，你越容易出头。","posterSubtext":"你适合跟曹操，因为你不怕局势乱，你怕的是明明有机会却没人敢动。","maturityScore":90,"coreConclusion":"你的性格里有强机会感、速度感和战果意识。你不喜欢长期空谈，也不喜欢所有人都在等一个完美时机。曹操型主公最能放大你的地方，是给你战场、给你试险招的空间，也允许你用结果证明价值。但这条路风险不低，功劳越显眼，越要懂得收锋芒。 你真正想要的是舞台和结果。你希望自己不是被放在旁边等通知的人，而是在关键窗口里能出手、能拿战果的人。你的课题是把敢赌变成可控判断，而不是被局势推着上头。","diagnosis":"你的性格里有强机会感、速度感和战果意识。你不喜欢长期空谈，也不喜欢所有人都在等一个完美时机。曹操型主公最能放大你的地方，是给你战场、给你试险招的空间，也允许你用结果证明价值。但这条路风险不低，功劳越显眼，越要懂得收锋芒。","whatYouReallyWant":"你真正想要的是舞台和结果。你希望自己不是被放在旁边等通知的人，而是在关键窗口里能出手、能拿战果的人。你的课题是把敢赌变成可控判断，而不是被局势推着上头。","mechanism":{"title":"适配机制","content":"曹操型主公看重速度、结果、胆识和实用价值。你适合做急先锋、增长负责人、危机处理者、竞争项目负责人。你能在别人犹豫时行动，但必须学会功成后收势，不要让自己的锋芒变成被猜忌的理由。"},"professionalBasis":["你偏向抓机会、打硬仗和快速见结果，适合变化中的强竞争场。","你能承受不确定性，但需要更清楚地计算后果。","你的风险是太显眼、太猛，容易引发防备。"],"coreTensions":["机会感强","行动快","敢冒险","锋芒重","需要收势"],"suitableIf":["增长项目","销售破局","危机处理","竞争业务","副业冲刺","短周期战役"],"cautionIf":["冒进","功高招忌","短线赌博","忽视长期信任"],"indices":[{"label":"被重用指数","value":92},{"label":"机会指数","value":97},{"label":"执行指数","value":94},{"label":"风险指数","value":85},{"label":"收势指数","value":57}],"ifStay":"如果你只追求快和猛，你会拿到战果，也会把自己推到更危险的位置。","ifChange":"当你学会在赢之后收锋芒，你会从一把好刀，变成真正能长期被倚重的人。","notRecommended":["冒进","功高招忌","短线赌博","忽视长期信任"],"plan90":[{"title":"第1-2周：确认主战场","content":"只选一个最值得打的机会，不要到处开战。"},{"title":"第3-4周：建立战果证据","content":"把你的成果变成数据、案例和可复用打法。"},{"title":"第2个月：补长期信任","content":"别只让人看到你能赢，也要让人相信你可控。"},{"title":"第3个月：练习收势","content":"每次出头后主动沉淀流程，把个人锋芒转成团队资产。"}],"closing":"你适合乱世强主，但你要记住：真正厉害的人，不只是能打，还知道什么时候收刀。"},"C":{"typeName":"李世民阵营 · 纳谏中枢型谋臣","subtitle":"你适合投靠能听真话、重专业、愿意共治的明君。你的价值来自判断、方案和建设能力。","posterSubtext":"你适合跟李世民，因为你不是只想被喜欢，你更希望自己的真本事被采纳。","maturityScore":92,"coreConclusion":"你的性格里有理性、专业、结构感和进谏意识。你不适合在只要奉承的权力场里消耗，反而适合投靠有格局、能听不同意见、愿意把人才放进中枢的君主。李世民阵营最能放大你的地方，是让你用专业判断影响决策，而不是只做执行工具。 你真正想要的是被尊重的专业位置。你希望自己能讲真话、给方案、影响方向，而不是每天猜上意。你的课题是把真话说得既有锋芒又有台阶。","diagnosis":"你的性格里有理性、专业、结构感和进谏意识。你不适合在只要奉承的权力场里消耗，反而适合投靠有格局、能听不同意见、愿意把人才放进中枢的君主。李世民阵营最能放大你的地方，是让你用专业判断影响决策，而不是只做执行工具。","whatYouReallyWant":"你真正想要的是被尊重的专业位置。你希望自己能讲真话、给方案、影响方向，而不是每天猜上意。你的课题是把真话说得既有锋芒又有台阶。","mechanism":{"title":"适配机制","content":"李世民型君主重视人才、制度、谏言和共治。你适合做核心参谋、战略规划、产品负责人、研究分析和管理中枢。但你要避免把正确说得太硬，权力场不是课堂，真话也需要入口。"},"professionalBasis":["你多次选择证据、制度、专业和长期方案，说明你适合中枢参谋位。","你需要一个能容纳不同意见的上位者，否则会被消耗得很严重。","你的风险是太讲道理，低估面子、情绪和权力自尊。"],"coreTensions":["专业强","敢讲真话","结构感强","不爱奉承","表达需圆融"],"suitableIf":["战略规划","咨询分析","产品管理","研究内容","组织建设","核心参谋"],"cautionIf":["话太直","低估情绪","不懂台阶","被当成刺头"],"indices":[{"label":"被重用指数","value":94},{"label":"专业指数","value":96},{"label":"进谏指数","value":91},{"label":"风险指数","value":62},{"label":"圆融指数","value":64}],"ifStay":"如果你只顾讲正确的话，别人可能承认你对，却不一定愿意采纳你。","ifChange":"当你学会给真话配上路径和台阶，你会成为真正能进入中枢的人。","notRecommended":["话太直","低估情绪","不懂台阶","被当成刺头"],"plan90":[{"title":"第1-2周：训练方案表达","content":"每个观点都配一个可执行方案，而不只是指出问题。"},{"title":"第3-4周：学习给台阶","content":"把反对意见包装成共同目标下的替代路径。"},{"title":"第2个月：建立专业资产","content":"把你的判断沉淀成报告、模型、方法论或案例库。"},{"title":"第3个月：进入关键讨论","content":"主动争取能影响决策的会议、项目或内容场景。"}],"closing":"你适合明君身边的中枢位置。你要修炼的不是少说真话，而是让真话更容易被用起来。"},"D":{"typeName":"武则天阵营 · 破格上位型狠人","subtitle":"你适合投靠敢破格、敢提拔被低估者的强势君主。你不是没能力，只是不适合被旧规则按住。","posterSubtext":"你适合跟武则天，因为你需要的不是怜悯，而是一个允许你破格翻身的权力场。","maturityScore":89,"coreConclusion":"你的性格里有强烈的证明欲、抗压感和破格意识。你最受不了被身份、性别、出身、履历或旧标签卡死。武则天型君主最能放大你的地方，是愿意打破原有秩序，把被低估的人放到真正的位置上。但这条路要求极强心脏，既要能被看见，也要能承受被攻击。 你真正想要的是改写标签。你希望别人不再用旧眼光定义你，而是看见你真正能做到什么。你的课题是别把每一次轻视都当成生死战，要学会选择最值得反击的战场。","diagnosis":"你的性格里有强烈的证明欲、抗压感和破格意识。你最受不了被身份、性别、出身、履历或旧标签卡死。武则天型君主最能放大你的地方，是愿意打破原有秩序，把被低估的人放到真正的位置上。但这条路要求极强心脏，既要能被看见，也要能承受被攻击。","whatYouReallyWant":"你真正想要的是改写标签。你希望别人不再用旧眼光定义你，而是看见你真正能做到什么。你的课题是别把每一次轻视都当成生死战，要学会选择最值得反击的战场。","mechanism":{"title":"适配机制","content":"武则天型君主重视破格、能力、忠诚和可用性。你适合做新势力、破局项目、被低估赛道里的翻身角色。你能在压力中爆发，但要避免过度证明自己，真正的上位不是每场都赢，而是最后站稳。"},"professionalBasis":["你对被低估和被旧标签限制非常敏感，适合破格型机会。","你能把委屈转化为行动力，但也容易被证明欲拖走。","你的风险是太锋利，让同场的人过早感到威胁。"],"coreTensions":["破格欲强","抗压强","证明欲强","容易过度反击","需要稳位"],"suitableIf":["逆袭赛道","个人品牌翻身","新项目破局","女性成长","高压竞争","非标准路径"],"cautionIf":["过度证明","锋芒过露","树敌太早","把偏见都当战场"],"indices":[{"label":"被重用指数","value":90},{"label":"破格指数","value":98},{"label":"抗压指数","value":94},{"label":"风险指数","value":80},{"label":"稳位指数","value":60}],"ifStay":"如果你一直靠愤怒驱动，你会很能冲，但也容易把自己烧得太快。","ifChange":"当你把证明欲转成策略和节奏，你会从被低估的人，变成真正被破格重用的人。","notRecommended":["过度证明","锋芒过露","树敌太早","把偏见都当战场"],"plan90":[{"title":"第1-2周：选对反击战场","content":"不是所有轻视都值得回应，只选能改变位置的战场。"},{"title":"第3-4周：做一个不可忽视的成果","content":"用作品、数据、订单或案例证明能力。"},{"title":"第2个月：降低无效对抗","content":"减少情绪化证明，把能量集中到关键位置。"},{"title":"第3个月：建立护城河","content":"让你的破格不只是爆发，而是可持续的优势。"}],"closing":"你适合破格型君主，但你要记住：真正的翻身，不是让所有人闭嘴，而是让他们不得不承认你的位置。"},"E":{"typeName":"朱元璋阵营 · 高压守边型实干臣","subtitle":"你适合投靠赏罚极清、规则极硬、高压但能给实干者位置的君主。这里能上升，也最考验边界。","posterSubtext":"你适合跟朱元璋，不是因为这条路轻松，而是你有高压体系里的生存感和执行力。","maturityScore":86,"coreConclusion":"你的性格里有谨慎、纪律、边界感和执行力。你不一定最喜欢冒险出风头，但很懂规则、责任和风险。朱元璋型君主最能放大你的地方，是赏罚分明、重视实际执行、能让守规矩的人获得信任。但这条路风险最高，不能乱说、不能越界、不能被牵连。 你真正想要的是确定感和安全位置。你希望上位者有清晰规则，不要让你每天猜。你的课题是别因为怕错而永远站在后面，要学会在安全边界内主动争功。","diagnosis":"你的性格里有谨慎、纪律、边界感和执行力。你不一定最喜欢冒险出风头，但很懂规则、责任和风险。朱元璋型君主最能放大你的地方，是赏罚分明、重视实际执行、能让守规矩的人获得信任。但这条路风险最高，不能乱说、不能越界、不能被牵连。","whatYouReallyWant":"你真正想要的是确定感和安全位置。你希望上位者有清晰规则，不要让你每天猜。你的课题是别因为怕错而永远站在后面，要学会在安全边界内主动争功。","mechanism":{"title":"适配机制","content":"朱元璋型君主看重纪律、忠诚、执行和责任清晰。你适合做流程治理、风控、财务、运营、执行负责人和稳定型骨干。但你必须极懂边界，少碰敏感事，少替人兜锅，功劳要留痕，风险要隔离。"},"professionalBasis":["你对规则、责任和边界敏感，适合高压清晰型体系。","你能执行，也能避免低级错误，这是你的安全优势。","你的风险是过度谨慎，导致有功但不显眼。"],"coreTensions":["纪律强","边界强","执行稳","风险敏感","主动性需增强"],"suitableIf":["运营管理","风控合规","财务流程","执行负责人","组织治理","稳定型岗位"],"cautionIf":["替人背锅","越权","口无遮拦","功劳不留痕","只守不争"],"indices":[{"label":"被重用指数","value":84},{"label":"执行指数","value":95},{"label":"边界指数","value":96},{"label":"风险指数","value":88},{"label":"争功指数","value":54}],"ifStay":"如果你只求不出错，你会很安全，但不一定能被真正看见。","ifChange":"当你在边界内主动留下成果，你会成为高压体系里少数可靠又有功的人。","notRecommended":["替人背锅","越权","口无遮拦","功劳不留痕","只守不争"],"plan90":[{"title":"第1-2周：建立留痕习惯","content":"所有关键工作都保留记录、确认和成果证明。"},{"title":"第3-4周：划清责任边界","content":"不替模糊责任背锅，提前确认职责范围。"},{"title":"第2个月：争取可见功劳","content":"选一个低风险但能展示执行力的项目。"},{"title":"第3个月：搭建安全护城河","content":"让流程、数据和规则替你挡风险。"}],"closing":"你适合高压型君主，但这条路的核心不是讨好，而是边界、证据和稳定功劳。"},"F":{"typeName":"康熙阵营 · 长期治理型重臣","subtitle":"你适合投靠耐心、重学习、看长期治理的君主。你不是短跑型臣子，而是越到后半场越值钱。","posterSubtext":"你适合跟康熙，因为你需要的不是一场短期豪赌，而是一盘能慢慢做大的长期局。","maturityScore":91,"coreConclusion":"你的性格里有耐心、学习力、长期主义和治理意识。你不一定最会抢短期风头，但能把复杂系统慢慢做稳。康熙型君主最能放大你的地方，是看重学习、耐性、治理细节和长期成果。你适合陪跑大局，也适合在后半程逐渐被信任。 你真正想要的是长期确定的成长空间。你希望上位者不是只看短期战果，而是愿意给时间、资源和耐心。你的课题是前期要主动制造可见度，否则容易被误认为慢或没存在感。","diagnosis":"你的性格里有耐心、学习力、长期主义和治理意识。你不一定最会抢短期风头，但能把复杂系统慢慢做稳。康熙型君主最能放大你的地方，是看重学习、耐性、治理细节和长期成果。你适合陪跑大局，也适合在后半程逐渐被信任。","whatYouReallyWant":"你真正想要的是长期确定的成长空间。你希望上位者不是只看短期战果，而是愿意给时间、资源和耐心。你的课题是前期要主动制造可见度，否则容易被误认为慢或没存在感。","mechanism":{"title":"适配机制","content":"康熙型君主重视长期治理、学习能力、稳定输出和系统建设。你适合做长期项目、组织管理、知识体系、教育培训、内容矩阵和治理型产品。你越稳定，越能积累信任；但前期要主动汇报成果，不能只埋头做事。"},"professionalBasis":["你多次选择长期、学习和治理视角，说明你适合慢变量项目。","你能在复杂系统里持续积累，不依赖一时爆发。","你的风险是短期存在感不足，被快节奏环境低估。"],"coreTensions":["耐心强","学习强","治理感强","慢热","需要可见度"],"suitableIf":["长期项目","教育培训","知识体系","内容矩阵","组织管理","治理型产品"],"cautionIf":["慢热被低估","不主动汇报","短期成果少","错过窗口期"],"indices":[{"label":"被重用指数","value":89},{"label":"长期指数","value":97},{"label":"学习指数","value":94},{"label":"风险指数","value":58},{"label":"可见度指数","value":60}],"ifStay":"如果你一直只做长期积累却不展示，别人可能到很晚才发现你的价值。","ifChange":"当你把长期成果阶段性呈现，你会成为越到后面越不可替代的人。","notRecommended":["慢热被低估","不主动汇报","短期成果少","错过窗口期"],"plan90":[{"title":"第1-2周：拆分长期目标","content":"把大目标拆成 3 个短期可见成果。"},{"title":"第3-4周：固定汇报节奏","content":"每周输出一次进展，让别人看到你在推进。"},{"title":"第2个月：建立系统资产","content":"把经验整理成流程、课程、内容库或管理机制。"},{"title":"第3个月：争取长期授权","content":"用稳定成果换更大的项目权限和信任。"}],"closing":"你适合长期型君主。你的真正优势不是一夜翻身，而是别人跑累之后，你还在持续变强。"}},"secondaryNotes":{"A":{"B":"你的主适配是「刘邦阵营 · 草莽开国合伙人」，同时带有「曹操阵营 · 乱世战功型能臣」的副倾向。主结果代表你最适合被哪种君主重用，副结果代表你在压力、机会或关系变化时会启动的第二套生存策略。","C":"你的主适配是「刘邦阵营 · 草莽开国合伙人」，同时带有「李世民阵营 · 纳谏中枢型谋臣」的副倾向。主结果代表你最适合被哪种君主重用，副结果代表你在压力、机会或关系变化时会启动的第二套生存策略。","D":"你的主适配是「刘邦阵营 · 草莽开国合伙人」，同时带有「武则天阵营 · 破格上位型狠人」的副倾向。主结果代表你最适合被哪种君主重用，副结果代表你在压力、机会或关系变化时会启动的第二套生存策略。","E":"你的主适配是「刘邦阵营 · 草莽开国合伙人」，同时带有「朱元璋阵营 · 高压守边型实干臣」的副倾向。主结果代表你最适合被哪种君主重用，副结果代表你在压力、机会或关系变化时会启动的第二套生存策略。","F":"你的主适配是「刘邦阵营 · 草莽开国合伙人」，同时带有「康熙阵营 · 长期治理型重臣」的副倾向。主结果代表你最适合被哪种君主重用，副结果代表你在压力、机会或关系变化时会启动的第二套生存策略。"},"B":{"A":"你的主适配是「曹操阵营 · 乱世战功型能臣」，同时带有「刘邦阵营 · 草莽开国合伙人」的副倾向。主结果代表你最适合被哪种君主重用，副结果代表你在压力、机会或关系变化时会启动的第二套生存策略。","C":"你的主适配是「曹操阵营 · 乱世战功型能臣」，同时带有「李世民阵营 · 纳谏中枢型谋臣」的副倾向。主结果代表你最适合被哪种君主重用，副结果代表你在压力、机会或关系变化时会启动的第二套生存策略。","D":"你的主适配是「曹操阵营 · 乱世战功型能臣」，同时带有「武则天阵营 · 破格上位型狠人」的副倾向。主结果代表你最适合被哪种君主重用，副结果代表你在压力、机会或关系变化时会启动的第二套生存策略。","E":"你的主适配是「曹操阵营 · 乱世战功型能臣」，同时带有「朱元璋阵营 · 高压守边型实干臣」的副倾向。主结果代表你最适合被哪种君主重用，副结果代表你在压力、机会或关系变化时会启动的第二套生存策略。","F":"你的主适配是「曹操阵营 · 乱世战功型能臣」，同时带有「康熙阵营 · 长期治理型重臣」的副倾向。主结果代表你最适合被哪种君主重用，副结果代表你在压力、机会或关系变化时会启动的第二套生存策略。"},"C":{"A":"你的主适配是「李世民阵营 · 纳谏中枢型谋臣」，同时带有「刘邦阵营 · 草莽开国合伙人」的副倾向。主结果代表你最适合被哪种君主重用，副结果代表你在压力、机会或关系变化时会启动的第二套生存策略。","B":"你的主适配是「李世民阵营 · 纳谏中枢型谋臣」，同时带有「曹操阵营 · 乱世战功型能臣」的副倾向。主结果代表你最适合被哪种君主重用，副结果代表你在压力、机会或关系变化时会启动的第二套生存策略。","D":"你的主适配是「李世民阵营 · 纳谏中枢型谋臣」，同时带有「武则天阵营 · 破格上位型狠人」的副倾向。主结果代表你最适合被哪种君主重用，副结果代表你在压力、机会或关系变化时会启动的第二套生存策略。","E":"你的主适配是「李世民阵营 · 纳谏中枢型谋臣」，同时带有「朱元璋阵营 · 高压守边型实干臣」的副倾向。主结果代表你最适合被哪种君主重用，副结果代表你在压力、机会或关系变化时会启动的第二套生存策略。","F":"你的主适配是「李世民阵营 · 纳谏中枢型谋臣」，同时带有「康熙阵营 · 长期治理型重臣」的副倾向。主结果代表你最适合被哪种君主重用，副结果代表你在压力、机会或关系变化时会启动的第二套生存策略。"},"D":{"A":"你的主适配是「武则天阵营 · 破格上位型狠人」，同时带有「刘邦阵营 · 草莽开国合伙人」的副倾向。主结果代表你最适合被哪种君主重用，副结果代表你在压力、机会或关系变化时会启动的第二套生存策略。","B":"你的主适配是「武则天阵营 · 破格上位型狠人」，同时带有「曹操阵营 · 乱世战功型能臣」的副倾向。主结果代表你最适合被哪种君主重用，副结果代表你在压力、机会或关系变化时会启动的第二套生存策略。","C":"你的主适配是「武则天阵营 · 破格上位型狠人」，同时带有「李世民阵营 · 纳谏中枢型谋臣」的副倾向。主结果代表你最适合被哪种君主重用，副结果代表你在压力、机会或关系变化时会启动的第二套生存策略。","E":"你的主适配是「武则天阵营 · 破格上位型狠人」，同时带有「朱元璋阵营 · 高压守边型实干臣」的副倾向。主结果代表你最适合被哪种君主重用，副结果代表你在压力、机会或关系变化时会启动的第二套生存策略。","F":"你的主适配是「武则天阵营 · 破格上位型狠人」，同时带有「康熙阵营 · 长期治理型重臣」的副倾向。主结果代表你最适合被哪种君主重用，副结果代表你在压力、机会或关系变化时会启动的第二套生存策略。"},"E":{"A":"你的主适配是「朱元璋阵营 · 高压守边型实干臣」，同时带有「刘邦阵营 · 草莽开国合伙人」的副倾向。主结果代表你最适合被哪种君主重用，副结果代表你在压力、机会或关系变化时会启动的第二套生存策略。","B":"你的主适配是「朱元璋阵营 · 高压守边型实干臣」，同时带有「曹操阵营 · 乱世战功型能臣」的副倾向。主结果代表你最适合被哪种君主重用，副结果代表你在压力、机会或关系变化时会启动的第二套生存策略。","C":"你的主适配是「朱元璋阵营 · 高压守边型实干臣」，同时带有「李世民阵营 · 纳谏中枢型谋臣」的副倾向。主结果代表你最适合被哪种君主重用，副结果代表你在压力、机会或关系变化时会启动的第二套生存策略。","D":"你的主适配是「朱元璋阵营 · 高压守边型实干臣」，同时带有「武则天阵营 · 破格上位型狠人」的副倾向。主结果代表你最适合被哪种君主重用，副结果代表你在压力、机会或关系变化时会启动的第二套生存策略。","F":"你的主适配是「朱元璋阵营 · 高压守边型实干臣」，同时带有「康熙阵营 · 长期治理型重臣」的副倾向。主结果代表你最适合被哪种君主重用，副结果代表你在压力、机会或关系变化时会启动的第二套生存策略。"},"F":{"A":"你的主适配是「康熙阵营 · 长期治理型重臣」，同时带有「刘邦阵营 · 草莽开国合伙人」的副倾向。主结果代表你最适合被哪种君主重用，副结果代表你在压力、机会或关系变化时会启动的第二套生存策略。","B":"你的主适配是「康熙阵营 · 长期治理型重臣」，同时带有「曹操阵营 · 乱世战功型能臣」的副倾向。主结果代表你最适合被哪种君主重用，副结果代表你在压力、机会或关系变化时会启动的第二套生存策略。","C":"你的主适配是「康熙阵营 · 长期治理型重臣」，同时带有「李世民阵营 · 纳谏中枢型谋臣」的副倾向。主结果代表你最适合被哪种君主重用，副结果代表你在压力、机会或关系变化时会启动的第二套生存策略。","D":"你的主适配是「康熙阵营 · 长期治理型重臣」，同时带有「武则天阵营 · 破格上位型狠人」的副倾向。主结果代表你最适合被哪种君主重用，副结果代表你在压力、机会或关系变化时会启动的第二套生存策略。","E":"你的主适配是「康熙阵营 · 长期治理型重臣」，同时带有「朱元璋阵营 · 高压守边型实干臣」的副倾向。主结果代表你最适合被哪种君主重用，副结果代表你在压力、机会或关系变化时会启动的第二套生存策略。"}},"shareTemplate":["我测出来了：{{typeName}}","{{posterSubtext}}","{{secondaryLine}}","","你的性格，历史上最适合投靠哪位君主？32题历史权力场测试。"]};</script>
+    <script>
+(function () {
+  const app = document.getElementById("app");
+  const configPaths = ["./configs/site-config.json", "./configs/career-change.json"];
+
+  const state = {
+    config: null,
+    answers: {},
+    currentIndex: 0,
+    selected: null,
+    locked: false,
+    loadingStep: 0,
+    route: "home",
+    resultData: null,
+  };
+
+  const defaultLoadingMessages = [
+    "正在读取你的选择倾向...",
+    "正在识别隐藏动机...",
+    "正在计算结果分布...",
+    "正在生成专属报告...",
+    "分析完成。",
+  ];
+
+  init();
+
+  async function init() {
+    try {
+      state.config = await fetchConfig();
+      applyDocumentMeta(state.config);
+
+      const saved = sessionStorage.getItem(getStorageKey());
+      if (saved) {
+        state.answers = JSON.parse(saved);
+      }
+
+      routeFromHash();
+      window.addEventListener("hashchange", routeFromHash);
+    } catch (error) {
+      app.innerHTML = `
+        <div class="error">
+          <div>
+            <h1>测试加载失败</h1>
+            <p>请确认你是通过网页链接打开页面，而不是直接双击 HTML 文件。</p>
+          </div>
+        </div>
+      `;
+      console.error(error);
+    }
+  }
+
+  async function fetchConfig() {
+    if (window.__QUIZ_CONFIG__) return window.__QUIZ_CONFIG__;
+    let lastError;
+    for (const path of configPaths) {
+      try {
+        const response = await fetch(path, { cache: "no-store" });
+        if (!response.ok) throw new Error(`${path} ${response.status}`);
+        return response.json();
+      } catch (error) {
+        lastError = error;
+      }
+    }
+    throw lastError;
+  }
+
+  function applyDocumentMeta(cfg) {
+    const title = cfg.title || "趣味测试";
+    const description = cfg.metaDescription || cfg.subtitle || "完成测试，生成你的专属报告。";
+    document.title = title;
+    setMeta("name", "description", description);
+    setMeta("property", "og:title", title);
+    setMeta("property", "og:description", description);
+  }
+
+  function setMeta(attr, key, content) {
+    let node = document.querySelector(`meta[${attr}="${key}"]`);
+    if (!node) {
+      node = document.createElement("meta");
+      node.setAttribute(attr, key);
+      document.head.appendChild(node);
+    }
+    node.setAttribute("content", content);
+  }
+
+  function routeFromHash() {
+    const route = (location.hash || "#/").replace("#/", "") || "home";
+    renderRoute(route);
+  }
+
+  function navigate(route) {
+    const nextHash = `#/${route}`;
+    if (location.hash === nextHash) {
+      renderRoute(route);
+      return;
+    }
+    location.hash = nextHash;
+  }
+
+  function renderRoute(route) {
+    state.route = route;
+    if (route === "quiz") renderQuiz();
+    else if (route === "loading") startLoading();
+    else if (route === "result") renderResult();
+    else renderHome();
+  }
+
+  function renderShell(content, extraClass = "") {
+    app.innerHTML = `
+      <div class="shell">
+        <div class="top-rule"></div>
+        <section class="screen ${extraClass}">${content}</section>
+      </div>
+      <div id="toast" class="toast">已复制</div>
+    `;
+  }
+
+  function renderHome() {
+    const cfg = state.config;
+    renderShell(
+      `
+      <div class="home">
+        <div class="kicker"><span class="dot"></span><span>${text(cfg.kicker)}</span><span class="dot"></span></div>
+        <h1 class="hero-title">${text(cfg.title)}</h1>
+        <p class="hero-subtitle">${text(cfg.subtitle)}</p>
+        <div class="hairline"></div>
+        <div class="intro">
+          ${(cfg.intro || []).map((p, index) => `<p class="${index === cfg.intro.length - 1 ? "strong" : ""}">${text(p)}</p>`).join("")}
+        </div>
+        <div class="pill-grid">
+          ${(cfg.dimensions || []).map((item) => `<div class="pill">${text(item)}</div>`).join("")}
+        </div>
+        <button class="primary-btn" data-action="start">${text(cfg.startButton || "开始测试")}</button>
+        <p class="disclaimer">${text(cfg.disclaimer || "本测试为趣味内容，仅供娱乐参考。")}</p>
+      </div>
+      `,
+      "home"
+    );
+    const startButton = app.querySelector("[data-action='start']");
+    let started = false;
+    const startQuiz = () => {
+      if (started) return;
+      started = true;
+      state.answers = {};
+      state.currentIndex = 0;
+      sessionStorage.removeItem(getStorageKey());
+      navigate("quiz");
+    };
+    startButton.addEventListener("click", startQuiz);
+    startButton.addEventListener(
+      "touchend",
+      (event) => {
+        event.preventDefault();
+        startQuiz();
+      },
+      { passive: false }
+    );
+  }
+
+  function renderQuiz() {
+    const questions = state.config.questions || [];
+    const question = questions[state.currentIndex];
+    if (!question) {
+      renderHome();
+      return;
+    }
+
+    const progress = ((state.currentIndex + 1) / questions.length) * 100;
+
+    renderShell(
+      `
+      <div class="sticky-head">
+        <div class="quiz-meta">
+          <span>${String(state.currentIndex + 1).padStart(2, "0")} / ${questions.length}</span>
+          <span>${text(question.module)}</span>
+        </div>
+        <div class="progress-track"><div class="progress-bar" style="width:${progress}%"></div></div>
+      </div>
+      <div class="question-no">${String(state.currentIndex + 1).padStart(2, "0")}</div>
+      <h1 class="question-title">${text(question.text)}</h1>
+      <div class="options">
+        ${(question.options || [])
+          .map(
+            (option) => `
+            <button class="option" data-option="${text(option.key)}">
+              <span class="option-key">${text(option.key)}</span>
+              <span class="option-text">${text(option.text)}</span>
+            </button>
+          `
+          )
+          .join("")}
+      </div>
+      <p class="hint">${text(state.config.quizHint || "选择后自动进入下一题")}</p>
+      `,
+      "quiz-screen"
+    );
+
+    app.querySelectorAll("[data-option]").forEach((button) => {
+      button.addEventListener("click", () => selectOption(button.dataset.option));
+    });
+  }
+
+  function selectOption(key) {
+    if (state.locked) return;
+    state.locked = true;
+    state.selected = key;
+    const question = state.config.questions[state.currentIndex];
+    state.answers[question.id] = key;
+
+    app.querySelectorAll(".option").forEach((button) => {
+      const selected = button.dataset.option === key;
+      button.classList.toggle("selected", selected);
+      button.classList.toggle("dimmed", !selected);
+    });
+
+    window.setTimeout(() => {
+      if (state.currentIndex < state.config.questions.length - 1) {
+        state.currentIndex += 1;
+        state.locked = false;
+        state.selected = null;
+        renderQuiz();
+      } else {
+        sessionStorage.setItem(getStorageKey(), JSON.stringify(state.answers));
+        state.locked = false;
+        navigate("loading");
+      }
+    }, 420);
+  }
+
+  function startLoading() {
+    state.loadingStep = 0;
+    renderLoading("");
+    tickLoading();
+  }
+
+  function renderLoading(value) {
+    const loadingMessages = getLoadingMessages();
+    renderShell(
+      `
+      <div class="loading-card">
+        <div class="spinner"></div>
+        <div class="loading-text">${text(value)}<span class="cursor">|</span></div>
+        <div class="step-bars">
+          ${loadingMessages.map((_, index) => `<div class="step ${index < state.loadingStep ? "done" : ""}"><span></span></div>`).join("")}
+        </div>
+      </div>
+      `,
+      "loading-screen"
+    );
+  }
+
+  function tickLoading() {
+    if (state.route !== "loading") return;
+    const loadingMessages = getLoadingMessages();
+    if (state.loadingStep >= loadingMessages.length) {
+      window.setTimeout(() => navigate("result"), 700);
+      return;
+    }
+    const message = loadingMessages[state.loadingStep];
+    let chars = 0;
+    const interval = window.setInterval(() => {
+      chars += 1;
+      renderLoading(message.slice(0, chars));
+      if (chars >= message.length) {
+        window.clearInterval(interval);
+        window.setTimeout(() => {
+          state.loadingStep += 1;
+          tickLoading();
+        }, 520);
+      }
+    }, 35);
+  }
+
+  function renderResult() {
+    const saved = sessionStorage.getItem(getStorageKey());
+    if (saved) state.answers = JSON.parse(saved);
+    if (Object.keys(state.answers).length < state.config.questions.length) {
+      renderHome();
+      return;
+    }
+
+    const scored = scoreAnswers(state.answers);
+    const primary = state.config.results[scored.primary];
+    const secondary = scored.secondary ? state.config.secondaryNotes?.[scored.primary]?.[scored.secondary] : null;
+    const stage = getStage(primary.maturityScore);
+    const shareText = buildShareText(primary, secondary);
+    const compareLabels = state.config.compareLabels || ["如果继续原路", "如果换一种做法"];
+    state.resultData = { scored, primary, secondary, stage, shareText };
+
+    renderShell(
+      `
+      <article class="report">
+        <div class="kicker"><span class="dot"></span><span>${text(state.config.resultKicker || "Result Report")}</span><span class="dot"></span></div>
+        <h1 class="result-type">${text(primary.typeName)}</h1>
+        <p class="result-subtitle">${text(primary.subtitle)}</p>
+        <div class="stamp-row">
+          <div class="stamp"><strong>${text(primary.maturityScore)}</strong><span>${text(state.config.scoreLabel || "决策成熟度")}</span></div>
+          <div class="stamp"><strong>${text(stage)}</strong><span>${text(state.config.stageLabel || "当前行动阶段")}</span></div>
+        </div>
+
+        <section class="section">
+          <h2>你的答案分布</h2>
+          <div class="meters">
+            ${Object.entries(scored.counts)
+              .map(([key, value]) => {
+                const typeData = state.config.results[key];
+                const width = (value / state.config.questions.length) * 100;
+                return `
+                  <div>
+                    <div class="meter-head"><span>${text(key)} · ${text(typeData.typeName)}</span><span>${value} 题</span></div>
+                    <div class="meter-track"><div class="meter-fill" style="width:${width}%"></div></div>
+                  </div>
+                `;
+              })
+              .join("")}
+          </div>
+        </section>
+
+        ${secondary ? `<section class="section"><h2>副倾向提示</h2><div class="secondary-note">${text(secondary)}</div></section>` : ""}
+
+        <section class="section">
+          <h2>诊断结论</h2>
+          <div class="quote">${text(primary.coreConclusion)}</div>
+        </section>
+
+        <section class="section">
+          <h2>为什么你会这样</h2>
+          <p>${text(primary.diagnosis)}</p>
+          <p>${text(primary.whatYouReallyWant)}</p>
+        </section>
+
+        <section class="section">
+          <h2>${text(primary.mechanism.title)}</h2>
+          <p>${text(primary.mechanism.content)}</p>
+        </section>
+
+        ${renderParagraphSection("专业解读框架", primary.professionalBasis)}
+        ${renderTagSection("你的关键矛盾", primary.coreTensions)}
+        ${renderCompareListSection("适合推进的条件", "需要谨慎的信号", primary.suitableIf, primary.cautionIf)}
+
+        <section class="section">
+          <h2>关键指数</h2>
+          <div class="meters">
+            ${(primary.indices || [])
+              .map(
+                (item) => `
+                <div>
+                  <div class="meter-head"><span>${text(item.label)}</span><span>${text(item.value)}</span></div>
+                  <div class="meter-track"><div class="meter-fill" style="width:${number(item.value)}%"></div></div>
+                </div>
+              `
+              )
+              .join("")}
+          </div>
+        </section>
+
+        <section class="section">
+          <h2>两条路径对比</h2>
+          <div class="compare">
+            <div class="compare-card"><h3>${text(compareLabels[0])}</h3><p>${text(primary.ifStay)}</p></div>
+            <div class="compare-card"><h3>${text(compareLabels[1])}</h3><p>${text(primary.ifChange)}</p></div>
+          </div>
+        </section>
+
+        <section class="section">
+          <h2>现在最不建议你做</h2>
+          <div class="tag-list">${(primary.notRecommended || []).map((item) => `<span class="tag">${text(item)}</span>`).join("")}</div>
+        </section>
+
+        <section class="section">
+          <h2>未来 90 天验证方案</h2>
+          <div class="plan">
+            ${(primary.plan90 || [])
+              .map(
+                (item, index) => `
+                <div class="plan-card">
+                  <h3>${index + 1}. ${text(item.title)}</h3>
+                  <p>${text(item.content)}</p>
+                </div>
+              `
+              )
+              .join("")}
+          </div>
+        </section>
+
+        <section class="section">
+          <h2>最后一句话</h2>
+          <p>${text(primary.closing)}</p>
+        </section>
+
+        <div class="actions">
+          <button class="primary-btn" data-action="copy">${text(state.config.copyButton || "复制我的结果")}</button>
+          <button class="ghost-btn" data-action="restart">${text(state.config.restartButton || "重新测试")}</button>
+        </div>
+      </article>
+      `,
+      "result-screen"
+    );
+
+    app.querySelector("[data-action='copy']").addEventListener("click", () => copyShareText(shareText));
+    app.querySelector("[data-action='restart']").addEventListener("click", () => {
+      sessionStorage.removeItem(getStorageKey());
+      state.answers = {};
+      state.currentIndex = 0;
+      navigate("home");
+    });
+  }
+
+  function renderParagraphSection(title, paragraphs) {
+    if (!Array.isArray(paragraphs) || !paragraphs.length) return "";
+    return `
+      <section class="section">
+        <h2>${text(title)}</h2>
+        ${paragraphs.map((item) => `<p>${text(item)}</p>`).join("")}
+      </section>
+    `;
+  }
+
+  function renderTagSection(title, items) {
+    if (!Array.isArray(items) || !items.length) return "";
+    return `
+      <section class="section">
+        <h2>${text(title)}</h2>
+        <div class="tag-list">${items.map((item) => `<span class="tag">${text(item)}</span>`).join("")}</div>
+      </section>
+    `;
+  }
+
+  function renderCompareListSection(leftTitle, rightTitle, leftItems, rightItems) {
+    const hasLeft = Array.isArray(leftItems) && leftItems.length;
+    const hasRight = Array.isArray(rightItems) && rightItems.length;
+    if (!hasLeft && !hasRight) return "";
+    return `
+      <section class="section">
+        <h2>适用边界</h2>
+        <div class="compare">
+          <div class="compare-card">
+            <h3>${text(leftTitle)}</h3>
+            ${(leftItems || []).map((item) => `<p>${text(item)}</p>`).join("")}
+          </div>
+          <div class="compare-card">
+            <h3>${text(rightTitle)}</h3>
+            ${(rightItems || []).map((item) => `<p>${text(item)}</p>`).join("")}
+          </div>
+        </div>
+      </section>
+    `;
+  }
+
+  function scoreAnswers(answers) {
+    const resultKeys = Object.keys(state.config.results || {});
+    const counts = Object.fromEntries(resultKeys.map((key) => [key, 0]));
+    (state.config.questions || []).forEach((question) => {
+      const answerKey = answers[question.id];
+      if (!answerKey) return;
+      const option = (question.options || []).find((item) => item.key === answerKey);
+      const scoreKey = option?.score || option?.result || answerKey;
+      if (counts[scoreKey] !== undefined) counts[scoreKey] += 1;
+    });
+    const sorted = Object.entries(counts).sort((a, b) => b[1] - a[1]);
+    const threshold = state.config.secondaryThreshold ?? 2;
+    const primary = sorted[0][0];
+    const secondary = sorted[1][1] > 0 && sorted[0][1] - sorted[1][1] <= threshold ? sorted[1][0] : null;
+    return { counts, primary, secondary };
+  }
+
+  function getStage(score) {
+    const labels = state.config.stageLabels || [
+      { max: 45, label: "观察期" },
+      { max: 65, label: "验证期" },
+      { max: 82, label: "规划期" },
+      { max: 100, label: "行动期" },
+    ];
+    const hit = labels.find((item) => score <= item.max);
+    return hit ? hit.label : labels[labels.length - 1].label;
+  }
+
+  function buildShareText(primary, secondary) {
+    const template = state.config.shareTemplate || [
+      "我测出了：{{typeName}}",
+      "{{posterSubtext}}",
+      "{{secondaryLine}}",
+      "",
+      "{{title}}",
+    ];
+    const values = {
+      title: state.config.title,
+      typeName: primary.typeName,
+      posterSubtext: primary.posterSubtext,
+      secondary: secondary || "",
+      secondaryLine: secondary ? `副倾向：${secondary}` : "",
+    };
+    return template
+      .map((line) => fillTemplate(line, values))
+      .filter((line, index, arr) => line || arr[index - 1])
+      .join("\n")
+      .trim();
+  }
+
+  async function copyShareText(value) {
+    try {
+      await navigator.clipboard.writeText(value);
+      showToast("结果文案已复制");
+    } catch (error) {
+      showToast("复制失败，可长按手动复制");
+    }
+  }
+
+  function showToast(value) {
+    const toast = document.getElementById("toast");
+    if (!toast) return;
+    toast.textContent = value;
+    toast.classList.add("show");
+    window.setTimeout(() => toast.classList.remove("show"), 1600);
+  }
+
+  function getLoadingMessages() {
+    return state.config.loadingMessages || defaultLoadingMessages;
+  }
+
+  function getStorageKey() {
+    return `xhsTestAnswers:${state.config.slug || "default"}`;
+  }
+
+  function fillTemplate(template, values) {
+    return String(template).replace(/\{\{(\w+)\}\}/g, (_, key) => values[key] || "");
+  }
+
+  function number(value) {
+    const parsed = Number(value);
+    if (Number.isNaN(parsed)) return 0;
+    return Math.max(0, Math.min(100, parsed));
+  }
+
+  function text(value) {
+    return String(value ?? "")
+      .replace(/&/g, "&amp;")
+      .replace(/</g, "&lt;")
+      .replace(/>/g, "&gt;")
+      .replace(/"/g, "&quot;");
+  }
+})();
+
+    </script>
+  </body>
+</html>
