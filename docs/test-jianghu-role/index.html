@@ -1,0 +1,1130 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <meta name="description" content="完成 32 道江湖角色测试，生成你的江湖生存方式、关系边界、合作优势、容易被利用的地方和 90 天行动建议。" />
+    <meta property="og:title" content="测完才发现，我原来是江湖里的这个角色" />
+    <meta property="og:description" content="完成 32 道江湖角色测试，生成你的江湖生存方式、关系边界、合作优势、容易被利用的地方和 90 天行动建议。" />
+    <title>测完才发现，我原来是江湖里的这个角色</title>
+    <style>
+:root {
+  --bg: #fbfaf7;
+  --paper: #fffefd;
+  --ink: #20242a;
+  --muted: #65707d;
+  --line: #d9d4ca;
+  --line-strong: #b9afa0;
+  --accent: #9b4339;
+  --accent-soft: #f1dfd7;
+  --gold: #c0964d;
+  --sage: #66795f;
+  --blue: #526a86;
+  --shadow: 0 16px 36px rgba(60, 47, 38, 0.1);
+  --radius: 8px;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  min-height: 100%;
+  background:
+    linear-gradient(rgba(32, 36, 42, 0.035) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(32, 36, 42, 0.035) 1px, transparent 1px),
+    var(--bg);
+  background-size: 24px 24px;
+}
+
+body {
+  min-height: 100vh;
+  margin: 0;
+  color: var(--ink);
+  font-family:
+    "PingFang SC",
+    "Microsoft YaHei",
+    "Noto Sans SC",
+    system-ui,
+    -apple-system,
+    BlinkMacSystemFont,
+    sans-serif;
+  letter-spacing: 0;
+}
+
+button {
+  font: inherit;
+}
+
+.shell {
+  width: min(100%, 480px);
+  min-height: 100vh;
+  margin: 0 auto;
+  background: rgba(251, 250, 247, 0.88);
+}
+
+.top-rule {
+  height: 4px;
+  background: var(--accent);
+}
+
+.screen {
+  min-height: calc(100vh - 4px);
+  padding: 28px 22px 32px;
+}
+
+.home {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.kicker {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  color: var(--muted);
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  font-size: 11px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+.dot {
+  width: 7px;
+  height: 7px;
+  background: var(--accent);
+  border-radius: 50%;
+}
+
+.hero-title {
+  margin: 26px 0 14px;
+  color: var(--ink);
+  font-size: 30px;
+  line-height: 1.2;
+  text-align: center;
+  font-weight: 800;
+}
+
+.hero-subtitle {
+  margin: 0 auto 28px;
+  max-width: 340px;
+  color: var(--muted);
+  font-size: 15px;
+  line-height: 1.75;
+  text-align: center;
+}
+
+.hairline {
+  width: 64px;
+  height: 1px;
+  margin: 0 auto 30px;
+  background: var(--line-strong);
+}
+
+.intro {
+  margin: 0 auto;
+  max-width: 380px;
+}
+
+.intro p {
+  margin: 0 0 15px;
+  color: rgba(32, 36, 42, 0.82);
+  font-size: 15px;
+  line-height: 1.8;
+}
+
+.intro .strong {
+  color: var(--accent);
+  font-weight: 700;
+}
+
+.pill-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px;
+  margin: 28px 0;
+}
+
+.pill {
+  min-height: 42px;
+  display: grid;
+  place-items: center;
+  border: 1px solid var(--line);
+  color: var(--muted);
+  background: rgba(255, 255, 255, 0.44);
+  font-size: 13px;
+}
+
+.primary-btn,
+.ghost-btn,
+.copy-btn {
+  width: 100%;
+  min-height: 48px;
+  border: 1px solid var(--ink);
+  border-radius: 0;
+  cursor: pointer;
+  transition: transform 150ms ease, background 150ms ease, color 150ms ease, border-color 150ms ease;
+}
+
+.primary-btn {
+  background: var(--ink);
+  color: #fff;
+  font-weight: 700;
+}
+
+.ghost-btn,
+.copy-btn {
+  background: transparent;
+  color: var(--ink);
+}
+
+.primary-btn:active,
+.ghost-btn:active,
+.copy-btn:active,
+.option:active {
+  transform: translateY(1px);
+}
+
+.disclaimer {
+  margin: 18px auto 0;
+  max-width: 340px;
+  color: var(--muted);
+  font-size: 12px;
+  line-height: 1.65;
+  text-align: center;
+}
+
+.quiz-screen {
+  padding-top: 0;
+}
+
+.sticky-head {
+  position: sticky;
+  top: 0;
+  z-index: 5;
+  margin: 0 -22px 26px;
+  padding: 14px 22px 12px;
+  background: rgba(251, 250, 247, 0.95);
+  border-bottom: 1px solid var(--line);
+  backdrop-filter: blur(12px);
+}
+
+.quiz-meta {
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+  color: var(--muted);
+  font-size: 12px;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+}
+
+.progress-track {
+  height: 4px;
+  margin-top: 10px;
+  background: rgba(32, 36, 42, 0.09);
+}
+
+.progress-bar {
+  height: 100%;
+  background: var(--accent);
+  transition: width 260ms ease;
+}
+
+.question-no {
+  color: rgba(155, 67, 57, 0.18);
+  font-size: 48px;
+  line-height: 1;
+  font-weight: 800;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+}
+
+.question-title {
+  margin: 18px 0 24px;
+  font-size: 22px;
+  line-height: 1.5;
+  font-weight: 750;
+}
+
+.options {
+  display: grid;
+  gap: 12px;
+}
+
+.option {
+  min-height: 66px;
+  display: grid;
+  grid-template-columns: 30px 1fr;
+  gap: 12px;
+  align-items: start;
+  width: 100%;
+  padding: 15px;
+  border: 1px solid var(--line);
+  background: rgba(255, 255, 255, 0.68);
+  color: var(--ink);
+  text-align: left;
+  cursor: pointer;
+  transition: background 160ms ease, border-color 160ms ease, color 160ms ease, opacity 160ms ease;
+}
+
+.option-key {
+  display: grid;
+  place-items: center;
+  width: 28px;
+  height: 28px;
+  border: 1px solid var(--line-strong);
+  font-size: 13px;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+}
+
+.option-text {
+  padding-top: 2px;
+  font-size: 15px;
+  line-height: 1.55;
+}
+
+.option.selected {
+  border-color: var(--accent);
+  background: var(--accent);
+  color: #fff;
+}
+
+.option.selected .option-key {
+  border-color: rgba(255, 255, 255, 0.8);
+}
+
+.option.dimmed {
+  opacity: 0.42;
+}
+
+.hint {
+  margin: 18px 0 0;
+  color: var(--muted);
+  font-size: 12px;
+  text-align: center;
+}
+
+.loading-screen {
+  display: grid;
+  place-items: center;
+}
+
+.loading-card {
+  width: 100%;
+  max-width: 360px;
+  text-align: center;
+}
+
+.spinner {
+  width: 54px;
+  height: 54px;
+  margin: 0 auto 24px;
+  border: 2px solid var(--line);
+  border-top-color: var(--accent);
+  border-radius: 50%;
+  animation: spin 850ms linear infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.loading-text {
+  min-height: 54px;
+  color: var(--accent);
+  font-size: 17px;
+  line-height: 1.6;
+  font-weight: 700;
+}
+
+.step-bars {
+  display: grid;
+  gap: 8px;
+  margin-top: 28px;
+}
+
+.step {
+  height: 4px;
+  overflow: hidden;
+  background: rgba(32, 36, 42, 0.09);
+}
+
+.step span {
+  display: block;
+  height: 100%;
+  width: 0;
+  background: var(--accent);
+  transition: width 300ms ease;
+}
+
+.step.done span {
+  width: 100%;
+}
+
+.result-screen {
+  padding: 22px 18px 30px;
+}
+
+.report {
+  padding: 22px 16px 18px;
+  border: 1px solid var(--line);
+  background: var(--paper);
+  box-shadow: var(--shadow);
+}
+
+.result-type {
+  margin: 8px 0 8px;
+  color: var(--accent);
+  font-size: 30px;
+  line-height: 1.15;
+  font-weight: 850;
+  text-align: center;
+}
+
+.result-subtitle {
+  margin: 0 auto 20px;
+  color: var(--muted);
+  font-size: 15px;
+  line-height: 1.7;
+  text-align: center;
+}
+
+.stamp-row {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px;
+  margin: 18px 0 20px;
+}
+
+.stamp {
+  padding: 12px 10px;
+  border: 1px solid var(--line);
+  background: #fbfaf7;
+}
+
+.stamp strong {
+  display: block;
+  margin-bottom: 4px;
+  color: var(--ink);
+  font-size: 20px;
+}
+
+.stamp span {
+  color: var(--muted);
+  font-size: 12px;
+}
+
+.section {
+  padding: 20px 0;
+  border-top: 1px solid var(--line);
+}
+
+.section h2 {
+  margin: 0 0 12px;
+  font-size: 18px;
+  color: var(--ink);
+}
+
+.section p {
+  margin: 0 0 12px;
+  color: rgba(32, 36, 42, 0.82);
+  font-size: 15px;
+  line-height: 1.85;
+}
+
+.quote {
+  padding: 15px;
+  border-left: 3px solid var(--accent);
+  background: var(--accent-soft);
+  color: #5b2d27;
+  line-height: 1.8;
+  font-weight: 700;
+}
+
+.meters {
+  display: grid;
+  gap: 14px;
+}
+
+.meter-head {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 7px;
+  color: var(--muted);
+  font-size: 13px;
+}
+
+.meter-track {
+  height: 8px;
+  background: rgba(32, 36, 42, 0.08);
+}
+
+.meter-fill {
+  height: 100%;
+  background: var(--accent);
+}
+
+.compare {
+  display: grid;
+  gap: 10px;
+}
+
+.compare-card {
+  padding: 14px;
+  border: 1px solid var(--line);
+  background: #fbfaf7;
+}
+
+.compare-card h3,
+.plan-card h3 {
+  margin: 0 0 8px;
+  font-size: 15px;
+}
+
+.compare-card p,
+.plan-card p {
+  font-size: 14px;
+}
+
+.tag-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.tag {
+  padding: 7px 9px;
+  border: 1px solid var(--line);
+  background: #fbfaf7;
+  color: var(--muted);
+  font-size: 13px;
+}
+
+.plan {
+  display: grid;
+  gap: 10px;
+}
+
+.plan-card {
+  padding: 14px;
+  border: 1px solid var(--line);
+  background: #fbfaf7;
+}
+
+.secondary-note {
+  padding: 14px;
+  border: 1px dashed var(--line-strong);
+  background: rgba(192, 150, 77, 0.12);
+  line-height: 1.75;
+  font-size: 14px;
+}
+
+.actions {
+  display: grid;
+  gap: 10px;
+  margin-top: 18px;
+}
+
+.toast {
+  position: fixed;
+  left: 50%;
+  bottom: 22px;
+  z-index: 20;
+  transform: translateX(-50%);
+  padding: 10px 14px;
+  background: var(--ink);
+  color: #fff;
+  font-size: 13px;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 180ms ease;
+}
+
+.toast.show {
+  opacity: 1;
+}
+
+.error {
+  display: grid;
+  place-items: center;
+  min-height: 100vh;
+  padding: 24px;
+  text-align: center;
+}
+
+.error p {
+  color: var(--muted);
+  line-height: 1.7;
+}
+
+@media (min-width: 700px) {
+  body {
+    padding: 28px 0;
+  }
+
+  .shell {
+    min-height: calc(100vh - 56px);
+    border: 1px solid var(--line);
+    box-shadow: var(--shadow);
+  }
+
+  .screen {
+    min-height: calc(100vh - 60px);
+  }
+}
+
+    </style>
+  </head>
+  <body>
+    <main id="app" aria-live="polite"></main>
+    <script>window.__QUIZ_CONFIG__ = {"slug":"test-jianghu-role","topic":"测完才发现，我原来是江湖里的这个角色","kicker":"32-Q JIANGHU ROLE TEST","title":"测完才发现，我原来是江湖里的这个角色","subtitle":"32 道真实情境题，测出你在关系、冲突、合作和选择里，更像独行侠、军师、掌柜、掌门、浪客还是隐世高人。","metaDescription":"完成 32 道江湖角色测试，生成你的江湖生存方式、关系边界、合作优势、容易被利用的地方和 90 天行动建议。","startButton":"开始测试","resultKicker":"Jianghu Role Report","quizHint":"按真实第一反应选，不要按你喜欢的江湖人设选","copyButton":"复制我的结果","restartButton":"重新测试","scoreLabel":"角色清晰度","stageLabel":"当前江湖位阶","stageLabels":[{"max":55,"label":"初入江湖"},{"max":72,"label":"站稳脚跟"},{"max":86,"label":"一方成局"},{"max":100,"label":"自成传说"}],"compareLabels":["如果继续按旧反应走","如果开始训练自己的江湖能力"],"disclaimer":"本测试借用江湖角色作为趣味人格原型，仅供娱乐和自我观察参考，不构成心理诊断、职业建议、关系结论或现实决策依据。","secondaryThreshold":4,"dimensions":["自由与边界","人心与判断","资源与信用","组织与守护","锋芒与行动","长期与退路"],"intro":["江湖不是只有大侠和反派。","有人靠自由活着，有人靠判断入局，有人把资源和人情连成路，也有人宁愿退到山里，等真正值得的时刻再出手。","这 32 道题会从入局方式、生存底线、情感关系、合作权力、冲突反应、人生欲望、关系边界和终局选择 8 个维度，匹配你更像哪一种江湖角色。"],"loadingMessages":["正在读取你的江湖第一反应...","正在分析你的边界、关系和冲突模式...","正在匹配六类江湖角色...","正在生成你的江湖人物报告...","分析完成。"],"questions":[{"id":1,"module":"初入江湖","text":"你第一次踏进陌生江湖，最先会观察什么？","options":[{"key":"A","text":"有没有人能管住我，先把自己的路走出来再说"},{"key":"B","text":"谁在说真话，谁只是借热闹试探别人"},{"key":"C","text":"这里的资源怎么流动，谁掌握真正的交换筹码"},{"key":"D","text":"这个圈子有没有值得守的规矩，谁能一起扛事"},{"key":"E","text":"有没有一个足够强的对手，值得我正面过招"},{"key":"F","text":"哪里能安静落脚，不必被无关的人和事拖住"}]},{"id":2,"module":"初入江湖","text":"有人邀你加入一个新组织，你最先在意：","options":[{"key":"A","text":"加入后还有没有自由，能不能按自己的方式做事"},{"key":"B","text":"对方是否看得懂我，而不是只看我的表面身份"},{"key":"C","text":"资源、利益和责任有没有讲清楚"},{"key":"D","text":"成员是否守信，遇到问题会不会互相甩锅"},{"key":"E","text":"这里有没有让我真正兴奋的挑战"},{"key":"F","text":"能不能保留自己的生活，不必随时待命"}]},{"id":3,"module":"初入江湖","text":"你最不能接受自己在江湖里变成哪种人？","options":[{"key":"A","text":"为了合群一直改掉自己，最后连路都不是自己的"},{"key":"B","text":"看懂了所有人的心思，却没有人愿意听我的真话"},{"key":"C","text":"替别人收拾一堆烂账，功劳和回报却说不清"},{"key":"D","text":"身边人遇事就散，关键时刻没有一个能并肩的人"},{"key":"E","text":"每天都很安全，但已经没有任何值得我出手的事"},{"key":"F","text":"被迫把全部时间交出去，连独处都成了奢侈"}]},{"id":4,"module":"初入江湖","text":"别人第一次见你，最可能留下的印象是：","options":[{"key":"A","text":"不好驯，但很有自己的判断"},{"key":"B","text":"话不多，却像什么都看见了"},{"key":"C","text":"靠谱，知道怎么把事情和人安排妥当"},{"key":"D","text":"稳，愿意承担，也在意身边人的感受"},{"key":"E","text":"有锋芒，靠近你总会有一点危险和吸引力"},{"key":"F","text":"有距离感，不会轻易把自己交出来"}]},{"id":5,"module":"生存底线","text":"你判断一个地方是否危险，最敏感的信号是：","options":[{"key":"A","text":"有人开始用为你好，要求我放弃选择"},{"key":"B","text":"一句普通的话被反复解读，空气里全是试探"},{"key":"C","text":"责任不断增加，回报和退出方式却没人说明"},{"key":"D","text":"大家嘴上讲义气，真正出事时却各自保命"},{"key":"E","text":"有人故意当众挑衅，想看我会不会退"},{"key":"F","text":"我开始没有时间独处，也没有可退的安静位置"}]},{"id":6,"module":"生存底线","text":"当别人试探你的底线，你更自然的反应是：","options":[{"key":"A","text":"直接说不，别让对方以为我什么都能接受"},{"key":"B","text":"先顺着听完，从对方的问题里找真实目的"},{"key":"C","text":"把权责、期限和条件重新说清楚"},{"key":"D","text":"提醒对方规矩在哪里，不让事情滑向失控"},{"key":"E","text":"把试探原样推回去，让对方知道我不是软柿子"},{"key":"F","text":"减少回应，先把自己从这个局里抽出来"}]},{"id":7,"module":"生存底线","text":"如果一个你在乎的人突然陷入麻烦，你会先：","options":[{"key":"A","text":"帮他脱身，但会提前说清楚别把我也绑进去"},{"key":"B","text":"先把经过和动机查明白，再决定怎么帮"},{"key":"C","text":"盘点手里的资源，想一个成本最低的解决方案"},{"key":"D","text":"先把人聚起来，别让他一个人面对所有压力"},{"key":"E","text":"直接站到他身边，哪怕要和对方正面冲突"},{"key":"F","text":"确认这是不是必须由我承担的事，不盲目冲进去"}]},{"id":8,"module":"生存底线","text":"下面哪件事最不值得你拿自己去交换？","options":[{"key":"A","text":"一个看起来体面、实际上处处限制你的身份"},{"key":"B","text":"一群不愿意面对真相，只想听好听话的人"},{"key":"C","text":"没有规则的承诺，和说不清的长期合作"},{"key":"D","text":"一段只有你在维护、别人随时可以离开的关系"},{"key":"E","text":"为了赢一口气，把自己拖进没完没了的争斗"},{"key":"F","text":"需要你持续表演亲密，却不允许你保留空间的关系"}]},{"id":9,"module":"情感与关系","text":"你最容易被哪种人吸引？","options":[{"key":"A","text":"尊重我的自由，不会因为亲近就想控制我"},{"key":"B","text":"能听出我没说出口的部分，也愿意讲真话"},{"key":"C","text":"做事有来有往，愿意把现实问题一起算清楚"},{"key":"D","text":"答应过的事会做到，关键时刻不会把我推出去"},{"key":"E","text":"有强烈的化学反应，敢靠近，也敢面对冲突"},{"key":"F","text":"情绪稳定，陪伴舒服，却不会侵入我的生活"}]},{"id":10,"module":"情感与关系","text":"关系里发生矛盾时，你最想要对方怎么做？","options":[{"key":"A","text":"先给我一点空间，别用沟通之名逼我马上表态"},{"key":"B","text":"别只解释表面，把真正的情绪和原因说出来"},{"key":"C","text":"把事实、责任和下一步行动讲清楚"},{"key":"D","text":"别让关系在沉默里散掉，愿意一起把问题扛过去"},{"key":"E","text":"不要冷处理，有话当面说，哪怕过程并不温柔"},{"key":"F","text":"允许双方暂停，等情绪退下去再决定要不要继续"}]},{"id":11,"module":"情感与关系","text":"你理解的被爱，更接近哪一种？","options":[{"key":"A","text":"我可以做自己，对方也不会把亲密变成管束"},{"key":"B","text":"对方能看见我的复杂，不只爱我表现出来的那一面"},{"key":"C","text":"两个人都愿意投入，付出和回报不是一个人单方面承担"},{"key":"D","text":"不只说喜欢，在生活里也愿意站到我这一边"},{"key":"E","text":"即使有冲突，也依然愿意一次次选择彼此"},{"key":"F","text":"相爱但不互相占有，彼此都有独处和退后的权利"}]},{"id":12,"module":"情感与关系","text":"你对一段关系失望后，最可能的处理方式是：","options":[{"key":"A","text":"转身离开，重新找回自己的节奏"},{"key":"B","text":"不急着翻脸，但会记住对方真正做过什么"},{"key":"C","text":"把共同投入、责任和未完成的事一项项理清楚"},{"key":"D","text":"如果还有修复可能，我愿意给关系一次机会"},{"key":"E","text":"把话说到最后，不接受模糊结束"},{"key":"F","text":"慢慢退出，不争输赢，也不再解释自己"}]},{"id":13,"module":"合作与权力","text":"在一个团队里，你更自然的位置是：","options":[{"key":"A","text":"接下没人敢做的突破口，按自己的判断把路打出来"},{"key":"B","text":"坐在旁边看局，关键时刻给出决定方向的一句话"},{"key":"C","text":"负责资源、信息和人脉的连接，让事情顺利流转"},{"key":"D","text":"把人聚起来，定下共同规则，再带大家往前走"},{"key":"E","text":"站到最前面处理硬仗，越有压力越想证明自己"},{"key":"F","text":"做那个提醒大家留后手、不要把退路全押上的人"}]},{"id":14,"module":"合作与权力","text":"你最愿意跟随哪种带头人？","options":[{"key":"A","text":"给我目标和空间，不会拿集体名义管死我的人"},{"key":"B","text":"有判断力，能听进逆耳话，也不会把聪明人当威胁"},{"key":"C","text":"懂资源配置，愿意把利益和责任分配清楚的人"},{"key":"D","text":"守规则、有担当，遇到危机不会先牺牲自己人"},{"key":"E","text":"敢做决定，愿意给真正能打的人舞台的人"},{"key":"F","text":"情绪稳定，尊重边界，不要求所有人都围着他转的人"}]},{"id":15,"module":"合作与权力","text":"如果你的功劳被别人顺手拿走，你第一反应是：","options":[{"key":"A","text":"算了，我另起一条路，不再把机会交给同一批人"},{"key":"B","text":"先把过程和证据留好，看看谁在默许这件事"},{"key":"C","text":"按约定和结果把贡献重新列出来，谈清楚回报"},{"key":"D","text":"先保护团队关系，再找合适的时机把事实摆出来"},{"key":"E","text":"当面问清楚，不接受对方把我的努力说成理所当然"},{"key":"F","text":"评估这件事值不值得争，如果代价太高就及时抽身"}]},{"id":16,"module":"合作与权力","text":"当一个团队连续失败，你更可能做什么？","options":[{"key":"A","text":"换一条路自己先试，等做出结果再回来谈"},{"key":"B","text":"找出反复失败的真正原因，而不是继续喊口号"},{"key":"C","text":"重新分配资源和责任，让流程能够跑起来"},{"key":"D","text":"先稳住人心，避免所有人互相甩锅和离场"},{"key":"E","text":"抓住最关键的一个问题，直接用行动破局"},{"key":"F","text":"先停下来保住核心，不让一次失败拖垮全部筹码"}]},{"id":17,"module":"冲突反应","text":"有人当众贬低你，你最可能：","options":[{"key":"A","text":"不解释，转身把自己的路走得更远"},{"key":"B","text":"先判断他为什么要在这个场合这样说"},{"key":"C","text":"问清楚事实依据，拒绝被一句话定性"},{"key":"D","text":"不让场面失控，但会维护自己和同伴的体面"},{"key":"E","text":"当场回击，让对方知道我不是可以随便拿捏的人"},{"key":"F","text":"不把注意力交给他，除非这件事影响到我的实际利益"}]},{"id":18,"module":"冲突反应","text":"被亲近的人背叛后，你最难接受的是：","options":[{"key":"A","text":"对方试图用关系继续干涉我的选择"},{"key":"B","text":"对方从一开始就没有把真实想法告诉我"},{"key":"C","text":"共同承担过的东西，最后全变成我一个人的责任"},{"key":"D","text":"对方关键时刻不认这段关系，也不愿意解释"},{"key":"E","text":"对方明明有问题，却还想把我逼成先低头的人"},{"key":"F","text":"这段关系让我失去自己的安静和判断能力"}]},{"id":19,"module":"冲突反应","text":"如果关于你的流言开始扩散，你会先：","options":[{"key":"A","text":"不追着每个人解释，把时间用在真正重要的事上"},{"key":"B","text":"找到源头和传播路径，先看这是谁在借题发挥"},{"key":"C","text":"整理事实和记录，只回应会影响实际结果的部分"},{"key":"D","text":"找可信的人沟通，避免身边人被流言带散"},{"key":"E","text":"公开把关键事实说清楚，不给对方继续模糊的空间"},{"key":"F","text":"主动降低暴露度，让流言自己失去燃料"}]},{"id":20,"module":"冲突反应","text":"别人越低估你，你越容易启动哪一种状态？","options":[{"key":"A","text":"我不需要他们理解，按自己的规则做出结果"},{"key":"B","text":"继续让他们低估，等真正关键的时候再亮底牌"},{"key":"C","text":"用持续、可验证的成果让判断自然改变"},{"key":"D","text":"把个人优势变成一群人的能力，让局面一起升级"},{"key":"E","text":"直接找最强的那个人过招，赢一次就够说明问题"},{"key":"F","text":"离开喧闹的评价场，把时间留给长期成长"}]},{"id":21,"module":"人生欲望","text":"如果只能选一种江湖生活，你更想要：","options":[{"key":"A","text":"自由来去，没人能决定我该成为谁"},{"key":"B","text":"站在幕后，真正重要的决定都绕不开我的判断"},{"key":"C","text":"掌握一套稳定的资源和交易网络"},{"key":"D","text":"有一群值得守护的人，也有自己说了算的地盘"},{"key":"E","text":"不停遇见强敌和新局，让人生保持锋利"},{"key":"F","text":"远离喧嚣，按自己的节奏过完一生"}]},{"id":22,"module":"人生欲望","text":"你最想在人生里保住的东西是：","options":[{"key":"A","text":"选择权，不因为任何关系放弃自我"},{"key":"B","text":"判断力，不被情绪和舆论牵着走"},{"key":"C","text":"信用，答应过的事和做过的交易都算数"},{"key":"D","text":"归属感，身边的人愿意在关键时刻互相托底"},{"key":"E","text":"热烈，哪怕有代价，也不想活得寡淡"},{"key":"F","text":"安静，不把所有人生都变成公开的战场"}]},{"id":23,"module":"人生欲望","text":"你愿意拿什么去交换更大的机会？","options":[{"key":"A","text":"一部分稳定，只要最终还能由我做主"},{"key":"B","text":"一部分被喜欢的感觉，先把真相看清楚更重要"},{"key":"C","text":"一部分轻松，重要的合作就应该把账算明白"},{"key":"D","text":"一部分个人时间，只要这群人值得我守"},{"key":"E","text":"一部分安全感，真正想要的东西值得我去搏"},{"key":"F","text":"一部分名声，我不想为了赢得掌声暴露全部自己"}]},{"id":24,"module":"人生欲望","text":"你最认可自己的地方是：","options":[{"key":"A","text":"我从来没有彻底把命运交给别人"},{"key":"B","text":"我能看懂很多事，却不急着拿聪明伤人"},{"key":"C","text":"我能把复杂关系变成清楚的合作"},{"key":"D","text":"我愿意在别人需要时承担责任"},{"key":"E","text":"我敢爱敢恨，也敢为自己的选择负责"},{"key":"F","text":"我知道什么时候靠近，什么时候应该退一步"}]},{"id":25,"module":"关系边界","text":"当别人开始过度依赖你，你会先：","options":[{"key":"A","text":"提醒对方这是他的路，别把选择权交给我"},{"key":"B","text":"观察他是真的需要帮助，还是只想把责任推过来"},{"key":"C","text":"把帮忙的范围、时间和回报说清楚"},{"key":"D","text":"愿意多承担一点，但希望对方也学会站起来"},{"key":"E","text":"如果对方一直退缩，我会直接逼他面对问题"},{"key":"F","text":"减少回应，避免关系变成长期的情绪照护"}]},{"id":26,"module":"关系边界","text":"什么最容易让你真正信任一个人？","options":[{"key":"A","text":"他尊重我的决定，不用亲近来换控制权"},{"key":"B","text":"他说过的话和做过的事能对得上"},{"key":"C","text":"他愿意把利益、责任和风险摆到台面上"},{"key":"D","text":"他在没人看见的时候也守住承诺"},{"key":"E","text":"他有勇气面对冲突，不用暧昧和逃避拖延"},{"key":"F","text":"他不会因为关系好，就要求我随时证明在乎"}]},{"id":27,"module":"关系边界","text":"你最容易被别人利用的时刻是：","options":[{"key":"A","text":"别人用亲密为理由让你承担本不该承担的事"},{"key":"B","text":"你太快看懂对方，于是替他找了很多借口"},{"key":"C","text":"大家习惯把资源、安排和收尾都交给你"},{"key":"D","text":"你不想让团队失望，所以总是先把自己放在最后"},{"key":"E","text":"你很在意被认可，于是接受了不必要的挑战"},{"key":"F","text":"你怕冲突，于是把真实不满拖到关系变形"}]},{"id":28,"module":"关系边界","text":"如果要给自己的底线写一句话，你更像：","options":[{"key":"A","text":"别替我安排人生，我会自己承担选择"},{"key":"B","text":"可以不认同我，但不要拿假话来糊弄我"},{"key":"C","text":"合作可以谈，责任和回报不能靠猜"},{"key":"D","text":"我愿意护短，但不接受有人反复破坏规矩"},{"key":"E","text":"别来试我的底线，我不保证永远给你第二次机会"},{"key":"F","text":"靠近我之前先尊重我的空间，不要把沉默当默许"}]},{"id":29,"module":"终局选择","text":"如果江湖给你写一段结局，你更想留下哪种传说？","options":[{"key":"A","text":"来去自由的独行侠，谁也没能驯服我"},{"key":"B","text":"看破局势的军师，最关键的转折都有我的影子"},{"key":"C","text":"掌握人情与商路的镖局掌柜，人人都愿意找我合作"},{"key":"D","text":"护住一方人的门派掌门，规则和归属都由我建立"},{"key":"E","text":"爱恨分明的浪客，永远在最热烈的地方出场"},{"key":"F","text":"隐在山水间的高人，偶尔出手却从不被困住"}]},{"id":30,"module":"终局选择","text":"当人生逼你在归属和自由之间二选一，你更可能：","options":[{"key":"A","text":"选自由，关系可以重建，但不能失去自己"},{"key":"B","text":"先看清这段归属是否值得，再决定要不要留下"},{"key":"C","text":"谈清楚双方的交换，公平的归属才值得进入"},{"key":"D","text":"如果这群人值得，我愿意把一部分自由用来守护他们"},{"key":"E","text":"选那个让我真正心动、值得全力投入的方向"},{"key":"F","text":"暂时退开，等自己确定不是因为害怕孤独才留下"}]},{"id":31,"module":"终局选择","text":"你认为一个人真正厉害的标志是：","options":[{"key":"A","text":"永远保留离开的能力"},{"key":"B","text":"知道什么该说，什么必须留在心里"},{"key":"C","text":"能让陌生人也愿意相信他的规则和信用"},{"key":"D","text":"自己强大之外，还能让身边的人变得更强"},{"key":"E","text":"敢承担选择带来的代价，不把责任推给命运"},{"key":"F","text":"不需要向所有人证明，依然能过好自己的日子"}]},{"id":32,"module":"终局选择","text":"凭第一反应，你觉得自己最像江湖里的：","options":[{"key":"A","text":"独行侠：不受门规束缚，靠自己走出一条路"},{"key":"B","text":"江湖军师：看得懂人心，在幕后改变局势"},{"key":"C","text":"镖局掌柜：掌握资源和信用，把各方连接起来"},{"key":"D","text":"门派掌门：建立规则，也护住一群愿意同行的人"},{"key":"E","text":"江湖浪客：爱恨分明，在冲突和热烈里找到自己"},{"key":"F","text":"隐世高人：保持距离，关键时刻才真正出手"}]}],"results":{"A":{"typeName":"独行侠 · 不受门规的人","subtitle":"你不是没有感情，而是比起被谁收编，更想保住自己的判断和选择权。","posterSubtext":"你最像江湖里的独行侠：不轻易拜师，也不轻易把命交给任何人。","maturityScore":88,"coreConclusion":"你的江湖角色是独行侠。你对控制、过度安排和以亲密换服从非常敏感，遇到不舒服的关系，第一反应往往不是求别人理解，而是先把自己抽出来。你的优势是独立、清醒、恢复力强，哪怕没有现成靠山，也能重新找到自己的路。短板是容易把所有依赖都当成风险，明明需要帮助，却总要等到筋疲力尽才开口。 你真正想要的不是永远一个人，而是一种不会吞掉你的亲密。你的课题是分清控制和照顾、依赖和失去自我，在值得的人面前保留一点被接住的空间。","diagnosis":"你的江湖角色是独行侠。你对控制、过度安排和以亲密换服从非常敏感，遇到不舒服的关系，第一反应往往不是求别人理解，而是先把自己抽出来。你的优势是独立、清醒、恢复力强，哪怕没有现成靠山，也能重新找到自己的路。短板是容易把所有依赖都当成风险，明明需要帮助，却总要等到筋疲力尽才开口。","whatYouReallyWant":"你真正想要的不是永远一个人，而是一种不会吞掉你的亲密。你的课题是分清控制和照顾、依赖和失去自我，在值得的人面前保留一点被接住的空间。","mechanism":{"title":"独行侠的生存机制","content":"独行侠靠选择权活下来。你适合需要自主判断、独立负责、可以自己开路的环境，也适合把个人技能做成长期资产。但独行不是拒绝所有连接，真正高级的独行侠会建立少量高质量盟友，而不是把所有人都挡在门外。"},"professionalBasis":["你多次优先选择自由和退出权，说明自主感是你的核心安全感。","你对控制、情绪绑架和模糊责任特别敏感，不喜欢被关系定义。","你在受挫后倾向于重新开路，说明你的恢复力比你自己以为的更强。"],"coreTensions":["自主感强","恢复力强","不怕重来","不易求助","亲密需练习"],"suitableIf":["独立项目","自由职业","个人品牌","需要判断力的岗位","异地发展","小而精的合作"],"cautionIf":["把依赖都当控制","凡事独自硬扛","过早离场","不表达真实需要"],"indices":[{"label":"自由指数","value":97},{"label":"自我恢复","value":92},{"label":"边界意识","value":94},{"label":"求助能力","value":63}],"ifStay":"如果你凡事都先离开，你会很自由，但也可能错过真正能并肩的人。","ifChange":"如果你学会在清楚边界后接受帮助，你的独立会从孤军奋战变成有选择的掌控。","notRecommended":["把依赖都当控制","凡事独自硬扛","过早离场","不表达真实需要"],"plan90":[{"title":"第1-2周：列出你的不可让渡边界","content":"把控制、干涉、合理协作分别写清楚，不再靠不舒服来判断所有关系。"},{"title":"第3-4周：主动保留一个可靠盟友","content":"挑一个能尊重边界的人，练习提出具体请求，而不是等对方猜。"},{"title":"第2个月：做一个独立成果","content":"把你的判断和技能沉淀成作品、项目或可复用资产。"},{"title":"第3个月：练习有条件地留下","content":"关系出现问题时，先谈边界和修复条件，再决定离开，而不是自动消失。"}],"closing":"你在江湖里不是没有归宿，而是只有不需要你交出自己的人，才配成为你的同路人。"},"B":{"typeName":"江湖军师 · 看破不说破","subtitle":"你习惯先看人心和局势，真正的力量往往藏在你没有说出口的判断里。","posterSubtext":"你最像江湖里的军师：不一定站在台前，但很多关键转折都有你的影子。","maturityScore":92,"coreConclusion":"你的江湖角色是军师。你对话外音、关系里的暗流和别人没有说完的部分很敏感，通常不会被表面热闹带着走。你的优势是判断细、看得远、能在冲突升级前发现真正的问题。短板是容易停在观察和分析里，等你把所有变量想清楚，机会已经被更敢行动的人拿走。 你真正想要的是影响力，不一定要站在最亮的位置，但希望重要的决定里有你的判断。你的课题是把洞察变成明确建议、把看懂变成落地，而不是只在事后证明自己早就知道。","diagnosis":"你的江湖角色是军师。你对话外音、关系里的暗流和别人没有说完的部分很敏感，通常不会被表面热闹带着走。你的优势是判断细、看得远、能在冲突升级前发现真正的问题。短板是容易停在观察和分析里，等你把所有变量想清楚，机会已经被更敢行动的人拿走。","whatYouReallyWant":"你真正想要的是影响力，不一定要站在最亮的位置，但希望重要的决定里有你的判断。你的课题是把洞察变成明确建议、把看懂变成落地，而不是只在事后证明自己早就知道。","mechanism":{"title":"军师的影响机制","content":"军师靠减少误判获得位置。你适合策略、咨询、内容、谈判和复杂关系处理，但要避免永远做别人的幕后大脑。一次次有效判断之后，要让贡献被记录、被署名，也要给自己争取独立的局。"},"professionalBasis":["你倾向先观察动机和关系，而不是马上站队，说明你有强烈的局势感。","你对模糊表达、试探和前后不一致特别敏锐。","你真正的压力不是看不懂，而是知道很多却没有及时落子。"],"coreTensions":["洞察敏锐","判断细腻","擅长预判","容易想多","需要行动化"],"suitableIf":["策略分析","内容策划","咨询顾问","谈判协作","管理参谋","复杂项目判断"],"cautionIf":["只观察不行动","贡献被别人拿走","过度试探","把沉默当安全"],"indices":[{"label":"人心洞察","value":96},{"label":"局势判断","value":94},{"label":"表达分寸","value":91},{"label":"行动速度","value":72}],"ifStay":"如果你一直只做幕后判断，你会被需要，却未必被公开承认。","ifChange":"如果你给判断配上方案、时间表和署名，你会从聪明的旁观者变成真正的局中人。","notRecommended":["只观察不行动","贡献被别人拿走","过度试探","把沉默当安全"],"plan90":[{"title":"第1-2周：把直觉写成结论","content":"每次判断都写成一句结论、三条依据和一个可验证结果。"},{"title":"第3-4周：少点评，多给方案","content":"不要只指出哪里不对，直接给出下一步行动路径。"},{"title":"第2个月：建立公开作品","content":"把你的分析沉淀成文章、报告、案例或可复用的方法。"},{"title":"第3个月：主动坐到桌前","content":"在一次重要议题里承担决策，而不是只把意见发给别人。"}],"closing":"你不是江湖里最吵的人，但你常常是最早看见风向改变的人。"},"C":{"typeName":"镖局掌柜 · 人情与资源中枢","subtitle":"你擅长把散落的人、信息和资源连成一条可靠的路，信用是你最大的招牌。","posterSubtext":"你最像江湖里的镖局掌柜：不靠虚张声势，靠一次次把人和事稳稳送到目的地。","maturityScore":89,"coreConclusion":"你的江湖角色是镖局掌柜。你不只看谁厉害，更会看一件事怎么落地、利益怎么分配、风险由谁承担。你的优势是可靠、会协调、懂交换，能让原本互不信任的人坐下来合作。短板是别人容易把你的安排能力当成理所当然，把收尾、兜底和情绪劳动都推给你。 你真正想要的是一种可持续的公平：说清楚的责任、对等的回报和能够长期复利的信用。你的课题是别只做那个最会收拾残局的人，要提前把规则和价格说在前面。","diagnosis":"你的江湖角色是镖局掌柜。你不只看谁厉害，更会看一件事怎么落地、利益怎么分配、风险由谁承担。你的优势是可靠、会协调、懂交换，能让原本互不信任的人坐下来合作。短板是别人容易把你的安排能力当成理所当然，把收尾、兜底和情绪劳动都推给你。","whatYouReallyWant":"你真正想要的是一种可持续的公平：说清楚的责任、对等的回报和能够长期复利的信用。你的课题是别只做那个最会收拾残局的人，要提前把规则和价格说在前面。","mechanism":{"title":"掌柜的信用机制","content":"镖局掌柜靠信用和资源网络坐稳位置。你适合运营、商务、项目管理、客户关系和个人生意，越复杂的协作越能体现你的价值。但人情不是无限额度，真正成熟的掌柜会拒绝亏损的单，也会让所有合作有清晰的边界。"},"professionalBasis":["你经常优先关注权责、资源和回报是否对等，说明你有很强的现实感。","你愿意连接不同的人，但不喜欢没有规则的承诺。","你容易被利用的地方，是太能解决问题，别人默认你会继续收尾。"],"coreTensions":["可靠稳妥","资源整合","讲信用","容易兜底","需要会拒绝"],"suitableIf":["项目管理","商务合作","客户经营","社群运营","个人售卖","资源型副业"],"cautionIf":["免费收尾","责任回报不对等","人情替代合同","害怕拒绝熟人"],"indices":[{"label":"资源整合","value":95},{"label":"信用稳定","value":94},{"label":"现实判断","value":91},{"label":"拒绝能力","value":67}],"ifStay":"如果你一直靠人情维持合作，你会很忙，却未必真正赚到位置和回报。","ifChange":"如果你把人情变成规则、报价和交付边界，你的可靠会变成可持续的商业价值。","notRecommended":["免费收尾","责任回报不对等","人情替代合同","害怕拒绝熟人"],"plan90":[{"title":"第1-2周：盘点你的资源网络","content":"把可提供的技能、关系和渠道列出来，区分资源与义务。"},{"title":"第3-4周：给常见帮忙定边界","content":"把时间、交付和收费规则说清楚，熟人也不靠猜。"},{"title":"第2个月：做一个小型闭环项目","content":"从需求、匹配、交付到复盘，完整跑完一次流程。"},{"title":"第3个月：留下可复用资产","content":"把你的方法、客户反馈和交付材料沉淀成产品或模板。"}],"closing":"你在江湖里最值钱的不是认识多少人，而是别人知道把事交给你，路就不会断。"},"D":{"typeName":"门派掌门 · 护住一群人的秩序","subtitle":"你不只想赢一次，更想建立一套规则，让愿意同行的人有位置、有方向、有退路。","posterSubtext":"你最像江湖里的门派掌门：有责任心，也有把混乱的人和事重新安顿好的能力。","maturityScore":90,"coreConclusion":"你的江湖角色是门派掌门。你很在意承诺、归属、规则和共同目标，遇到问题不会只想着自己脱身，也会考虑一群人的后果。你的优势是有担当、能聚人、能建立秩序，适合做组织者和长期负责人。短板是容易把所有人的问题都背到自己身上，对破坏规则的人又失望又不舍得彻底放手。 你真正想要的是一群可以互相托底的人，而不是表面热闹的社交。你的课题是让规则替你承担一部分责任，别把守护变成无止境的牺牲。","diagnosis":"你的江湖角色是门派掌门。你很在意承诺、归属、规则和共同目标，遇到问题不会只想着自己脱身，也会考虑一群人的后果。你的优势是有担当、能聚人、能建立秩序，适合做组织者和长期负责人。短板是容易把所有人的问题都背到自己身上，对破坏规则的人又失望又不舍得彻底放手。","whatYouReallyWant":"你真正想要的是一群可以互相托底的人，而不是表面热闹的社交。你的课题是让规则替你承担一部分责任，别把守护变成无止境的牺牲。","mechanism":{"title":"掌门的组织机制","content":"门派掌门靠共同规则和长期信任建立影响力。你适合团队管理、组织运营、教育带教和有使命感的项目。掌门不等于永远亲自救火，真正的组织者会让成员各自承担，也会在规则被反复破坏时果断止损。"},"professionalBasis":["你多次把团队完整和关系修复放在个人输赢之前，说明你有强烈的守护倾向。","你重视承诺和规矩，不喜欢关键时刻各自保命。","你的风险不是没有人愿意跟，而是容易把跟随者的责任也变成自己的。"],"coreTensions":["责任心重","会聚人","规则意识","容易牺牲","需要授权"],"suitableIf":["团队管理","社群运营","教育带教","长期项目","品牌主理","组织建设"],"cautionIf":["替所有人兜底","规则靠情绪维护","舍不得止损","把责任当归属感"],"indices":[{"label":"组织凝聚","value":95},{"label":"责任承担","value":96},{"label":"规则建设","value":89},{"label":"授权能力","value":70}],"ifStay":"如果你继续用牺牲换忠诚，最后可能所有人都习惯被你照顾。","ifChange":"如果你把责任拆开、把权力交出去，别人会从依赖你变成真正和你并肩。","notRecommended":["替所有人兜底","规则靠情绪维护","舍不得止损","把责任当归属感"],"plan90":[{"title":"第1-2周：画出责任地图","content":"把团队里哪些事必须由谁负责写清楚，不再用默契代替分工。"},{"title":"第3-4周：建立一条公开规则","content":"选择一个反复消耗你的问题，制定所有人都能看见的处理方式。"},{"title":"第2个月：授权一个完整任务","content":"允许别人用自己的方法完成，而不是只把零碎执行交出去。"},{"title":"第3个月：做一次关系止损","content":"对反复破坏规则的人明确后果，守护组织也要守护自己。"}],"closing":"你在江湖里不是只想当最强的人，而是想让一群人跟着你之后，真的能过得更好。"},"E":{"typeName":"江湖浪客 · 爱恨分明的锋刃","subtitle":"你需要真实、强烈和有回应的人生，宁愿经历风浪，也不愿把自己活成没有感觉的人。","posterSubtext":"你最像江湖里的浪客：遇强则强，爱恨分明，人生不能只剩下安全和妥协。","maturityScore":84,"coreConclusion":"你的江湖角色是浪客。你对无聊、敷衍和模糊关系的耐受度很低，真正让你活过来的是挑战、冲突、心动和一件值得全力投入的事。你的优势是勇敢、直接、有感染力，越是关键时刻越能调动自己。短板是容易把强烈当成真实，把冲突当成证明，在不值得的关系和争斗里消耗太久。 你真正想要的是被认真对待，也想证明自己没有白活。你的课题是把锋芒用在值得的战场上，学会区分热烈、执着和互相消耗。","diagnosis":"你的江湖角色是浪客。你对无聊、敷衍和模糊关系的耐受度很低，真正让你活过来的是挑战、冲突、心动和一件值得全力投入的事。你的优势是勇敢、直接、有感染力，越是关键时刻越能调动自己。短板是容易把强烈当成真实，把冲突当成证明，在不值得的关系和争斗里消耗太久。","whatYouReallyWant":"你真正想要的是被认真对待，也想证明自己没有白活。你的课题是把锋芒用在值得的战场上，学会区分热烈、执着和互相消耗。","mechanism":{"title":"浪客的锋刃机制","content":"浪客靠勇气和现场感获得存在感。你适合竞争、创作、开拓、谈判和需要感染力的环境。锋刃不是逢人就亮，真正成熟的浪客知道哪些对手值得打，哪些挑衅只是为了把你拖进泥里。"},"professionalBasis":["你对强烈体验和真实回应的需求很高，不愿意长期活在敷衍里。","你面对冲突时倾向于直接处理，说明你有很强的现场执行力。","你的风险是太在意被认可，容易接受不必要的挑战。"],"coreTensions":["敢爱敢恨","现场感强","行动果断","容易上头","需要挑选战场"],"suitableIf":["内容创作","销售谈判","市场开拓","竞争型岗位","创业试错","需要感染力的工作"],"cautionIf":["为证明而证明","把冲突当亲密","情绪化决策","在烂局里恋战"],"indices":[{"label":"现场战力","value":95},{"label":"感染力","value":93},{"label":"冒险胆量","value":91},{"label":"情绪节制","value":65}],"ifStay":"如果你每次都接下别人的挑衅，你会赢很多场，却不一定离自己想要的生活更近。","ifChange":"如果你在出手前先问一句值不值得，你的锋芒会从消耗变成真正的突破力。","notRecommended":["为证明而证明","把冲突当亲密","情绪化决策","在烂局里恋战"],"plan90":[{"title":"第1-2周：记录你的战场","content":"把最近参与的冲突分成值得争取、可以谈判、应该离开的三类。"},{"title":"第3-4周：给情绪加一个缓冲","content":"重要回复至少隔一段时间，先写事实和目标，再决定语气。"},{"title":"第2个月：把热情投入作品","content":"选一个真正想做的项目，让你的强烈变成持续产出。"},{"title":"第3个月：练习体面离场","content":"对不值得的人和局，完成一次不解释、不恋战的退出。"}],"closing":"你在江湖里最怕的不是受伤，而是明明有一把好刀，却一直被用来砍不值得的东西。"},"F":{"typeName":"隐世高人 · 退一步才是主场","subtitle":"你不是没有野心，而是知道真正的实力不需要随时拿出来证明。","posterSubtext":"你最像江湖里的隐世高人：保持距离，关键时刻出手，过自己的节奏。","maturityScore":87,"coreConclusion":"你的江湖角色是隐世高人。你对喧闹的评价、过度社交和被迫站队都很警惕，更愿意把时间留给真正重要的事。你的优势是稳定、克制、长期主义，能在别人急着证明时保持自己的判断。短板是容易过度退后，把冷静变成不表达，把不争变成别人看不见你的价值。 你真正想要的是不被打扰的主动权：亲密有边界，事业有节奏，重要时刻又能把能力拿出来。你的课题是别让低调变成隐身，要在值得的场合让别人知道你能做什么。","diagnosis":"你的江湖角色是隐世高人。你对喧闹的评价、过度社交和被迫站队都很警惕，更愿意把时间留给真正重要的事。你的优势是稳定、克制、长期主义，能在别人急着证明时保持自己的判断。短板是容易过度退后，把冷静变成不表达，把不争变成别人看不见你的价值。","whatYouReallyWant":"你真正想要的是不被打扰的主动权：亲密有边界，事业有节奏，重要时刻又能把能力拿出来。你的课题是别让低调变成隐身，要在值得的场合让别人知道你能做什么。","mechanism":{"title":"高人的蓄势机制","content":"隐世高人靠选择性出场和长期积累保持主动。你适合深度工作、专业积累、独立创作和低频高质量合作。退一步不是放弃，而是保留观察和选择的空间；但当机会真的到来，你也要给自己一个明确的出场动作。"},"professionalBasis":["你在多个情境里优先选择空间、安静和退路，说明独处是你的恢复方式。","你不喜欢用公开冲突证明价值，更愿意靠长期结果说话。","你的风险是能力没有被看见，或者别人误以为你的沉默代表没有意见。"],"coreTensions":["长期稳定","边界清楚","不易失控","存在感低","需要主动出场"],"suitableIf":["专业研究","深度创作","独立工作","小团队合作","长期投资自己","幕后技术型岗位"],"cautionIf":["过度隐身","回避必要沟通","错过窗口","把冷处理当边界"],"indices":[{"label":"内在稳定","value":95},{"label":"长期积累","value":94},{"label":"边界清晰","value":93},{"label":"主动曝光","value":62}],"ifStay":"如果你一直等别人主动发现你，你会保留安静，却可能错过本该属于你的舞台。","ifChange":"如果你只在关键节点主动亮相一次，你的低调会变成稀缺感，而不是透明感。","notRecommended":["过度隐身","回避必要沟通","错过窗口","把冷处理当边界"],"plan90":[{"title":"第1-2周：确认你的深度领域","content":"选一个值得长期积累的主题，减少无关信息和关系消耗。"},{"title":"第3-4周：做一次主动表达","content":"在工作、关系或内容平台上清楚说出一个你的判断。"},{"title":"第2个月：形成稳定输出","content":"用固定频率发布作品、复盘或专业成果，让能力有迹可循。"},{"title":"第3个月：接受一个高质量机会","content":"只选择真正尊重边界、能带来成长的合作，不再因为怕麻烦全部拒绝。"}],"closing":"你在江湖里不是消失，而是在把自己的出场留给真正值得的人和事。"}},"secondaryNotes":{"A":{"B":"你的主角色是「独行侠 · 不受门规的人」，同时带有「江湖军师 · 看破不说破」的副倾向。主结果代表你最稳定的生存方式，副结果代表你在压力升级或关系变化时会启动的另一套策略。","C":"你的主角色是「独行侠 · 不受门规的人」，同时带有「镖局掌柜 · 人情与资源中枢」的副倾向。主结果代表你最稳定的生存方式，副结果代表你在压力升级或关系变化时会启动的另一套策略。","D":"你的主角色是「独行侠 · 不受门规的人」，同时带有「门派掌门 · 护住一群人的秩序」的副倾向。主结果代表你最稳定的生存方式，副结果代表你在压力升级或关系变化时会启动的另一套策略。","E":"你的主角色是「独行侠 · 不受门规的人」，同时带有「江湖浪客 · 爱恨分明的锋刃」的副倾向。主结果代表你最稳定的生存方式，副结果代表你在压力升级或关系变化时会启动的另一套策略。","F":"你的主角色是「独行侠 · 不受门规的人」，同时带有「隐世高人 · 退一步才是主场」的副倾向。主结果代表你最稳定的生存方式，副结果代表你在压力升级或关系变化时会启动的另一套策略。"},"B":{"A":"你的主角色是「江湖军师 · 看破不说破」，同时带有「独行侠 · 不受门规的人」的副倾向。主结果代表你最稳定的生存方式，副结果代表你在压力升级或关系变化时会启动的另一套策略。","C":"你的主角色是「江湖军师 · 看破不说破」，同时带有「镖局掌柜 · 人情与资源中枢」的副倾向。主结果代表你最稳定的生存方式，副结果代表你在压力升级或关系变化时会启动的另一套策略。","D":"你的主角色是「江湖军师 · 看破不说破」，同时带有「门派掌门 · 护住一群人的秩序」的副倾向。主结果代表你最稳定的生存方式，副结果代表你在压力升级或关系变化时会启动的另一套策略。","E":"你的主角色是「江湖军师 · 看破不说破」，同时带有「江湖浪客 · 爱恨分明的锋刃」的副倾向。主结果代表你最稳定的生存方式，副结果代表你在压力升级或关系变化时会启动的另一套策略。","F":"你的主角色是「江湖军师 · 看破不说破」，同时带有「隐世高人 · 退一步才是主场」的副倾向。主结果代表你最稳定的生存方式，副结果代表你在压力升级或关系变化时会启动的另一套策略。"},"C":{"A":"你的主角色是「镖局掌柜 · 人情与资源中枢」，同时带有「独行侠 · 不受门规的人」的副倾向。主结果代表你最稳定的生存方式，副结果代表你在压力升级或关系变化时会启动的另一套策略。","B":"你的主角色是「镖局掌柜 · 人情与资源中枢」，同时带有「江湖军师 · 看破不说破」的副倾向。主结果代表你最稳定的生存方式，副结果代表你在压力升级或关系变化时会启动的另一套策略。","D":"你的主角色是「镖局掌柜 · 人情与资源中枢」，同时带有「门派掌门 · 护住一群人的秩序」的副倾向。主结果代表你最稳定的生存方式，副结果代表你在压力升级或关系变化时会启动的另一套策略。","E":"你的主角色是「镖局掌柜 · 人情与资源中枢」，同时带有「江湖浪客 · 爱恨分明的锋刃」的副倾向。主结果代表你最稳定的生存方式，副结果代表你在压力升级或关系变化时会启动的另一套策略。","F":"你的主角色是「镖局掌柜 · 人情与资源中枢」，同时带有「隐世高人 · 退一步才是主场」的副倾向。主结果代表你最稳定的生存方式，副结果代表你在压力升级或关系变化时会启动的另一套策略。"},"D":{"A":"你的主角色是「门派掌门 · 护住一群人的秩序」，同时带有「独行侠 · 不受门规的人」的副倾向。主结果代表你最稳定的生存方式，副结果代表你在压力升级或关系变化时会启动的另一套策略。","B":"你的主角色是「门派掌门 · 护住一群人的秩序」，同时带有「江湖军师 · 看破不说破」的副倾向。主结果代表你最稳定的生存方式，副结果代表你在压力升级或关系变化时会启动的另一套策略。","C":"你的主角色是「门派掌门 · 护住一群人的秩序」，同时带有「镖局掌柜 · 人情与资源中枢」的副倾向。主结果代表你最稳定的生存方式，副结果代表你在压力升级或关系变化时会启动的另一套策略。","E":"你的主角色是「门派掌门 · 护住一群人的秩序」，同时带有「江湖浪客 · 爱恨分明的锋刃」的副倾向。主结果代表你最稳定的生存方式，副结果代表你在压力升级或关系变化时会启动的另一套策略。","F":"你的主角色是「门派掌门 · 护住一群人的秩序」，同时带有「隐世高人 · 退一步才是主场」的副倾向。主结果代表你最稳定的生存方式，副结果代表你在压力升级或关系变化时会启动的另一套策略。"},"E":{"A":"你的主角色是「江湖浪客 · 爱恨分明的锋刃」，同时带有「独行侠 · 不受门规的人」的副倾向。主结果代表你最稳定的生存方式，副结果代表你在压力升级或关系变化时会启动的另一套策略。","B":"你的主角色是「江湖浪客 · 爱恨分明的锋刃」，同时带有「江湖军师 · 看破不说破」的副倾向。主结果代表你最稳定的生存方式，副结果代表你在压力升级或关系变化时会启动的另一套策略。","C":"你的主角色是「江湖浪客 · 爱恨分明的锋刃」，同时带有「镖局掌柜 · 人情与资源中枢」的副倾向。主结果代表你最稳定的生存方式，副结果代表你在压力升级或关系变化时会启动的另一套策略。","D":"你的主角色是「江湖浪客 · 爱恨分明的锋刃」，同时带有「门派掌门 · 护住一群人的秩序」的副倾向。主结果代表你最稳定的生存方式，副结果代表你在压力升级或关系变化时会启动的另一套策略。","F":"你的主角色是「江湖浪客 · 爱恨分明的锋刃」，同时带有「隐世高人 · 退一步才是主场」的副倾向。主结果代表你最稳定的生存方式，副结果代表你在压力升级或关系变化时会启动的另一套策略。"},"F":{"A":"你的主角色是「隐世高人 · 退一步才是主场」，同时带有「独行侠 · 不受门规的人」的副倾向。主结果代表你最稳定的生存方式，副结果代表你在压力升级或关系变化时会启动的另一套策略。","B":"你的主角色是「隐世高人 · 退一步才是主场」，同时带有「江湖军师 · 看破不说破」的副倾向。主结果代表你最稳定的生存方式，副结果代表你在压力升级或关系变化时会启动的另一套策略。","C":"你的主角色是「隐世高人 · 退一步才是主场」，同时带有「镖局掌柜 · 人情与资源中枢」的副倾向。主结果代表你最稳定的生存方式，副结果代表你在压力升级或关系变化时会启动的另一套策略。","D":"你的主角色是「隐世高人 · 退一步才是主场」，同时带有「门派掌门 · 护住一群人的秩序」的副倾向。主结果代表你最稳定的生存方式，副结果代表你在压力升级或关系变化时会启动的另一套策略。","E":"你的主角色是「隐世高人 · 退一步才是主场」，同时带有「江湖浪客 · 爱恨分明的锋刃」的副倾向。主结果代表你最稳定的生存方式，副结果代表你在压力升级或关系变化时会启动的另一套策略。"}},"shareTemplate":["我测出来是：{{typeName}}","{{posterSubtext}}","{{secondaryLine}}","","测完才发现，我原来是江湖里的这个角色｜32题江湖人格测试"]};</script>
+    <script>
+(function () {
+  const app = document.getElementById("app");
+  const configPaths = ["./configs/site-config.json", "./configs/career-change.json"];
+
+  const state = {
+    config: null,
+    answers: {},
+    currentIndex: 0,
+    selected: null,
+    locked: false,
+    loadingStep: 0,
+    route: "home",
+    resultData: null,
+  };
+
+  const defaultLoadingMessages = [
+    "正在读取你的选择倾向...",
+    "正在识别隐藏动机...",
+    "正在计算结果分布...",
+    "正在生成专属报告...",
+    "分析完成。",
+  ];
+
+  init();
+
+  async function init() {
+    try {
+      state.config = await fetchConfig();
+      applyDocumentMeta(state.config);
+
+      const saved = sessionStorage.getItem(getStorageKey());
+      if (saved) {
+        state.answers = JSON.parse(saved);
+      }
+
+      routeFromHash();
+      window.addEventListener("hashchange", routeFromHash);
+    } catch (error) {
+      app.innerHTML = `
+        <div class="error">
+          <div>
+            <h1>测试加载失败</h1>
+            <p>请确认你是通过网页链接打开页面，而不是直接双击 HTML 文件。</p>
+          </div>
+        </div>
+      `;
+      console.error(error);
+    }
+  }
+
+  async function fetchConfig() {
+    if (window.__QUIZ_CONFIG__) return window.__QUIZ_CONFIG__;
+    let lastError;
+    for (const path of configPaths) {
+      try {
+        const response = await fetch(path, { cache: "no-store" });
+        if (!response.ok) throw new Error(`${path} ${response.status}`);
+        return response.json();
+      } catch (error) {
+        lastError = error;
+      }
+    }
+    throw lastError;
+  }
+
+  function applyDocumentMeta(cfg) {
+    const title = cfg.title || "趣味测试";
+    const description = cfg.metaDescription || cfg.subtitle || "完成测试，生成你的专属报告。";
+    document.title = title;
+    setMeta("name", "description", description);
+    setMeta("property", "og:title", title);
+    setMeta("property", "og:description", description);
+  }
+
+  function setMeta(attr, key, content) {
+    let node = document.querySelector(`meta[${attr}="${key}"]`);
+    if (!node) {
+      node = document.createElement("meta");
+      node.setAttribute(attr, key);
+      document.head.appendChild(node);
+    }
+    node.setAttribute("content", content);
+  }
+
+  function routeFromHash() {
+    const route = (location.hash || "#/").replace("#/", "") || "home";
+    renderRoute(route);
+  }
+
+  function navigate(route) {
+    const nextHash = `#/${route}`;
+    if (location.hash === nextHash) {
+      renderRoute(route);
+      return;
+    }
+    location.hash = nextHash;
+  }
+
+  function renderRoute(route) {
+    state.route = route;
+    if (route === "quiz") renderQuiz();
+    else if (route === "loading") startLoading();
+    else if (route === "result") renderResult();
+    else renderHome();
+  }
+
+  function renderShell(content, extraClass = "") {
+    app.innerHTML = `
+      <div class="shell">
+        <div class="top-rule"></div>
+        <section class="screen ${extraClass}">${content}</section>
+      </div>
+      <div id="toast" class="toast">已复制</div>
+    `;
+  }
+
+  function renderHome() {
+    const cfg = state.config;
+    renderShell(
+      `
+      <div class="home">
+        <div class="kicker"><span class="dot"></span><span>${text(cfg.kicker)}</span><span class="dot"></span></div>
+        <h1 class="hero-title">${text(cfg.title)}</h1>
+        <p class="hero-subtitle">${text(cfg.subtitle)}</p>
+        <div class="hairline"></div>
+        <div class="intro">
+          ${(cfg.intro || []).map((p, index) => `<p class="${index === cfg.intro.length - 1 ? "strong" : ""}">${text(p)}</p>`).join("")}
+        </div>
+        <div class="pill-grid">
+          ${(cfg.dimensions || []).map((item) => `<div class="pill">${text(item)}</div>`).join("")}
+        </div>
+        <button class="primary-btn" data-action="start">${text(cfg.startButton || "开始测试")}</button>
+        <p class="disclaimer">${text(cfg.disclaimer || "本测试为趣味内容，仅供娱乐参考。")}</p>
+      </div>
+      `,
+      "home"
+    );
+    const startButton = app.querySelector("[data-action='start']");
+    let started = false;
+    const startQuiz = () => {
+      if (started) return;
+      started = true;
+      state.answers = {};
+      state.currentIndex = 0;
+      sessionStorage.removeItem(getStorageKey());
+      navigate("quiz");
+    };
+    startButton.addEventListener("click", startQuiz);
+    startButton.addEventListener(
+      "touchend",
+      (event) => {
+        event.preventDefault();
+        startQuiz();
+      },
+      { passive: false }
+    );
+  }
+
+  function renderQuiz() {
+    const questions = state.config.questions || [];
+    const question = questions[state.currentIndex];
+    if (!question) {
+      renderHome();
+      return;
+    }
+
+    const progress = ((state.currentIndex + 1) / questions.length) * 100;
+
+    renderShell(
+      `
+      <div class="sticky-head">
+        <div class="quiz-meta">
+          <span>${String(state.currentIndex + 1).padStart(2, "0")} / ${questions.length}</span>
+          <span>${text(question.module)}</span>
+        </div>
+        <div class="progress-track"><div class="progress-bar" style="width:${progress}%"></div></div>
+      </div>
+      <div class="question-no">${String(state.currentIndex + 1).padStart(2, "0")}</div>
+      <h1 class="question-title">${text(question.text)}</h1>
+      <div class="options">
+        ${(question.options || [])
+          .map(
+            (option) => `
+            <button class="option" data-option="${text(option.key)}">
+              <span class="option-key">${text(option.key)}</span>
+              <span class="option-text">${text(option.text)}</span>
+            </button>
+          `
+          )
+          .join("")}
+      </div>
+      <p class="hint">${text(state.config.quizHint || "选择后自动进入下一题")}</p>
+      `,
+      "quiz-screen"
+    );
+
+    app.querySelectorAll("[data-option]").forEach((button) => {
+      button.addEventListener("click", () => selectOption(button.dataset.option));
+    });
+  }
+
+  function selectOption(key) {
+    if (state.locked) return;
+    state.locked = true;
+    state.selected = key;
+    const question = state.config.questions[state.currentIndex];
+    state.answers[question.id] = key;
+
+    app.querySelectorAll(".option").forEach((button) => {
+      const selected = button.dataset.option === key;
+      button.classList.toggle("selected", selected);
+      button.classList.toggle("dimmed", !selected);
+    });
+
+    window.setTimeout(() => {
+      if (state.currentIndex < state.config.questions.length - 1) {
+        state.currentIndex += 1;
+        state.locked = false;
+        state.selected = null;
+        renderQuiz();
+      } else {
+        sessionStorage.setItem(getStorageKey(), JSON.stringify(state.answers));
+        state.locked = false;
+        navigate("loading");
+      }
+    }, 420);
+  }
+
+  function startLoading() {
+    state.loadingStep = 0;
+    renderLoading("");
+    tickLoading();
+  }
+
+  function renderLoading(value) {
+    const loadingMessages = getLoadingMessages();
+    renderShell(
+      `
+      <div class="loading-card">
+        <div class="spinner"></div>
+        <div class="loading-text">${text(value)}<span class="cursor">|</span></div>
+        <div class="step-bars">
+          ${loadingMessages.map((_, index) => `<div class="step ${index < state.loadingStep ? "done" : ""}"><span></span></div>`).join("")}
+        </div>
+      </div>
+      `,
+      "loading-screen"
+    );
+  }
+
+  function tickLoading() {
+    if (state.route !== "loading") return;
+    const loadingMessages = getLoadingMessages();
+    if (state.loadingStep >= loadingMessages.length) {
+      window.setTimeout(() => navigate("result"), 700);
+      return;
+    }
+    const message = loadingMessages[state.loadingStep];
+    let chars = 0;
+    const interval = window.setInterval(() => {
+      chars += 1;
+      renderLoading(message.slice(0, chars));
+      if (chars >= message.length) {
+        window.clearInterval(interval);
+        window.setTimeout(() => {
+          state.loadingStep += 1;
+          tickLoading();
+        }, 520);
+      }
+    }, 35);
+  }
+
+  function renderResult() {
+    const saved = sessionStorage.getItem(getStorageKey());
+    if (saved) state.answers = JSON.parse(saved);
+    if (Object.keys(state.answers).length < state.config.questions.length) {
+      renderHome();
+      return;
+    }
+
+    const scored = scoreAnswers(state.answers);
+    const primary = state.config.results[scored.primary];
+    const secondary = scored.secondary ? state.config.secondaryNotes?.[scored.primary]?.[scored.secondary] : null;
+    const stage = getStage(primary.maturityScore);
+    const shareText = buildShareText(primary, secondary);
+    const compareLabels = state.config.compareLabels || ["如果继续原路", "如果换一种做法"];
+    state.resultData = { scored, primary, secondary, stage, shareText };
+
+    renderShell(
+      `
+      <article class="report">
+        <div class="kicker"><span class="dot"></span><span>${text(state.config.resultKicker || "Result Report")}</span><span class="dot"></span></div>
+        <h1 class="result-type">${text(primary.typeName)}</h1>
+        <p class="result-subtitle">${text(primary.subtitle)}</p>
+        <div class="stamp-row">
+          <div class="stamp"><strong>${text(primary.maturityScore)}</strong><span>${text(state.config.scoreLabel || "决策成熟度")}</span></div>
+          <div class="stamp"><strong>${text(stage)}</strong><span>${text(state.config.stageLabel || "当前行动阶段")}</span></div>
+        </div>
+
+        <section class="section">
+          <h2>你的答案分布</h2>
+          <div class="meters">
+            ${Object.entries(scored.counts)
+              .map(([key, value]) => {
+                const typeData = state.config.results[key];
+                const width = (value / state.config.questions.length) * 100;
+                return `
+                  <div>
+                    <div class="meter-head"><span>${text(key)} · ${text(typeData.typeName)}</span><span>${value} 题</span></div>
+                    <div class="meter-track"><div class="meter-fill" style="width:${width}%"></div></div>
+                  </div>
+                `;
+              })
+              .join("")}
+          </div>
+        </section>
+
+        ${secondary ? `<section class="section"><h2>副倾向提示</h2><div class="secondary-note">${text(secondary)}</div></section>` : ""}
+
+        <section class="section">
+          <h2>诊断结论</h2>
+          <div class="quote">${text(primary.coreConclusion)}</div>
+        </section>
+
+        <section class="section">
+          <h2>为什么你会这样</h2>
+          <p>${text(primary.diagnosis)}</p>
+          <p>${text(primary.whatYouReallyWant)}</p>
+        </section>
+
+        <section class="section">
+          <h2>${text(primary.mechanism.title)}</h2>
+          <p>${text(primary.mechanism.content)}</p>
+        </section>
+
+        ${renderParagraphSection("专业解读框架", primary.professionalBasis)}
+        ${renderTagSection("你的关键矛盾", primary.coreTensions)}
+        ${renderCompareListSection("适合推进的条件", "需要谨慎的信号", primary.suitableIf, primary.cautionIf)}
+
+        <section class="section">
+          <h2>关键指数</h2>
+          <div class="meters">
+            ${(primary.indices || [])
+              .map(
+                (item) => `
+                <div>
+                  <div class="meter-head"><span>${text(item.label)}</span><span>${text(item.value)}</span></div>
+                  <div class="meter-track"><div class="meter-fill" style="width:${number(item.value)}%"></div></div>
+                </div>
+              `
+              )
+              .join("")}
+          </div>
+        </section>
+
+        <section class="section">
+          <h2>两条路径对比</h2>
+          <div class="compare">
+            <div class="compare-card"><h3>${text(compareLabels[0])}</h3><p>${text(primary.ifStay)}</p></div>
+            <div class="compare-card"><h3>${text(compareLabels[1])}</h3><p>${text(primary.ifChange)}</p></div>
+          </div>
+        </section>
+
+        <section class="section">
+          <h2>现在最不建议你做</h2>
+          <div class="tag-list">${(primary.notRecommended || []).map((item) => `<span class="tag">${text(item)}</span>`).join("")}</div>
+        </section>
+
+        <section class="section">
+          <h2>未来 90 天验证方案</h2>
+          <div class="plan">
+            ${(primary.plan90 || [])
+              .map(
+                (item, index) => `
+                <div class="plan-card">
+                  <h3>${index + 1}. ${text(item.title)}</h3>
+                  <p>${text(item.content)}</p>
+                </div>
+              `
+              )
+              .join("")}
+          </div>
+        </section>
+
+        <section class="section">
+          <h2>最后一句话</h2>
+          <p>${text(primary.closing)}</p>
+        </section>
+
+        <div class="actions">
+          <button class="primary-btn" data-action="copy">${text(state.config.copyButton || "复制我的结果")}</button>
+          <button class="ghost-btn" data-action="restart">${text(state.config.restartButton || "重新测试")}</button>
+        </div>
+      </article>
+      `,
+      "result-screen"
+    );
+
+    app.querySelector("[data-action='copy']").addEventListener("click", () => copyShareText(shareText));
+    app.querySelector("[data-action='restart']").addEventListener("click", () => {
+      sessionStorage.removeItem(getStorageKey());
+      state.answers = {};
+      state.currentIndex = 0;
+      navigate("home");
+    });
+  }
+
+  function renderParagraphSection(title, paragraphs) {
+    if (!Array.isArray(paragraphs) || !paragraphs.length) return "";
+    return `
+      <section class="section">
+        <h2>${text(title)}</h2>
+        ${paragraphs.map((item) => `<p>${text(item)}</p>`).join("")}
+      </section>
+    `;
+  }
+
+  function renderTagSection(title, items) {
+    if (!Array.isArray(items) || !items.length) return "";
+    return `
+      <section class="section">
+        <h2>${text(title)}</h2>
+        <div class="tag-list">${items.map((item) => `<span class="tag">${text(item)}</span>`).join("")}</div>
+      </section>
+    `;
+  }
+
+  function renderCompareListSection(leftTitle, rightTitle, leftItems, rightItems) {
+    const hasLeft = Array.isArray(leftItems) && leftItems.length;
+    const hasRight = Array.isArray(rightItems) && rightItems.length;
+    if (!hasLeft && !hasRight) return "";
+    return `
+      <section class="section">
+        <h2>适用边界</h2>
+        <div class="compare">
+          <div class="compare-card">
+            <h3>${text(leftTitle)}</h3>
+            ${(leftItems || []).map((item) => `<p>${text(item)}</p>`).join("")}
+          </div>
+          <div class="compare-card">
+            <h3>${text(rightTitle)}</h3>
+            ${(rightItems || []).map((item) => `<p>${text(item)}</p>`).join("")}
+          </div>
+        </div>
+      </section>
+    `;
+  }
+
+  function scoreAnswers(answers) {
+    const resultKeys = Object.keys(state.config.results || {});
+    const counts = Object.fromEntries(resultKeys.map((key) => [key, 0]));
+    (state.config.questions || []).forEach((question) => {
+      const answerKey = answers[question.id];
+      if (!answerKey) return;
+      const option = (question.options || []).find((item) => item.key === answerKey);
+      const scoreKey = option?.score || option?.result || answerKey;
+      if (counts[scoreKey] !== undefined) counts[scoreKey] += 1;
+    });
+    const sorted = Object.entries(counts).sort((a, b) => b[1] - a[1]);
+    const threshold = state.config.secondaryThreshold ?? 2;
+    const primary = sorted[0][0];
+    const secondary = sorted[1][1] > 0 && sorted[0][1] - sorted[1][1] <= threshold ? sorted[1][0] : null;
+    return { counts, primary, secondary };
+  }
+
+  function getStage(score) {
+    const labels = state.config.stageLabels || [
+      { max: 45, label: "观察期" },
+      { max: 65, label: "验证期" },
+      { max: 82, label: "规划期" },
+      { max: 100, label: "行动期" },
+    ];
+    const hit = labels.find((item) => score <= item.max);
+    return hit ? hit.label : labels[labels.length - 1].label;
+  }
+
+  function buildShareText(primary, secondary) {
+    const template = state.config.shareTemplate || [
+      "我测出了：{{typeName}}",
+      "{{posterSubtext}}",
+      "{{secondaryLine}}",
+      "",
+      "{{title}}",
+    ];
+    const values = {
+      title: state.config.title,
+      typeName: primary.typeName,
+      posterSubtext: primary.posterSubtext,
+      secondary: secondary || "",
+      secondaryLine: secondary ? `副倾向：${secondary}` : "",
+    };
+    return template
+      .map((line) => fillTemplate(line, values))
+      .filter((line, index, arr) => line || arr[index - 1])
+      .join("\n")
+      .trim();
+  }
+
+  async function copyShareText(value) {
+    try {
+      await navigator.clipboard.writeText(value);
+      showToast("结果文案已复制");
+    } catch (error) {
+      showToast("复制失败，可长按手动复制");
+    }
+  }
+
+  function showToast(value) {
+    const toast = document.getElementById("toast");
+    if (!toast) return;
+    toast.textContent = value;
+    toast.classList.add("show");
+    window.setTimeout(() => toast.classList.remove("show"), 1600);
+  }
+
+  function getLoadingMessages() {
+    return state.config.loadingMessages || defaultLoadingMessages;
+  }
+
+  function getStorageKey() {
+    return `xhsTestAnswers:${state.config.slug || "default"}`;
+  }
+
+  function fillTemplate(template, values) {
+    return String(template).replace(/\{\{(\w+)\}\}/g, (_, key) => values[key] || "");
+  }
+
+  function number(value) {
+    const parsed = Number(value);
+    if (Number.isNaN(parsed)) return 0;
+    return Math.max(0, Math.min(100, parsed));
+  }
+
+  function text(value) {
+    return String(value ?? "")
+      .replace(/&/g, "&amp;")
+      .replace(/</g, "&lt;")
+      .replace(/>/g, "&gt;")
+      .replace(/"/g, "&quot;");
+  }
+})();
+
+    </script>
+  </body>
+</html>
