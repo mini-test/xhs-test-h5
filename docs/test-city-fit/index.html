@@ -1,0 +1,1170 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <meta name="description" content="完成 32 道城市生活偏好测试，生成你的城市类型、适合城市示例、迁居风险和 90 天试住验证方案。" />
+    <meta property="og:title" content="测一测你适合的城市" />
+    <meta property="og:description" content="完成 32 道城市生活偏好测试，生成你的城市类型、适合城市示例、迁居风险和 90 天试住验证方案。" />
+    <title>测一测你适合的城市</title>
+    <style>
+:root {
+  --bg: #fbfaf7;
+  --paper: #fffefd;
+  --ink: #20242a;
+  --muted: #65707d;
+  --line: #d9d4ca;
+  --line-strong: #b9afa0;
+  --accent: #9b4339;
+  --accent-soft: #f1dfd7;
+  --gold: #c0964d;
+  --sage: #66795f;
+  --blue: #526a86;
+  --shadow: 0 16px 36px rgba(60, 47, 38, 0.1);
+  --radius: 8px;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  min-height: 100%;
+  background:
+    linear-gradient(rgba(32, 36, 42, 0.035) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(32, 36, 42, 0.035) 1px, transparent 1px),
+    var(--bg);
+  background-size: 24px 24px;
+}
+
+body {
+  min-height: 100vh;
+  margin: 0;
+  color: var(--ink);
+  font-family:
+    "PingFang SC",
+    "Microsoft YaHei",
+    "Noto Sans SC",
+    system-ui,
+    -apple-system,
+    BlinkMacSystemFont,
+    sans-serif;
+  letter-spacing: 0;
+}
+
+button {
+  font: inherit;
+}
+
+.shell {
+  width: min(100%, 480px);
+  min-height: 100vh;
+  margin: 0 auto;
+  background: rgba(251, 250, 247, 0.88);
+}
+
+.top-rule {
+  height: 4px;
+  background: var(--accent);
+}
+
+.screen {
+  min-height: calc(100vh - 4px);
+  padding: 28px 22px 32px;
+}
+
+.home {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.kicker {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  color: var(--muted);
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  font-size: 11px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+.dot {
+  width: 7px;
+  height: 7px;
+  background: var(--accent);
+  border-radius: 50%;
+}
+
+.hero-title {
+  margin: 26px 0 14px;
+  color: var(--ink);
+  font-size: 30px;
+  line-height: 1.2;
+  text-align: center;
+  font-weight: 800;
+}
+
+.hero-subtitle {
+  margin: 0 auto 28px;
+  max-width: 340px;
+  color: var(--muted);
+  font-size: 15px;
+  line-height: 1.75;
+  text-align: center;
+}
+
+.hairline {
+  width: 64px;
+  height: 1px;
+  margin: 0 auto 30px;
+  background: var(--line-strong);
+}
+
+.intro {
+  margin: 0 auto;
+  max-width: 380px;
+}
+
+.intro p {
+  margin: 0 0 15px;
+  color: rgba(32, 36, 42, 0.82);
+  font-size: 15px;
+  line-height: 1.8;
+}
+
+.intro .strong {
+  color: var(--accent);
+  font-weight: 700;
+}
+
+.pill-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px;
+  margin: 28px 0;
+}
+
+.pill {
+  min-height: 42px;
+  display: grid;
+  place-items: center;
+  border: 1px solid var(--line);
+  color: var(--muted);
+  background: rgba(255, 255, 255, 0.44);
+  font-size: 13px;
+}
+
+.primary-btn,
+.ghost-btn,
+.copy-btn {
+  width: 100%;
+  min-height: 48px;
+  border: 1px solid var(--ink);
+  border-radius: 0;
+  cursor: pointer;
+  transition: transform 150ms ease, background 150ms ease, color 150ms ease, border-color 150ms ease;
+}
+
+.primary-btn {
+  background: var(--ink);
+  color: #fff;
+  font-weight: 700;
+}
+
+.ghost-btn,
+.copy-btn {
+  background: transparent;
+  color: var(--ink);
+}
+
+.primary-btn:active,
+.ghost-btn:active,
+.copy-btn:active,
+.option:active {
+  transform: translateY(1px);
+}
+
+.disclaimer {
+  margin: 18px auto 0;
+  max-width: 340px;
+  color: var(--muted);
+  font-size: 12px;
+  line-height: 1.65;
+  text-align: center;
+}
+
+.quiz-screen {
+  padding-top: 0;
+}
+
+.sticky-head {
+  position: sticky;
+  top: 0;
+  z-index: 5;
+  margin: 0 -22px 26px;
+  padding: 14px 22px 12px;
+  background: rgba(251, 250, 247, 0.95);
+  border-bottom: 1px solid var(--line);
+  backdrop-filter: blur(12px);
+}
+
+.quiz-meta {
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+  color: var(--muted);
+  font-size: 12px;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+}
+
+.progress-track {
+  height: 4px;
+  margin-top: 10px;
+  background: rgba(32, 36, 42, 0.09);
+}
+
+.progress-bar {
+  height: 100%;
+  background: var(--accent);
+  transition: width 260ms ease;
+}
+
+.question-no {
+  color: rgba(155, 67, 57, 0.18);
+  font-size: 48px;
+  line-height: 1;
+  font-weight: 800;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+}
+
+.question-title {
+  margin: 18px 0 24px;
+  font-size: 22px;
+  line-height: 1.5;
+  font-weight: 750;
+}
+
+.options {
+  display: grid;
+  gap: 12px;
+}
+
+.option {
+  min-height: 66px;
+  display: grid;
+  grid-template-columns: 30px 1fr;
+  gap: 12px;
+  align-items: start;
+  width: 100%;
+  padding: 15px;
+  border: 1px solid var(--line);
+  background: rgba(255, 255, 255, 0.68);
+  color: var(--ink);
+  text-align: left;
+  cursor: pointer;
+  transition: background 160ms ease, border-color 160ms ease, color 160ms ease, opacity 160ms ease;
+}
+
+.option-key {
+  display: grid;
+  place-items: center;
+  width: 28px;
+  height: 28px;
+  border: 1px solid var(--line-strong);
+  font-size: 13px;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+}
+
+.option-text {
+  padding-top: 2px;
+  font-size: 15px;
+  line-height: 1.55;
+}
+
+.option.selected {
+  border-color: var(--accent);
+  background: var(--accent);
+  color: #fff;
+}
+
+.option.selected .option-key {
+  border-color: rgba(255, 255, 255, 0.8);
+}
+
+.option.dimmed {
+  opacity: 0.42;
+}
+
+.hint {
+  margin: 18px 0 0;
+  color: var(--muted);
+  font-size: 12px;
+  text-align: center;
+}
+
+.loading-screen {
+  display: grid;
+  place-items: center;
+}
+
+.loading-card {
+  width: 100%;
+  max-width: 360px;
+  text-align: center;
+}
+
+.spinner {
+  width: 54px;
+  height: 54px;
+  margin: 0 auto 24px;
+  border: 2px solid var(--line);
+  border-top-color: var(--accent);
+  border-radius: 50%;
+  animation: spin 850ms linear infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.loading-text {
+  min-height: 54px;
+  color: var(--accent);
+  font-size: 17px;
+  line-height: 1.6;
+  font-weight: 700;
+}
+
+.step-bars {
+  display: grid;
+  gap: 8px;
+  margin-top: 28px;
+}
+
+.step {
+  height: 4px;
+  overflow: hidden;
+  background: rgba(32, 36, 42, 0.09);
+}
+
+.step span {
+  display: block;
+  height: 100%;
+  width: 0;
+  background: var(--accent);
+  transition: width 300ms ease;
+}
+
+.step.done span {
+  width: 100%;
+}
+
+.result-screen {
+  padding: 22px 18px 30px;
+}
+
+.report {
+  padding: 22px 16px 18px;
+  border: 1px solid var(--line);
+  background: var(--paper);
+  box-shadow: var(--shadow);
+}
+
+.result-type {
+  margin: 8px 0 8px;
+  color: var(--accent);
+  font-size: 30px;
+  line-height: 1.15;
+  font-weight: 850;
+  text-align: center;
+}
+
+.result-subtitle {
+  margin: 0 auto 20px;
+  color: var(--muted);
+  font-size: 15px;
+  line-height: 1.7;
+  text-align: center;
+}
+
+.stamp-row {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px;
+  margin: 18px 0 20px;
+}
+
+.stamp {
+  padding: 12px 10px;
+  border: 1px solid var(--line);
+  background: #fbfaf7;
+}
+
+.stamp strong {
+  display: block;
+  margin-bottom: 4px;
+  color: var(--ink);
+  font-size: 20px;
+}
+
+.stamp span {
+  color: var(--muted);
+  font-size: 12px;
+}
+
+.section {
+  padding: 20px 0;
+  border-top: 1px solid var(--line);
+}
+
+.section h2 {
+  margin: 0 0 12px;
+  font-size: 18px;
+  color: var(--ink);
+}
+
+.section p {
+  margin: 0 0 12px;
+  color: rgba(32, 36, 42, 0.82);
+  font-size: 15px;
+  line-height: 1.85;
+}
+
+.quote {
+  padding: 15px;
+  border-left: 3px solid var(--accent);
+  background: var(--accent-soft);
+  color: #5b2d27;
+  line-height: 1.8;
+  font-weight: 700;
+}
+
+.meters {
+  display: grid;
+  gap: 14px;
+}
+
+.meter-head {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 7px;
+  color: var(--muted);
+  font-size: 13px;
+}
+
+.meter-track {
+  height: 8px;
+  background: rgba(32, 36, 42, 0.08);
+}
+
+.meter-fill {
+  height: 100%;
+  background: var(--accent);
+}
+
+.compare {
+  display: grid;
+  gap: 10px;
+}
+
+.compare-card {
+  padding: 14px;
+  border: 1px solid var(--line);
+  background: #fbfaf7;
+}
+
+.compare-card h3,
+.plan-card h3 {
+  margin: 0 0 8px;
+  font-size: 15px;
+}
+
+.compare-card p,
+.plan-card p {
+  font-size: 14px;
+}
+
+.tag-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.tag {
+  padding: 7px 9px;
+  border: 1px solid var(--line);
+  background: #fbfaf7;
+  color: var(--muted);
+  font-size: 13px;
+}
+
+.plan {
+  display: grid;
+  gap: 10px;
+}
+
+.plan-card {
+  padding: 14px;
+  border: 1px solid var(--line);
+  background: #fbfaf7;
+}
+
+.secondary-note {
+  padding: 14px;
+  border: 1px dashed var(--line-strong);
+  background: rgba(192, 150, 77, 0.12);
+  line-height: 1.75;
+  font-size: 14px;
+}
+
+.actions {
+  display: grid;
+  gap: 10px;
+  margin-top: 18px;
+}
+
+.toast {
+  position: fixed;
+  left: 50%;
+  bottom: 22px;
+  z-index: 20;
+  transform: translateX(-50%);
+  padding: 10px 14px;
+  background: var(--ink);
+  color: #fff;
+  font-size: 13px;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 180ms ease;
+}
+
+.toast.show {
+  opacity: 1;
+}
+
+.error {
+  display: grid;
+  place-items: center;
+  min-height: 100vh;
+  padding: 24px;
+  text-align: center;
+}
+
+.error p {
+  color: var(--muted);
+  line-height: 1.7;
+}
+
+@media (min-width: 700px) {
+  body {
+    padding: 28px 0;
+  }
+
+  .shell {
+    min-height: calc(100vh - 56px);
+    border: 1px solid var(--line);
+    box-shadow: var(--shadow);
+  }
+
+  .screen {
+    min-height: calc(100vh - 60px);
+  }
+}
+
+    </style>
+  </head>
+  <body>
+    <main id="app" aria-live="polite"></main>
+    <script>window.__QUIZ_CONFIG__ = {"slug":"test-city-fit","topic":"测一测你适合的城市","kicker":"CITY LIFE FIT TEST","title":"测一测你适合的城市","subtitle":"32 道生活情境题，从生活节奏、气候偏好、职业发展和文化氛围，匹配你的理想城市画像。","metaDescription":"完成 32 道城市生活偏好测试，生成你的城市类型、适合城市示例、迁居风险和 90 天试住验证方案。","startButton":"开始测试","resultKicker":"City Life Fit Report","quizHint":"按真实生活第一反应选，不要按别人推荐的城市选","copyButton":"复制我的结果","restartButton":"重新测试","scoreLabel":"城市适配度","stageLabel":"当前迁居状态","stageLabels":[{"max":55,"label":"想象期"},{"max":72,"label":"比较期"},{"max":86,"label":"试住期"},{"max":100,"label":"适配清晰"}],"compareLabels":["如果继续留在熟悉环境","如果开始做一次真实验证"],"disclaimer":"本测试把城市作为生活方式原型，仅供趣味自我观察。城市示例不代表综合排名，也不构成迁居、投资、职业或财务建议。","secondaryThreshold":4,"dimensions":["生活节奏","职业发展","气候身体","生活成本","关系归属","文化氛围"],"intro":["没有一座城市适合所有人。","有人需要机会密度，有人需要松弛日常；有人愿意用房子小一点换成长，有人更在意阳光、空气和睡眠。","这 32 道题会从生活节奏、职业发展、气候与身体、生活成本、关系归属、文化与审美、迁居决策 7 个维度，匹配你真正适合的城市生活方式。"],"loadingMessages":["正在读取你的城市生活第一反应...","正在分析你的节奏、职业和气候偏好...","正在匹配六类城市生活方式...","正在生成你的迁居参考报告...","分析完成。"],"questions":[{"id":1,"module":"城市节奏","text":"如果你刚搬到一座陌生城市，第一件想确认的事是：","options":[{"key":"A","text":"这里有没有能让我快速升级的行业和人"},{"key":"B","text":"这里有没有适合我试错、创作和做小项目的空间"},{"key":"C","text":"这里有没有足够多专业同行、文化场景和深度机会"},{"key":"D","text":"这里的日常是不是舒服，能不能很快认识一群人"},{"key":"E","text":"交通、住房、办事和生活成本是否足够可控"},{"key":"F","text":"空气、绿地、阳光和周末能不能让我真正放松"}]},{"id":2,"module":"城市节奏","text":"周五晚上，你更愿意把时间花在：","options":[{"key":"A","text":"行业活动、朋友组的局，或者认识一个可能改变机会的人"},{"key":"B","text":"创作者聚会、工作坊、展览市集，顺便找灵感"},{"key":"C","text":"一场演出、讲座、书店活动，或一个人看完一部好电影"},{"key":"D","text":"约朋友吃饭散步，去热闹但不需要端着的地方"},{"key":"E","text":"回家做饭、整理房间，享受可预测的周末节奏"},{"key":"F","text":"去江边、公园、海边或山里走走，远离人群和屏幕"}]},{"id":3,"module":"城市节奏","text":"你最不能忍受一座城市给你的感觉是：","options":[{"key":"A","text":"机会很多，但身边的人都不愿意往前走"},{"key":"B","text":"所有人都按同一条路径生活，没有人鼓励试新东西"},{"key":"C","text":"只有消费和打卡，没有值得长期学习的内容"},{"key":"D","text":"人很多，却很难建立真实而松弛的关系"},{"key":"E","text":"办什么都混乱，时间和精力被低效流程反复消耗"},{"key":"F","text":"空气、噪音和拥挤让身体一直处在紧绷状态"}]},{"id":4,"module":"城市节奏","text":"你更愿意接受哪一种城市不完美？","options":[{"key":"A","text":"房子小一点、节奏快一点，只要机会密度够高"},{"key":"B","text":"收入不确定一点，只要有空间把想法做成东西"},{"key":"C","text":"生活精致成本高一点，只要专业和文化选择足够多"},{"key":"D","text":"薪资普通一点，只要每天能过得有人情味"},{"key":"E","text":"变化慢一点，只要生活秩序稳定、风险可预期"},{"key":"F","text":"交通不那么方便，只要自然环境和身体状态更舒服"}]},{"id":5,"module":"职业发展","text":"你判断一份工作值不值得去，最先看：","options":[{"key":"A","text":"市场够不够大，能不能接触更高密度的机会"},{"key":"B","text":"有没有试验空间，能不能把新想法变成项目"},{"key":"C","text":"能不能进入专业圈层，持续建立不可替代的能力"},{"key":"D","text":"工作是否留得出生活，不会把每天都变成竞争"},{"key":"E","text":"岗位和组织是否稳定，路径、待遇和边界是否清楚"},{"key":"F","text":"能不能保留自主时间，长期状态是否健康"}]},{"id":6,"module":"职业发展","text":"如果收入高但工作节奏很快，你更可能：","options":[{"key":"A","text":"接受一段时间，用速度换平台、履历和资源"},{"key":"B","text":"接受，但希望能把高强度变成自己的项目资产"},{"key":"C","text":"先看专业成长和长期含金量，不只看短期数字"},{"key":"D","text":"只接受阶段性高峰，不能长期牺牲生活"},{"key":"E","text":"把房租、储蓄和家庭责任算清楚再决定"},{"key":"F","text":"如果身体和情绪明显变差，收入再高也会重新评估"}]},{"id":7,"module":"职业发展","text":"你最舒服的团队氛围是：","options":[{"key":"A","text":"大家目标感强，愿意主动争取，也不怕快速变化"},{"key":"B","text":"允许不同想法被试出来，失败后能快速复盘"},{"key":"C","text":"专业边界清楚，讨论有深度，彼此尊重独立判断"},{"key":"D","text":"关系自然，愿意互相帮忙，工作之外也能做普通朋友"},{"key":"E","text":"职责清楚、流程稳定，不靠临时情绪推动工作"},{"key":"F","text":"少一点内耗，多一点信任，让人有自己的节奏"}]},{"id":8,"module":"职业发展","text":"三年后，你最想看到自己：","options":[{"key":"A","text":"站上更大的业务平台，掌握更多资源和选择权"},{"key":"B","text":"做出一个属于自己的产品、品牌或持续变现的项目"},{"key":"C","text":"在某个领域拥有专业声誉，别人会因为能力来找你"},{"key":"D","text":"有一份不吞掉生活的工作，也有稳定而舒服的关系"},{"key":"E","text":"收入、住房和家庭生活进入可预期的长期状态"},{"key":"F","text":"能自由安排时间，身体状态和精神状态都比现在好"}]},{"id":9,"module":"气候与身体","text":"你对城市气候的第一要求是：","options":[{"key":"A","text":"天气只要不影响出门和工作，机会更重要"},{"key":"B","text":"四季有变化，能给创作和生活带来新鲜感"},{"key":"C","text":"愿意适应季节，只要室内设施、文化活动和服务够丰富"},{"key":"D","text":"不要太极端，最好大多数时候都适合户外和社交"},{"key":"E","text":"稳定、好安排，不要因为天气频繁打乱生活计划"},{"key":"F","text":"阳光、空气、绿地和湿度更重要，身体舒服优先"}]},{"id":10,"module":"气候与身体","text":"连续一周阴雨或高温，你最可能：","options":[{"key":"A","text":"把活动改成室内，工作机会不该被天气拖慢"},{"key":"B","text":"换成拍摄、学习、做产品或线上社群，继续找灵感"},{"key":"C","text":"去展馆、书店、影院或咖啡馆，照样可以过得充实"},{"key":"D","text":"约熟人吃饭聊天，情绪有人接住就没那么难熬"},{"key":"E","text":"按原计划生活，提前准备好通勤、衣物和日常安排"},{"key":"F","text":"如果身体明显不舒服，我会认真考虑换到更适合的地方"}]},{"id":11,"module":"气候与身体","text":"你周末真正恢复能量的方式是：","options":[{"key":"A","text":"参加活动、见厉害的人，新的信息会让我重新充电"},{"key":"B","text":"逛市集、看展、拍照、做手作，灵感比睡懒觉更有效"},{"key":"C","text":"阅读、散步、看演出，安静但有内容的时间最治愈"},{"key":"D","text":"和喜欢的人吃饭聊天，笑过一晚就觉得活过来了"},{"key":"E","text":"睡足、打扫、做饭，规律的小事会让我重新稳定"},{"key":"F","text":"去山海湖泊或郊外，让身体离开城市密度"}]},{"id":12,"module":"气候与身体","text":"如果一座城市让你长期睡不好，你会先：","options":[{"key":"A","text":"看看是否能换住处和通勤方式，只要机会值得就先解决"},{"key":"B","text":"把工作安排改成更灵活的模式，减少固定消耗"},{"key":"C","text":"分析噪音、光线和空间问题，做专业的环境调整"},{"key":"D","text":"找朋友、社区或同事帮忙，别让自己一个人硬撑"},{"key":"E","text":"重新计算生活成本和作息，优先恢复稳定日程"},{"key":"F","text":"直接把身体信号当成迁居依据，环境不适合就离开"}]},{"id":13,"module":"生活成本","text":"看到目标城市的预算表，你最先会算：","options":[{"key":"A","text":"花多少钱能换来更大的平台、圈层和机会"},{"key":"B","text":"能不能用合租、共享办公或项目制降低试错成本"},{"key":"C","text":"住在哪里才能同时接近工作、文化和专业资源"},{"key":"D","text":"每个月能不能留出吃饭、社交和休息的钱"},{"key":"E","text":"房租、储蓄、保险和家庭责任能不能长期平衡"},{"key":"F","text":"医疗、空气、休闲和身心恢复是否值得这笔支出"}]},{"id":14,"module":"生活成本","text":"如果必须在住房和机会之间做取舍，你更可能：","options":[{"key":"A","text":"先住小一点、远一点，把钱投向成长和人脉"},{"key":"B","text":"选择灵活住房，把现金留给做产品和试验"},{"key":"C","text":"尽量住在能提升专业生活质量的区域"},{"key":"D","text":"宁愿少一点机会，也不想每天通勤把人耗空"},{"key":"E","text":"优先保证住房稳定，长期安全感比短期刺激重要"},{"key":"F","text":"住得舒服、接近自然，哪怕职业选择少一些也能接受"}]},{"id":15,"module":"生活成本","text":"你更愿意把钱花在：","options":[{"key":"A","text":"课程、社交、出差和能带来下一次机会的事情上"},{"key":"B","text":"设备、软件、素材和能帮助你试新东西的工具上"},{"key":"C","text":"书、展览、演出、空间和提升专业判断的体验上"},{"key":"D","text":"好吃的、朋友聚会和让日常变得有温度的事情上"},{"key":"E","text":"房子、储蓄、保险和能让生活更稳的东西上"},{"key":"F","text":"健康、旅行、户外和真正能让身体放松的事情上"}]},{"id":16,"module":"生活成本","text":"你最害怕的城市风险是：","options":[{"key":"A","text":"机会窗口出现时，自己却因为太保守没有上车"},{"key":"B","text":"想法很多，但没有资源和空间把它们试出来"},{"key":"C","text":"专业能力停在原地，被低水平的重复工作困住"},{"key":"D","text":"工作之外没有关系和生活，最后只剩下一个人"},{"key":"E","text":"现金流、房租和家庭计划突然失去控制"},{"key":"F","text":"城市环境长期透支身体，却还以为自己只是累了"}]},{"id":17,"module":"关系与归属","text":"你在新城市最想建立的第一类关系是：","options":[{"key":"A","text":"能交换信息、互相推荐机会的同行和朋友"},{"key":"B","text":"愿意一起创作、试错、做项目的伙伴"},{"key":"C","text":"有独立判断、能聊专业和文化的人"},{"key":"D","text":"下班后愿意一起吃饭散步的真实朋友"},{"key":"E","text":"可靠、守信、能在生活里互相帮忙的人"},{"key":"F","text":"不需要高频联系，但彼此尊重空间的少数知己"}]},{"id":18,"module":"关系与归属","text":"家人说“留在身边稳定一点”，你更像：","options":[{"key":"A","text":"我理解他们，但不能只活在别人能接受的半径里"},{"key":"B","text":"我会沟通一个试验期，先把想法做出来再谈长期"},{"key":"C","text":"我需要自己的专业生活，但也会认真安排联系和照顾"},{"key":"D","text":"被支持和照应对我很重要，距离太远会降低生活质量"},{"key":"E","text":"家庭和稳定是我的重要底盘，选择不能只看个人兴奋"},{"key":"F","text":"我需要空间，但会用规律联系让他们知道我过得好"}]},{"id":19,"module":"关系与归属","text":"一个人搬到陌生城市，最让你不安的是：","options":[{"key":"A","text":"不安有，但我更想知道自己能不能打开新局面"},{"key":"B","text":"没有一起做事的人，灵感和行动都容易断掉"},{"key":"C","text":"没有同频的专业和文化圈，长期会觉得无聊"},{"key":"D","text":"没有熟人兜底，生病或低落时很难受"},{"key":"E","text":"生活办事不熟，出了问题不知道找谁解决"},{"key":"F","text":"城市太拥挤，连独处和恢复都找不到地方"}]},{"id":20,"module":"关系与归属","text":"如果伴侣或朋友不支持你换城市，你会先：","options":[{"key":"A","text":"把自己的成长可能性和关系支持分开评估"},{"key":"B","text":"提出阶段性试住或异地合作，不把决定一次性定死"},{"key":"C","text":"认真讨论双方的职业和生活规划，找一个专业上可行的方案"},{"key":"D","text":"优先看日常陪伴和关系质量，不能只谈个人野心"},{"key":"E","text":"把收入、住房、家庭和未来安排做成一张现实计划表"},{"key":"F","text":"先确认新环境是否真的能改善生活，再决定要不要改变关系半径"}]},{"id":21,"module":"文化与审美","text":"你希望城市能持续给你的东西是：","options":[{"key":"A","text":"更高密度的竞争、信息和视野"},{"key":"B","text":"不断出现的新品牌、新内容和新尝试"},{"key":"C","text":"历史、艺术、书店、展览和值得反复研究的生活细节"},{"key":"D","text":"街边烟火、好吃的和不端着的人情味"},{"key":"E","text":"干净、有秩序、生活设施好用且不折腾"},{"key":"F","text":"自然景观、慢节奏和让人重新感到呼吸的空间"}]},{"id":22,"module":"文化与审美","text":"理想中的夜晚更像：","options":[{"key":"A","text":"参加一个行业活动，认识几个可能改变路径的人"},{"key":"B","text":"临时去看展、拍摄或参加创作者聚会"},{"key":"C","text":"一个人看戏、读书或走进一间有内容的空间"},{"key":"D","text":"和朋友吃饭聊天，回家路上还在笑"},{"key":"E","text":"回到家把明天安排好，安稳地睡个好觉"},{"key":"F","text":"沿着江边、海边或公园慢慢走，什么都不安排"}]},{"id":23,"module":"文化与审美","text":"你会被一座城市的哪种气质长期吸引？","options":[{"key":"A","text":"大家都在认真争取更大的可能性"},{"key":"B","text":"普通人也愿意把兴趣做成作品和生意"},{"key":"C","text":"生活有审美，也有足够深的思想和专业内容"},{"key":"D","text":"人与人相处松弛，日常不需要一直表现自己"},{"key":"E","text":"不喧哗但可靠，生活规则让人有安全感"},{"key":"F","text":"不急着证明什么，身体和心都能慢慢松下来"}]},{"id":24,"module":"文化与审美","text":"你更愿意把“成功”定义成：","options":[{"key":"A","text":"进入更大的舞台，拥有更多资源和选择权"},{"key":"B","text":"做出属于自己的东西，并让它持续产生影响"},{"key":"C","text":"在一个领域成为真正专业、别人愿意信任的人"},{"key":"D","text":"每天都有人可见、有事可做，也有时间享受生活"},{"key":"E","text":"收入、住房和家庭都稳定，未来不需要靠运气"},{"key":"F","text":"身体健康、精神松弛，能自由安排自己的时间"}]},{"id":25,"module":"迁居决策","text":"如果只能先去目标城市住一个月，你会怎么试？","options":[{"key":"A","text":"直接进入目标行业，快速体验真实机会密度"},{"key":"B","text":"租个灵活空间，做一个小项目看能不能跑起来"},{"key":"C","text":"安排工作拜访、专业活动和文化路线，观察是否同频"},{"key":"D","text":"按普通居民的节奏生活，认真感受买菜、通勤和交朋友"},{"key":"E","text":"把房租、交通、办事和日常开销全部记下来"},{"key":"F","text":"连续体验天气、睡眠、户外和身体状态，再决定"}]},{"id":26,"module":"迁居决策","text":"你最希望迁居解决的核心问题是：","options":[{"key":"A","text":"职业天花板和机会不足"},{"key":"B","text":"没有平台让自己的创意和副业变现"},{"key":"C","text":"专业成长停滞，生活内容太单一"},{"key":"D","text":"孤独、疲惫和工作挤压了生活"},{"key":"E","text":"收入、住房和未来计划不够稳定"},{"key":"F","text":"长期压力、气候不适和身体状态变差"}]},{"id":27,"module":"迁居决策","text":"如果试住后发现城市没有想象中完美，你会：","options":[{"key":"A","text":"只要核心机会还在，就继续优化住处和节奏"},{"key":"B","text":"换一种工作和社交方式，不急着否定整座城市"},{"key":"C","text":"重新判断专业资源和文化内容是否值得留下"},{"key":"D","text":"看日常关系和生活感能不能修复，不只看城市名气"},{"key":"E","text":"把实际成本和长期稳定重新算一遍"},{"key":"F","text":"只要身体和环境不适，及时止损比证明自己重要"}]},{"id":28,"module":"迁居决策","text":"凭第一反应，你最想先去体验哪一类城市？","options":[{"key":"A","text":"深圳型：机会密度高，适合快速升级和拓展资源"},{"key":"B","text":"杭州型：创意、内容和创业机会，适合边生活边试错"},{"key":"C","text":"上海型：专业分工、文化内容和独立生活都很丰富"},{"key":"D","text":"成都型：松弛社交、烟火日常和生活感更重要"},{"key":"E","text":"苏州/宁波型：秩序、宜居和长期积累是核心"},{"key":"F","text":"昆明/厦门型：自然、气候和身心舒展优先"}]},{"id":29,"module":"日常适配","text":"工作日早上，你最在意哪件事？","options":[{"key":"A","text":"快速进入高密度工作状态，不被通勤消耗"},{"key":"B","text":"途中能顺便捕捉灵感、处理项目或试验想法"},{"key":"C","text":"通勤过程不打断专业状态，能在路上思考问题"},{"key":"D","text":"不赶时间，能买到早餐、和人打招呼再开始工作"},{"key":"E","text":"路线清楚、准点、办事方便，不必每天处理意外"},{"key":"F","text":"出门能接触阳光、绿地或安静街道，让身体慢慢醒来"}]},{"id":30,"module":"日常适配","text":"你理想中的下班时间是？","options":[{"key":"A","text":"还能去社交、参加活动，或认识新的机会"},{"key":"B","text":"去做自己的项目、运营内容或试试副业"},{"key":"C","text":"去学习、看演出、读书，把时间用在成长上"},{"key":"D","text":"约朋友吃饭或散步，让一天有一个收尾"},{"key":"E","text":"回家做饭、休息，按照自己的节奏恢复"},{"key":"F","text":"去公园、江边、海边或山里走走，让身体松下来"}]},{"id":31,"module":"日常适配","text":"当城市让你感到陌生时，你会怎么建立归属？","options":[{"key":"A","text":"先从行业互动开始，让资源网络帮我打开局面"},{"key":"B","text":"先从创作者、兴趣和实践圈建立联系"},{"key":"C","text":"先接触专业、文化活动，慢慢积累同频的人"},{"key":"D","text":"先从邻居、社区和固定饭局开始，让日常有人情味"},{"key":"E","text":"先掌握固定生活路径，在可预测中积累安全感"},{"key":"F","text":"先找到一条阳光或绿地路线，和少数知己保持联系"}]},{"id":32,"module":"日常适配","text":"你更希望城市给你哪种被照顾感？","options":[{"key":"A","text":"有机会和愿意帮我打开新局面的人"},{"key":"B","text":"有空间和平台让我试新东西、做小项目"},{"key":"C","text":"有高质量服务和内容让我不断学习和升级"},{"key":"D","text":"有烟火气和真实人情味，让日常有人陪伴"},{"key":"E","text":"有清晰制度、稳定设施和可被信赖的生活节奏"},{"key":"F","text":"有自然、空气和不被催促的时间，让我慢慢恢复"}]}],"results":{"A":{"typeName":"深圳型 · 机会加速器","subtitle":"你需要一座能让行动快速得到反馈的城市，机会密度比慢慢舒服更能点燃你。","posterSubtext":"你不是一定要卷，而是需要一个愿意回应野心的地方。","maturityScore":88,"coreConclusion":"你对机会、行业变化和向上流动很敏感。你容易被高密度的人、项目和资源激活，长期停在低反馈环境里反而会焦虑。适合你的城市不一定让你每天轻松，但应该让你的努力有机会被看见。你的风险是把忙碌误认为成长，或者为了证明自己长期透支身体和关系。 你真正想要的是选择权和更大的舞台，而不是单纯的高强度。迁居前要确认岗位、收入和止损线，把“我要变强”落成一个可验证的计划。","diagnosis":"你对机会、行业变化和向上流动很敏感。你容易被高密度的人、项目和资源激活，长期停在低反馈环境里反而会焦虑。适合你的城市不一定让你每天轻松，但应该让你的努力有机会被看见。你的风险是把忙碌误认为成长，或者为了证明自己长期透支身体和关系。","whatYouReallyWant":"你真正想要的是选择权和更大的舞台，而不是单纯的高强度。迁居前要确认岗位、收入和止损线，把“我要变强”落成一个可验证的计划。","mechanism":{"title":"机会加速机制","content":"深圳型 · 机会加速器的核心不是某个城市的标签，而是你对机会密度、职业反馈、生活平衡、身体边界的综合需求。迁居前先用短期试住、预算和真实工作场景验证，不要只靠想象中的城市滤镜做长期决定。"},"professionalBasis":["你的生活核心偏向：机会密度，它决定你每天能不能恢复能量。","你的发展需求偏向：职业反馈，它决定你是否愿意长期留下。","你的现实底盘偏向：生活平衡，它决定迁居成本能不能承受。","你的关键课题是：身体边界，别让城市选择替你逃避真正要解决的问题。"],"coreTensions":["机会密度","职业反馈","生活平衡","身体边界","城市滤镜需降温"],"suitableIf":["行业升级","大平台发展","商务拓展","创业早期","高密度社交","快速试错"],"cautionIf":["长期透支","只看薪资不算成本","没有退出线","把忙碌当成长"],"indices":[{"label":"机会密度","value":96},{"label":"职业反馈","value":93},{"label":"生活平衡","value":69},{"label":"身体边界","value":66}],"ifStay":"如果你继续只按熟悉的方式生活，长期透支，你会越来越难判断自己究竟是不适合，还是还没认真试过。","ifChange":"如果你先做一次有预算、有期限、有退出线的试住，把机会密度和职业反馈都验证清楚，迁居会从冲动变成选择。","notRecommended":["长期透支","只看薪资不算成本","没有退出线","把忙碌当成长"],"plan90":[{"title":"第1-2周：写清迁居动机","content":"把你想解决的核心问题写成一句话，区分职业、关系、生活和身体需求。"},{"title":"第3-4周：做现实预算","content":"把房租、通勤、吃饭、社交、储蓄和试错成本都列出来，设定最低现金流。"},{"title":"第2个月：短期试住或远程验证","content":"至少体验一次普通工作日和一个周末，不只打卡景点，也要买菜、通勤、工作和独处。"},{"title":"第3个月：做去留决定","content":"用机会、成本、关系、身体四项复盘，决定正式迁移、继续观察还是先保留双城选择。"}],"closing":"你适合的城市，不是别人嘴里的“最好城市”，而是能让机会密度、职业反馈和现实生活同时成立的地方。"},"B":{"typeName":"杭州型 · 创意创业场","subtitle":"你需要一座允许边生活边试错的城市，创意、内容、技术和小生意都能找到入口。","posterSubtext":"你不是只想找一份工作，更想把自己的想法做成东西。","maturityScore":90,"coreConclusion":"你对新鲜事、内容表达、产品试验和跨界合作很敏感。相比严格固定的路径，你更适合一边工作、一边做项目，在反馈里不断调整自己的方向。你的风险是想法多、开局快，却没有把一个项目做完，也容易被“大家都在创业”的氛围推着走。 你真正想要的是创作自由和可持续的试错空间。适合你的城市要同时有灵感、合作伙伴和基本生活秩序，不能只有热闹。","diagnosis":"你对新鲜事、内容表达、产品试验和跨界合作很敏感。相比严格固定的路径，你更适合一边工作、一边做项目，在反馈里不断调整自己的方向。你的风险是想法多、开局快，却没有把一个项目做完，也容易被“大家都在创业”的氛围推着走。","whatYouReallyWant":"你真正想要的是创作自由和可持续的试错空间。适合你的城市要同时有灵感、合作伙伴和基本生活秩序，不能只有热闹。","mechanism":{"title":"创意试错机制","content":"杭州型 · 创意创业场的核心不是某个城市的标签，而是你对创意空间、试错弹性、项目完成、现金流稳定的综合需求。迁居前先用短期试住、预算和真实工作场景验证，不要只靠想象中的城市滤镜做长期决定。"},"professionalBasis":["你的生活核心偏向：创意空间，它决定你每天能不能恢复能量。","你的发展需求偏向：试错弹性，它决定你是否愿意长期留下。","你的现实底盘偏向：项目完成，它决定迁居成本能不能承受。","你的关键课题是：现金流稳定，别让城市选择替你逃避真正要解决的问题。"],"coreTensions":["创意空间","试错弹性","项目完成","现金流稳定","城市滤镜需降温"],"suitableIf":["内容创作","互联网产品","个人IP","小团队创业","电商和品牌","跨界合作"],"cautionIf":["项目开太多","只追热点","没有稳定现金流","把社交当产出"],"indices":[{"label":"创意空间","value":96},{"label":"试错弹性","value":94},{"label":"项目完成","value":76},{"label":"现金流稳定","value":72}],"ifStay":"如果你继续只按熟悉的方式生活，项目开太多，你会越来越难判断自己究竟是不适合，还是还没认真试过。","ifChange":"如果你先做一次有预算、有期限、有退出线的试住，把创意空间和试错弹性都验证清楚，迁居会从冲动变成选择。","notRecommended":["项目开太多","只追热点","没有稳定现金流","把社交当产出"],"plan90":[{"title":"第1-2周：写清迁居动机","content":"把你想解决的核心问题写成一句话，区分职业、关系、生活和身体需求。"},{"title":"第3-4周：做现实预算","content":"把房租、通勤、吃饭、社交、储蓄和试错成本都列出来，设定最低现金流。"},{"title":"第2个月：短期试住或远程验证","content":"至少体验一次普通工作日和一个周末，不只打卡景点，也要买菜、通勤、工作和独处。"},{"title":"第3个月：做去留决定","content":"用机会、成本、关系、身体四项复盘，决定正式迁移、继续观察还是先保留双城选择。"}],"closing":"你适合的城市，不是别人嘴里的“最好城市”，而是能让创意空间、试错弹性和现实生活同时成立的地方。"},"C":{"typeName":"上海型 · 专业深耕者","subtitle":"你需要一座内容足够丰富、专业分工足够细的城市，让独立生活和长期成长同时发生。","posterSubtext":"你不只想赚钱，也想在一个有深度的环境里成为更专业的人。","maturityScore":91,"coreConclusion":"你对专业圈层、文化内容和生活品质有较高要求。你未必喜欢天天认识新的人，但希望城市能提供高质量的工作机会、学习场景和独处空间。你的风险是标准很高，容易因为“还不够理想”迟迟不开始，也可能把生活过成持续比较。 你真正想要的是深度和选择，而不是简单的热闹。迁居前要确认你的行业是否真的能在目标城市形成长期积累，而不是只因为城市名气行动。","diagnosis":"你对专业圈层、文化内容和生活品质有较高要求。你未必喜欢天天认识新的人，但希望城市能提供高质量的工作机会、学习场景和独处空间。你的风险是标准很高，容易因为“还不够理想”迟迟不开始，也可能把生活过成持续比较。","whatYouReallyWant":"你真正想要的是深度和选择，而不是简单的热闹。迁居前要确认你的行业是否真的能在目标城市形成长期积累，而不是只因为城市名气行动。","mechanism":{"title":"专业深耕机制","content":"上海型 · 专业深耕者的核心不是某个城市的标签，而是你对专业资源、文化内容、独处质量、生活成本感知的综合需求。迁居前先用短期试住、预算和真实工作场景验证，不要只靠想象中的城市滤镜做长期决定。"},"professionalBasis":["你的生活核心偏向：专业资源，它决定你每天能不能恢复能量。","你的发展需求偏向：文化内容，它决定你是否愿意长期留下。","你的现实底盘偏向：独处质量，它决定迁居成本能不能承受。","你的关键课题是：生活成本感知，别让城市选择替你逃避真正要解决的问题。"],"coreTensions":["专业资源","文化内容","独处质量","生活成本感知","城市滤镜需降温"],"suitableIf":["专业咨询","金融与法律","文化内容","科研研究","品牌策略","独立生活"],"cautionIf":["过度比较","只追体面","忽视日常成本","专业孤岛"],"indices":[{"label":"专业资源","value":96},{"label":"文化内容","value":94},{"label":"独处质量","value":91},{"label":"生活成本感知","value":71}],"ifStay":"如果你继续只按熟悉的方式生活，过度比较，你会越来越难判断自己究竟是不适合，还是还没认真试过。","ifChange":"如果你先做一次有预算、有期限、有退出线的试住，把专业资源和文化内容都验证清楚，迁居会从冲动变成选择。","notRecommended":["过度比较","只追体面","忽视日常成本","专业孤岛"],"plan90":[{"title":"第1-2周：写清迁居动机","content":"把你想解决的核心问题写成一句话，区分职业、关系、生活和身体需求。"},{"title":"第3-4周：做现实预算","content":"把房租、通勤、吃饭、社交、储蓄和试错成本都列出来，设定最低现金流。"},{"title":"第2个月：短期试住或远程验证","content":"至少体验一次普通工作日和一个周末，不只打卡景点，也要买菜、通勤、工作和独处。"},{"title":"第3个月：做去留决定","content":"用机会、成本、关系、身体四项复盘，决定正式迁移、继续观察还是先保留双城选择。"}],"closing":"你适合的城市，不是别人嘴里的“最好城市”，而是能让专业资源、文化内容和现实生活同时成立的地方。"},"D":{"typeName":"成都型 · 松弛生活派","subtitle":"你需要一座让工作回到生活之中的城市，人情味、日常感和可持续状态比头衔更重要。","posterSubtext":"你不是没有野心，只是不想用全部生活去交换一份看起来厉害的履历。","maturityScore":87,"coreConclusion":"你很重视日常的舒适度、关系的真实感和下班后的生活。你能努力，但不适合长期处于高压、强竞争和没有边界的环境。适合你的城市应该让你在工作之外还有吃饭、散步、交朋友和恢复自己的时间。你的风险是为了松弛而逃避必要的成长，或者用“我不想卷”掩盖真正的职业困惑。 你真正想要的是有生活的成长，而不是停止成长。选择城市时要同时保留职业增量和生活边界。","diagnosis":"你很重视日常的舒适度、关系的真实感和下班后的生活。你能努力，但不适合长期处于高压、强竞争和没有边界的环境。适合你的城市应该让你在工作之外还有吃饭、散步、交朋友和恢复自己的时间。你的风险是为了松弛而逃避必要的成长，或者用“我不想卷”掩盖真正的职业困惑。","whatYouReallyWant":"你真正想要的是有生活的成长，而不是停止成长。选择城市时要同时保留职业增量和生活边界。","mechanism":{"title":"松弛复原机制","content":"成都型 · 松弛生活派的核心不是某个城市的标签，而是你对生活感、关系舒适、职业增量、恢复能力的综合需求。迁居前先用短期试住、预算和真实工作场景验证，不要只靠想象中的城市滤镜做长期决定。"},"professionalBasis":["你的生活核心偏向：生活感，它决定你每天能不能恢复能量。","你的发展需求偏向：关系舒适，它决定你是否愿意长期留下。","你的现实底盘偏向：职业增量，它决定迁居成本能不能承受。","你的关键课题是：恢复能力，别让城市选择替你逃避真正要解决的问题。"],"coreTensions":["生活感","关系舒适","职业增量","恢复能力","城市滤镜需降温"],"suitableIf":["远程工作","内容生活方式","教育服务","本地经营","朋友型社交","长期生活"],"cautionIf":["过度安逸","关系替代成长","逃避竞争","收入增长停滞"],"indices":[{"label":"生活感","value":96},{"label":"关系舒适","value":94},{"label":"职业增量","value":75},{"label":"恢复能力","value":91}],"ifStay":"如果你继续只按熟悉的方式生活，过度安逸，你会越来越难判断自己究竟是不适合，还是还没认真试过。","ifChange":"如果你先做一次有预算、有期限、有退出线的试住，把生活感和关系舒适都验证清楚，迁居会从冲动变成选择。","notRecommended":["过度安逸","关系替代成长","逃避竞争","收入增长停滞"],"plan90":[{"title":"第1-2周：写清迁居动机","content":"把你想解决的核心问题写成一句话，区分职业、关系、生活和身体需求。"},{"title":"第3-4周：做现实预算","content":"把房租、通勤、吃饭、社交、储蓄和试错成本都列出来，设定最低现金流。"},{"title":"第2个月：短期试住或远程验证","content":"至少体验一次普通工作日和一个周末，不只打卡景点，也要买菜、通勤、工作和独处。"},{"title":"第3个月：做去留决定","content":"用机会、成本、关系、身体四项复盘，决定正式迁移、继续观察还是先保留双城选择。"}],"closing":"你适合的城市，不是别人嘴里的“最好城市”，而是能让生活感、关系舒适和现实生活同时成立的地方。"},"E":{"typeName":"苏州/宁波型 · 秩序宜居派","subtitle":"你需要一座规则清楚、生活可控的城市，让收入、住房、家庭和长期计划慢慢变稳。","posterSubtext":"你不是缺少野心，而是更在意一条能走得久、风险可控的路。","maturityScore":89,"coreConclusion":"你对住房、通勤、现金流、家庭支持和生活秩序非常敏感。你不喜欢用一次豪赌换未来，更愿意在稳定底盘上积累技能、关系和资产。你的风险是过度求稳，把安全感误认为没有变化，也可能因为害怕选错而错过本来可以尝试的机会。 你真正想要的是可预测的生活和逐步变好的未来。适合你的迁居方案应该先有预算、试住和退出线，再谈长期定居。","diagnosis":"你对住房、通勤、现金流、家庭支持和生活秩序非常敏感。你不喜欢用一次豪赌换未来，更愿意在稳定底盘上积累技能、关系和资产。你的风险是过度求稳，把安全感误认为没有变化，也可能因为害怕选错而错过本来可以尝试的机会。","whatYouReallyWant":"你真正想要的是可预测的生活和逐步变好的未来。适合你的迁居方案应该先有预算、试住和退出线，再谈长期定居。","mechanism":{"title":"秩序积累机制","content":"苏州/宁波型 · 秩序宜居派的核心不是某个城市的标签，而是你对生活可控、长期积累、家庭兼容、机会冒险的综合需求。迁居前先用短期试住、预算和真实工作场景验证，不要只靠想象中的城市滤镜做长期决定。"},"professionalBasis":["你的生活核心偏向：生活可控，它决定你每天能不能恢复能量。","你的发展需求偏向：长期积累，它决定你是否愿意长期留下。","你的现实底盘偏向：家庭兼容，它决定迁居成本能不能承受。","你的关键课题是：机会冒险，别让城市选择替你逃避真正要解决的问题。"],"coreTensions":["生活可控","长期积累","家庭兼容","机会冒险","城市滤镜需降温"],"suitableIf":["制造与供应链","稳定企业","专业服务","家庭生活","长期储蓄","稳健副业"],"cautionIf":["过度求稳","机会启动慢","害怕换赛道","把稳定当终点"],"indices":[{"label":"生活可控","value":97},{"label":"长期积累","value":94},{"label":"家庭兼容","value":92},{"label":"机会冒险","value":67}],"ifStay":"如果你继续只按熟悉的方式生活，过度求稳，你会越来越难判断自己究竟是不适合，还是还没认真试过。","ifChange":"如果你先做一次有预算、有期限、有退出线的试住，把生活可控和长期积累都验证清楚，迁居会从冲动变成选择。","notRecommended":["过度求稳","机会启动慢","害怕换赛道","把稳定当终点"],"plan90":[{"title":"第1-2周：写清迁居动机","content":"把你想解决的核心问题写成一句话，区分职业、关系、生活和身体需求。"},{"title":"第3-4周：做现实预算","content":"把房租、通勤、吃饭、社交、储蓄和试错成本都列出来，设定最低现金流。"},{"title":"第2个月：短期试住或远程验证","content":"至少体验一次普通工作日和一个周末，不只打卡景点，也要买菜、通勤、工作和独处。"},{"title":"第3个月：做去留决定","content":"用机会、成本、关系、身体四项复盘，决定正式迁移、继续观察还是先保留双城选择。"}],"closing":"你适合的城市，不是别人嘴里的“最好城市”，而是能让生活可控、长期积累和现实生活同时成立的地方。"},"F":{"typeName":"昆明/厦门型 · 自然疗愈派","subtitle":"你需要一个能让身体和情绪先松下来的城市，阳光、空气、自然和低压节奏是你的生产力。","posterSubtext":"对你来说，适合的城市不是让你更会忍，而是让你不必一直忍。","maturityScore":86,"coreConclusion":"你对气候、睡眠、噪音、绿地和身体状态的感受比多数人更敏锐。环境一旦长期不适，你的工作、关系和判断都会被拖累。你适合把健康和生活质量当作长期选择的一部分，但要注意不要把“换城市”当成解决所有问题的万能按钮。 你真正想要的是可呼吸的生活，以及不靠透支换来的收入。迁居前先用短期试住验证睡眠、工作机会和现实现金流。","diagnosis":"你对气候、睡眠、噪音、绿地和身体状态的感受比多数人更敏锐。环境一旦长期不适，你的工作、关系和判断都会被拖累。你适合把健康和生活质量当作长期选择的一部分，但要注意不要把“换城市”当成解决所有问题的万能按钮。","whatYouReallyWant":"你真正想要的是可呼吸的生活，以及不靠透支换来的收入。迁居前先用短期试住验证睡眠、工作机会和现实现金流。","mechanism":{"title":"身心复原机制","content":"昆明/厦门型 · 自然疗愈派的核心不是某个城市的标签，而是你对身体舒适、自然恢复、生活弹性、职业密度的综合需求。迁居前先用短期试住、预算和真实工作场景验证，不要只靠想象中的城市滤镜做长期决定。"},"professionalBasis":["你的生活核心偏向：身体舒适，它决定你每天能不能恢复能量。","你的发展需求偏向：自然恢复，它决定你是否愿意长期留下。","你的现实底盘偏向：生活弹性，它决定迁居成本能不能承受。","你的关键课题是：职业密度，别让城市选择替你逃避真正要解决的问题。"],"coreTensions":["身体舒适","自然恢复","生活弹性","职业密度","城市滤镜需降温"],"suitableIf":["远程工作","健康服务","自由职业","生活方式内容","小而稳的生意","长期疗愈"],"cautionIf":["只看风景不看工作","现金流不足","把逃离当重启","关系和机会断层"],"indices":[{"label":"身体舒适","value":97},{"label":"自然恢复","value":96},{"label":"生活弹性","value":89},{"label":"职业密度","value":68}],"ifStay":"如果你继续只按熟悉的方式生活，只看风景不看工作，你会越来越难判断自己究竟是不适合，还是还没认真试过。","ifChange":"如果你先做一次有预算、有期限、有退出线的试住，把身体舒适和自然恢复都验证清楚，迁居会从冲动变成选择。","notRecommended":["只看风景不看工作","现金流不足","把逃离当重启","关系和机会断层"],"plan90":[{"title":"第1-2周：写清迁居动机","content":"把你想解决的核心问题写成一句话，区分职业、关系、生活和身体需求。"},{"title":"第3-4周：做现实预算","content":"把房租、通勤、吃饭、社交、储蓄和试错成本都列出来，设定最低现金流。"},{"title":"第2个月：短期试住或远程验证","content":"至少体验一次普通工作日和一个周末，不只打卡景点，也要买菜、通勤、工作和独处。"},{"title":"第3个月：做去留决定","content":"用机会、成本、关系、身体四项复盘，决定正式迁移、继续观察还是先保留双城选择。"}],"closing":"你适合的城市，不是别人嘴里的“最好城市”，而是能让身体舒适、自然恢复和现实生活同时成立的地方。"}},"secondaryNotes":{"A":{"B":"你的主画像是「深圳型 · 机会加速器」，同时带有「杭州型 · 创意创业场」的副倾向。主结果代表你最稳定的城市需求，副倾向代表你在工作、关系或压力变化时会优先补足的生活条件。","C":"你的主画像是「深圳型 · 机会加速器」，同时带有「上海型 · 专业深耕者」的副倾向。主结果代表你最稳定的城市需求，副倾向代表你在工作、关系或压力变化时会优先补足的生活条件。","D":"你的主画像是「深圳型 · 机会加速器」，同时带有「成都型 · 松弛生活派」的副倾向。主结果代表你最稳定的城市需求，副倾向代表你在工作、关系或压力变化时会优先补足的生活条件。","E":"你的主画像是「深圳型 · 机会加速器」，同时带有「苏州/宁波型 · 秩序宜居派」的副倾向。主结果代表你最稳定的城市需求，副倾向代表你在工作、关系或压力变化时会优先补足的生活条件。","F":"你的主画像是「深圳型 · 机会加速器」，同时带有「昆明/厦门型 · 自然疗愈派」的副倾向。主结果代表你最稳定的城市需求，副倾向代表你在工作、关系或压力变化时会优先补足的生活条件。"},"B":{"A":"你的主画像是「杭州型 · 创意创业场」，同时带有「深圳型 · 机会加速器」的副倾向。主结果代表你最稳定的城市需求，副倾向代表你在工作、关系或压力变化时会优先补足的生活条件。","C":"你的主画像是「杭州型 · 创意创业场」，同时带有「上海型 · 专业深耕者」的副倾向。主结果代表你最稳定的城市需求，副倾向代表你在工作、关系或压力变化时会优先补足的生活条件。","D":"你的主画像是「杭州型 · 创意创业场」，同时带有「成都型 · 松弛生活派」的副倾向。主结果代表你最稳定的城市需求，副倾向代表你在工作、关系或压力变化时会优先补足的生活条件。","E":"你的主画像是「杭州型 · 创意创业场」，同时带有「苏州/宁波型 · 秩序宜居派」的副倾向。主结果代表你最稳定的城市需求，副倾向代表你在工作、关系或压力变化时会优先补足的生活条件。","F":"你的主画像是「杭州型 · 创意创业场」，同时带有「昆明/厦门型 · 自然疗愈派」的副倾向。主结果代表你最稳定的城市需求，副倾向代表你在工作、关系或压力变化时会优先补足的生活条件。"},"C":{"A":"你的主画像是「上海型 · 专业深耕者」，同时带有「深圳型 · 机会加速器」的副倾向。主结果代表你最稳定的城市需求，副倾向代表你在工作、关系或压力变化时会优先补足的生活条件。","B":"你的主画像是「上海型 · 专业深耕者」，同时带有「杭州型 · 创意创业场」的副倾向。主结果代表你最稳定的城市需求，副倾向代表你在工作、关系或压力变化时会优先补足的生活条件。","D":"你的主画像是「上海型 · 专业深耕者」，同时带有「成都型 · 松弛生活派」的副倾向。主结果代表你最稳定的城市需求，副倾向代表你在工作、关系或压力变化时会优先补足的生活条件。","E":"你的主画像是「上海型 · 专业深耕者」，同时带有「苏州/宁波型 · 秩序宜居派」的副倾向。主结果代表你最稳定的城市需求，副倾向代表你在工作、关系或压力变化时会优先补足的生活条件。","F":"你的主画像是「上海型 · 专业深耕者」，同时带有「昆明/厦门型 · 自然疗愈派」的副倾向。主结果代表你最稳定的城市需求，副倾向代表你在工作、关系或压力变化时会优先补足的生活条件。"},"D":{"A":"你的主画像是「成都型 · 松弛生活派」，同时带有「深圳型 · 机会加速器」的副倾向。主结果代表你最稳定的城市需求，副倾向代表你在工作、关系或压力变化时会优先补足的生活条件。","B":"你的主画像是「成都型 · 松弛生活派」，同时带有「杭州型 · 创意创业场」的副倾向。主结果代表你最稳定的城市需求，副倾向代表你在工作、关系或压力变化时会优先补足的生活条件。","C":"你的主画像是「成都型 · 松弛生活派」，同时带有「上海型 · 专业深耕者」的副倾向。主结果代表你最稳定的城市需求，副倾向代表你在工作、关系或压力变化时会优先补足的生活条件。","E":"你的主画像是「成都型 · 松弛生活派」，同时带有「苏州/宁波型 · 秩序宜居派」的副倾向。主结果代表你最稳定的城市需求，副倾向代表你在工作、关系或压力变化时会优先补足的生活条件。","F":"你的主画像是「成都型 · 松弛生活派」，同时带有「昆明/厦门型 · 自然疗愈派」的副倾向。主结果代表你最稳定的城市需求，副倾向代表你在工作、关系或压力变化时会优先补足的生活条件。"},"E":{"A":"你的主画像是「苏州/宁波型 · 秩序宜居派」，同时带有「深圳型 · 机会加速器」的副倾向。主结果代表你最稳定的城市需求，副倾向代表你在工作、关系或压力变化时会优先补足的生活条件。","B":"你的主画像是「苏州/宁波型 · 秩序宜居派」，同时带有「杭州型 · 创意创业场」的副倾向。主结果代表你最稳定的城市需求，副倾向代表你在工作、关系或压力变化时会优先补足的生活条件。","C":"你的主画像是「苏州/宁波型 · 秩序宜居派」，同时带有「上海型 · 专业深耕者」的副倾向。主结果代表你最稳定的城市需求，副倾向代表你在工作、关系或压力变化时会优先补足的生活条件。","D":"你的主画像是「苏州/宁波型 · 秩序宜居派」，同时带有「成都型 · 松弛生活派」的副倾向。主结果代表你最稳定的城市需求，副倾向代表你在工作、关系或压力变化时会优先补足的生活条件。","F":"你的主画像是「苏州/宁波型 · 秩序宜居派」，同时带有「昆明/厦门型 · 自然疗愈派」的副倾向。主结果代表你最稳定的城市需求，副倾向代表你在工作、关系或压力变化时会优先补足的生活条件。"},"F":{"A":"你的主画像是「昆明/厦门型 · 自然疗愈派」，同时带有「深圳型 · 机会加速器」的副倾向。主结果代表你最稳定的城市需求，副倾向代表你在工作、关系或压力变化时会优先补足的生活条件。","B":"你的主画像是「昆明/厦门型 · 自然疗愈派」，同时带有「杭州型 · 创意创业场」的副倾向。主结果代表你最稳定的城市需求，副倾向代表你在工作、关系或压力变化时会优先补足的生活条件。","C":"你的主画像是「昆明/厦门型 · 自然疗愈派」，同时带有「上海型 · 专业深耕者」的副倾向。主结果代表你最稳定的城市需求，副倾向代表你在工作、关系或压力变化时会优先补足的生活条件。","D":"你的主画像是「昆明/厦门型 · 自然疗愈派」，同时带有「成都型 · 松弛生活派」的副倾向。主结果代表你最稳定的城市需求，副倾向代表你在工作、关系或压力变化时会优先补足的生活条件。","E":"你的主画像是「昆明/厦门型 · 自然疗愈派」，同时带有「苏州/宁波型 · 秩序宜居派」的副倾向。主结果代表你最稳定的城市需求，副倾向代表你在工作、关系或压力变化时会优先补足的生活条件。"}},"shareTemplate":["我测出来更适合：{{typeName}}","{{posterSubtext}}","{{secondaryLine}}","","测一测你适合的城市｜32题城市生活偏好测试"]};</script>
+    <script>
+(function () {
+  const app = document.getElementById("app");
+  const configPaths = ["./configs/site-config.json", "./configs/career-change.json"];
+
+  const state = {
+    config: null,
+    answers: {},
+    currentIndex: 0,
+    selected: null,
+    locked: false,
+    loadingStep: 0,
+    route: "home",
+    resultData: null,
+  };
+
+  const defaultLoadingMessages = [
+    "正在读取你的选择倾向...",
+    "正在识别隐藏动机...",
+    "正在计算结果分布...",
+    "正在生成专属报告...",
+    "分析完成。",
+  ];
+
+  init();
+
+  async function init() {
+    try {
+      state.config = await fetchConfig();
+      applyDocumentMeta(state.config);
+
+      const saved = sessionStorage.getItem(getStorageKey());
+      if (saved) {
+        state.answers = JSON.parse(saved);
+      }
+
+      routeFromHash();
+      window.addEventListener("hashchange", routeFromHash);
+    } catch (error) {
+      app.innerHTML = `
+        <div class="error">
+          <div>
+            <h1>测试加载失败</h1>
+            <p>请确认你是通过网页链接打开页面，而不是直接双击 HTML 文件。</p>
+          </div>
+        </div>
+      `;
+      console.error(error);
+    }
+  }
+
+  async function fetchConfig() {
+    if (window.__QUIZ_CONFIG__) return window.__QUIZ_CONFIG__;
+    let lastError;
+    for (const path of configPaths) {
+      try {
+        const response = await fetch(path, { cache: "no-store" });
+        if (!response.ok) throw new Error(`${path} ${response.status}`);
+        return response.json();
+      } catch (error) {
+        lastError = error;
+      }
+    }
+    throw lastError;
+  }
+
+  function applyDocumentMeta(cfg) {
+    const title = cfg.title || "趣味测试";
+    const description = cfg.metaDescription || cfg.subtitle || "完成测试，生成你的专属报告。";
+    document.title = title;
+    setMeta("name", "description", description);
+    setMeta("property", "og:title", title);
+    setMeta("property", "og:description", description);
+  }
+
+  function setMeta(attr, key, content) {
+    let node = document.querySelector(`meta[${attr}="${key}"]`);
+    if (!node) {
+      node = document.createElement("meta");
+      node.setAttribute(attr, key);
+      document.head.appendChild(node);
+    }
+    node.setAttribute("content", content);
+  }
+
+  function routeFromHash() {
+    const route = (location.hash || "#/").replace("#/", "") || "home";
+    renderRoute(route);
+  }
+
+  function navigate(route) {
+    const nextHash = `#/${route}`;
+    if (location.hash === nextHash) {
+      renderRoute(route);
+      return;
+    }
+    location.hash = nextHash;
+  }
+
+  function renderRoute(route) {
+    state.route = route;
+    if (route === "quiz") renderQuiz();
+    else if (route === "loading") startLoading();
+    else if (route === "result") renderResult();
+    else renderHome();
+  }
+
+  function renderShell(content, extraClass = "") {
+    app.innerHTML = `
+      <div class="shell">
+        <div class="top-rule"></div>
+        <section class="screen ${extraClass}">${content}</section>
+      </div>
+      <div id="toast" class="toast">已复制</div>
+    `;
+  }
+
+  function renderHome() {
+    const cfg = state.config;
+    renderShell(
+      `
+      <div class="home">
+        <div class="kicker"><span class="dot"></span><span>${text(cfg.kicker)}</span><span class="dot"></span></div>
+        <h1 class="hero-title">${text(cfg.title)}</h1>
+        <p class="hero-subtitle">${text(cfg.subtitle)}</p>
+        <div class="hairline"></div>
+        <div class="intro">
+          ${(cfg.intro || []).map((p, index) => `<p class="${index === cfg.intro.length - 1 ? "strong" : ""}">${text(p)}</p>`).join("")}
+        </div>
+        <div class="pill-grid">
+          ${(cfg.dimensions || []).map((item) => `<div class="pill">${text(item)}</div>`).join("")}
+        </div>
+        <button class="primary-btn" data-action="start">${text(cfg.startButton || "开始测试")}</button>
+        <p class="disclaimer">${text(cfg.disclaimer || "本测试为趣味内容，仅供娱乐参考。")}</p>
+      </div>
+      `,
+      "home"
+    );
+    const startButton = app.querySelector("[data-action='start']");
+    let started = false;
+    const startQuiz = () => {
+      if (started) return;
+      started = true;
+      state.answers = {};
+      state.currentIndex = 0;
+      sessionStorage.removeItem(getStorageKey());
+      navigate("quiz");
+    };
+    startButton.addEventListener("click", startQuiz);
+    startButton.addEventListener(
+      "touchend",
+      (event) => {
+        event.preventDefault();
+        startQuiz();
+      },
+      { passive: false }
+    );
+  }
+
+  function renderQuiz() {
+    const questions = state.config.questions || [];
+    const question = questions[state.currentIndex];
+    if (!question) {
+      renderHome();
+      return;
+    }
+
+    const progress = ((state.currentIndex + 1) / questions.length) * 100;
+
+    renderShell(
+      `
+      <div class="sticky-head">
+        <div class="quiz-meta">
+          <span>${String(state.currentIndex + 1).padStart(2, "0")} / ${questions.length}</span>
+          <span>${text(question.module)}</span>
+        </div>
+        <div class="progress-track"><div class="progress-bar" style="width:${progress}%"></div></div>
+      </div>
+      <div class="question-no">${String(state.currentIndex + 1).padStart(2, "0")}</div>
+      <h1 class="question-title">${text(question.text)}</h1>
+      <div class="options">
+        ${(question.options || [])
+          .map(
+            (option) => `
+            <button class="option" data-option="${text(option.key)}">
+              <span class="option-key">${text(option.key)}</span>
+              <span class="option-text">${text(option.text)}</span>
+            </button>
+          `
+          )
+          .join("")}
+      </div>
+      <p class="hint">${text(state.config.quizHint || "选择后自动进入下一题")}</p>
+      `,
+      "quiz-screen"
+    );
+
+    app.querySelectorAll("[data-option]").forEach((button) => {
+      button.addEventListener("click", () => selectOption(button.dataset.option));
+    });
+  }
+
+  function selectOption(key) {
+    if (state.locked) return;
+    state.locked = true;
+    state.selected = key;
+    const question = state.config.questions[state.currentIndex];
+    state.answers[question.id] = key;
+
+    app.querySelectorAll(".option").forEach((button) => {
+      const selected = button.dataset.option === key;
+      button.classList.toggle("selected", selected);
+      button.classList.toggle("dimmed", !selected);
+    });
+
+    window.setTimeout(() => {
+      if (state.currentIndex < state.config.questions.length - 1) {
+        state.currentIndex += 1;
+        state.locked = false;
+        state.selected = null;
+        renderQuiz();
+      } else {
+        sessionStorage.setItem(getStorageKey(), JSON.stringify(state.answers));
+        state.locked = false;
+        navigate("loading");
+      }
+    }, 420);
+  }
+
+  function startLoading() {
+    state.loadingStep = 0;
+    renderLoading("");
+    tickLoading();
+  }
+
+  function renderLoading(value) {
+    const loadingMessages = getLoadingMessages();
+    renderShell(
+      `
+      <div class="loading-card">
+        <div class="spinner"></div>
+        <div class="loading-text">${text(value)}<span class="cursor">|</span></div>
+        <div class="step-bars">
+          ${loadingMessages.map((_, index) => `<div class="step ${index < state.loadingStep ? "done" : ""}"><span></span></div>`).join("")}
+        </div>
+      </div>
+      `,
+      "loading-screen"
+    );
+  }
+
+  function tickLoading() {
+    if (state.route !== "loading") return;
+    const loadingMessages = getLoadingMessages();
+    if (state.loadingStep >= loadingMessages.length) {
+      window.setTimeout(() => navigate("result"), 700);
+      return;
+    }
+    const message = loadingMessages[state.loadingStep];
+    let chars = 0;
+    const interval = window.setInterval(() => {
+      chars += 1;
+      renderLoading(message.slice(0, chars));
+      if (chars >= message.length) {
+        window.clearInterval(interval);
+        window.setTimeout(() => {
+          state.loadingStep += 1;
+          tickLoading();
+        }, 520);
+      }
+    }, 35);
+  }
+
+  function renderResult() {
+    const saved = sessionStorage.getItem(getStorageKey());
+    if (saved) state.answers = JSON.parse(saved);
+    if (Object.keys(state.answers).length < state.config.questions.length) {
+      renderHome();
+      return;
+    }
+
+    const scored = scoreAnswers(state.answers);
+    const primary = state.config.results[scored.primary];
+    const secondary = scored.secondary ? state.config.secondaryNotes?.[scored.primary]?.[scored.secondary] : null;
+    const stage = getStage(primary.maturityScore);
+    const shareText = buildShareText(primary, secondary);
+    const compareLabels = state.config.compareLabels || ["如果继续原路", "如果换一种做法"];
+    state.resultData = { scored, primary, secondary, stage, shareText };
+
+    renderShell(
+      `
+      <article class="report">
+        <div class="kicker"><span class="dot"></span><span>${text(state.config.resultKicker || "Result Report")}</span><span class="dot"></span></div>
+        <h1 class="result-type">${text(primary.typeName)}</h1>
+        <p class="result-subtitle">${text(primary.subtitle)}</p>
+        <div class="stamp-row">
+          <div class="stamp"><strong>${text(primary.maturityScore)}</strong><span>${text(state.config.scoreLabel || "决策成熟度")}</span></div>
+          <div class="stamp"><strong>${text(stage)}</strong><span>${text(state.config.stageLabel || "当前行动阶段")}</span></div>
+        </div>
+
+        <section class="section">
+          <h2>你的答案分布</h2>
+          <div class="meters">
+            ${Object.entries(scored.counts)
+              .filter(([, value]) => value > 0)
+              .map(([key, value]) => {
+                const typeData = state.config.results[key];
+                const width = (value / state.config.questions.length) * 100;
+                return `
+                  <div>
+                    <div class="meter-head"><span>${text(key)} · ${text(typeData.typeName)}</span><span>${value} 题</span></div>
+                    <div class="meter-track"><div class="meter-fill" style="width:${width}%"></div></div>
+                  </div>
+                `;
+              })
+              .join("")}
+          </div>
+        </section>
+
+        ${secondary ? `<section class="section"><h2>副倾向提示</h2><div class="secondary-note">${text(secondary)}</div></section>` : ""}
+
+        <section class="section">
+          <h2>诊断结论</h2>
+          <div class="quote">${text(primary.coreConclusion)}</div>
+        </section>
+
+        <section class="section">
+          <h2>为什么你会这样</h2>
+          <p>${text(primary.diagnosis)}</p>
+          <p>${text(primary.whatYouReallyWant)}</p>
+        </section>
+
+        <section class="section">
+          <h2>${text(primary.mechanism.title)}</h2>
+          <p>${text(primary.mechanism.content)}</p>
+        </section>
+
+        ${renderParagraphSection("专业解读框架", primary.professionalBasis)}
+        ${renderTagSection("你的关键矛盾", primary.coreTensions)}
+        ${renderCompareListSection("适合推进的条件", "需要谨慎的信号", primary.suitableIf, primary.cautionIf)}
+
+        <section class="section">
+          <h2>关键指数</h2>
+          <div class="meters">
+            ${(primary.indices || [])
+              .map(
+                (item) => `
+                <div>
+                  <div class="meter-head"><span>${text(item.label)}</span><span>${text(item.value)}</span></div>
+                  <div class="meter-track"><div class="meter-fill" style="width:${number(item.value)}%"></div></div>
+                </div>
+              `
+              )
+              .join("")}
+          </div>
+        </section>
+
+        <section class="section">
+          <h2>两条路径对比</h2>
+          <div class="compare">
+            <div class="compare-card"><h3>${text(compareLabels[0])}</h3><p>${text(primary.ifStay)}</p></div>
+            <div class="compare-card"><h3>${text(compareLabels[1])}</h3><p>${text(primary.ifChange)}</p></div>
+          </div>
+        </section>
+
+        <section class="section">
+          <h2>现在最不建议你做</h2>
+          <div class="tag-list">${(primary.notRecommended || []).map((item) => `<span class="tag">${text(item)}</span>`).join("")}</div>
+        </section>
+
+        <section class="section">
+          <h2>未来 90 天验证方案</h2>
+          <div class="plan">
+            ${(primary.plan90 || [])
+              .map(
+                (item, index) => `
+                <div class="plan-card">
+                  <h3>${index + 1}. ${text(item.title)}</h3>
+                  <p>${text(item.content)}</p>
+                </div>
+              `
+              )
+              .join("")}
+          </div>
+        </section>
+
+        <section class="section">
+          <h2>最后一句话</h2>
+          <p>${text(primary.closing)}</p>
+        </section>
+
+        <div class="actions">
+          <button class="primary-btn" data-action="copy">${text(state.config.copyButton || "复制我的结果")}</button>
+          <button class="ghost-btn" data-action="restart">${text(state.config.restartButton || "重新测试")}</button>
+        </div>
+      </article>
+      `,
+      "result-screen"
+    );
+
+    app.querySelector("[data-action='copy']").addEventListener("click", () => copyShareText(shareText));
+    app.querySelector("[data-action='restart']").addEventListener("click", () => {
+      sessionStorage.removeItem(getStorageKey());
+      state.answers = {};
+      state.currentIndex = 0;
+      navigate("home");
+    });
+  }
+
+  function renderParagraphSection(title, paragraphs) {
+    if (!Array.isArray(paragraphs) || !paragraphs.length) return "";
+    return `
+      <section class="section">
+        <h2>${text(title)}</h2>
+        ${paragraphs.map((item) => `<p>${text(item)}</p>`).join("")}
+      </section>
+    `;
+  }
+
+  function renderTagSection(title, items) {
+    if (!Array.isArray(items) || !items.length) return "";
+    return `
+      <section class="section">
+        <h2>${text(title)}</h2>
+        <div class="tag-list">${items.map((item) => `<span class="tag">${text(item)}</span>`).join("")}</div>
+      </section>
+    `;
+  }
+
+  function renderCompareListSection(leftTitle, rightTitle, leftItems, rightItems) {
+    const hasLeft = Array.isArray(leftItems) && leftItems.length;
+    const hasRight = Array.isArray(rightItems) && rightItems.length;
+    if (!hasLeft && !hasRight) return "";
+    return `
+      <section class="section">
+        <h2>适用边界</h2>
+        <div class="compare">
+          <div class="compare-card">
+            <h3>${text(leftTitle)}</h3>
+            ${(leftItems || []).map((item) => `<p>${text(item)}</p>`).join("")}
+          </div>
+          <div class="compare-card">
+            <h3>${text(rightTitle)}</h3>
+            ${(rightItems || []).map((item) => `<p>${text(item)}</p>`).join("")}
+          </div>
+        </div>
+      </section>
+    `;
+  }
+
+  function scoreAnswers(answers) {
+    if (state.config.scoring?.mode === "paired-attributes") {
+      return scorePairedAttributes(answers, state.config.scoring);
+    }
+
+    const resultKeys = Object.keys(state.config.results || {});
+    const counts = Object.fromEntries(resultKeys.map((key) => [key, 0]));
+    (state.config.questions || []).forEach((question) => {
+      const answerKey = answers[question.id];
+      if (!answerKey) return;
+      const option = (question.options || []).find((item) => item.key === answerKey);
+      const scoreKey = option?.score || option?.result || answerKey;
+      if (counts[scoreKey] !== undefined) counts[scoreKey] += 1;
+    });
+    const sorted = Object.entries(counts).sort((a, b) => b[1] - a[1]);
+    const threshold = state.config.secondaryThreshold ?? 2;
+    const primary = sorted[0][0];
+    const secondary = sorted[1][1] > 0 && sorted[0][1] - sorted[1][1] <= threshold ? sorted[1][0] : null;
+    return { counts, primary, secondary };
+  }
+
+  function scorePairedAttributes(answers, scoring) {
+    const attributes = Object.fromEntries((scoring.attributes || []).map((key) => [key, 0]));
+    const questionsById = Object.fromEntries((state.config.questions || []).map((question) => [question.id, question]));
+
+    (state.config.questions || []).forEach((question) => {
+      const answerKey = answers[question.id];
+      if (!answerKey) return;
+      const option = (question.options || []).find((item) => item.key === answerKey);
+      (option?.attributes || []).forEach((attribute) => {
+        if (attributes[attribute] !== undefined) attributes[attribute] += 1;
+      });
+    });
+
+    const chosen = (scoring.pairs || []).map(([left, right], index) => {
+      if (attributes[left] > attributes[right]) return left;
+      if (attributes[right] > attributes[left]) return right;
+
+      const tieQuestionId = scoring.tieBreakers?.[String(index)];
+      const tieQuestion = questionsById[tieQuestionId];
+      const tieAnswer = tieQuestion && answers[tieQuestionId];
+      const tieOption = tieQuestion?.options?.find((item) => item.key === tieAnswer);
+      return tieOption?.attributes?.includes(left) ? left : right;
+    });
+
+    const primary = chosen.join("");
+    const counts = Object.fromEntries(Object.keys(state.config.results || {}).map((key) => [key, key === primary ? (state.config.questions || []).length : 0]));
+    const alternate = chosen.slice();
+    if (scoring.pairs?.length) {
+      const firstPair = scoring.pairs[0];
+      alternate[0] = alternate[0] === firstPair[0] ? firstPair[1] : firstPair[0];
+    }
+    const secondary = alternate.join("") !== primary && state.config.secondaryNotes?.[primary]?.[alternate.join("")] ? alternate.join("") : null;
+    return { counts, primary, secondary, attributes };
+  }
+
+  function getStage(score) {
+    const labels = state.config.stageLabels || [
+      { max: 45, label: "观察期" },
+      { max: 65, label: "验证期" },
+      { max: 82, label: "规划期" },
+      { max: 100, label: "行动期" },
+    ];
+    const hit = labels.find((item) => score <= item.max);
+    return hit ? hit.label : labels[labels.length - 1].label;
+  }
+
+  function buildShareText(primary, secondary) {
+    const template = state.config.shareTemplate || [
+      "我测出了：{{typeName}}",
+      "{{posterSubtext}}",
+      "{{secondaryLine}}",
+      "",
+      "{{title}}",
+    ];
+    const values = {
+      title: state.config.title,
+      typeName: primary.typeName,
+      posterSubtext: primary.posterSubtext,
+      secondary: secondary || "",
+      secondaryLine: secondary ? `副倾向：${secondary}` : "",
+    };
+    return template
+      .map((line) => fillTemplate(line, values))
+      .filter((line, index, arr) => line || arr[index - 1])
+      .join("\n")
+      .trim();
+  }
+
+  async function copyShareText(value) {
+    try {
+      await navigator.clipboard.writeText(value);
+      showToast("结果文案已复制");
+    } catch (error) {
+      showToast("复制失败，可长按手动复制");
+    }
+  }
+
+  function showToast(value) {
+    const toast = document.getElementById("toast");
+    if (!toast) return;
+    toast.textContent = value;
+    toast.classList.add("show");
+    window.setTimeout(() => toast.classList.remove("show"), 1600);
+  }
+
+  function getLoadingMessages() {
+    return state.config.loadingMessages || defaultLoadingMessages;
+  }
+
+  function getStorageKey() {
+    return `xhsTestAnswers:${state.config.slug || "default"}`;
+  }
+
+  function fillTemplate(template, values) {
+    return String(template).replace(/\{\{(\w+)\}\}/g, (_, key) => values[key] || "");
+  }
+
+  function number(value) {
+    const parsed = Number(value);
+    if (Number.isNaN(parsed)) return 0;
+    return Math.max(0, Math.min(100, parsed));
+  }
+
+  function text(value) {
+    return String(value ?? "")
+      .replace(/&/g, "&amp;")
+      .replace(/</g, "&lt;")
+      .replace(/>/g, "&gt;")
+      .replace(/"/g, "&quot;");
+  }
+})();
+
+    </script>
+  </body>
+</html>
