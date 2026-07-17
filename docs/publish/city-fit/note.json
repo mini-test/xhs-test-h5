@@ -2,7 +2,7 @@
   "topic": "测一测你适合的城市",
   "topicNoPunc": "测一测你适合的城市",
   "goal": "看清你真正需要的城市生活方式，以及适合城市示例、迁居风险和试住验证方法",
-  "selectionRule": "完整测试共 32 题，图片里先放前 5 题",
+  "selectionRule": "完整测试共 49 题，图片里先放前 5 题",
   "captionTitle": "测一测你适合的城市｜先做这 5 题",
   "title": "测一测你适合的城市",
   "coverLines": [
@@ -185,9 +185,9 @@
     "type": "cardDecision",
     "leftLabel": "你的需求",
     "rightLabel": "城市画像",
-    "topLeft": "城市生活偏好测试",
+    "topLeft": "49题城市匹配测试",
     "topRight": "别按别人推荐选",
-    "footer": "先做 5 道题，看哪种城市生活更适合你",
+    "footer": "先做 5 道题，看你的城市生活倾向",
     "leftItems": [
       "节奏",
       "气候",
