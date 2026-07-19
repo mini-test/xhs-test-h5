@@ -1,0 +1,1661 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <meta name="description" content="完成 32 题古代门派归宿测试，匹配峨眉、武当、少林、丐帮、华山、明教、神农谷、星宿派等 8 种江湖人格。" />
+    <meta property="og:title" content="你在古代属于哪个门派？" />
+    <meta property="og:description" content="完成 32 题古代门派归宿测试，匹配峨眉、武当、少林、丐帮、华山、明教、神农谷、星宿派等 8 种江湖人格。" />
+    <title>你在古代属于哪个门派？</title>
+    <style>
+:root {
+  --bg: #fbfaf7;
+  --paper: #fffefd;
+  --ink: #20242a;
+  --muted: #65707d;
+  --line: #d9d4ca;
+  --line-strong: #b9afa0;
+  --accent: #9b4339;
+  --accent-soft: #f1dfd7;
+  --gold: #c0964d;
+  --sage: #66795f;
+  --blue: #526a86;
+  --shadow: 0 16px 36px rgba(60, 47, 38, 0.1);
+  --radius: 8px;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  min-height: 100%;
+  background:
+    linear-gradient(rgba(32, 36, 42, 0.035) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(32, 36, 42, 0.035) 1px, transparent 1px),
+    var(--bg);
+  background-size: 24px 24px;
+}
+
+body {
+  min-height: 100vh;
+  margin: 0;
+  color: var(--ink);
+  font-family:
+    "PingFang SC",
+    "Microsoft YaHei",
+    "Noto Sans SC",
+    system-ui,
+    -apple-system,
+    BlinkMacSystemFont,
+    sans-serif;
+  letter-spacing: 0;
+}
+
+button {
+  font: inherit;
+}
+
+.shell {
+  width: min(100%, 480px);
+  min-height: 100vh;
+  margin: 0 auto;
+  background: rgba(251, 250, 247, 0.88);
+}
+
+.top-rule {
+  height: 4px;
+  background: var(--accent);
+}
+
+.screen {
+  min-height: calc(100vh - 4px);
+  padding: 28px 22px 32px;
+}
+
+.home {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.kicker {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  color: var(--muted);
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  font-size: 11px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+.dot {
+  width: 7px;
+  height: 7px;
+  background: var(--accent);
+  border-radius: 50%;
+}
+
+.hero-title {
+  margin: 26px 0 14px;
+  color: var(--ink);
+  font-size: 30px;
+  line-height: 1.2;
+  text-align: center;
+  font-weight: 800;
+}
+
+.hero-subtitle {
+  margin: 0 auto 28px;
+  max-width: 340px;
+  color: var(--muted);
+  font-size: 15px;
+  line-height: 1.75;
+  text-align: center;
+}
+
+.hairline {
+  width: 64px;
+  height: 1px;
+  margin: 0 auto 30px;
+  background: var(--line-strong);
+}
+
+.intro {
+  margin: 0 auto;
+  max-width: 380px;
+}
+
+.intro p {
+  margin: 0 0 15px;
+  color: rgba(32, 36, 42, 0.82);
+  font-size: 15px;
+  line-height: 1.8;
+}
+
+.intro .strong {
+  color: var(--accent);
+  font-weight: 700;
+}
+
+.pill-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px;
+  margin: 28px 0;
+}
+
+.compact-pills {
+  margin: 16px 0 10px;
+}
+
+.pill {
+  min-height: 42px;
+  display: grid;
+  place-items: center;
+  border: 1px solid var(--line);
+  color: var(--muted);
+  background: rgba(255, 255, 255, 0.44);
+  font-size: 13px;
+}
+
+.home-card {
+  margin-top: 16px;
+  padding: 18px 16px;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  background: rgba(255, 255, 255, 0.78);
+}
+
+.info-card h2 {
+  margin: 0 0 12px;
+  font-size: 19px;
+}
+
+.info-card p,
+.info-card li {
+  color: rgba(32, 36, 42, 0.78);
+  font-size: 14px;
+  line-height: 1.8;
+}
+
+.info-card p {
+  margin: 0;
+}
+
+.info-card ul {
+  display: grid;
+  gap: 9px;
+  margin: 0;
+  padding-left: 20px;
+}
+
+.info-card li::marker {
+  color: var(--accent);
+}
+
+.profile-panel {
+  margin-top: 16px;
+  padding: 16px;
+  border: 1px solid var(--line-strong);
+  background: var(--accent-soft);
+}
+
+.profile-label {
+  display: block;
+  margin-bottom: 10px;
+  color: var(--ink);
+  font-size: 17px;
+  font-weight: 800;
+}
+
+.profile-field {
+  display: grid;
+  grid-template-columns: 1fr minmax(0, 1.4fr);
+  gap: 12px;
+  align-items: center;
+  padding: 11px 12px;
+  border: 1px solid var(--line);
+  background: var(--paper);
+}
+
+.profile-field span {
+  color: var(--muted);
+  font-size: 14px;
+}
+
+.profile-field input {
+  width: 100%;
+  min-height: 34px;
+  padding: 4px 6px;
+  border: 0;
+  background: transparent;
+  color: var(--ink);
+  font: inherit;
+  text-align: right;
+}
+
+.profile-field input:focus {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+
+.profile-field input.invalid {
+  outline: 2px solid #b3261e;
+  outline-offset: 2px;
+}
+
+.profile-note,
+.profile-error {
+  margin: 9px 0 0;
+  color: var(--muted);
+  font-size: 12px;
+  line-height: 1.6;
+}
+
+.profile-error {
+  min-height: 19px;
+  color: #a42f29;
+}
+
+.primary-btn,
+.ghost-btn,
+.copy-btn {
+  width: 100%;
+  min-height: 48px;
+  border: 1px solid var(--ink);
+  border-radius: 0;
+  cursor: pointer;
+  transition: transform 150ms ease, background 150ms ease, color 150ms ease, border-color 150ms ease;
+}
+
+.primary-btn {
+  background: var(--ink);
+  color: #fff;
+  font-weight: 700;
+}
+
+.ghost-btn,
+.copy-btn {
+  background: transparent;
+  color: var(--ink);
+}
+
+.primary-btn:active,
+.ghost-btn:active,
+.copy-btn:active,
+.option:active {
+  transform: translateY(1px);
+}
+
+.disclaimer {
+  margin: 18px auto 0;
+  max-width: 340px;
+  color: var(--muted);
+  font-size: 12px;
+  line-height: 1.65;
+  text-align: center;
+}
+
+.quiz-screen {
+  padding-top: 0;
+}
+
+.sticky-head {
+  position: sticky;
+  top: 0;
+  z-index: 5;
+  margin: 0 -22px 26px;
+  padding: 14px 22px 12px;
+  background: rgba(251, 250, 247, 0.95);
+  border-bottom: 1px solid var(--line);
+  backdrop-filter: blur(12px);
+}
+
+.quiz-meta {
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+  color: var(--muted);
+  font-size: 12px;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+}
+
+.progress-track {
+  height: 4px;
+  margin-top: 10px;
+  background: rgba(32, 36, 42, 0.09);
+}
+
+.progress-bar {
+  height: 100%;
+  background: var(--accent);
+  transition: width 260ms ease;
+}
+
+.question-no {
+  color: rgba(155, 67, 57, 0.18);
+  font-size: 48px;
+  line-height: 1;
+  font-weight: 800;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+}
+
+.question-title {
+  margin: 18px 0 24px;
+  font-size: 22px;
+  line-height: 1.5;
+  font-weight: 750;
+}
+
+.options {
+  display: grid;
+  gap: 12px;
+}
+
+.option {
+  min-height: 66px;
+  display: grid;
+  grid-template-columns: 30px 1fr;
+  gap: 12px;
+  align-items: start;
+  width: 100%;
+  padding: 15px;
+  border: 1px solid var(--line);
+  background: rgba(255, 255, 255, 0.68);
+  color: var(--ink);
+  text-align: left;
+  cursor: pointer;
+  transition: background 160ms ease, border-color 160ms ease, color 160ms ease, opacity 160ms ease;
+}
+
+.option-key {
+  display: grid;
+  place-items: center;
+  width: 28px;
+  height: 28px;
+  border: 1px solid var(--line-strong);
+  font-size: 13px;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+}
+
+.option-text {
+  padding-top: 2px;
+  font-size: 15px;
+  line-height: 1.55;
+}
+
+.option.selected {
+  border-color: var(--accent);
+  background: var(--accent);
+  color: #fff;
+}
+
+.option.selected .option-key {
+  border-color: rgba(255, 255, 255, 0.8);
+}
+
+.option.dimmed {
+  opacity: 0.42;
+}
+
+.hint {
+  margin: 18px 0 0;
+  color: var(--muted);
+  font-size: 12px;
+  text-align: center;
+}
+
+.loading-screen {
+  display: grid;
+  place-items: center;
+}
+
+.loading-card {
+  width: 100%;
+  max-width: 360px;
+  text-align: center;
+}
+
+.spinner {
+  width: 54px;
+  height: 54px;
+  margin: 0 auto 24px;
+  border: 2px solid var(--line);
+  border-top-color: var(--accent);
+  border-radius: 50%;
+  animation: spin 850ms linear infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.loading-text {
+  min-height: 54px;
+  color: var(--accent);
+  font-size: 17px;
+  line-height: 1.6;
+  font-weight: 700;
+}
+
+.step-bars {
+  display: grid;
+  gap: 8px;
+  margin-top: 28px;
+}
+
+.step {
+  height: 4px;
+  overflow: hidden;
+  background: rgba(32, 36, 42, 0.09);
+}
+
+.step span {
+  display: block;
+  height: 100%;
+  width: 0;
+  background: var(--accent);
+  transition: width 300ms ease;
+}
+
+.step.done span {
+  width: 100%;
+}
+
+.result-screen {
+  padding: 22px 18px 30px;
+}
+
+.report {
+  padding: 22px 16px 18px;
+  border: 1px solid var(--line);
+  background: var(--paper);
+  box-shadow: var(--shadow);
+}
+
+.result-type {
+  margin: 8px 0 8px;
+  color: var(--accent);
+  font-size: 30px;
+  line-height: 1.15;
+  font-weight: 850;
+  text-align: center;
+}
+
+.result-subtitle {
+  margin: 0 auto 20px;
+  color: var(--muted);
+  font-size: 15px;
+  line-height: 1.7;
+  text-align: center;
+}
+
+.stamp-row {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px;
+  margin: 18px 0 20px;
+}
+
+.stamp {
+  padding: 12px 10px;
+  border: 1px solid var(--line);
+  background: #fbfaf7;
+}
+
+.stamp strong {
+  display: block;
+  margin-bottom: 4px;
+  color: var(--ink);
+  font-size: 20px;
+}
+
+.stamp span {
+  color: var(--muted);
+  font-size: 12px;
+}
+
+.section {
+  padding: 20px 0;
+  border-top: 1px solid var(--line);
+}
+
+.section h2 {
+  margin: 0 0 12px;
+  font-size: 18px;
+  color: var(--ink);
+}
+
+.section p {
+  margin: 0 0 12px;
+  color: rgba(32, 36, 42, 0.82);
+  font-size: 15px;
+  line-height: 1.85;
+}
+
+.quote {
+  padding: 15px;
+  border-left: 3px solid var(--accent);
+  background: var(--accent-soft);
+  color: #5b2d27;
+  line-height: 1.8;
+  font-weight: 700;
+}
+
+.meters {
+  display: grid;
+  gap: 14px;
+}
+
+.meter-head {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 7px;
+  color: var(--muted);
+  font-size: 13px;
+}
+
+.meter-track {
+  height: 8px;
+  background: rgba(32, 36, 42, 0.08);
+}
+
+.meter-fill {
+  height: 100%;
+  background: var(--accent);
+}
+
+.compare {
+  display: grid;
+  gap: 10px;
+}
+
+.compare-card {
+  padding: 14px;
+  border: 1px solid var(--line);
+  background: #fbfaf7;
+}
+
+.compare-card h3,
+.plan-card h3 {
+  margin: 0 0 8px;
+  font-size: 15px;
+}
+
+.compare-card p,
+.plan-card p {
+  font-size: 14px;
+}
+
+.tag-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.tag {
+  padding: 7px 9px;
+  border: 1px solid var(--line);
+  background: #fbfaf7;
+  color: var(--muted);
+  font-size: 13px;
+}
+
+.plan {
+  display: grid;
+  gap: 10px;
+}
+
+.plan-card {
+  padding: 14px;
+  border: 1px solid var(--line);
+  background: #fbfaf7;
+}
+
+.secondary-note {
+  padding: 14px;
+  border: 1px dashed var(--line-strong);
+  background: rgba(192, 150, 77, 0.12);
+  line-height: 1.75;
+  font-size: 14px;
+}
+
+.match-summary {
+  padding: 14px;
+  border: 1px solid var(--line-strong);
+  background: var(--accent-soft);
+}
+
+.match-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 8px;
+}
+
+.match-item {
+  min-width: 0;
+  padding: 10px 8px;
+  background: var(--paper);
+  text-align: center;
+}
+
+.match-item span,
+.match-item strong {
+  display: block;
+}
+
+.match-item span {
+  color: var(--muted);
+  font-size: 11px;
+  line-height: 1.4;
+}
+
+.match-item strong {
+  margin-top: 4px;
+  color: var(--accent);
+  font-size: 20px;
+}
+
+.match-summary p {
+  margin: 12px 0 0;
+  color: rgba(32, 36, 42, 0.72);
+  font-size: 12px;
+  line-height: 1.7;
+}
+
+.actions {
+  display: grid;
+  gap: 10px;
+  margin-top: 18px;
+}
+
+.toast {
+  position: fixed;
+  left: 50%;
+  bottom: 22px;
+  z-index: 20;
+  transform: translateX(-50%);
+  padding: 10px 14px;
+  background: var(--ink);
+  color: #fff;
+  font-size: 13px;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 180ms ease;
+}
+
+.toast.show {
+  opacity: 1;
+}
+
+.error {
+  display: grid;
+  place-items: center;
+  min-height: 100vh;
+  padding: 24px;
+  text-align: center;
+}
+
+.error p {
+  color: var(--muted);
+  line-height: 1.7;
+}
+
+@media (min-width: 700px) {
+  body {
+    padding: 28px 0;
+  }
+
+  .shell {
+    min-height: calc(100vh - 56px);
+    border: 1px solid var(--line);
+    box-shadow: var(--shadow);
+  }
+
+  .screen {
+    min-height: calc(100vh - 60px);
+  }
+}
+
+    </style>
+  </head>
+  <body>
+    <main id="app" aria-live="polite"></main>
+    <script>window.__QUIZ_CONFIG__ = {"slug":"test-ancient-sect","compactHome":true,"topic":"你在古代属于哪个门派？","kicker":"32-Q WULIN SECT TEST","title":"你在古代属于哪个门派？","subtitle":"32 个江湖情境，测出你的门派归宿、处世心法、隐藏短板和修炼建议。","metaDescription":"完成 32 题古代门派归宿测试，匹配峨眉、武当、少林、丐帮、华山、明教、神农谷、星宿派等 8 种江湖人格。","startButton":"开始归派","resultKicker":"Wulin Sect Report","quizHint":"凭第一反应选，不要选更体面的自己。","copyButton":"复制我的门派结果","restartButton":"重新归派","scoreLabel":"江湖段位","stageLabel":"当前位阶","indexTitle":"五维江湖指数","tensionTitle":"你的修炼课题","planTitle":"30 天门派修炼建议","blurSummary":"做完 32 题，查看你的门派归宿、处世心法、隐藏短板和 30 天修炼建议。","stageLabels":[{"max":72,"label":"初入山门"},{"max":82,"label":"内门弟子"},{"max":90,"label":"掌门候选"},{"max":100,"label":"自立一派"}],"compareLabels":["顺着本能走","升级后的心法"],"disclaimer":"本测试借用武林门派做趣味人格原型，仅供娱乐和自我观察参考，不构成心理诊断、职业建议、关系结论或现实决策依据。","secondaryThreshold":4,"dimensions":["心法定力","人情洞察","破局锋芒","资源调度","边界感"],"intro":["如果把你丢进古代江湖，你不一定会去最热闹的门派。","有些人靠规矩，有些人靠锋芒；有些人靠人情，有些人靠心术；也有人天生适合退到安静处，慢慢修回自己的气血。","这 32 题不测你想成为谁，而是测你遇到关系、权力、背叛、机会和低谷时，最本能会启动哪套江湖心法。"],"loadingMessages":["正在翻阅江湖名册...","正在比对你的第一反应和门派心法...","正在分析你的边界、野心和人情模式...","正在生成你的武林归宿报告...","归派完成。"],"questions":[{"id":1,"module":"初入江湖","text":"你第一次被邀请加入一个门派，最先会看什么？","options":[{"key":"A","text":"掌门是不是讲规矩，别一进去就被人情绑架","score":"SHAOLIN"},{"key":"B","text":"这里有没有真正厉害的人，能让我学到东西","score":"HUASHAN"},{"key":"C","text":"这群人是不是愿意互相照应，出事不各跑各的","score":"GAIBANG"},{"key":"D","text":"我进去之后还能不能保留自己的节奏和退路","score":"WUDANG"}]},{"id":2,"module":"初入江湖","text":"路上有人说你天赋不错，想把你带去见师父，你会先想：","options":[{"key":"A","text":"他图什么？先别被夸两句就交底","score":"XINGXIU"},{"key":"B","text":"如果是真的机会，我要不要趁早抓住","score":"HUASHAN"},{"key":"C","text":"他是不是看见了我自己都没承认的潜力","score":"MINGJIAO"},{"key":"D","text":"这一路会不会太急，我想先观察几天","score":"SHENNONG"}]},{"id":3,"module":"初入江湖","text":"如果江湖给你一间屋子闭关，你最想要里面有什么？","options":[{"key":"A","text":"安静、药草、书和能慢慢恢复的时间","score":"SHENNONG"},{"key":"B","text":"剑谱、镜子和能让我看见进步的对手","score":"HUASHAN"},{"key":"C","text":"地图、消息册和各路人的关系线","score":"XINGXIU"},{"key":"D","text":"蒲团、清茶和一个不被打扰的清晨","score":"SHENNONG"}]},{"id":4,"module":"初入江湖","text":"别人第一眼看你，最容易误判你哪一点？","options":[{"key":"A","text":"以为我好说话，其实我心里有线","score":"EMEI"},{"key":"B","text":"以为我随和，其实我什么都记得","score":"XINGXIU"},{"key":"C","text":"以为我不争，其实我只是不急着赢","score":"WUDANG"},{"key":"D","text":"以为我很稳，其实我心里有一团火","score":"MINGJIAO"}]},{"id":5,"module":"门规与底线","text":"门派里有人用“都是自己人”让你吃亏，你会：","options":[{"key":"A","text":"当场把话说清楚，熟人也要讲规矩","score":"SHAOLIN"},{"key":"B","text":"先忍一下，但从此重新评估这个人","score":"XINGXIU"},{"key":"C","text":"帮可以，但条件、边界、回报都要摊开","score":"GAIBANG"},{"key":"D","text":"不想撕破脸，但会慢慢把自己抽出来","score":"SHENNONG"}]},{"id":6,"module":"门规与底线","text":"有人偷偷违反门规，却希望你替他遮掩，你的第一反应是：","options":[{"key":"A","text":"该担的自己担，别把我的名声拖进去","score":"SHAOLIN"},{"key":"B","text":"看他是不是被逼到没路，先弄清真相","score":"SHENNONG"},{"key":"C","text":"不站队，先判断这事会牵连多少人","score":"WUDANG"},{"key":"D","text":"如果他一直这样，我会让他知道代价","score":"EMEI"}]},{"id":7,"module":"门规与底线","text":"你最受不了哪种江湖人？","options":[{"key":"A","text":"嘴上仁义，关键时刻只拿别人挡刀的人","score":"SHAOLIN"},{"key":"B","text":"永远假装无辜，却总能让别人替他收拾残局的人","score":"XINGXIU"},{"key":"C","text":"只会画饼，不肯把资源和责任讲清楚的人","score":"GAIBANG"},{"key":"D","text":"把热血当冲动，害大家一起掉坑的人","score":"WUDANG"}]},{"id":8,"module":"门规与底线","text":"如果必须给自己立一条门规，你会写：","options":[{"key":"A","text":"可以心软，但不能被反复消耗","score":"EMEI"},{"key":"B","text":"可以慢，但不能乱","score":"WUDANG"},{"key":"C","text":"可以穷，但不能失信","score":"GAIBANG"},{"key":"D","text":"可以败，但不能跪着活","score":"MINGJIAO"}]},{"id":9,"module":"情义与关系","text":"朋友落难找你，你最可能先做什么？","options":[{"key":"A","text":"先把人接住，再一起想办法","score":"SHENNONG"},{"key":"B","text":"先问清来龙去脉，避免被卷进烂局","score":"XINGXIU"},{"key":"C","text":"帮，但也会提醒对方别把我的善意当义务","score":"EMEI"},{"key":"D","text":"给他一个可执行的恢复方案，而不是只安慰","score":"SHENNONG"}]},{"id":10,"module":"情义与关系","text":"你在关系里最想确认的是：","options":[{"key":"A","text":"对方是不是尊重我的边界","score":"EMEI"},{"key":"B","text":"对方是不是关键时候站得住","score":"SHAOLIN"},{"key":"C","text":"对方是不是愿意跟我一起变强","score":"HUASHAN"},{"key":"D","text":"对方是不是懂我不说出口的那部分","score":"SHENNONG"}]},{"id":11,"module":"情义与关系","text":"有人对你忽冷忽热，你会更倾向：","options":[{"key":"A","text":"先收回一点热情，看对方有没有真实行动","score":"WUDANG"},{"key":"B","text":"直接问清楚，不想被吊着消耗","score":"MINGJIAO"},{"key":"C","text":"不拆穿，但会把证据和感受都记下来","score":"XINGXIU"},{"key":"D","text":"如果只是对方状态不好，我愿意给一点时间","score":"SHENNONG"}]},{"id":12,"module":"情义与关系","text":"当一个圈子开始排挤某个人，你会：","options":[{"key":"A","text":"先看事实，不跟风站队","score":"XINGXIU"},{"key":"B","text":"如果不公平，我会替他说一句话","score":"EMEI"},{"key":"C","text":"看清谁在带节奏，再决定怎么介入","score":"XINGXIU"},{"key":"D","text":"把人拉出来，先别让局势继续恶化","score":"GAIBANG"}]},{"id":13,"module":"争斗与权力","text":"有人当众压你一头，你第一反应是：","options":[{"key":"A","text":"记住这一笔，找最合适的时机赢回来","score":"HUASHAN"},{"key":"B","text":"不急着回击，先看他真正想要什么","score":"WUDANG"},{"key":"C","text":"当场把不合理的地方指出来","score":"MINGJIAO"},{"key":"D","text":"用更稳的表现让他失去继续压人的理由","score":"SHAOLIN"}]},{"id":14,"module":"争斗与权力","text":"如果你必须争一个位置，你最怕自己输在：","options":[{"key":"A","text":"实力明明够，却没有主动争取","score":"HUASHAN"},{"key":"B","text":"太讲体面，被不讲体面的人抢先","score":"HUASHAN"},{"key":"C","text":"太相信表面规则，没看懂背后人情","score":"GAIBANG"},{"key":"D","text":"情绪上头，把一盘棋下成一场气","score":"WUDANG"}]},{"id":15,"module":"争斗与权力","text":"团队里出现内斗，你更像哪种人？","options":[{"key":"A","text":"先把局面稳住，不让大家一起翻船","score":"SHAOLIN"},{"key":"B","text":"抓住真正的矛盾源头，不被表面吵架带偏","score":"XINGXIU"},{"key":"C","text":"用资源交换把双方拉回谈判桌","score":"GAIBANG"},{"key":"D","text":"如果旧秩序烂透了，我宁愿推倒重来","score":"MINGJIAO"}]},{"id":16,"module":"争斗与权力","text":"你最想拥有哪种权力？","options":[{"key":"A","text":"让自己和在乎的人不被随便欺负","score":"EMEI"},{"key":"B","text":"在关键时刻改变规则，而不是被规则困死","score":"MINGJIAO"},{"key":"C","text":"掌握资源流向，让别人愿意来找我合作","score":"GAIBANG"},{"key":"D","text":"不必事事出面，但一句话能定方向","score":"XINGXIU"}]},{"id":17,"module":"名声与生存","text":"关于名声，你更真实的想法是：","options":[{"key":"A","text":"可以不被所有人喜欢，但不能被随便误解","score":"EMEI"},{"key":"B","text":"名声有用，但不能为了它把自己卖掉","score":"WUDANG"},{"key":"C","text":"名声就是资源，关键是怎么经营和兑现","score":"GAIBANG"},{"key":"D","text":"我宁愿有争议，也不要活成一张白纸","score":"MINGJIAO"}]},{"id":18,"module":"名声与生存","text":"江湖传你不好相处，你会：","options":[{"key":"A","text":"不好相处总比没有底线好","score":"EMEI"},{"key":"B","text":"看这句话从谁嘴里传出来，再决定要不要处理","score":"XINGXIU"},{"key":"C","text":"用长期稳定的结果慢慢改评价","score":"SHAOLIN"},{"key":"D","text":"只解释给值得解释的人听","score":"WUDANG"}]},{"id":19,"module":"名声与生存","text":"如果突然多了很多人追随你，你会先担心：","options":[{"key":"A","text":"他们是不是真的认同我的路，还是只想沾光","score":"MINGJIAO"},{"key":"B","text":"人多之后规矩会不会失控","score":"SHAOLIN"},{"key":"C","text":"我有没有能力照顾好这么多关系","score":"SHENNONG"},{"key":"D","text":"这里面有没有人想借我的势做自己的局","score":"XINGXIU"}]},{"id":20,"module":"名声与生存","text":"你最希望别人提起你时说：","options":[{"key":"A","text":"这个人可靠，托付给他不容易掉链子","score":"SHAOLIN"},{"key":"B","text":"这个人有办法，认识他路会变多","score":"GAIBANG"},{"key":"C","text":"这个人很清醒，不会被人随便拿捏","score":"EMEI"},{"key":"D","text":"这个人很强，但不轻易亮剑","score":"HUASHAN"}]},{"id":21,"module":"欲望与归宿","text":"如果只能选一种江湖归宿，你更想要：","options":[{"key":"A","text":"有自己的山门、自己的规则、自己的传承","score":"SHAOLIN"},{"key":"B","text":"走到哪里都有人认账，也有人愿意帮我","score":"GAIBANG"},{"key":"C","text":"活得自由，哪怕一生不被所有人理解","score":"MINGJIAO"},{"key":"D","text":"救回自己，也能救回几个真正重要的人","score":"SHENNONG"}]},{"id":22,"module":"欲望与归宿","text":"你真正羡慕哪种人？","options":[{"key":"A","text":"看起来温柔，但谁都越不过他的底线","score":"EMEI"},{"key":"B","text":"不显山露水，却总能把局势看得很准","score":"HUASHAN"},{"key":"C","text":"敢把野心说出口，也敢为它付代价","score":"HUASHAN"},{"key":"D","text":"不用讨好谁，也能过得很完整","score":"SHENNONG"}]},{"id":23,"module":"欲望与归宿","text":"你最怕自己最后变成：","options":[{"key":"A","text":"一直在赢，却没有一个真正能信的人","score":"HUASHAN"},{"key":"B","text":"太会算计，连自己什么时候真心都分不清","score":"XINGXIU"},{"key":"C","text":"一直照顾别人，却把自己弄丢了","score":"SHENNONG"},{"key":"D","text":"一直讲道理，却再也没有热血","score":"MINGJIAO"}]},{"id":24,"module":"欲望与归宿","text":"你觉得人生最值得拼的是：","options":[{"key":"A","text":"一次真正的翻盘机会","score":"HUASHAN"},{"key":"B","text":"一套能让自己长期安身的秩序","score":"SHAOLIN"},{"key":"C","text":"一群愿意彼此托底的人","score":"GAIBANG"},{"key":"D","text":"一个不必伪装的自己","score":"MINGJIAO"}]},{"id":25,"module":"危机与背叛","text":"被亲近的人背刺后，你最难接受的是：","options":[{"key":"A","text":"他明明知道我的底线，却偏要踩","score":"EMEI"},{"key":"B","text":"他把我给的信任当成可利用的漏洞","score":"XINGXIU"},{"key":"C","text":"他让共同承担的事变成我一个人的债","score":"GAIBANG"},{"key":"D","text":"他在关键时候逃了，还假装自己无辜","score":"SHAOLIN"}]},{"id":26,"module":"危机与背叛","text":"如果你发现自己被人设计了，你会先：","options":[{"key":"A","text":"把情绪压住，先找到对方布了哪些局","score":"XINGXIU"},{"key":"B","text":"保住核心资源，别让损失继续扩大","score":"WUDANG"},{"key":"C","text":"直接反击，让对方知道我不是软柿子","score":"HUASHAN"},{"key":"D","text":"找可信的人一起补洞，不一个人硬扛","score":"WUDANG"}]},{"id":27,"module":"危机与背叛","text":"你最擅长哪种危机处理？","options":[{"key":"A","text":"把混乱的人心安顿下来","score":"SHENNONG"},{"key":"B","text":"迅速找到破局点，先赢回主动权","score":"HUASHAN"},{"key":"C","text":"守住原则，不让局面继续滑坡","score":"SHAOLIN"},{"key":"D","text":"用退一步换更大的余地","score":"WUDANG"}]},{"id":28,"module":"危机与背叛","text":"如果要放弃一段关系，你通常是因为：","options":[{"key":"A","text":"对方反复越界，我已经给过机会","score":"EMEI"},{"key":"B","text":"对方只索取，不承担任何现实代价","score":"GAIBANG"},{"key":"C","text":"这段关系让我越来越不像自己","score":"MINGJIAO"},{"key":"D","text":"我发现继续解释只是在消耗生命","score":"SHENNONG"}]},{"id":29,"module":"最终归派","text":"如果让你留下一句江湖传言，你希望是：","options":[{"key":"A","text":"她温柔，但她不是谁都能欺负的人","score":"EMEI"},{"key":"B","text":"他不争一时，却从没输过大局","score":"WUDANG"},{"key":"C","text":"此人守信，落难时可以去找他","score":"GAIBANG"},{"key":"D","text":"这个人一出手，局面就会变","score":"HUASHAN"}]},{"id":30,"module":"最终归派","text":"你最像哪种武功心法？","options":[{"key":"A","text":"护心诀：先守住自己，再保护别人","score":"EMEI"},{"key":"B","text":"太极意：顺势借力，后发制人","score":"WUDANG"},{"key":"C","text":"伏魔功：苦练根基，正面扛住压力","score":"SHAOLIN"},{"key":"D","text":"逆火诀：越被压制，越要燃起来","score":"MINGJIAO"}]},{"id":31,"module":"最终归派","text":"如果人生给你一次重开，你最想补什么课？","options":[{"key":"A","text":"更早学会争取，不再等别人看见我","score":"HUASHAN"},{"key":"B","text":"更早看懂人心，不把真诚交给错的人","score":"XINGXIU"},{"key":"C","text":"更早照顾自己，不把修复别人当使命","score":"SHENNONG"},{"key":"D","text":"更早建立规则，不靠委屈维持关系","score":"SHAOLIN"}]},{"id":32,"module":"最终归派","text":"最后一道题：你入江湖真正想修成什么？","options":[{"key":"A","text":"有底线的温柔","score":"EMEI"},{"key":"B","text":"不慌不忙的掌控感","score":"WUDANG"},{"key":"C","text":"能把人和机会连起来的本事","score":"GAIBANG"},{"key":"D","text":"不再压抑自己的光和野心","score":"MINGJIAO"}]}],"results":{"EMEI":{"typeName":"峨眉派 · 外柔内刚的护心者","subtitle":"你不是脾气小，而是底线清楚。你愿意体面、温柔、给人余地，但别人一旦反复越界，你会比谁都决绝。","posterSubtext":"你最像峨眉派：看起来好相处，其实心里有一把尺。","maturityScore":88,"coreConclusion":"你的门派归宿是峨眉派。你重视边界、体面、关系里的尊重感，也很擅长在混乱中保持清醒。你通常不会第一时间翻脸，因为你会先给对方解释和修正的机会。但这不代表你软弱，你只是很珍惜关系里的秩序和情分。真正触碰你底线的人，会发现你离开得非常干净。 你真正想要的是“被温柔对待，也被认真尊重”。你的短板是容易把体面留给别人，把委屈留给自己。你需要练习更早表达不舒服，而不是等失望攒满后一次性退场。","diagnosis":"你的门派归宿是峨眉派。你重视边界、体面、关系里的尊重感，也很擅长在混乱中保持清醒。你通常不会第一时间翻脸，因为你会先给对方解释和修正的机会。但这不代表你软弱，你只是很珍惜关系里的秩序和情分。真正触碰你底线的人，会发现你离开得非常干净。","whatYouReallyWant":"你真正想要的是“被温柔对待，也被认真尊重”。你的短板是容易把体面留给别人，把委屈留给自己。你需要练习更早表达不舒服，而不是等失望攒满后一次性退场。","mechanism":{"title":"峨眉心法：温柔不是退让，而是有选择地出手","content":"峨眉型人格的核心机制是高情绪感知和强边界意识。你适合做需要细腻判断、关系维护、审美表达和长期信任的事。真正让你变强的不是更硬，而是更早、更清楚地说出规则。"},"professionalBasis":["你在关系题里更在意尊重和边界，说明你对隐性消耗非常敏感。","你不是不敢冲突，而是不喜欢无意义地把场面弄脏。","你的优势是清醒和护短，风险是过度忍耐后突然切断。"],"coreTensions":["外柔内刚","边界感强","容易忍到失望","护短但挑人","需要早表达"],"suitableIf":["内容审美","咨询陪伴","关系维护","品牌沟通","教育训练","长期信任型合作"],"cautionIf":["把体面当沉默","替别人找借口","晚一步说不","关系里过度自省"],"indices":[{"label":"边界感","value":94},{"label":"情绪感知","value":91},{"label":"护短指数","value":88},{"label":"决断力","value":84},{"label":"自我表达","value":73}],"ifStay":"如果你继续用忍耐换体面，你会越来越擅长离开，却不一定更擅长被爱。","ifChange":"如果你更早说出规则，你的温柔会变得有力量，而不是被别人当成默认同意。","notRecommended":["把体面当沉默","替别人找借口","晚一步说不","关系里过度自省"],"plan90":[{"title":"第1周：写下三条不可退让的边界","content":"把关系、合作、金钱、时间里的底线写具体，不再只凭情绪判断。"},{"title":"第2周：练习提前拒绝","content":"遇到让你不舒服的小事，当天表达，不等累积成大事。"},{"title":"第3周：区分善良和责任","content":"帮忙前先问一句：这是我的责任，还是我在替别人承担？"},{"title":"第4周：保留温柔，也保留后果","content":"对反复越界的人减少解释，直接调整距离。"}],"closing":"你不是冷，你只是终于学会：真正的善意，不能建立在牺牲自己之上。"},"WUDANG":{"typeName":"武当派 · 以柔克刚的控局者","subtitle":"你不是没有锋芒，而是不喜欢把力气浪费在表面胜负上。你更擅长看趋势、借力、等待时机。","posterSubtext":"你最像武当派：不急着赢一招，但很少输掉整盘。","maturityScore":91,"coreConclusion":"你的门派归宿是武当派。你对局势、节奏和长期结果非常敏感，遇到冲突不会马上被情绪带走，而是先判断这件事值不值得投入。你常被误会为不争、慢热、太理性，但你的优势恰恰是能在别人上头时保住判断。真正进入你的节奏后，你会发现自己并不被动，而是在用更省力的方式拿回主动权。 你真正想要的是稳定的掌控感，不是控制别人，而是不被别人带乱。你的短板是有时过度等待，明明已经看清，却迟迟不出手。","diagnosis":"你的门派归宿是武当派。你对局势、节奏和长期结果非常敏感，遇到冲突不会马上被情绪带走，而是先判断这件事值不值得投入。你常被误会为不争、慢热、太理性，但你的优势恰恰是能在别人上头时保住判断。真正进入你的节奏后，你会发现自己并不被动，而是在用更省力的方式拿回主动权。","whatYouReallyWant":"你真正想要的是稳定的掌控感，不是控制别人，而是不被别人带乱。你的短板是有时过度等待，明明已经看清，却迟迟不出手。","mechanism":{"title":"武当心法：退一步不是认输，是换角度发力","content":"武当型人格的底层逻辑是延迟反应和战略观察。你适合做长期项目、策略判断、系统搭建、知识沉淀和复杂关系中的调停者。你需要练习的不是更聪明，而是让关键动作更明确。"},"professionalBasis":["你倾向先看局势再行动，说明你对风险和节奏有天然敏感度。","你不喜欢被迫站队，也不喜欢用情绪证明自己。","你的风险是把谨慎变成拖延，把冷静变成不表达。"],"coreTensions":["后发制人","节奏稳定","不易上头","行动偏慢","需要主动亮牌"],"suitableIf":["策略规划","长期内容","项目管理","研究分析","投资学习","复杂关系调停"],"cautionIf":["一直等最佳时机","把退让当和平","有判断却不说","错过窗口期"],"indices":[{"label":"心法定力","value":96},{"label":"局势判断","value":94},{"label":"长期主义","value":92},{"label":"情绪控制","value":89},{"label":"主动出手","value":70}],"ifStay":"如果你一直等局面自然变好，你会看懂很多事，却错过本该属于你的窗口。","ifChange":"如果你在关键时刻主动亮一次牌，你的冷静会变成真正的掌控，而不是旁观。","notRecommended":["一直等最佳时机","把退让当和平","有判断却不说","错过窗口期"],"plan90":[{"title":"第1周：标记正在拖延的决定","content":"列出三个你已经看清但还没行动的事，给每个决定设一个截止日。"},{"title":"第2周：做一次低成本出手","content":"选一件小事主动推进，验证你不需要等到完美才行动。"},{"title":"第3周：减少无效权衡","content":"每次纠结时只问：现在最小可执行动作是什么？"},{"title":"第4周：建立自己的节奏表","content":"把学习、输出、合作安排成固定节奏，让稳定变成可见成果。"}],"closing":"你真正厉害的地方，不是从不失控，而是能在混乱里慢慢把局势带回你的节奏。"},"SHAOLIN":{"typeName":"少林派 · 规矩与定力的扛事者","subtitle":"你相信根基、责任和长期修炼。越是关键时刻，你越不喜欢花招，反而会回到最朴素的原则上。","posterSubtext":"你最像少林派：不靠嘴上热闹，靠一次次把事扛住。","maturityScore":89,"coreConclusion":"你的门派归宿是少林派。你很看重承诺、纪律、责任和秩序感，遇到问题时更愿意正面解决，而不是靠情绪、讨好或算计绕过去。你给人的安全感很强，别人容易把重要的事交给你。但你的压力也来自这里：你太习惯扛事，容易把“我应该”放在“我愿意”之前。 你真正想要的是可托付的关系和清楚的规则。你的短板是容易把责任当成价值来源，忘了不是所有担子都该由你背。","diagnosis":"你的门派归宿是少林派。你很看重承诺、纪律、责任和秩序感，遇到问题时更愿意正面解决，而不是靠情绪、讨好或算计绕过去。你给人的安全感很强，别人容易把重要的事交给你。但你的压力也来自这里：你太习惯扛事，容易把“我应该”放在“我愿意”之前。","whatYouReallyWant":"你真正想要的是可托付的关系和清楚的规则。你的短板是容易把责任当成价值来源，忘了不是所有担子都该由你背。","mechanism":{"title":"少林心法：真正的强，是知道哪些事不该硬扛","content":"少林型人格靠稳定、纪律和承诺建立信任。你适合做需要长期执行、可靠交付、风险控制和团队规范的事。成熟的少林派不是永远吃苦，而是把规矩立起来，让责任不再只压在自己身上。"},"professionalBasis":["你多次选择规则、承诺和正面承担，说明你对失序非常敏感。","你希望关系里有人站得住，而不是关键时刻各自保命。","你的风险是把能扛误认为必须扛。"],"coreTensions":["责任感重","定力强","守规矩","容易硬撑","需要分担"],"suitableIf":["项目执行","团队管理","合规风控","教育训练","长期运营","稳定交付型工作"],"cautionIf":["替别人背锅","不敢暴露疲惫","把吃苦当荣誉","规则只约束自己"],"indices":[{"label":"责任担当","value":96},{"label":"执行稳定","value":94},{"label":"规则意识","value":92},{"label":"抗压能力","value":88},{"label":"求助能力","value":66}],"ifStay":"如果你继续用硬扛证明自己，你会越来越可靠，也越来越累。","ifChange":"如果你学会把责任拆开，你的稳定会从个人负担变成团队秩序。","notRecommended":["替别人背锅","不敢暴露疲惫","把吃苦当荣誉","规则只约束自己"],"plan90":[{"title":"第1周：列出你不该独自承担的事","content":"把工作、家庭、关系里的责任分成我的、对方的、共同的三类。"},{"title":"第2周：说一次明确的条件","content":"接任务或帮忙前，把时间、边界和可交付结果讲清楚。"},{"title":"第3周：练习求助","content":"选一件小事让别人参与，不再把可靠等同于独自完成。"},{"title":"第4周：建立复盘制度","content":"每周复盘一次：哪些事靠规则解决，不再靠我个人硬撑。"}],"closing":"你不是必须一直站在最前面。真正的秩序，是你不用牺牲自己也能把事做好。"},"GAIBANG":{"typeName":"丐帮 · 人情江湖的资源连接者","subtitle":"你很懂现实，也很懂人。你的能力不是单点爆发，而是把人、机会、信息和资源连成路。","posterSubtext":"你最像丐帮：看似随和，其实最懂江湖怎么流动。","maturityScore":86,"coreConclusion":"你的门派归宿是丐帮。你擅长看人情、讲信用、搭桥牵线，也知道很多事不是靠单打独斗能完成的。你不一定最爱当主角，但常常能让一件原本卡住的事重新流动起来。你的优势是接地气、会做人、有资源嗅觉；短板是有时太容易被人情拖住，把别人的局变成自己的账。 你真正想要的是有人愿意互相托底，也希望自己的价值被现实认可。你的课题是把义气和交易边界分开，熟人也要讲清条件。","diagnosis":"你的门派归宿是丐帮。你擅长看人情、讲信用、搭桥牵线，也知道很多事不是靠单打独斗能完成的。你不一定最爱当主角，但常常能让一件原本卡住的事重新流动起来。你的优势是接地气、会做人、有资源嗅觉；短板是有时太容易被人情拖住，把别人的局变成自己的账。","whatYouReallyWant":"你真正想要的是有人愿意互相托底，也希望自己的价值被现实认可。你的课题是把义气和交易边界分开，熟人也要讲清条件。","mechanism":{"title":"丐帮心法：人情不是消耗，是有边界的流动","content":"丐帮型人格靠信用、连接和交换建立影响力。你适合社群、销售、资源整合、商务合作、运营和需要长期关系维护的领域。你要学会让人情可持续，而不是让自己一直补窟窿。"},"professionalBasis":["你关注现实资源、承诺兑现和关键时刻的互相支持。","你会自然承担连接角色，帮助人和事重新运转。","你的风险是碍于情面，不好意思把规则讲在前面。"],"coreTensions":["人情敏感","资源嗅觉","讲信用","容易被拖账","需要先谈规则"],"suitableIf":["社群运营","商务合作","销售转化","资源整合","活动策划","客户关系"],"cautionIf":["熟人不谈钱","替别人兜底","关系账算不清","把帮忙当义务"],"indices":[{"label":"资源连接","value":95},{"label":"人情洞察","value":92},{"label":"信用感","value":90},{"label":"落地能力","value":86},{"label":"边界清晰","value":69}],"ifStay":"如果你一直靠义气维持关系，你会认识很多人，但真正回到你身上的回报未必稳定。","ifChange":"如果你把规则讲在前面，你的人情会变成资产，而不是长期消耗。","notRecommended":["熟人不谈钱","替别人兜底","关系账算不清","把帮忙当义务"],"plan90":[{"title":"第1周：整理你的资源清单","content":"写下你能提供什么、需要什么、能连接谁，别低估你的网络价值。"},{"title":"第2周：熟人合作先说清","content":"任何合作先讲费用、时间、责任和交付，不靠猜。"},{"title":"第3周：建立可复制交付","content":"把常见帮忙做成模板、报价或流程。"},{"title":"第4周：筛选高质量关系","content":"减少只索取不回馈的人，把精力留给双向流动的关系。"}],"closing":"你在江湖里最值钱的不是认识多少人，而是别人知道：找你，事情真的会往前走。"},"HUASHAN":{"typeName":"华山派 · 锋芒与野心的破局者","subtitle":"你需要舞台，也需要对手。你不是喜欢争，而是不想把自己困在一个永远没有上升空间的地方。","posterSubtext":"你最像华山派：心里有剑，最怕一身本事无处施展。","maturityScore":84,"coreConclusion":"你的门派归宿是华山派。你有明显的上升心、胜负感和自我证明需求，越是遇到挑战，越容易被激发。你不甘心长期停在原地，也不喜欢只做安全但没有成长的事。你的优势是有冲劲、目标感和突破能力；短板是容易把每一次机会都看成必须赢的战场，导致自己长期紧绷。 你真正想要的是被看见、被认可、被放到更大的位置上。你的课题是选择值得打的仗，不要为了证明自己，把精力花在低价值的比较里。","diagnosis":"你的门派归宿是华山派。你有明显的上升心、胜负感和自我证明需求，越是遇到挑战，越容易被激发。你不甘心长期停在原地，也不喜欢只做安全但没有成长的事。你的优势是有冲劲、目标感和突破能力；短板是容易把每一次机会都看成必须赢的战场，导致自己长期紧绷。","whatYouReallyWant":"你真正想要的是被看见、被认可、被放到更大的位置上。你的课题是选择值得打的仗，不要为了证明自己，把精力花在低价值的比较里。","mechanism":{"title":"华山心法：锋芒要对准出口，而不是对准所有人","content":"华山型人格靠目标感、竞争意识和成长反馈驱动。你适合高挑战岗位、内容创作、销售增长、创业试错和需要快速突破的场景。你需要把野心转成作品、成绩和可见成果，而不是被情绪性竞争消耗。"},"professionalBasis":["你在题目中多次选择主动争取、抓机会、赢回主动权。","你对被低估、被压制、没有舞台的状态非常敏感。","你的风险是把短期输赢看得太重，忽略长期势能。"],"coreTensions":["胜负欲强","成长需求高","敢冲敢争","容易紧绷","需要选战场"],"suitableIf":["增长岗位","销售谈判","内容创作","创业副业","竞技型项目","需要突破的职业阶段"],"cautionIf":["过度比较","为了证明而选择","被激将法带走","把休息当退步"],"indices":[{"label":"破局锋芒","value":96},{"label":"目标感","value":94},{"label":"行动速度","value":91},{"label":"抗打击","value":83},{"label":"情绪复盘","value":67}],"ifStay":"如果你把每场小胜负都当成人生证明，你会很努力，但也很难真正松下来。","ifChange":"如果你只打关键仗，你的锋芒会从消耗变成上升通道。","notRecommended":["过度比较","为了证明而选择","被激将法带走","把休息当退步"],"plan90":[{"title":"第1周：筛选真正值得争的目标","content":"把所有想争的事按回报、成长、长期价值排序，只保留前三个。"},{"title":"第2周：做一个可见成果","content":"用作品、数据或具体结果证明自己，不陷入口头比较。"},{"title":"第3周：建立复盘而非自责","content":"每次失败只写原因和下一步，不写人格否定。"},{"title":"第4周：留出恢复时间","content":"锋芒需要蓄力，给自己固定休息，不把停顿当失败。"}],"closing":"你不是怕输，你怕的是明明可以更强，却一直被放在不需要你发光的位置。"},"MINGJIAO":{"typeName":"明教 · 反骨与热血的燃灯者","subtitle":"你骨子里不太服被安排的人生。你可以合作，但不能被驯化；可以妥协，但不能失去自己。","posterSubtext":"你最像明教：越被压制，越想把自己的火点亮。","maturityScore":82,"coreConclusion":"你的门派归宿是明教。你对自由、真实、热血和价值感有很强需求，最受不了被无意义的规则困住，也不喜欢为了合群长期伪装。你看似容易上头，其实是很难接受人生被别人定义。你的优势是有感染力、敢表达、敢反抗；短板是容易在情绪高点做决定，把所有约束都看成敌人。 你真正想要的是不被压抑地活着，也希望有人理解你不是叛逆，而是在守住自己的火。你的课题是让反骨变成创造力，而不是把自己烧伤。","diagnosis":"你的门派归宿是明教。你对自由、真实、热血和价值感有很强需求，最受不了被无意义的规则困住，也不喜欢为了合群长期伪装。你看似容易上头，其实是很难接受人生被别人定义。你的优势是有感染力、敢表达、敢反抗；短板是容易在情绪高点做决定，把所有约束都看成敌人。","whatYouReallyWant":"你真正想要的是不被压抑地活着，也希望有人理解你不是叛逆，而是在守住自己的火。你的课题是让反骨变成创造力，而不是把自己烧伤。","mechanism":{"title":"明教心法：反抗不是毁掉一切，是点亮新的路","content":"明教型人格靠价值感、自由感和情绪能量启动。你适合创作表达、创业探索、观点输出、改革型项目和需要鼓舞人的角色。你需要建立一个能承接热情的结构，否则热血会变成反复燃烧后的疲惫。"},"professionalBasis":["你在题目中倾向选择真实、自主、推倒旧秩序和不被驯化。","你对压制、伪装和无意义规则的耐受度较低。","你的风险是把所有不顺都理解为被限制，从而错过可协商的空间。"],"coreTensions":["反骨强","热血高","表达欲强","容易上头","需要结构承接"],"suitableIf":["内容表达","自媒体","创业探索","观点输出","改革项目","需要感染力的工作"],"cautionIf":["情绪化辞职","冲动撕破脸","把建议当控制","一热血就全押"],"indices":[{"label":"自由需求","value":97},{"label":"感染力","value":92},{"label":"行动爆发","value":88},{"label":"规则耐受","value":61},{"label":"持续结构","value":66}],"ifStay":"如果你只靠反抗证明自己，你会暂时痛快，却很难长期稳定地建成东西。","ifChange":"如果你给热血加上结构，你会从不服气的人，变成真正能开新路的人。","notRecommended":["情绪化辞职","冲动撕破脸","把建议当控制","一热血就全押"],"plan90":[{"title":"第1周：写下你真正反抗的是什么","content":"区分不喜欢的人、不合理的规则、和自己没被看见的委屈。"},{"title":"第2周：把情绪变成作品","content":"用一篇内容、一个方案或一个行动表达观点，不只停留在愤怒。"},{"title":"第3周：给自由设边界","content":"自由不是随时推翻一切，而是知道哪些责任你愿意承担。"},{"title":"第4周：找一个同路人","content":"让热情进入合作，而不是一个人燃尽。"}],"closing":"你不是天生不合群，你只是不能忍受把自己的光关掉，去换一张安静的通行证。"},"SHENNONG":{"typeName":"神农谷 · 慢热修复的疗愈者","subtitle":"你不是没有野心，只是比起冲到最前面，你更在乎自己和身边的人能不能慢慢好起来。","posterSubtext":"你最像神农谷：会观察，会修复，也容易把别人的痛放进自己心里。","maturityScore":87,"coreConclusion":"你的门派归宿是神农谷。你对情绪、疲惫、创伤和关系里的微妙变化很敏感，擅长发现问题真正卡在哪里。你不是那种喜欢热闹争斗的人，更适合在安静处慢慢修复、整理、积累。你的优势是细腻、稳定、共情和恢复力；短板是容易把别人的问题揽到自己身上，忘了你也需要被照顾。 你真正想要的是一个能安心恢复、慢慢生长的环境。你的课题是把共情变成边界清晰的支持，而不是无止境消耗。","diagnosis":"你的门派归宿是神农谷。你对情绪、疲惫、创伤和关系里的微妙变化很敏感，擅长发现问题真正卡在哪里。你不是那种喜欢热闹争斗的人，更适合在安静处慢慢修复、整理、积累。你的优势是细腻、稳定、共情和恢复力；短板是容易把别人的问题揽到自己身上，忘了你也需要被照顾。","whatYouReallyWant":"你真正想要的是一个能安心恢复、慢慢生长的环境。你的课题是把共情变成边界清晰的支持，而不是无止境消耗。","mechanism":{"title":"神农心法：能治人，也要先护住自己的气血","content":"神农谷型人格靠观察、修复和长期照料形成影响力。你适合心理陪伴、教育、内容疗愈、服务设计、健康管理和需要耐心的长期工作。你需要练习把帮助变成方法，而不是把自己变成药。"},"professionalBasis":["你多次关注恢复、照顾、真相背后的情绪和关系修复。","你对别人状态变化很敏感，能看见很多未说出口的东西。","你的风险是过度共情，替别人承担本该由他们面对的课题。"],"coreTensions":["共情强","恢复力好","慢热稳定","容易被求助","需要保护能量"],"suitableIf":["心理陪伴","教育训练","疗愈内容","服务设计","健康管理","长期陪跑型产品"],"cautionIf":["把自己当药","替别人消化情绪","不敢提出需求","恢复太慢后自责"],"indices":[{"label":"修复能力","value":95},{"label":"共情感知","value":94},{"label":"耐心指数","value":90},{"label":"自我照顾","value":68},{"label":"边界表达","value":71}],"ifStay":"如果你一直把别人放在前面，你会变得很会照顾人，却越来越不知道自己想要什么。","ifChange":"如果你先照顾自己的能量，你的疗愈力会更稳定，也更不容易被消耗。","notRecommended":["把自己当药","替别人消化情绪","不敢提出需求","恢复太慢后自责"],"plan90":[{"title":"第1周：记录能量流失点","content":"每天写下最消耗你的三件事，看哪些是别人的情绪转移。"},{"title":"第2周：把帮助变成规则","content":"对求助设定时间、范围和方式，不再随叫随到。"},{"title":"第3周：为自己建立恢复仪式","content":"固定一个安静时段，不处理别人，只恢复自己。"},{"title":"第4周：输出你的方法","content":"把你的观察和修复经验写成内容或模板，让能力可持续。"}],"closing":"你不是为了拯救所有人才来到江湖。先把自己养回来，你才能真正长出稳定的力量。"},"XINGXIU":{"typeName":"星宿派 · 洞察人心的暗线谋士","subtitle":"你很少轻易相信表面话。你敏感、警觉、会观察动机，也擅长在复杂关系里保住自己。","posterSubtext":"你最像星宿派：看似不动声色，其实早就把人心看了几层。","maturityScore":85,"coreConclusion":"你的门派归宿是星宿派。你对人心、动机、话外音和权力关系非常敏感，别人还在听表面意思时，你已经开始判断谁在试探、谁在借势、谁在埋伏笔。你的优势是洞察深、反应快、不容易被骗；短板是容易过度防御，把一些真诚也看成风险。 你真正想要的是安全感和主动权。你不是不信任人，而是曾经见过太多不把话说透的关系。你的课题是保留洞察，同时允许真正可靠的人靠近。","diagnosis":"你的门派归宿是星宿派。你对人心、动机、话外音和权力关系非常敏感，别人还在听表面意思时，你已经开始判断谁在试探、谁在借势、谁在埋伏笔。你的优势是洞察深、反应快、不容易被骗；短板是容易过度防御，把一些真诚也看成风险。","whatYouReallyWant":"你真正想要的是安全感和主动权。你不是不信任人，而是曾经见过太多不把话说透的关系。你的课题是保留洞察，同时允许真正可靠的人靠近。","mechanism":{"title":"星宿心法：识人是护身术，不是把自己关起来","content":"星宿型人格靠信息敏感、风险预判和策略保全生存。你适合策略分析、舆情判断、谈判、侦查式研究、竞争分析和复杂人际场。你需要避免让防御系统全天候开启，否则你会一直很安全，也一直很累。"},"professionalBasis":["你对试探、背刺、动机和话外音反应敏锐。","你倾向先留证据、看来源、判断局势再行动。","你的风险是把所有不确定都解释成威胁。"],"coreTensions":["人心洞察","风险预判","防御强","不易信任","需要放松警报"],"suitableIf":["策略分析","舆情观察","谈判博弈","竞争研究","风控","复杂关系协调"],"cautionIf":["过度怀疑","把真诚也当局","长期不交底","靠冷处理保护自己"],"indices":[{"label":"人心洞察","value":97},{"label":"风险识别","value":95},{"label":"策略感","value":91},{"label":"信任开放","value":62},{"label":"情绪松弛","value":65}],"ifStay":"如果你一直用防御保护自己，你会很难被骗，也很难真正放松地被爱。","ifChange":"如果你学会分级信任，你的洞察会变成智慧，而不是长期紧绷。","notRecommended":["过度怀疑","把真诚也当局","长期不交底","靠冷处理保护自己"],"plan90":[{"title":"第1周：给关系分级","content":"把人分成可合作、可交流、可亲近三层，不需要对所有人同样防备。"},{"title":"第2周：验证而不是脑补","content":"遇到可疑信号时，先找事实验证，再下判断。"},{"title":"第3周：选择一个小范围交底","content":"对一个可靠的人表达真实想法，练习安全地开放。"},{"title":"第4周：减少无用监控","content":"停止反复查看让你焦虑的信息源，把注意力收回自己。"}],"closing":"你看得懂人心，但真正的高手不是永远防着别人，而是知道谁值得靠近，谁只需远观。"}},"secondaryNotes":{"EMEI":{"WUDANG":"你的主门派是「峨眉派 · 外柔内刚的护心者」，但身上也带着「武当派 · 以柔克刚的控局者」的副心法。主结果代表你最稳定的处世方式，副结果代表你在压力升高、关系变化或机会出现时会启动的第二套反应。","SHAOLIN":"你的主门派是「峨眉派 · 外柔内刚的护心者」，但身上也带着「少林派 · 规矩与定力的扛事者」的副心法。主结果代表你最稳定的处世方式，副结果代表你在压力升高、关系变化或机会出现时会启动的第二套反应。","GAIBANG":"你的主门派是「峨眉派 · 外柔内刚的护心者」，但身上也带着「丐帮 · 人情江湖的资源连接者」的副心法。主结果代表你最稳定的处世方式，副结果代表你在压力升高、关系变化或机会出现时会启动的第二套反应。","HUASHAN":"你的主门派是「峨眉派 · 外柔内刚的护心者」，但身上也带着「华山派 · 锋芒与野心的破局者」的副心法。主结果代表你最稳定的处世方式，副结果代表你在压力升高、关系变化或机会出现时会启动的第二套反应。","MINGJIAO":"你的主门派是「峨眉派 · 外柔内刚的护心者」，但身上也带着「明教 · 反骨与热血的燃灯者」的副心法。主结果代表你最稳定的处世方式，副结果代表你在压力升高、关系变化或机会出现时会启动的第二套反应。","SHENNONG":"你的主门派是「峨眉派 · 外柔内刚的护心者」，但身上也带着「神农谷 · 慢热修复的疗愈者」的副心法。主结果代表你最稳定的处世方式，副结果代表你在压力升高、关系变化或机会出现时会启动的第二套反应。","XINGXIU":"你的主门派是「峨眉派 · 外柔内刚的护心者」，但身上也带着「星宿派 · 洞察人心的暗线谋士」的副心法。主结果代表你最稳定的处世方式，副结果代表你在压力升高、关系变化或机会出现时会启动的第二套反应。"},"WUDANG":{"EMEI":"你的主门派是「武当派 · 以柔克刚的控局者」，但身上也带着「峨眉派 · 外柔内刚的护心者」的副心法。主结果代表你最稳定的处世方式，副结果代表你在压力升高、关系变化或机会出现时会启动的第二套反应。","SHAOLIN":"你的主门派是「武当派 · 以柔克刚的控局者」，但身上也带着「少林派 · 规矩与定力的扛事者」的副心法。主结果代表你最稳定的处世方式，副结果代表你在压力升高、关系变化或机会出现时会启动的第二套反应。","GAIBANG":"你的主门派是「武当派 · 以柔克刚的控局者」，但身上也带着「丐帮 · 人情江湖的资源连接者」的副心法。主结果代表你最稳定的处世方式，副结果代表你在压力升高、关系变化或机会出现时会启动的第二套反应。","HUASHAN":"你的主门派是「武当派 · 以柔克刚的控局者」，但身上也带着「华山派 · 锋芒与野心的破局者」的副心法。主结果代表你最稳定的处世方式，副结果代表你在压力升高、关系变化或机会出现时会启动的第二套反应。","MINGJIAO":"你的主门派是「武当派 · 以柔克刚的控局者」，但身上也带着「明教 · 反骨与热血的燃灯者」的副心法。主结果代表你最稳定的处世方式，副结果代表你在压力升高、关系变化或机会出现时会启动的第二套反应。","SHENNONG":"你的主门派是「武当派 · 以柔克刚的控局者」，但身上也带着「神农谷 · 慢热修复的疗愈者」的副心法。主结果代表你最稳定的处世方式，副结果代表你在压力升高、关系变化或机会出现时会启动的第二套反应。","XINGXIU":"你的主门派是「武当派 · 以柔克刚的控局者」，但身上也带着「星宿派 · 洞察人心的暗线谋士」的副心法。主结果代表你最稳定的处世方式，副结果代表你在压力升高、关系变化或机会出现时会启动的第二套反应。"},"SHAOLIN":{"EMEI":"你的主门派是「少林派 · 规矩与定力的扛事者」，但身上也带着「峨眉派 · 外柔内刚的护心者」的副心法。主结果代表你最稳定的处世方式，副结果代表你在压力升高、关系变化或机会出现时会启动的第二套反应。","WUDANG":"你的主门派是「少林派 · 规矩与定力的扛事者」，但身上也带着「武当派 · 以柔克刚的控局者」的副心法。主结果代表你最稳定的处世方式，副结果代表你在压力升高、关系变化或机会出现时会启动的第二套反应。","GAIBANG":"你的主门派是「少林派 · 规矩与定力的扛事者」，但身上也带着「丐帮 · 人情江湖的资源连接者」的副心法。主结果代表你最稳定的处世方式，副结果代表你在压力升高、关系变化或机会出现时会启动的第二套反应。","HUASHAN":"你的主门派是「少林派 · 规矩与定力的扛事者」，但身上也带着「华山派 · 锋芒与野心的破局者」的副心法。主结果代表你最稳定的处世方式，副结果代表你在压力升高、关系变化或机会出现时会启动的第二套反应。","MINGJIAO":"你的主门派是「少林派 · 规矩与定力的扛事者」，但身上也带着「明教 · 反骨与热血的燃灯者」的副心法。主结果代表你最稳定的处世方式，副结果代表你在压力升高、关系变化或机会出现时会启动的第二套反应。","SHENNONG":"你的主门派是「少林派 · 规矩与定力的扛事者」，但身上也带着「神农谷 · 慢热修复的疗愈者」的副心法。主结果代表你最稳定的处世方式，副结果代表你在压力升高、关系变化或机会出现时会启动的第二套反应。","XINGXIU":"你的主门派是「少林派 · 规矩与定力的扛事者」，但身上也带着「星宿派 · 洞察人心的暗线谋士」的副心法。主结果代表你最稳定的处世方式，副结果代表你在压力升高、关系变化或机会出现时会启动的第二套反应。"},"GAIBANG":{"EMEI":"你的主门派是「丐帮 · 人情江湖的资源连接者」，但身上也带着「峨眉派 · 外柔内刚的护心者」的副心法。主结果代表你最稳定的处世方式，副结果代表你在压力升高、关系变化或机会出现时会启动的第二套反应。","WUDANG":"你的主门派是「丐帮 · 人情江湖的资源连接者」，但身上也带着「武当派 · 以柔克刚的控局者」的副心法。主结果代表你最稳定的处世方式，副结果代表你在压力升高、关系变化或机会出现时会启动的第二套反应。","SHAOLIN":"你的主门派是「丐帮 · 人情江湖的资源连接者」，但身上也带着「少林派 · 规矩与定力的扛事者」的副心法。主结果代表你最稳定的处世方式，副结果代表你在压力升高、关系变化或机会出现时会启动的第二套反应。","HUASHAN":"你的主门派是「丐帮 · 人情江湖的资源连接者」，但身上也带着「华山派 · 锋芒与野心的破局者」的副心法。主结果代表你最稳定的处世方式，副结果代表你在压力升高、关系变化或机会出现时会启动的第二套反应。","MINGJIAO":"你的主门派是「丐帮 · 人情江湖的资源连接者」，但身上也带着「明教 · 反骨与热血的燃灯者」的副心法。主结果代表你最稳定的处世方式，副结果代表你在压力升高、关系变化或机会出现时会启动的第二套反应。","SHENNONG":"你的主门派是「丐帮 · 人情江湖的资源连接者」，但身上也带着「神农谷 · 慢热修复的疗愈者」的副心法。主结果代表你最稳定的处世方式，副结果代表你在压力升高、关系变化或机会出现时会启动的第二套反应。","XINGXIU":"你的主门派是「丐帮 · 人情江湖的资源连接者」，但身上也带着「星宿派 · 洞察人心的暗线谋士」的副心法。主结果代表你最稳定的处世方式，副结果代表你在压力升高、关系变化或机会出现时会启动的第二套反应。"},"HUASHAN":{"EMEI":"你的主门派是「华山派 · 锋芒与野心的破局者」，但身上也带着「峨眉派 · 外柔内刚的护心者」的副心法。主结果代表你最稳定的处世方式，副结果代表你在压力升高、关系变化或机会出现时会启动的第二套反应。","WUDANG":"你的主门派是「华山派 · 锋芒与野心的破局者」，但身上也带着「武当派 · 以柔克刚的控局者」的副心法。主结果代表你最稳定的处世方式，副结果代表你在压力升高、关系变化或机会出现时会启动的第二套反应。","SHAOLIN":"你的主门派是「华山派 · 锋芒与野心的破局者」，但身上也带着「少林派 · 规矩与定力的扛事者」的副心法。主结果代表你最稳定的处世方式，副结果代表你在压力升高、关系变化或机会出现时会启动的第二套反应。","GAIBANG":"你的主门派是「华山派 · 锋芒与野心的破局者」，但身上也带着「丐帮 · 人情江湖的资源连接者」的副心法。主结果代表你最稳定的处世方式，副结果代表你在压力升高、关系变化或机会出现时会启动的第二套反应。","MINGJIAO":"你的主门派是「华山派 · 锋芒与野心的破局者」，但身上也带着「明教 · 反骨与热血的燃灯者」的副心法。主结果代表你最稳定的处世方式，副结果代表你在压力升高、关系变化或机会出现时会启动的第二套反应。","SHENNONG":"你的主门派是「华山派 · 锋芒与野心的破局者」，但身上也带着「神农谷 · 慢热修复的疗愈者」的副心法。主结果代表你最稳定的处世方式，副结果代表你在压力升高、关系变化或机会出现时会启动的第二套反应。","XINGXIU":"你的主门派是「华山派 · 锋芒与野心的破局者」，但身上也带着「星宿派 · 洞察人心的暗线谋士」的副心法。主结果代表你最稳定的处世方式，副结果代表你在压力升高、关系变化或机会出现时会启动的第二套反应。"},"MINGJIAO":{"EMEI":"你的主门派是「明教 · 反骨与热血的燃灯者」，但身上也带着「峨眉派 · 外柔内刚的护心者」的副心法。主结果代表你最稳定的处世方式，副结果代表你在压力升高、关系变化或机会出现时会启动的第二套反应。","WUDANG":"你的主门派是「明教 · 反骨与热血的燃灯者」，但身上也带着「武当派 · 以柔克刚的控局者」的副心法。主结果代表你最稳定的处世方式，副结果代表你在压力升高、关系变化或机会出现时会启动的第二套反应。","SHAOLIN":"你的主门派是「明教 · 反骨与热血的燃灯者」，但身上也带着「少林派 · 规矩与定力的扛事者」的副心法。主结果代表你最稳定的处世方式，副结果代表你在压力升高、关系变化或机会出现时会启动的第二套反应。","GAIBANG":"你的主门派是「明教 · 反骨与热血的燃灯者」，但身上也带着「丐帮 · 人情江湖的资源连接者」的副心法。主结果代表你最稳定的处世方式，副结果代表你在压力升高、关系变化或机会出现时会启动的第二套反应。","HUASHAN":"你的主门派是「明教 · 反骨与热血的燃灯者」，但身上也带着「华山派 · 锋芒与野心的破局者」的副心法。主结果代表你最稳定的处世方式，副结果代表你在压力升高、关系变化或机会出现时会启动的第二套反应。","SHENNONG":"你的主门派是「明教 · 反骨与热血的燃灯者」，但身上也带着「神农谷 · 慢热修复的疗愈者」的副心法。主结果代表你最稳定的处世方式，副结果代表你在压力升高、关系变化或机会出现时会启动的第二套反应。","XINGXIU":"你的主门派是「明教 · 反骨与热血的燃灯者」，但身上也带着「星宿派 · 洞察人心的暗线谋士」的副心法。主结果代表你最稳定的处世方式，副结果代表你在压力升高、关系变化或机会出现时会启动的第二套反应。"},"SHENNONG":{"EMEI":"你的主门派是「神农谷 · 慢热修复的疗愈者」，但身上也带着「峨眉派 · 外柔内刚的护心者」的副心法。主结果代表你最稳定的处世方式，副结果代表你在压力升高、关系变化或机会出现时会启动的第二套反应。","WUDANG":"你的主门派是「神农谷 · 慢热修复的疗愈者」，但身上也带着「武当派 · 以柔克刚的控局者」的副心法。主结果代表你最稳定的处世方式，副结果代表你在压力升高、关系变化或机会出现时会启动的第二套反应。","SHAOLIN":"你的主门派是「神农谷 · 慢热修复的疗愈者」，但身上也带着「少林派 · 规矩与定力的扛事者」的副心法。主结果代表你最稳定的处世方式，副结果代表你在压力升高、关系变化或机会出现时会启动的第二套反应。","GAIBANG":"你的主门派是「神农谷 · 慢热修复的疗愈者」，但身上也带着「丐帮 · 人情江湖的资源连接者」的副心法。主结果代表你最稳定的处世方式，副结果代表你在压力升高、关系变化或机会出现时会启动的第二套反应。","HUASHAN":"你的主门派是「神农谷 · 慢热修复的疗愈者」，但身上也带着「华山派 · 锋芒与野心的破局者」的副心法。主结果代表你最稳定的处世方式，副结果代表你在压力升高、关系变化或机会出现时会启动的第二套反应。","MINGJIAO":"你的主门派是「神农谷 · 慢热修复的疗愈者」，但身上也带着「明教 · 反骨与热血的燃灯者」的副心法。主结果代表你最稳定的处世方式，副结果代表你在压力升高、关系变化或机会出现时会启动的第二套反应。","XINGXIU":"你的主门派是「神农谷 · 慢热修复的疗愈者」，但身上也带着「星宿派 · 洞察人心的暗线谋士」的副心法。主结果代表你最稳定的处世方式，副结果代表你在压力升高、关系变化或机会出现时会启动的第二套反应。"},"XINGXIU":{"EMEI":"你的主门派是「星宿派 · 洞察人心的暗线谋士」，但身上也带着「峨眉派 · 外柔内刚的护心者」的副心法。主结果代表你最稳定的处世方式，副结果代表你在压力升高、关系变化或机会出现时会启动的第二套反应。","WUDANG":"你的主门派是「星宿派 · 洞察人心的暗线谋士」，但身上也带着「武当派 · 以柔克刚的控局者」的副心法。主结果代表你最稳定的处世方式，副结果代表你在压力升高、关系变化或机会出现时会启动的第二套反应。","SHAOLIN":"你的主门派是「星宿派 · 洞察人心的暗线谋士」，但身上也带着「少林派 · 规矩与定力的扛事者」的副心法。主结果代表你最稳定的处世方式，副结果代表你在压力升高、关系变化或机会出现时会启动的第二套反应。","GAIBANG":"你的主门派是「星宿派 · 洞察人心的暗线谋士」，但身上也带着「丐帮 · 人情江湖的资源连接者」的副心法。主结果代表你最稳定的处世方式，副结果代表你在压力升高、关系变化或机会出现时会启动的第二套反应。","HUASHAN":"你的主门派是「星宿派 · 洞察人心的暗线谋士」，但身上也带着「华山派 · 锋芒与野心的破局者」的副心法。主结果代表你最稳定的处世方式，副结果代表你在压力升高、关系变化或机会出现时会启动的第二套反应。","MINGJIAO":"你的主门派是「星宿派 · 洞察人心的暗线谋士」，但身上也带着「明教 · 反骨与热血的燃灯者」的副心法。主结果代表你最稳定的处世方式，副结果代表你在压力升高、关系变化或机会出现时会启动的第二套反应。","SHENNONG":"你的主门派是「星宿派 · 洞察人心的暗线谋士」，但身上也带着「神农谷 · 慢热修复的疗愈者」的副心法。主结果代表你最稳定的处世方式，副结果代表你在压力升高、关系变化或机会出现时会启动的第二套反应。"}},"shareTemplate":["我测出来是：{{typeName}}","{{posterSubtext}}","{{secondaryLine}}","","你在古代属于哪个门派？32题武林归宿测试"]};</script>
+    <script>
+(function () {
+  const app = document.getElementById("app");
+  const configPaths = ["./configs/site-config.json", "./configs/career-change.json"];
+
+  const state = {
+    config: null,
+    answers: {},
+    profile: { birthDate: "", actualAge: "" },
+    currentIndex: 0,
+    selected: null,
+    locked: false,
+    loadingStep: 0,
+    route: "home",
+    resultData: null,
+  };
+
+  const defaultLoadingMessages = [
+    "正在读取你的选择倾向...",
+    "正在识别隐藏动机...",
+    "正在计算结果分布...",
+    "正在生成专属报告...",
+    "分析完成。",
+  ];
+
+  init();
+
+  async function init() {
+    try {
+      state.config = await fetchConfig();
+      applyDocumentMeta(state.config);
+      applyTheme(state.config);
+
+      const saved = sessionStorage.getItem(getStorageKey());
+      if (saved) {
+        state.answers = JSON.parse(saved);
+      }
+      const savedProfile = sessionStorage.getItem(getProfileStorageKey());
+      if (savedProfile) {
+        state.profile = JSON.parse(savedProfile);
+      }
+
+      routeFromHash();
+      window.addEventListener("hashchange", routeFromHash);
+    } catch (error) {
+      app.innerHTML = `
+        <div class="error">
+          <div>
+            <h1>测试加载失败</h1>
+            <p>请确认你是通过网页链接打开页面，而不是直接双击 HTML 文件。</p>
+          </div>
+        </div>
+      `;
+      console.error(error);
+    }
+  }
+
+  async function fetchConfig() {
+    if (window.__QUIZ_CONFIG__) return window.__QUIZ_CONFIG__;
+    let lastError;
+    for (const path of configPaths) {
+      try {
+        const response = await fetch(path, { cache: "no-store" });
+        if (!response.ok) throw new Error(`${path} ${response.status}`);
+        return response.json();
+      } catch (error) {
+        lastError = error;
+      }
+    }
+    throw lastError;
+  }
+
+  function applyDocumentMeta(cfg) {
+    const title = cfg.title || "趣味测试";
+    const description = cfg.metaDescription || cfg.subtitle || "完成测试，生成你的专属报告。";
+    document.title = title;
+    setMeta("name", "description", description);
+    setMeta("property", "og:title", title);
+    setMeta("property", "og:description", description);
+  }
+
+  function applyTheme(cfg) {
+    Object.entries(cfg.theme || {}).forEach(([name, value]) => {
+      document.documentElement.style.setProperty(name, value);
+    });
+  }
+
+  function setMeta(attr, key, content) {
+    let node = document.querySelector(`meta[${attr}="${key}"]`);
+    if (!node) {
+      node = document.createElement("meta");
+      node.setAttribute(attr, key);
+      document.head.appendChild(node);
+    }
+    node.setAttribute("content", content);
+  }
+
+  function routeFromHash() {
+    const route = (location.hash || "#/").replace("#/", "") || "home";
+    renderRoute(route);
+  }
+
+  function navigate(route) {
+    const nextHash = `#/${route}`;
+    if (location.hash === nextHash) {
+      renderRoute(route);
+      return;
+    }
+    location.hash = nextHash;
+  }
+
+  function renderRoute(route) {
+    state.route = route;
+    if (route === "quiz") renderQuiz();
+    else if (route === "loading") startLoading();
+    else if (route === "result") renderResult();
+    else renderHome();
+  }
+
+  function renderShell(content, extraClass = "") {
+    app.innerHTML = `
+      <div class="shell">
+        <div class="top-rule"></div>
+        <section class="screen ${extraClass}">${content}</section>
+      </div>
+      <div id="toast" class="toast">已复制</div>
+    `;
+  }
+
+  function renderHome() {
+    const cfg = state.config;
+    renderShell(
+      `
+      <div class="home">
+        <div class="kicker"><span class="dot"></span><span>${text(cfg.kicker)}</span><span class="dot"></span></div>
+        <h1 class="hero-title">${text(cfg.title)}</h1>
+        <p class="hero-subtitle">${text(cfg.subtitle)}</p>
+        <div class="hairline"></div>
+        <div class="intro">
+          ${(cfg.intro || []).map((p, index) => `<p class="${index === cfg.intro.length - 1 ? "strong" : ""}">${text(p)}</p>`).join("")}
+        </div>
+        ${!cfg.compactHome && (cfg.dimensions || []).length ? `
+          <div class="pill-grid">
+            ${(cfg.dimensions || []).map((item) => `<div class="pill">${text(item)}</div>`).join("")}
+          </div>
+        ` : ""}
+        ${cfg.testInfo ? `
+          <section class="home-card info-card">
+            <h2>${text(cfg.testInfo.title || "测验说明")}</h2>
+            <ul>${(cfg.testInfo.bullets || []).map((item) => `<li>${text(item)}</li>`).join("")}</ul>
+          </section>
+        ` : ""}
+        ${cfg.matchingSystem ? `
+          <section class="home-card info-card">
+            <h2>${text(cfg.matchingSystem.title || "综合匹配系统")}</h2>
+            <p>${text(cfg.matchingSystem.body || "")}</p>
+          </section>
+        ` : ""}
+        ${cfg.profileInput ? `
+          <section class="profile-panel">
+            <label class="profile-label" for="profile-value">${text(cfg.profileInput.title || "先输入出生日期")}</label>
+            <div class="profile-field">
+              <span>${text(cfg.profileInput.label || "出生日期")}</span>
+              <input
+                id="profile-value"
+                type="${text(cfg.profileInput.type || "date")}"
+                value="${text(getProfileInputValue(cfg.profileInput))}"
+                ${cfg.profileInput.type === "number" ? `inputmode="numeric" min="${text(cfg.profileInput.min || 1)}" max="${text(cfg.profileInput.max || 99)}" placeholder="${text(cfg.profileInput.placeholder || "")}"` : ""}
+                ${cfg.profileInput.required ? "required" : ""}
+              >
+            </div>
+            <p class="profile-note">${text(cfg.profileInput.note || "")}</p>
+            <p class="profile-error" data-profile-error aria-live="polite"></p>
+          </section>
+        ` : ""}
+        <button class="primary-btn" data-action="start">${text(cfg.startButton || "开始测试")}</button>
+        ${cfg.compactHome && (cfg.dimensions || []).length ? `
+          <div class="pill-grid compact-pills">
+            ${(cfg.dimensions || []).map((item) => `<div class="pill">${text(item)}</div>`).join("")}
+          </div>
+        ` : ""}
+        <p class="disclaimer">${text(cfg.disclaimer || "本测试为趣味内容，仅供娱乐参考。")}</p>
+      </div>
+      `,
+      "home"
+    );
+    const startButton = app.querySelector("[data-action='start']");
+    const profileField = app.querySelector("#profile-value");
+    const profileError = app.querySelector("[data-profile-error]");
+    profileField?.addEventListener("input", () => {
+      profileField.classList.remove("invalid");
+      if (profileError) profileError.textContent = "";
+    });
+    let started = false;
+    const startQuiz = () => {
+      if (started) return;
+      const profileValue = profileField?.value?.trim() || "";
+      if (cfg.profileInput?.required && !profileValue) {
+        profileField?.classList.add("invalid");
+        if (profileError) profileError.textContent = cfg.profileInput?.error || "请先填写信息，再开始测试。";
+        profileField?.focus();
+        return;
+      }
+      if (cfg.profileInput?.type === "number") {
+        const numericValue = Number(profileValue);
+        const min = Number(cfg.profileInput.min || 1);
+        const max = Number(cfg.profileInput.max || 99);
+        if (!Number.isFinite(numericValue) || numericValue < min || numericValue > max) {
+          profileField?.classList.add("invalid");
+          if (profileError) profileError.textContent = cfg.profileInput?.rangeError || `请输入 ${min}-${max} 之间的数字。`;
+          profileField?.focus();
+          return;
+        }
+      }
+      started = true;
+      state.answers = {};
+      state.profile = buildProfileFromInput(cfg.profileInput, profileValue);
+      state.currentIndex = 0;
+      sessionStorage.removeItem(getStorageKey());
+      sessionStorage.setItem(getProfileStorageKey(), JSON.stringify(state.profile));
+      navigate("quiz");
+    };
+    startButton.addEventListener("click", startQuiz);
+    startButton.addEventListener(
+      "touchend",
+      (event) => {
+        event.preventDefault();
+        startQuiz();
+      },
+      { passive: false }
+    );
+  }
+
+  function renderQuiz() {
+    const questions = state.config.questions || [];
+    const question = questions[state.currentIndex];
+    if (!question) {
+      renderHome();
+      return;
+    }
+
+    const progress = ((state.currentIndex + 1) / questions.length) * 100;
+
+    renderShell(
+      `
+      <div class="sticky-head">
+        <div class="quiz-meta">
+          <span>${String(state.currentIndex + 1).padStart(2, "0")} / ${questions.length}</span>
+          <span>${text(question.module)}</span>
+        </div>
+        <div class="progress-track"><div class="progress-bar" style="width:${progress}%"></div></div>
+      </div>
+      <div class="question-no">${String(state.currentIndex + 1).padStart(2, "0")}</div>
+      <h1 class="question-title">${text(question.text)}</h1>
+      <div class="options">
+        ${(question.options || [])
+          .map(
+            (option) => `
+            <button class="option" data-option="${text(option.key)}">
+              <span class="option-key">${text(option.key)}</span>
+              <span class="option-text">${text(option.text)}</span>
+            </button>
+          `
+          )
+          .join("")}
+      </div>
+      <p class="hint">${text(state.config.quizHint || "选择后自动进入下一题")}</p>
+      `,
+      "quiz-screen"
+    );
+
+    app.querySelectorAll("[data-option]").forEach((button) => {
+      button.addEventListener("click", () => selectOption(button.dataset.option));
+    });
+  }
+
+  function selectOption(key) {
+    if (state.locked) return;
+    state.locked = true;
+    state.selected = key;
+    const question = state.config.questions[state.currentIndex];
+    state.answers[question.id] = key;
+
+    app.querySelectorAll(".option").forEach((button) => {
+      const selected = button.dataset.option === key;
+      button.classList.toggle("selected", selected);
+      button.classList.toggle("dimmed", !selected);
+    });
+
+    window.setTimeout(() => {
+      if (state.currentIndex < state.config.questions.length - 1) {
+        state.currentIndex += 1;
+        state.locked = false;
+        state.selected = null;
+        renderQuiz();
+      } else {
+        sessionStorage.setItem(getStorageKey(), JSON.stringify(state.answers));
+        state.locked = false;
+        navigate("loading");
+      }
+    }, 420);
+  }
+
+  function startLoading() {
+    state.loadingStep = 0;
+    renderLoading("");
+    tickLoading();
+  }
+
+  function renderLoading(value) {
+    const loadingMessages = getLoadingMessages();
+    renderShell(
+      `
+      <div class="loading-card">
+        <div class="spinner"></div>
+        <div class="loading-text">${text(value)}<span class="cursor">|</span></div>
+        <div class="step-bars">
+          ${loadingMessages.map((_, index) => `<div class="step ${index < state.loadingStep ? "done" : ""}"><span></span></div>`).join("")}
+        </div>
+      </div>
+      `,
+      "loading-screen"
+    );
+  }
+
+  function tickLoading() {
+    if (state.route !== "loading") return;
+    const loadingMessages = getLoadingMessages();
+    if (state.loadingStep >= loadingMessages.length) {
+      window.setTimeout(() => navigate("result"), 700);
+      return;
+    }
+    const message = loadingMessages[state.loadingStep];
+    let chars = 0;
+    const interval = window.setInterval(() => {
+      chars += 1;
+      renderLoading(message.slice(0, chars));
+      if (chars >= message.length) {
+        window.clearInterval(interval);
+        window.setTimeout(() => {
+          state.loadingStep += 1;
+          tickLoading();
+        }, 520);
+      }
+    }, 35);
+  }
+
+  function renderResult() {
+    const saved = sessionStorage.getItem(getStorageKey());
+    if (saved) state.answers = JSON.parse(saved);
+    if (Object.keys(state.answers).length < state.config.questions.length) {
+      renderHome();
+      return;
+    }
+
+    const scored = scoreAnswers(state.answers);
+    const primary = state.config.results[scored.primary];
+    const secondary = scored.secondary ? state.config.secondaryNotes?.[scored.primary]?.[scored.secondary] : null;
+    const stage = getStage(primary.maturityScore);
+    const shareText = buildShareText(primary, secondary);
+    const compareLabels = state.config.compareLabels || ["如果继续原路", "如果换一种做法"];
+    state.resultData = { scored, primary, secondary, stage, shareText };
+
+    renderShell(
+      `
+      <article class="report">
+        <div class="kicker"><span class="dot"></span><span>${text(state.config.resultKicker || "Result Report")}</span><span class="dot"></span></div>
+        <h1 class="result-type">${text(primary.typeName)}</h1>
+        <p class="result-subtitle">${text(primary.subtitle)}</p>
+        <div class="stamp-row">
+          <div class="stamp"><strong>${text(primary.maturityScore)}</strong><span>${text(state.config.scoreLabel || "决策成熟度")}</span></div>
+          <div class="stamp"><strong>${text(stage)}</strong><span>${text(state.config.stageLabel || "当前行动阶段")}</span></div>
+        </div>
+
+        ${renderMatchSummary(scored)}
+
+        ${scored.psychological ? "" : `
+          <section class="section">
+            <h2>你的答案分布</h2>
+            <div class="meters">
+              ${Object.entries(scored.counts)
+                .filter(([, value]) => value > 0)
+                .map(([key, value]) => {
+                  const typeData = state.config.results[key];
+                  const width = (value / state.config.questions.length) * 100;
+                  return `
+                    <div>
+                      <div class="meter-head"><span>${text(key)} · ${text(typeData.typeName)}</span><span>${value} 题</span></div>
+                      <div class="meter-track"><div class="meter-fill" style="width:${width}%"></div></div>
+                    </div>
+                  `;
+                })
+                .join("")}
+            </div>
+          </section>
+        `}
+
+        ${secondary ? `<section class="section"><h2>副倾向提示</h2><div class="secondary-note">${text(secondary)}</div></section>` : ""}
+
+        <section class="section">
+          <h2>诊断结论</h2>
+          <div class="quote">${text(primary.coreConclusion)}</div>
+        </section>
+
+        <section class="section">
+          <h2>为什么你会这样</h2>
+          <p>${text(primary.diagnosis)}</p>
+          <p>${text(primary.whatYouReallyWant)}</p>
+        </section>
+
+        <section class="section">
+          <h2>${text(primary.mechanism.title)}</h2>
+          <p>${text(primary.mechanism.content)}</p>
+        </section>
+
+        ${renderParagraphSection("专业解读框架", primary.professionalBasis)}
+        ${renderTagSection("你的关键矛盾", primary.coreTensions)}
+        ${renderCompareListSection("适合推进的条件", "需要谨慎的信号", primary.suitableIf, primary.cautionIf)}
+
+        <section class="section">
+          <h2>关键指数</h2>
+          <div class="meters">
+            ${(primary.indices || [])
+              .map(
+                (item) => `
+                <div>
+                  <div class="meter-head"><span>${text(item.label)}</span><span>${text(item.value)}</span></div>
+                  <div class="meter-track"><div class="meter-fill" style="width:${number(item.value)}%"></div></div>
+                </div>
+              `
+              )
+              .join("")}
+          </div>
+        </section>
+
+        <section class="section">
+          <h2>两条路径对比</h2>
+          <div class="compare">
+            <div class="compare-card"><h3>${text(compareLabels[0])}</h3><p>${text(primary.ifStay)}</p></div>
+            <div class="compare-card"><h3>${text(compareLabels[1])}</h3><p>${text(primary.ifChange)}</p></div>
+          </div>
+        </section>
+
+        <section class="section">
+          <h2>现在最不建议你做</h2>
+          <div class="tag-list">${(primary.notRecommended || []).map((item) => `<span class="tag">${text(item)}</span>`).join("")}</div>
+        </section>
+
+        <section class="section">
+          <h2>未来 90 天验证方案</h2>
+          <div class="plan">
+            ${(primary.plan90 || [])
+              .map(
+                (item, index) => `
+                <div class="plan-card">
+                  <h3>${index + 1}. ${text(item.title)}</h3>
+                  <p>${text(item.content)}</p>
+                </div>
+              `
+              )
+              .join("")}
+          </div>
+        </section>
+
+        <section class="section">
+          <h2>最后一句话</h2>
+          <p>${text(primary.closing)}</p>
+        </section>
+
+        <div class="actions">
+          <button class="primary-btn" data-action="copy">${text(state.config.copyButton || "复制我的结果")}</button>
+          <button class="ghost-btn" data-action="restart">${text(state.config.restartButton || "重新测试")}</button>
+        </div>
+      </article>
+      `,
+      "result-screen"
+    );
+
+    app.querySelector("[data-action='copy']").addEventListener("click", () => copyShareText(shareText));
+    app.querySelector("[data-action='restart']").addEventListener("click", () => {
+      sessionStorage.removeItem(getStorageKey());
+      sessionStorage.removeItem(getProfileStorageKey());
+      state.answers = {};
+      state.profile = { birthDate: "" };
+      state.currentIndex = 0;
+      navigate("home");
+    });
+  }
+
+  function renderParagraphSection(title, paragraphs) {
+    if (!Array.isArray(paragraphs) || !paragraphs.length) return "";
+    return `
+      <section class="section">
+        <h2>${text(title)}</h2>
+        ${paragraphs.map((item) => `<p>${text(item)}</p>`).join("")}
+      </section>
+    `;
+  }
+
+  function renderTagSection(title, items) {
+    if (!Array.isArray(items) || !items.length) return "";
+    return `
+      <section class="section">
+        <h2>${text(title)}</h2>
+        <div class="tag-list">${items.map((item) => `<span class="tag">${text(item)}</span>`).join("")}</div>
+      </section>
+    `;
+  }
+
+  function renderMatchSummary(scored) {
+    if (scored.psychological) return renderPsychologicalSummary(scored.psychological);
+    if (!scored.match) return "";
+    const match = scored.match;
+    return `
+      <section class="section">
+        <h2>综合匹配结果</h2>
+        <div class="match-summary">
+          <div class="match-grid">
+            <div class="match-item"><span>出生日期倾向</span><strong>${text(match.birthElement)}</strong></div>
+            <div class="match-item"><span>答题倾向</span><strong>${text(match.personalityElement)}</strong></div>
+            <div class="match-item"><span>城市匹配度</span><strong>${text(match.matchScore)}%</strong></div>
+          </div>
+          <p>本结果按出生日期倾向与 49 道题的生活选择加权生成。五行仅用于表达生活偏好，结果需要结合真实岗位、预算、住房和试住体验判断。</p>
+        </div>
+      </section>
+    `;
+  }
+
+  function renderPsychologicalSummary(data) {
+    const deltaLabel = data.delta > 0 ? `比实际年龄成熟 ${data.delta} 岁` : data.delta < 0 ? `比实际年龄年轻 ${Math.abs(data.delta)} 岁` : "与实际年龄同频";
+    return `
+      <section class="section">
+        <h2>心理年龄对比</h2>
+        <div class="match-summary">
+          <div class="match-grid">
+            <div class="match-item"><span>实际年龄</span><strong>${text(data.actualAge)}岁</strong></div>
+            <div class="match-item"><span>心理年龄</span><strong>${text(data.psychologicalAge)}岁</strong></div>
+            <div class="match-item"><span>年龄差</span><strong>${text(deltaLabel)}</strong></div>
+          </div>
+          <p>${text(data.ageLabel)}。这个数字不是能力高低，只代表你最近面对世界时更常用的心理模式。</p>
+        </div>
+      </section>
+      <section class="section">
+        <h2>8维心理画像</h2>
+        <div class="meters">
+          ${data.dimensionOrder.map((key) => `
+            <div>
+              <div class="meter-head"><span>${text(data.dimensionLabels[key] || key)}</span><span>${text(data.dimensions[key])}</span></div>
+              <div class="meter-track"><div class="meter-fill" style="width:${number(data.dimensions[key])}%"></div></div>
+            </div>
+          `).join("")}
+        </div>
+      </section>
+      <section class="section">
+        <h2>关键词标签</h2>
+        <div class="tag-list">${data.tags.map((item) => `<span class="tag">${text(item)}</span>`).join("")}</div>
+      </section>
+      <section class="section">
+        <h2>你的长板与盲点</h2>
+        <div class="compare">
+          <div class="compare-card">
+            <h3>最高的 3 个维度</h3>
+            ${data.topDimensions.map((item) => `<p>${text(item.label)}：${text(item.value)}</p>`).join("")}
+          </div>
+          <div class="compare-card">
+            <h3>最低的 2 个维度</h3>
+            ${data.lowDimensions.map((item) => `<p>${text(item.label)}：${text(item.value)}</p>`).join("")}
+          </div>
+        </div>
+      </section>
+    `;
+  }
+
+  function renderCompareListSection(leftTitle, rightTitle, leftItems, rightItems) {
+    const hasLeft = Array.isArray(leftItems) && leftItems.length;
+    const hasRight = Array.isArray(rightItems) && rightItems.length;
+    if (!hasLeft && !hasRight) return "";
+    return `
+      <section class="section">
+        <h2>适用边界</h2>
+        <div class="compare">
+          <div class="compare-card">
+            <h3>${text(leftTitle)}</h3>
+            ${(leftItems || []).map((item) => `<p>${text(item)}</p>`).join("")}
+          </div>
+          <div class="compare-card">
+            <h3>${text(rightTitle)}</h3>
+            ${(rightItems || []).map((item) => `<p>${text(item)}</p>`).join("")}
+          </div>
+        </div>
+      </section>
+    `;
+  }
+
+  function scoreAnswers(answers) {
+    if (state.config.scoring?.mode === "psychological-age") {
+      return scorePsychologicalAge(answers, state.config.scoring);
+    }
+    if (state.config.scoring?.mode === "paired-attributes") {
+      return scorePairedAttributes(answers, state.config.scoring);
+    }
+    if (state.config.scoring?.mode === "city-with-elements") {
+      return scoreCityWithElements(answers, state.config.scoring);
+    }
+
+    const resultKeys = Object.keys(state.config.results || {});
+    const counts = Object.fromEntries(resultKeys.map((key) => [key, 0]));
+    (state.config.questions || []).forEach((question) => {
+      const answerKey = answers[question.id];
+      if (!answerKey) return;
+      const option = (question.options || []).find((item) => item.key === answerKey);
+      const scoreKey = option?.score || option?.result || answerKey;
+      if (counts[scoreKey] !== undefined) counts[scoreKey] += 1;
+    });
+    const sorted = Object.entries(counts).sort((a, b) => b[1] - a[1]);
+    const threshold = state.config.secondaryThreshold ?? 2;
+    const primary = sorted[0][0];
+    const secondary = sorted[1][1] > 0 && sorted[0][1] - sorted[1][1] <= threshold ? sorted[1][0] : null;
+    return { counts, primary, secondary };
+  }
+
+  function scorePsychologicalAge(answers, scoring) {
+    const answerValues = scoring.answerValues || { A: 1, B: 2, C: 3, D: 4, E: 5 };
+    const dimensionLabels = scoring.dimensionLabels || {};
+    const dimensionOrder = scoring.dimensionOrder || Object.keys(dimensionLabels);
+    const rawTotals = Object.fromEntries(dimensionOrder.map((key) => [key, 0]));
+    const rawCounts = Object.fromEntries(dimensionOrder.map((key) => [key, 0]));
+
+    (state.config.questions || []).forEach((question) => {
+      const answerKey = answers[question.id];
+      if (!answerKey || !question.dimension) return;
+      const base = Number(answerValues[answerKey] ?? answerValues[String(answerKey)] ?? 0);
+      if (!Number.isFinite(base) || base <= 0) return;
+      const value = question.reverse ? 6 - base : base;
+      rawTotals[question.dimension] = (rawTotals[question.dimension] || 0) + value;
+      rawCounts[question.dimension] = (rawCounts[question.dimension] || 0) + 1;
+    });
+
+    const dimensions = {};
+    dimensionOrder.forEach((key) => {
+      const count = rawCounts[key] || 0;
+      if (!count) {
+        dimensions[key] = 0;
+        return;
+      }
+      const min = count;
+      const max = count * 5;
+      dimensions[key] = Math.round(((rawTotals[key] - min) / (max - min)) * 100);
+    });
+
+    const matureDimensions = scoring.matureDimensions || ["emotion", "responsibility", "resilience", "tolerance", "selfAcceptance"];
+    const youthfulDimensions = scoring.youthfulDimensions || ["curiosity", "socialEase", "lifePassion"];
+    const matureIndex = average(matureDimensions.map((key) => dimensions[key]));
+    const youthfulIndex = average(youthfulDimensions.map((key) => dimensions[key]));
+    const actualAge = getActualAge(scoring);
+    const psychologicalAge = clamp(
+      Math.round(actualAge + (matureIndex - youthfulIndex) * Number(scoring.ageFactor ?? 0.22)),
+      Number(scoring.minAge ?? 10),
+      Number(scoring.maxAge ?? 70)
+    );
+    const delta = psychologicalAge - actualAge;
+    const primary = getPsychologicalResultKey(delta, scoring);
+    const counts = Object.fromEntries(Object.keys(state.config.results || {}).map((key) => [key, key === primary ? (state.config.questions || []).length : 0]));
+    const rankedDimensions = dimensionOrder
+      .map((key) => ({ key, label: dimensionLabels[key] || key, value: dimensions[key] ?? 0 }))
+      .sort((left, right) => right.value - left.value);
+    const tags = buildPsychologicalTags(rankedDimensions, delta, primary, scoring);
+
+    return {
+      counts,
+      primary,
+      secondary: null,
+      psychological: {
+        actualAge,
+        psychologicalAge,
+        delta,
+        ageLabel: getPsychologicalAgeLabel(delta),
+        matureIndex: Math.round(matureIndex),
+        youthfulIndex: Math.round(youthfulIndex),
+        dimensions,
+        dimensionLabels,
+        dimensionOrder,
+        topDimensions: rankedDimensions.slice(0, 3),
+        lowDimensions: rankedDimensions.slice(-2).reverse(),
+        tags,
+      },
+    };
+  }
+
+  function getActualAge(scoring) {
+    const numericAge = Number(state.profile.actualAge);
+    if (Number.isFinite(numericAge) && numericAge > 0) return Math.round(numericAge);
+    const birthAge = calculateAgeFromBirthDate(state.profile.birthDate);
+    if (birthAge) return birthAge;
+    return Number(scoring.defaultActualAge || 28);
+  }
+
+  function calculateAgeFromBirthDate(value) {
+    if (!value) return null;
+    const date = new Date(value);
+    if (Number.isNaN(date.getTime())) return null;
+    const now = new Date();
+    let age = now.getFullYear() - date.getFullYear();
+    const monthDiff = now.getMonth() - date.getMonth();
+    if (monthDiff < 0 || (monthDiff === 0 && now.getDate() < date.getDate())) age -= 1;
+    return age > 0 ? age : null;
+  }
+
+  function getPsychologicalResultKey(delta, scoring) {
+    const groups = scoring.ageGroups || [
+      { key: "CURIOUS_CHILD", maxDelta: -8 },
+      { key: "HOT_BLOODED_TEEN", maxDelta: -3 },
+      { key: "BALANCED_YOUTH", maxDelta: 2 },
+      { key: "STEADY_ADVISER", maxDelta: 7 },
+      { key: "CLEAR_HELM", maxDelta: Infinity },
+    ];
+    const hit = groups.find((item) => delta <= Number(item.maxDelta));
+    return hit?.key || groups[groups.length - 1]?.key || Object.keys(state.config.results || {})[0];
+  }
+
+  function getPsychologicalAgeLabel(delta) {
+    if (delta <= -8) return "灵魂明显年轻";
+    if (delta <= -3) return "少年感在线";
+    if (delta <= 2) return "与真实年龄同频";
+    if (delta <= 7) return "心智略超前";
+    return "灵魂明显成熟";
+  }
+
+  function buildPsychologicalTags(rankedDimensions, delta, primary, scoring) {
+    const tagMap = scoring.dimensionTags || {};
+    const ageTags = scoring.ageTags || {};
+    const resultTags = scoring.resultTags || {};
+    const tags = rankedDimensions
+      .slice(0, 3)
+      .map((item) => tagMap[item.key]?.[0] || item.label)
+      .filter(Boolean);
+    tags.push(ageTags[getPsychologicalAgeLabel(delta)] || getPsychologicalAgeLabel(delta));
+    tags.push(resultTags[primary] || "社交原型清晰");
+    return [...new Set(tags)].slice(0, 5);
+  }
+
+  function scoreCityWithElements(answers, scoring) {
+    const resultKeys = Object.keys(state.config.results || {});
+    const counts = Object.fromEntries(resultKeys.map((key) => [key, 0]));
+    const elementMap = scoring.elementMap || {};
+    const elementCounts = {};
+    Object.values(elementMap).forEach((element) => { elementCounts[element] = 0; });
+
+    (state.config.questions || []).forEach((question) => {
+      const answerKey = answers[question.id];
+      if (!answerKey) return;
+      const option = (question.options || []).find((item) => item.key === answerKey);
+      const scoreKey = option?.score || option?.result || answerKey;
+      const element = elementMap[scoreKey];
+      if (counts[scoreKey] !== undefined) counts[scoreKey] += 1;
+      if (element && elementCounts[element] !== undefined) elementCounts[element] += 1;
+    });
+
+    const personalityElement = Object.entries(elementCounts).sort((left, right) => right[1] - left[1])[0]?.[0] || "未提供";
+    const birthElement = getBirthElement(state.profile.birthDate, scoring);
+    const birthWeight = Number(scoring.birthWeight ?? 0.25);
+    const combined = Object.fromEntries(resultKeys.map((key) => {
+      const birthBonus = elementMap[key] === birthElement ? (state.config.questions.length * birthWeight) : 0;
+      return [key, counts[key] + birthBonus];
+    }));
+    const sorted = Object.entries(combined).sort((left, right) => right[1] - left[1]);
+    const threshold = state.config.secondaryThreshold ?? 2;
+    const primary = sorted[0][0];
+    const secondary = sorted[1][1] > 0 && sorted[0][1] - sorted[1][1] <= threshold ? sorted[1][0] : null;
+    const personalityShare = counts[primary] / Math.max(1, state.config.questions.length);
+    const birthMatch = elementMap[primary] === birthElement;
+    const matchScore = Math.round(Math.min(99, 55 + personalityShare * 30 + (birthMatch ? 15 : 5)));
+    return {
+      counts,
+      primary,
+      secondary,
+      match: { birthElement, personalityElement, elementCounts, matchScore },
+    };
+  }
+
+  function getBirthElement(value, scoring) {
+    if (!value) return "未提供";
+    const parts = value.split("-").map(Number);
+    if (parts.length !== 3 || parts.some((part) => !Number.isFinite(part))) return "未提供";
+    const [year, month, day] = parts;
+    const elements = scoring.birthElements || ["木", "火", "土", "金", "水"];
+    return elements[Math.abs(year * 13 + month * 7 + day) % elements.length];
+  }
+
+  function scorePairedAttributes(answers, scoring) {
+    const attributes = Object.fromEntries((scoring.attributes || []).map((key) => [key, 0]));
+    const questionsById = Object.fromEntries((state.config.questions || []).map((question) => [question.id, question]));
+
+    (state.config.questions || []).forEach((question) => {
+      const answerKey = answers[question.id];
+      if (!answerKey) return;
+      const option = (question.options || []).find((item) => item.key === answerKey);
+      (option?.attributes || []).forEach((attribute) => {
+        if (attributes[attribute] !== undefined) attributes[attribute] += 1;
+      });
+    });
+
+    const chosen = (scoring.pairs || []).map(([left, right], index) => {
+      if (attributes[left] > attributes[right]) return left;
+      if (attributes[right] > attributes[left]) return right;
+
+      const tieQuestionId = scoring.tieBreakers?.[String(index)];
+      const tieQuestion = questionsById[tieQuestionId];
+      const tieAnswer = tieQuestion && answers[tieQuestionId];
+      const tieOption = tieQuestion?.options?.find((item) => item.key === tieAnswer);
+      return tieOption?.attributes?.includes(left) ? left : right;
+    });
+
+    const primary = chosen.join("");
+    const counts = Object.fromEntries(Object.keys(state.config.results || {}).map((key) => [key, key === primary ? (state.config.questions || []).length : 0]));
+    const alternate = chosen.slice();
+    if (scoring.pairs?.length) {
+      const firstPair = scoring.pairs[0];
+      alternate[0] = alternate[0] === firstPair[0] ? firstPair[1] : firstPair[0];
+    }
+    const secondary = alternate.join("") !== primary && state.config.secondaryNotes?.[primary]?.[alternate.join("")] ? alternate.join("") : null;
+    return { counts, primary, secondary, attributes };
+  }
+
+  function getStage(score) {
+    const labels = state.config.stageLabels || [
+      { max: 45, label: "观察期" },
+      { max: 65, label: "验证期" },
+      { max: 82, label: "规划期" },
+      { max: 100, label: "行动期" },
+    ];
+    const hit = labels.find((item) => score <= item.max);
+    return hit ? hit.label : labels[labels.length - 1].label;
+  }
+
+  function buildShareText(primary, secondary) {
+    const template = state.config.shareTemplate || [
+      "我测出了：{{typeName}}",
+      "{{posterSubtext}}",
+      "{{secondaryLine}}",
+      "",
+      "{{title}}",
+    ];
+    const values = {
+      title: state.config.title,
+      typeName: primary.typeName,
+      posterSubtext: primary.posterSubtext,
+      secondary: secondary || "",
+      secondaryLine: secondary ? `副倾向：${secondary}` : "",
+    };
+    return template
+      .map((line) => fillTemplate(line, values))
+      .filter((line, index, arr) => line || arr[index - 1])
+      .join("\n")
+      .trim();
+  }
+
+  async function copyShareText(value) {
+    try {
+      await navigator.clipboard.writeText(value);
+      showToast("结果文案已复制");
+    } catch (error) {
+      showToast("复制失败，可长按手动复制");
+    }
+  }
+
+  function showToast(value) {
+    const toast = document.getElementById("toast");
+    if (!toast) return;
+    toast.textContent = value;
+    toast.classList.add("show");
+    window.setTimeout(() => toast.classList.remove("show"), 1600);
+  }
+
+  function getLoadingMessages() {
+    return state.config.loadingMessages || defaultLoadingMessages;
+  }
+
+  function getStorageKey() {
+    return `xhsTestAnswers:${state.config.slug || "default"}`;
+  }
+
+  function getProfileStorageKey() {
+    return `xhsTestProfile:${state.config?.slug || "default"}`;
+  }
+
+  function getProfileInputValue(inputConfig) {
+    if (!inputConfig) return "";
+    if (inputConfig.type === "number") return state.profile.actualAge || "";
+    return state.profile.birthDate || "";
+  }
+
+  function buildProfileFromInput(inputConfig, value) {
+    if (inputConfig?.type === "number") {
+      return { birthDate: "", actualAge: value };
+    }
+    return { birthDate: value, actualAge: "" };
+  }
+
+  function fillTemplate(template, values) {
+    return String(template).replace(/\{\{(\w+)\}\}/g, (_, key) => values[key] || "");
+  }
+
+  function number(value) {
+    const parsed = Number(value);
+    if (Number.isNaN(parsed)) return 0;
+    return Math.max(0, Math.min(100, parsed));
+  }
+
+  function average(values) {
+    const cleanValues = values.map(Number).filter((value) => Number.isFinite(value));
+    if (!cleanValues.length) return 0;
+    return cleanValues.reduce((sum, value) => sum + value, 0) / cleanValues.length;
+  }
+
+  function clamp(value, min, max) {
+    return Math.max(min, Math.min(max, value));
+  }
+
+  function text(value) {
+    return String(value ?? "")
+      .replace(/&/g, "&amp;")
+      .replace(/</g, "&lt;")
+      .replace(/>/g, "&gt;")
+      .replace(/"/g, "&quot;");
+  }
+})();
+
+    </script>
+  </body>
+</html>
