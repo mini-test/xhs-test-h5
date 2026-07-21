@@ -1,0 +1,1661 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <meta name="description" content="完成 24 题隐藏天赋测试，匹配语言、逻辑、空间、人际、自然、动觉、音乐、内省、美学、创造 10 种天赋原型。" />
+    <meta property="og:title" content="你的隐藏天赋是哪一种？" />
+    <meta property="og:description" content="完成 24 题隐藏天赋测试，匹配语言、逻辑、空间、人际、自然、动觉、音乐、内省、美学、创造 10 种天赋原型。" />
+    <title>你的隐藏天赋是哪一种？</title>
+    <style>
+:root {
+  --bg: #fbfaf7;
+  --paper: #fffefd;
+  --ink: #20242a;
+  --muted: #65707d;
+  --line: #d9d4ca;
+  --line-strong: #b9afa0;
+  --accent: #9b4339;
+  --accent-soft: #f1dfd7;
+  --gold: #c0964d;
+  --sage: #66795f;
+  --blue: #526a86;
+  --shadow: 0 16px 36px rgba(60, 47, 38, 0.1);
+  --radius: 8px;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  min-height: 100%;
+  background:
+    linear-gradient(rgba(32, 36, 42, 0.035) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(32, 36, 42, 0.035) 1px, transparent 1px),
+    var(--bg);
+  background-size: 24px 24px;
+}
+
+body {
+  min-height: 100vh;
+  margin: 0;
+  color: var(--ink);
+  font-family:
+    "PingFang SC",
+    "Microsoft YaHei",
+    "Noto Sans SC",
+    system-ui,
+    -apple-system,
+    BlinkMacSystemFont,
+    sans-serif;
+  letter-spacing: 0;
+}
+
+button {
+  font: inherit;
+}
+
+.shell {
+  width: min(100%, 480px);
+  min-height: 100vh;
+  margin: 0 auto;
+  background: rgba(251, 250, 247, 0.88);
+}
+
+.top-rule {
+  height: 4px;
+  background: var(--accent);
+}
+
+.screen {
+  min-height: calc(100vh - 4px);
+  padding: 28px 22px 32px;
+}
+
+.home {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.kicker {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  color: var(--muted);
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  font-size: 11px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+.dot {
+  width: 7px;
+  height: 7px;
+  background: var(--accent);
+  border-radius: 50%;
+}
+
+.hero-title {
+  margin: 26px 0 14px;
+  color: var(--ink);
+  font-size: 30px;
+  line-height: 1.2;
+  text-align: center;
+  font-weight: 800;
+}
+
+.hero-subtitle {
+  margin: 0 auto 28px;
+  max-width: 340px;
+  color: var(--muted);
+  font-size: 15px;
+  line-height: 1.75;
+  text-align: center;
+}
+
+.hairline {
+  width: 64px;
+  height: 1px;
+  margin: 0 auto 30px;
+  background: var(--line-strong);
+}
+
+.intro {
+  margin: 0 auto;
+  max-width: 380px;
+}
+
+.intro p {
+  margin: 0 0 15px;
+  color: rgba(32, 36, 42, 0.82);
+  font-size: 15px;
+  line-height: 1.8;
+}
+
+.intro .strong {
+  color: var(--accent);
+  font-weight: 700;
+}
+
+.pill-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px;
+  margin: 28px 0;
+}
+
+.compact-pills {
+  margin: 16px 0 10px;
+}
+
+.pill {
+  min-height: 42px;
+  display: grid;
+  place-items: center;
+  border: 1px solid var(--line);
+  color: var(--muted);
+  background: rgba(255, 255, 255, 0.44);
+  font-size: 13px;
+}
+
+.home-card {
+  margin-top: 16px;
+  padding: 18px 16px;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  background: rgba(255, 255, 255, 0.78);
+}
+
+.info-card h2 {
+  margin: 0 0 12px;
+  font-size: 19px;
+}
+
+.info-card p,
+.info-card li {
+  color: rgba(32, 36, 42, 0.78);
+  font-size: 14px;
+  line-height: 1.8;
+}
+
+.info-card p {
+  margin: 0;
+}
+
+.info-card ul {
+  display: grid;
+  gap: 9px;
+  margin: 0;
+  padding-left: 20px;
+}
+
+.info-card li::marker {
+  color: var(--accent);
+}
+
+.profile-panel {
+  margin-top: 16px;
+  padding: 16px;
+  border: 1px solid var(--line-strong);
+  background: var(--accent-soft);
+}
+
+.profile-label {
+  display: block;
+  margin-bottom: 10px;
+  color: var(--ink);
+  font-size: 17px;
+  font-weight: 800;
+}
+
+.profile-field {
+  display: grid;
+  grid-template-columns: 1fr minmax(0, 1.4fr);
+  gap: 12px;
+  align-items: center;
+  padding: 11px 12px;
+  border: 1px solid var(--line);
+  background: var(--paper);
+}
+
+.profile-field span {
+  color: var(--muted);
+  font-size: 14px;
+}
+
+.profile-field input {
+  width: 100%;
+  min-height: 34px;
+  padding: 4px 6px;
+  border: 0;
+  background: transparent;
+  color: var(--ink);
+  font: inherit;
+  text-align: right;
+}
+
+.profile-field input:focus {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+
+.profile-field input.invalid {
+  outline: 2px solid #b3261e;
+  outline-offset: 2px;
+}
+
+.profile-note,
+.profile-error {
+  margin: 9px 0 0;
+  color: var(--muted);
+  font-size: 12px;
+  line-height: 1.6;
+}
+
+.profile-error {
+  min-height: 19px;
+  color: #a42f29;
+}
+
+.primary-btn,
+.ghost-btn,
+.copy-btn {
+  width: 100%;
+  min-height: 48px;
+  border: 1px solid var(--ink);
+  border-radius: 0;
+  cursor: pointer;
+  transition: transform 150ms ease, background 150ms ease, color 150ms ease, border-color 150ms ease;
+}
+
+.primary-btn {
+  background: var(--ink);
+  color: #fff;
+  font-weight: 700;
+}
+
+.ghost-btn,
+.copy-btn {
+  background: transparent;
+  color: var(--ink);
+}
+
+.primary-btn:active,
+.ghost-btn:active,
+.copy-btn:active,
+.option:active {
+  transform: translateY(1px);
+}
+
+.disclaimer {
+  margin: 18px auto 0;
+  max-width: 340px;
+  color: var(--muted);
+  font-size: 12px;
+  line-height: 1.65;
+  text-align: center;
+}
+
+.quiz-screen {
+  padding-top: 0;
+}
+
+.sticky-head {
+  position: sticky;
+  top: 0;
+  z-index: 5;
+  margin: 0 -22px 26px;
+  padding: 14px 22px 12px;
+  background: rgba(251, 250, 247, 0.95);
+  border-bottom: 1px solid var(--line);
+  backdrop-filter: blur(12px);
+}
+
+.quiz-meta {
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+  color: var(--muted);
+  font-size: 12px;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+}
+
+.progress-track {
+  height: 4px;
+  margin-top: 10px;
+  background: rgba(32, 36, 42, 0.09);
+}
+
+.progress-bar {
+  height: 100%;
+  background: var(--accent);
+  transition: width 260ms ease;
+}
+
+.question-no {
+  color: rgba(155, 67, 57, 0.18);
+  font-size: 48px;
+  line-height: 1;
+  font-weight: 800;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+}
+
+.question-title {
+  margin: 18px 0 24px;
+  font-size: 22px;
+  line-height: 1.5;
+  font-weight: 750;
+}
+
+.options {
+  display: grid;
+  gap: 12px;
+}
+
+.option {
+  min-height: 66px;
+  display: grid;
+  grid-template-columns: 30px 1fr;
+  gap: 12px;
+  align-items: start;
+  width: 100%;
+  padding: 15px;
+  border: 1px solid var(--line);
+  background: rgba(255, 255, 255, 0.68);
+  color: var(--ink);
+  text-align: left;
+  cursor: pointer;
+  transition: background 160ms ease, border-color 160ms ease, color 160ms ease, opacity 160ms ease;
+}
+
+.option-key {
+  display: grid;
+  place-items: center;
+  width: 28px;
+  height: 28px;
+  border: 1px solid var(--line-strong);
+  font-size: 13px;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+}
+
+.option-text {
+  padding-top: 2px;
+  font-size: 15px;
+  line-height: 1.55;
+}
+
+.option.selected {
+  border-color: var(--accent);
+  background: var(--accent);
+  color: #fff;
+}
+
+.option.selected .option-key {
+  border-color: rgba(255, 255, 255, 0.8);
+}
+
+.option.dimmed {
+  opacity: 0.42;
+}
+
+.hint {
+  margin: 18px 0 0;
+  color: var(--muted);
+  font-size: 12px;
+  text-align: center;
+}
+
+.loading-screen {
+  display: grid;
+  place-items: center;
+}
+
+.loading-card {
+  width: 100%;
+  max-width: 360px;
+  text-align: center;
+}
+
+.spinner {
+  width: 54px;
+  height: 54px;
+  margin: 0 auto 24px;
+  border: 2px solid var(--line);
+  border-top-color: var(--accent);
+  border-radius: 50%;
+  animation: spin 850ms linear infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.loading-text {
+  min-height: 54px;
+  color: var(--accent);
+  font-size: 17px;
+  line-height: 1.6;
+  font-weight: 700;
+}
+
+.step-bars {
+  display: grid;
+  gap: 8px;
+  margin-top: 28px;
+}
+
+.step {
+  height: 4px;
+  overflow: hidden;
+  background: rgba(32, 36, 42, 0.09);
+}
+
+.step span {
+  display: block;
+  height: 100%;
+  width: 0;
+  background: var(--accent);
+  transition: width 300ms ease;
+}
+
+.step.done span {
+  width: 100%;
+}
+
+.result-screen {
+  padding: 22px 18px 30px;
+}
+
+.report {
+  padding: 22px 16px 18px;
+  border: 1px solid var(--line);
+  background: var(--paper);
+  box-shadow: var(--shadow);
+}
+
+.result-type {
+  margin: 8px 0 8px;
+  color: var(--accent);
+  font-size: 30px;
+  line-height: 1.15;
+  font-weight: 850;
+  text-align: center;
+}
+
+.result-subtitle {
+  margin: 0 auto 20px;
+  color: var(--muted);
+  font-size: 15px;
+  line-height: 1.7;
+  text-align: center;
+}
+
+.stamp-row {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px;
+  margin: 18px 0 20px;
+}
+
+.stamp {
+  padding: 12px 10px;
+  border: 1px solid var(--line);
+  background: #fbfaf7;
+}
+
+.stamp strong {
+  display: block;
+  margin-bottom: 4px;
+  color: var(--ink);
+  font-size: 20px;
+}
+
+.stamp span {
+  color: var(--muted);
+  font-size: 12px;
+}
+
+.section {
+  padding: 20px 0;
+  border-top: 1px solid var(--line);
+}
+
+.section h2 {
+  margin: 0 0 12px;
+  font-size: 18px;
+  color: var(--ink);
+}
+
+.section p {
+  margin: 0 0 12px;
+  color: rgba(32, 36, 42, 0.82);
+  font-size: 15px;
+  line-height: 1.85;
+}
+
+.quote {
+  padding: 15px;
+  border-left: 3px solid var(--accent);
+  background: var(--accent-soft);
+  color: #5b2d27;
+  line-height: 1.8;
+  font-weight: 700;
+}
+
+.meters {
+  display: grid;
+  gap: 14px;
+}
+
+.meter-head {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 7px;
+  color: var(--muted);
+  font-size: 13px;
+}
+
+.meter-track {
+  height: 8px;
+  background: rgba(32, 36, 42, 0.08);
+}
+
+.meter-fill {
+  height: 100%;
+  background: var(--accent);
+}
+
+.compare {
+  display: grid;
+  gap: 10px;
+}
+
+.compare-card {
+  padding: 14px;
+  border: 1px solid var(--line);
+  background: #fbfaf7;
+}
+
+.compare-card h3,
+.plan-card h3 {
+  margin: 0 0 8px;
+  font-size: 15px;
+}
+
+.compare-card p,
+.plan-card p {
+  font-size: 14px;
+}
+
+.tag-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.tag {
+  padding: 7px 9px;
+  border: 1px solid var(--line);
+  background: #fbfaf7;
+  color: var(--muted);
+  font-size: 13px;
+}
+
+.plan {
+  display: grid;
+  gap: 10px;
+}
+
+.plan-card {
+  padding: 14px;
+  border: 1px solid var(--line);
+  background: #fbfaf7;
+}
+
+.secondary-note {
+  padding: 14px;
+  border: 1px dashed var(--line-strong);
+  background: rgba(192, 150, 77, 0.12);
+  line-height: 1.75;
+  font-size: 14px;
+}
+
+.match-summary {
+  padding: 14px;
+  border: 1px solid var(--line-strong);
+  background: var(--accent-soft);
+}
+
+.match-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 8px;
+}
+
+.match-item {
+  min-width: 0;
+  padding: 10px 8px;
+  background: var(--paper);
+  text-align: center;
+}
+
+.match-item span,
+.match-item strong {
+  display: block;
+}
+
+.match-item span {
+  color: var(--muted);
+  font-size: 11px;
+  line-height: 1.4;
+}
+
+.match-item strong {
+  margin-top: 4px;
+  color: var(--accent);
+  font-size: 20px;
+}
+
+.match-summary p {
+  margin: 12px 0 0;
+  color: rgba(32, 36, 42, 0.72);
+  font-size: 12px;
+  line-height: 1.7;
+}
+
+.actions {
+  display: grid;
+  gap: 10px;
+  margin-top: 18px;
+}
+
+.toast {
+  position: fixed;
+  left: 50%;
+  bottom: 22px;
+  z-index: 20;
+  transform: translateX(-50%);
+  padding: 10px 14px;
+  background: var(--ink);
+  color: #fff;
+  font-size: 13px;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 180ms ease;
+}
+
+.toast.show {
+  opacity: 1;
+}
+
+.error {
+  display: grid;
+  place-items: center;
+  min-height: 100vh;
+  padding: 24px;
+  text-align: center;
+}
+
+.error p {
+  color: var(--muted);
+  line-height: 1.7;
+}
+
+@media (min-width: 700px) {
+  body {
+    padding: 28px 0;
+  }
+
+  .shell {
+    min-height: calc(100vh - 56px);
+    border: 1px solid var(--line);
+    box-shadow: var(--shadow);
+  }
+
+  .screen {
+    min-height: calc(100vh - 60px);
+  }
+}
+
+    </style>
+  </head>
+  <body>
+    <main id="app" aria-live="polite"></main>
+    <script>window.__QUIZ_CONFIG__ = {"slug":"test-human-talents-24","compactHome":true,"topic":"你的隐藏天赋是哪一种？","kicker":"24-Q TALENT MAP TEST","title":"你的隐藏天赋是哪一种？","subtitle":"24 个真实生活情境，测出你最容易被低估的天赋主轴和适合发力方向。","metaDescription":"完成 24 题隐藏天赋测试，匹配语言、逻辑、空间、人际、自然、动觉、音乐、内省、美学、创造 10 种天赋原型。","startButton":"开始测天赋","resultKicker":"Talent Map Report","quizHint":"凭第一反应选，不要选你觉得更厉害的自己。","copyButton":"复制我的天赋结果","restartButton":"重新测天赋","scoreLabel":"天赋显性度","stageLabel":"当前阶段","indexTitle":"天赋雷达指数","tensionTitle":"你的天赋卡点","planTitle":"30 天发力建议","blurSummary":"做完 24 题，查看你的主天赋、副倾向、适合方向和 30 天发力建议。","stageLabels":[{"max":72,"label":"未被看见"},{"max":82,"label":"开始显影"},{"max":90,"label":"优势成型"},{"max":100,"label":"天赋开挂"}],"compareLabels":["继续靠本能使用","升级后的发力方式"],"disclaimer":"本测试借用多元能力与天赋原型做趣味自我探索，结果仅供娱乐、内容互动和方向参考，不构成心理诊断、职业测评结论、升学就业建议或任何确定性判断。","secondaryThreshold":2,"dimensions":["表达力","分析力","感知力","行动力","创造力"],"intro":["很多人不是没有天赋，而是一直拿自己的弱项和别人的强项比。","有的人擅长语言，有的人擅长结构；有人天生会读气氛，有人对空间、节奏、身体、自然或美感特别敏锐。","这 24 题不问你喜欢什么标签，而是观察你在学习、关系、压力和创作里的第一反应，帮你找到最容易被低估的那张底牌。"],"loadingMessages":["正在点亮你的天赋图谱...","正在比对你的第一反应和能力倾向...","正在分析主天赋、副倾向和隐藏卡点...","正在生成你的专属天赋报告...","天赋图谱生成完成。"],"questions":[{"id":1,"module":"第一组：第一反应","text":"你到一个新地方，最先注意到的通常是？","options":[{"key":"A","text":"哪里舒服、哪里堵，动线和位置合不合理","score":"SPACE"},{"key":"B","text":"这个地方会不会让我放松，身体和心里想不想留下","score":"INTRA"},{"key":"C","text":"规则写得清不清楚，有没有漏洞","score":"LOGIC"},{"key":"D","text":"光线、颜色、材质有没有让人舒服","score":"AESTH"},{"key":"E","text":"空气、植物、声音和整体环境状态","score":"NATURE"}]},{"id":2,"module":"第一组：第一反应","text":"朋友讲一件烦心事，你最自然的反应是？","options":[{"key":"A","text":"帮 ta 把话说清楚，找到真正想表达的点","score":"LANG"},{"key":"B","text":"听出 ta 没说出口的委屈和需求","score":"SOCIAL"},{"key":"C","text":"先看 ta 最近是不是被环境、作息和压力耗空了","score":"NATURE"},{"key":"D","text":"联想到一个更好的做法或新方案","score":"CREATIVE"},{"key":"E","text":"安静听完，再说自己观察到的内在模式","score":"INTRA"}]},{"id":3,"module":"第一组：第一反应","text":"你学一个新东西，最容易被哪部分吸住？","options":[{"key":"A","text":"它背后的结构、公式、规律","score":"LOGIC"},{"key":"B","text":"它能不能立刻上手做出来","score":"KINE"},{"key":"C","text":"它有没有节奏、韵律或重复感","score":"MUSIC"},{"key":"D","text":"它和现实世界、自然系统有什么关系","score":"NATURE"},{"key":"E","text":"它能不能被改造成新的玩法","score":"CREATIVE"}]},{"id":4,"module":"第一组：第一反应","text":"别人夸你时，哪句话最容易让你心里一动？","options":[{"key":"A","text":"你说话节奏很舒服，听你讲东西人会安定","score":"MUSIC"},{"key":"B","text":"你一眼就能看出布局哪里乱","score":"SPACE"},{"key":"C","text":"你很懂人，跟你相处不累","score":"SOCIAL"},{"key":"D","text":"你审美很稳定，一眼就知道哪里不对","score":"AESTH"},{"key":"E","text":"你很知道自己要什么","score":"INTRA"}]},{"id":5,"module":"第二组：压力场景","text":"事情突然乱成一团，你会先做什么？","options":[{"key":"A","text":"先看整个系统哪里失衡，是人、资源还是节奏出了问题","score":"NATURE"},{"key":"B","text":"先重新摆位置、排顺序，让局面看得见","score":"SPACE"},{"key":"C","text":"把大家的情绪稳下来，不让场子更乱","score":"SOCIAL"},{"key":"D","text":"直接动手试一版，边做边修","score":"KINE"},{"key":"E","text":"找一个别人没想到的突破口","score":"CREATIVE"}]},{"id":6,"module":"第二组：压力场景","text":"你最怕自己被困在哪种状态里？","options":[{"key":"A","text":"明明有话，却怎么都表达不出来","score":"LANG"},{"key":"B","text":"每天都在跑，但身体和动作跟不上心","score":"KINE"},{"key":"C","text":"周围太吵，完全听不见自己的节奏","score":"MUSIC"},{"key":"D","text":"离自然太远，像被困在一个密闭盒子里","score":"NATURE"},{"key":"E","text":"一直分析别人，却看不见自己真正的感受","score":"INTRA"}]},{"id":7,"module":"第二组：压力场景","text":"被人临时塞一个任务，你最容易从哪里入手？","options":[{"key":"A","text":"先拆要求，确认到底交付什么","score":"LOGIC"},{"key":"B","text":"先找参考图、版式和整体感觉","score":"AESTH"},{"key":"C","text":"先做一个粗糙原型，不空想","score":"KINE"},{"key":"D","text":"先想有没有更有趣的呈现方式","score":"CREATIVE"},{"key":"E","text":"先把要说服谁、影响谁弄清楚","score":"SOCIAL"}]},{"id":8,"module":"第二组：压力场景","text":"当你状态不好时，哪件事最能把你拉回来？","options":[{"key":"A","text":"写下来，把脑子里的东西变成文字","score":"LANG"},{"key":"B","text":"出去走走，换个空间和视角","score":"SPACE"},{"key":"C","text":"听一首对的音乐，节奏回来人就回来","score":"MUSIC"},{"key":"D","text":"接触植物、阳光、风，慢慢恢复感知","score":"NATURE"},{"key":"E","text":"独处一会儿，把自己问明白","score":"INTRA"}]},{"id":9,"module":"第三组：关系与表达","text":"在群聊或会议里，你最常扮演什么角色？","options":[{"key":"A","text":"先确认自己真正赞同什么，不急着跟着气氛表态","score":"INTRA"},{"key":"B","text":"发现整体呈现不协调，提醒别把内容做得太粗糙","score":"AESTH"},{"key":"C","text":"观察谁没说话，谁其实不舒服","score":"SOCIAL"},{"key":"D","text":"提出一个新角度，让讨论活起来","score":"CREATIVE"},{"key":"E","text":"注意氛围和节奏，知道什么时候该停","score":"MUSIC"}]},{"id":10,"module":"第三组：关系与表达","text":"你对一个人产生好感，往往是因为？","options":[{"key":"A","text":"ta 说话有分寸，也有表达力","score":"LANG"},{"key":"B","text":"ta 的行为逻辑稳定，不让人猜","score":"LOGIC"},{"key":"C","text":"和 ta 在一起身体是放松的","score":"KINE"},{"key":"D","text":"ta 有自己的世界，不容易被外界吞掉","score":"INTRA"},{"key":"E","text":"ta 身上有一种干净、协调、好看的气质","score":"AESTH"}]},{"id":11,"module":"第三组：关系与表达","text":"别人说你敏感，你心里更像哪一种？","options":[{"key":"A","text":"我只是听见了你话里的潜台词","score":"LANG"},{"key":"B","text":"我只是看见了关系里的细节变化","score":"SOCIAL"},{"key":"C","text":"我只是感受到空间和气氛不对","score":"SPACE"},{"key":"D","text":"我只是对声音、节奏和语气更敏锐","score":"MUSIC"},{"key":"E","text":"我只是更容易觉察自己的内在波动","score":"INTRA"}]},{"id":12,"module":"第三组：关系与表达","text":"你最容易被哪种人消耗？","options":[{"key":"A","text":"讲话节奏很乱，一直打断你内在节拍的人","score":"MUSIC"},{"key":"B","text":"逻辑跳跃，还非要你接受的人","score":"LOGIC"},{"key":"C","text":"边界模糊，情绪全丢给你的人","score":"SOCIAL"},{"key":"D","text":"审美粗糙，却要求你觉得好的人","score":"AESTH"},{"key":"E","text":"一直打断你的节奏和行动的人","score":"KINE"}]},{"id":13,"module":"第四组：工作与创造","text":"如果让你做一个小项目，你最想负责哪一块？","options":[{"key":"A","text":"创意概念、故事设定和新玩法设计","score":"CREATIVE"},{"key":"B","text":"把需求、资源和时间像一个系统一样养顺","score":"NATURE"},{"key":"C","text":"版面布局、空间呈现、视觉结构","score":"SPACE"},{"key":"D","text":"用户沟通、关系协调、社群运营","score":"SOCIAL"},{"key":"E","text":"整体风格、色彩、质感和审美把控","score":"AESTH"}]},{"id":14,"module":"第四组：工作与创造","text":"你做事最容易进入心流的时刻是？","options":[{"key":"A","text":"双手动起来，身体比脑子先知道怎么做","score":"KINE"},{"key":"B","text":"节奏顺了，所有步骤像音乐一样接上","score":"MUSIC"},{"key":"C","text":"材料、灵感和旧经验突然接在一起","score":"CREATIVE"},{"key":"D","text":"看到一个系统从混乱变得有秩序","score":"NATURE"},{"key":"E","text":"越做越明白自己为什么想做这件事","score":"INTRA"}]},{"id":15,"module":"第四组：工作与创造","text":"你最看不下去什么？","options":[{"key":"A","text":"文字堆很多，但一句也没说到人心里","score":"LANG"},{"key":"B","text":"方案看着热闹，底层逻辑完全站不住","score":"LOGIC"},{"key":"C","text":"空间、版式、页面挤到让人喘不过气","score":"SPACE"},{"key":"D","text":"人与人之间的暗流没人处理","score":"SOCIAL"},{"key":"E","text":"明明可以更美，却被做得很随便","score":"AESTH"}]},{"id":16,"module":"第四组：工作与创造","text":"你最容易被哪类内容打动？","options":[{"key":"A","text":"一句话很准，像替我说出了心里话","score":"LANG"},{"key":"B","text":"一个解释把复杂问题讲明白","score":"LOGIC"},{"key":"C","text":"一个场景、镜头或空间让我想走进去","score":"SPACE"},{"key":"D","text":"一个旋律或节奏让情绪瞬间被带走","score":"MUSIC"},{"key":"E","text":"一个新点子让我觉得还能这样想","score":"CREATIVE"}]},{"id":17,"module":"第五组：童年线索","text":"小时候你更容易被什么吸引？","options":[{"key":"A","text":"地图、积木、房间布置、路线变化","score":"SPACE"},{"key":"B","text":"昆虫、植物、天气、动物行为","score":"NATURE"},{"key":"C","text":"唱歌、敲节拍、反复听同一段旋律","score":"MUSIC"},{"key":"D","text":"画画、配色、漂亮物件、衣服搭配","score":"AESTH"},{"key":"E","text":"自己编故事、发明规则、改造玩具","score":"CREATIVE"}]},{"id":18,"module":"第五组：童年线索","text":"你被误解时，最常出现的委屈是？","options":[{"key":"A","text":"我不是话多，我是在帮事情被说清楚","score":"LANG"},{"key":"B","text":"我不是异想天开，我是在找另一个可能","score":"CREATIVE"},{"key":"C","text":"我不是想太多，我是真的感到哪里不舒服","score":"SOCIAL"},{"key":"D","text":"我不是慢，我需要先在心里对齐自己","score":"INTRA"},{"key":"E","text":"我不是挑剔，我是真的看见了不协调","score":"AESTH"}]},{"id":19,"module":"第五组：童年线索","text":"如果没有评价压力，你最想把时间花在哪？","options":[{"key":"A","text":"读、写、讲，把感受变成表达","score":"LANG"},{"key":"B","text":"研究一个难题，直到它变得清楚","score":"LOGIC"},{"key":"C","text":"旅行、布置、拍摄，感受空间变化","score":"SPACE"},{"key":"D","text":"运动、舞蹈、手作，让身体参与创造","score":"KINE"},{"key":"E","text":"听歌、编曲、玩声音和节奏","score":"MUSIC"}]},{"id":20,"module":"第五组：童年线索","text":"你最容易记住一件事的方式是？","options":[{"key":"A","text":"记住它的说法、句子或关键词","score":"LANG"},{"key":"B","text":"记住它的结构和推导过程","score":"LOGIC"},{"key":"C","text":"记住它的位置、形状和画面","score":"SPACE"},{"key":"D","text":"记住当时的天气、气味和环境状态","score":"NATURE"},{"key":"E","text":"记住身体做过的动作","score":"KINE"}]},{"id":21,"module":"第六组：未来发力","text":"你希望自己的天赋最终变成什么？","options":[{"key":"A","text":"行动影响力，让别人因为我的执行力被带动","score":"KINE"},{"key":"B","text":"判断力，解决复杂问题时有人找我","score":"LOGIC"},{"key":"C","text":"设计力，把看不见的结构变成可感知的东西","score":"SPACE"},{"key":"D","text":"连接力，让人和人之间的合作更顺","score":"SOCIAL"},{"key":"E","text":"创造力，把旧东西组合出新可能","score":"CREATIVE"}]},{"id":22,"module":"第六组：未来发力","text":"以下哪种职业画面最让你心动？","options":[{"key":"A","text":"在舞台、镜头或现场，用身体完成表达","score":"KINE"},{"key":"B","text":"用声音、节奏、氛围调动人的情绪","score":"MUSIC"},{"key":"C","text":"研究自然、环境、生命系统或可持续议题","score":"NATURE"},{"key":"D","text":"做品牌、视觉、影像、空间或美学策划","score":"AESTH"},{"key":"E","text":"做咨询、心理、自我探索或深度陪伴","score":"INTRA"}]},{"id":23,"module":"第六组：未来发力","text":"你最想修掉自己的哪块短板？","options":[{"key":"A","text":"想太多但说不清","score":"LANG"},{"key":"B","text":"灵感很多但不成系统","score":"LOGIC"},{"key":"C","text":"脑子知道但身体不行动","score":"KINE"},{"key":"D","text":"太容易受关系氛围影响","score":"SOCIAL"},{"key":"E","text":"太容易困在自我怀疑里","score":"INTRA"}]},{"id":24,"module":"第六组：未来发力","text":"如果只能保留一种能力，你会选？","options":[{"key":"A","text":"把复杂情绪说成别人听得懂的话","score":"LANG"},{"key":"B","text":"在混乱中抓住真实规律","score":"LOGIC"},{"key":"C","text":"感知环境和生命状态的变化","score":"NATURE"},{"key":"D","text":"把普通东西做出独特的新意","score":"CREATIVE"},{"key":"E","text":"让世界在你手里变得更好看","score":"AESTH"}]}],"results":{"LANG":{"typeName":"语言天赋 · 意义翻译者","subtitle":"语言天赋型","posterSubtext":"语言天赋不是标签，而是你最容易进入心流的方式。","maturityScore":90,"coreConclusion":"你的主天赋是语言。你最强的不是会说漂亮话，而是能把模糊感受、复杂关系和混乱信息翻译成别人听得懂的话。","diagnosis":"你对词语、语气和表达顺序很敏感。别人听到的是一句话，你听到的是对方真正想被理解的部分。你适合站在信息和人之间，把难懂的东西讲清楚，把说不出口的东西说体面。","whatYouReallyWant":"你真正想要的是表达被接住。你害怕的不是没人听你说话，而是你明明感受到了很多，却找不到一个准确的出口。","mechanism":{"title":"你的天赋机制","content":"你的优势集中在「表达、叙事、命名、沟通、内容写作、讲解。」。它能帮你更快进入心流，也会让你对不匹配的环境更敏感。真正要做的不是硬补短板，而是把这个天赋放到能产生价值的位置。"},"professionalBasis":["显性优势：表达、叙事、命名、沟通、内容写作、讲解。","容易卡住：想得很细，但说太多会让重点被稀释。","建议把结果当成自我观察线索，而不是给自己贴死标签。"],"coreTensions":["想得很细，但说太多会让重点被稀释。","天赋强项越明显，越容易看不惯低质量环境","需要把感觉转成稳定作品或行动"],"suitableIf":["内容创作","品牌文案","教育讲解","咨询沟通","公关表达"],"cautionIf":["用表达替代行动","过度解释","为了被理解而反复证明自己"],"indices":[{"label":"表达力","value":95},{"label":"分析力","value":76},{"label":"感知力","value":82},{"label":"行动力","value":68},{"label":"创造力","value":86}],"ifStay":"继续只靠本能使用语言天赋，你会偶尔很亮眼，但容易在不适合的环境里被误解、消耗或低估。","ifChange":"把语言天赋变成稳定能力：给它一个具体场景、一个作品出口、一个可复盘的方法，你会更容易被看见。","notRecommended":["拿短板和别人的强项比","为了显得全面而放弃最有优势的部分","只停留在感觉好准，不去落地"],"plan90":[{"title":"7 天：记录心流瞬间","content":"每天写下最让你不费劲、却做得比别人好的一个细节。"},{"title":"30 天：做一个小作品","content":"围绕语言天赋做一个可展示的小成果，让天赋不只停留在自我感觉。"},{"title":"90 天：找到价值场景","content":"观察哪里有人愿意为你的能力省时间、省力气、获得更好的体验。"}],"closing":"你不是没有天赋，只是可能一直把语言天赋当成普通习惯。真正的升级，是把它放到能发光的位置。"},"LOGIC":{"typeName":"逻辑天赋 · 结构拆解者","subtitle":"逻辑天赋型","posterSubtext":"逻辑天赋不是标签，而是你最容易进入心流的方式。","maturityScore":91,"coreConclusion":"你的主天赋是逻辑。你擅长在别人还被情绪和表象带着跑时，先抓住结构、变量和因果链。","diagnosis":"你会本能地问：问题到底是什么，前提是否成立，哪个环节最关键。你不太容易被热闹说服，更相信可以被验证的判断。","whatYouReallyWant":"你真正想要的是清楚。只要事情不清楚，你就很难真正放松，因为你的大脑会不断试图把它拆开、归类、校准。","mechanism":{"title":"你的天赋机制","content":"你的优势集中在「分析、推理、系统化、策略、数据判断。」。它能帮你更快进入心流，也会让你对不匹配的环境更敏感。真正要做的不是硬补短板，而是把这个天赋放到能产生价值的位置。"},"professionalBasis":["显性优势：分析、推理、系统化、策略、数据判断。","容易卡住：太急着讲道理，容易低估人的情绪惯性。","建议把结果当成自我观察线索，而不是给自己贴死标签。"],"coreTensions":["太急着讲道理，容易低估人的情绪惯性。","天赋强项越明显，越容易看不惯低质量环境","需要把感觉转成稳定作品或行动"],"suitableIf":["产品分析","工程技术","数据策略","研究规划","商业判断"],"cautionIf":["把所有问题都当逻辑题","忽视审美和关系成本","迟迟不接受不确定性"],"indices":[{"label":"表达力","value":72},{"label":"分析力","value":98},{"label":"感知力","value":75},{"label":"行动力","value":64},{"label":"创造力","value":82}],"ifStay":"继续只靠本能使用逻辑天赋，你会偶尔很亮眼，但容易在不适合的环境里被误解、消耗或低估。","ifChange":"把逻辑天赋变成稳定能力：给它一个具体场景、一个作品出口、一个可复盘的方法，你会更容易被看见。","notRecommended":["拿短板和别人的强项比","为了显得全面而放弃最有优势的部分","只停留在感觉好准，不去落地"],"plan90":[{"title":"7 天：记录心流瞬间","content":"每天写下最让你不费劲、却做得比别人好的一个细节。"},{"title":"30 天：做一个小作品","content":"围绕逻辑天赋做一个可展示的小成果，让天赋不只停留在自我感觉。"},{"title":"90 天：找到价值场景","content":"观察哪里有人愿意为你的能力省时间、省力气、获得更好的体验。"}],"closing":"你不是没有天赋，只是可能一直把逻辑天赋当成普通习惯。真正的升级，是把它放到能发光的位置。"},"SPACE":{"typeName":"空间天赋 · 布局想象者","subtitle":"空间天赋型","posterSubtext":"空间天赋不是标签，而是你最容易进入心流的方式。","maturityScore":87,"coreConclusion":"你的主天赋是空间。你对位置、画面、路径和结构的感觉比多数人敏锐，能把看不见的关系变成可感知的布局。","diagnosis":"你很容易注意到哪里挤、哪里散、哪里不顺。无论是房间、页面、镜头还是流程，你都会自然地在脑内建立空间模型。","whatYouReallyWant":"你真正想要的是秩序感和可进入感。你希望世界不是一堆杂乱的信息，而是能被看见、被走通、被重新摆放。","mechanism":{"title":"你的天赋机制","content":"你的优势集中在「布局、视觉结构、路线规划、摄影构图、空间设计。」。它能帮你更快进入心流，也会让你对不匹配的环境更敏感。真正要做的不是硬补短板，而是把这个天赋放到能产生价值的位置。"},"professionalBasis":["显性优势：布局、视觉结构、路线规划、摄影构图、空间设计。","容易卡住：脑内画面很清楚，但不一定能马上说清楚。","建议把结果当成自我观察线索，而不是给自己贴死标签。"],"coreTensions":["脑内画面很清楚，但不一定能马上说清楚。","天赋强项越明显，越容易看不惯低质量环境","需要把感觉转成稳定作品或行动"],"suitableIf":["视觉设计","空间设计","摄影剪辑","建筑规划","用户体验"],"cautionIf":["只追求结构好看，忽略真实需求","想象很完整但交付太慢","对混乱环境过度敏感"],"indices":[{"label":"表达力","value":78},{"label":"分析力","value":84},{"label":"感知力","value":94},{"label":"行动力","value":70},{"label":"创造力","value":82}],"ifStay":"继续只靠本能使用空间天赋，你会偶尔很亮眼，但容易在不适合的环境里被误解、消耗或低估。","ifChange":"把空间天赋变成稳定能力：给它一个具体场景、一个作品出口、一个可复盘的方法，你会更容易被看见。","notRecommended":["拿短板和别人的强项比","为了显得全面而放弃最有优势的部分","只停留在感觉好准，不去落地"],"plan90":[{"title":"7 天：记录心流瞬间","content":"每天写下最让你不费劲、却做得比别人好的一个细节。"},{"title":"30 天：做一个小作品","content":"围绕空间天赋做一个可展示的小成果，让天赋不只停留在自我感觉。"},{"title":"90 天：找到价值场景","content":"观察哪里有人愿意为你的能力省时间、省力气、获得更好的体验。"}],"closing":"你不是没有天赋，只是可能一直把空间天赋当成普通习惯。真正的升级，是把它放到能发光的位置。"},"SOCIAL":{"typeName":"人际天赋 · 气氛读心者","subtitle":"人际天赋型","posterSubtext":"人际天赋不是标签，而是你最容易进入心流的方式。","maturityScore":89,"coreConclusion":"你的主天赋是人际。你不是简单会社交，而是很会读气氛、读关系、读别人没说出口的部分。","diagnosis":"你能感到一个房间里谁紧张、谁在退、谁其实需要被照顾。你适合做连接者，也适合处理人与人之间那些不能只靠规则解决的问题。","whatYouReallyWant":"你真正想要的是关系里的流动感。你希望大家都舒服，但也容易因此承担过多情绪劳动。","mechanism":{"title":"你的天赋机制","content":"你的优势集中在「共情、协调、社群、销售、服务、组织气氛。」。它能帮你更快进入心流，也会让你对不匹配的环境更敏感。真正要做的不是硬补短板，而是把这个天赋放到能产生价值的位置。"},"professionalBasis":["显性优势：共情、协调、社群、销售、服务、组织气氛。","容易卡住：太会照顾别人，容易忽略自己的边界。","建议把结果当成自我观察线索，而不是给自己贴死标签。"],"coreTensions":["太会照顾别人，容易忽略自己的边界。","天赋强项越明显，越容易看不惯低质量环境","需要把感觉转成稳定作品或行动"],"suitableIf":["社群运营","销售顾问","心理陪伴","团队协调","用户关系"],"cautionIf":["把别人的情绪当成自己的责任","靠察言观色消耗自己","为了维持关系不敢表达真实需求"],"indices":[{"label":"表达力","value":88},{"label":"分析力","value":72},{"label":"感知力","value":93},{"label":"行动力","value":76},{"label":"创造力","value":80}],"ifStay":"继续只靠本能使用人际天赋，你会偶尔很亮眼，但容易在不适合的环境里被误解、消耗或低估。","ifChange":"把人际天赋变成稳定能力：给它一个具体场景、一个作品出口、一个可复盘的方法，你会更容易被看见。","notRecommended":["拿短板和别人的强项比","为了显得全面而放弃最有优势的部分","只停留在感觉好准，不去落地"],"plan90":[{"title":"7 天：记录心流瞬间","content":"每天写下最让你不费劲、却做得比别人好的一个细节。"},{"title":"30 天：做一个小作品","content":"围绕人际天赋做一个可展示的小成果，让天赋不只停留在自我感觉。"},{"title":"90 天：找到价值场景","content":"观察哪里有人愿意为你的能力省时间、省力气、获得更好的体验。"}],"closing":"你不是没有天赋，只是可能一直把人际天赋当成普通习惯。真正的升级，是把它放到能发光的位置。"},"NATURE":{"typeName":"自然天赋 · 系统感知者","subtitle":"自然天赋型","posterSubtext":"自然天赋不是标签，而是你最容易进入心流的方式。","maturityScore":85,"coreConclusion":"你的主天赋是自然。你对生命状态、环境变化和系统平衡有很强感知，擅长从大环境里看见规律。","diagnosis":"你可能对天气、植物、动物、身体状态、空间能量都比较敏锐。你不喜欢被切得很碎的生活，更能在自然节奏里恢复判断。","whatYouReallyWant":"你真正想要的是和世界重新连上。你不只是需要休息，而是需要一个能让感官和身体重新打开的环境。","mechanism":{"title":"你的天赋机制","content":"你的优势集中在「环境感知、生命系统、观察、疗愈、可持续、长期规律。」。它能帮你更快进入心流，也会让你对不匹配的环境更敏感。真正要做的不是硬补短板，而是把这个天赋放到能产生价值的位置。"},"professionalBasis":["显性优势：环境感知、生命系统、观察、疗愈、可持续、长期规律。","容易卡住：直觉很强，但如果不转成方法，别人很难理解。","建议把结果当成自我观察线索，而不是给自己贴死标签。"],"coreTensions":["直觉很强，但如果不转成方法，别人很难理解。","天赋强项越明显，越容易看不惯低质量环境","需要把感觉转成稳定作品或行动"],"suitableIf":["自然教育","健康生活","环境相关","疗愈内容","户外与生活方式"],"cautionIf":["太依赖状态","不适合长期待在高噪音环境","把退回自然当成逃避现实"],"indices":[{"label":"表达力","value":70},{"label":"分析力","value":78},{"label":"感知力","value":96},{"label":"行动力","value":72},{"label":"创造力","value":82}],"ifStay":"继续只靠本能使用自然天赋，你会偶尔很亮眼，但容易在不适合的环境里被误解、消耗或低估。","ifChange":"把自然天赋变成稳定能力：给它一个具体场景、一个作品出口、一个可复盘的方法，你会更容易被看见。","notRecommended":["拿短板和别人的强项比","为了显得全面而放弃最有优势的部分","只停留在感觉好准，不去落地"],"plan90":[{"title":"7 天：记录心流瞬间","content":"每天写下最让你不费劲、却做得比别人好的一个细节。"},{"title":"30 天：做一个小作品","content":"围绕自然天赋做一个可展示的小成果，让天赋不只停留在自我感觉。"},{"title":"90 天：找到价值场景","content":"观察哪里有人愿意为你的能力省时间、省力气、获得更好的体验。"}],"closing":"你不是没有天赋，只是可能一直把自然天赋当成普通习惯。真正的升级，是把它放到能发光的位置。"},"KINE":{"typeName":"动觉天赋 · 行动校准者","subtitle":"动觉天赋型","posterSubtext":"动觉天赋不是标签，而是你最容易进入心流的方式。","maturityScore":86,"coreConclusion":"你的主天赋是动觉。你不是只会动手，而是身体比大脑更早知道哪里对、哪里不对。","diagnosis":"很多人要想明白才行动，你常常是在行动里想明白。你适合通过练习、演示、表演、手作、运动或真实操作建立能力。","whatYouReallyWant":"你真正想要的是参与感。只听别人讲会让你烦躁，因为你的天赋需要通过身体进入世界。","mechanism":{"title":"你的天赋机制","content":"你的优势集中在「执行、运动、手作、现场反应、表演、操作学习。」。它能帮你更快进入心流，也会让你对不匹配的环境更敏感。真正要做的不是硬补短板，而是把这个天赋放到能产生价值的位置。"},"professionalBasis":["显性优势：执行、运动、手作、现场反应、表演、操作学习。","容易卡住：脑子还没整理完就先做了，容易被说冲动或不够规划。","建议把结果当成自我观察线索，而不是给自己贴死标签。"],"coreTensions":["脑子还没整理完就先做了，容易被说冲动或不够规划。","天赋强项越明显，越容易看不惯低质量环境","需要把感觉转成稳定作品或行动"],"suitableIf":["运动舞蹈","表演表达","手作设计","现场执行","技能训练"],"cautionIf":["只靠手感不复盘","被长时间静坐消耗","行动太快导致后续成本变高"],"indices":[{"label":"表达力","value":74},{"label":"分析力","value":66},{"label":"感知力","value":78},{"label":"行动力","value":98},{"label":"创造力","value":80}],"ifStay":"继续只靠本能使用动觉天赋，你会偶尔很亮眼，但容易在不适合的环境里被误解、消耗或低估。","ifChange":"把动觉天赋变成稳定能力：给它一个具体场景、一个作品出口、一个可复盘的方法，你会更容易被看见。","notRecommended":["拿短板和别人的强项比","为了显得全面而放弃最有优势的部分","只停留在感觉好准，不去落地"],"plan90":[{"title":"7 天：记录心流瞬间","content":"每天写下最让你不费劲、却做得比别人好的一个细节。"},{"title":"30 天：做一个小作品","content":"围绕动觉天赋做一个可展示的小成果，让天赋不只停留在自我感觉。"},{"title":"90 天：找到价值场景","content":"观察哪里有人愿意为你的能力省时间、省力气、获得更好的体验。"}],"closing":"你不是没有天赋，只是可能一直把动觉天赋当成普通习惯。真正的升级，是把它放到能发光的位置。"},"MUSIC":{"typeName":"音乐天赋 · 节奏捕捉者","subtitle":"音乐天赋型","posterSubtext":"音乐天赋不是标签，而是你最容易进入心流的方式。","maturityScore":84,"coreConclusion":"你的主天赋是音乐。你对节奏、重复、停顿和情绪流动特别敏锐，容易用声音和韵律理解世界。","diagnosis":"你不一定只适合做音乐。你的强项是节奏感：知道什么时候推进、什么时候停、什么时候情绪该转弯。","whatYouReallyWant":"你真正想要的是内外节奏一致。环境太乱、语气太刺、节奏太碎，都会让你比别人更快失去状态。","mechanism":{"title":"你的天赋机制","content":"你的优势集中在「音乐、声音、节奏、剪辑、氛围感、情绪调动。」。它能帮你更快进入心流，也会让你对不匹配的环境更敏感。真正要做的不是硬补短板，而是把这个天赋放到能产生价值的位置。"},"professionalBasis":["显性优势：音乐、声音、节奏、剪辑、氛围感、情绪调动。","容易卡住：太依赖感觉，一旦节奏断了就容易全盘卡住。","建议把结果当成自我观察线索，而不是给自己贴死标签。"],"coreTensions":["太依赖感觉，一旦节奏断了就容易全盘卡住。","天赋强项越明显，越容易看不惯低质量环境","需要把感觉转成稳定作品或行动"],"suitableIf":["音乐声音","短视频剪辑","直播表达","活动策划","情绪型内容"],"cautionIf":["用感觉替代判断","被噪音和打断严重消耗","热爱变成压力后迅速降温"],"indices":[{"label":"表达力","value":82},{"label":"分析力","value":70},{"label":"感知力","value":88},{"label":"行动力","value":76},{"label":"创造力","value":84}],"ifStay":"继续只靠本能使用音乐天赋，你会偶尔很亮眼，但容易在不适合的环境里被误解、消耗或低估。","ifChange":"把音乐天赋变成稳定能力：给它一个具体场景、一个作品出口、一个可复盘的方法，你会更容易被看见。","notRecommended":["拿短板和别人的强项比","为了显得全面而放弃最有优势的部分","只停留在感觉好准，不去落地"],"plan90":[{"title":"7 天：记录心流瞬间","content":"每天写下最让你不费劲、却做得比别人好的一个细节。"},{"title":"30 天：做一个小作品","content":"围绕音乐天赋做一个可展示的小成果，让天赋不只停留在自我感觉。"},{"title":"90 天：找到价值场景","content":"观察哪里有人愿意为你的能力省时间、省力气、获得更好的体验。"}],"closing":"你不是没有天赋，只是可能一直把音乐天赋当成普通习惯。真正的升级，是把它放到能发光的位置。"},"INTRA":{"typeName":"内省天赋 · 自我观测者","subtitle":"内省天赋型","posterSubtext":"内省天赋不是标签，而是你最容易进入心流的方式。","maturityScore":88,"coreConclusion":"你的主天赋是内省。你很会观察自己的内在变化，也擅长把经历沉淀成理解和判断。","diagnosis":"你对自己的情绪、动机、边界和变化很敏感。你可能不总是外放，但你在心里会不断复盘：我为什么这样，我真正要什么。","whatYouReallyWant":"你真正想要的是自洽。你不怕慢一点，但很怕被迫过一种和自己内在不一致的生活。","mechanism":{"title":"你的天赋机制","content":"你的优势集中在「自我觉察、深度思考、心理洞察、复盘、长期成长。」。它能帮你更快进入心流，也会让你对不匹配的环境更敏感。真正要做的不是硬补短板，而是把这个天赋放到能产生价值的位置。"},"professionalBasis":["显性优势：自我觉察、深度思考、心理洞察、复盘、长期成长。","容易卡住：容易困在脑内循环，想明白很多，却迟迟不行动。","建议把结果当成自我观察线索，而不是给自己贴死标签。"],"coreTensions":["容易困在脑内循环，想明白很多，却迟迟不行动。","天赋强项越明显，越容易看不惯低质量环境","需要把感觉转成稳定作品或行动"],"suitableIf":["心理成长","咨询陪伴","写作记录","个人品牌","深度内容"],"cautionIf":["过度自我分析","把敏感等同于问题","独处太久失去外部反馈"],"indices":[{"label":"表达力","value":86},{"label":"分析力","value":80},{"label":"感知力","value":92},{"label":"行动力","value":62},{"label":"创造力","value":84}],"ifStay":"继续只靠本能使用内省天赋，你会偶尔很亮眼，但容易在不适合的环境里被误解、消耗或低估。","ifChange":"把内省天赋变成稳定能力：给它一个具体场景、一个作品出口、一个可复盘的方法，你会更容易被看见。","notRecommended":["拿短板和别人的强项比","为了显得全面而放弃最有优势的部分","只停留在感觉好准，不去落地"],"plan90":[{"title":"7 天：记录心流瞬间","content":"每天写下最让你不费劲、却做得比别人好的一个细节。"},{"title":"30 天：做一个小作品","content":"围绕内省天赋做一个可展示的小成果，让天赋不只停留在自我感觉。"},{"title":"90 天：找到价值场景","content":"观察哪里有人愿意为你的能力省时间、省力气、获得更好的体验。"}],"closing":"你不是没有天赋，只是可能一直把内省天赋当成普通习惯。真正的升级，是把它放到能发光的位置。"},"AESTH":{"typeName":"美学天赋 · 感官定调者","subtitle":"美学天赋型","posterSubtext":"美学天赋不是标签，而是你最容易进入心流的方式。","maturityScore":87,"coreConclusion":"你的主天赋是美学。你不是单纯爱漂亮，而是能感知比例、质感、色彩和气质是否协调。","diagnosis":"别人觉得差不多，你会觉得哪里不对。你的审美判断常常先于语言出现，适合做风格、品牌、影像、空间和体验的定调者。","whatYouReallyWant":"你真正想要的是质感。你希望自己做出来的东西有气息、有秩序、有记忆点，而不是只完成任务。","mechanism":{"title":"你的天赋机制","content":"你的优势集中在「审美、风格、视觉表达、质感控制、品牌调性。」。它能帮你更快进入心流，也会让你对不匹配的环境更敏感。真正要做的不是硬补短板，而是把这个天赋放到能产生价值的位置。"},"professionalBasis":["显性优势：审美、风格、视觉表达、质感控制、品牌调性。","容易卡住：标准高但表达不够具体，容易被误解成挑剔。","建议把结果当成自我观察线索，而不是给自己贴死标签。"],"coreTensions":["标准高但表达不够具体，容易被误解成挑剔。","天赋强项越明显，越容易看不惯低质量环境","需要把感觉转成稳定作品或行动"],"suitableIf":["品牌视觉","穿搭美学","摄影修图","空间软装","产品包装"],"cautionIf":["完美主义拖慢进度","太在意外部评价","为了好看牺牲清晰度"],"indices":[{"label":"表达力","value":84},{"label":"分析力","value":74},{"label":"感知力","value":90},{"label":"行动力","value":68},{"label":"创造力","value":88}],"ifStay":"继续只靠本能使用美学天赋，你会偶尔很亮眼，但容易在不适合的环境里被误解、消耗或低估。","ifChange":"把美学天赋变成稳定能力：给它一个具体场景、一个作品出口、一个可复盘的方法，你会更容易被看见。","notRecommended":["拿短板和别人的强项比","为了显得全面而放弃最有优势的部分","只停留在感觉好准，不去落地"],"plan90":[{"title":"7 天：记录心流瞬间","content":"每天写下最让你不费劲、却做得比别人好的一个细节。"},{"title":"30 天：做一个小作品","content":"围绕美学天赋做一个可展示的小成果，让天赋不只停留在自我感觉。"},{"title":"90 天：找到价值场景","content":"观察哪里有人愿意为你的能力省时间、省力气、获得更好的体验。"}],"closing":"你不是没有天赋，只是可能一直把美学天赋当成普通习惯。真正的升级，是把它放到能发光的位置。"},"CREATIVE":{"typeName":"创造天赋 · 新连接制造者","subtitle":"创造天赋型","posterSubtext":"创造天赋不是标签，而是你最容易进入心流的方式。","maturityScore":92,"coreConclusion":"你的主天赋是创造。你最强的是把不相关的东西接在一起，生成一个别人没想到的新可能。","diagnosis":"你不喜欢只按标准答案走。你的脑子会自动联想、改造、重组，越是开放的问题越能激发你。","whatYouReallyWant":"你真正想要的是可能性。比起重复正确，你更想知道还能不能更有趣、更自由、更不一样。","mechanism":{"title":"你的天赋机制","content":"你的优势集中在「创意、策划、跨界连接、内容选题、产品想法。」。它能帮你更快进入心流，也会让你对不匹配的环境更敏感。真正要做的不是硬补短板，而是把这个天赋放到能产生价值的位置。"},"professionalBasis":["显性优势：创意、策划、跨界连接、内容选题、产品想法。","容易卡住：灵感太多，容易开头兴奋、后面散掉。","建议把结果当成自我观察线索，而不是给自己贴死标签。"],"coreTensions":["灵感太多，容易开头兴奋、后面散掉。","天赋强项越明显，越容易看不惯低质量环境","需要把感觉转成稳定作品或行动"],"suitableIf":["内容策划","创意广告","产品创新","个人 IP","活动企划"],"cautionIf":["只追新鲜感不收尾","抗拒流程导致交付不稳","把普通执行误认为没天赋"],"indices":[{"label":"表达力","value":88},{"label":"分析力","value":82},{"label":"感知力","value":84},{"label":"行动力","value":76},{"label":"创造力","value":98}],"ifStay":"继续只靠本能使用创造天赋，你会偶尔很亮眼，但容易在不适合的环境里被误解、消耗或低估。","ifChange":"把创造天赋变成稳定能力：给它一个具体场景、一个作品出口、一个可复盘的方法，你会更容易被看见。","notRecommended":["拿短板和别人的强项比","为了显得全面而放弃最有优势的部分","只停留在感觉好准，不去落地"],"plan90":[{"title":"7 天：记录心流瞬间","content":"每天写下最让你不费劲、却做得比别人好的一个细节。"},{"title":"30 天：做一个小作品","content":"围绕创造天赋做一个可展示的小成果，让天赋不只停留在自我感觉。"},{"title":"90 天：找到价值场景","content":"观察哪里有人愿意为你的能力省时间、省力气、获得更好的体验。"}],"closing":"你不是没有天赋，只是可能一直把创造天赋当成普通习惯。真正的升级，是把它放到能发光的位置。"}},"secondaryNotes":{"LANG":{"LOGIC":"你的主天赋是语言天赋，但副倾向带着逻辑天赋的气质。你适合的不是单点发力，而是「语言 + 逻辑」组合：用主天赋打开局面，用副天赋补足表达、落地或感知。","SPACE":"你的主天赋是语言天赋，但副倾向带着空间天赋的气质。你适合的不是单点发力，而是「语言 + 空间」组合：用主天赋打开局面，用副天赋补足表达、落地或感知。","SOCIAL":"你的主天赋是语言天赋，但副倾向带着人际天赋的气质。你适合的不是单点发力，而是「语言 + 人际」组合：用主天赋打开局面，用副天赋补足表达、落地或感知。","NATURE":"你的主天赋是语言天赋，但副倾向带着自然天赋的气质。你适合的不是单点发力，而是「语言 + 自然」组合：用主天赋打开局面，用副天赋补足表达、落地或感知。","KINE":"你的主天赋是语言天赋，但副倾向带着动觉天赋的气质。你适合的不是单点发力，而是「语言 + 动觉」组合：用主天赋打开局面，用副天赋补足表达、落地或感知。","MUSIC":"你的主天赋是语言天赋，但副倾向带着音乐天赋的气质。你适合的不是单点发力，而是「语言 + 音乐」组合：用主天赋打开局面，用副天赋补足表达、落地或感知。","INTRA":"你的主天赋是语言天赋，但副倾向带着内省天赋的气质。你适合的不是单点发力，而是「语言 + 内省」组合：用主天赋打开局面，用副天赋补足表达、落地或感知。","AESTH":"你的主天赋是语言天赋，但副倾向带着美学天赋的气质。你适合的不是单点发力，而是「语言 + 美学」组合：用主天赋打开局面，用副天赋补足表达、落地或感知。","CREATIVE":"你的主天赋是语言天赋，但副倾向带着创造天赋的气质。你适合的不是单点发力，而是「语言 + 创造」组合：用主天赋打开局面，用副天赋补足表达、落地或感知。"},"LOGIC":{"LANG":"你的主天赋是逻辑天赋，但副倾向带着语言天赋的气质。你适合的不是单点发力，而是「逻辑 + 语言」组合：用主天赋打开局面，用副天赋补足表达、落地或感知。","SPACE":"你的主天赋是逻辑天赋，但副倾向带着空间天赋的气质。你适合的不是单点发力，而是「逻辑 + 空间」组合：用主天赋打开局面，用副天赋补足表达、落地或感知。","SOCIAL":"你的主天赋是逻辑天赋，但副倾向带着人际天赋的气质。你适合的不是单点发力，而是「逻辑 + 人际」组合：用主天赋打开局面，用副天赋补足表达、落地或感知。","NATURE":"你的主天赋是逻辑天赋，但副倾向带着自然天赋的气质。你适合的不是单点发力，而是「逻辑 + 自然」组合：用主天赋打开局面，用副天赋补足表达、落地或感知。","KINE":"你的主天赋是逻辑天赋，但副倾向带着动觉天赋的气质。你适合的不是单点发力，而是「逻辑 + 动觉」组合：用主天赋打开局面，用副天赋补足表达、落地或感知。","MUSIC":"你的主天赋是逻辑天赋，但副倾向带着音乐天赋的气质。你适合的不是单点发力，而是「逻辑 + 音乐」组合：用主天赋打开局面，用副天赋补足表达、落地或感知。","INTRA":"你的主天赋是逻辑天赋，但副倾向带着内省天赋的气质。你适合的不是单点发力，而是「逻辑 + 内省」组合：用主天赋打开局面，用副天赋补足表达、落地或感知。","AESTH":"你的主天赋是逻辑天赋，但副倾向带着美学天赋的气质。你适合的不是单点发力，而是「逻辑 + 美学」组合：用主天赋打开局面，用副天赋补足表达、落地或感知。","CREATIVE":"你的主天赋是逻辑天赋，但副倾向带着创造天赋的气质。你适合的不是单点发力，而是「逻辑 + 创造」组合：用主天赋打开局面，用副天赋补足表达、落地或感知。"},"SPACE":{"LANG":"你的主天赋是空间天赋，但副倾向带着语言天赋的气质。你适合的不是单点发力，而是「空间 + 语言」组合：用主天赋打开局面，用副天赋补足表达、落地或感知。","LOGIC":"你的主天赋是空间天赋，但副倾向带着逻辑天赋的气质。你适合的不是单点发力，而是「空间 + 逻辑」组合：用主天赋打开局面，用副天赋补足表达、落地或感知。","SOCIAL":"你的主天赋是空间天赋，但副倾向带着人际天赋的气质。你适合的不是单点发力，而是「空间 + 人际」组合：用主天赋打开局面，用副天赋补足表达、落地或感知。","NATURE":"你的主天赋是空间天赋，但副倾向带着自然天赋的气质。你适合的不是单点发力，而是「空间 + 自然」组合：用主天赋打开局面，用副天赋补足表达、落地或感知。","KINE":"你的主天赋是空间天赋，但副倾向带着动觉天赋的气质。你适合的不是单点发力，而是「空间 + 动觉」组合：用主天赋打开局面，用副天赋补足表达、落地或感知。","MUSIC":"你的主天赋是空间天赋，但副倾向带着音乐天赋的气质。你适合的不是单点发力，而是「空间 + 音乐」组合：用主天赋打开局面，用副天赋补足表达、落地或感知。","INTRA":"你的主天赋是空间天赋，但副倾向带着内省天赋的气质。你适合的不是单点发力，而是「空间 + 内省」组合：用主天赋打开局面，用副天赋补足表达、落地或感知。","AESTH":"你的主天赋是空间天赋，但副倾向带着美学天赋的气质。你适合的不是单点发力，而是「空间 + 美学」组合：用主天赋打开局面，用副天赋补足表达、落地或感知。","CREATIVE":"你的主天赋是空间天赋，但副倾向带着创造天赋的气质。你适合的不是单点发力，而是「空间 + 创造」组合：用主天赋打开局面，用副天赋补足表达、落地或感知。"},"SOCIAL":{"LANG":"你的主天赋是人际天赋，但副倾向带着语言天赋的气质。你适合的不是单点发力，而是「人际 + 语言」组合：用主天赋打开局面，用副天赋补足表达、落地或感知。","LOGIC":"你的主天赋是人际天赋，但副倾向带着逻辑天赋的气质。你适合的不是单点发力，而是「人际 + 逻辑」组合：用主天赋打开局面，用副天赋补足表达、落地或感知。","SPACE":"你的主天赋是人际天赋，但副倾向带着空间天赋的气质。你适合的不是单点发力，而是「人际 + 空间」组合：用主天赋打开局面，用副天赋补足表达、落地或感知。","NATURE":"你的主天赋是人际天赋，但副倾向带着自然天赋的气质。你适合的不是单点发力，而是「人际 + 自然」组合：用主天赋打开局面，用副天赋补足表达、落地或感知。","KINE":"你的主天赋是人际天赋，但副倾向带着动觉天赋的气质。你适合的不是单点发力，而是「人际 + 动觉」组合：用主天赋打开局面，用副天赋补足表达、落地或感知。","MUSIC":"你的主天赋是人际天赋，但副倾向带着音乐天赋的气质。你适合的不是单点发力，而是「人际 + 音乐」组合：用主天赋打开局面，用副天赋补足表达、落地或感知。","INTRA":"你的主天赋是人际天赋，但副倾向带着内省天赋的气质。你适合的不是单点发力，而是「人际 + 内省」组合：用主天赋打开局面，用副天赋补足表达、落地或感知。","AESTH":"你的主天赋是人际天赋，但副倾向带着美学天赋的气质。你适合的不是单点发力，而是「人际 + 美学」组合：用主天赋打开局面，用副天赋补足表达、落地或感知。","CREATIVE":"你的主天赋是人际天赋，但副倾向带着创造天赋的气质。你适合的不是单点发力，而是「人际 + 创造」组合：用主天赋打开局面，用副天赋补足表达、落地或感知。"},"NATURE":{"LANG":"你的主天赋是自然天赋，但副倾向带着语言天赋的气质。你适合的不是单点发力，而是「自然 + 语言」组合：用主天赋打开局面，用副天赋补足表达、落地或感知。","LOGIC":"你的主天赋是自然天赋，但副倾向带着逻辑天赋的气质。你适合的不是单点发力，而是「自然 + 逻辑」组合：用主天赋打开局面，用副天赋补足表达、落地或感知。","SPACE":"你的主天赋是自然天赋，但副倾向带着空间天赋的气质。你适合的不是单点发力，而是「自然 + 空间」组合：用主天赋打开局面，用副天赋补足表达、落地或感知。","SOCIAL":"你的主天赋是自然天赋，但副倾向带着人际天赋的气质。你适合的不是单点发力，而是「自然 + 人际」组合：用主天赋打开局面，用副天赋补足表达、落地或感知。","KINE":"你的主天赋是自然天赋，但副倾向带着动觉天赋的气质。你适合的不是单点发力，而是「自然 + 动觉」组合：用主天赋打开局面，用副天赋补足表达、落地或感知。","MUSIC":"你的主天赋是自然天赋，但副倾向带着音乐天赋的气质。你适合的不是单点发力，而是「自然 + 音乐」组合：用主天赋打开局面，用副天赋补足表达、落地或感知。","INTRA":"你的主天赋是自然天赋，但副倾向带着内省天赋的气质。你适合的不是单点发力，而是「自然 + 内省」组合：用主天赋打开局面，用副天赋补足表达、落地或感知。","AESTH":"你的主天赋是自然天赋，但副倾向带着美学天赋的气质。你适合的不是单点发力，而是「自然 + 美学」组合：用主天赋打开局面，用副天赋补足表达、落地或感知。","CREATIVE":"你的主天赋是自然天赋，但副倾向带着创造天赋的气质。你适合的不是单点发力，而是「自然 + 创造」组合：用主天赋打开局面，用副天赋补足表达、落地或感知。"},"KINE":{"LANG":"你的主天赋是动觉天赋，但副倾向带着语言天赋的气质。你适合的不是单点发力，而是「动觉 + 语言」组合：用主天赋打开局面，用副天赋补足表达、落地或感知。","LOGIC":"你的主天赋是动觉天赋，但副倾向带着逻辑天赋的气质。你适合的不是单点发力，而是「动觉 + 逻辑」组合：用主天赋打开局面，用副天赋补足表达、落地或感知。","SPACE":"你的主天赋是动觉天赋，但副倾向带着空间天赋的气质。你适合的不是单点发力，而是「动觉 + 空间」组合：用主天赋打开局面，用副天赋补足表达、落地或感知。","SOCIAL":"你的主天赋是动觉天赋，但副倾向带着人际天赋的气质。你适合的不是单点发力，而是「动觉 + 人际」组合：用主天赋打开局面，用副天赋补足表达、落地或感知。","NATURE":"你的主天赋是动觉天赋，但副倾向带着自然天赋的气质。你适合的不是单点发力，而是「动觉 + 自然」组合：用主天赋打开局面，用副天赋补足表达、落地或感知。","MUSIC":"你的主天赋是动觉天赋，但副倾向带着音乐天赋的气质。你适合的不是单点发力，而是「动觉 + 音乐」组合：用主天赋打开局面，用副天赋补足表达、落地或感知。","INTRA":"你的主天赋是动觉天赋，但副倾向带着内省天赋的气质。你适合的不是单点发力，而是「动觉 + 内省」组合：用主天赋打开局面，用副天赋补足表达、落地或感知。","AESTH":"你的主天赋是动觉天赋，但副倾向带着美学天赋的气质。你适合的不是单点发力，而是「动觉 + 美学」组合：用主天赋打开局面，用副天赋补足表达、落地或感知。","CREATIVE":"你的主天赋是动觉天赋，但副倾向带着创造天赋的气质。你适合的不是单点发力，而是「动觉 + 创造」组合：用主天赋打开局面，用副天赋补足表达、落地或感知。"},"MUSIC":{"LANG":"你的主天赋是音乐天赋，但副倾向带着语言天赋的气质。你适合的不是单点发力，而是「音乐 + 语言」组合：用主天赋打开局面，用副天赋补足表达、落地或感知。","LOGIC":"你的主天赋是音乐天赋，但副倾向带着逻辑天赋的气质。你适合的不是单点发力，而是「音乐 + 逻辑」组合：用主天赋打开局面，用副天赋补足表达、落地或感知。","SPACE":"你的主天赋是音乐天赋，但副倾向带着空间天赋的气质。你适合的不是单点发力，而是「音乐 + 空间」组合：用主天赋打开局面，用副天赋补足表达、落地或感知。","SOCIAL":"你的主天赋是音乐天赋，但副倾向带着人际天赋的气质。你适合的不是单点发力，而是「音乐 + 人际」组合：用主天赋打开局面，用副天赋补足表达、落地或感知。","NATURE":"你的主天赋是音乐天赋，但副倾向带着自然天赋的气质。你适合的不是单点发力，而是「音乐 + 自然」组合：用主天赋打开局面，用副天赋补足表达、落地或感知。","KINE":"你的主天赋是音乐天赋，但副倾向带着动觉天赋的气质。你适合的不是单点发力，而是「音乐 + 动觉」组合：用主天赋打开局面，用副天赋补足表达、落地或感知。","INTRA":"你的主天赋是音乐天赋，但副倾向带着内省天赋的气质。你适合的不是单点发力，而是「音乐 + 内省」组合：用主天赋打开局面，用副天赋补足表达、落地或感知。","AESTH":"你的主天赋是音乐天赋，但副倾向带着美学天赋的气质。你适合的不是单点发力，而是「音乐 + 美学」组合：用主天赋打开局面，用副天赋补足表达、落地或感知。","CREATIVE":"你的主天赋是音乐天赋，但副倾向带着创造天赋的气质。你适合的不是单点发力，而是「音乐 + 创造」组合：用主天赋打开局面，用副天赋补足表达、落地或感知。"},"INTRA":{"LANG":"你的主天赋是内省天赋，但副倾向带着语言天赋的气质。你适合的不是单点发力，而是「内省 + 语言」组合：用主天赋打开局面，用副天赋补足表达、落地或感知。","LOGIC":"你的主天赋是内省天赋，但副倾向带着逻辑天赋的气质。你适合的不是单点发力，而是「内省 + 逻辑」组合：用主天赋打开局面，用副天赋补足表达、落地或感知。","SPACE":"你的主天赋是内省天赋，但副倾向带着空间天赋的气质。你适合的不是单点发力，而是「内省 + 空间」组合：用主天赋打开局面，用副天赋补足表达、落地或感知。","SOCIAL":"你的主天赋是内省天赋，但副倾向带着人际天赋的气质。你适合的不是单点发力，而是「内省 + 人际」组合：用主天赋打开局面，用副天赋补足表达、落地或感知。","NATURE":"你的主天赋是内省天赋，但副倾向带着自然天赋的气质。你适合的不是单点发力，而是「内省 + 自然」组合：用主天赋打开局面，用副天赋补足表达、落地或感知。","KINE":"你的主天赋是内省天赋，但副倾向带着动觉天赋的气质。你适合的不是单点发力，而是「内省 + 动觉」组合：用主天赋打开局面，用副天赋补足表达、落地或感知。","MUSIC":"你的主天赋是内省天赋，但副倾向带着音乐天赋的气质。你适合的不是单点发力，而是「内省 + 音乐」组合：用主天赋打开局面，用副天赋补足表达、落地或感知。","AESTH":"你的主天赋是内省天赋，但副倾向带着美学天赋的气质。你适合的不是单点发力，而是「内省 + 美学」组合：用主天赋打开局面，用副天赋补足表达、落地或感知。","CREATIVE":"你的主天赋是内省天赋，但副倾向带着创造天赋的气质。你适合的不是单点发力，而是「内省 + 创造」组合：用主天赋打开局面，用副天赋补足表达、落地或感知。"},"AESTH":{"LANG":"你的主天赋是美学天赋，但副倾向带着语言天赋的气质。你适合的不是单点发力，而是「美学 + 语言」组合：用主天赋打开局面，用副天赋补足表达、落地或感知。","LOGIC":"你的主天赋是美学天赋，但副倾向带着逻辑天赋的气质。你适合的不是单点发力，而是「美学 + 逻辑」组合：用主天赋打开局面，用副天赋补足表达、落地或感知。","SPACE":"你的主天赋是美学天赋，但副倾向带着空间天赋的气质。你适合的不是单点发力，而是「美学 + 空间」组合：用主天赋打开局面，用副天赋补足表达、落地或感知。","SOCIAL":"你的主天赋是美学天赋，但副倾向带着人际天赋的气质。你适合的不是单点发力，而是「美学 + 人际」组合：用主天赋打开局面，用副天赋补足表达、落地或感知。","NATURE":"你的主天赋是美学天赋，但副倾向带着自然天赋的气质。你适合的不是单点发力，而是「美学 + 自然」组合：用主天赋打开局面，用副天赋补足表达、落地或感知。","KINE":"你的主天赋是美学天赋，但副倾向带着动觉天赋的气质。你适合的不是单点发力，而是「美学 + 动觉」组合：用主天赋打开局面，用副天赋补足表达、落地或感知。","MUSIC":"你的主天赋是美学天赋，但副倾向带着音乐天赋的气质。你适合的不是单点发力，而是「美学 + 音乐」组合：用主天赋打开局面，用副天赋补足表达、落地或感知。","INTRA":"你的主天赋是美学天赋，但副倾向带着内省天赋的气质。你适合的不是单点发力，而是「美学 + 内省」组合：用主天赋打开局面，用副天赋补足表达、落地或感知。","CREATIVE":"你的主天赋是美学天赋，但副倾向带着创造天赋的气质。你适合的不是单点发力，而是「美学 + 创造」组合：用主天赋打开局面，用副天赋补足表达、落地或感知。"},"CREATIVE":{"LANG":"你的主天赋是创造天赋，但副倾向带着语言天赋的气质。你适合的不是单点发力，而是「创造 + 语言」组合：用主天赋打开局面，用副天赋补足表达、落地或感知。","LOGIC":"你的主天赋是创造天赋，但副倾向带着逻辑天赋的气质。你适合的不是单点发力，而是「创造 + 逻辑」组合：用主天赋打开局面，用副天赋补足表达、落地或感知。","SPACE":"你的主天赋是创造天赋，但副倾向带着空间天赋的气质。你适合的不是单点发力，而是「创造 + 空间」组合：用主天赋打开局面，用副天赋补足表达、落地或感知。","SOCIAL":"你的主天赋是创造天赋，但副倾向带着人际天赋的气质。你适合的不是单点发力，而是「创造 + 人际」组合：用主天赋打开局面，用副天赋补足表达、落地或感知。","NATURE":"你的主天赋是创造天赋，但副倾向带着自然天赋的气质。你适合的不是单点发力，而是「创造 + 自然」组合：用主天赋打开局面，用副天赋补足表达、落地或感知。","KINE":"你的主天赋是创造天赋，但副倾向带着动觉天赋的气质。你适合的不是单点发力，而是「创造 + 动觉」组合：用主天赋打开局面，用副天赋补足表达、落地或感知。","MUSIC":"你的主天赋是创造天赋，但副倾向带着音乐天赋的气质。你适合的不是单点发力，而是「创造 + 音乐」组合：用主天赋打开局面，用副天赋补足表达、落地或感知。","INTRA":"你的主天赋是创造天赋，但副倾向带着内省天赋的气质。你适合的不是单点发力，而是「创造 + 内省」组合：用主天赋打开局面，用副天赋补足表达、落地或感知。","AESTH":"你的主天赋是创造天赋，但副倾向带着美学天赋的气质。你适合的不是单点发力，而是「创造 + 美学」组合：用主天赋打开局面，用副天赋补足表达、落地或感知。"}},"shareTemplate":["我测出了：{{typeName}}","{{posterSubtext}}","{{secondaryLine}}","","24题隐藏天赋测试：你的隐藏天赋是哪一种？"]};</script>
+    <script>
+(function () {
+  const app = document.getElementById("app");
+  const configPaths = ["./configs/site-config.json", "./configs/career-change.json"];
+
+  const state = {
+    config: null,
+    answers: {},
+    profile: { birthDate: "", actualAge: "" },
+    currentIndex: 0,
+    selected: null,
+    locked: false,
+    loadingStep: 0,
+    route: "home",
+    resultData: null,
+  };
+
+  const defaultLoadingMessages = [
+    "正在读取你的选择倾向...",
+    "正在识别隐藏动机...",
+    "正在计算结果分布...",
+    "正在生成专属报告...",
+    "分析完成。",
+  ];
+
+  init();
+
+  async function init() {
+    try {
+      state.config = await fetchConfig();
+      applyDocumentMeta(state.config);
+      applyTheme(state.config);
+
+      const saved = sessionStorage.getItem(getStorageKey());
+      if (saved) {
+        state.answers = JSON.parse(saved);
+      }
+      const savedProfile = sessionStorage.getItem(getProfileStorageKey());
+      if (savedProfile) {
+        state.profile = JSON.parse(savedProfile);
+      }
+
+      routeFromHash();
+      window.addEventListener("hashchange", routeFromHash);
+    } catch (error) {
+      app.innerHTML = `
+        <div class="error">
+          <div>
+            <h1>测试加载失败</h1>
+            <p>请确认你是通过网页链接打开页面，而不是直接双击 HTML 文件。</p>
+          </div>
+        </div>
+      `;
+      console.error(error);
+    }
+  }
+
+  async function fetchConfig() {
+    if (window.__QUIZ_CONFIG__) return window.__QUIZ_CONFIG__;
+    let lastError;
+    for (const path of configPaths) {
+      try {
+        const response = await fetch(path, { cache: "no-store" });
+        if (!response.ok) throw new Error(`${path} ${response.status}`);
+        return response.json();
+      } catch (error) {
+        lastError = error;
+      }
+    }
+    throw lastError;
+  }
+
+  function applyDocumentMeta(cfg) {
+    const title = cfg.title || "趣味测试";
+    const description = cfg.metaDescription || cfg.subtitle || "完成测试，生成你的专属报告。";
+    document.title = title;
+    setMeta("name", "description", description);
+    setMeta("property", "og:title", title);
+    setMeta("property", "og:description", description);
+  }
+
+  function applyTheme(cfg) {
+    Object.entries(cfg.theme || {}).forEach(([name, value]) => {
+      document.documentElement.style.setProperty(name, value);
+    });
+  }
+
+  function setMeta(attr, key, content) {
+    let node = document.querySelector(`meta[${attr}="${key}"]`);
+    if (!node) {
+      node = document.createElement("meta");
+      node.setAttribute(attr, key);
+      document.head.appendChild(node);
+    }
+    node.setAttribute("content", content);
+  }
+
+  function routeFromHash() {
+    const route = (location.hash || "#/").replace("#/", "") || "home";
+    renderRoute(route);
+  }
+
+  function navigate(route) {
+    const nextHash = `#/${route}`;
+    if (location.hash === nextHash) {
+      renderRoute(route);
+      return;
+    }
+    location.hash = nextHash;
+  }
+
+  function renderRoute(route) {
+    state.route = route;
+    if (route === "quiz") renderQuiz();
+    else if (route === "loading") startLoading();
+    else if (route === "result") renderResult();
+    else renderHome();
+  }
+
+  function renderShell(content, extraClass = "") {
+    app.innerHTML = `
+      <div class="shell">
+        <div class="top-rule"></div>
+        <section class="screen ${extraClass}">${content}</section>
+      </div>
+      <div id="toast" class="toast">已复制</div>
+    `;
+  }
+
+  function renderHome() {
+    const cfg = state.config;
+    renderShell(
+      `
+      <div class="home">
+        <div class="kicker"><span class="dot"></span><span>${text(cfg.kicker)}</span><span class="dot"></span></div>
+        <h1 class="hero-title">${text(cfg.title)}</h1>
+        <p class="hero-subtitle">${text(cfg.subtitle)}</p>
+        <div class="hairline"></div>
+        <div class="intro">
+          ${(cfg.intro || []).map((p, index) => `<p class="${index === cfg.intro.length - 1 ? "strong" : ""}">${text(p)}</p>`).join("")}
+        </div>
+        ${!cfg.compactHome && (cfg.dimensions || []).length ? `
+          <div class="pill-grid">
+            ${(cfg.dimensions || []).map((item) => `<div class="pill">${text(item)}</div>`).join("")}
+          </div>
+        ` : ""}
+        ${cfg.testInfo ? `
+          <section class="home-card info-card">
+            <h2>${text(cfg.testInfo.title || "测验说明")}</h2>
+            <ul>${(cfg.testInfo.bullets || []).map((item) => `<li>${text(item)}</li>`).join("")}</ul>
+          </section>
+        ` : ""}
+        ${cfg.matchingSystem ? `
+          <section class="home-card info-card">
+            <h2>${text(cfg.matchingSystem.title || "综合匹配系统")}</h2>
+            <p>${text(cfg.matchingSystem.body || "")}</p>
+          </section>
+        ` : ""}
+        ${cfg.profileInput ? `
+          <section class="profile-panel">
+            <label class="profile-label" for="profile-value">${text(cfg.profileInput.title || "先输入出生日期")}</label>
+            <div class="profile-field">
+              <span>${text(cfg.profileInput.label || "出生日期")}</span>
+              <input
+                id="profile-value"
+                type="${text(cfg.profileInput.type || "date")}"
+                value="${text(getProfileInputValue(cfg.profileInput))}"
+                ${cfg.profileInput.type === "number" ? `inputmode="numeric" min="${text(cfg.profileInput.min || 1)}" max="${text(cfg.profileInput.max || 99)}" placeholder="${text(cfg.profileInput.placeholder || "")}"` : ""}
+                ${cfg.profileInput.required ? "required" : ""}
+              >
+            </div>
+            <p class="profile-note">${text(cfg.profileInput.note || "")}</p>
+            <p class="profile-error" data-profile-error aria-live="polite"></p>
+          </section>
+        ` : ""}
+        <button class="primary-btn" data-action="start">${text(cfg.startButton || "开始测试")}</button>
+        ${cfg.compactHome && (cfg.dimensions || []).length ? `
+          <div class="pill-grid compact-pills">
+            ${(cfg.dimensions || []).map((item) => `<div class="pill">${text(item)}</div>`).join("")}
+          </div>
+        ` : ""}
+        <p class="disclaimer">${text(cfg.disclaimer || "本测试为趣味内容，仅供娱乐参考。")}</p>
+      </div>
+      `,
+      "home"
+    );
+    const startButton = app.querySelector("[data-action='start']");
+    const profileField = app.querySelector("#profile-value");
+    const profileError = app.querySelector("[data-profile-error]");
+    profileField?.addEventListener("input", () => {
+      profileField.classList.remove("invalid");
+      if (profileError) profileError.textContent = "";
+    });
+    let started = false;
+    const startQuiz = () => {
+      if (started) return;
+      const profileValue = profileField?.value?.trim() || "";
+      if (cfg.profileInput?.required && !profileValue) {
+        profileField?.classList.add("invalid");
+        if (profileError) profileError.textContent = cfg.profileInput?.error || "请先填写信息，再开始测试。";
+        profileField?.focus();
+        return;
+      }
+      if (cfg.profileInput?.type === "number") {
+        const numericValue = Number(profileValue);
+        const min = Number(cfg.profileInput.min || 1);
+        const max = Number(cfg.profileInput.max || 99);
+        if (!Number.isFinite(numericValue) || numericValue < min || numericValue > max) {
+          profileField?.classList.add("invalid");
+          if (profileError) profileError.textContent = cfg.profileInput?.rangeError || `请输入 ${min}-${max} 之间的数字。`;
+          profileField?.focus();
+          return;
+        }
+      }
+      started = true;
+      state.answers = {};
+      state.profile = buildProfileFromInput(cfg.profileInput, profileValue);
+      state.currentIndex = 0;
+      sessionStorage.removeItem(getStorageKey());
+      sessionStorage.setItem(getProfileStorageKey(), JSON.stringify(state.profile));
+      navigate("quiz");
+    };
+    startButton.addEventListener("click", startQuiz);
+    startButton.addEventListener(
+      "touchend",
+      (event) => {
+        event.preventDefault();
+        startQuiz();
+      },
+      { passive: false }
+    );
+  }
+
+  function renderQuiz() {
+    const questions = state.config.questions || [];
+    const question = questions[state.currentIndex];
+    if (!question) {
+      renderHome();
+      return;
+    }
+
+    const progress = ((state.currentIndex + 1) / questions.length) * 100;
+
+    renderShell(
+      `
+      <div class="sticky-head">
+        <div class="quiz-meta">
+          <span>${String(state.currentIndex + 1).padStart(2, "0")} / ${questions.length}</span>
+          <span>${text(question.module)}</span>
+        </div>
+        <div class="progress-track"><div class="progress-bar" style="width:${progress}%"></div></div>
+      </div>
+      <div class="question-no">${String(state.currentIndex + 1).padStart(2, "0")}</div>
+      <h1 class="question-title">${text(question.text)}</h1>
+      <div class="options">
+        ${(question.options || [])
+          .map(
+            (option) => `
+            <button class="option" data-option="${text(option.key)}">
+              <span class="option-key">${text(option.key)}</span>
+              <span class="option-text">${text(option.text)}</span>
+            </button>
+          `
+          )
+          .join("")}
+      </div>
+      <p class="hint">${text(state.config.quizHint || "选择后自动进入下一题")}</p>
+      `,
+      "quiz-screen"
+    );
+
+    app.querySelectorAll("[data-option]").forEach((button) => {
+      button.addEventListener("click", () => selectOption(button.dataset.option));
+    });
+  }
+
+  function selectOption(key) {
+    if (state.locked) return;
+    state.locked = true;
+    state.selected = key;
+    const question = state.config.questions[state.currentIndex];
+    state.answers[question.id] = key;
+
+    app.querySelectorAll(".option").forEach((button) => {
+      const selected = button.dataset.option === key;
+      button.classList.toggle("selected", selected);
+      button.classList.toggle("dimmed", !selected);
+    });
+
+    window.setTimeout(() => {
+      if (state.currentIndex < state.config.questions.length - 1) {
+        state.currentIndex += 1;
+        state.locked = false;
+        state.selected = null;
+        renderQuiz();
+      } else {
+        sessionStorage.setItem(getStorageKey(), JSON.stringify(state.answers));
+        state.locked = false;
+        navigate("loading");
+      }
+    }, 420);
+  }
+
+  function startLoading() {
+    state.loadingStep = 0;
+    renderLoading("");
+    tickLoading();
+  }
+
+  function renderLoading(value) {
+    const loadingMessages = getLoadingMessages();
+    renderShell(
+      `
+      <div class="loading-card">
+        <div class="spinner"></div>
+        <div class="loading-text">${text(value)}<span class="cursor">|</span></div>
+        <div class="step-bars">
+          ${loadingMessages.map((_, index) => `<div class="step ${index < state.loadingStep ? "done" : ""}"><span></span></div>`).join("")}
+        </div>
+      </div>
+      `,
+      "loading-screen"
+    );
+  }
+
+  function tickLoading() {
+    if (state.route !== "loading") return;
+    const loadingMessages = getLoadingMessages();
+    if (state.loadingStep >= loadingMessages.length) {
+      window.setTimeout(() => navigate("result"), 700);
+      return;
+    }
+    const message = loadingMessages[state.loadingStep];
+    let chars = 0;
+    const interval = window.setInterval(() => {
+      chars += 1;
+      renderLoading(message.slice(0, chars));
+      if (chars >= message.length) {
+        window.clearInterval(interval);
+        window.setTimeout(() => {
+          state.loadingStep += 1;
+          tickLoading();
+        }, 520);
+      }
+    }, 35);
+  }
+
+  function renderResult() {
+    const saved = sessionStorage.getItem(getStorageKey());
+    if (saved) state.answers = JSON.parse(saved);
+    if (Object.keys(state.answers).length < state.config.questions.length) {
+      renderHome();
+      return;
+    }
+
+    const scored = scoreAnswers(state.answers);
+    const primary = state.config.results[scored.primary];
+    const secondary = scored.secondary ? state.config.secondaryNotes?.[scored.primary]?.[scored.secondary] : null;
+    const stage = getStage(primary.maturityScore);
+    const shareText = buildShareText(primary, secondary);
+    const compareLabels = state.config.compareLabels || ["如果继续原路", "如果换一种做法"];
+    state.resultData = { scored, primary, secondary, stage, shareText };
+
+    renderShell(
+      `
+      <article class="report">
+        <div class="kicker"><span class="dot"></span><span>${text(state.config.resultKicker || "Result Report")}</span><span class="dot"></span></div>
+        <h1 class="result-type">${text(primary.typeName)}</h1>
+        <p class="result-subtitle">${text(primary.subtitle)}</p>
+        <div class="stamp-row">
+          <div class="stamp"><strong>${text(primary.maturityScore)}</strong><span>${text(state.config.scoreLabel || "决策成熟度")}</span></div>
+          <div class="stamp"><strong>${text(stage)}</strong><span>${text(state.config.stageLabel || "当前行动阶段")}</span></div>
+        </div>
+
+        ${renderMatchSummary(scored)}
+
+        ${scored.psychological ? "" : `
+          <section class="section">
+            <h2>你的答案分布</h2>
+            <div class="meters">
+              ${Object.entries(scored.counts)
+                .filter(([, value]) => value > 0)
+                .map(([key, value]) => {
+                  const typeData = state.config.results[key];
+                  const width = (value / state.config.questions.length) * 100;
+                  return `
+                    <div>
+                      <div class="meter-head"><span>${text(key)} · ${text(typeData.typeName)}</span><span>${value} 题</span></div>
+                      <div class="meter-track"><div class="meter-fill" style="width:${width}%"></div></div>
+                    </div>
+                  `;
+                })
+                .join("")}
+            </div>
+          </section>
+        `}
+
+        ${secondary ? `<section class="section"><h2>副倾向提示</h2><div class="secondary-note">${text(secondary)}</div></section>` : ""}
+
+        <section class="section">
+          <h2>诊断结论</h2>
+          <div class="quote">${text(primary.coreConclusion)}</div>
+        </section>
+
+        <section class="section">
+          <h2>为什么你会这样</h2>
+          <p>${text(primary.diagnosis)}</p>
+          <p>${text(primary.whatYouReallyWant)}</p>
+        </section>
+
+        <section class="section">
+          <h2>${text(primary.mechanism.title)}</h2>
+          <p>${text(primary.mechanism.content)}</p>
+        </section>
+
+        ${renderParagraphSection("专业解读框架", primary.professionalBasis)}
+        ${renderTagSection("你的关键矛盾", primary.coreTensions)}
+        ${renderCompareListSection("适合推进的条件", "需要谨慎的信号", primary.suitableIf, primary.cautionIf)}
+
+        <section class="section">
+          <h2>关键指数</h2>
+          <div class="meters">
+            ${(primary.indices || [])
+              .map(
+                (item) => `
+                <div>
+                  <div class="meter-head"><span>${text(item.label)}</span><span>${text(item.value)}</span></div>
+                  <div class="meter-track"><div class="meter-fill" style="width:${number(item.value)}%"></div></div>
+                </div>
+              `
+              )
+              .join("")}
+          </div>
+        </section>
+
+        <section class="section">
+          <h2>两条路径对比</h2>
+          <div class="compare">
+            <div class="compare-card"><h3>${text(compareLabels[0])}</h3><p>${text(primary.ifStay)}</p></div>
+            <div class="compare-card"><h3>${text(compareLabels[1])}</h3><p>${text(primary.ifChange)}</p></div>
+          </div>
+        </section>
+
+        <section class="section">
+          <h2>现在最不建议你做</h2>
+          <div class="tag-list">${(primary.notRecommended || []).map((item) => `<span class="tag">${text(item)}</span>`).join("")}</div>
+        </section>
+
+        <section class="section">
+          <h2>未来 90 天验证方案</h2>
+          <div class="plan">
+            ${(primary.plan90 || [])
+              .map(
+                (item, index) => `
+                <div class="plan-card">
+                  <h3>${index + 1}. ${text(item.title)}</h3>
+                  <p>${text(item.content)}</p>
+                </div>
+              `
+              )
+              .join("")}
+          </div>
+        </section>
+
+        <section class="section">
+          <h2>最后一句话</h2>
+          <p>${text(primary.closing)}</p>
+        </section>
+
+        <div class="actions">
+          <button class="primary-btn" data-action="copy">${text(state.config.copyButton || "复制我的结果")}</button>
+          <button class="ghost-btn" data-action="restart">${text(state.config.restartButton || "重新测试")}</button>
+        </div>
+      </article>
+      `,
+      "result-screen"
+    );
+
+    app.querySelector("[data-action='copy']").addEventListener("click", () => copyShareText(shareText));
+    app.querySelector("[data-action='restart']").addEventListener("click", () => {
+      sessionStorage.removeItem(getStorageKey());
+      sessionStorage.removeItem(getProfileStorageKey());
+      state.answers = {};
+      state.profile = { birthDate: "" };
+      state.currentIndex = 0;
+      navigate("home");
+    });
+  }
+
+  function renderParagraphSection(title, paragraphs) {
+    if (!Array.isArray(paragraphs) || !paragraphs.length) return "";
+    return `
+      <section class="section">
+        <h2>${text(title)}</h2>
+        ${paragraphs.map((item) => `<p>${text(item)}</p>`).join("")}
+      </section>
+    `;
+  }
+
+  function renderTagSection(title, items) {
+    if (!Array.isArray(items) || !items.length) return "";
+    return `
+      <section class="section">
+        <h2>${text(title)}</h2>
+        <div class="tag-list">${items.map((item) => `<span class="tag">${text(item)}</span>`).join("")}</div>
+      </section>
+    `;
+  }
+
+  function renderMatchSummary(scored) {
+    if (scored.psychological) return renderPsychologicalSummary(scored.psychological);
+    if (!scored.match) return "";
+    const match = scored.match;
+    return `
+      <section class="section">
+        <h2>综合匹配结果</h2>
+        <div class="match-summary">
+          <div class="match-grid">
+            <div class="match-item"><span>出生日期倾向</span><strong>${text(match.birthElement)}</strong></div>
+            <div class="match-item"><span>答题倾向</span><strong>${text(match.personalityElement)}</strong></div>
+            <div class="match-item"><span>城市匹配度</span><strong>${text(match.matchScore)}%</strong></div>
+          </div>
+          <p>本结果按出生日期倾向与 49 道题的生活选择加权生成。五行仅用于表达生活偏好，结果需要结合真实岗位、预算、住房和试住体验判断。</p>
+        </div>
+      </section>
+    `;
+  }
+
+  function renderPsychologicalSummary(data) {
+    const deltaLabel = data.delta > 0 ? `比实际年龄成熟 ${data.delta} 岁` : data.delta < 0 ? `比实际年龄年轻 ${Math.abs(data.delta)} 岁` : "与实际年龄同频";
+    return `
+      <section class="section">
+        <h2>心理年龄对比</h2>
+        <div class="match-summary">
+          <div class="match-grid">
+            <div class="match-item"><span>实际年龄</span><strong>${text(data.actualAge)}岁</strong></div>
+            <div class="match-item"><span>心理年龄</span><strong>${text(data.psychologicalAge)}岁</strong></div>
+            <div class="match-item"><span>年龄差</span><strong>${text(deltaLabel)}</strong></div>
+          </div>
+          <p>${text(data.ageLabel)}。这个数字不是能力高低，只代表你最近面对世界时更常用的心理模式。</p>
+        </div>
+      </section>
+      <section class="section">
+        <h2>8维心理画像</h2>
+        <div class="meters">
+          ${data.dimensionOrder.map((key) => `
+            <div>
+              <div class="meter-head"><span>${text(data.dimensionLabels[key] || key)}</span><span>${text(data.dimensions[key])}</span></div>
+              <div class="meter-track"><div class="meter-fill" style="width:${number(data.dimensions[key])}%"></div></div>
+            </div>
+          `).join("")}
+        </div>
+      </section>
+      <section class="section">
+        <h2>关键词标签</h2>
+        <div class="tag-list">${data.tags.map((item) => `<span class="tag">${text(item)}</span>`).join("")}</div>
+      </section>
+      <section class="section">
+        <h2>你的长板与盲点</h2>
+        <div class="compare">
+          <div class="compare-card">
+            <h3>最高的 3 个维度</h3>
+            ${data.topDimensions.map((item) => `<p>${text(item.label)}：${text(item.value)}</p>`).join("")}
+          </div>
+          <div class="compare-card">
+            <h3>最低的 2 个维度</h3>
+            ${data.lowDimensions.map((item) => `<p>${text(item.label)}：${text(item.value)}</p>`).join("")}
+          </div>
+        </div>
+      </section>
+    `;
+  }
+
+  function renderCompareListSection(leftTitle, rightTitle, leftItems, rightItems) {
+    const hasLeft = Array.isArray(leftItems) && leftItems.length;
+    const hasRight = Array.isArray(rightItems) && rightItems.length;
+    if (!hasLeft && !hasRight) return "";
+    return `
+      <section class="section">
+        <h2>适用边界</h2>
+        <div class="compare">
+          <div class="compare-card">
+            <h3>${text(leftTitle)}</h3>
+            ${(leftItems || []).map((item) => `<p>${text(item)}</p>`).join("")}
+          </div>
+          <div class="compare-card">
+            <h3>${text(rightTitle)}</h3>
+            ${(rightItems || []).map((item) => `<p>${text(item)}</p>`).join("")}
+          </div>
+        </div>
+      </section>
+    `;
+  }
+
+  function scoreAnswers(answers) {
+    if (state.config.scoring?.mode === "psychological-age") {
+      return scorePsychologicalAge(answers, state.config.scoring);
+    }
+    if (state.config.scoring?.mode === "paired-attributes") {
+      return scorePairedAttributes(answers, state.config.scoring);
+    }
+    if (state.config.scoring?.mode === "city-with-elements") {
+      return scoreCityWithElements(answers, state.config.scoring);
+    }
+
+    const resultKeys = Object.keys(state.config.results || {});
+    const counts = Object.fromEntries(resultKeys.map((key) => [key, 0]));
+    (state.config.questions || []).forEach((question) => {
+      const answerKey = answers[question.id];
+      if (!answerKey) return;
+      const option = (question.options || []).find((item) => item.key === answerKey);
+      const scoreKey = option?.score || option?.result || answerKey;
+      if (counts[scoreKey] !== undefined) counts[scoreKey] += 1;
+    });
+    const sorted = Object.entries(counts).sort((a, b) => b[1] - a[1]);
+    const threshold = state.config.secondaryThreshold ?? 2;
+    const primary = sorted[0][0];
+    const secondary = sorted[1][1] > 0 && sorted[0][1] - sorted[1][1] <= threshold ? sorted[1][0] : null;
+    return { counts, primary, secondary };
+  }
+
+  function scorePsychologicalAge(answers, scoring) {
+    const answerValues = scoring.answerValues || { A: 1, B: 2, C: 3, D: 4, E: 5 };
+    const dimensionLabels = scoring.dimensionLabels || {};
+    const dimensionOrder = scoring.dimensionOrder || Object.keys(dimensionLabels);
+    const rawTotals = Object.fromEntries(dimensionOrder.map((key) => [key, 0]));
+    const rawCounts = Object.fromEntries(dimensionOrder.map((key) => [key, 0]));
+
+    (state.config.questions || []).forEach((question) => {
+      const answerKey = answers[question.id];
+      if (!answerKey || !question.dimension) return;
+      const base = Number(answerValues[answerKey] ?? answerValues[String(answerKey)] ?? 0);
+      if (!Number.isFinite(base) || base <= 0) return;
+      const value = question.reverse ? 6 - base : base;
+      rawTotals[question.dimension] = (rawTotals[question.dimension] || 0) + value;
+      rawCounts[question.dimension] = (rawCounts[question.dimension] || 0) + 1;
+    });
+
+    const dimensions = {};
+    dimensionOrder.forEach((key) => {
+      const count = rawCounts[key] || 0;
+      if (!count) {
+        dimensions[key] = 0;
+        return;
+      }
+      const min = count;
+      const max = count * 5;
+      dimensions[key] = Math.round(((rawTotals[key] - min) / (max - min)) * 100);
+    });
+
+    const matureDimensions = scoring.matureDimensions || ["emotion", "responsibility", "resilience", "tolerance", "selfAcceptance"];
+    const youthfulDimensions = scoring.youthfulDimensions || ["curiosity", "socialEase", "lifePassion"];
+    const matureIndex = average(matureDimensions.map((key) => dimensions[key]));
+    const youthfulIndex = average(youthfulDimensions.map((key) => dimensions[key]));
+    const actualAge = getActualAge(scoring);
+    const psychologicalAge = clamp(
+      Math.round(actualAge + (matureIndex - youthfulIndex) * Number(scoring.ageFactor ?? 0.22)),
+      Number(scoring.minAge ?? 10),
+      Number(scoring.maxAge ?? 70)
+    );
+    const delta = psychologicalAge - actualAge;
+    const primary = getPsychologicalResultKey(delta, scoring);
+    const counts = Object.fromEntries(Object.keys(state.config.results || {}).map((key) => [key, key === primary ? (state.config.questions || []).length : 0]));
+    const rankedDimensions = dimensionOrder
+      .map((key) => ({ key, label: dimensionLabels[key] || key, value: dimensions[key] ?? 0 }))
+      .sort((left, right) => right.value - left.value);
+    const tags = buildPsychologicalTags(rankedDimensions, delta, primary, scoring);
+
+    return {
+      counts,
+      primary,
+      secondary: null,
+      psychological: {
+        actualAge,
+        psychologicalAge,
+        delta,
+        ageLabel: getPsychologicalAgeLabel(delta),
+        matureIndex: Math.round(matureIndex),
+        youthfulIndex: Math.round(youthfulIndex),
+        dimensions,
+        dimensionLabels,
+        dimensionOrder,
+        topDimensions: rankedDimensions.slice(0, 3),
+        lowDimensions: rankedDimensions.slice(-2).reverse(),
+        tags,
+      },
+    };
+  }
+
+  function getActualAge(scoring) {
+    const numericAge = Number(state.profile.actualAge);
+    if (Number.isFinite(numericAge) && numericAge > 0) return Math.round(numericAge);
+    const birthAge = calculateAgeFromBirthDate(state.profile.birthDate);
+    if (birthAge) return birthAge;
+    return Number(scoring.defaultActualAge || 28);
+  }
+
+  function calculateAgeFromBirthDate(value) {
+    if (!value) return null;
+    const date = new Date(value);
+    if (Number.isNaN(date.getTime())) return null;
+    const now = new Date();
+    let age = now.getFullYear() - date.getFullYear();
+    const monthDiff = now.getMonth() - date.getMonth();
+    if (monthDiff < 0 || (monthDiff === 0 && now.getDate() < date.getDate())) age -= 1;
+    return age > 0 ? age : null;
+  }
+
+  function getPsychologicalResultKey(delta, scoring) {
+    const groups = scoring.ageGroups || [
+      { key: "CURIOUS_CHILD", maxDelta: -8 },
+      { key: "HOT_BLOODED_TEEN", maxDelta: -3 },
+      { key: "BALANCED_YOUTH", maxDelta: 2 },
+      { key: "STEADY_ADVISER", maxDelta: 7 },
+      { key: "CLEAR_HELM", maxDelta: Infinity },
+    ];
+    const hit = groups.find((item) => delta <= Number(item.maxDelta));
+    return hit?.key || groups[groups.length - 1]?.key || Object.keys(state.config.results || {})[0];
+  }
+
+  function getPsychologicalAgeLabel(delta) {
+    if (delta <= -8) return "灵魂明显年轻";
+    if (delta <= -3) return "少年感在线";
+    if (delta <= 2) return "与真实年龄同频";
+    if (delta <= 7) return "心智略超前";
+    return "灵魂明显成熟";
+  }
+
+  function buildPsychologicalTags(rankedDimensions, delta, primary, scoring) {
+    const tagMap = scoring.dimensionTags || {};
+    const ageTags = scoring.ageTags || {};
+    const resultTags = scoring.resultTags || {};
+    const tags = rankedDimensions
+      .slice(0, 3)
+      .map((item) => tagMap[item.key]?.[0] || item.label)
+      .filter(Boolean);
+    tags.push(ageTags[getPsychologicalAgeLabel(delta)] || getPsychologicalAgeLabel(delta));
+    tags.push(resultTags[primary] || "社交原型清晰");
+    return [...new Set(tags)].slice(0, 5);
+  }
+
+  function scoreCityWithElements(answers, scoring) {
+    const resultKeys = Object.keys(state.config.results || {});
+    const counts = Object.fromEntries(resultKeys.map((key) => [key, 0]));
+    const elementMap = scoring.elementMap || {};
+    const elementCounts = {};
+    Object.values(elementMap).forEach((element) => { elementCounts[element] = 0; });
+
+    (state.config.questions || []).forEach((question) => {
+      const answerKey = answers[question.id];
+      if (!answerKey) return;
+      const option = (question.options || []).find((item) => item.key === answerKey);
+      const scoreKey = option?.score || option?.result || answerKey;
+      const element = elementMap[scoreKey];
+      if (counts[scoreKey] !== undefined) counts[scoreKey] += 1;
+      if (element && elementCounts[element] !== undefined) elementCounts[element] += 1;
+    });
+
+    const personalityElement = Object.entries(elementCounts).sort((left, right) => right[1] - left[1])[0]?.[0] || "未提供";
+    const birthElement = getBirthElement(state.profile.birthDate, scoring);
+    const birthWeight = Number(scoring.birthWeight ?? 0.25);
+    const combined = Object.fromEntries(resultKeys.map((key) => {
+      const birthBonus = elementMap[key] === birthElement ? (state.config.questions.length * birthWeight) : 0;
+      return [key, counts[key] + birthBonus];
+    }));
+    const sorted = Object.entries(combined).sort((left, right) => right[1] - left[1]);
+    const threshold = state.config.secondaryThreshold ?? 2;
+    const primary = sorted[0][0];
+    const secondary = sorted[1][1] > 0 && sorted[0][1] - sorted[1][1] <= threshold ? sorted[1][0] : null;
+    const personalityShare = counts[primary] / Math.max(1, state.config.questions.length);
+    const birthMatch = elementMap[primary] === birthElement;
+    const matchScore = Math.round(Math.min(99, 55 + personalityShare * 30 + (birthMatch ? 15 : 5)));
+    return {
+      counts,
+      primary,
+      secondary,
+      match: { birthElement, personalityElement, elementCounts, matchScore },
+    };
+  }
+
+  function getBirthElement(value, scoring) {
+    if (!value) return "未提供";
+    const parts = value.split("-").map(Number);
+    if (parts.length !== 3 || parts.some((part) => !Number.isFinite(part))) return "未提供";
+    const [year, month, day] = parts;
+    const elements = scoring.birthElements || ["木", "火", "土", "金", "水"];
+    return elements[Math.abs(year * 13 + month * 7 + day) % elements.length];
+  }
+
+  function scorePairedAttributes(answers, scoring) {
+    const attributes = Object.fromEntries((scoring.attributes || []).map((key) => [key, 0]));
+    const questionsById = Object.fromEntries((state.config.questions || []).map((question) => [question.id, question]));
+
+    (state.config.questions || []).forEach((question) => {
+      const answerKey = answers[question.id];
+      if (!answerKey) return;
+      const option = (question.options || []).find((item) => item.key === answerKey);
+      (option?.attributes || []).forEach((attribute) => {
+        if (attributes[attribute] !== undefined) attributes[attribute] += 1;
+      });
+    });
+
+    const chosen = (scoring.pairs || []).map(([left, right], index) => {
+      if (attributes[left] > attributes[right]) return left;
+      if (attributes[right] > attributes[left]) return right;
+
+      const tieQuestionId = scoring.tieBreakers?.[String(index)];
+      const tieQuestion = questionsById[tieQuestionId];
+      const tieAnswer = tieQuestion && answers[tieQuestionId];
+      const tieOption = tieQuestion?.options?.find((item) => item.key === tieAnswer);
+      return tieOption?.attributes?.includes(left) ? left : right;
+    });
+
+    const primary = chosen.join("");
+    const counts = Object.fromEntries(Object.keys(state.config.results || {}).map((key) => [key, key === primary ? (state.config.questions || []).length : 0]));
+    const alternate = chosen.slice();
+    if (scoring.pairs?.length) {
+      const firstPair = scoring.pairs[0];
+      alternate[0] = alternate[0] === firstPair[0] ? firstPair[1] : firstPair[0];
+    }
+    const secondary = alternate.join("") !== primary && state.config.secondaryNotes?.[primary]?.[alternate.join("")] ? alternate.join("") : null;
+    return { counts, primary, secondary, attributes };
+  }
+
+  function getStage(score) {
+    const labels = state.config.stageLabels || [
+      { max: 45, label: "观察期" },
+      { max: 65, label: "验证期" },
+      { max: 82, label: "规划期" },
+      { max: 100, label: "行动期" },
+    ];
+    const hit = labels.find((item) => score <= item.max);
+    return hit ? hit.label : labels[labels.length - 1].label;
+  }
+
+  function buildShareText(primary, secondary) {
+    const template = state.config.shareTemplate || [
+      "我测出了：{{typeName}}",
+      "{{posterSubtext}}",
+      "{{secondaryLine}}",
+      "",
+      "{{title}}",
+    ];
+    const values = {
+      title: state.config.title,
+      typeName: primary.typeName,
+      posterSubtext: primary.posterSubtext,
+      secondary: secondary || "",
+      secondaryLine: secondary ? `副倾向：${secondary}` : "",
+    };
+    return template
+      .map((line) => fillTemplate(line, values))
+      .filter((line, index, arr) => line || arr[index - 1])
+      .join("\n")
+      .trim();
+  }
+
+  async function copyShareText(value) {
+    try {
+      await navigator.clipboard.writeText(value);
+      showToast("结果文案已复制");
+    } catch (error) {
+      showToast("复制失败，可长按手动复制");
+    }
+  }
+
+  function showToast(value) {
+    const toast = document.getElementById("toast");
+    if (!toast) return;
+    toast.textContent = value;
+    toast.classList.add("show");
+    window.setTimeout(() => toast.classList.remove("show"), 1600);
+  }
+
+  function getLoadingMessages() {
+    return state.config.loadingMessages || defaultLoadingMessages;
+  }
+
+  function getStorageKey() {
+    return `xhsTestAnswers:${state.config.slug || "default"}`;
+  }
+
+  function getProfileStorageKey() {
+    return `xhsTestProfile:${state.config?.slug || "default"}`;
+  }
+
+  function getProfileInputValue(inputConfig) {
+    if (!inputConfig) return "";
+    if (inputConfig.type === "number") return state.profile.actualAge || "";
+    return state.profile.birthDate || "";
+  }
+
+  function buildProfileFromInput(inputConfig, value) {
+    if (inputConfig?.type === "number") {
+      return { birthDate: "", actualAge: value };
+    }
+    return { birthDate: value, actualAge: "" };
+  }
+
+  function fillTemplate(template, values) {
+    return String(template).replace(/\{\{(\w+)\}\}/g, (_, key) => values[key] || "");
+  }
+
+  function number(value) {
+    const parsed = Number(value);
+    if (Number.isNaN(parsed)) return 0;
+    return Math.max(0, Math.min(100, parsed));
+  }
+
+  function average(values) {
+    const cleanValues = values.map(Number).filter((value) => Number.isFinite(value));
+    if (!cleanValues.length) return 0;
+    return cleanValues.reduce((sum, value) => sum + value, 0) / cleanValues.length;
+  }
+
+  function clamp(value, min, max) {
+    return Math.max(min, Math.min(max, value));
+  }
+
+  function text(value) {
+    return String(value ?? "")
+      .replace(/&/g, "&amp;")
+      .replace(/</g, "&lt;")
+      .replace(/>/g, "&gt;")
+      .replace(/"/g, "&quot;");
+  }
+})();
+
+    </script>
+  </body>
+</html>
