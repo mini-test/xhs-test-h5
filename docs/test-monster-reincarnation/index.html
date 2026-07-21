@@ -1,0 +1,1671 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <meta name="description" content="完成 24 道妖怪人格趣味测试，生成你的妖怪原型、隐藏天赋、关系模式和现实行动建议。" />
+    <meta property="og:title" content="测测你的前世是哪种妖怪？" />
+    <meta property="og:description" content="完成 24 道妖怪人格趣味测试，生成你的妖怪原型、隐藏天赋、关系模式和现实行动建议。" />
+    <title>测测你的前世是哪种妖怪？</title>
+    <style>
+:root {
+  --bg: #fbfaf7;
+  --paper: #fffefd;
+  --ink: #20242a;
+  --muted: #65707d;
+  --line: #d9d4ca;
+  --line-strong: #b9afa0;
+  --accent: #9b4339;
+  --accent-soft: #f1dfd7;
+  --gold: #c0964d;
+  --sage: #66795f;
+  --blue: #526a86;
+  --shadow: 0 16px 36px rgba(60, 47, 38, 0.1);
+  --radius: 8px;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  min-height: 100%;
+  width: 100%;
+  overflow-x: hidden;
+  background:
+    linear-gradient(rgba(32, 36, 42, 0.035) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(32, 36, 42, 0.035) 1px, transparent 1px),
+    var(--bg);
+  background-size: 24px 24px;
+}
+
+body {
+  width: 100%;
+  overflow-x: hidden;
+  min-height: 100vh;
+  margin: 0;
+  color: var(--ink);
+  font-family:
+    "PingFang SC",
+    "Microsoft YaHei",
+    "Noto Sans SC",
+    system-ui,
+    -apple-system,
+    BlinkMacSystemFont,
+    sans-serif;
+  letter-spacing: 0;
+}
+
+button {
+  font: inherit;
+}
+
+.shell {
+  width: 100%;
+  max-width: 480px;
+  min-height: 100vh;
+  margin: 0 auto;
+  background: rgba(251, 250, 247, 0.88);
+  overflow-x: hidden;
+}
+
+.top-rule {
+  height: 4px;
+  background: var(--accent);
+}
+
+.screen {
+  width: 100%;
+  overflow-x: hidden;
+  min-height: calc(100vh - 4px);
+  padding: 28px 22px 32px;
+}
+
+.home {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.kicker {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  color: var(--muted);
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  font-size: 11px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+.dot {
+  width: 7px;
+  height: 7px;
+  background: var(--accent);
+  border-radius: 50%;
+}
+
+.hero-title {
+  max-width: 100%;
+  margin: 26px 0 14px;
+  color: var(--ink);
+  font-size: 30px;
+  line-height: 1.2;
+  text-align: center;
+  font-weight: 800;
+  overflow-wrap: anywhere;
+}
+
+.hero-subtitle {
+  margin: 0 auto 28px;
+  max-width: 340px;
+  color: var(--muted);
+  font-size: 15px;
+  line-height: 1.75;
+  text-align: center;
+}
+
+.hairline {
+  width: 64px;
+  height: 1px;
+  margin: 0 auto 30px;
+  background: var(--line-strong);
+}
+
+.intro {
+  margin: 0 auto;
+  max-width: 380px;
+}
+
+.intro p {
+  margin: 0 0 15px;
+  color: rgba(32, 36, 42, 0.82);
+  font-size: 15px;
+  line-height: 1.8;
+}
+
+.intro .strong {
+  color: var(--accent);
+  font-weight: 700;
+}
+
+.pill-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px;
+  margin: 28px 0;
+}
+
+.compact-pills {
+  margin: 16px 0 10px;
+}
+
+.pill {
+  min-height: 42px;
+  display: grid;
+  place-items: center;
+  border: 1px solid var(--line);
+  color: var(--muted);
+  background: rgba(255, 255, 255, 0.44);
+  font-size: 13px;
+}
+
+.home-card {
+  margin-top: 16px;
+  padding: 18px 16px;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  background: rgba(255, 255, 255, 0.78);
+}
+
+.info-card h2 {
+  margin: 0 0 12px;
+  font-size: 19px;
+}
+
+.info-card p,
+.info-card li {
+  color: rgba(32, 36, 42, 0.78);
+  font-size: 14px;
+  line-height: 1.8;
+}
+
+.info-card p {
+  margin: 0;
+}
+
+.info-card ul {
+  display: grid;
+  gap: 9px;
+  margin: 0;
+  padding-left: 20px;
+}
+
+.info-card li::marker {
+  color: var(--accent);
+}
+
+.profile-panel {
+  margin-top: 16px;
+  padding: 16px;
+  border: 1px solid var(--line-strong);
+  background: var(--accent-soft);
+}
+
+.profile-label {
+  display: block;
+  margin-bottom: 10px;
+  color: var(--ink);
+  font-size: 17px;
+  font-weight: 800;
+}
+
+.profile-field {
+  display: grid;
+  grid-template-columns: 1fr minmax(0, 1.4fr);
+  gap: 12px;
+  align-items: center;
+  padding: 11px 12px;
+  border: 1px solid var(--line);
+  background: var(--paper);
+}
+
+.profile-field span {
+  color: var(--muted);
+  font-size: 14px;
+}
+
+.profile-field input {
+  width: 100%;
+  min-height: 34px;
+  padding: 4px 6px;
+  border: 0;
+  background: transparent;
+  color: var(--ink);
+  font: inherit;
+  text-align: right;
+}
+
+.profile-field input:focus {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+
+.profile-field input.invalid {
+  outline: 2px solid #b3261e;
+  outline-offset: 2px;
+}
+
+.profile-note,
+.profile-error {
+  margin: 9px 0 0;
+  color: var(--muted);
+  font-size: 12px;
+  line-height: 1.6;
+}
+
+.profile-error {
+  min-height: 19px;
+  color: #a42f29;
+}
+
+.primary-btn,
+.ghost-btn,
+.copy-btn {
+  width: 100%;
+  min-height: 48px;
+  border: 1px solid var(--ink);
+  border-radius: 0;
+  cursor: pointer;
+  transition: transform 150ms ease, background 150ms ease, color 150ms ease, border-color 150ms ease;
+}
+
+.primary-btn {
+  background: var(--ink);
+  color: #fff;
+  font-weight: 700;
+}
+
+.ghost-btn,
+.copy-btn {
+  background: transparent;
+  color: var(--ink);
+}
+
+.primary-btn:active,
+.ghost-btn:active,
+.copy-btn:active,
+.option:active {
+  transform: translateY(1px);
+}
+
+.disclaimer {
+  margin: 18px auto 0;
+  max-width: 340px;
+  color: var(--muted);
+  font-size: 12px;
+  line-height: 1.65;
+  text-align: center;
+}
+
+.quiz-screen {
+  padding-top: 0;
+}
+
+.sticky-head {
+  position: sticky;
+  top: 0;
+  z-index: 5;
+  margin: 0 -22px 26px;
+  padding: 14px 22px 12px;
+  background: rgba(251, 250, 247, 0.95);
+  border-bottom: 1px solid var(--line);
+  backdrop-filter: blur(12px);
+}
+
+.quiz-meta {
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+  color: var(--muted);
+  font-size: 12px;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+}
+
+.progress-track {
+  height: 4px;
+  margin-top: 10px;
+  background: rgba(32, 36, 42, 0.09);
+}
+
+.progress-bar {
+  height: 100%;
+  background: var(--accent);
+  transition: width 260ms ease;
+}
+
+.question-no {
+  color: rgba(155, 67, 57, 0.18);
+  font-size: 48px;
+  line-height: 1;
+  font-weight: 800;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+}
+
+.question-title {
+  margin: 18px 0 24px;
+  font-size: 22px;
+  line-height: 1.5;
+  font-weight: 750;
+}
+
+.options {
+  display: grid;
+  gap: 12px;
+}
+
+.option {
+  min-height: 66px;
+  display: grid;
+  grid-template-columns: 30px 1fr;
+  gap: 12px;
+  align-items: start;
+  width: 100%;
+  padding: 15px;
+  border: 1px solid var(--line);
+  background: rgba(255, 255, 255, 0.68);
+  color: var(--ink);
+  text-align: left;
+  cursor: pointer;
+  transition: background 160ms ease, border-color 160ms ease, color 160ms ease, opacity 160ms ease;
+}
+
+.option-key {
+  display: grid;
+  place-items: center;
+  width: 28px;
+  height: 28px;
+  border: 1px solid var(--line-strong);
+  font-size: 13px;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+}
+
+.option-text {
+  padding-top: 2px;
+  font-size: 15px;
+  line-height: 1.55;
+}
+
+.option.selected {
+  border-color: var(--accent);
+  background: var(--accent);
+  color: #fff;
+}
+
+.option.selected .option-key {
+  border-color: rgba(255, 255, 255, 0.8);
+}
+
+.option.dimmed {
+  opacity: 0.42;
+}
+
+.hint {
+  margin: 18px 0 0;
+  color: var(--muted);
+  font-size: 12px;
+  text-align: center;
+}
+
+.loading-screen {
+  display: grid;
+  place-items: center;
+}
+
+.loading-card {
+  width: 100%;
+  max-width: 360px;
+  text-align: center;
+}
+
+.spinner {
+  width: 54px;
+  height: 54px;
+  margin: 0 auto 24px;
+  border: 2px solid var(--line);
+  border-top-color: var(--accent);
+  border-radius: 50%;
+  animation: spin 850ms linear infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.loading-text {
+  min-height: 54px;
+  color: var(--accent);
+  font-size: 17px;
+  line-height: 1.6;
+  font-weight: 700;
+}
+
+.step-bars {
+  display: grid;
+  gap: 8px;
+  margin-top: 28px;
+}
+
+.step {
+  height: 4px;
+  overflow: hidden;
+  background: rgba(32, 36, 42, 0.09);
+}
+
+.step span {
+  display: block;
+  height: 100%;
+  width: 0;
+  background: var(--accent);
+  transition: width 300ms ease;
+}
+
+.step.done span {
+  width: 100%;
+}
+
+.result-screen {
+  padding: 22px 18px 30px;
+}
+
+.report {
+  padding: 22px 16px 18px;
+  border: 1px solid var(--line);
+  background: var(--paper);
+  box-shadow: var(--shadow);
+}
+
+.result-type {
+  margin: 8px 0 8px;
+  color: var(--accent);
+  font-size: 30px;
+  line-height: 1.15;
+  font-weight: 850;
+  text-align: center;
+}
+
+.result-subtitle {
+  margin: 0 auto 20px;
+  color: var(--muted);
+  font-size: 15px;
+  line-height: 1.7;
+  text-align: center;
+}
+
+.stamp-row {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px;
+  margin: 18px 0 20px;
+}
+
+.stamp {
+  padding: 12px 10px;
+  border: 1px solid var(--line);
+  background: #fbfaf7;
+}
+
+.stamp strong {
+  display: block;
+  margin-bottom: 4px;
+  color: var(--ink);
+  font-size: 20px;
+}
+
+.stamp span {
+  color: var(--muted);
+  font-size: 12px;
+}
+
+.section {
+  padding: 20px 0;
+  border-top: 1px solid var(--line);
+}
+
+.section h2 {
+  margin: 0 0 12px;
+  font-size: 18px;
+  color: var(--ink);
+}
+
+.section p {
+  margin: 0 0 12px;
+  color: rgba(32, 36, 42, 0.82);
+  font-size: 15px;
+  line-height: 1.85;
+}
+
+.quote {
+  padding: 15px;
+  border-left: 3px solid var(--accent);
+  background: var(--accent-soft);
+  color: #5b2d27;
+  line-height: 1.8;
+  font-weight: 700;
+}
+
+.meters {
+  display: grid;
+  gap: 14px;
+}
+
+.meter-head {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 7px;
+  color: var(--muted);
+  font-size: 13px;
+}
+
+.meter-track {
+  height: 8px;
+  background: rgba(32, 36, 42, 0.08);
+}
+
+.meter-fill {
+  height: 100%;
+  background: var(--accent);
+}
+
+.compare {
+  display: grid;
+  gap: 10px;
+}
+
+.compare-card {
+  padding: 14px;
+  border: 1px solid var(--line);
+  background: #fbfaf7;
+}
+
+.compare-card h3,
+.plan-card h3 {
+  margin: 0 0 8px;
+  font-size: 15px;
+}
+
+.compare-card p,
+.plan-card p {
+  font-size: 14px;
+}
+
+.tag-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.tag {
+  padding: 7px 9px;
+  border: 1px solid var(--line);
+  background: #fbfaf7;
+  color: var(--muted);
+  font-size: 13px;
+}
+
+.plan {
+  display: grid;
+  gap: 10px;
+}
+
+.plan-card {
+  padding: 14px;
+  border: 1px solid var(--line);
+  background: #fbfaf7;
+}
+
+.secondary-note {
+  padding: 14px;
+  border: 1px dashed var(--line-strong);
+  background: rgba(192, 150, 77, 0.12);
+  line-height: 1.75;
+  font-size: 14px;
+}
+
+.match-summary {
+  padding: 14px;
+  border: 1px solid var(--line-strong);
+  background: var(--accent-soft);
+}
+
+.match-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 8px;
+}
+
+.match-item {
+  min-width: 0;
+  padding: 10px 8px;
+  background: var(--paper);
+  text-align: center;
+}
+
+.match-item span,
+.match-item strong {
+  display: block;
+}
+
+.match-item span {
+  color: var(--muted);
+  font-size: 11px;
+  line-height: 1.4;
+}
+
+.match-item strong {
+  margin-top: 4px;
+  color: var(--accent);
+  font-size: 20px;
+}
+
+.match-summary p {
+  margin: 12px 0 0;
+  color: rgba(32, 36, 42, 0.72);
+  font-size: 12px;
+  line-height: 1.7;
+}
+
+.actions {
+  display: grid;
+  gap: 10px;
+  margin-top: 18px;
+}
+
+.toast {
+  position: fixed;
+  left: 50%;
+  bottom: 22px;
+  z-index: 20;
+  transform: translateX(-50%);
+  padding: 10px 14px;
+  background: var(--ink);
+  color: #fff;
+  font-size: 13px;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 180ms ease;
+}
+
+.toast.show {
+  opacity: 1;
+}
+
+.error {
+  display: grid;
+  place-items: center;
+  min-height: 100vh;
+  padding: 24px;
+  text-align: center;
+}
+
+.error p {
+  color: var(--muted);
+  line-height: 1.7;
+}
+
+@media (min-width: 700px) {
+  body {
+    padding: 28px 0;
+  }
+
+  .shell {
+    min-height: calc(100vh - 56px);
+    border: 1px solid var(--line);
+    box-shadow: var(--shadow);
+  }
+
+  .screen {
+    min-height: calc(100vh - 60px);
+  }
+}
+
+    </style>
+  </head>
+  <body>
+    <main id="app" aria-live="polite"></main>
+    <script>window.__QUIZ_CONFIG__ = {"slug":"test-monster-reincarnation","topic":"测测你的前世是哪种妖怪？","kicker":"MONSTER ARCHETYPE TEST","title":"测测你的前世是哪种妖怪？","subtitle":"24 道选择题，从 8 种妖怪人格原型里看见你的性格底色、隐藏天赋和关系课题。","metaDescription":"完成 24 道妖怪人格趣味测试，生成你的妖怪原型、隐藏天赋、关系模式和现实行动建议。","theme":{"--bg":"#f7f3ee","--paper":"#fffdf9","--ink":"#2f2524","--muted":"#806f69","--line":"#e3d4cd","--line-strong":"#bc8d7b","--accent":"#8f3f56","--accent-soft":"#f5e9e7","--shadow":"0 16px 36px rgba(91, 52, 46, 0.12)"},"startButton":"开始测试","testInfo":{"title":"测验说明","bullets":["本测验包含 24 道选择题","选择答案后会自动进入下一题","系统会从 8 种妖怪人格原型中匹配你的主原型与副原型"]},"matchingSystem":{"title":"妖性匹配系统","body":"系统会根据你在陌生环境、关系边界、现实选择、压力恢复和人生想象里的第一反应，匹配你的妖怪人格原型。这里的妖怪设定是趣味人格原型，不是前世事实、宗教判断或命运预测。"},"resultKicker":"Monster Archetype Report","quizHint":"凭第一反应选择，系统会自动进入下一题","copyButton":"复制我的结果","restartButton":"重新测试","scoreLabel":"妖性显影度","stageLabel":"当前妖性阶段","stageLabels":[{"max":55,"label":"初见妖性"},{"max":72,"label":"妖性觉醒"},{"max":86,"label":"人间试炼"},{"max":100,"label":"妖性成形"}],"compareLabels":["如果继续压住这股妖性","如果开始主动使用这股妖性"],"disclaimer":"本测试借用神话妖怪作为趣味人格原型，仅供娱乐和自我观察参考，不代表前世事实、命运预测、心理诊断或重大人生决策依据。","secondaryThreshold":1,"dimensions":["九尾狐 · 魅惑识人者","白泽 · 识局知言者","山鬼 · 静默守界者","蛇妖 · 蜕变复生者","花妖 · 造梦感受者","猫妖 · 自由警觉者","鲛人 · 深情回声者","夜叉 · 破局护航者"],"intro":["你不一定真的相信前世，但你一定有一种反复出现的力量：识人、守界、蜕变、造梦、自由、深情或破局。","这 24 道题不问你想成为谁，而是看你在真实场景里会先保护什么、先靠近什么、又最怕失去什么。","做完后，你会看到最接近你的妖怪原型，以及这股妖性在现实生活里的优势、盲区和行动建议。"],"loadingMessages":["正在读取你的第一反应...","正在匹配 8 种妖怪人格原型...","正在计算妖性、边界与行动指数...","正在生成你的人间课题...","分析完成。"],"questions":[{"id":1,"module":"直觉与警戒","text":"第一次进入一个完全陌生的场合，你最先注意什么？","options":[{"key":"A","text":"谁在观察谁，气氛里有没有隐藏的试探"},{"key":"B","text":"信息从谁手里流出，谁真正能做决定"},{"key":"C","text":"这里有没有让我不舒服的边界和声音"},{"key":"D","text":"有没有地方可以先退一步，等自己恢复"},{"key":"E","text":"光线、气味和细节是否让我产生灵感"},{"key":"F","text":"出口在哪里，我能不能随时离开"},{"key":"G","text":"谁的情绪最需要被照顾，谁在假装没事"},{"key":"H","text":"资源怎么分布，先抓住哪个关键位置"}]},{"id":2,"module":"直觉与警戒","text":"计划突然被打乱时，你最常见的第一反应是？","options":[{"key":"A","text":"先稳住表情，再判断对方到底想试探什么"},{"key":"B","text":"把新信息重新排序，找一条还能走通的路径"},{"key":"C","text":"先回到自己的节奏，不让混乱侵入内心"},{"key":"D","text":"把变化当成重新开始，换个方法继续"},{"key":"E","text":"先确认我还有没有选择，不能被一条路困住"},{"key":"F","text":"观察现场的出口和替代方案，减少无谓消耗"},{"key":"G","text":"先安抚受影响的人，再一起把事情接住"},{"key":"H","text":"立即确定最重要的目标，先解决最危险的一环"}]},{"id":3,"module":"直觉与警戒","text":"有人突然对你表现得过分热情，你会先想什么？","options":[{"key":"A","text":"他想从我这里得到什么，是真心还是技巧"},{"key":"B","text":"这份热情背后有没有交换条件"},{"key":"C","text":"我不需要立刻回应，先保持合适距离"},{"key":"D","text":"也许是新的关系，但我要看它能不能经得起时间"},{"key":"E","text":"这种靠近有没有让我感到舒服和有趣"},{"key":"F","text":"他会不会很快把热情变成控制"},{"key":"G","text":"他是不是也在期待被理解和接住"},{"key":"H","text":"这段关系将来会不会影响我的选择和节奏"}]},{"id":4,"module":"直觉与警戒","text":"你发现一件小事可能没有表面那么简单时，会怎么做？","options":[{"key":"A","text":"记住细节，再观察它会不会反复出现"},{"key":"B","text":"把人、时间和结果连起来，看完整结构"},{"key":"C","text":"先不说破，确认这件事是否触碰我的底线"},{"key":"D","text":"先接受真相，再决定要不要改变方向"},{"key":"E","text":"从不寻常之处找新的可能，而不是只找错误"},{"key":"F","text":"保持警惕，不让好奇心把我带进麻烦"},{"key":"G","text":"想想谁会因此受伤，以及我能不能帮上忙"},{"key":"H","text":"尽快验证关键事实，避免小问题变成大风险"}]},{"id":5,"module":"关系边界","text":"朋友把一大段负面情绪倒给你时，你通常会？","options":[{"key":"A","text":"先陪他把感受说完，不急着给结论"},{"key":"B","text":"帮他把事件、情绪和可处理的问题分开"},{"key":"C","text":"听一会儿，但会提醒自己不要把它带回家"},{"key":"D","text":"问他真正想改变什么，再陪他走一段"},{"key":"E","text":"用一个新角度或轻松的方式，让他暂时透口气"},{"key":"F","text":"如果这已经变成反复消耗，我会减少参与"},{"key":"G","text":"先接住他的委屈，再确认他是否需要实际帮助"},{"key":"H","text":"陪他把最急的事情处理掉，而不是一直停在抱怨里"}]},{"id":6,"module":"关系边界","text":"一段关系里，什么最容易让你失去耐心？","options":[{"key":"A","text":"明明在意，却永远不肯把真实感受说出来"},{"key":"B","text":"只讲立场，不讲事实和解决办法"},{"key":"C","text":"不断索取我的时间，却不尊重我的安静"},{"key":"D","text":"一边说要改变，一边重复同样的伤害"},{"key":"E","text":"把生活过得没有温度，也不允许别人有感受"},{"key":"F","text":"把亲近变成监控，让我失去自己的空间"},{"key":"G","text":"只在需要安慰时出现，却不愿意真正理解我"},{"key":"H","text":"遇到问题只会推给别人，关键时刻没有担当"}]},{"id":7,"module":"关系边界","text":"别人越过你的边界时，你最可能怎么处理？","options":[{"key":"A","text":"先确认自己是不是太在意，再温和地说清楚"},{"key":"B","text":"把具体事实列出来，说明什么可以、什么不可以"},{"key":"C","text":"直接结束这次接触，不让对方继续试探"},{"key":"D","text":"给一次解释的机会，但会重新评估信任"},{"key":"E","text":"把规则说得不伤人，也尽量保留关系里的体面"},{"key":"F","text":"迅速拉开距离，减少不必要的解释"},{"key":"G","text":"告诉对方我的感受，不希望这段关系留下刺"},{"key":"H","text":"当场制止，必要时直接切断后续合作"}]},{"id":8,"module":"关系边界","text":"你真正信任一个人，通常是因为对方？","options":[{"key":"A","text":"能听懂我没说出口的部分"},{"key":"B","text":"说到做到，而且愿意面对复杂问题"},{"key":"C","text":"尊重我的独处，不会用亲近逼我表态"},{"key":"D","text":"允许彼此变化，却不会轻易抛下对方"},{"key":"E","text":"有趣、有审美，也愿意一起创造生活"},{"key":"F","text":"不会把我的自由当成不在乎"},{"key":"G","text":"愿意对脆弱负责，不把真心当筹码"},{"key":"H","text":"关键时刻站出来，而不是只会说漂亮话"}]},{"id":9,"module":"欲望与选择","text":"如果突然得到一个很大的机会，你最先会确认？","options":[{"key":"A","text":"它是否真的让我更接近想要的生活"},{"key":"B","text":"它的规则、成本和长期回报是什么"},{"key":"C","text":"我会不会因此失去原本的安稳和边界"},{"key":"D","text":"它是否能让我完成一次重要的蜕变"},{"key":"E","text":"它有没有空间让我创造真正属于自己的东西"},{"key":"F","text":"它会不会把我锁进一种无法离开的生活"},{"key":"G","text":"我在这条路上是否还能保留重要的关系"},{"key":"H","text":"它值不值得我集中全部精力打一场硬仗"}]},{"id":10,"module":"欲望与选择","text":"如果只能保住一种东西，你最不愿意失去？","options":[{"key":"A","text":"感受爱和被理解的能力"},{"key":"B","text":"判断真相和做出清醒选择的能力"},{"key":"C","text":"一个不被打扰、能做自己的空间"},{"key":"D","text":"重新开始和自我修复的能力"},{"key":"E","text":"发现美、表达自己和创造新事物的能力"},{"key":"F","text":"随时离开不适合环境的自由"},{"key":"G","text":"和重要的人保持深度连接的能力"},{"key":"H","text":"面对困难仍然行动和保护身边人的能力"}]},{"id":11,"module":"欲望与选择","text":"面对一次失败，你最先会做什么？","options":[{"key":"A","text":"找个安静的地方，让自己先从情绪里出来"},{"key":"B","text":"复盘事实，找出真正影响结果的变量"},{"key":"C","text":"暂时关掉外界声音，不急着解释"},{"key":"D","text":"把失败拆成经验，准备下一次重新来过"},{"key":"E","text":"把感受写下来、做出来，转成新的表达"},{"key":"F","text":"离开原来的场景，换个环境恢复能量"},{"key":"G","text":"找一个信任的人，把最难受的部分说出来"},{"key":"H","text":"马上安排下一步，不让失败占据太久的时间"}]},{"id":12,"module":"欲望与选择","text":"如果必须放弃一个选项，你会最舍不得哪一个？","options":[{"key":"A","text":"那个让我感觉被看见的选择"},{"key":"B","text":"那个长期胜率最高、但最不热闹的选择"},{"key":"C","text":"那个能让我保留独处和边界的选择"},{"key":"D","text":"那个能让我彻底换一种活法的选择"},{"key":"E","text":"那个最能表达我审美和想象的选择"},{"key":"F","text":"那个让我拥有最大流动空间的选择"},{"key":"G","text":"那个和重要的人有共同记忆的选择"},{"key":"H","text":"那个最有挑战、最能改变现状的选择"}]},{"id":13,"module":"失控与恢复","text":"当别人误解你时，最让你难受的是？","options":[{"key":"A","text":"我明明在乎，却被看成冷淡"},{"key":"B","text":"对方拒绝面对事实，只凭印象下结论"},{"key":"C","text":"我只是保护自己，却被说成没有感情"},{"key":"D","text":"我正在努力改变，却被永远钉在过去"},{"key":"E","text":"我在意的细节和感受，被说成矫情"},{"key":"F","text":"别人用一个标签限制了我的选择"},{"key":"G","text":"我付出了真心，却被当成了随时可替代的人"},{"key":"H","text":"我在承担责任，却被说成只会逞强"}]},{"id":14,"module":"失控与恢复","text":"连续碰壁一段时间后，你更可能靠什么恢复？","options":[{"key":"A","text":"睡一觉、散散步，重新找回内在的安静"},{"key":"B","text":"把问题重新拆解，找到一个能执行的小步骤"},{"key":"C","text":"暂时离开人群，把自己的能量收回来"},{"key":"D","text":"换一个环境或身份，让自己重新开始"},{"key":"E","text":"做点有美感、有趣味的事，找回生命力"},{"key":"F","text":"去一个没去过的地方，让新鲜感把我拉出来"},{"key":"G","text":"和真正懂我的人见面，重新感到被连接"},{"key":"H","text":"完成一件立刻能看到结果的事，证明我还在前进"}]},{"id":15,"module":"失控与恢复","text":"哪一种夸奖反而会让你有点不自在？","options":[{"key":"A","text":"你真的很会照顾别人"},{"key":"B","text":"你看事情总是比别人远"},{"key":"C","text":"你根本不需要任何人"},{"key":"D","text":"你什么都能重新开始"},{"key":"E","text":"你天生就很有品味"},{"key":"F","text":"你永远不会被任何人困住"},{"key":"G","text":"你总是特别深情"},{"key":"H","text":"你就是天生的强者"}]},{"id":16,"module":"失控与恢复","text":"真正疲惫的时候，你最需要的不是建议，而是？","options":[{"key":"A","text":"一个不必解释、可以安静待着的空间"},{"key":"B","text":"有人帮我把混乱的问题理出重点"},{"key":"C","text":"别人不要再进入我的边界"},{"key":"D","text":"知道这段低谷总会过去，我还能重新来过"},{"key":"E","text":"一点美感、音乐或让心情重新流动的东西"},{"key":"F","text":"离开原来的地方，换个空气和节奏"},{"key":"G","text":"一个愿意认真听我说完的人"},{"key":"H","text":"有人和我一起把最现实的难题解决掉"}]},{"id":17,"module":"生存策略","text":"在一个团队里，你最自然的位置通常是？","options":[{"key":"A","text":"感知大家的状态，让关系不至于失控"},{"key":"B","text":"梳理信息和规则，让事情有清晰的方向"},{"key":"C","text":"守住关键边界，不让团队被无效消耗"},{"key":"D","text":"在变化里补位，推动大家重新适应"},{"key":"E","text":"提供创意、表达和让人愿意参与的氛围"},{"key":"F","text":"发现新的路径，不被固定分工困住"},{"key":"G","text":"照顾成员的感受，让重要的人不被落下"},{"key":"H","text":"设定目标、推进执行，把难题真正解决"}]},{"id":18,"module":"生存策略","text":"到了一个没有熟人的新环境，你会怎么建立安全感？","options":[{"key":"A","text":"先找到一两个让我感觉舒服的人"},{"key":"B","text":"尽快摸清这里的规则和资源分布"},{"key":"C","text":"保留自己的生活节奏，不急着融入所有人"},{"key":"D","text":"允许自己试错，用行动慢慢建立新身份"},{"key":"E","text":"布置一个有自己风格的小空间"},{"key":"F","text":"确认我随时可以离开，再决定投入多少"},{"key":"G","text":"找到能分享日常的人，让生活有回应"},{"key":"H","text":"先做出一个结果，让别人知道我能解决问题"}]},{"id":19,"module":"生存策略","text":"遇到正面冲突时，你最不愿意做的事是？","options":[{"key":"A","text":"明明有感受，却被迫装作什么都没有"},{"key":"B","text":"不看事实，只靠情绪互相指责"},{"key":"C","text":"为了维持关系而反复解释自己的底线"},{"key":"D","text":"把一次争执当成永远无法修复的结论"},{"key":"E","text":"用难听的话摧毁彼此最后的体面"},{"key":"F","text":"被迫当场做出一个无法撤回的承诺"},{"key":"G","text":"让真正重要的人在冲突里受伤"},{"key":"H","text":"明知道问题存在，却一直拖着不处理"}]},{"id":20,"module":"生存策略","text":"别人问你“最近过得怎么样”，你最真实的回答更接近？","options":[{"key":"A","text":"表面还好，只是最近需要一点安静"},{"key":"B","text":"我在处理几件事，暂时还在重新排序"},{"key":"C","text":"我不太想展开说，但我知道自己需要什么"},{"key":"D","text":"正在经历变化，旧的状态已经回不去了"},{"key":"E","text":"有一些新的想法，想慢慢把它们做出来"},{"key":"F","text":"还不错，我最近在给自己换空气"},{"key":"G","text":"有点累，但有人陪我就会好很多"},{"key":"H","text":"事情不少，不过我会一件件处理好"}]},{"id":21,"module":"妖怪气质","text":"你最容易被哪种意象吸引？","options":[{"key":"A","text":"月光、夜色和安静的水面"},{"key":"B","text":"古书、地图和藏着线索的房间"},{"key":"C","text":"山林、石头和没有人打扰的小路"},{"key":"D","text":"蛇蜕、雨季和重新长出来的植物"},{"key":"E","text":"花、香气、颜色和盛放的季节"},{"key":"F","text":"猫、风、车站和没有终点的路"},{"key":"G","text":"海、潮汐、歌声和旧信件"},{"key":"H","text":"火、长矛、旗帜和奔跑的马"}]},{"id":22,"module":"妖怪气质","text":"如果你进入一段妖怪传说，你最想站在哪里？","options":[{"key":"A","text":"月下的屋檐，替迷路的人留一盏灯"},{"key":"B","text":"藏书洞府，掌管被遗忘的知识和名字"},{"key":"C","text":"山林深处，守着不允许随便进入的边界"},{"key":"D","text":"蜕变之池，从旧身份里重新醒来"},{"key":"E","text":"花海中央，把梦境变成真实的景色"},{"key":"F","text":"风口的城门，想来就来、想走就走"},{"key":"G","text":"潮汐尽头，收集每个人没说完的心事"},{"key":"H","text":"战场前线，替同伴挡住最难的一击"}]},{"id":23,"module":"妖怪气质","text":"你希望别人最后记住你的方式是？","options":[{"key":"A","text":"温柔但有力量，曾经让人感到被看见"},{"key":"B","text":"见识很深，遇到复杂问题总能说到关键"},{"key":"C","text":"安静而坚定，从不轻易背叛自己"},{"key":"D","text":"经历过很多次变化，却一直没有放弃重生"},{"key":"E","text":"有独特的风格，把平凡日子过出了光"},{"key":"F","text":"自由、敏锐，永远没有被任何标签困住"},{"key":"G","text":"真诚而深情，认真对待过每一段重要关系"},{"key":"H","text":"勇敢可靠，关键时刻总是愿意站出来"}]},{"id":24,"module":"妖怪气质","text":"经历一段人生试炼后，你最想留下什么？","options":[{"key":"A","text":"仍然感受爱与美好的能力"},{"key":"B","text":"更清醒的判断和识别真相的能力"},{"key":"C","text":"不再为了被喜欢而交出边界"},{"key":"D","text":"知道自己可以一次次重新开始"},{"key":"E","text":"把经历变成真正属于自己的作品"},{"key":"F","text":"无论在哪里，都能保留选择离开的自由"},{"key":"G","text":"不把深情浪费在不回应的人身上"},{"key":"H","text":"把力量用在值得保护和建设的事情上"}]}],"results":{"A":{"typeName":"九尾狐 · 魅惑识人者","subtitle":"你敏感、聪明、很会读懂关系里的细节。你真正的魅力不是讨好，而是知道什么时候靠近、什么时候收回自己。","posterSubtext":"你想要的是被真正看见，同时保留随时退出不适合关系的权利。","maturityScore":97,"coreConclusion":"你常常比别人更早感知到气氛变化，也更容易发现一句话背后的真正意思。你不缺社交能力，只是不愿把真心随便交出去。 你想要的是被真正看见，同时保留随时退出不适合关系的权利。","diagnosis":"你常常比别人更早感知到气氛变化，也更容易发现一句话背后的真正意思。你不缺社交能力，只是不愿把真心随便交出去。","whatYouReallyWant":"你想要的是被真正看见，同时保留随时退出不适合关系的权利。","mechanism":{"title":"魅惑识人机制","content":"九尾狐 · 魅惑识人者的核心不是某种超自然能力，而是你在现实生活里反复使用的一套心理与行动方式。你常常比别人更早感知到气氛变化，也更容易发现一句话背后的真正意思。你不缺社交能力，只是不愿把真心随便交出去。"},"professionalBasis":["你在「情绪洞察」上的表现，通常会在压力、关系或选择场景里反复出现。","你在「关系判断」上的表现，通常会在压力、关系或选择场景里反复出现。","你在「表达分寸」上的表现，通常会在压力、关系或选择场景里反复出现。","你在「气氛感知」上的表现，通常会在压力、关系或选择场景里反复出现。"],"coreTensions":["过度试探","把敏感当证据","为了体面不说需求","关系里反复猜测"],"suitableIf":["情绪洞察","关系判断","表达分寸","气氛感知"],"cautionIf":["过度试探","把敏感当证据","为了体面不说需求","关系里反复猜测"],"indices":[{"label":"识人敏锐度","value":97},{"label":"魅力表达力","value":94},{"label":"边界清晰度","value":86},{"label":"直接行动力","value":68}],"ifStay":"如果你继续沿用「过度试探」的惯性，短期可能比较省力，但长期会让真正想要的生活越来越远。","ifChange":"当你把「情绪洞察」用在值得的方向上，同时补上「把敏感当证据」这一课，你的优势会变成更稳定的现实能力。","notRecommended":["过度试探","把敏感当证据","为了体面不说需求","关系里反复猜测"],"plan90":[{"title":"第1周：记录真实感受","content":"每天写下一个让你靠近或退后的瞬间，区分直觉、事实和猜测。"},{"title":"第2—3周：练习说清需求","content":"用一句具体请求替代让别人猜，不用再靠冷淡测试关系。"},{"title":"第4—6周：筛选高质量关系","content":"观察对方是否尊重边界、兑现承诺，而不是只看会不会说好听的话。"},{"title":"第7—12周：建立稳定表达","content":"把你的洞察用于沟通、创作或工作判断，减少只在心里反复推演。"}],"closing":"九尾狐真正的力量，不是让所有人喜欢你，而是你终于能看清谁值得靠近。"},"B":{"typeName":"白泽 · 识局知言者","subtitle":"你擅长从复杂信息里找到规律，别人看到一团乱，你已经开始整理因果和下一步。","posterSubtext":"你想要的是掌握事情的结构，让每一次选择都不是被情绪推着走。","maturityScore":98,"coreConclusion":"你对混乱、含糊和反复失控很敏感，总想先弄清规则再投入。你的优势是判断力，风险是想得太完整才肯开始。 你想要的是掌握事情的结构，让每一次选择都不是被情绪推着走。","diagnosis":"你对混乱、含糊和反复失控很敏感，总想先弄清规则再投入。你的优势是判断力，风险是想得太完整才肯开始。","whatYouReallyWant":"你想要的是掌握事情的结构，让每一次选择都不是被情绪推着走。","mechanism":{"title":"识局知言机制","content":"白泽 · 识局知言者的核心不是某种超自然能力，而是你在现实生活里反复使用的一套心理与行动方式。你对混乱、含糊和反复失控很敏感，总想先弄清规则再投入。你的优势是判断力，风险是想得太完整才肯开始。"},"professionalBasis":["你在「信息整合」上的表现，通常会在压力、关系或选择场景里反复出现。","你在「结构判断」上的表现，通常会在压力、关系或选择场景里反复出现。","你在「长期规划」上的表现，通常会在压力、关系或选择场景里反复出现。","你在「问题拆解」上的表现，通常会在压力、关系或选择场景里反复出现。"],"coreTensions":["分析过载","等待完美信息","说得清却做得慢","忽略即时反馈"],"suitableIf":["信息整合","结构判断","长期规划","问题拆解"],"cautionIf":["分析过载","等待完美信息","说得清却做得慢","忽略即时反馈"],"indices":[{"label":"全局判断力","value":98},{"label":"信息整合力","value":96},{"label":"长期规划力","value":93},{"label":"即时行动力","value":64}],"ifStay":"如果你继续沿用「分析过载」的惯性，短期可能比较省力，但长期会让真正想要的生活越来越远。","ifChange":"当你把「信息整合」用在值得的方向上，同时补上「等待完美信息」这一课，你的优势会变成更稳定的现实能力。","notRecommended":["分析过载","等待完美信息","说得清却做得慢","忽略即时反馈"],"plan90":[{"title":"第1周：只选一个问题","content":"把最近最困扰你的事写成一句可处理的问题，不继续扩大研究范围。"},{"title":"第2—3周：设置决策截止日","content":"给信息收集设上限，到了时间就用现有证据做一个小决定。"},{"title":"第4—6周：做低成本验证","content":"先用小实验验证方向，不让完整计划替代真实反馈。"},{"title":"第7—12周：沉淀可复用方法","content":"把有效的判断流程记录下来，形成你的个人知识资产。"}],"closing":"白泽的力量，不是知道所有答案，而是能让复杂世界重新变得可理解、可行动。"},"C":{"typeName":"山鬼 · 静默守界者","subtitle":"你拥有很强的独处能力和内在边界，不喜欢被人随便进入，也不愿为了合群交出自己。","posterSubtext":"你想要的是一种不必解释太多、也不会被随意打扰的生活方式。","maturityScore":98,"coreConclusion":"你不是冷漠，而是对环境和关系的消耗很敏感。你需要先保护内在秩序，才有余力和世界建立连接。 你想要的是一种不必解释太多、也不会被随意打扰的生活方式。","diagnosis":"你不是冷漠，而是对环境和关系的消耗很敏感。你需要先保护内在秩序，才有余力和世界建立连接。","whatYouReallyWant":"你想要的是一种不必解释太多、也不会被随意打扰的生活方式。","mechanism":{"title":"静默守界机制","content":"山鬼 · 静默守界者的核心不是某种超自然能力，而是你在现实生活里反复使用的一套心理与行动方式。你不是冷漠，而是对环境和关系的消耗很敏感。你需要先保护内在秩序，才有余力和世界建立连接。"},"professionalBasis":["你在「独立思考」上的表现，通常会在压力、关系或选择场景里反复出现。","你在「边界意识」上的表现，通常会在压力、关系或选择场景里反复出现。","你在「稳定耐力」上的表现，通常会在压力、关系或选择场景里反复出现。","你在「深度专注」上的表现，通常会在压力、关系或选择场景里反复出现。"],"coreTensions":["过度封闭","把求助视为软弱","沉默积累不满","错过必要协作"],"suitableIf":["独立思考","边界意识","稳定耐力","深度专注"],"cautionIf":["过度封闭","把求助视为软弱","沉默积累不满","错过必要协作"],"indices":[{"label":"边界清晰度","value":98},{"label":"独处恢复力","value":96},{"label":"专注深度","value":92},{"label":"主动求助度","value":62}],"ifStay":"如果你继续沿用「过度封闭」的惯性，短期可能比较省力，但长期会让真正想要的生活越来越远。","ifChange":"当你把「独立思考」用在值得的方向上，同时补上「把求助视为软弱」这一课，你的优势会变成更稳定的现实能力。","notRecommended":["过度封闭","把求助视为软弱","沉默积累不满","错过必要协作"],"plan90":[{"title":"第1周：定义能量边界","content":"列出三件最消耗你的互动，并写出一个可执行的减少方式。"},{"title":"第2—3周：保留固定独处时间","content":"把恢复安排进日程，而不是等到完全透支才退出。"},{"title":"第4—6周：建立少量深度连接","content":"主动告诉可信任的人你需要怎样被支持，不用让对方猜。"},{"title":"第7—12周：把安静变成产出","content":"用稳定的独处时间完成一个作品、技能或长期项目。"}],"closing":"山鬼的力量，不是永远躲在山里，而是知道什么值得让它进入自己的领地。"},"D":{"typeName":"蛇妖 · 蜕变复生者","subtitle":"你的人生很少只有一条固定路线。你能适应变化，也有能力从旧身份里脱身，重新长出自己。","posterSubtext":"你想要的是重新定义自己的机会，而不是永远为从前的选择负责。","maturityScore":98,"coreConclusion":"你对重复、停滞和被过去定义特别敏感。你的优势是复原与转型，风险是每次遇到困难都想立刻换一种人生。 你想要的是重新定义自己的机会，而不是永远为从前的选择负责。","diagnosis":"你对重复、停滞和被过去定义特别敏感。你的优势是复原与转型，风险是每次遇到困难都想立刻换一种人生。","whatYouReallyWant":"你想要的是重新定义自己的机会，而不是永远为从前的选择负责。","mechanism":{"title":"蜕变复生机制","content":"蛇妖 · 蜕变复生者的核心不是某种超自然能力，而是你在现实生活里反复使用的一套心理与行动方式。你对重复、停滞和被过去定义特别敏感。你的优势是复原与转型，风险是每次遇到困难都想立刻换一种人生。"},"professionalBasis":["你在「适应变化」上的表现，通常会在压力、关系或选择场景里反复出现。","你在「自我修复」上的表现，通常会在压力、关系或选择场景里反复出现。","你在「身份重塑」上的表现，通常会在压力、关系或选择场景里反复出现。","你在「危机转化」上的表现，通常会在压力、关系或选择场景里反复出现。"],"coreTensions":["频繁重启","逃避沉淀","否定过去积累","把变化当答案"],"suitableIf":["适应变化","自我修复","身份重塑","危机转化"],"cautionIf":["频繁重启","逃避沉淀","否定过去积累","把变化当答案"],"indices":[{"label":"复原能力","value":98},{"label":"变化适应","value":96},{"label":"自我更新力","value":94},{"label":"长期沉淀力","value":67}],"ifStay":"如果你继续沿用「频繁重启」的惯性，短期可能比较省力，但长期会让真正想要的生活越来越远。","ifChange":"当你把「适应变化」用在值得的方向上，同时补上「逃避沉淀」这一课，你的优势会变成更稳定的现实能力。","notRecommended":["频繁重启","逃避沉淀","否定过去积累","把变化当答案"],"plan90":[{"title":"第1周：分清想改变什么","content":"把想离开的冲动拆成环境、关系、工作方式和自我评价四类。"},{"title":"第2—3周：先做一次小转型","content":"不要立刻推翻全部生活，先验证一个新身份或新能力。"},{"title":"第4—6周：保留旧经验","content":"把过去积累中仍然有用的部分整理出来，带着它进入下一阶段。"},{"title":"第7—12周：完成一次稳定迭代","content":"给新方向至少一个完整周期，观察它是否真的适合你。"}],"closing":"蛇妖的力量，不是永远变化，而是每次变化之后都比从前更接近自己。"},"E":{"typeName":"花妖 · 造梦感受者","subtitle":"你对氛围、审美和情绪细节很敏感，能够把普通日子变成有风格、有记忆点的体验。","posterSubtext":"你想要的是把感受变成作品，让别人也能看见你眼里的世界。","maturityScore":98,"coreConclusion":"你经常先感受到一件事有没有生命力，再判断它是否值得投入。你的优势是创造和表达，风险是灵感很多、完成不稳。 你想要的是把感受变成作品，让别人也能看见你眼里的世界。","diagnosis":"你经常先感受到一件事有没有生命力，再判断它是否值得投入。你的优势是创造和表达，风险是灵感很多、完成不稳。","whatYouReallyWant":"你想要的是把感受变成作品，让别人也能看见你眼里的世界。","mechanism":{"title":"造梦感受机制","content":"花妖 · 造梦感受者的核心不是某种超自然能力，而是你在现实生活里反复使用的一套心理与行动方式。你经常先感受到一件事有没有生命力，再判断它是否值得投入。你的优势是创造和表达，风险是灵感很多、完成不稳。"},"professionalBasis":["你在「审美感知」上的表现，通常会在压力、关系或选择场景里反复出现。","你在「创意生成」上的表现，通常会在压力、关系或选择场景里反复出现。","你在「情绪表达」上的表现，通常会在压力、关系或选择场景里反复出现。","你在「氛围营造」上的表现，通常会在压力、关系或选择场景里反复出现。"],"coreTensions":["只追求灵感","容易受评价影响","项目铺得太开","缺少完成机制"],"suitableIf":["审美感知","创意生成","情绪表达","氛围营造"],"cautionIf":["只追求灵感","容易受评价影响","项目铺得太开","缺少完成机制"],"indices":[{"label":"审美感知力","value":98},{"label":"创意生成力","value":96},{"label":"表达感染力","value":91},{"label":"完成稳定度","value":66}],"ifStay":"如果你继续沿用「只追求灵感」的惯性，短期可能比较省力，但长期会让真正想要的生活越来越远。","ifChange":"当你把「审美感知」用在值得的方向上，同时补上「容易受评价影响」这一课，你的优势会变成更稳定的现实能力。","notRecommended":["只追求灵感","容易受评价影响","项目铺得太开","缺少完成机制"],"plan90":[{"title":"第1周：确定一个主题","content":"从你反复观察的生活细节里，选一个能持续表达的方向。"},{"title":"第2—3周：完成三个小作品","content":"先完成再优化，用作品而不是想象确认自己的风格。"},{"title":"第4—6周：固定输出节奏","content":"建立简单的创作流程，让灵感有稳定的出口。"},{"title":"第7—12周：形成可识别风格","content":"复盘别人最容易记住你的部分，逐渐留下自己的符号。"}],"closing":"花妖的力量，不是永远等待盛放，而是让美感在你的手里变成持续发生的事情。"},"F":{"typeName":"猫妖 · 自由警觉者","subtitle":"你敏锐、独立、需要空间。你可以亲近别人，但不接受任何人用亲近来管理你。","posterSubtext":"你想要的是保留选择权，同时拥有一条愿意长期投入的路。","maturityScore":98,"coreConclusion":"你对束缚、重复和被安排非常敏感。你的优势是反应快、适应强，风险是刚遇到阻力就想换场。 你想要的是保留选择权，同时拥有一条愿意长期投入的路。","diagnosis":"你对束缚、重复和被安排非常敏感。你的优势是反应快、适应强，风险是刚遇到阻力就想换场。","whatYouReallyWant":"你想要的是保留选择权，同时拥有一条愿意长期投入的路。","mechanism":{"title":"自由警觉机制","content":"猫妖 · 自由警觉者的核心不是某种超自然能力，而是你在现实生活里反复使用的一套心理与行动方式。你对束缚、重复和被安排非常敏感。你的优势是反应快、适应强，风险是刚遇到阻力就想换场。"},"professionalBasis":["你在「环境敏锐」上的表现，通常会在压力、关系或选择场景里反复出现。","你在「快速适应」上的表现，通常会在压力、关系或选择场景里反复出现。","你在「独立行动」上的表现，通常会在压力、关系或选择场景里反复出现。","你在「机会嗅觉」上的表现，通常会在压力、关系或选择场景里反复出现。"],"coreTensions":["频繁换方向","把承诺当束缚","逃避深度","新鲜感替代积累"],"suitableIf":["环境敏锐","快速适应","独立行动","机会嗅觉"],"cautionIf":["频繁换方向","把承诺当束缚","逃避深度","新鲜感替代积累"],"indices":[{"label":"自由需求度","value":98},{"label":"环境适应力","value":96},{"label":"机会嗅觉","value":90},{"label":"长期投入度","value":63}],"ifStay":"如果你继续沿用「频繁换方向」的惯性，短期可能比较省力，但长期会让真正想要的生活越来越远。","ifChange":"当你把「环境敏锐」用在值得的方向上，同时补上「把承诺当束缚」这一课，你的优势会变成更稳定的现实能力。","notRecommended":["频繁换方向","把承诺当束缚","逃避深度","新鲜感替代积累"],"plan90":[{"title":"第1周：定义你要的自由","content":"分清你要的是时间、地点、关系还是工作方式的自主。"},{"title":"第2—3周：选择一个90天方向","content":"给一个方向足够的试验期，不用每周重启人生。"},{"title":"第4—6周：建立可移动能力","content":"积累一个能跨环境使用的作品、技能或收入来源。"},{"title":"第7—12周：保留一根稳定的锚","content":"无论走到哪里，都持续维护一个长期项目或重要关系。"}],"closing":"猫妖的力量，不是永远离开，而是走遍很多地方后依然知道什么值得回来。"},"G":{"typeName":"鲛人 · 深情回声者","subtitle":"你重视情感的真实和回应，能够记住别人忽略的细节，也容易把关系放得很重。","posterSubtext":"你想要的是双向的深情，而不是永远由你一个人维持关系的温度。","maturityScore":98,"coreConclusion":"你不是脆弱，而是对连接的质量有要求。你的优势是共情和陪伴，风险是把没有回应的关系也坚持太久。 你想要的是双向的深情，而不是永远由你一个人维持关系的温度。","diagnosis":"你不是脆弱，而是对连接的质量有要求。你的优势是共情和陪伴，风险是把没有回应的关系也坚持太久。","whatYouReallyWant":"你想要的是双向的深情，而不是永远由你一个人维持关系的温度。","mechanism":{"title":"深情回声机制","content":"鲛人 · 深情回声者的核心不是某种超自然能力，而是你在现实生活里反复使用的一套心理与行动方式。你不是脆弱，而是对连接的质量有要求。你的优势是共情和陪伴，风险是把没有回应的关系也坚持太久。"},"professionalBasis":["你在「共情陪伴」上的表现，通常会在压力、关系或选择场景里反复出现。","你在「情绪表达」上的表现，通常会在压力、关系或选择场景里反复出现。","你在「关系记忆」上的表现，通常会在压力、关系或选择场景里反复出现。","你在「温柔影响」上的表现，通常会在压力、关系或选择场景里反复出现。"],"coreTensions":["过度付出","替别人找理由","害怕失去而委屈自己","把怀念当成爱"],"suitableIf":["共情陪伴","情绪表达","关系记忆","温柔影响"],"cautionIf":["过度付出","替别人找理由","害怕失去而委屈自己","把怀念当成爱"],"indices":[{"label":"共情感受力","value":98},{"label":"关系投入度","value":96},{"label":"表达感染力","value":92},{"label":"自我保护力","value":65}],"ifStay":"如果你继续沿用「过度付出」的惯性，短期可能比较省力，但长期会让真正想要的生活越来越远。","ifChange":"当你把「共情陪伴」用在值得的方向上，同时补上「替别人找理由」这一课，你的优势会变成更稳定的现实能力。","notRecommended":["过度付出","替别人找理由","害怕失去而委屈自己","把怀念当成爱"],"plan90":[{"title":"第1周：记录关系回声","content":"分清哪些关系让你被滋养，哪些关系只是在消耗你的回应。"},{"title":"第2—3周：练习双向标准","content":"不只看自己有多在乎，也看对方是否愿意持续投入。"},{"title":"第4—6周：停止替别人解释","content":"把注意力从猜测对方动机，转回对方实际做了什么。"},{"title":"第7—12周：建立自己的情感容器","content":"通过创作、运动或稳定社交承接情绪，不把全部需要压在一个人身上。"}],"closing":"鲛人的力量，不是永远为别人唱歌，而是先确认自己的声音也值得被认真听见。"},"H":{"typeName":"夜叉 · 破局护航者","subtitle":"你遇到问题会本能地想解决、保护和推进，不喜欢把重要的事交给运气。","posterSubtext":"你想要的是一场值得全力投入的战役，并且不必永远一个人扛下所有事情。","maturityScore":98,"coreConclusion":"你习惯在关键时刻站出来，也容易成为别人默认的依靠。你的优势是执行和担当，风险是把休息、求助和脆弱都当成浪费时间。 你想要的是一场值得全力投入的战役，并且不必永远一个人扛下所有事情。","diagnosis":"你习惯在关键时刻站出来，也容易成为别人默认的依靠。你的优势是执行和担当，风险是把休息、求助和脆弱都当成浪费时间。","whatYouReallyWant":"你想要的是一场值得全力投入的战役，并且不必永远一个人扛下所有事情。","mechanism":{"title":"破局护航机制","content":"夜叉 · 破局护航者的核心不是某种超自然能力，而是你在现实生活里反复使用的一套心理与行动方式。你习惯在关键时刻站出来，也容易成为别人默认的依靠。你的优势是执行和担当，风险是把休息、求助和脆弱都当成浪费时间。"},"professionalBasis":["你在「执行推进」上的表现，通常会在压力、关系或选择场景里反复出现。","你在「风险承担」上的表现，通常会在压力、关系或选择场景里反复出现。","你在「保护意识」上的表现，通常会在压力、关系或选择场景里反复出现。","你在「目标驱动」上的表现，通常会在压力、关系或选择场景里反复出现。"],"coreTensions":["过度承担","不愿求助","把休息当偷懒","用结果证明价值"],"suitableIf":["执行推进","风险承担","保护意识","目标驱动"],"cautionIf":["过度承担","不愿求助","把休息当偷懒","用结果证明价值"],"indices":[{"label":"行动执行力","value":98},{"label":"破局意志力","value":96},{"label":"保护担当度","value":94},{"label":"自我恢复力","value":64}],"ifStay":"如果你继续沿用「过度承担」的惯性，短期可能比较省力，但长期会让真正想要的生活越来越远。","ifChange":"当你把「执行推进」用在值得的方向上，同时补上「不愿求助」这一课，你的优势会变成更稳定的现实能力。","notRecommended":["过度承担","不愿求助","把休息当偷懒","用结果证明价值"],"plan90":[{"title":"第1周：挑一个值得投入的目标","content":"用价值筛选目标，不再为了证明自己接下所有挑战。"},{"title":"第2—3周：拆解可求助环节","content":"把目标拆成行动、资源和支持，不让承担变成孤军奋战。"},{"title":"第4—6周：固定恢复时间","content":"把睡眠、运动、复盘和关系写进计划，保护长期战斗力。"},{"title":"第7—12周：练习授权","content":"把一部分责任交给可靠的人，让团队一起变强。"}],"closing":"夜叉的力量，不是永远站在最前面，而是让自己和重要的人都能走到最后。"}},"secondaryNotes":{"A":{"B":"你的主原型是「九尾狐 · 魅惑识人者」，同时带有「白泽 · 识局知言者」的影子。主原型代表你最稳定的第一反应，副原型提醒你在压力、关系或变化里会调用另一种妖性。","C":"你的主原型是「九尾狐 · 魅惑识人者」，同时带有「山鬼 · 静默守界者」的影子。主原型代表你最稳定的第一反应，副原型提醒你在压力、关系或变化里会调用另一种妖性。","D":"你的主原型是「九尾狐 · 魅惑识人者」，同时带有「蛇妖 · 蜕变复生者」的影子。主原型代表你最稳定的第一反应，副原型提醒你在压力、关系或变化里会调用另一种妖性。","E":"你的主原型是「九尾狐 · 魅惑识人者」，同时带有「花妖 · 造梦感受者」的影子。主原型代表你最稳定的第一反应，副原型提醒你在压力、关系或变化里会调用另一种妖性。","F":"你的主原型是「九尾狐 · 魅惑识人者」，同时带有「猫妖 · 自由警觉者」的影子。主原型代表你最稳定的第一反应，副原型提醒你在压力、关系或变化里会调用另一种妖性。","G":"你的主原型是「九尾狐 · 魅惑识人者」，同时带有「鲛人 · 深情回声者」的影子。主原型代表你最稳定的第一反应，副原型提醒你在压力、关系或变化里会调用另一种妖性。","H":"你的主原型是「九尾狐 · 魅惑识人者」，同时带有「夜叉 · 破局护航者」的影子。主原型代表你最稳定的第一反应，副原型提醒你在压力、关系或变化里会调用另一种妖性。"},"B":{"A":"你的主原型是「白泽 · 识局知言者」，同时带有「九尾狐 · 魅惑识人者」的影子。主原型代表你最稳定的第一反应，副原型提醒你在压力、关系或变化里会调用另一种妖性。","C":"你的主原型是「白泽 · 识局知言者」，同时带有「山鬼 · 静默守界者」的影子。主原型代表你最稳定的第一反应，副原型提醒你在压力、关系或变化里会调用另一种妖性。","D":"你的主原型是「白泽 · 识局知言者」，同时带有「蛇妖 · 蜕变复生者」的影子。主原型代表你最稳定的第一反应，副原型提醒你在压力、关系或变化里会调用另一种妖性。","E":"你的主原型是「白泽 · 识局知言者」，同时带有「花妖 · 造梦感受者」的影子。主原型代表你最稳定的第一反应，副原型提醒你在压力、关系或变化里会调用另一种妖性。","F":"你的主原型是「白泽 · 识局知言者」，同时带有「猫妖 · 自由警觉者」的影子。主原型代表你最稳定的第一反应，副原型提醒你在压力、关系或变化里会调用另一种妖性。","G":"你的主原型是「白泽 · 识局知言者」，同时带有「鲛人 · 深情回声者」的影子。主原型代表你最稳定的第一反应，副原型提醒你在压力、关系或变化里会调用另一种妖性。","H":"你的主原型是「白泽 · 识局知言者」，同时带有「夜叉 · 破局护航者」的影子。主原型代表你最稳定的第一反应，副原型提醒你在压力、关系或变化里会调用另一种妖性。"},"C":{"A":"你的主原型是「山鬼 · 静默守界者」，同时带有「九尾狐 · 魅惑识人者」的影子。主原型代表你最稳定的第一反应，副原型提醒你在压力、关系或变化里会调用另一种妖性。","B":"你的主原型是「山鬼 · 静默守界者」，同时带有「白泽 · 识局知言者」的影子。主原型代表你最稳定的第一反应，副原型提醒你在压力、关系或变化里会调用另一种妖性。","D":"你的主原型是「山鬼 · 静默守界者」，同时带有「蛇妖 · 蜕变复生者」的影子。主原型代表你最稳定的第一反应，副原型提醒你在压力、关系或变化里会调用另一种妖性。","E":"你的主原型是「山鬼 · 静默守界者」，同时带有「花妖 · 造梦感受者」的影子。主原型代表你最稳定的第一反应，副原型提醒你在压力、关系或变化里会调用另一种妖性。","F":"你的主原型是「山鬼 · 静默守界者」，同时带有「猫妖 · 自由警觉者」的影子。主原型代表你最稳定的第一反应，副原型提醒你在压力、关系或变化里会调用另一种妖性。","G":"你的主原型是「山鬼 · 静默守界者」，同时带有「鲛人 · 深情回声者」的影子。主原型代表你最稳定的第一反应，副原型提醒你在压力、关系或变化里会调用另一种妖性。","H":"你的主原型是「山鬼 · 静默守界者」，同时带有「夜叉 · 破局护航者」的影子。主原型代表你最稳定的第一反应，副原型提醒你在压力、关系或变化里会调用另一种妖性。"},"D":{"A":"你的主原型是「蛇妖 · 蜕变复生者」，同时带有「九尾狐 · 魅惑识人者」的影子。主原型代表你最稳定的第一反应，副原型提醒你在压力、关系或变化里会调用另一种妖性。","B":"你的主原型是「蛇妖 · 蜕变复生者」，同时带有「白泽 · 识局知言者」的影子。主原型代表你最稳定的第一反应，副原型提醒你在压力、关系或变化里会调用另一种妖性。","C":"你的主原型是「蛇妖 · 蜕变复生者」，同时带有「山鬼 · 静默守界者」的影子。主原型代表你最稳定的第一反应，副原型提醒你在压力、关系或变化里会调用另一种妖性。","E":"你的主原型是「蛇妖 · 蜕变复生者」，同时带有「花妖 · 造梦感受者」的影子。主原型代表你最稳定的第一反应，副原型提醒你在压力、关系或变化里会调用另一种妖性。","F":"你的主原型是「蛇妖 · 蜕变复生者」，同时带有「猫妖 · 自由警觉者」的影子。主原型代表你最稳定的第一反应，副原型提醒你在压力、关系或变化里会调用另一种妖性。","G":"你的主原型是「蛇妖 · 蜕变复生者」，同时带有「鲛人 · 深情回声者」的影子。主原型代表你最稳定的第一反应，副原型提醒你在压力、关系或变化里会调用另一种妖性。","H":"你的主原型是「蛇妖 · 蜕变复生者」，同时带有「夜叉 · 破局护航者」的影子。主原型代表你最稳定的第一反应，副原型提醒你在压力、关系或变化里会调用另一种妖性。"},"E":{"A":"你的主原型是「花妖 · 造梦感受者」，同时带有「九尾狐 · 魅惑识人者」的影子。主原型代表你最稳定的第一反应，副原型提醒你在压力、关系或变化里会调用另一种妖性。","B":"你的主原型是「花妖 · 造梦感受者」，同时带有「白泽 · 识局知言者」的影子。主原型代表你最稳定的第一反应，副原型提醒你在压力、关系或变化里会调用另一种妖性。","C":"你的主原型是「花妖 · 造梦感受者」，同时带有「山鬼 · 静默守界者」的影子。主原型代表你最稳定的第一反应，副原型提醒你在压力、关系或变化里会调用另一种妖性。","D":"你的主原型是「花妖 · 造梦感受者」，同时带有「蛇妖 · 蜕变复生者」的影子。主原型代表你最稳定的第一反应，副原型提醒你在压力、关系或变化里会调用另一种妖性。","F":"你的主原型是「花妖 · 造梦感受者」，同时带有「猫妖 · 自由警觉者」的影子。主原型代表你最稳定的第一反应，副原型提醒你在压力、关系或变化里会调用另一种妖性。","G":"你的主原型是「花妖 · 造梦感受者」，同时带有「鲛人 · 深情回声者」的影子。主原型代表你最稳定的第一反应，副原型提醒你在压力、关系或变化里会调用另一种妖性。","H":"你的主原型是「花妖 · 造梦感受者」，同时带有「夜叉 · 破局护航者」的影子。主原型代表你最稳定的第一反应，副原型提醒你在压力、关系或变化里会调用另一种妖性。"},"F":{"A":"你的主原型是「猫妖 · 自由警觉者」，同时带有「九尾狐 · 魅惑识人者」的影子。主原型代表你最稳定的第一反应，副原型提醒你在压力、关系或变化里会调用另一种妖性。","B":"你的主原型是「猫妖 · 自由警觉者」，同时带有「白泽 · 识局知言者」的影子。主原型代表你最稳定的第一反应，副原型提醒你在压力、关系或变化里会调用另一种妖性。","C":"你的主原型是「猫妖 · 自由警觉者」，同时带有「山鬼 · 静默守界者」的影子。主原型代表你最稳定的第一反应，副原型提醒你在压力、关系或变化里会调用另一种妖性。","D":"你的主原型是「猫妖 · 自由警觉者」，同时带有「蛇妖 · 蜕变复生者」的影子。主原型代表你最稳定的第一反应，副原型提醒你在压力、关系或变化里会调用另一种妖性。","E":"你的主原型是「猫妖 · 自由警觉者」，同时带有「花妖 · 造梦感受者」的影子。主原型代表你最稳定的第一反应，副原型提醒你在压力、关系或变化里会调用另一种妖性。","G":"你的主原型是「猫妖 · 自由警觉者」，同时带有「鲛人 · 深情回声者」的影子。主原型代表你最稳定的第一反应，副原型提醒你在压力、关系或变化里会调用另一种妖性。","H":"你的主原型是「猫妖 · 自由警觉者」，同时带有「夜叉 · 破局护航者」的影子。主原型代表你最稳定的第一反应，副原型提醒你在压力、关系或变化里会调用另一种妖性。"},"G":{"A":"你的主原型是「鲛人 · 深情回声者」，同时带有「九尾狐 · 魅惑识人者」的影子。主原型代表你最稳定的第一反应，副原型提醒你在压力、关系或变化里会调用另一种妖性。","B":"你的主原型是「鲛人 · 深情回声者」，同时带有「白泽 · 识局知言者」的影子。主原型代表你最稳定的第一反应，副原型提醒你在压力、关系或变化里会调用另一种妖性。","C":"你的主原型是「鲛人 · 深情回声者」，同时带有「山鬼 · 静默守界者」的影子。主原型代表你最稳定的第一反应，副原型提醒你在压力、关系或变化里会调用另一种妖性。","D":"你的主原型是「鲛人 · 深情回声者」，同时带有「蛇妖 · 蜕变复生者」的影子。主原型代表你最稳定的第一反应，副原型提醒你在压力、关系或变化里会调用另一种妖性。","E":"你的主原型是「鲛人 · 深情回声者」，同时带有「花妖 · 造梦感受者」的影子。主原型代表你最稳定的第一反应，副原型提醒你在压力、关系或变化里会调用另一种妖性。","F":"你的主原型是「鲛人 · 深情回声者」，同时带有「猫妖 · 自由警觉者」的影子。主原型代表你最稳定的第一反应，副原型提醒你在压力、关系或变化里会调用另一种妖性。","H":"你的主原型是「鲛人 · 深情回声者」，同时带有「夜叉 · 破局护航者」的影子。主原型代表你最稳定的第一反应，副原型提醒你在压力、关系或变化里会调用另一种妖性。"},"H":{"A":"你的主原型是「夜叉 · 破局护航者」，同时带有「九尾狐 · 魅惑识人者」的影子。主原型代表你最稳定的第一反应，副原型提醒你在压力、关系或变化里会调用另一种妖性。","B":"你的主原型是「夜叉 · 破局护航者」，同时带有「白泽 · 识局知言者」的影子。主原型代表你最稳定的第一反应，副原型提醒你在压力、关系或变化里会调用另一种妖性。","C":"你的主原型是「夜叉 · 破局护航者」，同时带有「山鬼 · 静默守界者」的影子。主原型代表你最稳定的第一反应，副原型提醒你在压力、关系或变化里会调用另一种妖性。","D":"你的主原型是「夜叉 · 破局护航者」，同时带有「蛇妖 · 蜕变复生者」的影子。主原型代表你最稳定的第一反应，副原型提醒你在压力、关系或变化里会调用另一种妖性。","E":"你的主原型是「夜叉 · 破局护航者」，同时带有「花妖 · 造梦感受者」的影子。主原型代表你最稳定的第一反应，副原型提醒你在压力、关系或变化里会调用另一种妖性。","F":"你的主原型是「夜叉 · 破局护航者」，同时带有「猫妖 · 自由警觉者」的影子。主原型代表你最稳定的第一反应，副原型提醒你在压力、关系或变化里会调用另一种妖性。","G":"你的主原型是「夜叉 · 破局护航者」，同时带有「鲛人 · 深情回声者」的影子。主原型代表你最稳定的第一反应，副原型提醒你在压力、关系或变化里会调用另一种妖性。"}},"shareTemplate":["我测出来是：{{typeName}}","{{posterSubtext}}","{{secondaryLine}}","","测测你的前世是哪种妖怪？24题妖怪人格原型测试"]};</script>
+    <script>
+(function () {
+  const app = document.getElementById("app");
+  const configPaths = ["./configs/site-config.json", "./configs/career-change.json"];
+
+  const state = {
+    config: null,
+    answers: {},
+    profile: { birthDate: "", actualAge: "" },
+    currentIndex: 0,
+    selected: null,
+    locked: false,
+    loadingStep: 0,
+    route: "home",
+    resultData: null,
+  };
+
+  const defaultLoadingMessages = [
+    "正在读取你的选择倾向...",
+    "正在识别隐藏动机...",
+    "正在计算结果分布...",
+    "正在生成专属报告...",
+    "分析完成。",
+  ];
+
+  init();
+
+  async function init() {
+    try {
+      state.config = await fetchConfig();
+      applyDocumentMeta(state.config);
+      applyTheme(state.config);
+
+      const saved = sessionStorage.getItem(getStorageKey());
+      if (saved) {
+        state.answers = JSON.parse(saved);
+      }
+      const savedProfile = sessionStorage.getItem(getProfileStorageKey());
+      if (savedProfile) {
+        state.profile = JSON.parse(savedProfile);
+      }
+
+      routeFromHash();
+      window.addEventListener("hashchange", routeFromHash);
+    } catch (error) {
+      app.innerHTML = `
+        <div class="error">
+          <div>
+            <h1>测试加载失败</h1>
+            <p>请确认你是通过网页链接打开页面，而不是直接双击 HTML 文件。</p>
+          </div>
+        </div>
+      `;
+      console.error(error);
+    }
+  }
+
+  async function fetchConfig() {
+    if (window.__QUIZ_CONFIG__) return window.__QUIZ_CONFIG__;
+    let lastError;
+    for (const path of configPaths) {
+      try {
+        const response = await fetch(path, { cache: "no-store" });
+        if (!response.ok) throw new Error(`${path} ${response.status}`);
+        return response.json();
+      } catch (error) {
+        lastError = error;
+      }
+    }
+    throw lastError;
+  }
+
+  function applyDocumentMeta(cfg) {
+    const title = cfg.title || "趣味测试";
+    const description = cfg.metaDescription || cfg.subtitle || "完成测试，生成你的专属报告。";
+    document.title = title;
+    setMeta("name", "description", description);
+    setMeta("property", "og:title", title);
+    setMeta("property", "og:description", description);
+  }
+
+  function applyTheme(cfg) {
+    Object.entries(cfg.theme || {}).forEach(([name, value]) => {
+      document.documentElement.style.setProperty(name, value);
+    });
+  }
+
+  function setMeta(attr, key, content) {
+    let node = document.querySelector(`meta[${attr}="${key}"]`);
+    if (!node) {
+      node = document.createElement("meta");
+      node.setAttribute(attr, key);
+      document.head.appendChild(node);
+    }
+    node.setAttribute("content", content);
+  }
+
+  function routeFromHash() {
+    const route = (location.hash || "#/").replace("#/", "") || "home";
+    renderRoute(route);
+  }
+
+  function navigate(route) {
+    const nextHash = `#/${route}`;
+    if (location.hash === nextHash) {
+      renderRoute(route);
+      return;
+    }
+    location.hash = nextHash;
+  }
+
+  function renderRoute(route) {
+    state.route = route;
+    if (route === "quiz") renderQuiz();
+    else if (route === "loading") startLoading();
+    else if (route === "result") renderResult();
+    else renderHome();
+  }
+
+  function renderShell(content, extraClass = "") {
+    app.innerHTML = `
+      <div class="shell">
+        <div class="top-rule"></div>
+        <section class="screen ${extraClass}">${content}</section>
+      </div>
+      <div id="toast" class="toast">已复制</div>
+    `;
+  }
+
+  function renderHome() {
+    const cfg = state.config;
+    renderShell(
+      `
+      <div class="home">
+        <div class="kicker"><span class="dot"></span><span>${text(cfg.kicker)}</span><span class="dot"></span></div>
+        <h1 class="hero-title">${text(cfg.title)}</h1>
+        <p class="hero-subtitle">${text(cfg.subtitle)}</p>
+        <div class="hairline"></div>
+        <div class="intro">
+          ${(cfg.intro || []).map((p, index) => `<p class="${index === cfg.intro.length - 1 ? "strong" : ""}">${text(p)}</p>`).join("")}
+        </div>
+        ${!cfg.compactHome && (cfg.dimensions || []).length ? `
+          <div class="pill-grid">
+            ${(cfg.dimensions || []).map((item) => `<div class="pill">${text(item)}</div>`).join("")}
+          </div>
+        ` : ""}
+        ${cfg.testInfo ? `
+          <section class="home-card info-card">
+            <h2>${text(cfg.testInfo.title || "测验说明")}</h2>
+            <ul>${(cfg.testInfo.bullets || []).map((item) => `<li>${text(item)}</li>`).join("")}</ul>
+          </section>
+        ` : ""}
+        ${cfg.matchingSystem ? `
+          <section class="home-card info-card">
+            <h2>${text(cfg.matchingSystem.title || "综合匹配系统")}</h2>
+            <p>${text(cfg.matchingSystem.body || "")}</p>
+          </section>
+        ` : ""}
+        ${cfg.profileInput ? `
+          <section class="profile-panel">
+            <label class="profile-label" for="profile-value">${text(cfg.profileInput.title || "先输入出生日期")}</label>
+            <div class="profile-field">
+              <span>${text(cfg.profileInput.label || "出生日期")}</span>
+              <input
+                id="profile-value"
+                type="${text(cfg.profileInput.type || "date")}"
+                value="${text(getProfileInputValue(cfg.profileInput))}"
+                ${cfg.profileInput.type === "number" ? `inputmode="numeric" min="${text(cfg.profileInput.min || 1)}" max="${text(cfg.profileInput.max || 99)}" placeholder="${text(cfg.profileInput.placeholder || "")}"` : ""}
+                ${cfg.profileInput.required ? "required" : ""}
+              >
+            </div>
+            <p class="profile-note">${text(cfg.profileInput.note || "")}</p>
+            <p class="profile-error" data-profile-error aria-live="polite"></p>
+          </section>
+        ` : ""}
+        <button class="primary-btn" data-action="start">${text(cfg.startButton || "开始测试")}</button>
+        ${cfg.compactHome && (cfg.dimensions || []).length ? `
+          <div class="pill-grid compact-pills">
+            ${(cfg.dimensions || []).map((item) => `<div class="pill">${text(item)}</div>`).join("")}
+          </div>
+        ` : ""}
+        <p class="disclaimer">${text(cfg.disclaimer || "本测试为趣味内容，仅供娱乐参考。")}</p>
+      </div>
+      `,
+      "home"
+    );
+    const startButton = app.querySelector("[data-action='start']");
+    const profileField = app.querySelector("#profile-value");
+    const profileError = app.querySelector("[data-profile-error]");
+    profileField?.addEventListener("input", () => {
+      profileField.classList.remove("invalid");
+      if (profileError) profileError.textContent = "";
+    });
+    let started = false;
+    const startQuiz = () => {
+      if (started) return;
+      const profileValue = profileField?.value?.trim() || "";
+      if (cfg.profileInput?.required && !profileValue) {
+        profileField?.classList.add("invalid");
+        if (profileError) profileError.textContent = cfg.profileInput?.error || "请先填写信息，再开始测试。";
+        profileField?.focus();
+        return;
+      }
+      if (cfg.profileInput?.type === "number") {
+        const numericValue = Number(profileValue);
+        const min = Number(cfg.profileInput.min || 1);
+        const max = Number(cfg.profileInput.max || 99);
+        if (!Number.isFinite(numericValue) || numericValue < min || numericValue > max) {
+          profileField?.classList.add("invalid");
+          if (profileError) profileError.textContent = cfg.profileInput?.rangeError || `请输入 ${min}-${max} 之间的数字。`;
+          profileField?.focus();
+          return;
+        }
+      }
+      started = true;
+      state.answers = {};
+      state.profile = buildProfileFromInput(cfg.profileInput, profileValue);
+      state.currentIndex = 0;
+      sessionStorage.removeItem(getStorageKey());
+      sessionStorage.setItem(getProfileStorageKey(), JSON.stringify(state.profile));
+      navigate("quiz");
+    };
+    startButton.addEventListener("click", startQuiz);
+    startButton.addEventListener(
+      "touchend",
+      (event) => {
+        event.preventDefault();
+        startQuiz();
+      },
+      { passive: false }
+    );
+  }
+
+  function renderQuiz() {
+    const questions = state.config.questions || [];
+    const question = questions[state.currentIndex];
+    if (!question) {
+      renderHome();
+      return;
+    }
+
+    const progress = ((state.currentIndex + 1) / questions.length) * 100;
+
+    renderShell(
+      `
+      <div class="sticky-head">
+        <div class="quiz-meta">
+          <span>${String(state.currentIndex + 1).padStart(2, "0")} / ${questions.length}</span>
+          <span>${text(question.module)}</span>
+        </div>
+        <div class="progress-track"><div class="progress-bar" style="width:${progress}%"></div></div>
+      </div>
+      <div class="question-no">${String(state.currentIndex + 1).padStart(2, "0")}</div>
+      <h1 class="question-title">${text(question.text)}</h1>
+      <div class="options">
+        ${(question.options || [])
+          .map(
+            (option) => `
+            <button class="option" data-option="${text(option.key)}">
+              <span class="option-key">${text(option.key)}</span>
+              <span class="option-text">${text(option.text)}</span>
+            </button>
+          `
+          )
+          .join("")}
+      </div>
+      <p class="hint">${text(state.config.quizHint || "选择后自动进入下一题")}</p>
+      `,
+      "quiz-screen"
+    );
+
+    app.querySelectorAll("[data-option]").forEach((button) => {
+      button.addEventListener("click", () => selectOption(button.dataset.option));
+    });
+  }
+
+  function selectOption(key) {
+    if (state.locked) return;
+    state.locked = true;
+    state.selected = key;
+    const question = state.config.questions[state.currentIndex];
+    state.answers[question.id] = key;
+
+    app.querySelectorAll(".option").forEach((button) => {
+      const selected = button.dataset.option === key;
+      button.classList.toggle("selected", selected);
+      button.classList.toggle("dimmed", !selected);
+    });
+
+    window.setTimeout(() => {
+      if (state.currentIndex < state.config.questions.length - 1) {
+        state.currentIndex += 1;
+        state.locked = false;
+        state.selected = null;
+        renderQuiz();
+      } else {
+        sessionStorage.setItem(getStorageKey(), JSON.stringify(state.answers));
+        state.locked = false;
+        navigate("loading");
+      }
+    }, 420);
+  }
+
+  function startLoading() {
+    state.loadingStep = 0;
+    renderLoading("");
+    tickLoading();
+  }
+
+  function renderLoading(value) {
+    const loadingMessages = getLoadingMessages();
+    renderShell(
+      `
+      <div class="loading-card">
+        <div class="spinner"></div>
+        <div class="loading-text">${text(value)}<span class="cursor">|</span></div>
+        <div class="step-bars">
+          ${loadingMessages.map((_, index) => `<div class="step ${index < state.loadingStep ? "done" : ""}"><span></span></div>`).join("")}
+        </div>
+      </div>
+      `,
+      "loading-screen"
+    );
+  }
+
+  function tickLoading() {
+    if (state.route !== "loading") return;
+    const loadingMessages = getLoadingMessages();
+    if (state.loadingStep >= loadingMessages.length) {
+      window.setTimeout(() => navigate("result"), 700);
+      return;
+    }
+    const message = loadingMessages[state.loadingStep];
+    let chars = 0;
+    const interval = window.setInterval(() => {
+      chars += 1;
+      renderLoading(message.slice(0, chars));
+      if (chars >= message.length) {
+        window.clearInterval(interval);
+        window.setTimeout(() => {
+          state.loadingStep += 1;
+          tickLoading();
+        }, 520);
+      }
+    }, 35);
+  }
+
+  function renderResult() {
+    const saved = sessionStorage.getItem(getStorageKey());
+    if (saved) state.answers = JSON.parse(saved);
+    if (Object.keys(state.answers).length < state.config.questions.length) {
+      renderHome();
+      return;
+    }
+
+    const scored = scoreAnswers(state.answers);
+    const primary = state.config.results[scored.primary];
+    const secondary = scored.secondary ? state.config.secondaryNotes?.[scored.primary]?.[scored.secondary] : null;
+    const stage = getStage(primary.maturityScore);
+    const shareText = buildShareText(primary, secondary);
+    const compareLabels = state.config.compareLabels || ["如果继续原路", "如果换一种做法"];
+    state.resultData = { scored, primary, secondary, stage, shareText };
+
+    renderShell(
+      `
+      <article class="report">
+        <div class="kicker"><span class="dot"></span><span>${text(state.config.resultKicker || "Result Report")}</span><span class="dot"></span></div>
+        <h1 class="result-type">${text(primary.typeName)}</h1>
+        <p class="result-subtitle">${text(primary.subtitle)}</p>
+        <div class="stamp-row">
+          <div class="stamp"><strong>${text(primary.maturityScore)}</strong><span>${text(state.config.scoreLabel || "决策成熟度")}</span></div>
+          <div class="stamp"><strong>${text(stage)}</strong><span>${text(state.config.stageLabel || "当前行动阶段")}</span></div>
+        </div>
+
+        ${renderMatchSummary(scored)}
+
+        ${scored.psychological ? "" : `
+          <section class="section">
+            <h2>你的答案分布</h2>
+            <div class="meters">
+              ${Object.entries(scored.counts)
+                .filter(([, value]) => value > 0)
+                .map(([key, value]) => {
+                  const typeData = state.config.results[key];
+                  const width = (value / state.config.questions.length) * 100;
+                  return `
+                    <div>
+                      <div class="meter-head"><span>${text(key)} · ${text(typeData.typeName)}</span><span>${value} 题</span></div>
+                      <div class="meter-track"><div class="meter-fill" style="width:${width}%"></div></div>
+                    </div>
+                  `;
+                })
+                .join("")}
+            </div>
+          </section>
+        `}
+
+        ${secondary ? `<section class="section"><h2>副倾向提示</h2><div class="secondary-note">${text(secondary)}</div></section>` : ""}
+
+        <section class="section">
+          <h2>诊断结论</h2>
+          <div class="quote">${text(primary.coreConclusion)}</div>
+        </section>
+
+        <section class="section">
+          <h2>为什么你会这样</h2>
+          <p>${text(primary.diagnosis)}</p>
+          <p>${text(primary.whatYouReallyWant)}</p>
+        </section>
+
+        <section class="section">
+          <h2>${text(primary.mechanism.title)}</h2>
+          <p>${text(primary.mechanism.content)}</p>
+        </section>
+
+        ${renderParagraphSection("专业解读框架", primary.professionalBasis)}
+        ${renderTagSection("你的关键矛盾", primary.coreTensions)}
+        ${renderCompareListSection("适合推进的条件", "需要谨慎的信号", primary.suitableIf, primary.cautionIf)}
+
+        <section class="section">
+          <h2>关键指数</h2>
+          <div class="meters">
+            ${(primary.indices || [])
+              .map(
+                (item) => `
+                <div>
+                  <div class="meter-head"><span>${text(item.label)}</span><span>${text(item.value)}</span></div>
+                  <div class="meter-track"><div class="meter-fill" style="width:${number(item.value)}%"></div></div>
+                </div>
+              `
+              )
+              .join("")}
+          </div>
+        </section>
+
+        <section class="section">
+          <h2>两条路径对比</h2>
+          <div class="compare">
+            <div class="compare-card"><h3>${text(compareLabels[0])}</h3><p>${text(primary.ifStay)}</p></div>
+            <div class="compare-card"><h3>${text(compareLabels[1])}</h3><p>${text(primary.ifChange)}</p></div>
+          </div>
+        </section>
+
+        <section class="section">
+          <h2>现在最不建议你做</h2>
+          <div class="tag-list">${(primary.notRecommended || []).map((item) => `<span class="tag">${text(item)}</span>`).join("")}</div>
+        </section>
+
+        <section class="section">
+          <h2>未来 90 天验证方案</h2>
+          <div class="plan">
+            ${(primary.plan90 || [])
+              .map(
+                (item, index) => `
+                <div class="plan-card">
+                  <h3>${index + 1}. ${text(item.title)}</h3>
+                  <p>${text(item.content)}</p>
+                </div>
+              `
+              )
+              .join("")}
+          </div>
+        </section>
+
+        <section class="section">
+          <h2>最后一句话</h2>
+          <p>${text(primary.closing)}</p>
+        </section>
+
+        <div class="actions">
+          <button class="primary-btn" data-action="copy">${text(state.config.copyButton || "复制我的结果")}</button>
+          <button class="ghost-btn" data-action="restart">${text(state.config.restartButton || "重新测试")}</button>
+        </div>
+      </article>
+      `,
+      "result-screen"
+    );
+
+    app.querySelector("[data-action='copy']").addEventListener("click", () => copyShareText(shareText));
+    app.querySelector("[data-action='restart']").addEventListener("click", () => {
+      sessionStorage.removeItem(getStorageKey());
+      sessionStorage.removeItem(getProfileStorageKey());
+      state.answers = {};
+      state.profile = { birthDate: "" };
+      state.currentIndex = 0;
+      navigate("home");
+    });
+  }
+
+  function renderParagraphSection(title, paragraphs) {
+    if (!Array.isArray(paragraphs) || !paragraphs.length) return "";
+    return `
+      <section class="section">
+        <h2>${text(title)}</h2>
+        ${paragraphs.map((item) => `<p>${text(item)}</p>`).join("")}
+      </section>
+    `;
+  }
+
+  function renderTagSection(title, items) {
+    if (!Array.isArray(items) || !items.length) return "";
+    return `
+      <section class="section">
+        <h2>${text(title)}</h2>
+        <div class="tag-list">${items.map((item) => `<span class="tag">${text(item)}</span>`).join("")}</div>
+      </section>
+    `;
+  }
+
+  function renderMatchSummary(scored) {
+    if (scored.psychological) return renderPsychologicalSummary(scored.psychological);
+    if (!scored.match) return "";
+    const match = scored.match;
+    return `
+      <section class="section">
+        <h2>综合匹配结果</h2>
+        <div class="match-summary">
+          <div class="match-grid">
+            <div class="match-item"><span>出生日期倾向</span><strong>${text(match.birthElement)}</strong></div>
+            <div class="match-item"><span>答题倾向</span><strong>${text(match.personalityElement)}</strong></div>
+            <div class="match-item"><span>城市匹配度</span><strong>${text(match.matchScore)}%</strong></div>
+          </div>
+          <p>本结果按出生日期倾向与 49 道题的生活选择加权生成。五行仅用于表达生活偏好，结果需要结合真实岗位、预算、住房和试住体验判断。</p>
+        </div>
+      </section>
+    `;
+  }
+
+  function renderPsychologicalSummary(data) {
+    const deltaLabel = data.delta > 0 ? `比实际年龄成熟 ${data.delta} 岁` : data.delta < 0 ? `比实际年龄年轻 ${Math.abs(data.delta)} 岁` : "与实际年龄同频";
+    return `
+      <section class="section">
+        <h2>心理年龄对比</h2>
+        <div class="match-summary">
+          <div class="match-grid">
+            <div class="match-item"><span>实际年龄</span><strong>${text(data.actualAge)}岁</strong></div>
+            <div class="match-item"><span>心理年龄</span><strong>${text(data.psychologicalAge)}岁</strong></div>
+            <div class="match-item"><span>年龄差</span><strong>${text(deltaLabel)}</strong></div>
+          </div>
+          <p>${text(data.ageLabel)}。这个数字不是能力高低，只代表你最近面对世界时更常用的心理模式。</p>
+        </div>
+      </section>
+      <section class="section">
+        <h2>8维心理画像</h2>
+        <div class="meters">
+          ${data.dimensionOrder.map((key) => `
+            <div>
+              <div class="meter-head"><span>${text(data.dimensionLabels[key] || key)}</span><span>${text(data.dimensions[key])}</span></div>
+              <div class="meter-track"><div class="meter-fill" style="width:${number(data.dimensions[key])}%"></div></div>
+            </div>
+          `).join("")}
+        </div>
+      </section>
+      <section class="section">
+        <h2>关键词标签</h2>
+        <div class="tag-list">${data.tags.map((item) => `<span class="tag">${text(item)}</span>`).join("")}</div>
+      </section>
+      <section class="section">
+        <h2>你的长板与盲点</h2>
+        <div class="compare">
+          <div class="compare-card">
+            <h3>最高的 3 个维度</h3>
+            ${data.topDimensions.map((item) => `<p>${text(item.label)}：${text(item.value)}</p>`).join("")}
+          </div>
+          <div class="compare-card">
+            <h3>最低的 2 个维度</h3>
+            ${data.lowDimensions.map((item) => `<p>${text(item.label)}：${text(item.value)}</p>`).join("")}
+          </div>
+        </div>
+      </section>
+    `;
+  }
+
+  function renderCompareListSection(leftTitle, rightTitle, leftItems, rightItems) {
+    const hasLeft = Array.isArray(leftItems) && leftItems.length;
+    const hasRight = Array.isArray(rightItems) && rightItems.length;
+    if (!hasLeft && !hasRight) return "";
+    return `
+      <section class="section">
+        <h2>适用边界</h2>
+        <div class="compare">
+          <div class="compare-card">
+            <h3>${text(leftTitle)}</h3>
+            ${(leftItems || []).map((item) => `<p>${text(item)}</p>`).join("")}
+          </div>
+          <div class="compare-card">
+            <h3>${text(rightTitle)}</h3>
+            ${(rightItems || []).map((item) => `<p>${text(item)}</p>`).join("")}
+          </div>
+        </div>
+      </section>
+    `;
+  }
+
+  function scoreAnswers(answers) {
+    if (state.config.scoring?.mode === "psychological-age") {
+      return scorePsychologicalAge(answers, state.config.scoring);
+    }
+    if (state.config.scoring?.mode === "paired-attributes") {
+      return scorePairedAttributes(answers, state.config.scoring);
+    }
+    if (state.config.scoring?.mode === "city-with-elements") {
+      return scoreCityWithElements(answers, state.config.scoring);
+    }
+
+    const resultKeys = Object.keys(state.config.results || {});
+    const counts = Object.fromEntries(resultKeys.map((key) => [key, 0]));
+    (state.config.questions || []).forEach((question) => {
+      const answerKey = answers[question.id];
+      if (!answerKey) return;
+      const option = (question.options || []).find((item) => item.key === answerKey);
+      const scoreKey = option?.score || option?.result || answerKey;
+      if (counts[scoreKey] !== undefined) counts[scoreKey] += 1;
+    });
+    const sorted = Object.entries(counts).sort((a, b) => b[1] - a[1]);
+    const threshold = state.config.secondaryThreshold ?? 2;
+    const primary = sorted[0][0];
+    const secondary = sorted[1][1] > 0 && sorted[0][1] - sorted[1][1] <= threshold ? sorted[1][0] : null;
+    return { counts, primary, secondary };
+  }
+
+  function scorePsychologicalAge(answers, scoring) {
+    const answerValues = scoring.answerValues || { A: 1, B: 2, C: 3, D: 4, E: 5 };
+    const dimensionLabels = scoring.dimensionLabels || {};
+    const dimensionOrder = scoring.dimensionOrder || Object.keys(dimensionLabels);
+    const rawTotals = Object.fromEntries(dimensionOrder.map((key) => [key, 0]));
+    const rawCounts = Object.fromEntries(dimensionOrder.map((key) => [key, 0]));
+
+    (state.config.questions || []).forEach((question) => {
+      const answerKey = answers[question.id];
+      if (!answerKey || !question.dimension) return;
+      const base = Number(answerValues[answerKey] ?? answerValues[String(answerKey)] ?? 0);
+      if (!Number.isFinite(base) || base <= 0) return;
+      const value = question.reverse ? 6 - base : base;
+      rawTotals[question.dimension] = (rawTotals[question.dimension] || 0) + value;
+      rawCounts[question.dimension] = (rawCounts[question.dimension] || 0) + 1;
+    });
+
+    const dimensions = {};
+    dimensionOrder.forEach((key) => {
+      const count = rawCounts[key] || 0;
+      if (!count) {
+        dimensions[key] = 0;
+        return;
+      }
+      const min = count;
+      const max = count * 5;
+      dimensions[key] = Math.round(((rawTotals[key] - min) / (max - min)) * 100);
+    });
+
+    const matureDimensions = scoring.matureDimensions || ["emotion", "responsibility", "resilience", "tolerance", "selfAcceptance"];
+    const youthfulDimensions = scoring.youthfulDimensions || ["curiosity", "socialEase", "lifePassion"];
+    const matureIndex = average(matureDimensions.map((key) => dimensions[key]));
+    const youthfulIndex = average(youthfulDimensions.map((key) => dimensions[key]));
+    const actualAge = getActualAge(scoring);
+    const psychologicalAge = clamp(
+      Math.round(actualAge + (matureIndex - youthfulIndex) * Number(scoring.ageFactor ?? 0.22)),
+      Number(scoring.minAge ?? 10),
+      Number(scoring.maxAge ?? 70)
+    );
+    const delta = psychologicalAge - actualAge;
+    const primary = getPsychologicalResultKey(delta, scoring);
+    const counts = Object.fromEntries(Object.keys(state.config.results || {}).map((key) => [key, key === primary ? (state.config.questions || []).length : 0]));
+    const rankedDimensions = dimensionOrder
+      .map((key) => ({ key, label: dimensionLabels[key] || key, value: dimensions[key] ?? 0 }))
+      .sort((left, right) => right.value - left.value);
+    const tags = buildPsychologicalTags(rankedDimensions, delta, primary, scoring);
+
+    return {
+      counts,
+      primary,
+      secondary: null,
+      psychological: {
+        actualAge,
+        psychologicalAge,
+        delta,
+        ageLabel: getPsychologicalAgeLabel(delta),
+        matureIndex: Math.round(matureIndex),
+        youthfulIndex: Math.round(youthfulIndex),
+        dimensions,
+        dimensionLabels,
+        dimensionOrder,
+        topDimensions: rankedDimensions.slice(0, 3),
+        lowDimensions: rankedDimensions.slice(-2).reverse(),
+        tags,
+      },
+    };
+  }
+
+  function getActualAge(scoring) {
+    const numericAge = Number(state.profile.actualAge);
+    if (Number.isFinite(numericAge) && numericAge > 0) return Math.round(numericAge);
+    const birthAge = calculateAgeFromBirthDate(state.profile.birthDate);
+    if (birthAge) return birthAge;
+    return Number(scoring.defaultActualAge || 28);
+  }
+
+  function calculateAgeFromBirthDate(value) {
+    if (!value) return null;
+    const date = new Date(value);
+    if (Number.isNaN(date.getTime())) return null;
+    const now = new Date();
+    let age = now.getFullYear() - date.getFullYear();
+    const monthDiff = now.getMonth() - date.getMonth();
+    if (monthDiff < 0 || (monthDiff === 0 && now.getDate() < date.getDate())) age -= 1;
+    return age > 0 ? age : null;
+  }
+
+  function getPsychologicalResultKey(delta, scoring) {
+    const groups = scoring.ageGroups || [
+      { key: "CURIOUS_CHILD", maxDelta: -8 },
+      { key: "HOT_BLOODED_TEEN", maxDelta: -3 },
+      { key: "BALANCED_YOUTH", maxDelta: 2 },
+      { key: "STEADY_ADVISER", maxDelta: 7 },
+      { key: "CLEAR_HELM", maxDelta: Infinity },
+    ];
+    const hit = groups.find((item) => delta <= Number(item.maxDelta));
+    return hit?.key || groups[groups.length - 1]?.key || Object.keys(state.config.results || {})[0];
+  }
+
+  function getPsychologicalAgeLabel(delta) {
+    if (delta <= -8) return "灵魂明显年轻";
+    if (delta <= -3) return "少年感在线";
+    if (delta <= 2) return "与真实年龄同频";
+    if (delta <= 7) return "心智略超前";
+    return "灵魂明显成熟";
+  }
+
+  function buildPsychologicalTags(rankedDimensions, delta, primary, scoring) {
+    const tagMap = scoring.dimensionTags || {};
+    const ageTags = scoring.ageTags || {};
+    const resultTags = scoring.resultTags || {};
+    const tags = rankedDimensions
+      .slice(0, 3)
+      .map((item) => tagMap[item.key]?.[0] || item.label)
+      .filter(Boolean);
+    tags.push(ageTags[getPsychologicalAgeLabel(delta)] || getPsychologicalAgeLabel(delta));
+    tags.push(resultTags[primary] || "社交原型清晰");
+    return [...new Set(tags)].slice(0, 5);
+  }
+
+  function scoreCityWithElements(answers, scoring) {
+    const resultKeys = Object.keys(state.config.results || {});
+    const counts = Object.fromEntries(resultKeys.map((key) => [key, 0]));
+    const elementMap = scoring.elementMap || {};
+    const elementCounts = {};
+    Object.values(elementMap).forEach((element) => { elementCounts[element] = 0; });
+
+    (state.config.questions || []).forEach((question) => {
+      const answerKey = answers[question.id];
+      if (!answerKey) return;
+      const option = (question.options || []).find((item) => item.key === answerKey);
+      const scoreKey = option?.score || option?.result || answerKey;
+      const element = elementMap[scoreKey];
+      if (counts[scoreKey] !== undefined) counts[scoreKey] += 1;
+      if (element && elementCounts[element] !== undefined) elementCounts[element] += 1;
+    });
+
+    const personalityElement = Object.entries(elementCounts).sort((left, right) => right[1] - left[1])[0]?.[0] || "未提供";
+    const birthElement = getBirthElement(state.profile.birthDate, scoring);
+    const birthWeight = Number(scoring.birthWeight ?? 0.25);
+    const combined = Object.fromEntries(resultKeys.map((key) => {
+      const birthBonus = elementMap[key] === birthElement ? (state.config.questions.length * birthWeight) : 0;
+      return [key, counts[key] + birthBonus];
+    }));
+    const sorted = Object.entries(combined).sort((left, right) => right[1] - left[1]);
+    const threshold = state.config.secondaryThreshold ?? 2;
+    const primary = sorted[0][0];
+    const secondary = sorted[1][1] > 0 && sorted[0][1] - sorted[1][1] <= threshold ? sorted[1][0] : null;
+    const personalityShare = counts[primary] / Math.max(1, state.config.questions.length);
+    const birthMatch = elementMap[primary] === birthElement;
+    const matchScore = Math.round(Math.min(99, 55 + personalityShare * 30 + (birthMatch ? 15 : 5)));
+    return {
+      counts,
+      primary,
+      secondary,
+      match: { birthElement, personalityElement, elementCounts, matchScore },
+    };
+  }
+
+  function getBirthElement(value, scoring) {
+    if (!value) return "未提供";
+    const parts = value.split("-").map(Number);
+    if (parts.length !== 3 || parts.some((part) => !Number.isFinite(part))) return "未提供";
+    const [year, month, day] = parts;
+    const elements = scoring.birthElements || ["木", "火", "土", "金", "水"];
+    return elements[Math.abs(year * 13 + month * 7 + day) % elements.length];
+  }
+
+  function scorePairedAttributes(answers, scoring) {
+    const attributes = Object.fromEntries((scoring.attributes || []).map((key) => [key, 0]));
+    const questionsById = Object.fromEntries((state.config.questions || []).map((question) => [question.id, question]));
+
+    (state.config.questions || []).forEach((question) => {
+      const answerKey = answers[question.id];
+      if (!answerKey) return;
+      const option = (question.options || []).find((item) => item.key === answerKey);
+      (option?.attributes || []).forEach((attribute) => {
+        if (attributes[attribute] !== undefined) attributes[attribute] += 1;
+      });
+    });
+
+    const chosen = (scoring.pairs || []).map(([left, right], index) => {
+      if (attributes[left] > attributes[right]) return left;
+      if (attributes[right] > attributes[left]) return right;
+
+      const tieQuestionId = scoring.tieBreakers?.[String(index)];
+      const tieQuestion = questionsById[tieQuestionId];
+      const tieAnswer = tieQuestion && answers[tieQuestionId];
+      const tieOption = tieQuestion?.options?.find((item) => item.key === tieAnswer);
+      return tieOption?.attributes?.includes(left) ? left : right;
+    });
+
+    const primary = chosen.join("");
+    const counts = Object.fromEntries(Object.keys(state.config.results || {}).map((key) => [key, key === primary ? (state.config.questions || []).length : 0]));
+    const alternate = chosen.slice();
+    if (scoring.pairs?.length) {
+      const firstPair = scoring.pairs[0];
+      alternate[0] = alternate[0] === firstPair[0] ? firstPair[1] : firstPair[0];
+    }
+    const secondary = alternate.join("") !== primary && state.config.secondaryNotes?.[primary]?.[alternate.join("")] ? alternate.join("") : null;
+    return { counts, primary, secondary, attributes };
+  }
+
+  function getStage(score) {
+    const labels = state.config.stageLabels || [
+      { max: 45, label: "观察期" },
+      { max: 65, label: "验证期" },
+      { max: 82, label: "规划期" },
+      { max: 100, label: "行动期" },
+    ];
+    const hit = labels.find((item) => score <= item.max);
+    return hit ? hit.label : labels[labels.length - 1].label;
+  }
+
+  function buildShareText(primary, secondary) {
+    const template = state.config.shareTemplate || [
+      "我测出了：{{typeName}}",
+      "{{posterSubtext}}",
+      "{{secondaryLine}}",
+      "",
+      "{{title}}",
+    ];
+    const values = {
+      title: state.config.title,
+      typeName: primary.typeName,
+      posterSubtext: primary.posterSubtext,
+      secondary: secondary || "",
+      secondaryLine: secondary ? `副倾向：${secondary}` : "",
+    };
+    return template
+      .map((line) => fillTemplate(line, values))
+      .filter((line, index, arr) => line || arr[index - 1])
+      .join("\n")
+      .trim();
+  }
+
+  async function copyShareText(value) {
+    try {
+      await navigator.clipboard.writeText(value);
+      showToast("结果文案已复制");
+    } catch (error) {
+      showToast("复制失败，可长按手动复制");
+    }
+  }
+
+  function showToast(value) {
+    const toast = document.getElementById("toast");
+    if (!toast) return;
+    toast.textContent = value;
+    toast.classList.add("show");
+    window.setTimeout(() => toast.classList.remove("show"), 1600);
+  }
+
+  function getLoadingMessages() {
+    return state.config.loadingMessages || defaultLoadingMessages;
+  }
+
+  function getStorageKey() {
+    return `xhsTestAnswers:${state.config.slug || "default"}`;
+  }
+
+  function getProfileStorageKey() {
+    return `xhsTestProfile:${state.config?.slug || "default"}`;
+  }
+
+  function getProfileInputValue(inputConfig) {
+    if (!inputConfig) return "";
+    if (inputConfig.type === "number") return state.profile.actualAge || "";
+    return state.profile.birthDate || "";
+  }
+
+  function buildProfileFromInput(inputConfig, value) {
+    if (inputConfig?.type === "number") {
+      return { birthDate: "", actualAge: value };
+    }
+    return { birthDate: value, actualAge: "" };
+  }
+
+  function fillTemplate(template, values) {
+    return String(template).replace(/\{\{(\w+)\}\}/g, (_, key) => values[key] || "");
+  }
+
+  function number(value) {
+    const parsed = Number(value);
+    if (Number.isNaN(parsed)) return 0;
+    return Math.max(0, Math.min(100, parsed));
+  }
+
+  function average(values) {
+    const cleanValues = values.map(Number).filter((value) => Number.isFinite(value));
+    if (!cleanValues.length) return 0;
+    return cleanValues.reduce((sum, value) => sum + value, 0) / cleanValues.length;
+  }
+
+  function clamp(value, min, max) {
+    return Math.max(min, Math.min(max, value));
+  }
+
+  function text(value) {
+    return String(value ?? "")
+      .replace(/&/g, "&amp;")
+      .replace(/</g, "&lt;")
+      .replace(/>/g, "&gt;")
+      .replace(/"/g, "&quot;");
+  }
+})();
+
+    </script>
+  </body>
+</html>
