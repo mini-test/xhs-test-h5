@@ -1,0 +1,1678 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <meta name="description" content="完成历史性格路线测试，生成你的历史路线原型、影子原型、优势风险和 90 天行动建议。" />
+    <meta property="og:title" content="历史性格路线测试" />
+    <meta property="og:description" content="完成历史性格路线测试，生成你的历史路线原型、影子原型、优势风险和 90 天行动建议。" />
+    <title>历史性格路线测试</title>
+    <style>
+:root {
+  --bg: #fbfaf7;
+  --paper: #fffefd;
+  --ink: #20242a;
+  --muted: #65707d;
+  --line: #d9d4ca;
+  --line-strong: #b9afa0;
+  --accent: #9b4339;
+  --accent-soft: #f1dfd7;
+  --gold: #c0964d;
+  --sage: #66795f;
+  --blue: #526a86;
+  --shadow: 0 16px 36px rgba(60, 47, 38, 0.1);
+  --radius: 8px;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  min-height: 100%;
+  width: 100%;
+  overflow-x: hidden;
+  background:
+    linear-gradient(rgba(32, 36, 42, 0.035) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(32, 36, 42, 0.035) 1px, transparent 1px),
+    var(--bg);
+  background-size: 24px 24px;
+}
+
+body {
+  width: 100%;
+  overflow-x: hidden;
+  min-height: 100vh;
+  margin: 0;
+  color: var(--ink);
+  font-family:
+    "PingFang SC",
+    "Microsoft YaHei",
+    "Noto Sans SC",
+    system-ui,
+    -apple-system,
+    BlinkMacSystemFont,
+    sans-serif;
+  letter-spacing: 0;
+}
+
+button {
+  font: inherit;
+}
+
+.shell {
+  width: 100%;
+  max-width: 480px;
+  min-height: 100vh;
+  margin: 0 auto;
+  background: rgba(251, 250, 247, 0.88);
+  overflow-x: hidden;
+}
+
+.top-rule {
+  height: 4px;
+  background: var(--accent);
+}
+
+.screen {
+  width: 100%;
+  overflow-x: hidden;
+  min-height: calc(100vh - 4px);
+  padding: 28px 22px 32px;
+}
+
+.home {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.kicker {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  color: var(--muted);
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  font-size: 11px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+.dot {
+  width: 7px;
+  height: 7px;
+  background: var(--accent);
+  border-radius: 50%;
+}
+
+.hero-title {
+  max-width: 100%;
+  margin: 26px 0 14px;
+  color: var(--ink);
+  font-size: 30px;
+  line-height: 1.2;
+  text-align: center;
+  font-weight: 800;
+  overflow-wrap: anywhere;
+}
+
+.hero-subtitle {
+  margin: 0 auto 28px;
+  max-width: 340px;
+  color: var(--muted);
+  font-size: 15px;
+  line-height: 1.75;
+  text-align: center;
+}
+
+.hairline {
+  width: 64px;
+  height: 1px;
+  margin: 0 auto 30px;
+  background: var(--line-strong);
+}
+
+.intro {
+  margin: 0 auto;
+  max-width: 380px;
+}
+
+.intro p {
+  margin: 0 0 15px;
+  color: rgba(32, 36, 42, 0.82);
+  font-size: 15px;
+  line-height: 1.8;
+}
+
+.intro .strong {
+  color: var(--accent);
+  font-weight: 700;
+}
+
+.pill-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px;
+  margin: 28px 0;
+}
+
+.compact-pills {
+  margin: 16px 0 10px;
+}
+
+.pill {
+  min-height: 42px;
+  display: grid;
+  place-items: center;
+  border: 1px solid var(--line);
+  color: var(--muted);
+  background: rgba(255, 255, 255, 0.44);
+  font-size: 13px;
+}
+
+.home-card {
+  margin-top: 16px;
+  padding: 18px 16px;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  background: rgba(255, 255, 255, 0.78);
+}
+
+.info-card h2 {
+  margin: 0 0 12px;
+  font-size: 19px;
+}
+
+.info-card p,
+.info-card li {
+  color: rgba(32, 36, 42, 0.78);
+  font-size: 14px;
+  line-height: 1.8;
+}
+
+.info-card p {
+  margin: 0;
+}
+
+.info-card ul {
+  display: grid;
+  gap: 9px;
+  margin: 0;
+  padding-left: 20px;
+}
+
+.info-card li::marker {
+  color: var(--accent);
+}
+
+.profile-panel {
+  margin-top: 16px;
+  padding: 16px;
+  border: 1px solid var(--line-strong);
+  background: var(--accent-soft);
+}
+
+.profile-label {
+  display: block;
+  margin-bottom: 10px;
+  color: var(--ink);
+  font-size: 17px;
+  font-weight: 800;
+}
+
+.profile-field {
+  display: grid;
+  grid-template-columns: 1fr minmax(0, 1.4fr);
+  gap: 12px;
+  align-items: center;
+  padding: 11px 12px;
+  border: 1px solid var(--line);
+  background: var(--paper);
+}
+
+.profile-field span {
+  color: var(--muted);
+  font-size: 14px;
+}
+
+.profile-field input {
+  width: 100%;
+  min-height: 34px;
+  padding: 4px 6px;
+  border: 0;
+  background: transparent;
+  color: var(--ink);
+  font: inherit;
+  text-align: right;
+}
+
+.profile-field input:focus {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+
+.profile-field input.invalid {
+  outline: 2px solid #b3261e;
+  outline-offset: 2px;
+}
+
+.profile-note,
+.profile-error {
+  margin: 9px 0 0;
+  color: var(--muted);
+  font-size: 12px;
+  line-height: 1.6;
+}
+
+.profile-error {
+  min-height: 19px;
+  color: #a42f29;
+}
+
+.primary-btn,
+.ghost-btn,
+.copy-btn {
+  width: 100%;
+  min-height: 48px;
+  border: 1px solid var(--ink);
+  border-radius: 0;
+  cursor: pointer;
+  transition: transform 150ms ease, background 150ms ease, color 150ms ease, border-color 150ms ease;
+}
+
+.primary-btn {
+  background: var(--ink);
+  color: #fff;
+  font-weight: 700;
+}
+
+.ghost-btn,
+.copy-btn {
+  background: transparent;
+  color: var(--ink);
+}
+
+.primary-btn:active,
+.ghost-btn:active,
+.copy-btn:active,
+.option:active {
+  transform: translateY(1px);
+}
+
+.disclaimer {
+  margin: 18px auto 0;
+  max-width: 340px;
+  color: var(--muted);
+  font-size: 12px;
+  line-height: 1.65;
+  text-align: center;
+}
+
+.quiz-screen {
+  padding-top: 0;
+}
+
+.sticky-head {
+  position: sticky;
+  top: 0;
+  z-index: 5;
+  margin: 0 -22px 26px;
+  padding: 14px 22px 12px;
+  background: rgba(251, 250, 247, 0.95);
+  border-bottom: 1px solid var(--line);
+  backdrop-filter: blur(12px);
+}
+
+.quiz-meta {
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+  color: var(--muted);
+  font-size: 12px;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+}
+
+.progress-track {
+  height: 4px;
+  margin-top: 10px;
+  background: rgba(32, 36, 42, 0.09);
+}
+
+.progress-bar {
+  height: 100%;
+  background: var(--accent);
+  transition: width 260ms ease;
+}
+
+.question-no {
+  color: rgba(155, 67, 57, 0.18);
+  font-size: 48px;
+  line-height: 1;
+  font-weight: 800;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+}
+
+.question-title {
+  margin: 18px 0 24px;
+  font-size: 22px;
+  line-height: 1.5;
+  font-weight: 750;
+}
+
+.options {
+  display: grid;
+  gap: 12px;
+}
+
+.option {
+  min-height: 66px;
+  display: grid;
+  grid-template-columns: 30px 1fr;
+  gap: 12px;
+  align-items: start;
+  width: 100%;
+  padding: 15px;
+  border: 1px solid var(--line);
+  background: rgba(255, 255, 255, 0.68);
+  color: var(--ink);
+  text-align: left;
+  cursor: pointer;
+  transition: background 160ms ease, border-color 160ms ease, color 160ms ease, opacity 160ms ease;
+}
+
+.option-key {
+  display: grid;
+  place-items: center;
+  width: 28px;
+  height: 28px;
+  border: 1px solid var(--line-strong);
+  font-size: 13px;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+}
+
+.option-text {
+  padding-top: 2px;
+  font-size: 15px;
+  line-height: 1.55;
+}
+
+.option.selected {
+  border-color: var(--accent);
+  background: var(--accent);
+  color: #fff;
+}
+
+.option.selected .option-key {
+  border-color: rgba(255, 255, 255, 0.8);
+}
+
+.option.dimmed {
+  opacity: 0.42;
+}
+
+.hint {
+  margin: 18px 0 0;
+  color: var(--muted);
+  font-size: 12px;
+  text-align: center;
+}
+
+.loading-screen {
+  display: grid;
+  place-items: center;
+}
+
+.loading-card {
+  width: 100%;
+  max-width: 360px;
+  text-align: center;
+}
+
+.spinner {
+  width: 54px;
+  height: 54px;
+  margin: 0 auto 24px;
+  border: 2px solid var(--line);
+  border-top-color: var(--accent);
+  border-radius: 50%;
+  animation: spin 850ms linear infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.loading-text {
+  min-height: 54px;
+  color: var(--accent);
+  font-size: 17px;
+  line-height: 1.6;
+  font-weight: 700;
+}
+
+.step-bars {
+  display: grid;
+  gap: 8px;
+  margin-top: 28px;
+}
+
+.step {
+  height: 4px;
+  overflow: hidden;
+  background: rgba(32, 36, 42, 0.09);
+}
+
+.step span {
+  display: block;
+  height: 100%;
+  width: 0;
+  background: var(--accent);
+  transition: width 300ms ease;
+}
+
+.step.done span {
+  width: 100%;
+}
+
+.result-screen {
+  padding: 22px 18px 30px;
+}
+
+.report {
+  padding: 22px 16px 18px;
+  border: 1px solid var(--line);
+  background: var(--paper);
+  box-shadow: var(--shadow);
+}
+
+.result-type {
+  margin: 8px 0 8px;
+  color: var(--accent);
+  font-size: 30px;
+  line-height: 1.15;
+  font-weight: 850;
+  text-align: center;
+}
+
+.result-subtitle {
+  margin: 0 auto 20px;
+  color: var(--muted);
+  font-size: 15px;
+  line-height: 1.7;
+  text-align: center;
+}
+
+.stamp-row {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px;
+  margin: 18px 0 20px;
+}
+
+.stamp {
+  padding: 12px 10px;
+  border: 1px solid var(--line);
+  background: #fbfaf7;
+}
+
+.stamp strong {
+  display: block;
+  margin-bottom: 4px;
+  color: var(--ink);
+  font-size: 20px;
+}
+
+.stamp span {
+  color: var(--muted);
+  font-size: 12px;
+}
+
+.section {
+  padding: 20px 0;
+  border-top: 1px solid var(--line);
+}
+
+.section h2 {
+  margin: 0 0 12px;
+  font-size: 18px;
+  color: var(--ink);
+}
+
+.section p {
+  margin: 0 0 12px;
+  color: rgba(32, 36, 42, 0.82);
+  font-size: 15px;
+  line-height: 1.85;
+}
+
+.quote {
+  padding: 15px;
+  border-left: 3px solid var(--accent);
+  background: var(--accent-soft);
+  color: #5b2d27;
+  line-height: 1.8;
+  font-weight: 700;
+}
+
+.meters {
+  display: grid;
+  gap: 14px;
+}
+
+.meter-head {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 7px;
+  color: var(--muted);
+  font-size: 13px;
+}
+
+.meter-track {
+  height: 8px;
+  background: rgba(32, 36, 42, 0.08);
+}
+
+.meter-fill {
+  height: 100%;
+  background: var(--accent);
+}
+
+.compare {
+  display: grid;
+  gap: 10px;
+}
+
+.compare-card {
+  padding: 14px;
+  border: 1px solid var(--line);
+  background: #fbfaf7;
+}
+
+.compare-card h3,
+.plan-card h3 {
+  margin: 0 0 8px;
+  font-size: 15px;
+}
+
+.compare-card p,
+.plan-card p {
+  font-size: 14px;
+}
+
+.tag-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.tag {
+  padding: 7px 9px;
+  border: 1px solid var(--line);
+  background: #fbfaf7;
+  color: var(--muted);
+  font-size: 13px;
+}
+
+.plan {
+  display: grid;
+  gap: 10px;
+}
+
+.plan-card {
+  padding: 14px;
+  border: 1px solid var(--line);
+  background: #fbfaf7;
+}
+
+.secondary-note {
+  padding: 14px;
+  border: 1px dashed var(--line-strong);
+  background: rgba(192, 150, 77, 0.12);
+  line-height: 1.75;
+  font-size: 14px;
+}
+
+.match-summary {
+  padding: 14px;
+  border: 1px solid var(--line-strong);
+  background: var(--accent-soft);
+}
+
+.match-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 8px;
+}
+
+.match-item {
+  min-width: 0;
+  padding: 10px 8px;
+  background: var(--paper);
+  text-align: center;
+}
+
+.match-item span,
+.match-item strong {
+  display: block;
+}
+
+.match-item span {
+  color: var(--muted);
+  font-size: 11px;
+  line-height: 1.4;
+}
+
+.match-item strong {
+  margin-top: 4px;
+  color: var(--accent);
+  font-size: 20px;
+}
+
+.match-summary p {
+  margin: 12px 0 0;
+  color: rgba(32, 36, 42, 0.72);
+  font-size: 12px;
+  line-height: 1.7;
+}
+
+.actions {
+  display: grid;
+  gap: 10px;
+  margin-top: 18px;
+}
+
+.toast {
+  position: fixed;
+  left: 50%;
+  bottom: 22px;
+  z-index: 20;
+  transform: translateX(-50%);
+  padding: 10px 14px;
+  background: var(--ink);
+  color: #fff;
+  font-size: 13px;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 180ms ease;
+}
+
+.toast.show {
+  opacity: 1;
+}
+
+.error {
+  display: grid;
+  place-items: center;
+  min-height: 100vh;
+  padding: 24px;
+  text-align: center;
+}
+
+.error p {
+  color: var(--muted);
+  line-height: 1.7;
+}
+
+@media (min-width: 700px) {
+  body {
+    padding: 28px 0;
+  }
+
+  .shell {
+    min-height: calc(100vh - 56px);
+    border: 1px solid var(--line);
+    box-shadow: var(--shadow);
+  }
+
+  .screen {
+    min-height: calc(100vh - 60px);
+  }
+}
+
+    </style>
+  </head>
+  <body>
+    <main id="app" aria-live="polite"></main>
+    <script>window.__QUIZ_CONFIG__ = {"slug":"test-history-validated-path-24","topic":"你的性格，历史上早有人验证过这条路？","kicker":"24-Q HISTORY PERSONALITY PATH TEST","title":"历史性格路线测试","subtitle":"24 道真实场景题，匹配你的历史性格路线：谋局、慢成、旷达，还是掌局。","metaDescription":"完成历史性格路线测试，生成你的历史路线原型、影子原型、优势风险和 90 天行动建议。","startButton":"开始测试","resultKicker":"Historical Path Report","quizHint":"不要选更体面的答案，选你在现实里最接近的第一反应。","copyButton":"复制我的结果","restartButton":"重新测试","scoreLabel":"路线清晰度","stageLabel":"当前路线阶段","indexTitle":"历史路线指数","tensionTitle":"你的性格矛盾点","planTitle":"未来 90 天路线验证建议","blurSummary":"做完 24 道题，查看你的历史路线原型、影子原型、优势风险和行动建议。","stageLabels":[{"max":65,"label":"路线未成形"},{"max":78,"label":"开始看清自己"},{"max":88,"label":"路线逐渐稳定"},{"max":100,"label":"进入可放大阶段"}],"compareLabels":["顺着本能走","升级后的历史路线"],"disclaimer":"本测试为趣味自测和历史原型投射，不构成心理诊断、历史评价、职业建议或重大人生决策依据。","secondaryThreshold":1,"dimensions":["局势洞察","长期耐力","情绪复原","资源整合","行动落点"],"intro":["很多人以为自己的性格是问题。","太敏感、太慢热、太不甘心、想太多、看人太准。","但历史里早有人用类似的性格走通过一条路。你要测的不是你像谁，而是你的性格到底适合哪种人生打法。"],"loadingMessages":["正在读取你的第一反应...","正在匹配历史性格路线...","正在分析你的优势和风险...","正在生成你的路线档案...","历史路线报告生成完成。"],"questions":[{"id":1,"module":"第一组 判断方式","text":"遇到复杂局面，你第一眼通常先看什么？","options":[{"key":"A","text":"谁是关键人，真正的机会在哪","score":"ZHANG_LIANG"},{"key":"B","text":"先把基本盘稳住，再一步步修正","score":"ZENG_GUOFAN"},{"key":"C","text":"先照顾自己的状态，别让心被压窄","score":"SU_SHI"},{"key":"D","text":"先判断我有没有位置和话语权","score":"WU_ZETIAN"}]},{"id":2,"module":"第一组 判断方式","text":"别人质疑你时，你心里最真实的反应更像：","options":[{"key":"A","text":"不急解释，先看他为什么这样说","score":"ZHANG_LIANG"},{"key":"B","text":"记下来，靠长期结果回应","score":"ZENG_GUOFAN"},{"key":"C","text":"难受会有，但不会让一句话判我死刑","score":"SU_SHI"},{"key":"D","text":"这次轻视会变成我争取位置的理由","score":"WU_ZETIAN"}]},{"id":3,"module":"第一组 判断方式","text":"你最怕自己处在哪种状态里？","options":[{"key":"A","text":"看懂了局，却没有落子的空间","score":"ZHANG_LIANG"},{"key":"B","text":"一直努力，但没有稳定的长期系统","score":"ZENG_GUOFAN"},{"key":"C","text":"心被一件事困窄，失去生活感","score":"SU_SHI"},{"key":"D","text":"明明有能力，却一直被安排在边缘","score":"WU_ZETIAN"}]},{"id":4,"module":"第一组 判断方式","text":"你做重大决定时，最相信哪种东西？","options":[{"key":"A","text":"时机、人心、筹码的组合","score":"ZHANG_LIANG"},{"key":"B","text":"复盘、纪律、长期积累","score":"ZENG_GUOFAN"},{"key":"C","text":"内心是否还能保持松弛和真实","score":"SU_SHI"},{"key":"D","text":"权力结构、资源入口、身份位置","score":"WU_ZETIAN"}]},{"id":5,"module":"第二组 关系与边界","text":"在团队里，你最自然会站到哪个位置？","options":[{"key":"A","text":"幕后判断局势，提醒关键风险","score":"ZHANG_LIANG"},{"key":"B","text":"把混乱的流程和责任稳住","score":"ZENG_GUOFAN"},{"key":"C","text":"缓和气氛，让大家别被压力压扁","score":"SU_SHI"},{"key":"D","text":"争取决策权，不只做执行者","score":"WU_ZETIAN"}]},{"id":6,"module":"第二组 关系与边界","text":"别人向你求助，你通常最先给什么？","options":[{"key":"A","text":"帮 ta 看清局面和关键人","score":"ZHANG_LIANG"},{"key":"B","text":"给可执行步骤和复盘方法","score":"ZENG_GUOFAN"},{"key":"C","text":"先让 ta 把心放下来，不被一件事吞掉","score":"SU_SHI"},{"key":"D","text":"先确认边界、筹码和谁有决定权","score":"WU_ZETIAN"}]},{"id":7,"module":"第二组 关系与边界","text":"你最容易被哪类人消耗？","options":[{"key":"A","text":"没有判断力，却硬要指挥的人","score":"ZHANG_LIANG"},{"key":"B","text":"不负责任，还不断制造烂摊子的人","score":"ZENG_GUOFAN"},{"key":"C","text":"把生活越过越窄，只会抱怨的人","score":"SU_SHI"},{"key":"D","text":"既想利用你，又不给你位置的人","score":"WU_ZETIAN"}]},{"id":8,"module":"第二组 关系与边界","text":"关系里，你最在意的底层条件是：","options":[{"key":"A","text":"彼此能不能看懂局势，不互相拖后腿","score":"ZHANG_LIANG"},{"key":"B","text":"对方是否可靠、稳定、愿意一起做长期事","score":"ZENG_GUOFAN"},{"key":"C","text":"相处是否舒服，能不能保留松弛感","score":"SU_SHI"},{"key":"D","text":"对方是否真正尊重我的价值和边界","score":"WU_ZETIAN"}]},{"id":9,"module":"第三组 逆境反应","text":"低谷时，你最可能先做什么？","options":[{"key":"A","text":"暂时退后，重新观察机会和时机","score":"ZHANG_LIANG"},{"key":"B","text":"建立作息和任务表，先把基本盘救回来","score":"ZENG_GUOFAN"},{"key":"C","text":"去散步、写东西、吃饭，把生活重新养回来","score":"SU_SHI"},{"key":"D","text":"默默积累筹码，准备下一次上桌","score":"WU_ZETIAN"}]},{"id":10,"module":"第三组 逆境反应","text":"被人看轻后，你更像哪一种反应？","options":[{"key":"A","text":"先不翻脸，记住对方真实位置","score":"ZHANG_LIANG"},{"key":"B","text":"用一年半载做出结果","score":"ZENG_GUOFAN"},{"key":"C","text":"不让自己因为被看轻而变刻薄","score":"SU_SHI"},{"key":"D","text":"以后我必须拥有让人无法忽视的权力","score":"WU_ZETIAN"}]},{"id":11,"module":"第三组 逆境反应","text":"失败后，你最先复盘的会是：","options":[{"key":"A","text":"是不是误判了时机和关键人","score":"ZHANG_LIANG"},{"key":"B","text":"是不是基本功和纪律不够","score":"ZENG_GUOFAN"},{"key":"C","text":"是不是把自己逼得太窄","score":"SU_SHI"},{"key":"D","text":"是不是一开始就没拿到足够资源和位置","score":"WU_ZETIAN"}]},{"id":12,"module":"第三组 逆境反应","text":"你最希望别人怎么理解你的难？","options":[{"key":"A","text":"我不是冷，我是在看清局面","score":"ZHANG_LIANG"},{"key":"B","text":"我不是慢，我在修底层能力","score":"ZENG_GUOFAN"},{"key":"C","text":"我不是不痛，我只是不想把人生过窄","score":"SU_SHI"},{"key":"D","text":"我不是强势，我只是不能一直被放在边缘","score":"WU_ZETIAN"}]},{"id":13,"module":"第四组 权力与资源","text":"如果给你更多影响力，你会先做什么？","options":[{"key":"A","text":"重新布局关键关系和节点","score":"ZHANG_LIANG"},{"key":"B","text":"建制度、建流程、建长期系统","score":"ZENG_GUOFAN"},{"key":"C","text":"让人过得松一点、宽一点、有审美一点","score":"SU_SHI"},{"key":"D","text":"把资源集中到自己能掌局的位置","score":"WU_ZETIAN"}]},{"id":14,"module":"第四组 权力与资源","text":"你对“上位”的态度更接近：","options":[{"key":"A","text":"不一定站台前，但要能影响关键走向","score":"ZHANG_LIANG"},{"key":"B","text":"位置是责任，不是炫耀","score":"ZENG_GUOFAN"},{"key":"C","text":"比起上位，我更想有自由和生活质感","score":"SU_SHI"},{"key":"D","text":"位置很重要，因为没有位置就容易被定义","score":"WU_ZETIAN"}]},{"id":15,"module":"第四组 权力与资源","text":"你最想掌握哪种能力？","options":[{"key":"A","text":"判断大势和人心","score":"ZHANG_LIANG"},{"key":"B","text":"长期自律和组织经营","score":"ZENG_GUOFAN"},{"key":"C","text":"把痛苦转成表达和生活","score":"SU_SHI"},{"key":"D","text":"资源整合和话语权争取","score":"WU_ZETIAN"}]},{"id":16,"module":"第四组 权力与资源","text":"遇到强势的人，你通常会：","options":[{"key":"A","text":"观察他的弱点和真实需求","score":"ZHANG_LIANG"},{"key":"B","text":"用事实、流程和结果说话","score":"ZENG_GUOFAN"},{"key":"C","text":"不被他的情绪带走，先稳住自己","score":"SU_SHI"},{"key":"D","text":"明确边界，不接受被压低","score":"WU_ZETIAN"}]},{"id":17,"module":"第五组 行动路线","text":"你真正适合的成长方式更像：","options":[{"key":"A","text":"跟高手、趋势、机会借势","score":"ZHANG_LIANG"},{"key":"B","text":"靠笨功夫和复盘慢慢变强","score":"ZENG_GUOFAN"},{"key":"C","text":"靠体验、表达和生活感恢复生命力","score":"SU_SHI"},{"key":"D","text":"把自己推进更核心的位置","score":"WU_ZETIAN"}]},{"id":18,"module":"第五组 行动路线","text":"如果人生卡住一年，你更可能怎么破局？","options":[{"key":"A","text":"等一个更好的切入口，不乱动","score":"ZHANG_LIANG"},{"key":"B","text":"每天做一点能累积的事","score":"ZENG_GUOFAN"},{"key":"C","text":"先把自己从情绪低谷里养回来","score":"SU_SHI"},{"key":"D","text":"换圈层、换赛道，抢回主动权","score":"WU_ZETIAN"}]},{"id":19,"module":"第五组 行动路线","text":"你最容易忽略的一门功课是：","options":[{"key":"A","text":"看清之后要行动，不要只推演","score":"ZHANG_LIANG"},{"key":"B","text":"长期努力也要争取资源，不要只苦撑","score":"ZENG_GUOFAN"},{"key":"C","text":"旷达不是逃避，该处理的问题还要处理","score":"SU_SHI"},{"key":"D","text":"掌控欲要有边界，别把所有关系都变成战场","score":"WU_ZETIAN"}]},{"id":20,"module":"第五组 行动路线","text":"你最适合被放大的优势是：","options":[{"key":"A","text":"洞察、布局、判断关键节点","score":"ZHANG_LIANG"},{"key":"B","text":"稳定、耐心、持续经营","score":"ZENG_GUOFAN"},{"key":"C","text":"表达、审美、情绪复原","score":"SU_SHI"},{"key":"D","text":"野心、边界、资源整合","score":"WU_ZETIAN"}]},{"id":21,"module":"第六组 人生验证","text":"放到现代，你更适合哪种角色？","options":[{"key":"A","text":"策略顾问、内容拆解、商业判断","score":"ZHANG_LIANG"},{"key":"B","text":"项目负责人、运营管理、长期陪跑","score":"ZENG_GUOFAN"},{"key":"C","text":"内容创作者、生活方式、文化表达","score":"SU_SHI"},{"key":"D","text":"创业者、管理者、个人品牌主理人","score":"WU_ZETIAN"}]},{"id":22,"module":"第六组 人生验证","text":"做副业或个人品牌，你更适合哪类内容？","options":[{"key":"A","text":"洞察、分析、趋势、拆解类","score":"ZHANG_LIANG"},{"key":"B","text":"体系、模板、陪跑、训练类","score":"ZENG_GUOFAN"},{"key":"C","text":"情绪、审美、故事、疗愈类","score":"SU_SHI"},{"key":"D","text":"资源整合、社群、商业转化类","score":"WU_ZETIAN"}]},{"id":23,"module":"第六组 人生验证","text":"哪句话最像你的历史路线？","options":[{"key":"A","text":"借势而行，等风来时一击即中","score":"ZHANG_LIANG"},{"key":"B","text":"慢慢来，笨功夫终会改变命运","score":"ZENG_GUOFAN"},{"key":"C","text":"人生再窄，也要把它活宽","score":"SU_SHI"},{"key":"D","text":"不等被允许，我自己拿回位置","score":"WU_ZETIAN"}]},{"id":24,"module":"第六组 人生验证","text":"你做这个测试，最想确认的是：","options":[{"key":"A","text":"我的深度判断到底该怎么变成路","score":"ZHANG_LIANG"},{"key":"B","text":"我的慢和稳是不是也能赢","score":"ZENG_GUOFAN"},{"key":"C","text":"我的敏感和松弛是不是一种能力","score":"SU_SHI"},{"key":"D","text":"我的野心和边界是不是该被承认","score":"WU_ZETIAN"}]}],"results":{"ZHANG_LIANG":{"typeName":"张良型谋局者","subtitle":"你不是不行动，你是在等真正值得出手的局。","posterSubtext":"你的人生验证路线：看懂大势，借势落子。","maturityScore":89,"coreConclusion":"你的优势不是蛮冲，而是能在混乱里看见关键人、关键节点和关键时机。你不适合一直被推到前台消耗，更适合先判断局势，再用最小动作撬动最大变化。","diagnosis":"你常常比别人更早看见问题的结构。别人还在情绪里争输赢时，你已经在想谁有资源、谁有动机、谁才是真正能改变局面的人。这让你显得冷静，也容易让你被误解成不够热情。","whatYouReallyWant":"你真正想要的是一条更聪明的路：不是证明自己很拼，而是证明自己判断得准。你需要把洞察变成行动，不然你会长期停在“我都看懂了，但我没有动”的位置。","mechanism":{"title":"历史验证逻辑：借势，而不是硬撞","content":"张良型路线的核心不是逃避冲突，而是不把自己浪费在错误战场上。你适合先做信息收集、关系判断和时机选择，再找一个能撬动全局的切口。"},"professionalBasis":["这个原型对应的是高情境判断力：你对局势、人心和资源流向更敏感，适合做策略、拆解、规划、谈判、内容定位等工作。","风险在于想得过深、行动过慢。你越聪明，越容易把自己困在推演里。你的升级点不是再多想一点，而是把判断压缩成一个可执行动作。"],"coreTensions":["看得太清，动得太慢","擅长幕后，容易被低估","不爱硬碰，却并不软弱","想借势，也怕错过时机"],"suitableIf":["你适合做需要判断、拆解、布局、连接关键资源的事。"],"cautionIf":["不要把“等时机”变成拖延。真正的谋局者不是永远旁观，而是知道什么时候必须落子。"],"indices":[{"label":"局势洞察","value":94},{"label":"人心判断","value":90},{"label":"长期耐性","value":78},{"label":"行动落点","value":74},{"label":"借势能力","value":92}],"ifStay":"如果你继续只观察不出手，你会越来越清醒，也越来越难被看见。","ifChange":"把每一次判断改成一个小动作：约一个人、写一页方案、试一个切口、发一次作品。","notRecommended":["和所有人正面硬刚","把聪明用来证明别人错","一直等完美时机","只做幕后但不留下成果"],"plan90":[{"title":"列关键人地图","content":"把当前困境里的关键人、资源方、阻碍方列出来，别只盯着表面冲突。"},{"title":"做一次小落子","content":"选择一个低风险动作验证判断，例如发一次内容、找一次合作、问一次真实反馈。"},{"title":"建立成果证据","content":"每周留下一个能被别人看见的输出，减少“我知道但没人知道我知道”的损耗。"}],"closing":"你的路不是冲得最猛，而是在关键时刻把局面拨正。"},"ZENG_GUOFAN":{"typeName":"曾国藩型慢成者","subtitle":"你不是天生耀眼，但你最擅长把自己一点点修出来。","posterSubtext":"你的人生验证路线：笨功夫，慢慢赢。","maturityScore":91,"coreConclusion":"你的人生不是靠灵光一闪，而是靠反复复盘、长期纪律和稳定积累。你可能不是一开始最快的人，但你很容易成为最后还站在牌桌上的人。","diagnosis":"你内心对“稳定进步”有很强的执念。别人放弃时，你还会继续修流程、补基本功、做复盘。你不一定喜欢被夸天才，你更希望别人承认你可靠、能扛事、能把复杂事情慢慢做成。","whatYouReallyWant":"你真正想确认的是：慢是不是也能赢。答案是能，但前提是你的慢不是原地消耗，而是持续积累。你需要把努力从苦撑升级成系统。","mechanism":{"title":"历史验证逻辑：用纪律改命","content":"曾国藩型路线的核心是长期主义。不是因为你没有情绪，而是你知道情绪过后，真正改变处境的是作息、复盘、责任和持续行动。"},"professionalBasis":["这个原型对应的是高责任感和系统稳定性，适合管理、项目推进、运营、长期经营、知识产品、陪跑服务等需要持续交付的方向。","风险在于太能忍、太会扛，容易把本该争取的资源变成自己默默消化的压力。你的升级点是用制度和边界保护长期努力。"],"coreTensions":["慢热但稳","能扛也容易硬撑","不怕长期，却怕没有反馈","想靠实力，也需要资源"],"suitableIf":["你适合做能长期积累口碑、案例、体系和复利的事。"],"cautionIf":["不要把所有问题都归因于自己不够努力。有些局面需要换资源，不是继续苦撑。"],"indices":[{"label":"长期耐力","value":96},{"label":"复盘能力","value":91},{"label":"责任稳定","value":93},{"label":"资源争取","value":70},{"label":"系统搭建","value":89}],"ifStay":"如果你继续只靠忍耐，你会变强，但也可能变钝。","ifChange":"把努力变成系统：固定产出、固定复盘、固定筛选机会，不再靠意志力硬撑。","notRecommended":["用熬夜证明努力","什么烂摊子都接","只复盘自己不复盘环境","不提需求也不争资源"],"plan90":[{"title":"做长期表格","content":"把你想做成的事拆成每周固定动作，用数据记录，不靠感觉判断进步。"},{"title":"清理无效责任","content":"列出正在消耗你的三件事，判断哪些不是你的责任，逐步减少投入。"},{"title":"争取一次资源","content":"主动提出一次合作、预算、岗位、曝光或支持，不再只用默默做事换认可。"}],"closing":"你的路不是一夜翻身，而是把自己修到别人无法忽视。"},"SU_SHI":{"typeName":"苏轼型旷达者","subtitle":"你不是没受伤，你是不想让伤口定义整个人生。","posterSubtext":"你的人生验证路线：把窄路活宽。","maturityScore":87,"coreConclusion":"你的性格里有一种很珍贵的复原力。你会痛，会敏感，会被现实刺到，但你不愿意把人生越过越窄。你适合把经历转化成表达、审美、生活方式和更宽的心态。","diagnosis":"你很容易被情绪、关系和环境影响，但你也有能力把这些东西重新变成生活的一部分。你不是单纯乐观，而是知道日子还要继续，饭要好好吃，风要好好看，文字也可以慢慢写。","whatYouReallyWant":"你真正想要的是不被一件事困死。你想保留敏感，也保留幽默；承认疼痛，也不把自己交给疼痛。你的天赋在于把痛感转成可分享、可审美、可生活的东西。","mechanism":{"title":"历史验证逻辑：把低谷过成作品","content":"苏轼型路线的核心不是假装洒脱，而是在困境里重新恢复对生活的感知。你越能把经历说出来、写出来、活出来，越不会被困境吞掉。"},"professionalBasis":["这个原型对应的是情绪感知、表达力、审美力和复原力，适合内容创作、生活方式、情绪陪伴、文化表达、审美类产品等方向。","风险在于用幽默盖住问题，用旷达逃避边界。你的升级点是既保持宽，也保持清楚：哪些要放下，哪些要处理。"],"coreTensions":["敏感但不愿变窄","会痛也会自救","想自由也怕失控","能共情也容易被情绪淹没"],"suitableIf":["你适合做表达型、审美型、疗愈型、生活方式型内容或产品。"],"cautionIf":["不要把“算了”当成万能答案。真正的旷达不是不处理，而是不让问题夺走你的整个人生。"],"indices":[{"label":"情绪复原","value":91},{"label":"生活感知","value":95},{"label":"表达转化","value":88},{"label":"现实处理","value":73},{"label":"审美能量","value":92}],"ifStay":"如果你只靠自我安慰，你会看起来很好，但问题可能还在原地。","ifChange":"把你的感受转成作品、记录、产品或行动，同时明确处理一个现实问题。","notRecommended":["用玩笑遮住所有痛","一边说算了一边反复内耗","逃进远方但不处理现实","过度共情消耗自己"],"plan90":[{"title":"恢复生活触感","content":"固定做三件小事：散步、记录、整理空间，让身体先回到生活里。"},{"title":"把经历写成内容","content":"每周输出一篇短内容，把痛点转成别人能共鸣的表达。"},{"title":"处理一个现实边界","content":"选择一个长期逃避的问题，做一次沟通、拒绝或切断。"}],"closing":"你的路不是忘掉痛，而是带着痛把人生重新过宽。"},"WU_ZETIAN":{"typeName":"武则天型掌局者","subtitle":"你不是天生强势，你只是太清楚没有位置就会被定义。","posterSubtext":"你的人生验证路线：不等允许，拿回位置。","maturityScore":90,"coreConclusion":"你的性格里有很强的主导欲和边界意识。你不喜欢被安排、被低估、被放在边缘。你真正要走的路线不是讨好所有人，而是把自己推进能影响结果的位置。","diagnosis":"你对权力、位置和资源很敏感。你可能不一定直接说出来，但你很清楚谁在定义规则、谁在享受好处、谁被要求牺牲。你讨厌被动，因为被动会让你失去对人生的解释权。","whatYouReallyWant":"你真正想要的是被承认、被放到核心位置，并且拥有决定自己路线的权力。你的野心不是缺点，但它需要结构、耐心和边界，否则会变成长期紧绷。","mechanism":{"title":"历史验证逻辑：从边缘走到中枢","content":"武则天型路线的核心不是单纯争强，而是重新拿回定义权。你适合看清资源入口，整合支持系统，逐步进入更有话语权的位置。"},"professionalBasis":["这个原型对应的是高掌控力、资源整合力、边界意识和上升动力，适合创业、管理、社群主理、商业转化、个人品牌等方向。","风险在于把所有关系都看成战场，把所有反馈都听成压制。你的升级点是把野心变成路线图，而不是随时准备反击的情绪。"],"coreTensions":["想掌局，也怕被说强势","边界清楚，但容易紧绷","不甘边缘，也怕失控","野心很真，需要路线"],"suitableIf":["你适合做需要主导、整合、谈判、管理和转化的事情。"],"cautionIf":["不要把掌控感建立在压过别人上。真正的掌局，是让资源、规则和人心都能为目标服务。"],"indices":[{"label":"资源整合","value":94},{"label":"边界意识","value":92},{"label":"主导欲望","value":95},{"label":"长期耐心","value":74},{"label":"话语权争取","value":93}],"ifStay":"如果你只靠反击，你会越来越强硬，也越来越疲惫。","ifChange":"把野心写成路线：我要什么位置、需要什么资源、谁能协作、下一步怎么进入核心。","notRecommended":["把所有人当对手","用情绪争权","只想证明自己不弱","忽略长期信任建设"],"plan90":[{"title":"明确你要的位置","content":"写清楚你想进入哪个核心位置，以及它需要的能力、资源和证据。"},{"title":"建立资源清单","content":"列出能帮你上桌的人、平台、作品、案例和合作机会。"},{"title":"做一次主动争取","content":"主动提出一次角色升级、合作主导、报价提升或公开表达。"}],"closing":"你的路不是等别人看见，而是让自己走到无法被忽视的位置。"}},"secondaryNotes":{"ZHANG_LIANG":{"ZENG_GUOFAN":"你的主路线是「张良型谋局者」，但同时带有「曾国藩型慢成者」的影子倾向。主路线代表你最稳定的性格策略，影子路线代表你在压力、关系或机会面前偶尔会启动的另一套反应。","SU_SHI":"你的主路线是「张良型谋局者」，但同时带有「苏轼型旷达者」的影子倾向。主路线代表你最稳定的性格策略，影子路线代表你在压力、关系或机会面前偶尔会启动的另一套反应。","WU_ZETIAN":"你的主路线是「张良型谋局者」，但同时带有「武则天型掌局者」的影子倾向。主路线代表你最稳定的性格策略，影子路线代表你在压力、关系或机会面前偶尔会启动的另一套反应。"},"ZENG_GUOFAN":{"ZHANG_LIANG":"你的主路线是「曾国藩型慢成者」，但同时带有「张良型谋局者」的影子倾向。主路线代表你最稳定的性格策略，影子路线代表你在压力、关系或机会面前偶尔会启动的另一套反应。","SU_SHI":"你的主路线是「曾国藩型慢成者」，但同时带有「苏轼型旷达者」的影子倾向。主路线代表你最稳定的性格策略，影子路线代表你在压力、关系或机会面前偶尔会启动的另一套反应。","WU_ZETIAN":"你的主路线是「曾国藩型慢成者」，但同时带有「武则天型掌局者」的影子倾向。主路线代表你最稳定的性格策略，影子路线代表你在压力、关系或机会面前偶尔会启动的另一套反应。"},"SU_SHI":{"ZHANG_LIANG":"你的主路线是「苏轼型旷达者」，但同时带有「张良型谋局者」的影子倾向。主路线代表你最稳定的性格策略，影子路线代表你在压力、关系或机会面前偶尔会启动的另一套反应。","ZENG_GUOFAN":"你的主路线是「苏轼型旷达者」，但同时带有「曾国藩型慢成者」的影子倾向。主路线代表你最稳定的性格策略，影子路线代表你在压力、关系或机会面前偶尔会启动的另一套反应。","WU_ZETIAN":"你的主路线是「苏轼型旷达者」，但同时带有「武则天型掌局者」的影子倾向。主路线代表你最稳定的性格策略，影子路线代表你在压力、关系或机会面前偶尔会启动的另一套反应。"},"WU_ZETIAN":{"ZHANG_LIANG":"你的主路线是「武则天型掌局者」，但同时带有「张良型谋局者」的影子倾向。主路线代表你最稳定的性格策略，影子路线代表你在压力、关系或机会面前偶尔会启动的另一套反应。","ZENG_GUOFAN":"你的主路线是「武则天型掌局者」，但同时带有「曾国藩型慢成者」的影子倾向。主路线代表你最稳定的性格策略，影子路线代表你在压力、关系或机会面前偶尔会启动的另一套反应。","SU_SHI":"你的主路线是「武则天型掌局者」，但同时带有「苏轼型旷达者」的影子倾向。主路线代表你最稳定的性格策略，影子路线代表你在压力、关系或机会面前偶尔会启动的另一套反应。"}},"shareTemplate":["我测出来了：{{typeName}}","{{posterSubtext}}","{{secondaryLine}}","","你的性格，历史上早有人验证过这条路？"]};</script>
+    <script>
+(function () {
+  const app = document.getElementById("app");
+  const configPaths = ["./configs/site-config.json", "./configs/career-change.json"];
+
+  const state = {
+    config: null,
+    answers: {},
+    profile: { birthDate: "", actualAge: "" },
+    currentIndex: 0,
+    selected: null,
+    locked: false,
+    loadingStep: 0,
+    route: "home",
+    resultData: null,
+  };
+
+  const defaultLoadingMessages = [
+    "正在读取你的选择倾向...",
+    "正在识别隐藏动机...",
+    "正在计算结果分布...",
+    "正在生成专属报告...",
+    "分析完成。",
+  ];
+
+  init();
+
+  async function init() {
+    try {
+      state.config = await fetchConfig();
+      applyDocumentMeta(state.config);
+      applyTheme(state.config);
+
+      const saved = sessionStorage.getItem(getStorageKey());
+      if (saved) {
+        state.answers = JSON.parse(saved);
+      }
+      const savedProfile = sessionStorage.getItem(getProfileStorageKey());
+      if (savedProfile) {
+        state.profile = JSON.parse(savedProfile);
+      }
+
+      routeFromHash();
+      window.addEventListener("hashchange", routeFromHash);
+    } catch (error) {
+      app.innerHTML = `
+        <div class="error">
+          <div>
+            <h1>测试加载失败</h1>
+            <p>请确认你是通过网页链接打开页面，而不是直接双击 HTML 文件。</p>
+          </div>
+        </div>
+      `;
+      console.error(error);
+    }
+  }
+
+  async function fetchConfig() {
+    if (window.__QUIZ_CONFIG__) return window.__QUIZ_CONFIG__;
+    let lastError;
+    for (const path of configPaths) {
+      try {
+        const response = await fetch(path, { cache: "no-store" });
+        if (!response.ok) throw new Error(`${path} ${response.status}`);
+        return response.json();
+      } catch (error) {
+        lastError = error;
+      }
+    }
+    throw lastError;
+  }
+
+  function applyDocumentMeta(cfg) {
+    const title = cfg.title || "趣味测试";
+    const description = cfg.metaDescription || cfg.subtitle || "完成测试，生成你的专属报告。";
+    document.title = title;
+    setMeta("name", "description", description);
+    setMeta("property", "og:title", title);
+    setMeta("property", "og:description", description);
+  }
+
+  function applyTheme(cfg) {
+    Object.entries(cfg.theme || {}).forEach(([name, value]) => {
+      document.documentElement.style.setProperty(name, value);
+    });
+  }
+
+  function setMeta(attr, key, content) {
+    let node = document.querySelector(`meta[${attr}="${key}"]`);
+    if (!node) {
+      node = document.createElement("meta");
+      node.setAttribute(attr, key);
+      document.head.appendChild(node);
+    }
+    node.setAttribute("content", content);
+  }
+
+  function routeFromHash() {
+    const route = (location.hash || "#/").replace("#/", "") || "home";
+    renderRoute(route);
+  }
+
+  function navigate(route) {
+    const nextHash = `#/${route}`;
+    if (location.hash === nextHash) {
+      renderRoute(route);
+      return;
+    }
+    location.hash = nextHash;
+  }
+
+  function renderRoute(route) {
+    state.route = route;
+    if (route === "quiz") renderQuiz();
+    else if (route === "loading") startLoading();
+    else if (route === "result") renderResult();
+    else renderHome();
+  }
+
+  function renderShell(content, extraClass = "") {
+    app.innerHTML = `
+      <div class="shell">
+        <div class="top-rule"></div>
+        <section class="screen ${extraClass}">${content}</section>
+      </div>
+      <div id="toast" class="toast">已复制</div>
+    `;
+  }
+
+  function renderHome() {
+    const cfg = state.config;
+    renderShell(
+      `
+      <div class="home">
+        <div class="kicker"><span class="dot"></span><span>${text(cfg.kicker)}</span><span class="dot"></span></div>
+        <h1 class="hero-title">${text(cfg.title)}</h1>
+        <p class="hero-subtitle">${text(cfg.subtitle)}</p>
+        <div class="hairline"></div>
+        <div class="intro">
+          ${(cfg.intro || []).map((p, index) => `<p class="${index === cfg.intro.length - 1 ? "strong" : ""}">${text(p)}</p>`).join("")}
+        </div>
+        ${!cfg.compactHome && (cfg.dimensions || []).length ? `
+          <div class="pill-grid">
+            ${(cfg.dimensions || []).map((item) => `<div class="pill">${text(item)}</div>`).join("")}
+          </div>
+        ` : ""}
+        ${cfg.testInfo ? `
+          <section class="home-card info-card">
+            <h2>${text(cfg.testInfo.title || "测验说明")}</h2>
+            <ul>${(cfg.testInfo.bullets || []).map((item) => `<li>${text(item)}</li>`).join("")}</ul>
+          </section>
+        ` : ""}
+        ${cfg.matchingSystem ? `
+          <section class="home-card info-card">
+            <h2>${text(cfg.matchingSystem.title || "综合匹配系统")}</h2>
+            <p>${text(cfg.matchingSystem.body || "")}</p>
+          </section>
+        ` : ""}
+        ${cfg.profileInput ? `
+          <section class="profile-panel">
+            <label class="profile-label" for="profile-value">${text(cfg.profileInput.title || "先输入出生日期")}</label>
+            <div class="profile-field">
+              <span>${text(cfg.profileInput.label || "出生日期")}</span>
+              <input
+                id="profile-value"
+                type="${text(cfg.profileInput.type || "date")}"
+                value="${text(getProfileInputValue(cfg.profileInput))}"
+                ${cfg.profileInput.type === "number" ? `inputmode="numeric" min="${text(cfg.profileInput.min || 1)}" max="${text(cfg.profileInput.max || 99)}" placeholder="${text(cfg.profileInput.placeholder || "")}"` : ""}
+                ${cfg.profileInput.required ? "required" : ""}
+              >
+            </div>
+            <p class="profile-note">${text(cfg.profileInput.note || "")}</p>
+            <p class="profile-error" data-profile-error aria-live="polite"></p>
+          </section>
+        ` : ""}
+        <button class="primary-btn" data-action="start">${text(cfg.startButton || "开始测试")}</button>
+        ${cfg.compactHome && (cfg.dimensions || []).length ? `
+          <div class="pill-grid compact-pills">
+            ${(cfg.dimensions || []).map((item) => `<div class="pill">${text(item)}</div>`).join("")}
+          </div>
+        ` : ""}
+        <p class="disclaimer">${text(cfg.disclaimer || "本测试为趣味内容，仅供娱乐参考。")}</p>
+      </div>
+      `,
+      "home"
+    );
+    const startButton = app.querySelector("[data-action='start']");
+    const profileField = app.querySelector("#profile-value");
+    const profileError = app.querySelector("[data-profile-error]");
+    profileField?.addEventListener("input", () => {
+      profileField.classList.remove("invalid");
+      if (profileError) profileError.textContent = "";
+    });
+    let started = false;
+    const startQuiz = () => {
+      if (started) return;
+      const profileValue = profileField?.value?.trim() || "";
+      if (cfg.profileInput?.required && !profileValue) {
+        profileField?.classList.add("invalid");
+        if (profileError) profileError.textContent = cfg.profileInput?.error || "请先填写信息，再开始测试。";
+        profileField?.focus();
+        return;
+      }
+      if (cfg.profileInput?.type === "number") {
+        const numericValue = Number(profileValue);
+        const min = Number(cfg.profileInput.min || 1);
+        const max = Number(cfg.profileInput.max || 99);
+        if (!Number.isFinite(numericValue) || numericValue < min || numericValue > max) {
+          profileField?.classList.add("invalid");
+          if (profileError) profileError.textContent = cfg.profileInput?.rangeError || `请输入 ${min}-${max} 之间的数字。`;
+          profileField?.focus();
+          return;
+        }
+      }
+      started = true;
+      state.answers = {};
+      state.profile = buildProfileFromInput(cfg.profileInput, profileValue);
+      state.currentIndex = 0;
+      sessionStorage.removeItem(getStorageKey());
+      sessionStorage.setItem(getProfileStorageKey(), JSON.stringify(state.profile));
+      navigate("quiz");
+    };
+    startButton.addEventListener("click", startQuiz);
+    startButton.addEventListener(
+      "touchend",
+      (event) => {
+        event.preventDefault();
+        startQuiz();
+      },
+      { passive: false }
+    );
+  }
+
+  function renderQuiz() {
+    const questions = state.config.questions || [];
+    const question = questions[state.currentIndex];
+    if (!question) {
+      renderHome();
+      return;
+    }
+
+    const progress = ((state.currentIndex + 1) / questions.length) * 100;
+
+    renderShell(
+      `
+      <div class="sticky-head">
+        <div class="quiz-meta">
+          <span>${String(state.currentIndex + 1).padStart(2, "0")} / ${questions.length}</span>
+          <span>${text(question.module)}</span>
+        </div>
+        <div class="progress-track"><div class="progress-bar" style="width:${progress}%"></div></div>
+      </div>
+      <div class="question-no">${String(state.currentIndex + 1).padStart(2, "0")}</div>
+      <h1 class="question-title">${text(question.text)}</h1>
+      <div class="options">
+        ${(question.options || [])
+          .map(
+            (option) => `
+            <button class="option" data-option="${text(option.key)}">
+              <span class="option-key">${text(option.key)}</span>
+              <span class="option-text">${text(option.text)}</span>
+            </button>
+          `
+          )
+          .join("")}
+      </div>
+      <p class="hint">${text(state.config.quizHint || "选择后自动进入下一题")}</p>
+      `,
+      "quiz-screen"
+    );
+
+    app.querySelectorAll("[data-option]").forEach((button) => {
+      button.addEventListener("click", () => selectOption(button.dataset.option));
+    });
+  }
+
+  function selectOption(key) {
+    if (state.locked) return;
+    state.locked = true;
+    state.selected = key;
+    const question = state.config.questions[state.currentIndex];
+    state.answers[question.id] = key;
+
+    app.querySelectorAll(".option").forEach((button) => {
+      const selected = button.dataset.option === key;
+      button.classList.toggle("selected", selected);
+      button.classList.toggle("dimmed", !selected);
+    });
+
+    window.setTimeout(() => {
+      if (state.currentIndex < state.config.questions.length - 1) {
+        state.currentIndex += 1;
+        state.locked = false;
+        state.selected = null;
+        renderQuiz();
+      } else {
+        sessionStorage.setItem(getStorageKey(), JSON.stringify(state.answers));
+        state.locked = false;
+        navigate("loading");
+      }
+    }, 420);
+  }
+
+  function startLoading() {
+    state.loadingStep = 0;
+    renderLoading("");
+    tickLoading();
+  }
+
+  function renderLoading(value) {
+    const loadingMessages = getLoadingMessages();
+    renderShell(
+      `
+      <div class="loading-card">
+        <div class="spinner"></div>
+        <div class="loading-text">${text(value)}<span class="cursor">|</span></div>
+        <div class="step-bars">
+          ${loadingMessages.map((_, index) => `<div class="step ${index < state.loadingStep ? "done" : ""}"><span></span></div>`).join("")}
+        </div>
+      </div>
+      `,
+      "loading-screen"
+    );
+  }
+
+  function tickLoading() {
+    if (state.route !== "loading") return;
+    const loadingMessages = getLoadingMessages();
+    if (state.loadingStep >= loadingMessages.length) {
+      window.setTimeout(() => navigate("result"), 700);
+      return;
+    }
+    const message = loadingMessages[state.loadingStep];
+    let chars = 0;
+    const interval = window.setInterval(() => {
+      chars += 1;
+      renderLoading(message.slice(0, chars));
+      if (chars >= message.length) {
+        window.clearInterval(interval);
+        window.setTimeout(() => {
+          state.loadingStep += 1;
+          tickLoading();
+        }, 520);
+      }
+    }, 35);
+  }
+
+  function renderResult() {
+    const saved = sessionStorage.getItem(getStorageKey());
+    if (saved) state.answers = JSON.parse(saved);
+    if (Object.keys(state.answers).length < state.config.questions.length) {
+      renderHome();
+      return;
+    }
+
+    const scored = scoreAnswers(state.answers);
+    const primary = state.config.results[scored.primary];
+    const secondary = scored.secondary ? state.config.secondaryNotes?.[scored.primary]?.[scored.secondary] : null;
+    const stage = getStage(primary.maturityScore);
+    const shareText = buildShareText(primary, secondary);
+    const compareLabels = state.config.compareLabels || ["如果继续原路", "如果换一种做法"];
+    state.resultData = { scored, primary, secondary, stage, shareText };
+
+    renderShell(
+      `
+      <article class="report">
+        <div class="kicker"><span class="dot"></span><span>${text(state.config.resultKicker || "Result Report")}</span><span class="dot"></span></div>
+        <h1 class="result-type">${text(primary.typeName)}</h1>
+        <p class="result-subtitle">${text(primary.subtitle)}</p>
+        <div class="stamp-row">
+          <div class="stamp"><strong>${text(primary.maturityScore)}</strong><span>${text(state.config.scoreLabel || "决策成熟度")}</span></div>
+          <div class="stamp"><strong>${text(stage)}</strong><span>${text(state.config.stageLabel || "当前行动阶段")}</span></div>
+        </div>
+
+        ${renderMatchSummary(scored)}
+
+        ${scored.psychological ? "" : `
+          <section class="section">
+            <h2>你的答案分布</h2>
+            <div class="meters">
+              ${Object.entries(scored.counts)
+                .filter(([, value]) => value > 0)
+                .map(([key, value]) => {
+                  const typeData = state.config.results[key];
+                  const width = (value / state.config.questions.length) * 100;
+                  return `
+                    <div>
+                      <div class="meter-head"><span>${text(key)} · ${text(typeData.typeName)}</span><span>${value} 题</span></div>
+                      <div class="meter-track"><div class="meter-fill" style="width:${width}%"></div></div>
+                    </div>
+                  `;
+                })
+                .join("")}
+            </div>
+          </section>
+        `}
+
+        ${secondary ? `<section class="section"><h2>副倾向提示</h2><div class="secondary-note">${text(secondary)}</div></section>` : ""}
+
+        <section class="section">
+          <h2>诊断结论</h2>
+          <div class="quote">${text(primary.coreConclusion)}</div>
+        </section>
+
+        <section class="section">
+          <h2>为什么你会这样</h2>
+          <p>${text(primary.diagnosis)}</p>
+          <p>${text(primary.whatYouReallyWant)}</p>
+        </section>
+
+        <section class="section">
+          <h2>${text(primary.mechanism.title)}</h2>
+          <p>${text(primary.mechanism.content)}</p>
+        </section>
+
+        ${renderParagraphSection("专业解读框架", primary.professionalBasis)}
+        ${renderTagSection("你的关键矛盾", primary.coreTensions)}
+        ${renderCompareListSection("适合推进的条件", "需要谨慎的信号", primary.suitableIf, primary.cautionIf)}
+
+        <section class="section">
+          <h2>关键指数</h2>
+          <div class="meters">
+            ${(primary.indices || [])
+              .map(
+                (item) => `
+                <div>
+                  <div class="meter-head"><span>${text(item.label)}</span><span>${text(item.value)}</span></div>
+                  <div class="meter-track"><div class="meter-fill" style="width:${number(item.value)}%"></div></div>
+                </div>
+              `
+              )
+              .join("")}
+          </div>
+        </section>
+
+        <section class="section">
+          <h2>两条路径对比</h2>
+          <div class="compare">
+            <div class="compare-card"><h3>${text(compareLabels[0])}</h3><p>${text(primary.ifStay)}</p></div>
+            <div class="compare-card"><h3>${text(compareLabels[1])}</h3><p>${text(primary.ifChange)}</p></div>
+          </div>
+        </section>
+
+        <section class="section">
+          <h2>现在最不建议你做</h2>
+          <div class="tag-list">${(primary.notRecommended || []).map((item) => `<span class="tag">${text(item)}</span>`).join("")}</div>
+        </section>
+
+        <section class="section">
+          <h2>未来 90 天验证方案</h2>
+          <div class="plan">
+            ${(primary.plan90 || [])
+              .map(
+                (item, index) => `
+                <div class="plan-card">
+                  <h3>${index + 1}. ${text(item.title)}</h3>
+                  <p>${text(item.content)}</p>
+                </div>
+              `
+              )
+              .join("")}
+          </div>
+        </section>
+
+        <section class="section">
+          <h2>最后一句话</h2>
+          <p>${text(primary.closing)}</p>
+        </section>
+
+        <div class="actions">
+          <button class="primary-btn" data-action="copy">${text(state.config.copyButton || "复制我的结果")}</button>
+          <button class="ghost-btn" data-action="restart">${text(state.config.restartButton || "重新测试")}</button>
+        </div>
+      </article>
+      `,
+      "result-screen"
+    );
+
+    app.querySelector("[data-action='copy']").addEventListener("click", () => copyShareText(shareText));
+    app.querySelector("[data-action='restart']").addEventListener("click", () => {
+      sessionStorage.removeItem(getStorageKey());
+      sessionStorage.removeItem(getProfileStorageKey());
+      state.answers = {};
+      state.profile = { birthDate: "" };
+      state.currentIndex = 0;
+      navigate("home");
+    });
+  }
+
+  function renderParagraphSection(title, paragraphs) {
+    if (!Array.isArray(paragraphs) || !paragraphs.length) return "";
+    return `
+      <section class="section">
+        <h2>${text(title)}</h2>
+        ${paragraphs.map((item) => `<p>${text(item)}</p>`).join("")}
+      </section>
+    `;
+  }
+
+  function renderTagSection(title, items) {
+    if (!Array.isArray(items) || !items.length) return "";
+    return `
+      <section class="section">
+        <h2>${text(title)}</h2>
+        <div class="tag-list">${items.map((item) => `<span class="tag">${text(item)}</span>`).join("")}</div>
+      </section>
+    `;
+  }
+
+  function renderMatchSummary(scored) {
+    if (scored.psychological) return renderPsychologicalSummary(scored.psychological);
+    if (!scored.match) return "";
+    const match = scored.match;
+    return `
+      <section class="section">
+        <h2>综合匹配结果</h2>
+        <div class="match-summary">
+          <div class="match-grid">
+            <div class="match-item"><span>出生日期倾向</span><strong>${text(match.birthElement)}</strong></div>
+            <div class="match-item"><span>答题倾向</span><strong>${text(match.personalityElement)}</strong></div>
+            <div class="match-item"><span>城市匹配度</span><strong>${text(match.matchScore)}%</strong></div>
+          </div>
+          <p>本结果按出生日期倾向与 49 道题的生活选择加权生成。五行仅用于表达生活偏好，结果需要结合真实岗位、预算、住房和试住体验判断。</p>
+        </div>
+      </section>
+    `;
+  }
+
+  function renderPsychologicalSummary(data) {
+    const deltaLabel = data.delta > 0 ? `比实际年龄成熟 ${data.delta} 岁` : data.delta < 0 ? `比实际年龄年轻 ${Math.abs(data.delta)} 岁` : "与实际年龄同频";
+    return `
+      <section class="section">
+        <h2>心理年龄对比</h2>
+        <div class="match-summary">
+          <div class="match-grid">
+            <div class="match-item"><span>实际年龄</span><strong>${text(data.actualAge)}岁</strong></div>
+            <div class="match-item"><span>心理年龄</span><strong>${text(data.psychologicalAge)}岁</strong></div>
+            <div class="match-item"><span>年龄差</span><strong>${text(deltaLabel)}</strong></div>
+          </div>
+          <p>${text(data.ageLabel)}。这个数字不是能力高低，只代表你最近面对世界时更常用的心理模式。</p>
+        </div>
+      </section>
+      <section class="section">
+        <h2>8维心理画像</h2>
+        <div class="meters">
+          ${data.dimensionOrder.map((key) => `
+            <div>
+              <div class="meter-head"><span>${text(data.dimensionLabels[key] || key)}</span><span>${text(data.dimensions[key])}</span></div>
+              <div class="meter-track"><div class="meter-fill" style="width:${number(data.dimensions[key])}%"></div></div>
+            </div>
+          `).join("")}
+        </div>
+      </section>
+      <section class="section">
+        <h2>关键词标签</h2>
+        <div class="tag-list">${data.tags.map((item) => `<span class="tag">${text(item)}</span>`).join("")}</div>
+      </section>
+      <section class="section">
+        <h2>你的长板与盲点</h2>
+        <div class="compare">
+          <div class="compare-card">
+            <h3>最高的 3 个维度</h3>
+            ${data.topDimensions.map((item) => `<p>${text(item.label)}：${text(item.value)}</p>`).join("")}
+          </div>
+          <div class="compare-card">
+            <h3>最低的 2 个维度</h3>
+            ${data.lowDimensions.map((item) => `<p>${text(item.label)}：${text(item.value)}</p>`).join("")}
+          </div>
+        </div>
+      </section>
+    `;
+  }
+
+  function renderCompareListSection(leftTitle, rightTitle, leftItems, rightItems) {
+    const hasLeft = Array.isArray(leftItems) && leftItems.length;
+    const hasRight = Array.isArray(rightItems) && rightItems.length;
+    if (!hasLeft && !hasRight) return "";
+    return `
+      <section class="section">
+        <h2>适用边界</h2>
+        <div class="compare">
+          <div class="compare-card">
+            <h3>${text(leftTitle)}</h3>
+            ${(leftItems || []).map((item) => `<p>${text(item)}</p>`).join("")}
+          </div>
+          <div class="compare-card">
+            <h3>${text(rightTitle)}</h3>
+            ${(rightItems || []).map((item) => `<p>${text(item)}</p>`).join("")}
+          </div>
+        </div>
+      </section>
+    `;
+  }
+
+  function scoreAnswers(answers) {
+    if (state.config.scoring?.mode === "psychological-age") {
+      return scorePsychologicalAge(answers, state.config.scoring);
+    }
+    if (state.config.scoring?.mode === "paired-attributes") {
+      return scorePairedAttributes(answers, state.config.scoring);
+    }
+    if (state.config.scoring?.mode === "city-with-elements") {
+      return scoreCityWithElements(answers, state.config.scoring);
+    }
+
+    const resultKeys = Object.keys(state.config.results || {});
+    const counts = Object.fromEntries(resultKeys.map((key) => [key, 0]));
+    (state.config.questions || []).forEach((question) => {
+      const answerKey = answers[question.id];
+      if (!answerKey) return;
+      const option = (question.options || []).find((item) => item.key === answerKey);
+      const weights = option?.weights;
+      if (weights && typeof weights === "object") {
+        Object.entries(weights).forEach(([key, value]) => {
+          if (counts[key] !== undefined) counts[key] += Number(value) || 0;
+        });
+        return;
+      }
+      const scoreKey = option?.score || option?.result || answerKey;
+      if (counts[scoreKey] !== undefined) counts[scoreKey] += 1;
+    });
+    const sorted = Object.entries(counts).sort((a, b) => b[1] - a[1]);
+    const threshold = state.config.secondaryThreshold ?? 2;
+    const primary = sorted[0][0];
+    const secondary = sorted[1][1] > 0 && sorted[0][1] - sorted[1][1] <= threshold ? sorted[1][0] : null;
+    return { counts, primary, secondary };
+  }
+
+  function scorePsychologicalAge(answers, scoring) {
+    const answerValues = scoring.answerValues || { A: 1, B: 2, C: 3, D: 4, E: 5 };
+    const dimensionLabels = scoring.dimensionLabels || {};
+    const dimensionOrder = scoring.dimensionOrder || Object.keys(dimensionLabels);
+    const rawTotals = Object.fromEntries(dimensionOrder.map((key) => [key, 0]));
+    const rawCounts = Object.fromEntries(dimensionOrder.map((key) => [key, 0]));
+
+    (state.config.questions || []).forEach((question) => {
+      const answerKey = answers[question.id];
+      if (!answerKey || !question.dimension) return;
+      const base = Number(answerValues[answerKey] ?? answerValues[String(answerKey)] ?? 0);
+      if (!Number.isFinite(base) || base <= 0) return;
+      const value = question.reverse ? 6 - base : base;
+      rawTotals[question.dimension] = (rawTotals[question.dimension] || 0) + value;
+      rawCounts[question.dimension] = (rawCounts[question.dimension] || 0) + 1;
+    });
+
+    const dimensions = {};
+    dimensionOrder.forEach((key) => {
+      const count = rawCounts[key] || 0;
+      if (!count) {
+        dimensions[key] = 0;
+        return;
+      }
+      const min = count;
+      const max = count * 5;
+      dimensions[key] = Math.round(((rawTotals[key] - min) / (max - min)) * 100);
+    });
+
+    const matureDimensions = scoring.matureDimensions || ["emotion", "responsibility", "resilience", "tolerance", "selfAcceptance"];
+    const youthfulDimensions = scoring.youthfulDimensions || ["curiosity", "socialEase", "lifePassion"];
+    const matureIndex = average(matureDimensions.map((key) => dimensions[key]));
+    const youthfulIndex = average(youthfulDimensions.map((key) => dimensions[key]));
+    const actualAge = getActualAge(scoring);
+    const psychologicalAge = clamp(
+      Math.round(actualAge + (matureIndex - youthfulIndex) * Number(scoring.ageFactor ?? 0.22)),
+      Number(scoring.minAge ?? 10),
+      Number(scoring.maxAge ?? 70)
+    );
+    const delta = psychologicalAge - actualAge;
+    const primary = getPsychologicalResultKey(delta, scoring);
+    const counts = Object.fromEntries(Object.keys(state.config.results || {}).map((key) => [key, key === primary ? (state.config.questions || []).length : 0]));
+    const rankedDimensions = dimensionOrder
+      .map((key) => ({ key, label: dimensionLabels[key] || key, value: dimensions[key] ?? 0 }))
+      .sort((left, right) => right.value - left.value);
+    const tags = buildPsychologicalTags(rankedDimensions, delta, primary, scoring);
+
+    return {
+      counts,
+      primary,
+      secondary: null,
+      psychological: {
+        actualAge,
+        psychologicalAge,
+        delta,
+        ageLabel: getPsychologicalAgeLabel(delta),
+        matureIndex: Math.round(matureIndex),
+        youthfulIndex: Math.round(youthfulIndex),
+        dimensions,
+        dimensionLabels,
+        dimensionOrder,
+        topDimensions: rankedDimensions.slice(0, 3),
+        lowDimensions: rankedDimensions.slice(-2).reverse(),
+        tags,
+      },
+    };
+  }
+
+  function getActualAge(scoring) {
+    const numericAge = Number(state.profile.actualAge);
+    if (Number.isFinite(numericAge) && numericAge > 0) return Math.round(numericAge);
+    const birthAge = calculateAgeFromBirthDate(state.profile.birthDate);
+    if (birthAge) return birthAge;
+    return Number(scoring.defaultActualAge || 28);
+  }
+
+  function calculateAgeFromBirthDate(value) {
+    if (!value) return null;
+    const date = new Date(value);
+    if (Number.isNaN(date.getTime())) return null;
+    const now = new Date();
+    let age = now.getFullYear() - date.getFullYear();
+    const monthDiff = now.getMonth() - date.getMonth();
+    if (monthDiff < 0 || (monthDiff === 0 && now.getDate() < date.getDate())) age -= 1;
+    return age > 0 ? age : null;
+  }
+
+  function getPsychologicalResultKey(delta, scoring) {
+    const groups = scoring.ageGroups || [
+      { key: "CURIOUS_CHILD", maxDelta: -8 },
+      { key: "HOT_BLOODED_TEEN", maxDelta: -3 },
+      { key: "BALANCED_YOUTH", maxDelta: 2 },
+      { key: "STEADY_ADVISER", maxDelta: 7 },
+      { key: "CLEAR_HELM", maxDelta: Infinity },
+    ];
+    const hit = groups.find((item) => delta <= Number(item.maxDelta));
+    return hit?.key || groups[groups.length - 1]?.key || Object.keys(state.config.results || {})[0];
+  }
+
+  function getPsychologicalAgeLabel(delta) {
+    if (delta <= -8) return "灵魂明显年轻";
+    if (delta <= -3) return "少年感在线";
+    if (delta <= 2) return "与真实年龄同频";
+    if (delta <= 7) return "心智略超前";
+    return "灵魂明显成熟";
+  }
+
+  function buildPsychologicalTags(rankedDimensions, delta, primary, scoring) {
+    const tagMap = scoring.dimensionTags || {};
+    const ageTags = scoring.ageTags || {};
+    const resultTags = scoring.resultTags || {};
+    const tags = rankedDimensions
+      .slice(0, 3)
+      .map((item) => tagMap[item.key]?.[0] || item.label)
+      .filter(Boolean);
+    tags.push(ageTags[getPsychologicalAgeLabel(delta)] || getPsychologicalAgeLabel(delta));
+    tags.push(resultTags[primary] || "社交原型清晰");
+    return [...new Set(tags)].slice(0, 5);
+  }
+
+  function scoreCityWithElements(answers, scoring) {
+    const resultKeys = Object.keys(state.config.results || {});
+    const counts = Object.fromEntries(resultKeys.map((key) => [key, 0]));
+    const elementMap = scoring.elementMap || {};
+    const elementCounts = {};
+    Object.values(elementMap).forEach((element) => { elementCounts[element] = 0; });
+
+    (state.config.questions || []).forEach((question) => {
+      const answerKey = answers[question.id];
+      if (!answerKey) return;
+      const option = (question.options || []).find((item) => item.key === answerKey);
+      const scoreKey = option?.score || option?.result || answerKey;
+      const element = elementMap[scoreKey];
+      if (counts[scoreKey] !== undefined) counts[scoreKey] += 1;
+      if (element && elementCounts[element] !== undefined) elementCounts[element] += 1;
+    });
+
+    const personalityElement = Object.entries(elementCounts).sort((left, right) => right[1] - left[1])[0]?.[0] || "未提供";
+    const birthElement = getBirthElement(state.profile.birthDate, scoring);
+    const birthWeight = Number(scoring.birthWeight ?? 0.25);
+    const combined = Object.fromEntries(resultKeys.map((key) => {
+      const birthBonus = elementMap[key] === birthElement ? (state.config.questions.length * birthWeight) : 0;
+      return [key, counts[key] + birthBonus];
+    }));
+    const sorted = Object.entries(combined).sort((left, right) => right[1] - left[1]);
+    const threshold = state.config.secondaryThreshold ?? 2;
+    const primary = sorted[0][0];
+    const secondary = sorted[1][1] > 0 && sorted[0][1] - sorted[1][1] <= threshold ? sorted[1][0] : null;
+    const personalityShare = counts[primary] / Math.max(1, state.config.questions.length);
+    const birthMatch = elementMap[primary] === birthElement;
+    const matchScore = Math.round(Math.min(99, 55 + personalityShare * 30 + (birthMatch ? 15 : 5)));
+    return {
+      counts,
+      primary,
+      secondary,
+      match: { birthElement, personalityElement, elementCounts, matchScore },
+    };
+  }
+
+  function getBirthElement(value, scoring) {
+    if (!value) return "未提供";
+    const parts = value.split("-").map(Number);
+    if (parts.length !== 3 || parts.some((part) => !Number.isFinite(part))) return "未提供";
+    const [year, month, day] = parts;
+    const elements = scoring.birthElements || ["木", "火", "土", "金", "水"];
+    return elements[Math.abs(year * 13 + month * 7 + day) % elements.length];
+  }
+
+  function scorePairedAttributes(answers, scoring) {
+    const attributes = Object.fromEntries((scoring.attributes || []).map((key) => [key, 0]));
+    const questionsById = Object.fromEntries((state.config.questions || []).map((question) => [question.id, question]));
+
+    (state.config.questions || []).forEach((question) => {
+      const answerKey = answers[question.id];
+      if (!answerKey) return;
+      const option = (question.options || []).find((item) => item.key === answerKey);
+      (option?.attributes || []).forEach((attribute) => {
+        if (attributes[attribute] !== undefined) attributes[attribute] += 1;
+      });
+    });
+
+    const chosen = (scoring.pairs || []).map(([left, right], index) => {
+      if (attributes[left] > attributes[right]) return left;
+      if (attributes[right] > attributes[left]) return right;
+
+      const tieQuestionId = scoring.tieBreakers?.[String(index)];
+      const tieQuestion = questionsById[tieQuestionId];
+      const tieAnswer = tieQuestion && answers[tieQuestionId];
+      const tieOption = tieQuestion?.options?.find((item) => item.key === tieAnswer);
+      return tieOption?.attributes?.includes(left) ? left : right;
+    });
+
+    const primary = chosen.join("");
+    const counts = Object.fromEntries(Object.keys(state.config.results || {}).map((key) => [key, key === primary ? (state.config.questions || []).length : 0]));
+    const alternate = chosen.slice();
+    if (scoring.pairs?.length) {
+      const firstPair = scoring.pairs[0];
+      alternate[0] = alternate[0] === firstPair[0] ? firstPair[1] : firstPair[0];
+    }
+    const secondary = alternate.join("") !== primary && state.config.secondaryNotes?.[primary]?.[alternate.join("")] ? alternate.join("") : null;
+    return { counts, primary, secondary, attributes };
+  }
+
+  function getStage(score) {
+    const labels = state.config.stageLabels || [
+      { max: 45, label: "观察期" },
+      { max: 65, label: "验证期" },
+      { max: 82, label: "规划期" },
+      { max: 100, label: "行动期" },
+    ];
+    const hit = labels.find((item) => score <= item.max);
+    return hit ? hit.label : labels[labels.length - 1].label;
+  }
+
+  function buildShareText(primary, secondary) {
+    const template = state.config.shareTemplate || [
+      "我测出了：{{typeName}}",
+      "{{posterSubtext}}",
+      "{{secondaryLine}}",
+      "",
+      "{{title}}",
+    ];
+    const values = {
+      title: state.config.title,
+      typeName: primary.typeName,
+      posterSubtext: primary.posterSubtext,
+      secondary: secondary || "",
+      secondaryLine: secondary ? `副倾向：${secondary}` : "",
+    };
+    return template
+      .map((line) => fillTemplate(line, values))
+      .filter((line, index, arr) => line || arr[index - 1])
+      .join("\n")
+      .trim();
+  }
+
+  async function copyShareText(value) {
+    try {
+      await navigator.clipboard.writeText(value);
+      showToast("结果文案已复制");
+    } catch (error) {
+      showToast("复制失败，可长按手动复制");
+    }
+  }
+
+  function showToast(value) {
+    const toast = document.getElementById("toast");
+    if (!toast) return;
+    toast.textContent = value;
+    toast.classList.add("show");
+    window.setTimeout(() => toast.classList.remove("show"), 1600);
+  }
+
+  function getLoadingMessages() {
+    return state.config.loadingMessages || defaultLoadingMessages;
+  }
+
+  function getStorageKey() {
+    return `xhsTestAnswers:${state.config.slug || "default"}`;
+  }
+
+  function getProfileStorageKey() {
+    return `xhsTestProfile:${state.config?.slug || "default"}`;
+  }
+
+  function getProfileInputValue(inputConfig) {
+    if (!inputConfig) return "";
+    if (inputConfig.type === "number") return state.profile.actualAge || "";
+    return state.profile.birthDate || "";
+  }
+
+  function buildProfileFromInput(inputConfig, value) {
+    if (inputConfig?.type === "number") {
+      return { birthDate: "", actualAge: value };
+    }
+    return { birthDate: value, actualAge: "" };
+  }
+
+  function fillTemplate(template, values) {
+    return String(template).replace(/\{\{(\w+)\}\}/g, (_, key) => values[key] || "");
+  }
+
+  function number(value) {
+    const parsed = Number(value);
+    if (Number.isNaN(parsed)) return 0;
+    return Math.max(0, Math.min(100, parsed));
+  }
+
+  function average(values) {
+    const cleanValues = values.map(Number).filter((value) => Number.isFinite(value));
+    if (!cleanValues.length) return 0;
+    return cleanValues.reduce((sum, value) => sum + value, 0) / cleanValues.length;
+  }
+
+  function clamp(value, min, max) {
+    return Math.max(min, Math.min(max, value));
+  }
+
+  function text(value) {
+    return String(value ?? "")
+      .replace(/&/g, "&amp;")
+      .replace(/</g, "&lt;")
+      .replace(/>/g, "&gt;")
+      .replace(/"/g, "&quot;");
+  }
+})();
+
+    </script>
+  </body>
+</html>
