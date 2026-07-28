@@ -1,0 +1,2043 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <meta name="description" content="完成24题七宗罪分布测试，查看七维欲望张力、主导印记和触发因素。" />
+    <meta property="og:title" content="你的七宗罪，哪一面最容易被触发？" />
+    <meta property="og:description" content="完成24题七宗罪分布测试，查看七维欲望张力、主导印记和触发因素。" />
+    <title>你的七宗罪，哪一面最容易被触发？</title>
+    <style>
+:root {
+  --bg: #fbfaf7;
+  --paper: #fffefd;
+  --ink: #20242a;
+  --muted: #65707d;
+  --line: #d9d4ca;
+  --line-strong: #b9afa0;
+  --accent: #9b4339;
+  --accent-soft: #f1dfd7;
+  --gold: #c0964d;
+  --sage: #66795f;
+  --blue: #526a86;
+  --shadow: 0 16px 36px rgba(60, 47, 38, 0.1);
+  --radius: 8px;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  min-height: 100%;
+  width: 100%;
+  overflow-x: hidden;
+  background:
+    linear-gradient(rgba(32, 36, 42, 0.035) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(32, 36, 42, 0.035) 1px, transparent 1px),
+    var(--bg);
+  background-size: 24px 24px;
+}
+
+body {
+  width: 100%;
+  overflow-x: hidden;
+  min-height: 100vh;
+  margin: 0;
+  color: var(--ink);
+  font-family:
+    "PingFang SC",
+    "Microsoft YaHei",
+    "Noto Sans SC",
+    system-ui,
+    -apple-system,
+    BlinkMacSystemFont,
+    sans-serif;
+  letter-spacing: 0;
+}
+
+button {
+  font: inherit;
+}
+
+.shell {
+  width: 100%;
+  max-width: 480px;
+  min-height: 100vh;
+  margin: 0 auto;
+  background: rgba(251, 250, 247, 0.88);
+  overflow-x: hidden;
+}
+
+.top-rule {
+  height: 4px;
+  background: var(--accent);
+}
+
+.screen {
+  width: 100%;
+  overflow-x: hidden;
+  min-height: calc(100vh - 4px);
+  padding: 28px 22px 32px;
+}
+
+.home {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.kicker {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  color: var(--muted);
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  font-size: 11px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+.dot {
+  width: 7px;
+  height: 7px;
+  background: var(--accent);
+  border-radius: 50%;
+}
+
+.hero-title {
+  max-width: 100%;
+  margin: 26px 0 14px;
+  color: var(--ink);
+  font-size: 30px;
+  line-height: 1.2;
+  text-align: center;
+  font-weight: 800;
+  overflow-wrap: anywhere;
+}
+
+.hero-subtitle {
+  margin: 0 auto 28px;
+  max-width: 340px;
+  color: var(--muted);
+  font-size: 15px;
+  line-height: 1.75;
+  text-align: center;
+}
+
+.hairline {
+  width: 64px;
+  height: 1px;
+  margin: 0 auto 30px;
+  background: var(--line-strong);
+}
+
+.intro {
+  margin: 0 auto;
+  max-width: 380px;
+}
+
+.intro p {
+  margin: 0 0 15px;
+  color: rgba(32, 36, 42, 0.82);
+  font-size: 15px;
+  line-height: 1.8;
+}
+
+.intro .strong {
+  color: var(--accent);
+  font-weight: 700;
+}
+
+.pill-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px;
+  margin: 28px 0;
+}
+
+.compact-pills {
+  margin: 16px 0 10px;
+}
+
+.pill {
+  min-height: 42px;
+  display: grid;
+  place-items: center;
+  border: 1px solid var(--line);
+  color: var(--muted);
+  background: rgba(255, 255, 255, 0.44);
+  font-size: 13px;
+}
+
+.home-card {
+  margin-top: 16px;
+  padding: 18px 16px;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  background: rgba(255, 255, 255, 0.78);
+}
+
+.info-card h2 {
+  margin: 0 0 12px;
+  font-size: 19px;
+}
+
+.info-card p,
+.info-card li {
+  color: rgba(32, 36, 42, 0.78);
+  font-size: 14px;
+  line-height: 1.8;
+}
+
+.info-card p {
+  margin: 0;
+}
+
+.info-card ul {
+  display: grid;
+  gap: 9px;
+  margin: 0;
+  padding-left: 20px;
+}
+
+.info-card li::marker {
+  color: var(--accent);
+}
+
+.profile-panel {
+  margin-top: 16px;
+  padding: 16px;
+  border: 1px solid var(--line-strong);
+  background: var(--accent-soft);
+}
+
+.profile-label {
+  display: block;
+  margin-bottom: 10px;
+  color: var(--ink);
+  font-size: 17px;
+  font-weight: 800;
+}
+
+.profile-field {
+  display: grid;
+  grid-template-columns: 1fr minmax(0, 1.4fr);
+  gap: 12px;
+  align-items: center;
+  padding: 11px 12px;
+  border: 1px solid var(--line);
+  background: var(--paper);
+}
+
+.profile-field span {
+  color: var(--muted);
+  font-size: 14px;
+}
+
+.profile-field input {
+  width: 100%;
+  min-height: 34px;
+  padding: 4px 6px;
+  border: 0;
+  background: transparent;
+  color: var(--ink);
+  font: inherit;
+  text-align: right;
+}
+
+.profile-field input:focus {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+
+.profile-field input.invalid {
+  outline: 2px solid #b3261e;
+  outline-offset: 2px;
+}
+
+.profile-note,
+.profile-error {
+  margin: 9px 0 0;
+  color: var(--muted);
+  font-size: 12px;
+  line-height: 1.6;
+}
+
+.profile-error {
+  min-height: 19px;
+  color: #a42f29;
+}
+
+.primary-btn,
+.ghost-btn,
+.copy-btn {
+  width: 100%;
+  min-height: 48px;
+  border: 1px solid var(--ink);
+  border-radius: 0;
+  cursor: pointer;
+  transition: transform 150ms ease, background 150ms ease, color 150ms ease, border-color 150ms ease;
+}
+
+.primary-btn {
+  background: var(--ink);
+  color: #fff;
+  font-weight: 700;
+}
+
+.ghost-btn,
+.copy-btn {
+  background: transparent;
+  color: var(--ink);
+}
+
+.primary-btn:active,
+.ghost-btn:active,
+.copy-btn:active,
+.option:active {
+  transform: translateY(1px);
+}
+
+.disclaimer {
+  margin: 18px auto 0;
+  max-width: 340px;
+  color: var(--muted);
+  font-size: 12px;
+  line-height: 1.65;
+  text-align: center;
+}
+
+.quiz-screen {
+  padding-top: 0;
+}
+
+.sticky-head {
+  position: sticky;
+  top: 0;
+  z-index: 5;
+  margin: 0 -22px 26px;
+  padding: 14px 22px 12px;
+  background: rgba(251, 250, 247, 0.95);
+  border-bottom: 1px solid var(--line);
+  backdrop-filter: blur(12px);
+}
+
+.quiz-meta {
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+  color: var(--muted);
+  font-size: 12px;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+}
+
+.progress-track {
+  height: 4px;
+  margin-top: 10px;
+  background: rgba(32, 36, 42, 0.09);
+}
+
+.progress-bar {
+  height: 100%;
+  background: var(--accent);
+  transition: width 260ms ease;
+}
+
+.question-no {
+  color: rgba(155, 67, 57, 0.18);
+  font-size: 48px;
+  line-height: 1;
+  font-weight: 800;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+}
+
+.question-title {
+  margin: 18px 0 24px;
+  font-size: 22px;
+  line-height: 1.5;
+  font-weight: 750;
+}
+
+.options {
+  display: grid;
+  gap: 12px;
+}
+
+.option {
+  min-height: 66px;
+  display: grid;
+  grid-template-columns: 30px 1fr;
+  gap: 12px;
+  align-items: start;
+  width: 100%;
+  padding: 15px;
+  border: 1px solid var(--line);
+  background: rgba(255, 255, 255, 0.68);
+  color: var(--ink);
+  text-align: left;
+  cursor: pointer;
+  transition: background 160ms ease, border-color 160ms ease, color 160ms ease, opacity 160ms ease;
+}
+
+.option-key {
+  display: grid;
+  place-items: center;
+  width: 28px;
+  height: 28px;
+  border: 1px solid var(--line-strong);
+  font-size: 13px;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+}
+
+.option-text {
+  padding-top: 2px;
+  font-size: 15px;
+  line-height: 1.55;
+}
+
+.option.selected {
+  border-color: var(--accent);
+  background: var(--accent);
+  color: #fff;
+}
+
+.option.selected .option-key {
+  border-color: rgba(255, 255, 255, 0.8);
+}
+
+.option.dimmed {
+  opacity: 0.42;
+}
+
+.hint {
+  margin: 18px 0 0;
+  color: var(--muted);
+  font-size: 12px;
+  text-align: center;
+}
+
+.loading-screen {
+  display: grid;
+  place-items: center;
+}
+
+.loading-card {
+  width: 100%;
+  max-width: 360px;
+  text-align: center;
+}
+
+.spinner {
+  width: 54px;
+  height: 54px;
+  margin: 0 auto 24px;
+  border: 2px solid var(--line);
+  border-top-color: var(--accent);
+  border-radius: 50%;
+  animation: spin 850ms linear infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.loading-text {
+  min-height: 54px;
+  color: var(--accent);
+  font-size: 17px;
+  line-height: 1.6;
+  font-weight: 700;
+}
+
+.step-bars {
+  display: grid;
+  gap: 8px;
+  margin-top: 28px;
+}
+
+.step {
+  height: 4px;
+  overflow: hidden;
+  background: rgba(32, 36, 42, 0.09);
+}
+
+.step span {
+  display: block;
+  height: 100%;
+  width: 0;
+  background: var(--accent);
+  transition: width 300ms ease;
+}
+
+.step.done span {
+  width: 100%;
+}
+
+.result-screen {
+  padding: 22px 18px 30px;
+}
+
+.report {
+  padding: 22px 16px 18px;
+  border: 1px solid var(--line);
+  background: var(--paper);
+  box-shadow: var(--shadow);
+}
+
+.result-type {
+  margin: 8px 0 8px;
+  color: var(--accent);
+  font-size: 30px;
+  line-height: 1.15;
+  font-weight: 850;
+  text-align: center;
+}
+
+.result-subtitle {
+  margin: 0 auto 20px;
+  color: var(--muted);
+  font-size: 15px;
+  line-height: 1.7;
+  text-align: center;
+}
+
+.stamp-row {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px;
+  margin: 18px 0 20px;
+}
+
+.stamp {
+  padding: 12px 10px;
+  border: 1px solid var(--line);
+  background: #fbfaf7;
+}
+
+.stamp strong {
+  display: block;
+  margin-bottom: 4px;
+  color: var(--ink);
+  font-size: 20px;
+}
+
+.stamp span {
+  color: var(--muted);
+  font-size: 12px;
+}
+
+.section {
+  padding: 20px 0;
+  border-top: 1px solid var(--line);
+}
+
+.section h2 {
+  margin: 0 0 12px;
+  font-size: 18px;
+  color: var(--ink);
+}
+
+.section p {
+  margin: 0 0 12px;
+  color: rgba(32, 36, 42, 0.82);
+  font-size: 15px;
+  line-height: 1.85;
+}
+
+.quote {
+  padding: 15px;
+  border-left: 3px solid var(--accent);
+  background: var(--accent-soft);
+  color: #5b2d27;
+  line-height: 1.8;
+  font-weight: 700;
+}
+
+.meters {
+  display: grid;
+  gap: 14px;
+}
+
+.meter-head {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 7px;
+  color: var(--muted);
+  font-size: 13px;
+}
+
+.meter-track {
+  height: 8px;
+  background: rgba(32, 36, 42, 0.08);
+}
+
+.meter-fill {
+  height: 100%;
+  background: var(--accent);
+}
+
+.distribution-chart {
+  width: min(100%, 360px);
+  margin: 4px auto 18px;
+  color: var(--ink);
+}
+
+.distribution-chart svg {
+  display: block;
+  width: 100%;
+  height: auto;
+  overflow: visible;
+}
+
+.radar-grid,
+.radar-axis {
+  fill: none;
+  stroke: rgba(119, 91, 52, 0.22);
+  stroke-width: 1;
+}
+
+.radar-value {
+  fill: rgba(154, 54, 52, 0.22);
+  stroke: #9a3634;
+  stroke-width: 2.5;
+}
+
+.radar-dot {
+  fill: #f8f2e7;
+  stroke: #9a3634;
+  stroke-width: 2;
+}
+
+.distribution-chart text {
+  fill: currentColor;
+  font-size: 13px;
+  font-weight: 700;
+}
+
+.result-disclaimer {
+  margin: 18px 0 0;
+  padding-top: 14px;
+  border-top: 1px solid var(--line);
+  color: var(--muted);
+  font-size: 12px;
+  line-height: 1.7;
+}
+
+.compare {
+  display: grid;
+  gap: 10px;
+}
+
+.compare-card {
+  padding: 14px;
+  border: 1px solid var(--line);
+  background: #fbfaf7;
+}
+
+.compare-card h3,
+.plan-card h3 {
+  margin: 0 0 8px;
+  font-size: 15px;
+}
+
+.compare-card p,
+.plan-card p {
+  font-size: 14px;
+}
+
+.tag-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.tag {
+  padding: 7px 9px;
+  border: 1px solid var(--line);
+  background: #fbfaf7;
+  color: var(--muted);
+  font-size: 13px;
+}
+
+.plan {
+  display: grid;
+  gap: 10px;
+}
+
+.plan-card {
+  padding: 14px;
+  border: 1px solid var(--line);
+  background: #fbfaf7;
+}
+
+.secondary-note {
+  padding: 14px;
+  border: 1px dashed var(--line-strong);
+  background: rgba(192, 150, 77, 0.12);
+  line-height: 1.75;
+  font-size: 14px;
+}
+
+.match-summary {
+  padding: 14px;
+  border: 1px solid var(--line-strong);
+  background: var(--accent-soft);
+}
+
+.match-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 8px;
+}
+
+.match-item {
+  min-width: 0;
+  padding: 10px 8px;
+  background: var(--paper);
+  text-align: center;
+}
+
+.match-item span,
+.match-item strong {
+  display: block;
+}
+
+.match-item span {
+  color: var(--muted);
+  font-size: 11px;
+  line-height: 1.4;
+}
+
+.match-item strong {
+  margin-top: 4px;
+  color: var(--accent);
+  font-size: 20px;
+}
+
+.match-summary p {
+  margin: 12px 0 0;
+  color: rgba(32, 36, 42, 0.72);
+  font-size: 12px;
+  line-height: 1.7;
+}
+
+.actions {
+  display: grid;
+  gap: 10px;
+  margin-top: 18px;
+}
+
+.toast {
+  position: fixed;
+  left: 50%;
+  bottom: 22px;
+  z-index: 20;
+  transform: translateX(-50%);
+  padding: 10px 14px;
+  background: var(--ink);
+  color: #fff;
+  font-size: 13px;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 180ms ease;
+}
+
+.toast.show {
+  opacity: 1;
+}
+
+.error {
+  display: grid;
+  place-items: center;
+  min-height: 100vh;
+  padding: 24px;
+  text-align: center;
+}
+
+.error p {
+  color: var(--muted);
+  line-height: 1.7;
+}
+
+@media (min-width: 700px) {
+  body {
+    padding: 28px 0;
+  }
+
+  .shell {
+    min-height: calc(100vh - 56px);
+    border: 1px solid var(--line);
+    box-shadow: var(--shadow);
+  }
+
+  .screen {
+    min-height: calc(100vh - 60px);
+  }
+}
+
+    </style>
+  </head>
+  <body>
+    <main id="app" aria-live="polite"></main>
+    <script>window.__QUIZ_CONFIG__ = {"slug":"test-seven-sins-24","compactHome":true,"topic":"七宗罪分布测试","kicker":"24-Q SEVEN IMPULSES","title":"你的七宗罪，哪一面最容易被触发？","subtitle":"24 个真实情境，生成你的七维欲望分布、主导印记、第二倾向与触发档案。","metaDescription":"完成24题七宗罪分布测试，查看七维欲望张力、主导印记和触发因素。","startButton":"开始查看七面欲望","resultKicker":"Seven Impulses Archive","quizHint":"凭第一反应选，不要选最体面的答案。","copyButton":"复制我的七面档案","restartButton":"重新测试","scoreLabel":"主导张力","stageLabel":"分布状态","planTitle":"未来 7 天观察练习","compareLabels":["如果继续否认","如果开始看见"],"blurSummary":"完成 24 题，查看七维分布、主导印记、第二倾向、触发因素和行动建议。","disclaimer":"本测试借用“七宗罪”作为文化隐喻，仅用于趣味自我观察与内容互动，不评价道德好坏，不构成心理诊断、人格障碍判断、医学建议或命运预测。","intro":["你以为自己最难控制的是脾气，也许真正牵动你的，是被低估、被落下或永远不够。","七种欲望并非善恶判决。它们像七种信号，在不同情境里提醒你：哪里缺安全、哪里要边界、哪里已经耗尽。","这 24 题不直接问你“贪不贪、懒不懒”，而是看真实选择如何留下分布。"],"loadingMessages":["正在识别七面触发信号...","正在计算欲望张力分布...","正在寻找主导与第二印记...","正在生成触发因素档案...","七面档案生成完成。"],"stageLabels":[{"max":59,"label":"低频显影"},{"max":74,"label":"情境触发"},{"max":89,"label":"主轴清晰"},{"max":100,"label":"高频牵引"}],"secondaryThreshold":100,"scoring":{"mode":"distribution-profile","title":"七面欲望张力图","dimensionOrder":["PRIDE","GREED","LUST","ENVY","WRATH","GLUTTONY","SLOTH"],"dimensionLabels":{"PRIDE":"傲慢","GREED":"贪婪","LUST":"色欲","ENVY":"嫉妒","WRATH":"暴怒","GLUTTONY":"暴食","SLOTH":"懒惰"},"note":"分数表示特定情境下更容易启动的欲望与防御。它不代表道德高低，也不是固定人格。"},"questions":[{"id":1,"module":"01 · 被看见","text":"群聊里有人晒出一个你也努力很久才得到的成果。你最真实的第一反应是？","options":[{"key":"A","text":"先看它到底有没有那么厉害，心里会自动找出自己更强的地方","weights":{"PRIDE":3,"ENVY":1}},{"key":"B","text":"立刻研究对方用了什么资源、路径和机会，自己也想拿到","weights":{"GREED":3,"GLUTTONY":1}},{"key":"C","text":"会被那种被关注、被羡慕的氛围吸引，想象自己成为焦点","weights":{"LUST":3,"PRIDE":1}},{"key":"D","text":"祝福是真的，但也会忍不住对照：为什么不是我先做到","weights":{"ENVY":3,"GREED":1}}]},{"id":2,"module":"01 · 被看见","text":"会议上你的想法被轻描淡写带过，十分钟后别人换个说法却得到认可。你更可能？","options":[{"key":"A","text":"当场补充出处和关键逻辑，让贡献重新被看见","weights":{"WRATH":3,"PRIDE":1}},{"key":"B","text":"先忍住，之后用更完整的结果证明谁才真正懂这件事","weights":{"PRIDE":3,"ENVY":1}},{"key":"C","text":"开始评估这个团队值不值得继续投入，哪里还有更好位置","weights":{"GREED":3,"GLUTTONY":1}},{"key":"D","text":"表面没事，回去后越想越堵，忍不住比较两个人的待遇","weights":{"ENVY":3,"GREED":1}}]},{"id":3,"module":"01 · 被看见","text":"有人夸你“最近状态真好”，哪种后续最容易发生？","options":[{"key":"A","text":"很享受那个目光，之后会更在意穿着、气氛和吸引力","weights":{"LUST":3,"PRIDE":1}},{"key":"B","text":"顺势奖励自己一顿好的或买点喜欢的，把愉快延长","weights":{"GLUTTONY":3,"LUST":1}},{"key":"C","text":"嘴上说还好，心里会确认：果然我一直有自己的水平","weights":{"PRIDE":3,"ENVY":1}},{"key":"D","text":"短暂开心后又想到更亮眼的人，觉得自己还差一点","weights":{"ENVY":3,"GREED":1}}]},{"id":4,"module":"01 · 被看见","text":"连续忙了很久，却没人注意到你的付出。你最容易变成哪种状态？","options":[{"key":"A","text":"突然不想再证明了，能少做一点就少做一点","weights":{"SLOTH":3,"ENVY":1}},{"key":"B","text":"积累到某一刻直接爆发：凭什么所有人都默认我能扛","weights":{"WRATH":3,"PRIDE":1}},{"key":"C","text":"开始争取更明确的回报、头衔或资源，不再只讲情怀","weights":{"GREED":3,"GLUTTONY":1}},{"key":"D","text":"会特别在意谁被表扬、谁得到照顾，越看越不平衡","weights":{"ENVY":3,"GREED":1}}]},{"id":5,"module":"02 · 资源与拥有","text":"突然多出一笔可自由支配的钱，你最想先做什么？","options":[{"key":"A","text":"把它变成存款、工具或下一次机会，让手里的筹码更多","weights":{"GREED":3,"GLUTTONY":1}},{"key":"B","text":"买一件能明显提升气场和吸引力的东西","weights":{"LUST":3,"PRIDE":1}},{"key":"C","text":"认真吃喝玩乐一次，先把这段时间亏欠自己的补回来","weights":{"GLUTTONY":3,"LUST":1}},{"key":"D","text":"暂时不处理，光想到要比较和选择就觉得累","weights":{"SLOTH":3,"ENVY":1}}]},{"id":6,"module":"02 · 资源与拥有","text":"你最难放下的一类东西更像？","options":[{"key":"A","text":"能证明自己品位、水平或身份的东西","weights":{"PRIDE":3,"ENVY":1}},{"key":"B","text":"也许以后会用到的资源、文件、优惠和人脉","weights":{"GREED":3,"GLUTTONY":1}},{"key":"C","text":"承载快乐体验的味道、礼物、照片和纪念品","weights":{"GLUTTONY":3,"LUST":1}},{"key":"D","text":"别人有而自己没有的那一类，明知不需要也会惦记","weights":{"ENVY":3,"GREED":1}}]},{"id":7,"module":"02 · 资源与拥有","text":"看到限量商品只剩最后一件，你更容易被什么推动？","options":[{"key":"A","text":"“别人买不到而我有”，这种稀缺感很迷人","weights":{"PRIDE":3,"ENVY":1}},{"key":"B","text":"错过可能更贵，先拿下再说，机会不能白白流走","weights":{"GREED":3,"GLUTTONY":1}},{"key":"C","text":"它真的好看，拥有后会让自己更有魅力","weights":{"LUST":3,"PRIDE":1}},{"key":"D","text":"下单那一刻很爽，像终于给疲惫生活加了一口糖","weights":{"GLUTTONY":3,"LUST":1}}]},{"id":8,"module":"02 · 资源与拥有","text":"朋友借走你的东西迟迟不还，你的情绪最接近？","options":[{"key":"A","text":"越界感很强，会直接催还并重新设规则","weights":{"WRATH":3,"PRIDE":1}},{"key":"B","text":"会想以后减少往来，这个人不值得再得到你的好东西","weights":{"PRIDE":3,"ENVY":1}},{"key":"C","text":"先记着，等下次对方再求助时重新计算交换","weights":{"GREED":3,"GLUTTONY":1}},{"key":"D","text":"嫌追问麻烦，拖着拖着又会暗自不舒服","weights":{"SLOTH":3,"ENVY":1}}]},{"id":9,"module":"03 · 关系与吸引","text":"暧昧对象忽然变冷，你最先启动的反应更像？","options":[{"key":"A","text":"想恢复吸引力，让对方重新主动靠近","weights":{"LUST":3,"PRIDE":1}},{"key":"B","text":"忍不住对照是不是出现了更有魅力的人","weights":{"ENVY":3,"GREED":1}},{"key":"C","text":"直接问清楚，不接受忽冷忽热吊着自己","weights":{"WRATH":3,"PRIDE":1}},{"key":"D","text":"把聊天放着，觉得追问和解释都太消耗","weights":{"SLOTH":3,"ENVY":1}}]},{"id":10,"module":"03 · 关系与吸引","text":"一段关系里，什么最容易让你上头？","options":[{"key":"A","text":"对方强烈地欣赏你，让你觉得自己无可替代","weights":{"PRIDE":3,"ENVY":1}},{"key":"B","text":"外形、气味、声音和靠近时的化学反应","weights":{"LUST":3,"PRIDE":1}},{"key":"C","text":"对方能带你进入更大的世界，资源和可能性都变多","weights":{"GREED":3,"GLUTTONY":1}},{"key":"D","text":"被照顾、被投喂、一起舒服地享受日常","weights":{"GLUTTONY":3,"LUST":1}}]},{"id":11,"module":"03 · 关系与吸引","text":"恋人夸别人很优秀，你最难控制的念头是？","options":[{"key":"A","text":"会想证明自己更特别，不愿在比较里落下风","weights":{"PRIDE":3,"ENVY":1}},{"key":"B","text":"会注意对方是不是对那个人有吸引和兴趣","weights":{"LUST":3,"PRIDE":1}},{"key":"C","text":"脑内立刻开始比较，越想越容易看见自己的不足","weights":{"ENVY":3,"GREED":1}},{"key":"D","text":"如果语气越界，会当场表达不满，不想装大度","weights":{"WRATH":3,"PRIDE":1}}]},{"id":12,"module":"03 · 关系与吸引","text":"关系进入平淡期，你最可能怎样处理？","options":[{"key":"A","text":"制造一点新的约会和亲密感，让火花回来","weights":{"LUST":3,"PRIDE":1}},{"key":"B","text":"安排一顿好的或一次旅行，用共同享受重新连接","weights":{"GLUTTONY":3,"LUST":1}},{"key":"C","text":"想谈清楚双方投入，不能总由一个人维持","weights":{"GREED":3,"GLUTTONY":1}},{"key":"D","text":"明知该沟通，却常常拖到两个人都越来越没话","weights":{"SLOTH":3,"ENVY":1}}]},{"id":13,"module":"04 · 压力与失衡","text":"一个计划受阻时，你最容易出现哪种反应？","options":[{"key":"A","text":"火气一下上来，先想找出是谁挡住了推进","weights":{"WRATH":3,"PRIDE":1}},{"key":"B","text":"觉得别人效率太低，还是自己来才靠得住","weights":{"PRIDE":3,"ENVY":1}},{"key":"C","text":"重新盘算还能获得什么、有没有替代路径","weights":{"GREED":3,"GLUTTONY":1}},{"key":"D","text":"先逃离任务，刷手机或睡一会儿再说","weights":{"SLOTH":3,"ENVY":1}}]},{"id":14,"module":"04 · 压力与失衡","text":"你情绪很差却暂时不能解决问题，最常见的补偿是？","options":[{"key":"A","text":"吃点、买点、看点，让身体先得到即时满足","weights":{"GLUTTONY":3,"LUST":1}},{"key":"B","text":"找能让自己感到漂亮、性感或被喜欢的东西","weights":{"LUST":3,"PRIDE":1}},{"key":"C","text":"翻看别人的生活，越看越觉得自己被落下","weights":{"ENVY":3,"GREED":1}},{"key":"D","text":"对最亲近的人变得不耐烦，容易被小事点燃","weights":{"WRATH":3,"PRIDE":1}}]},{"id":15,"module":"04 · 压力与失衡","text":"面对很难但重要的任务，你更容易卡在哪一步？","options":[{"key":"A","text":"标准太高，不愿交出一个可能显得普通的版本","weights":{"PRIDE":3,"ENVY":1}},{"key":"B","text":"总想再多准备一点资源和信息，迟迟不肯收手","weights":{"GREED":3,"GLUTTONY":1}},{"key":"C","text":"先用娱乐和舒适缓冲，结果启动时间一拖再拖","weights":{"SLOTH":3,"ENVY":1}},{"key":"D","text":"看到别人已经做得很好，动力反而被比较耗掉","weights":{"ENVY":3,"GREED":1}}]},{"id":16,"module":"04 · 压力与失衡","text":"被误解后，你心里最像哪句话？","options":[{"key":"A","text":"他们看不懂，不代表我的判断有问题","weights":{"PRIDE":3,"ENVY":1}},{"key":"B","text":"我要把话说清楚，不能让错误印象占上风","weights":{"WRATH":3,"PRIDE":1}},{"key":"C","text":"算了，解释太累，爱怎么想就怎么想","weights":{"SLOTH":3,"ENVY":1}},{"key":"D","text":"为什么别人轻易就被理解，我却总要费这么大力气","weights":{"ENVY":3,"GREED":1}}]},{"id":17,"module":"05 · 比较与竞争","text":"同龄人的好消息最容易在哪种情况下刺到你？","options":[{"key":"A","text":"得到你一直想要却还没拿到的位置和认可","weights":{"ENVY":3,"GREED":1}},{"key":"B","text":"拥有更多钱、选择权和可以调动的资源","weights":{"GREED":3,"GLUTTONY":1}},{"key":"C","text":"被很多人喜欢、追捧，显得特别有魅力","weights":{"LUST":3,"PRIDE":1}},{"key":"D","text":"几乎没费你这么多力气，却获得同样甚至更好的结果","weights":{"WRATH":3,"PRIDE":1}}]},{"id":18,"module":"05 · 比较与竞争","text":"竞争中你发现对手有一个明显弱点，你更接近？","options":[{"key":"A","text":"会利用规则和时机，但要赢得漂亮，不显得低级","weights":{"PRIDE":3,"ENVY":1}},{"key":"B","text":"快速计算怎么把这个差距变成自己的实际收益","weights":{"GREED":3,"GLUTTONY":1}},{"key":"C","text":"如果对方踩过你，会很想让其为此付出代价","weights":{"WRATH":3,"PRIDE":1}},{"key":"D","text":"懒得正面对抗，宁愿换一条更省力的赛道","weights":{"SLOTH":3,"ENVY":1}}]},{"id":19,"module":"05 · 比较与竞争","text":"别人复制你的风格或想法，你最难受的是？","options":[{"key":"A","text":"独特性被稀释，好像自己不再那么特别","weights":{"PRIDE":3,"ENVY":1}},{"key":"B","text":"对方拿走了原本可能属于你的关注和机会","weights":{"GREED":3,"GLUTTONY":1}},{"key":"C","text":"看到对方因此更受欢迎，心里会很不平衡","weights":{"ENVY":3,"GREED":1}},{"key":"D","text":"想立刻拆穿或制止，不愿假装大方","weights":{"WRATH":3,"PRIDE":1}}]},{"id":20,"module":"05 · 比较与竞争","text":"你赢下一场竞争后，最想得到哪种满足？","options":[{"key":"A","text":"别人承认你的判断和能力确实高一层","weights":{"PRIDE":3,"ENVY":1}},{"key":"B","text":"把胜利兑换成更稳定的收益和下一轮筹码","weights":{"GREED":3,"GLUTTONY":1}},{"key":"C","text":"庆祝、享受，把压抑很久的快乐一次放出来","weights":{"GLUTTONY":3,"LUST":1}},{"key":"D","text":"终于可以停下来，暂时什么都不做","weights":{"SLOTH":3,"ENVY":1}}]},{"id":21,"module":"06 · 无人看见","text":"如果没有任何人知道，你更可能放纵哪一件事？","options":[{"key":"A","text":"沉浸在让自己舒服的吃喝、娱乐或购买里","weights":{"GLUTTONY":3,"LUST":1}},{"key":"B","text":"偷偷关注一个很有吸引力的人，享受想象","weights":{"LUST":3,"PRIDE":1}},{"key":"C","text":"翻看某个比较对象的动态，确认彼此现在的差距","weights":{"ENVY":3,"GREED":1}},{"key":"D","text":"把所有待办放着，允许自己彻底停摆","weights":{"SLOTH":3,"ENVY":1}}]},{"id":22,"module":"06 · 无人看见","text":"哪种念头最容易让你觉得“我不想再忍了”？","options":[{"key":"A","text":"有人公开轻视你，像你根本不配被尊重","weights":{"PRIDE":3,"ENVY":1}},{"key":"B","text":"明明付出很多，资源和好处却被别人拿走","weights":{"GREED":3,"GLUTTONY":1}},{"key":"C","text":"别人一再越过边界，还要求你体谅","weights":{"WRATH":3,"PRIDE":1}},{"key":"D","text":"看着别人轻松拥有自己求而不得的东西","weights":{"ENVY":3,"GREED":1}}]},{"id":23,"module":"06 · 无人看见","text":"周末没有安排时，你最自然的去向是？","options":[{"key":"A","text":"找一个让自己变好看、变迷人的活动","weights":{"LUST":3,"PRIDE":1}},{"key":"B","text":"吃喜欢的、看喜欢的，让感官彻底松下来","weights":{"GLUTTONY":3,"LUST":1}},{"key":"C","text":"不想计划，能躺多久躺多久，先回收能量","weights":{"SLOTH":3,"ENVY":1}},{"key":"D","text":"做一件能让未来资源更多、选择更大的事","weights":{"GREED":3,"GLUTTONY":1}}]},{"id":24,"module":"06 · 无人看见","text":"如果七种欲望都不必伪装，你最想允许自己承认什么？","options":[{"key":"A","text":"我确实想被仰望，不想永远只是普通的一员","weights":{"PRIDE":3,"ENVY":1}},{"key":"B","text":"我想拥有更多，不想总被“知足”劝退","weights":{"GREED":3,"GLUTTONY":1}},{"key":"C","text":"我需要快乐和满足，不想只做一个会克制的人","weights":{"GLUTTONY":3,"LUST":1}},{"key":"D","text":"我真的累了，有些事不是不想做，是已经没有能量","weights":{"SLOTH":3,"ENVY":1}}]}],"results":{"PRIDE":{"typeName":"王冠印记 · 高位标准者","subtitle":"傲慢不是道德判决，而是你在某些情境下更容易启动的欲望张力。","maturityScore":86,"coreConclusion":"你最敏感的不是输，而是被低估。","diagnosis":"你会用高标准、独立和体面保护自尊。优势是判断稳、追求卓越；盲点是把求助误解成示弱。","whatYouReallyWant":"你真正想要的是被尊重，而且这种尊重最好来自实力，而不是安慰。","mechanism":{"title":"自尊防御机制","content":"当评价威胁到你的独特性，你会抬高标准或拉开距离。"},"professionalBasis":["本测试使用七种文化原型描述欲望、比较、边界和能量反应，不对应临床人格分类。","主导印记反映当前选择模式；关系对象、工作压力和生活阶段变化时，分布也会移动。"],"coreTensions":["傲慢带来的推动力","想满足自己，又怕被评价","本能反应与长期目标之间的拉扯"],"suitableIf":["把欲望翻译成具体需要","允许自己承认感受","为满足设置清楚边界"],"cautionIf":["用标签给自己定性","把结果当作道德高低","让即时冲动替代现实判断"],"indices":[{"label":"自尊敏感","value":92},{"label":"高标准","value":88},{"label":"求助阻力","value":71}],"ifStay":"继续否认这股张力，它仍会从更隐蔽的比较、拖延、冲动或不满里出现。","ifChange":"看见触发点、命名真实需要，再选择更低代价的满足方式，这股力量会更可用。","notRecommended":["羞辱自己的欲望","拿结果攻击他人","在情绪高点做重大决定"],"plan90":[{"title":"记录触发","content":"连续 7 天记下：发生了什么、身体有什么感觉、最想立刻做什么。"},{"title":"翻译需要","content":"每次出现傲慢张力时，把“我想怎样”改写成“我现在需要什么”。"},{"title":"设计出口","content":"为这项需要准备一个即时出口和一个长期出口，减少只能靠冲动解决的时刻。"}],"closing":"看见欲望，不是纵容它；是让它不必在暗处替你做决定。"},"GREED":{"typeName":"筹码印记 · 资源扩张者","subtitle":"贪婪不是道德判决，而是你在某些情境下更容易启动的欲望张力。","maturityScore":86,"coreConclusion":"你最难放下的不是东西，而是下一种可能。","diagnosis":"你很容易看见机会、资源和更优解，擅长积累筹码。盲点是目标不断升级，拥有再多也难真正停下。","whatYouReallyWant":"你真正想要的是选择权：不求人、不被卡住，还能随时换一条路。","mechanism":{"title":"资源扩张机制","content":"不确定来临时，你会用拥有、储备和推进来换安全。"},"professionalBasis":["本测试使用七种文化原型描述欲望、比较、边界和能量反应，不对应临床人格分类。","主导印记反映当前选择模式；关系对象、工作压力和生活阶段变化时，分布也会移动。"],"coreTensions":["贪婪带来的推动力","想满足自己，又怕被评价","本能反应与长期目标之间的拉扯"],"suitableIf":["把欲望翻译成具体需要","允许自己承认感受","为满足设置清楚边界"],"cautionIf":["用标签给自己定性","把结果当作道德高低","让即时冲动替代现实判断"],"indices":[{"label":"机会扫描","value":94},{"label":"资源牵引","value":90},{"label":"满足阈值","value":67}],"ifStay":"继续否认这股张力，它仍会从更隐蔽的比较、拖延、冲动或不满里出现。","ifChange":"看见触发点、命名真实需要，再选择更低代价的满足方式，这股力量会更可用。","notRecommended":["羞辱自己的欲望","拿结果攻击他人","在情绪高点做重大决定"],"plan90":[{"title":"记录触发","content":"连续 7 天记下：发生了什么、身体有什么感觉、最想立刻做什么。"},{"title":"翻译需要","content":"每次出现贪婪张力时，把“我想怎样”改写成“我现在需要什么”。"},{"title":"设计出口","content":"为这项需要准备一个即时出口和一个长期出口，减少只能靠冲动解决的时刻。"}],"closing":"看见欲望，不是纵容它；是让它不必在暗处替你做决定。"},"LUST":{"typeName":"磁场印记 · 感官吸引者","subtitle":"色欲不是道德判决，而是你在某些情境下更容易启动的欲望张力。","maturityScore":86,"coreConclusion":"你追逐的不是表面诱惑，而是活着的浓度。","diagnosis":"你对吸引力、审美、亲密与化学反应很敏锐。优势是感染力强、懂得创造火花；盲点是容易把强烈感觉当成长久匹配。","whatYouReallyWant":"你真正想要的是被渴望、被看见，也能自由表达自己的生命力。","mechanism":{"title":"感官点亮机制","content":"生活变钝时，你会本能寻找美、亲密和新鲜感让自己重新发亮。"},"professionalBasis":["本测试使用七种文化原型描述欲望、比较、边界和能量反应，不对应临床人格分类。","主导印记反映当前选择模式；关系对象、工作压力和生活阶段变化时，分布也会移动。"],"coreTensions":["色欲带来的推动力","想满足自己，又怕被评价","本能反应与长期目标之间的拉扯"],"suitableIf":["把欲望翻译成具体需要","允许自己承认感受","为满足设置清楚边界"],"cautionIf":["用标签给自己定性","把结果当作道德高低","让即时冲动替代现实判断"],"indices":[{"label":"吸引敏感","value":91},{"label":"新鲜牵引","value":87},{"label":"现实校准","value":69}],"ifStay":"继续否认这股张力，它仍会从更隐蔽的比较、拖延、冲动或不满里出现。","ifChange":"看见触发点、命名真实需要，再选择更低代价的满足方式，这股力量会更可用。","notRecommended":["羞辱自己的欲望","拿结果攻击他人","在情绪高点做重大决定"],"plan90":[{"title":"记录触发","content":"连续 7 天记下：发生了什么、身体有什么感觉、最想立刻做什么。"},{"title":"翻译需要","content":"每次出现色欲张力时，把“我想怎样”改写成“我现在需要什么”。"},{"title":"设计出口","content":"为这项需要准备一个即时出口和一个长期出口，减少只能靠冲动解决的时刻。"}],"closing":"看见欲望，不是纵容它；是让它不必在暗处替你做决定。"},"ENVY":{"typeName":"镜面印记 · 比较校准者","subtitle":"嫉妒不是道德判决，而是你在某些情境下更容易启动的欲望张力。","maturityScore":86,"coreConclusion":"你不是见不得别人好，而是太会看见自己的缺口。","diagnosis":"比较让你迅速定位差距，也能成为很强的成长雷达。盲点是把别人的高光当成对自己的否定。","whatYouReallyWant":"你真正想要的是确认：自己没有被时代、关系或机会悄悄落下。","mechanism":{"title":"镜像校准机制","content":"当别人拥有你在意的东西，你会借对方重新衡量自身位置。"},"professionalBasis":["本测试使用七种文化原型描述欲望、比较、边界和能量反应，不对应临床人格分类。","主导印记反映当前选择模式；关系对象、工作压力和生活阶段变化时，分布也会移动。"],"coreTensions":["嫉妒带来的推动力","想满足自己，又怕被评价","本能反应与长期目标之间的拉扯"],"suitableIf":["把欲望翻译成具体需要","允许自己承认感受","为满足设置清楚边界"],"cautionIf":["用标签给自己定性","把结果当作道德高低","让即时冲动替代现实判断"],"indices":[{"label":"比较雷达","value":93},{"label":"缺口敏感","value":89},{"label":"自我肯定","value":64}],"ifStay":"继续否认这股张力，它仍会从更隐蔽的比较、拖延、冲动或不满里出现。","ifChange":"看见触发点、命名真实需要，再选择更低代价的满足方式，这股力量会更可用。","notRecommended":["羞辱自己的欲望","拿结果攻击他人","在情绪高点做重大决定"],"plan90":[{"title":"记录触发","content":"连续 7 天记下：发生了什么、身体有什么感觉、最想立刻做什么。"},{"title":"翻译需要","content":"每次出现嫉妒张力时，把“我想怎样”改写成“我现在需要什么”。"},{"title":"设计出口","content":"为这项需要准备一个即时出口和一个长期出口，减少只能靠冲动解决的时刻。"}],"closing":"看见欲望，不是纵容它；是让它不必在暗处替你做决定。"},"WRATH":{"typeName":"火种印记 · 边界捍卫者","subtitle":"暴怒不是道德判决，而是你在某些情境下更容易启动的欲望张力。","maturityScore":86,"coreConclusion":"你的火气下面，往往站着一条被踩到的边界。","diagnosis":"你对不公、越界和拖延反应快，能在关键时刻保护自己。盲点是情绪升温过快，让本来能解决的问题变成输赢。","whatYouReallyWant":"你真正想要的不是吵赢，而是让规则、尊重和后果重新清楚。","mechanism":{"title":"边界升温机制","content":"被冒犯、阻碍或轻视时，你会用能量爆发迅速夺回位置。"},"professionalBasis":["本测试使用七种文化原型描述欲望、比较、边界和能量反应，不对应临床人格分类。","主导印记反映当前选择模式；关系对象、工作压力和生活阶段变化时，分布也会移动。"],"coreTensions":["暴怒带来的推动力","想满足自己，又怕被评价","本能反应与长期目标之间的拉扯"],"suitableIf":["把欲望翻译成具体需要","允许自己承认感受","为满足设置清楚边界"],"cautionIf":["用标签给自己定性","把结果当作道德高低","让即时冲动替代现实判断"],"indices":[{"label":"边界敏感","value":94},{"label":"情绪升温","value":86},{"label":"修复速度","value":68}],"ifStay":"继续否认这股张力，它仍会从更隐蔽的比较、拖延、冲动或不满里出现。","ifChange":"看见触发点、命名真实需要，再选择更低代价的满足方式，这股力量会更可用。","notRecommended":["羞辱自己的欲望","拿结果攻击他人","在情绪高点做重大决定"],"plan90":[{"title":"记录触发","content":"连续 7 天记下：发生了什么、身体有什么感觉、最想立刻做什么。"},{"title":"翻译需要","content":"每次出现暴怒张力时，把“我想怎样”改写成“我现在需要什么”。"},{"title":"设计出口","content":"为这项需要准备一个即时出口和一个长期出口，减少只能靠冲动解决的时刻。"}],"closing":"看见欲望，不是纵容它；是让它不必在暗处替你做决定。"},"GLUTTONY":{"typeName":"盛宴印记 · 即时补给者","subtitle":"暴食不是道德判决，而是你在某些情境下更容易启动的欲望张力。","maturityScore":86,"coreConclusion":"你不是自控差，只是太久没有被真正满足。","diagnosis":"你会通过食物、娱乐、购买和舒适感快速补给自己。优势是懂享受、恢复快；盲点是短期满足遮住了长期缺口。","whatYouReallyWant":"你真正想要的是身心被照顾，不必永远延迟快乐、只顾着扛。","mechanism":{"title":"即时补给机制","content":"压力过载时，你会先让身体得到确定的快乐与安慰。"},"professionalBasis":["本测试使用七种文化原型描述欲望、比较、边界和能量反应，不对应临床人格分类。","主导印记反映当前选择模式；关系对象、工作压力和生活阶段变化时，分布也会移动。"],"coreTensions":["暴食带来的推动力","想满足自己，又怕被评价","本能反应与长期目标之间的拉扯"],"suitableIf":["把欲望翻译成具体需要","允许自己承认感受","为满足设置清楚边界"],"cautionIf":["用标签给自己定性","把结果当作道德高低","让即时冲动替代现实判断"],"indices":[{"label":"感官需求","value":92},{"label":"即时补给","value":90},{"label":"延迟满足","value":63}],"ifStay":"继续否认这股张力，它仍会从更隐蔽的比较、拖延、冲动或不满里出现。","ifChange":"看见触发点、命名真实需要，再选择更低代价的满足方式，这股力量会更可用。","notRecommended":["羞辱自己的欲望","拿结果攻击他人","在情绪高点做重大决定"],"plan90":[{"title":"记录触发","content":"连续 7 天记下：发生了什么、身体有什么感觉、最想立刻做什么。"},{"title":"翻译需要","content":"每次出现暴食张力时，把“我想怎样”改写成“我现在需要什么”。"},{"title":"设计出口","content":"为这项需要准备一个即时出口和一个长期出口，减少只能靠冲动解决的时刻。"}],"closing":"看见欲望，不是纵容它；是让它不必在暗处替你做决定。"},"SLOTH":{"typeName":"休眠印记 · 能量保全者","subtitle":"懒惰不是道德判决，而是你在某些情境下更容易启动的欲望张力。","maturityScore":86,"coreConclusion":"你不是没有欲望，而是在用停下来保护剩余能量。","diagnosis":"你会本能避开高耗损、低回报和无休止的任务。优势是会识别无效投入；盲点是恢复与回避混在一起，越拖越难启动。","whatYouReallyWant":"你真正想要的是一个不靠硬撑也能前进的节奏。","mechanism":{"title":"能量保全机制","content":"任务看不到回报或压力过载时，你会降低投入以避免彻底耗尽。"},"professionalBasis":["本测试使用七种文化原型描述欲望、比较、边界和能量反应，不对应临床人格分类。","主导印记反映当前选择模式；关系对象、工作压力和生活阶段变化时，分布也会移动。"],"coreTensions":["懒惰带来的推动力","想满足自己，又怕被评价","本能反应与长期目标之间的拉扯"],"suitableIf":["把欲望翻译成具体需要","允许自己承认感受","为满足设置清楚边界"],"cautionIf":["用标签给自己定性","把结果当作道德高低","让即时冲动替代现实判断"],"indices":[{"label":"能量保护","value":93},{"label":"启动阻力","value":84},{"label":"节奏恢复","value":70}],"ifStay":"继续否认这股张力，它仍会从更隐蔽的比较、拖延、冲动或不满里出现。","ifChange":"看见触发点、命名真实需要，再选择更低代价的满足方式，这股力量会更可用。","notRecommended":["羞辱自己的欲望","拿结果攻击他人","在情绪高点做重大决定"],"plan90":[{"title":"记录触发","content":"连续 7 天记下：发生了什么、身体有什么感觉、最想立刻做什么。"},{"title":"翻译需要","content":"每次出现懒惰张力时，把“我想怎样”改写成“我现在需要什么”。"},{"title":"设计出口","content":"为这项需要准备一个即时出口和一个长期出口，减少只能靠冲动解决的时刻。"}],"closing":"看见欲望，不是纵容它；是让它不必在暗处替你做决定。"}}};</script>
+    <script>
+(function () {
+  const app = document.getElementById("app");
+  const configPaths = ["./configs/site-config.json", "./configs/career-change.json"];
+
+  const state = {
+    config: null,
+    answers: {},
+    profile: { birthDate: "", actualAge: "" },
+    currentIndex: 0,
+    selected: null,
+    locked: false,
+    loadingStep: 0,
+    route: "home",
+    resultData: null,
+  };
+
+  const defaultLoadingMessages = [
+    "正在读取你的选择倾向...",
+    "正在识别隐藏动机...",
+    "正在计算结果分布...",
+    "正在生成专属报告...",
+    "分析完成。",
+  ];
+
+  init();
+
+  async function init() {
+    try {
+      state.config = await fetchConfig();
+      applyDocumentMeta(state.config);
+      applyTheme(state.config);
+
+      const saved = sessionStorage.getItem(getStorageKey());
+      if (saved) {
+        state.answers = JSON.parse(saved);
+      }
+      const savedProfile = sessionStorage.getItem(getProfileStorageKey());
+      if (savedProfile) {
+        state.profile = JSON.parse(savedProfile);
+      }
+
+      routeFromHash();
+      window.addEventListener("hashchange", routeFromHash);
+    } catch (error) {
+      app.innerHTML = `
+        <div class="error">
+          <div>
+            <h1>测试加载失败</h1>
+            <p>请确认你是通过网页链接打开页面，而不是直接双击 HTML 文件。</p>
+          </div>
+        </div>
+      `;
+      console.error(error);
+    }
+  }
+
+  async function fetchConfig() {
+    if (window.__QUIZ_CONFIG__) return window.__QUIZ_CONFIG__;
+    let lastError;
+    for (const path of configPaths) {
+      try {
+        const response = await fetch(path, { cache: "no-store" });
+        if (!response.ok) throw new Error(`${path} ${response.status}`);
+        return response.json();
+      } catch (error) {
+        lastError = error;
+      }
+    }
+    throw lastError;
+  }
+
+  function applyDocumentMeta(cfg) {
+    const title = cfg.title || "趣味测试";
+    const description = cfg.metaDescription || cfg.subtitle || "完成测试，生成你的专属报告。";
+    document.title = title;
+    setMeta("name", "description", description);
+    setMeta("property", "og:title", title);
+    setMeta("property", "og:description", description);
+  }
+
+  function applyTheme(cfg) {
+    Object.entries(cfg.theme || {}).forEach(([name, value]) => {
+      document.documentElement.style.setProperty(name, value);
+    });
+  }
+
+  function setMeta(attr, key, content) {
+    let node = document.querySelector(`meta[${attr}="${key}"]`);
+    if (!node) {
+      node = document.createElement("meta");
+      node.setAttribute(attr, key);
+      document.head.appendChild(node);
+    }
+    node.setAttribute("content", content);
+  }
+
+  function routeFromHash() {
+    const route = (location.hash || "#/").replace("#/", "") || "home";
+    renderRoute(route);
+  }
+
+  function navigate(route) {
+    const nextHash = `#/${route}`;
+    if (location.hash === nextHash) {
+      renderRoute(route);
+      return;
+    }
+    location.hash = nextHash;
+  }
+
+  function renderRoute(route) {
+    state.route = route;
+    if (route === "quiz") renderQuiz();
+    else if (route === "loading") startLoading();
+    else if (route === "result") renderResult();
+    else renderHome();
+  }
+
+  function renderShell(content, extraClass = "") {
+    app.innerHTML = `
+      <div class="shell">
+        <div class="top-rule"></div>
+        <section class="screen ${extraClass}">${content}</section>
+      </div>
+      <div id="toast" class="toast">已复制</div>
+    `;
+  }
+
+  function renderHome() {
+    const cfg = state.config;
+    renderShell(
+      `
+      <div class="home">
+        <div class="kicker"><span class="dot"></span><span>${text(cfg.kicker)}</span><span class="dot"></span></div>
+        <h1 class="hero-title">${text(cfg.title)}</h1>
+        <p class="hero-subtitle">${text(cfg.subtitle)}</p>
+        <div class="hairline"></div>
+        <div class="intro">
+          ${(cfg.intro || []).map((p, index) => `<p class="${index === cfg.intro.length - 1 ? "strong" : ""}">${text(p)}</p>`).join("")}
+        </div>
+        ${!cfg.compactHome && (cfg.dimensions || []).length ? `
+          <div class="pill-grid">
+            ${(cfg.dimensions || []).map((item) => `<div class="pill">${text(item)}</div>`).join("")}
+          </div>
+        ` : ""}
+        ${cfg.testInfo ? `
+          <section class="home-card info-card">
+            <h2>${text(cfg.testInfo.title || "测验说明")}</h2>
+            <ul>${(cfg.testInfo.bullets || []).map((item) => `<li>${text(item)}</li>`).join("")}</ul>
+          </section>
+        ` : ""}
+        ${cfg.matchingSystem ? `
+          <section class="home-card info-card">
+            <h2>${text(cfg.matchingSystem.title || "综合匹配系统")}</h2>
+            <p>${text(cfg.matchingSystem.body || "")}</p>
+          </section>
+        ` : ""}
+        ${cfg.profileInput ? `
+          <section class="profile-panel">
+            <label class="profile-label" for="profile-value">${text(cfg.profileInput.title || "先输入出生日期")}</label>
+            <div class="profile-field">
+              <span>${text(cfg.profileInput.label || "出生日期")}</span>
+              <input
+                id="profile-value"
+                type="${text(cfg.profileInput.type || "date")}"
+                value="${text(getProfileInputValue(cfg.profileInput))}"
+                ${cfg.profileInput.type === "number" ? `inputmode="numeric" min="${text(cfg.profileInput.min || 1)}" max="${text(cfg.profileInput.max || 99)}" placeholder="${text(cfg.profileInput.placeholder || "")}"` : ""}
+                ${cfg.profileInput.required ? "required" : ""}
+              >
+            </div>
+            <p class="profile-note">${text(cfg.profileInput.note || "")}</p>
+            <p class="profile-error" data-profile-error aria-live="polite"></p>
+          </section>
+        ` : ""}
+        <button class="primary-btn" data-action="start">${text(cfg.startButton || "开始测试")}</button>
+        ${cfg.compactHome && (cfg.dimensions || []).length ? `
+          <div class="pill-grid compact-pills">
+            ${(cfg.dimensions || []).map((item) => `<div class="pill">${text(item)}</div>`).join("")}
+          </div>
+        ` : ""}
+        <p class="disclaimer">${text(cfg.disclaimer || "本测试为趣味内容，仅供娱乐参考。")}</p>
+      </div>
+      `,
+      "home"
+    );
+    const startButton = app.querySelector("[data-action='start']");
+    const profileField = app.querySelector("#profile-value");
+    const profileError = app.querySelector("[data-profile-error]");
+    profileField?.addEventListener("input", () => {
+      profileField.classList.remove("invalid");
+      if (profileError) profileError.textContent = "";
+    });
+    let started = false;
+    const startQuiz = () => {
+      if (started) return;
+      const profileValue = profileField?.value?.trim() || "";
+      if (cfg.profileInput?.required && !profileValue) {
+        profileField?.classList.add("invalid");
+        if (profileError) profileError.textContent = cfg.profileInput?.error || "请先填写信息，再开始测试。";
+        profileField?.focus();
+        return;
+      }
+      if (cfg.profileInput?.type === "number") {
+        const numericValue = Number(profileValue);
+        const min = Number(cfg.profileInput.min || 1);
+        const max = Number(cfg.profileInput.max || 99);
+        if (!Number.isFinite(numericValue) || numericValue < min || numericValue > max) {
+          profileField?.classList.add("invalid");
+          if (profileError) profileError.textContent = cfg.profileInput?.rangeError || `请输入 ${min}-${max} 之间的数字。`;
+          profileField?.focus();
+          return;
+        }
+      }
+      started = true;
+      state.answers = {};
+      state.profile = buildProfileFromInput(cfg.profileInput, profileValue);
+      state.currentIndex = 0;
+      sessionStorage.removeItem(getStorageKey());
+      sessionStorage.setItem(getProfileStorageKey(), JSON.stringify(state.profile));
+      navigate("quiz");
+    };
+    startButton.addEventListener("click", startQuiz);
+    startButton.addEventListener(
+      "touchend",
+      (event) => {
+        event.preventDefault();
+        startQuiz();
+      },
+      { passive: false }
+    );
+  }
+
+  function renderQuiz() {
+    const questions = state.config.questions || [];
+    const question = questions[state.currentIndex];
+    if (!question) {
+      renderHome();
+      return;
+    }
+
+    const progress = ((state.currentIndex + 1) / questions.length) * 100;
+
+    renderShell(
+      `
+      <div class="sticky-head">
+        <div class="quiz-meta">
+          <span>${String(state.currentIndex + 1).padStart(2, "0")} / ${questions.length}</span>
+          <span>${text(question.module)}</span>
+        </div>
+        <div class="progress-track"><div class="progress-bar" style="width:${progress}%"></div></div>
+      </div>
+      <div class="question-no">${String(state.currentIndex + 1).padStart(2, "0")}</div>
+      <h1 class="question-title">${text(question.text)}</h1>
+      <div class="options">
+        ${(question.options || [])
+          .map(
+            (option) => `
+            <button class="option" data-option="${text(option.key)}">
+              <span class="option-key">${text(option.key)}</span>
+              <span class="option-text">${text(option.text)}</span>
+            </button>
+          `
+          )
+          .join("")}
+      </div>
+      <p class="hint">${text(state.config.quizHint || "选择后自动进入下一题")}</p>
+      `,
+      "quiz-screen"
+    );
+
+    app.querySelectorAll("[data-option]").forEach((button) => {
+      button.addEventListener("click", () => selectOption(button.dataset.option));
+    });
+  }
+
+  function selectOption(key) {
+    if (state.locked) return;
+    state.locked = true;
+    state.selected = key;
+    const question = state.config.questions[state.currentIndex];
+    state.answers[question.id] = key;
+
+    app.querySelectorAll(".option").forEach((button) => {
+      const selected = button.dataset.option === key;
+      button.classList.toggle("selected", selected);
+      button.classList.toggle("dimmed", !selected);
+    });
+
+    window.setTimeout(() => {
+      if (state.currentIndex < state.config.questions.length - 1) {
+        state.currentIndex += 1;
+        state.locked = false;
+        state.selected = null;
+        renderQuiz();
+      } else {
+        sessionStorage.setItem(getStorageKey(), JSON.stringify(state.answers));
+        state.locked = false;
+        navigate("loading");
+      }
+    }, 420);
+  }
+
+  function startLoading() {
+    state.loadingStep = 0;
+    renderLoading("");
+    tickLoading();
+  }
+
+  function renderLoading(value) {
+    const loadingMessages = getLoadingMessages();
+    renderShell(
+      `
+      <div class="loading-card">
+        <div class="spinner"></div>
+        <div class="loading-text">${text(value)}<span class="cursor">|</span></div>
+        <div class="step-bars">
+          ${loadingMessages.map((_, index) => `<div class="step ${index < state.loadingStep ? "done" : ""}"><span></span></div>`).join("")}
+        </div>
+      </div>
+      `,
+      "loading-screen"
+    );
+  }
+
+  function tickLoading() {
+    if (state.route !== "loading") return;
+    const loadingMessages = getLoadingMessages();
+    if (state.loadingStep >= loadingMessages.length) {
+      window.setTimeout(() => navigate("result"), 700);
+      return;
+    }
+    const message = loadingMessages[state.loadingStep];
+    let chars = 0;
+    const interval = window.setInterval(() => {
+      chars += 1;
+      renderLoading(message.slice(0, chars));
+      if (chars >= message.length) {
+        window.clearInterval(interval);
+        window.setTimeout(() => {
+          state.loadingStep += 1;
+          tickLoading();
+        }, 520);
+      }
+    }, 35);
+  }
+
+  function renderResult() {
+    const saved = sessionStorage.getItem(getStorageKey());
+    if (saved) state.answers = JSON.parse(saved);
+    if (Object.keys(state.answers).length < state.config.questions.length) {
+      renderHome();
+      return;
+    }
+
+    const scored = scoreAnswers(state.answers);
+    const primary = state.config.results[scored.primary];
+    const secondary = scored.secondary ? state.config.secondaryNotes?.[scored.primary]?.[scored.secondary] : null;
+    const headlineScore = Number.isFinite(scored.score) ? scored.score : primary.maturityScore;
+    const stage = getStage(headlineScore);
+    const shareText = buildShareText(primary, secondary, scored);
+    const compareLabels = state.config.compareLabels || ["如果继续原路", "如果换一种做法"];
+    state.resultData = { scored, primary, secondary, stage, shareText };
+
+    renderShell(
+      `
+      <article class="report">
+        <div class="kicker"><span class="dot"></span><span>${text(state.config.resultKicker || "Result Report")}</span><span class="dot"></span></div>
+        <h1 class="result-type">${text(primary.typeName)}</h1>
+        <p class="result-subtitle">${text(primary.subtitle)}</p>
+        <div class="stamp-row">
+          <div class="stamp"><strong>${text(headlineScore)}</strong><span>${text(state.config.scoreLabel || "决策成熟度")}</span></div>
+          <div class="stamp"><strong>${text(stage)}</strong><span>${text(state.config.stageLabel || "当前行动阶段")}</span></div>
+        </div>
+
+        ${renderMatchSummary(scored)}
+
+        ${scored.psychological || scored.attachment || scored.liking || scored.distribution ? "" : `
+          <section class="section">
+            <h2>你的答案分布</h2>
+            <div class="meters">
+              ${Object.entries(scored.counts)
+                .filter(([, value]) => value > 0)
+                .map(([key, value]) => {
+                  const typeData = state.config.results[key];
+                  const width = (value / state.config.questions.length) * 100;
+                  return `
+                    <div>
+                      <div class="meter-head"><span>${text(key)} · ${text(typeData.typeName)}</span><span>${value} 题</span></div>
+                      <div class="meter-track"><div class="meter-fill" style="width:${width}%"></div></div>
+                    </div>
+                  `;
+                })
+                .join("")}
+            </div>
+          </section>
+        `}
+
+        ${secondary ? `<section class="section"><h2>副倾向提示</h2><div class="secondary-note">${text(secondary)}</div></section>` : ""}
+
+        <section class="section">
+          <h2>诊断结论</h2>
+          <div class="quote">${text(primary.coreConclusion)}</div>
+        </section>
+
+        <section class="section">
+          <h2>为什么你会这样</h2>
+          <p>${text(primary.diagnosis)}</p>
+          <p>${text(primary.whatYouReallyWant)}</p>
+        </section>
+
+        <section class="section">
+          <h2>${text(primary.mechanism.title)}</h2>
+          <p>${text(primary.mechanism.content)}</p>
+        </section>
+
+        ${renderParagraphSection("专业解读框架", primary.professionalBasis)}
+        ${renderTagSection("你的关键矛盾", primary.coreTensions)}
+        ${renderCompareListSection("适合推进的条件", "需要谨慎的信号", primary.suitableIf, primary.cautionIf)}
+
+        <section class="section">
+          <h2>关键指数</h2>
+          <div class="meters">
+            ${(primary.indices || [])
+              .map(
+                (item) => `
+                <div>
+                  <div class="meter-head"><span>${text(item.label)}</span><span>${text(item.value)}</span></div>
+                  <div class="meter-track"><div class="meter-fill" style="width:${number(item.value)}%"></div></div>
+                </div>
+              `
+              )
+              .join("")}
+          </div>
+        </section>
+
+        <section class="section">
+          <h2>两条路径对比</h2>
+          <div class="compare">
+            <div class="compare-card"><h3>${text(compareLabels[0])}</h3><p>${text(primary.ifStay)}</p></div>
+            <div class="compare-card"><h3>${text(compareLabels[1])}</h3><p>${text(primary.ifChange)}</p></div>
+          </div>
+        </section>
+
+        <section class="section">
+          <h2>现在最不建议你做</h2>
+          <div class="tag-list">${(primary.notRecommended || []).map((item) => `<span class="tag">${text(item)}</span>`).join("")}</div>
+        </section>
+
+        <section class="section">
+          <h2>${text(state.config.planTitle || "未来 90 天验证方案")}</h2>
+          <div class="plan">
+            ${(primary.plan90 || [])
+              .map(
+                (item, index) => `
+                <div class="plan-card">
+                  <h3>${index + 1}. ${text(item.title)}</h3>
+                  <p>${text(item.content)}</p>
+                </div>
+              `
+              )
+              .join("")}
+          </div>
+        </section>
+
+        <section class="section">
+          <h2>最后一句话</h2>
+          <p>${text(primary.closing)}</p>
+        </section>
+
+        ${state.config.disclaimer ? `<p class="result-disclaimer">${text(state.config.disclaimer)}</p>` : ""}
+
+        <div class="actions">
+          <button class="primary-btn" data-action="copy">${text(state.config.copyButton || "复制我的结果")}</button>
+          <button class="ghost-btn" data-action="restart">${text(state.config.restartButton || "重新测试")}</button>
+        </div>
+      </article>
+      `,
+      "result-screen"
+    );
+
+    app.querySelector("[data-action='copy']").addEventListener("click", () => copyShareText(shareText));
+    app.querySelector("[data-action='restart']").addEventListener("click", () => {
+      sessionStorage.removeItem(getStorageKey());
+      sessionStorage.removeItem(getProfileStorageKey());
+      state.answers = {};
+      state.profile = { birthDate: "" };
+      state.currentIndex = 0;
+      navigate("home");
+    });
+  }
+
+  function renderParagraphSection(title, paragraphs) {
+    if (!Array.isArray(paragraphs) || !paragraphs.length) return "";
+    return `
+      <section class="section">
+        <h2>${text(title)}</h2>
+        ${paragraphs.map((item) => `<p>${text(item)}</p>`).join("")}
+      </section>
+    `;
+  }
+
+  function renderTagSection(title, items) {
+    if (!Array.isArray(items) || !items.length) return "";
+    return `
+      <section class="section">
+        <h2>${text(title)}</h2>
+        <div class="tag-list">${items.map((item) => `<span class="tag">${text(item)}</span>`).join("")}</div>
+      </section>
+    `;
+  }
+
+  function renderMatchSummary(scored) {
+    if (scored.distribution) return renderDistributionSummary(scored.distribution);
+    if (scored.psychological) return renderPsychologicalSummary(scored.psychological);
+    if (scored.attachment) return renderAttachmentSummary(scored.attachment);
+    if (scored.liking) return renderLikingSummary(scored.liking);
+    if (!scored.match) return "";
+    const match = scored.match;
+    return `
+      <section class="section">
+        <h2>综合匹配结果</h2>
+        <div class="match-summary">
+          <div class="match-grid">
+            <div class="match-item"><span>出生日期倾向</span><strong>${text(match.birthElement)}</strong></div>
+            <div class="match-item"><span>答题倾向</span><strong>${text(match.personalityElement)}</strong></div>
+            <div class="match-item"><span>城市匹配度</span><strong>${text(match.matchScore)}%</strong></div>
+          </div>
+          <p>本结果按出生日期倾向与 49 道题的生活选择加权生成。五行仅用于表达生活偏好，结果需要结合真实岗位、预算、住房和试住体验判断。</p>
+        </div>
+      </section>
+    `;
+  }
+
+  function renderDistributionSummary(data) {
+    const size = 320;
+    const center = size / 2;
+    const radius = 108;
+    const count = data.dimensionOrder.length;
+    const point = (index, scale = 1) => {
+      const angle = -Math.PI / 2 + (Math.PI * 2 * index) / count;
+      return [
+        center + Math.cos(angle) * radius * scale,
+        center + Math.sin(angle) * radius * scale,
+      ];
+    };
+    const polygon = (scale) =>
+      data.dimensionOrder.map((_, index) => point(index, scale).join(",")).join(" ");
+    const valuePolygon = data.dimensionOrder
+      .map((key, index) => point(index, number(data.dimensions[key]) / 100).join(","))
+      .join(" ");
+    const labels = data.dimensionOrder
+      .map((key, index) => {
+        const [x, y] = point(index, 1.28);
+        return `<text x="${x}" y="${y}" text-anchor="middle" dominant-baseline="middle">${text(data.dimensionLabels[key] || key)}</text>`;
+      })
+      .join("");
+
+    return `
+      <section class="section distribution-summary">
+        <h2>${text(data.title || "七维张力分布")}</h2>
+        <div class="distribution-chart" role="img" aria-label="${text(data.title || "七维张力分布")}">
+          <svg viewBox="0 0 ${size} ${size}">
+            ${[0.25, 0.5, 0.75, 1].map((scale) => `<polygon class="radar-grid" points="${polygon(scale)}"></polygon>`).join("")}
+            ${data.dimensionOrder.map((_, index) => {
+              const [x, y] = point(index, 1);
+              return `<line class="radar-axis" x1="${center}" y1="${center}" x2="${x}" y2="${y}"></line>`;
+            }).join("")}
+            <polygon class="radar-value" points="${valuePolygon}"></polygon>
+            ${data.dimensionOrder.map((key, index) => {
+              const [x, y] = point(index, number(data.dimensions[key]) / 100);
+              return `<circle class="radar-dot" cx="${x}" cy="${y}" r="4"></circle>`;
+            }).join("")}
+            ${labels}
+          </svg>
+        </div>
+        <div class="match-summary">
+          <div class="match-grid">
+            <div class="match-item"><span>主导印记</span><strong>${text(data.ranking[0]?.label || "")}</strong></div>
+            <div class="match-item"><span>第二倾向</span><strong>${text(data.ranking[1]?.label || "")}</strong></div>
+            <div class="match-item"><span>分布状态</span><strong>${text(data.balanceLabel)}</strong></div>
+          </div>
+          <p>${text(data.note)}</p>
+        </div>
+      </section>
+      <section class="section">
+        <h2>七维排序</h2>
+        <div class="meters">
+          ${data.ranking.map((item, index) => `
+            <div>
+              <div class="meter-head"><span>${index + 1}. ${text(item.label)}</span><span>${text(item.value)}</span></div>
+              <div class="meter-track"><div class="meter-fill" style="width:${number(item.value)}%"></div></div>
+            </div>
+          `).join("")}
+        </div>
+      </section>
+    `;
+  }
+
+  function renderAttachmentSummary(data) {
+    return `
+      <section class="section">
+        <h2>你的关系联结坐标</h2>
+        <div class="match-summary">
+          <div class="match-grid">
+            <div class="match-item"><span>关系焦虑</span><strong>${text(data.anxiety)}分</strong></div>
+            <div class="match-item"><span>亲密回避</span><strong>${text(data.avoidance)}分</strong></div>
+            <div class="match-item"><span>当前状态</span><strong>${text(data.mixed ? "带有混合倾向" : "主要倾向清晰")}</strong></div>
+          </div>
+          <p>分数表示你在当前关系经验中更容易启动的保护反应，不是终身不变的标签。关系对象、安全感和近期压力变化，都可能让坐标移动。</p>
+        </div>
+      </section>
+      <section class="section">
+        <h2>双维度关系天气</h2>
+        <div class="meters">
+          <div>
+            <div class="meter-head"><span>关系焦虑：对失去连接的警觉</span><span>${text(data.anxiety)}</span></div>
+            <div class="meter-track"><div class="meter-fill" style="width:${number(data.anxiety)}%"></div></div>
+          </div>
+          <div>
+            <div class="meter-head"><span>亲密回避：对过度靠近的压力</span><span>${text(data.avoidance)}</span></div>
+            <div class="meter-track"><div class="meter-fill" style="width:${number(data.avoidance)}%"></div></div>
+          </div>
+        </div>
+      </section>
+    `;
+  }
+
+  function renderPsychologicalSummary(data) {
+    const deltaLabel = data.delta > 0 ? `比实际年龄成熟 ${data.delta} 岁` : data.delta < 0 ? `比实际年龄年轻 ${Math.abs(data.delta)} 岁` : "与实际年龄同频";
+    return `
+      <section class="section">
+        <h2>心理年龄对比</h2>
+        <div class="match-summary">
+          <div class="match-grid">
+            <div class="match-item"><span>实际年龄</span><strong>${text(data.actualAge)}岁</strong></div>
+            <div class="match-item"><span>心理年龄</span><strong>${text(data.psychologicalAge)}岁</strong></div>
+            <div class="match-item"><span>年龄差</span><strong>${text(deltaLabel)}</strong></div>
+          </div>
+          <p>${text(data.ageLabel)}。这个数字不是能力高低，只代表你最近面对世界时更常用的心理模式。</p>
+        </div>
+      </section>
+      <section class="section">
+        <h2>8维心理画像</h2>
+        <div class="meters">
+          ${data.dimensionOrder.map((key) => `
+            <div>
+              <div class="meter-head"><span>${text(data.dimensionLabels[key] || key)}</span><span>${text(data.dimensions[key])}</span></div>
+              <div class="meter-track"><div class="meter-fill" style="width:${number(data.dimensions[key])}%"></div></div>
+            </div>
+          `).join("")}
+        </div>
+      </section>
+      <section class="section">
+        <h2>关键词标签</h2>
+        <div class="tag-list">${data.tags.map((item) => `<span class="tag">${text(item)}</span>`).join("")}</div>
+      </section>
+      <section class="section">
+        <h2>你的长板与盲点</h2>
+        <div class="compare">
+          <div class="compare-card">
+            <h3>最高的 3 个维度</h3>
+            ${data.topDimensions.map((item) => `<p>${text(item.label)}：${text(item.value)}</p>`).join("")}
+          </div>
+          <div class="compare-card">
+            <h3>最低的 2 个维度</h3>
+            ${data.lowDimensions.map((item) => `<p>${text(item.label)}：${text(item.value)}</p>`).join("")}
+          </div>
+        </div>
+      </section>
+    `;
+  }
+
+  function renderLikingSummary(data) {
+    return `
+      <section class="section">
+        <h2>你的喜欢光谱</h2>
+        <div class="match-summary">
+          <div class="match-grid">
+            <div class="match-item"><span>喜欢值</span><strong>${text(data.score)} / 100</strong></div>
+            <div class="match-item"><span>当前阶段</span><strong>${text(data.bandLabel)}</strong></div>
+            <div class="match-item"><span>理想化提醒</span><strong>${text(data.idealizationRisk)}分</strong></div>
+          </div>
+          <p>喜欢值表示你此刻的主观心动与投入，不代表双方匹配度，也不代表对方有同样的感觉。现实看见和关系准备越充分，这份喜欢越有机会从想象走向真实。</p>
+        </div>
+      </section>
+      <section class="section">
+        <h2>四维喜欢档案</h2>
+        <div class="meters">
+          ${data.dimensionOrder.map((key) => `
+            <div>
+              <div class="meter-head"><span>${text(data.dimensionLabels[key] || key)}</span><span>${text(data.dimensions[key])}</span></div>
+              <div class="meter-track"><div class="meter-fill" style="width:${number(data.dimensions[key])}%"></div></div>
+            </div>
+          `).join("")}
+        </div>
+      </section>
+    `;
+  }
+
+  function renderCompareListSection(leftTitle, rightTitle, leftItems, rightItems) {
+    const hasLeft = Array.isArray(leftItems) && leftItems.length;
+    const hasRight = Array.isArray(rightItems) && rightItems.length;
+    if (!hasLeft && !hasRight) return "";
+    return `
+      <section class="section">
+        <h2>适用边界</h2>
+        <div class="compare">
+          <div class="compare-card">
+            <h3>${text(leftTitle)}</h3>
+            ${(leftItems || []).map((item) => `<p>${text(item)}</p>`).join("")}
+          </div>
+          <div class="compare-card">
+            <h3>${text(rightTitle)}</h3>
+            ${(rightItems || []).map((item) => `<p>${text(item)}</p>`).join("")}
+          </div>
+        </div>
+      </section>
+    `;
+  }
+
+  function scoreAnswers(answers) {
+    if (state.config.scoring?.mode === "distribution-profile") {
+      return scoreDistributionProfile(answers, state.config.scoring);
+    }
+    if (state.config.scoring?.mode === "liking-profile") {
+      return scoreLikingProfile(answers, state.config.scoring);
+    }
+    if (state.config.scoring?.mode === "attachment-two-axis") {
+      return scoreAttachmentTwoAxis(answers, state.config.scoring);
+    }
+    if (state.config.scoring?.mode === "psychological-age") {
+      return scorePsychologicalAge(answers, state.config.scoring);
+    }
+    if (state.config.scoring?.mode === "paired-attributes") {
+      return scorePairedAttributes(answers, state.config.scoring);
+    }
+    if (state.config.scoring?.mode === "city-with-elements") {
+      return scoreCityWithElements(answers, state.config.scoring);
+    }
+
+    const resultKeys = Object.keys(state.config.results || {});
+    const counts = Object.fromEntries(resultKeys.map((key) => [key, 0]));
+    (state.config.questions || []).forEach((question) => {
+      const answerKey = answers[question.id];
+      if (!answerKey) return;
+      const option = (question.options || []).find((item) => item.key === answerKey);
+      const weights = option?.weights;
+      if (weights && typeof weights === "object") {
+        Object.entries(weights).forEach(([key, value]) => {
+          if (counts[key] !== undefined) counts[key] += Number(value) || 0;
+        });
+        return;
+      }
+      const scoreKey = option?.score || option?.result || answerKey;
+      if (counts[scoreKey] !== undefined) counts[scoreKey] += 1;
+    });
+    const sorted = Object.entries(counts).sort((a, b) => b[1] - a[1]);
+    const threshold = state.config.secondaryThreshold ?? 2;
+    const primary = sorted[0][0];
+    const secondary = sorted[1][1] > 0 && sorted[0][1] - sorted[1][1] <= threshold ? sorted[1][0] : null;
+    return { counts, primary, secondary };
+  }
+
+  function scoreDistributionProfile(answers, scoring) {
+    const dimensionOrder = scoring.dimensionOrder || Object.keys(state.config.results || {});
+    const dimensionLabels = scoring.dimensionLabels || {};
+    const totals = Object.fromEntries(dimensionOrder.map((key) => [key, 0]));
+    const possible = Object.fromEntries(dimensionOrder.map((key) => [key, 0]));
+
+    (state.config.questions || []).forEach((question) => {
+      const answerKey = answers[question.id];
+      const chosen = (question.options || []).find((item) => item.key === answerKey);
+      dimensionOrder.forEach((key) => {
+        const maxForQuestion = Math.max(
+          0,
+          ...(question.options || []).map((option) => Number(option.weights?.[key] || 0)),
+        );
+        possible[key] += maxForQuestion;
+        totals[key] += Number(chosen?.weights?.[key] || 0);
+      });
+    });
+
+    const dimensions = Object.fromEntries(
+      dimensionOrder.map((key) => [
+        key,
+        possible[key] ? clamp(Math.round((totals[key] / possible[key]) * 100), 0, 100) : 0,
+      ]),
+    );
+    const ranking = dimensionOrder
+      .map((key) => ({ key, label: dimensionLabels[key] || key, value: dimensions[key] }))
+      .sort((left, right) => right.value - left.value);
+    const primary = ranking[0]?.key;
+    const secondary = ranking[1]?.key || null;
+    const spread = (ranking[0]?.value || 0) - (ranking[ranking.length - 1]?.value || 0);
+    const balanceLabel = spread <= 18 ? "七面较均衡" : spread <= 35 ? "双核牵引" : "主轴较清晰";
+    const average = Math.round(ranking.reduce((sum, item) => sum + item.value, 0) / Math.max(1, ranking.length));
+    const counts = Object.fromEntries(dimensionOrder.map((key) => [key, dimensions[key]]));
+
+    return {
+      counts,
+      primary,
+      secondary,
+      score: dimensions[primary] || average,
+      distribution: {
+        title: scoring.title || "七维张力分布",
+        dimensions,
+        dimensionOrder,
+        dimensionLabels,
+        ranking,
+        balanceLabel,
+        note: scoring.note || "这些分数表示特定情境下更容易被启动的欲望与防御，不代表道德好坏，也不是固定人格。",
+      },
+    };
+  }
+
+  function scoreLikingProfile(answers, scoring) {
+    const answerValues = scoring.answerValues || { A: 1, B: 2, C: 3, D: 4, E: 5 };
+    const dimensionOrder = scoring.dimensionOrder || ["attraction", "reality", "investment", "readiness"];
+    const dimensionLabels = scoring.dimensionLabels || {};
+    const totals = Object.fromEntries(dimensionOrder.map((key) => [key, 0]));
+    const itemCounts = Object.fromEntries(dimensionOrder.map((key) => [key, 0]));
+
+    (state.config.questions || []).forEach((question) => {
+      const answerKey = answers[question.id];
+      const dimension = question.dimension;
+      if (!answerKey || !(dimension in totals)) return;
+      const base = Number(answerValues[answerKey] ?? answerValues[String(answerKey)] ?? 0);
+      if (!Number.isFinite(base) || base < 1 || base > 5) return;
+      const adjusted = question.reverse ? 6 - base : base;
+      totals[dimension] += adjusted;
+      itemCounts[dimension] += 1;
+    });
+
+    const dimensions = {};
+    dimensionOrder.forEach((key) => {
+      const count = itemCounts[key] || 0;
+      const averageScore = count ? totals[key] / count : 1;
+      dimensions[key] = clamp(Math.round(((averageScore - 1) / 4) * 100), 0, 100);
+    });
+
+    const weights = scoring.dimensionWeights || {};
+    const weightTotal = dimensionOrder.reduce((sum, key) => sum + Number(weights[key] ?? 1), 0) || 1;
+    const score = clamp(
+      Math.round(
+        dimensionOrder.reduce(
+          (sum, key) => sum + dimensions[key] * Number(weights[key] ?? 1),
+          0,
+        ) / weightTotal,
+      ),
+      0,
+      100,
+    );
+    const bands = scoring.bands || [
+      { max: 24, key: "BUD" },
+      { max: 44, key: "CURIOUS" },
+      { max: 64, key: "SPARK" },
+      { max: 82, key: "SERIOUS" },
+      { max: 100, key: "COMMITTED" },
+    ];
+    const band = bands.find((item) => score <= Number(item.max)) || bands[bands.length - 1];
+    const primary = band.key;
+    const primaryData = state.config.results?.[primary] || {};
+    const liking = {
+      score,
+      bandLabel: primaryData.typeName || primary,
+      idealizationRisk: clamp(100 - Number(dimensions.reality || 0), 0, 100),
+      dimensions,
+      dimensionOrder,
+      dimensionLabels,
+    };
+    const counts = Object.fromEntries(Object.keys(state.config.results || {}).map((key) => [key, key === primary ? 1 : 0]));
+    return { counts, primary, secondary: null, score, liking };
+  }
+
+  function scoreAttachmentTwoAxis(answers, scoring) {
+    const answerValues = scoring.answerValues || { A: 1, B: 2, C: 3, D: 4, E: 5 };
+    const totals = { anxiety: 0, avoidance: 0 };
+    const itemCounts = { anxiety: 0, avoidance: 0 };
+
+    (state.config.questions || []).forEach((question) => {
+      const answerKey = answers[question.id];
+      const dimension = question.dimension;
+      if (!answerKey || !(dimension in totals)) return;
+      const base = Number(answerValues[answerKey] ?? answerValues[String(answerKey)] ?? 0);
+      if (!Number.isFinite(base) || base < 1 || base > 5) return;
+      const adjusted = question.reverse ? 6 - base : base;
+      totals[dimension] += adjusted;
+      itemCounts[dimension] += 1;
+    });
+
+    const toPercent = (dimension) => {
+      const count = itemCounts[dimension] || 0;
+      if (!count) return 0;
+      const averageScore = totals[dimension] / count;
+      return clamp(Math.round(((averageScore - 1) / 4) * 100), 0, 100);
+    };
+
+    const anxiety = toPercent("anxiety");
+    const avoidance = toPercent("avoidance");
+    const threshold = Number(scoring.threshold ?? 50);
+    const anxietyHigh = anxiety >= threshold;
+    const avoidanceHigh = avoidance >= threshold;
+    const resultMap = scoring.resultMap || {
+      "low-low": "SECURE",
+      "high-low": "ANXIOUS",
+      "low-high": "AVOIDANT",
+      "high-high": "FEARFUL",
+    };
+    const quadrantKey = `${anxietyHigh ? "high" : "low"}-${avoidanceHigh ? "high" : "low"}`;
+    const primary = resultMap[quadrantKey];
+    const mixedBand = Array.isArray(scoring.mixedBand) ? scoring.mixedBand : [42, 58];
+    const mixed =
+      (anxiety >= Number(mixedBand[0]) && anxiety <= Number(mixedBand[1])) ||
+      (avoidance >= Number(mixedBand[0]) && avoidance <= Number(mixedBand[1]));
+
+    let secondary = null;
+    if (mixed) {
+      const flipAnxiety = Math.abs(anxiety - threshold) <= Math.abs(avoidance - threshold);
+      const secondaryKey = flipAnxiety
+        ? `${anxietyHigh ? "low" : "high"}-${avoidanceHigh ? "high" : "low"}`
+        : `${anxietyHigh ? "high" : "low"}-${avoidanceHigh ? "low" : "high"}`;
+      secondary = resultMap[secondaryKey] || null;
+    }
+
+    const counts = Object.fromEntries(
+      Object.keys(state.config.results || {}).map((key) => [
+        key,
+        key === primary ? (state.config.questions || []).length : 0,
+      ])
+    );
+
+    return {
+      counts,
+      primary,
+      secondary,
+      attachment: {
+        anxiety,
+        avoidance,
+        threshold,
+        mixed,
+      },
+    };
+  }
+
+  function scorePsychologicalAge(answers, scoring) {
+    const answerValues = scoring.answerValues || { A: 1, B: 2, C: 3, D: 4, E: 5 };
+    const dimensionLabels = scoring.dimensionLabels || {};
+    const dimensionOrder = scoring.dimensionOrder || Object.keys(dimensionLabels);
+    const rawTotals = Object.fromEntries(dimensionOrder.map((key) => [key, 0]));
+    const rawCounts = Object.fromEntries(dimensionOrder.map((key) => [key, 0]));
+
+    (state.config.questions || []).forEach((question) => {
+      const answerKey = answers[question.id];
+      if (!answerKey || !question.dimension) return;
+      const base = Number(answerValues[answerKey] ?? answerValues[String(answerKey)] ?? 0);
+      if (!Number.isFinite(base) || base <= 0) return;
+      const value = question.reverse ? 6 - base : base;
+      rawTotals[question.dimension] = (rawTotals[question.dimension] || 0) + value;
+      rawCounts[question.dimension] = (rawCounts[question.dimension] || 0) + 1;
+    });
+
+    const dimensions = {};
+    dimensionOrder.forEach((key) => {
+      const count = rawCounts[key] || 0;
+      if (!count) {
+        dimensions[key] = 0;
+        return;
+      }
+      const min = count;
+      const max = count * 5;
+      dimensions[key] = Math.round(((rawTotals[key] - min) / (max - min)) * 100);
+    });
+
+    const matureDimensions = scoring.matureDimensions || ["emotion", "responsibility", "resilience", "tolerance", "selfAcceptance"];
+    const youthfulDimensions = scoring.youthfulDimensions || ["curiosity", "socialEase", "lifePassion"];
+    const matureIndex = average(matureDimensions.map((key) => dimensions[key]));
+    const youthfulIndex = average(youthfulDimensions.map((key) => dimensions[key]));
+    const actualAge = getActualAge(scoring);
+    const psychologicalAge = clamp(
+      Math.round(actualAge + (matureIndex - youthfulIndex) * Number(scoring.ageFactor ?? 0.22)),
+      Number(scoring.minAge ?? 10),
+      Number(scoring.maxAge ?? 70)
+    );
+    const delta = psychologicalAge - actualAge;
+    const primary = getPsychologicalResultKey(delta, scoring);
+    const counts = Object.fromEntries(Object.keys(state.config.results || {}).map((key) => [key, key === primary ? (state.config.questions || []).length : 0]));
+    const rankedDimensions = dimensionOrder
+      .map((key) => ({ key, label: dimensionLabels[key] || key, value: dimensions[key] ?? 0 }))
+      .sort((left, right) => right.value - left.value);
+    const tags = buildPsychologicalTags(rankedDimensions, delta, primary, scoring);
+
+    return {
+      counts,
+      primary,
+      secondary: null,
+      psychological: {
+        actualAge,
+        psychologicalAge,
+        delta,
+        ageLabel: getPsychologicalAgeLabel(delta),
+        matureIndex: Math.round(matureIndex),
+        youthfulIndex: Math.round(youthfulIndex),
+        dimensions,
+        dimensionLabels,
+        dimensionOrder,
+        topDimensions: rankedDimensions.slice(0, 3),
+        lowDimensions: rankedDimensions.slice(-2).reverse(),
+        tags,
+      },
+    };
+  }
+
+  function getActualAge(scoring) {
+    const numericAge = Number(state.profile.actualAge);
+    if (Number.isFinite(numericAge) && numericAge > 0) return Math.round(numericAge);
+    const birthAge = calculateAgeFromBirthDate(state.profile.birthDate);
+    if (birthAge) return birthAge;
+    return Number(scoring.defaultActualAge || 28);
+  }
+
+  function calculateAgeFromBirthDate(value) {
+    if (!value) return null;
+    const date = new Date(value);
+    if (Number.isNaN(date.getTime())) return null;
+    const now = new Date();
+    let age = now.getFullYear() - date.getFullYear();
+    const monthDiff = now.getMonth() - date.getMonth();
+    if (monthDiff < 0 || (monthDiff === 0 && now.getDate() < date.getDate())) age -= 1;
+    return age > 0 ? age : null;
+  }
+
+  function getPsychologicalResultKey(delta, scoring) {
+    const groups = scoring.ageGroups || [
+      { key: "CURIOUS_CHILD", maxDelta: -8 },
+      { key: "HOT_BLOODED_TEEN", maxDelta: -3 },
+      { key: "BALANCED_YOUTH", maxDelta: 2 },
+      { key: "STEADY_ADVISER", maxDelta: 7 },
+      { key: "CLEAR_HELM", maxDelta: Infinity },
+    ];
+    const hit = groups.find((item) => delta <= Number(item.maxDelta));
+    return hit?.key || groups[groups.length - 1]?.key || Object.keys(state.config.results || {})[0];
+  }
+
+  function getPsychologicalAgeLabel(delta) {
+    if (delta <= -8) return "灵魂明显年轻";
+    if (delta <= -3) return "少年感在线";
+    if (delta <= 2) return "与真实年龄同频";
+    if (delta <= 7) return "心智略超前";
+    return "灵魂明显成熟";
+  }
+
+  function buildPsychologicalTags(rankedDimensions, delta, primary, scoring) {
+    const tagMap = scoring.dimensionTags || {};
+    const ageTags = scoring.ageTags || {};
+    const resultTags = scoring.resultTags || {};
+    const tags = rankedDimensions
+      .slice(0, 3)
+      .map((item) => tagMap[item.key]?.[0] || item.label)
+      .filter(Boolean);
+    tags.push(ageTags[getPsychologicalAgeLabel(delta)] || getPsychologicalAgeLabel(delta));
+    tags.push(resultTags[primary] || "社交原型清晰");
+    return [...new Set(tags)].slice(0, 5);
+  }
+
+  function scoreCityWithElements(answers, scoring) {
+    const resultKeys = Object.keys(state.config.results || {});
+    const counts = Object.fromEntries(resultKeys.map((key) => [key, 0]));
+    const elementMap = scoring.elementMap || {};
+    const elementCounts = {};
+    Object.values(elementMap).forEach((element) => { elementCounts[element] = 0; });
+
+    (state.config.questions || []).forEach((question) => {
+      const answerKey = answers[question.id];
+      if (!answerKey) return;
+      const option = (question.options || []).find((item) => item.key === answerKey);
+      const scoreKey = option?.score || option?.result || answerKey;
+      const element = elementMap[scoreKey];
+      if (counts[scoreKey] !== undefined) counts[scoreKey] += 1;
+      if (element && elementCounts[element] !== undefined) elementCounts[element] += 1;
+    });
+
+    const personalityElement = Object.entries(elementCounts).sort((left, right) => right[1] - left[1])[0]?.[0] || "未提供";
+    const birthElement = getBirthElement(state.profile.birthDate, scoring);
+    const birthWeight = Number(scoring.birthWeight ?? 0.25);
+    const combined = Object.fromEntries(resultKeys.map((key) => {
+      const birthBonus = elementMap[key] === birthElement ? (state.config.questions.length * birthWeight) : 0;
+      return [key, counts[key] + birthBonus];
+    }));
+    const sorted = Object.entries(combined).sort((left, right) => right[1] - left[1]);
+    const threshold = state.config.secondaryThreshold ?? 2;
+    const primary = sorted[0][0];
+    const secondary = sorted[1][1] > 0 && sorted[0][1] - sorted[1][1] <= threshold ? sorted[1][0] : null;
+    const personalityShare = counts[primary] / Math.max(1, state.config.questions.length);
+    const birthMatch = elementMap[primary] === birthElement;
+    const matchScore = Math.round(Math.min(99, 55 + personalityShare * 30 + (birthMatch ? 15 : 5)));
+    return {
+      counts,
+      primary,
+      secondary,
+      match: { birthElement, personalityElement, elementCounts, matchScore },
+    };
+  }
+
+  function getBirthElement(value, scoring) {
+    if (!value) return "未提供";
+    const parts = value.split("-").map(Number);
+    if (parts.length !== 3 || parts.some((part) => !Number.isFinite(part))) return "未提供";
+    const [year, month, day] = parts;
+    const elements = scoring.birthElements || ["木", "火", "土", "金", "水"];
+    return elements[Math.abs(year * 13 + month * 7 + day) % elements.length];
+  }
+
+  function scorePairedAttributes(answers, scoring) {
+    const attributes = Object.fromEntries((scoring.attributes || []).map((key) => [key, 0]));
+    const questionsById = Object.fromEntries((state.config.questions || []).map((question) => [question.id, question]));
+
+    (state.config.questions || []).forEach((question) => {
+      const answerKey = answers[question.id];
+      if (!answerKey) return;
+      const option = (question.options || []).find((item) => item.key === answerKey);
+      (option?.attributes || []).forEach((attribute) => {
+        if (attributes[attribute] !== undefined) attributes[attribute] += 1;
+      });
+    });
+
+    const chosen = (scoring.pairs || []).map(([left, right], index) => {
+      if (attributes[left] > attributes[right]) return left;
+      if (attributes[right] > attributes[left]) return right;
+
+      const tieQuestionId = scoring.tieBreakers?.[String(index)];
+      const tieQuestion = questionsById[tieQuestionId];
+      const tieAnswer = tieQuestion && answers[tieQuestionId];
+      const tieOption = tieQuestion?.options?.find((item) => item.key === tieAnswer);
+      return tieOption?.attributes?.includes(left) ? left : right;
+    });
+
+    const primary = chosen.join("");
+    const counts = Object.fromEntries(Object.keys(state.config.results || {}).map((key) => [key, key === primary ? (state.config.questions || []).length : 0]));
+    const alternate = chosen.slice();
+    if (scoring.pairs?.length) {
+      const firstPair = scoring.pairs[0];
+      alternate[0] = alternate[0] === firstPair[0] ? firstPair[1] : firstPair[0];
+    }
+    const secondary = alternate.join("") !== primary && state.config.secondaryNotes?.[primary]?.[alternate.join("")] ? alternate.join("") : null;
+    return { counts, primary, secondary, attributes };
+  }
+
+  function getStage(score) {
+    const labels = state.config.stageLabels || [
+      { max: 45, label: "观察期" },
+      { max: 65, label: "验证期" },
+      { max: 82, label: "规划期" },
+      { max: 100, label: "行动期" },
+    ];
+    const hit = labels.find((item) => score <= item.max);
+    return hit ? hit.label : labels[labels.length - 1].label;
+  }
+
+  function buildShareText(primary, secondary, scored = {}) {
+    const template = state.config.shareTemplate || [
+      "我测出了：{{typeName}}",
+      "{{posterSubtext}}",
+      "{{secondaryLine}}",
+      "",
+      "{{title}}",
+    ];
+    const values = {
+      title: state.config.title,
+      typeName: primary.typeName,
+      posterSubtext: primary.posterSubtext,
+      secondary: secondary || "",
+      secondaryLine: secondary ? `副倾向：${secondary}` : "",
+      score: Number.isFinite(scored.score) ? scored.score : primary.maturityScore,
+    };
+    return template
+      .map((line) => fillTemplate(line, values))
+      .filter((line, index, arr) => line || arr[index - 1])
+      .join("\n")
+      .trim();
+  }
+
+  async function copyShareText(value) {
+    try {
+      await navigator.clipboard.writeText(value);
+      showToast("结果文案已复制");
+    } catch (error) {
+      showToast("复制失败，可长按手动复制");
+    }
+  }
+
+  function showToast(value) {
+    const toast = document.getElementById("toast");
+    if (!toast) return;
+    toast.textContent = value;
+    toast.classList.add("show");
+    window.setTimeout(() => toast.classList.remove("show"), 1600);
+  }
+
+  function getLoadingMessages() {
+    return state.config.loadingMessages || defaultLoadingMessages;
+  }
+
+  function getStorageKey() {
+    return `xhsTestAnswers:${state.config.slug || "default"}`;
+  }
+
+  function getProfileStorageKey() {
+    return `xhsTestProfile:${state.config?.slug || "default"}`;
+  }
+
+  function getProfileInputValue(inputConfig) {
+    if (!inputConfig) return "";
+    if (inputConfig.type === "number") return state.profile.actualAge || "";
+    return state.profile.birthDate || "";
+  }
+
+  function buildProfileFromInput(inputConfig, value) {
+    if (inputConfig?.type === "number") {
+      return { birthDate: "", actualAge: value };
+    }
+    return { birthDate: value, actualAge: "" };
+  }
+
+  function fillTemplate(template, values) {
+    return String(template).replace(/\{\{(\w+)\}\}/g, (_, key) => values[key] || "");
+  }
+
+  function number(value) {
+    const parsed = Number(value);
+    if (Number.isNaN(parsed)) return 0;
+    return Math.max(0, Math.min(100, parsed));
+  }
+
+  function average(values) {
+    const cleanValues = values.map(Number).filter((value) => Number.isFinite(value));
+    if (!cleanValues.length) return 0;
+    return cleanValues.reduce((sum, value) => sum + value, 0) / cleanValues.length;
+  }
+
+  function clamp(value, min, max) {
+    return Math.max(min, Math.min(max, value));
+  }
+
+  function text(value) {
+    return String(value ?? "")
+      .replace(/&/g, "&amp;")
+      .replace(/</g, "&lt;")
+      .replace(/>/g, "&gt;")
+      .replace(/"/g, "&quot;");
+  }
+})();
+
+    </script>
+  </body>
+</html>
