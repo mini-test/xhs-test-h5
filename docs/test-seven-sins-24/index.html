@@ -783,97 +783,257 @@ button {
     </style>
   </head>
   <body>
-    <main id="app" aria-live="polite"></main>
+    <main id="app" aria-live="polite">
+      <div style="max-width:560px;margin:0 auto;padding:42vh 24px 48px;text-align:center;color:#5f514c;font:16px/1.7 system-ui,-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif">
+        页面正在加载，请稍候。<br>
+        <small style="color:#8b7d77">若长时间停留，请复制链接到手机系统浏览器打开。</small>
+      </div>
+    </main>
+    <noscript>
+      <div style="padding:24px;text-align:center">请开启浏览器 JavaScript 后重新打开测试。</div>
+    </noscript>
     <script>window.__QUIZ_CONFIG__ = {"slug":"test-seven-sins-24","compactHome":true,"topic":"七宗罪分布测试","kicker":"24-Q SEVEN IMPULSES","title":"你的七宗罪，哪一面最容易被触发？","subtitle":"24 个真实情境，生成你的七维欲望分布、主导印记、第二倾向与触发档案。","metaDescription":"完成24题七宗罪分布测试，查看七维欲望张力、主导印记和触发因素。","startButton":"开始查看七面欲望","resultKicker":"Seven Impulses Archive","quizHint":"凭第一反应选，不要选最体面的答案。","copyButton":"复制我的七面档案","restartButton":"重新测试","scoreLabel":"主导张力","stageLabel":"分布状态","planTitle":"未来 7 天观察练习","compareLabels":["如果继续否认","如果开始看见"],"blurSummary":"完成 24 题，查看七维分布、主导印记、第二倾向、触发因素和行动建议。","disclaimer":"本测试借用“七宗罪”作为文化隐喻，仅用于趣味自我观察与内容互动，不评价道德好坏，不构成心理诊断、人格障碍判断、医学建议或命运预测。","intro":["你以为自己最难控制的是脾气，也许真正牵动你的，是被低估、被落下或永远不够。","七种欲望并非善恶判决。它们像七种信号，在不同情境里提醒你：哪里缺安全、哪里要边界、哪里已经耗尽。","这 24 题不直接问你“贪不贪、懒不懒”，而是看真实选择如何留下分布。"],"loadingMessages":["正在识别七面触发信号...","正在计算欲望张力分布...","正在寻找主导与第二印记...","正在生成触发因素档案...","七面档案生成完成。"],"stageLabels":[{"max":59,"label":"低频显影"},{"max":74,"label":"情境触发"},{"max":89,"label":"主轴清晰"},{"max":100,"label":"高频牵引"}],"secondaryThreshold":100,"scoring":{"mode":"distribution-profile","title":"七面欲望张力图","dimensionOrder":["PRIDE","GREED","LUST","ENVY","WRATH","GLUTTONY","SLOTH"],"dimensionLabels":{"PRIDE":"傲慢","GREED":"贪婪","LUST":"色欲","ENVY":"嫉妒","WRATH":"暴怒","GLUTTONY":"暴食","SLOTH":"懒惰"},"note":"分数表示特定情境下更容易启动的欲望与防御。它不代表道德高低，也不是固定人格。"},"questions":[{"id":1,"module":"01 · 被看见","text":"群聊里有人晒出一个你也努力很久才得到的成果。你最真实的第一反应是？","options":[{"key":"A","text":"先看它到底有没有那么厉害，心里会自动找出自己更强的地方","weights":{"PRIDE":3,"ENVY":1}},{"key":"B","text":"立刻研究对方用了什么资源、路径和机会，自己也想拿到","weights":{"GREED":3,"GLUTTONY":1}},{"key":"C","text":"会被那种被关注、被羡慕的氛围吸引，想象自己成为焦点","weights":{"LUST":3,"PRIDE":1}},{"key":"D","text":"祝福是真的，但也会忍不住对照：为什么不是我先做到","weights":{"ENVY":3,"GREED":1}}]},{"id":2,"module":"01 · 被看见","text":"会议上你的想法被轻描淡写带过，十分钟后别人换个说法却得到认可。你更可能？","options":[{"key":"A","text":"当场补充出处和关键逻辑，让贡献重新被看见","weights":{"WRATH":3,"PRIDE":1}},{"key":"B","text":"先忍住，之后用更完整的结果证明谁才真正懂这件事","weights":{"PRIDE":3,"ENVY":1}},{"key":"C","text":"开始评估这个团队值不值得继续投入，哪里还有更好位置","weights":{"GREED":3,"GLUTTONY":1}},{"key":"D","text":"表面没事，回去后越想越堵，忍不住比较两个人的待遇","weights":{"ENVY":3,"GREED":1}}]},{"id":3,"module":"01 · 被看见","text":"有人夸你“最近状态真好”，哪种后续最容易发生？","options":[{"key":"A","text":"很享受那个目光，之后会更在意穿着、气氛和吸引力","weights":{"LUST":3,"PRIDE":1}},{"key":"B","text":"顺势奖励自己一顿好的或买点喜欢的，把愉快延长","weights":{"GLUTTONY":3,"LUST":1}},{"key":"C","text":"嘴上说还好，心里会确认：果然我一直有自己的水平","weights":{"PRIDE":3,"ENVY":1}},{"key":"D","text":"短暂开心后又想到更亮眼的人，觉得自己还差一点","weights":{"ENVY":3,"GREED":1}}]},{"id":4,"module":"01 · 被看见","text":"连续忙了很久，却没人注意到你的付出。你最容易变成哪种状态？","options":[{"key":"A","text":"突然不想再证明了，能少做一点就少做一点","weights":{"SLOTH":3,"ENVY":1}},{"key":"B","text":"积累到某一刻直接爆发：凭什么所有人都默认我能扛","weights":{"WRATH":3,"PRIDE":1}},{"key":"C","text":"开始争取更明确的回报、头衔或资源，不再只讲情怀","weights":{"GREED":3,"GLUTTONY":1}},{"key":"D","text":"会特别在意谁被表扬、谁得到照顾，越看越不平衡","weights":{"ENVY":3,"GREED":1}}]},{"id":5,"module":"02 · 资源与拥有","text":"突然多出一笔可自由支配的钱，你最想先做什么？","options":[{"key":"A","text":"把它变成存款、工具或下一次机会，让手里的筹码更多","weights":{"GREED":3,"GLUTTONY":1}},{"key":"B","text":"买一件能明显提升气场和吸引力的东西","weights":{"LUST":3,"PRIDE":1}},{"key":"C","text":"认真吃喝玩乐一次，先把这段时间亏欠自己的补回来","weights":{"GLUTTONY":3,"LUST":1}},{"key":"D","text":"暂时不处理，光想到要比较和选择就觉得累","weights":{"SLOTH":3,"ENVY":1}}]},{"id":6,"module":"02 · 资源与拥有","text":"你最难放下的一类东西更像？","options":[{"key":"A","text":"能证明自己品位、水平或身份的东西","weights":{"PRIDE":3,"ENVY":1}},{"key":"B","text":"也许以后会用到的资源、文件、优惠和人脉","weights":{"GREED":3,"GLUTTONY":1}},{"key":"C","text":"承载快乐体验的味道、礼物、照片和纪念品","weights":{"GLUTTONY":3,"LUST":1}},{"key":"D","text":"别人有而自己没有的那一类，明知不需要也会惦记","weights":{"ENVY":3,"GREED":1}}]},{"id":7,"module":"02 · 资源与拥有","text":"看到限量商品只剩最后一件，你更容易被什么推动？","options":[{"key":"A","text":"“别人买不到而我有”，这种稀缺感很迷人","weights":{"PRIDE":3,"ENVY":1}},{"key":"B","text":"错过可能更贵，先拿下再说，机会不能白白流走","weights":{"GREED":3,"GLUTTONY":1}},{"key":"C","text":"它真的好看，拥有后会让自己更有魅力","weights":{"LUST":3,"PRIDE":1}},{"key":"D","text":"下单那一刻很爽，像终于给疲惫生活加了一口糖","weights":{"GLUTTONY":3,"LUST":1}}]},{"id":8,"module":"02 · 资源与拥有","text":"朋友借走你的东西迟迟不还，你的情绪最接近？","options":[{"key":"A","text":"越界感很强，会直接催还并重新设规则","weights":{"WRATH":3,"PRIDE":1}},{"key":"B","text":"会想以后减少往来，这个人不值得再得到你的好东西","weights":{"PRIDE":3,"ENVY":1}},{"key":"C","text":"先记着，等下次对方再求助时重新计算交换","weights":{"GREED":3,"GLUTTONY":1}},{"key":"D","text":"嫌追问麻烦，拖着拖着又会暗自不舒服","weights":{"SLOTH":3,"ENVY":1}}]},{"id":9,"module":"03 · 关系与吸引","text":"暧昧对象忽然变冷，你最先启动的反应更像？","options":[{"key":"A","text":"想恢复吸引力，让对方重新主动靠近","weights":{"LUST":3,"PRIDE":1}},{"key":"B","text":"忍不住对照是不是出现了更有魅力的人","weights":{"ENVY":3,"GREED":1}},{"key":"C","text":"直接问清楚，不接受忽冷忽热吊着自己","weights":{"WRATH":3,"PRIDE":1}},{"key":"D","text":"把聊天放着，觉得追问和解释都太消耗","weights":{"SLOTH":3,"ENVY":1}}]},{"id":10,"module":"03 · 关系与吸引","text":"一段关系里，什么最容易让你上头？","options":[{"key":"A","text":"对方强烈地欣赏你，让你觉得自己无可替代","weights":{"PRIDE":3,"ENVY":1}},{"key":"B","text":"外形、气味、声音和靠近时的化学反应","weights":{"LUST":3,"PRIDE":1}},{"key":"C","text":"对方能带你进入更大的世界，资源和可能性都变多","weights":{"GREED":3,"GLUTTONY":1}},{"key":"D","text":"被照顾、被投喂、一起舒服地享受日常","weights":{"GLUTTONY":3,"LUST":1}}]},{"id":11,"module":"03 · 关系与吸引","text":"恋人夸别人很优秀，你最难控制的念头是？","options":[{"key":"A","text":"会想证明自己更特别，不愿在比较里落下风","weights":{"PRIDE":3,"ENVY":1}},{"key":"B","text":"会注意对方是不是对那个人有吸引和兴趣","weights":{"LUST":3,"PRIDE":1}},{"key":"C","text":"脑内立刻开始比较，越想越容易看见自己的不足","weights":{"ENVY":3,"GREED":1}},{"key":"D","text":"如果语气越界，会当场表达不满，不想装大度","weights":{"WRATH":3,"PRIDE":1}}]},{"id":12,"module":"03 · 关系与吸引","text":"关系进入平淡期，你最可能怎样处理？","options":[{"key":"A","text":"制造一点新的约会和亲密感，让火花回来","weights":{"LUST":3,"PRIDE":1}},{"key":"B","text":"安排一顿好的或一次旅行，用共同享受重新连接","weights":{"GLUTTONY":3,"LUST":1}},{"key":"C","text":"想谈清楚双方投入，不能总由一个人维持","weights":{"GREED":3,"GLUTTONY":1}},{"key":"D","text":"明知该沟通，却常常拖到两个人都越来越没话","weights":{"SLOTH":3,"ENVY":1}}]},{"id":13,"module":"04 · 压力与失衡","text":"一个计划受阻时，你最容易出现哪种反应？","options":[{"key":"A","text":"火气一下上来，先想找出是谁挡住了推进","weights":{"WRATH":3,"PRIDE":1}},{"key":"B","text":"觉得别人效率太低，还是自己来才靠得住","weights":{"PRIDE":3,"ENVY":1}},{"key":"C","text":"重新盘算还能获得什么、有没有替代路径","weights":{"GREED":3,"GLUTTONY":1}},{"key":"D","text":"先逃离任务，刷手机或睡一会儿再说","weights":{"SLOTH":3,"ENVY":1}}]},{"id":14,"module":"04 · 压力与失衡","text":"你情绪很差却暂时不能解决问题，最常见的补偿是？","options":[{"key":"A","text":"吃点、买点、看点，让身体先得到即时满足","weights":{"GLUTTONY":3,"LUST":1}},{"key":"B","text":"找能让自己感到漂亮、性感或被喜欢的东西","weights":{"LUST":3,"PRIDE":1}},{"key":"C","text":"翻看别人的生活，越看越觉得自己被落下","weights":{"ENVY":3,"GREED":1}},{"key":"D","text":"对最亲近的人变得不耐烦，容易被小事点燃","weights":{"WRATH":3,"PRIDE":1}}]},{"id":15,"module":"04 · 压力与失衡","text":"面对很难但重要的任务，你更容易卡在哪一步？","options":[{"key":"A","text":"标准太高，不愿交出一个可能显得普通的版本","weights":{"PRIDE":3,"ENVY":1}},{"key":"B","text":"总想再多准备一点资源和信息，迟迟不肯收手","weights":{"GREED":3,"GLUTTONY":1}},{"key":"C","text":"先用娱乐和舒适缓冲，结果启动时间一拖再拖","weights":{"SLOTH":3,"ENVY":1}},{"key":"D","text":"看到别人已经做得很好，动力反而被比较耗掉","weights":{"ENVY":3,"GREED":1}}]},{"id":16,"module":"04 · 压力与失衡","text":"被误解后，你心里最像哪句话？","options":[{"key":"A","text":"他们看不懂，不代表我的判断有问题","weights":{"PRIDE":3,"ENVY":1}},{"key":"B","text":"我要把话说清楚，不能让错误印象占上风","weights":{"WRATH":3,"PRIDE":1}},{"key":"C","text":"算了，解释太累，爱怎么想就怎么想","weights":{"SLOTH":3,"ENVY":1}},{"key":"D","text":"为什么别人轻易就被理解，我却总要费这么大力气","weights":{"ENVY":3,"GREED":1}}]},{"id":17,"module":"05 · 比较与竞争","text":"同龄人的好消息最容易在哪种情况下刺到你？","options":[{"key":"A","text":"得到你一直想要却还没拿到的位置和认可","weights":{"ENVY":3,"GREED":1}},{"key":"B","text":"拥有更多钱、选择权和可以调动的资源","weights":{"GREED":3,"GLUTTONY":1}},{"key":"C","text":"被很多人喜欢、追捧，显得特别有魅力","weights":{"LUST":3,"PRIDE":1}},{"key":"D","text":"几乎没费你这么多力气，却获得同样甚至更好的结果","weights":{"WRATH":3,"PRIDE":1}}]},{"id":18,"module":"05 · 比较与竞争","text":"竞争中你发现对手有一个明显弱点，你更接近？","options":[{"key":"A","text":"会利用规则和时机，但要赢得漂亮，不显得低级","weights":{"PRIDE":3,"ENVY":1}},{"key":"B","text":"快速计算怎么把这个差距变成自己的实际收益","weights":{"GREED":3,"GLUTTONY":1}},{"key":"C","text":"如果对方踩过你，会很想让其为此付出代价","weights":{"WRATH":3,"PRIDE":1}},{"key":"D","text":"懒得正面对抗，宁愿换一条更省力的赛道","weights":{"SLOTH":3,"ENVY":1}}]},{"id":19,"module":"05 · 比较与竞争","text":"别人复制你的风格或想法，你最难受的是？","options":[{"key":"A","text":"独特性被稀释，好像自己不再那么特别","weights":{"PRIDE":3,"ENVY":1}},{"key":"B","text":"对方拿走了原本可能属于你的关注和机会","weights":{"GREED":3,"GLUTTONY":1}},{"key":"C","text":"看到对方因此更受欢迎，心里会很不平衡","weights":{"ENVY":3,"GREED":1}},{"key":"D","text":"想立刻拆穿或制止，不愿假装大方","weights":{"WRATH":3,"PRIDE":1}}]},{"id":20,"module":"05 · 比较与竞争","text":"你赢下一场竞争后，最想得到哪种满足？","options":[{"key":"A","text":"别人承认你的判断和能力确实高一层","weights":{"PRIDE":3,"ENVY":1}},{"key":"B","text":"把胜利兑换成更稳定的收益和下一轮筹码","weights":{"GREED":3,"GLUTTONY":1}},{"key":"C","text":"庆祝、享受，把压抑很久的快乐一次放出来","weights":{"GLUTTONY":3,"LUST":1}},{"key":"D","text":"终于可以停下来，暂时什么都不做","weights":{"SLOTH":3,"ENVY":1}}]},{"id":21,"module":"06 · 无人看见","text":"如果没有任何人知道，你更可能放纵哪一件事？","options":[{"key":"A","text":"沉浸在让自己舒服的吃喝、娱乐或购买里","weights":{"GLUTTONY":3,"LUST":1}},{"key":"B","text":"偷偷关注一个很有吸引力的人，享受想象","weights":{"LUST":3,"PRIDE":1}},{"key":"C","text":"翻看某个比较对象的动态，确认彼此现在的差距","weights":{"ENVY":3,"GREED":1}},{"key":"D","text":"把所有待办放着，允许自己彻底停摆","weights":{"SLOTH":3,"ENVY":1}}]},{"id":22,"module":"06 · 无人看见","text":"哪种念头最容易让你觉得“我不想再忍了”？","options":[{"key":"A","text":"有人公开轻视你，像你根本不配被尊重","weights":{"PRIDE":3,"ENVY":1}},{"key":"B","text":"明明付出很多，资源和好处却被别人拿走","weights":{"GREED":3,"GLUTTONY":1}},{"key":"C","text":"别人一再越过边界，还要求你体谅","weights":{"WRATH":3,"PRIDE":1}},{"key":"D","text":"看着别人轻松拥有自己求而不得的东西","weights":{"ENVY":3,"GREED":1}}]},{"id":23,"module":"06 · 无人看见","text":"周末没有安排时，你最自然的去向是？","options":[{"key":"A","text":"找一个让自己变好看、变迷人的活动","weights":{"LUST":3,"PRIDE":1}},{"key":"B","text":"吃喜欢的、看喜欢的，让感官彻底松下来","weights":{"GLUTTONY":3,"LUST":1}},{"key":"C","text":"不想计划，能躺多久躺多久，先回收能量","weights":{"SLOTH":3,"ENVY":1}},{"key":"D","text":"做一件能让未来资源更多、选择更大的事","weights":{"GREED":3,"GLUTTONY":1}}]},{"id":24,"module":"06 · 无人看见","text":"如果七种欲望都不必伪装，你最想允许自己承认什么？","options":[{"key":"A","text":"我确实想被仰望，不想永远只是普通的一员","weights":{"PRIDE":3,"ENVY":1}},{"key":"B","text":"我想拥有更多，不想总被“知足”劝退","weights":{"GREED":3,"GLUTTONY":1}},{"key":"C","text":"我需要快乐和满足，不想只做一个会克制的人","weights":{"GLUTTONY":3,"LUST":1}},{"key":"D","text":"我真的累了，有些事不是不想做，是已经没有能量","weights":{"SLOTH":3,"ENVY":1}}]}],"results":{"PRIDE":{"typeName":"王冠印记 · 高位标准者","subtitle":"傲慢不是道德判决，而是你在某些情境下更容易启动的欲望张力。","maturityScore":86,"coreConclusion":"你最敏感的不是输，而是被低估。","diagnosis":"你会用高标准、独立和体面保护自尊。优势是判断稳、追求卓越；盲点是把求助误解成示弱。","whatYouReallyWant":"你真正想要的是被尊重，而且这种尊重最好来自实力，而不是安慰。","mechanism":{"title":"自尊防御机制","content":"当评价威胁到你的独特性，你会抬高标准或拉开距离。"},"professionalBasis":["本测试使用七种文化原型描述欲望、比较、边界和能量反应，不对应临床人格分类。","主导印记反映当前选择模式；关系对象、工作压力和生活阶段变化时，分布也会移动。"],"coreTensions":["傲慢带来的推动力","想满足自己，又怕被评价","本能反应与长期目标之间的拉扯"],"suitableIf":["把欲望翻译成具体需要","允许自己承认感受","为满足设置清楚边界"],"cautionIf":["用标签给自己定性","把结果当作道德高低","让即时冲动替代现实判断"],"indices":[{"label":"自尊敏感","value":92},{"label":"高标准","value":88},{"label":"求助阻力","value":71}],"ifStay":"继续否认这股张力，它仍会从更隐蔽的比较、拖延、冲动或不满里出现。","ifChange":"看见触发点、命名真实需要，再选择更低代价的满足方式，这股力量会更可用。","notRecommended":["羞辱自己的欲望","拿结果攻击他人","在情绪高点做重大决定"],"plan90":[{"title":"记录触发","content":"连续 7 天记下：发生了什么、身体有什么感觉、最想立刻做什么。"},{"title":"翻译需要","content":"每次出现傲慢张力时，把“我想怎样”改写成“我现在需要什么”。"},{"title":"设计出口","content":"为这项需要准备一个即时出口和一个长期出口，减少只能靠冲动解决的时刻。"}],"closing":"看见欲望，不是纵容它；是让它不必在暗处替你做决定。"},"GREED":{"typeName":"筹码印记 · 资源扩张者","subtitle":"贪婪不是道德判决，而是你在某些情境下更容易启动的欲望张力。","maturityScore":86,"coreConclusion":"你最难放下的不是东西，而是下一种可能。","diagnosis":"你很容易看见机会、资源和更优解，擅长积累筹码。盲点是目标不断升级，拥有再多也难真正停下。","whatYouReallyWant":"你真正想要的是选择权：不求人、不被卡住，还能随时换一条路。","mechanism":{"title":"资源扩张机制","content":"不确定来临时，你会用拥有、储备和推进来换安全。"},"professionalBasis":["本测试使用七种文化原型描述欲望、比较、边界和能量反应，不对应临床人格分类。","主导印记反映当前选择模式；关系对象、工作压力和生活阶段变化时，分布也会移动。"],"coreTensions":["贪婪带来的推动力","想满足自己，又怕被评价","本能反应与长期目标之间的拉扯"],"suitableIf":["把欲望翻译成具体需要","允许自己承认感受","为满足设置清楚边界"],"cautionIf":["用标签给自己定性","把结果当作道德高低","让即时冲动替代现实判断"],"indices":[{"label":"机会扫描","value":94},{"label":"资源牵引","value":90},{"label":"满足阈值","value":67}],"ifStay":"继续否认这股张力，它仍会从更隐蔽的比较、拖延、冲动或不满里出现。","ifChange":"看见触发点、命名真实需要，再选择更低代价的满足方式，这股力量会更可用。","notRecommended":["羞辱自己的欲望","拿结果攻击他人","在情绪高点做重大决定"],"plan90":[{"title":"记录触发","content":"连续 7 天记下：发生了什么、身体有什么感觉、最想立刻做什么。"},{"title":"翻译需要","content":"每次出现贪婪张力时，把“我想怎样”改写成“我现在需要什么”。"},{"title":"设计出口","content":"为这项需要准备一个即时出口和一个长期出口，减少只能靠冲动解决的时刻。"}],"closing":"看见欲望，不是纵容它；是让它不必在暗处替你做决定。"},"LUST":{"typeName":"磁场印记 · 感官吸引者","subtitle":"色欲不是道德判决，而是你在某些情境下更容易启动的欲望张力。","maturityScore":86,"coreConclusion":"你追逐的不是表面诱惑，而是活着的浓度。","diagnosis":"你对吸引力、审美、亲密与化学反应很敏锐。优势是感染力强、懂得创造火花；盲点是容易把强烈感觉当成长久匹配。","whatYouReallyWant":"你真正想要的是被渴望、被看见，也能自由表达自己的生命力。","mechanism":{"title":"感官点亮机制","content":"生活变钝时，你会本能寻找美、亲密和新鲜感让自己重新发亮。"},"professionalBasis":["本测试使用七种文化原型描述欲望、比较、边界和能量反应，不对应临床人格分类。","主导印记反映当前选择模式；关系对象、工作压力和生活阶段变化时，分布也会移动。"],"coreTensions":["色欲带来的推动力","想满足自己，又怕被评价","本能反应与长期目标之间的拉扯"],"suitableIf":["把欲望翻译成具体需要","允许自己承认感受","为满足设置清楚边界"],"cautionIf":["用标签给自己定性","把结果当作道德高低","让即时冲动替代现实判断"],"indices":[{"label":"吸引敏感","value":91},{"label":"新鲜牵引","value":87},{"label":"现实校准","value":69}],"ifStay":"继续否认这股张力，它仍会从更隐蔽的比较、拖延、冲动或不满里出现。","ifChange":"看见触发点、命名真实需要，再选择更低代价的满足方式，这股力量会更可用。","notRecommended":["羞辱自己的欲望","拿结果攻击他人","在情绪高点做重大决定"],"plan90":[{"title":"记录触发","content":"连续 7 天记下：发生了什么、身体有什么感觉、最想立刻做什么。"},{"title":"翻译需要","content":"每次出现色欲张力时，把“我想怎样”改写成“我现在需要什么”。"},{"title":"设计出口","content":"为这项需要准备一个即时出口和一个长期出口，减少只能靠冲动解决的时刻。"}],"closing":"看见欲望，不是纵容它；是让它不必在暗处替你做决定。"},"ENVY":{"typeName":"镜面印记 · 比较校准者","subtitle":"嫉妒不是道德判决，而是你在某些情境下更容易启动的欲望张力。","maturityScore":86,"coreConclusion":"你不是见不得别人好，而是太会看见自己的缺口。","diagnosis":"比较让你迅速定位差距，也能成为很强的成长雷达。盲点是把别人的高光当成对自己的否定。","whatYouReallyWant":"你真正想要的是确认：自己没有被时代、关系或机会悄悄落下。","mechanism":{"title":"镜像校准机制","content":"当别人拥有你在意的东西，你会借对方重新衡量自身位置。"},"professionalBasis":["本测试使用七种文化原型描述欲望、比较、边界和能量反应，不对应临床人格分类。","主导印记反映当前选择模式；关系对象、工作压力和生活阶段变化时，分布也会移动。"],"coreTensions":["嫉妒带来的推动力","想满足自己，又怕被评价","本能反应与长期目标之间的拉扯"],"suitableIf":["把欲望翻译成具体需要","允许自己承认感受","为满足设置清楚边界"],"cautionIf":["用标签给自己定性","把结果当作道德高低","让即时冲动替代现实判断"],"indices":[{"label":"比较雷达","value":93},{"label":"缺口敏感","value":89},{"label":"自我肯定","value":64}],"ifStay":"继续否认这股张力，它仍会从更隐蔽的比较、拖延、冲动或不满里出现。","ifChange":"看见触发点、命名真实需要，再选择更低代价的满足方式，这股力量会更可用。","notRecommended":["羞辱自己的欲望","拿结果攻击他人","在情绪高点做重大决定"],"plan90":[{"title":"记录触发","content":"连续 7 天记下：发生了什么、身体有什么感觉、最想立刻做什么。"},{"title":"翻译需要","content":"每次出现嫉妒张力时，把“我想怎样”改写成“我现在需要什么”。"},{"title":"设计出口","content":"为这项需要准备一个即时出口和一个长期出口，减少只能靠冲动解决的时刻。"}],"closing":"看见欲望，不是纵容它；是让它不必在暗处替你做决定。"},"WRATH":{"typeName":"火种印记 · 边界捍卫者","subtitle":"暴怒不是道德判决，而是你在某些情境下更容易启动的欲望张力。","maturityScore":86,"coreConclusion":"你的火气下面，往往站着一条被踩到的边界。","diagnosis":"你对不公、越界和拖延反应快，能在关键时刻保护自己。盲点是情绪升温过快，让本来能解决的问题变成输赢。","whatYouReallyWant":"你真正想要的不是吵赢，而是让规则、尊重和后果重新清楚。","mechanism":{"title":"边界升温机制","content":"被冒犯、阻碍或轻视时，你会用能量爆发迅速夺回位置。"},"professionalBasis":["本测试使用七种文化原型描述欲望、比较、边界和能量反应，不对应临床人格分类。","主导印记反映当前选择模式；关系对象、工作压力和生活阶段变化时，分布也会移动。"],"coreTensions":["暴怒带来的推动力","想满足自己，又怕被评价","本能反应与长期目标之间的拉扯"],"suitableIf":["把欲望翻译成具体需要","允许自己承认感受","为满足设置清楚边界"],"cautionIf":["用标签给自己定性","把结果当作道德高低","让即时冲动替代现实判断"],"indices":[{"label":"边界敏感","value":94},{"label":"情绪升温","value":86},{"label":"修复速度","value":68}],"ifStay":"继续否认这股张力，它仍会从更隐蔽的比较、拖延、冲动或不满里出现。","ifChange":"看见触发点、命名真实需要，再选择更低代价的满足方式，这股力量会更可用。","notRecommended":["羞辱自己的欲望","拿结果攻击他人","在情绪高点做重大决定"],"plan90":[{"title":"记录触发","content":"连续 7 天记下：发生了什么、身体有什么感觉、最想立刻做什么。"},{"title":"翻译需要","content":"每次出现暴怒张力时，把“我想怎样”改写成“我现在需要什么”。"},{"title":"设计出口","content":"为这项需要准备一个即时出口和一个长期出口，减少只能靠冲动解决的时刻。"}],"closing":"看见欲望，不是纵容它；是让它不必在暗处替你做决定。"},"GLUTTONY":{"typeName":"盛宴印记 · 即时补给者","subtitle":"暴食不是道德判决，而是你在某些情境下更容易启动的欲望张力。","maturityScore":86,"coreConclusion":"你不是自控差，只是太久没有被真正满足。","diagnosis":"你会通过食物、娱乐、购买和舒适感快速补给自己。优势是懂享受、恢复快；盲点是短期满足遮住了长期缺口。","whatYouReallyWant":"你真正想要的是身心被照顾，不必永远延迟快乐、只顾着扛。","mechanism":{"title":"即时补给机制","content":"压力过载时，你会先让身体得到确定的快乐与安慰。"},"professionalBasis":["本测试使用七种文化原型描述欲望、比较、边界和能量反应，不对应临床人格分类。","主导印记反映当前选择模式；关系对象、工作压力和生活阶段变化时，分布也会移动。"],"coreTensions":["暴食带来的推动力","想满足自己，又怕被评价","本能反应与长期目标之间的拉扯"],"suitableIf":["把欲望翻译成具体需要","允许自己承认感受","为满足设置清楚边界"],"cautionIf":["用标签给自己定性","把结果当作道德高低","让即时冲动替代现实判断"],"indices":[{"label":"感官需求","value":92},{"label":"即时补给","value":90},{"label":"延迟满足","value":63}],"ifStay":"继续否认这股张力，它仍会从更隐蔽的比较、拖延、冲动或不满里出现。","ifChange":"看见触发点、命名真实需要，再选择更低代价的满足方式，这股力量会更可用。","notRecommended":["羞辱自己的欲望","拿结果攻击他人","在情绪高点做重大决定"],"plan90":[{"title":"记录触发","content":"连续 7 天记下：发生了什么、身体有什么感觉、最想立刻做什么。"},{"title":"翻译需要","content":"每次出现暴食张力时，把“我想怎样”改写成“我现在需要什么”。"},{"title":"设计出口","content":"为这项需要准备一个即时出口和一个长期出口，减少只能靠冲动解决的时刻。"}],"closing":"看见欲望，不是纵容它；是让它不必在暗处替你做决定。"},"SLOTH":{"typeName":"休眠印记 · 能量保全者","subtitle":"懒惰不是道德判决，而是你在某些情境下更容易启动的欲望张力。","maturityScore":86,"coreConclusion":"你不是没有欲望，而是在用停下来保护剩余能量。","diagnosis":"你会本能避开高耗损、低回报和无休止的任务。优势是会识别无效投入；盲点是恢复与回避混在一起，越拖越难启动。","whatYouReallyWant":"你真正想要的是一个不靠硬撑也能前进的节奏。","mechanism":{"title":"能量保全机制","content":"任务看不到回报或压力过载时，你会降低投入以避免彻底耗尽。"},"professionalBasis":["本测试使用七种文化原型描述欲望、比较、边界和能量反应，不对应临床人格分类。","主导印记反映当前选择模式；关系对象、工作压力和生活阶段变化时，分布也会移动。"],"coreTensions":["懒惰带来的推动力","想满足自己，又怕被评价","本能反应与长期目标之间的拉扯"],"suitableIf":["把欲望翻译成具体需要","允许自己承认感受","为满足设置清楚边界"],"cautionIf":["用标签给自己定性","把结果当作道德高低","让即时冲动替代现实判断"],"indices":[{"label":"能量保护","value":93},{"label":"启动阻力","value":84},{"label":"节奏恢复","value":70}],"ifStay":"继续否认这股张力，它仍会从更隐蔽的比较、拖延、冲动或不满里出现。","ifChange":"看见触发点、命名真实需要，再选择更低代价的满足方式，这股力量会更可用。","notRecommended":["羞辱自己的欲望","拿结果攻击他人","在情绪高点做重大决定"],"plan90":[{"title":"记录触发","content":"连续 7 天记下：发生了什么、身体有什么感觉、最想立刻做什么。"},{"title":"翻译需要","content":"每次出现懒惰张力时，把“我想怎样”改写成“我现在需要什么”。"},{"title":"设计出口","content":"为这项需要准备一个即时出口和一个长期出口，减少只能靠冲动解决的时刻。"}],"closing":"看见欲望，不是纵容它；是让它不必在暗处替你做决定。"}}};</script>
     <script>
 (function () {
-  const app = document.getElementById("app");
-  const configPaths = ["./configs/site-config.json", "./configs/career-change.json"];
+  if (!Object.entries) {
+    Object.entries = function (object) {
+      return Object.keys(object).map(function (key) {
+        return [key, object[key]];
+      });
+    };
+  }
 
-  const state = {
+  if (!Object.values) {
+    Object.values = function (object) {
+      return Object.keys(object).map(function (key) {
+        return object[key];
+      });
+    };
+  }
+
+  if (!Object.fromEntries) {
+    Object.fromEntries = function (entries) {
+      return entries.reduce(function (object, entry) {
+        object[entry[0]] = entry[1];
+        return object;
+      }, {});
+    };
+  }
+
+  if (!Array.prototype.find) {
+    Array.prototype.find = function (predicate, thisArg) {
+      for (var index = 0; index < this.length; index += 1) {
+        if (predicate.call(thisArg, this[index], index, this)) return this[index];
+      }
+      return undefined;
+    };
+  }
+
+  if (!Array.prototype.includes) {
+    Array.prototype.includes = function (value, fromIndex) {
+      var start = Math.max(Number(fromIndex) || 0, 0);
+      for (var index = start; index < this.length; index += 1) {
+        if (this[index] === value || (this[index] !== this[index] && value !== value)) return true;
+      }
+      return false;
+    };
+  }
+
+  if (!String.prototype.padStart) {
+    String.prototype.padStart = function (targetLength, padString) {
+      var value = String(this);
+      var padding = String(padString === undefined ? " " : padString);
+      while (value.length < targetLength) value = padding + value;
+      return value.slice(value.length - targetLength);
+    };
+  }
+
+  if (!Number.isFinite) {
+    Number.isFinite = function (value) {
+      return typeof value === "number" && isFinite(value);
+    };
+  }
+
+  if (!Number.isNaN) {
+    Number.isNaN = function (value) {
+      return typeof value === "number" && value !== value;
+    };
+  }
+
+  if (window.NodeList && !NodeList.prototype.forEach) {
+    NodeList.prototype.forEach = Array.prototype.forEach;
+  }
+})();
+
+    </script>
+    <script>
+function _regenerator() { var e, t, r = "function" == typeof Symbol ? Symbol : {}, n = r.iterator || "@@iterator", o = r.toStringTag || "@@toStringTag"; function i(r, n, o, i) { var c = n && n.prototype instanceof Generator ? n : Generator, u = Object.create(c.prototype); return _regeneratorDefine2(u, "_invoke", function (r, n, o) { var i, c, u, f = 0, p = o || [], y = !1, G = { p: 0, n: 0, v: e, a: d, f: d.bind(e, 4), d: function d(t, r) { return i = t, c = 0, u = e, G.n = r, a; } }; function d(r, n) { for (c = r, u = n, t = 0; !y && f && !o && t < p.length; t++) { var o, i = p[t], d = G.p, l = i[2]; r > 3 ? (o = l === n) && (u = i[(c = i[4]) ? 5 : (c = 3, 3)], i[4] = i[5] = e) : i[0] <= d && ((o = r < 2 && d < i[1]) ? (c = 0, G.v = n, G.n = i[1]) : d < l && (o = r < 3 || i[0] > n || n > l) && (i[4] = r, i[5] = n, G.n = l, c = 0)); } if (o || r > 1) return a; throw y = !0, n; } return function (o, p, l) { if (f > 1) throw TypeError("Generator is already running"); for (y && 1 === p && d(p, l), c = p, u = l; (t = c < 2 ? e : u) || !y;) { i || (c ? c < 3 ? (c > 1 && (G.n = -1), d(c, u)) : G.n = u : G.v = u); try { if (f = 2, i) { if (c || (o = "next"), t = i[o]) { if (!(t = t.call(i, u))) throw TypeError("iterator result is not an object"); if (!t.done) return t; u = t.value, c < 2 && (c = 0); } else 1 === c && (t = i.return) && t.call(i), c < 2 && (u = TypeError("The iterator does not provide a '" + o + "' method"), c = 1); i = e; } else if ((t = (y = G.n < 0) ? u : r.call(n, G)) !== a) break; } catch (t) { i = e, c = 1, u = t; } finally { f = 1; } } return { value: t, done: y }; }; }(r, o, i), !0), u; } var a = {}; function Generator() {} function GeneratorFunction() {} function GeneratorFunctionPrototype() {} t = Object.getPrototypeOf; var c = [][n] ? t(t([][n]())) : (_regeneratorDefine2(t = {}, n, function () { return this; }), t), u = GeneratorFunctionPrototype.prototype = Generator.prototype = Object.create(c); function f(e) { return Object.setPrototypeOf ? Object.setPrototypeOf(e, GeneratorFunctionPrototype) : (e.__proto__ = GeneratorFunctionPrototype, _regeneratorDefine2(e, o, "GeneratorFunction")), e.prototype = Object.create(u), e; } return GeneratorFunction.prototype = GeneratorFunctionPrototype, _regeneratorDefine2(u, "constructor", GeneratorFunctionPrototype), _regeneratorDefine2(GeneratorFunctionPrototype, "constructor", GeneratorFunction), GeneratorFunction.displayName = "GeneratorFunction", _regeneratorDefine2(GeneratorFunctionPrototype, o, "GeneratorFunction"), _regeneratorDefine2(u), _regeneratorDefine2(u, o, "Generator"), _regeneratorDefine2(u, n, function () { return this; }), _regeneratorDefine2(u, "toString", function () { return "[object Generator]"; }), (_regenerator = function _regenerator() { return { w: i, m: f }; })(); }
+function _regeneratorDefine2(e, r, n, t) { var i = Object.defineProperty; try { i({}, "", {}); } catch (e) { i = 0; } _regeneratorDefine2 = function _regeneratorDefine(e, r, n, t) { function o(r, n) { _regeneratorDefine2(e, r, function (e) { return this._invoke(r, n, e); }); } r ? i ? i(e, r, { value: n, enumerable: !t, configurable: !t, writable: !t }) : e[r] = n : (o("next", 0), o("throw", 1), o("return", 2)); }, _regeneratorDefine2(e, r, n, t); }
+function _createForOfIteratorHelper(r, e) { var t = "undefined" != typeof Symbol && r[Symbol.iterator] || r["@@iterator"]; if (!t) { if (Array.isArray(r) || (t = _unsupportedIterableToArray(r)) || e && r && "number" == typeof r.length) { t && (r = t); var _n = 0, F = function F() {}; return { s: F, n: function n() { return _n >= r.length ? { done: !0 } : { done: !1, value: r[_n++] }; }, e: function e(r) { throw r; }, f: F }; } throw new TypeError("Invalid attempt to iterate non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); } var o, a = !0, u = !1; return { s: function s() { t = t.call(r); }, n: function n() { var r = t.next(); return a = r.done, r; }, e: function e(r) { u = !0, o = r; }, f: function f() { try { a || null == t.return || t.return(); } finally { if (u) throw o; } } }; }
+function _toConsumableArray(r) { return _arrayWithoutHoles(r) || _iterableToArray(r) || _unsupportedIterableToArray(r) || _nonIterableSpread(); }
+function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+function _iterableToArray(r) { if ("undefined" != typeof Symbol && null != r[Symbol.iterator] || null != r["@@iterator"]) return Array.from(r); }
+function _arrayWithoutHoles(r) { if (Array.isArray(r)) return _arrayLikeToArray(r); }
+function _typeof(o) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (o) { return typeof o; } : function (o) { return o && "function" == typeof Symbol && o.constructor === Symbol && o !== Symbol.prototype ? "symbol" : typeof o; }, _typeof(o); }
+function _slicedToArray(r, e) { return _arrayWithHoles(r) || _iterableToArrayLimit(r, e) || _unsupportedIterableToArray(r, e) || _nonIterableRest(); }
+function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+function _unsupportedIterableToArray(r, a) { if (r) { if ("string" == typeof r) return _arrayLikeToArray(r, a); var t = {}.toString.call(r).slice(8, -1); return "Object" === t && r.constructor && (t = r.constructor.name), "Map" === t || "Set" === t ? Array.from(r) : "Arguments" === t || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(t) ? _arrayLikeToArray(r, a) : void 0; } }
+function _arrayLikeToArray(r, a) { (null == a || a > r.length) && (a = r.length); for (var e = 0, n = Array(a); e < a; e++) n[e] = r[e]; return n; }
+function _iterableToArrayLimit(r, l) { var t = null == r ? null : "undefined" != typeof Symbol && r[Symbol.iterator] || r["@@iterator"]; if (null != t) { var e, n, i, u, a = [], f = !0, o = !1; try { if (i = (t = t.call(r)).next, 0 === l) { if (Object(t) !== t) return; f = !1; } else for (; !(f = (e = i.call(t)).done) && (a.push(e.value), a.length !== l); f = !0); } catch (r) { o = !0, n = r; } finally { try { if (!f && null != t.return && (u = t.return(), Object(u) !== u)) return; } finally { if (o) throw n; } } return a; } }
+function _arrayWithHoles(r) { if (Array.isArray(r)) return r; }
+function asyncGeneratorStep(n, t, e, r, o, a, c) { try { var i = n[a](c), u = i.value; } catch (n) { return void e(n); } i.done ? t(u) : Promise.resolve(u).then(r, o); }
+function _asyncToGenerator(n) { return function () { var t = this, e = arguments; return new Promise(function (r, o) { var a = n.apply(t, e); function _next(n) { asyncGeneratorStep(a, r, o, _next, _throw, "next", n); } function _throw(n) { asyncGeneratorStep(a, r, o, _next, _throw, "throw", n); } _next(void 0); }); }; }
+(function () {
+  var app = document.getElementById("app");
+  var configPaths = ["./configs/site-config.json", "./configs/career-change.json"];
+  var state = {
     config: null,
     answers: {},
-    profile: { birthDate: "", actualAge: "" },
+    profile: {
+      birthDate: "",
+      actualAge: ""
+    },
     currentIndex: 0,
     selected: null,
     locked: false,
     loadingStep: 0,
     route: "home",
-    resultData: null,
+    resultData: null
   };
-
-  const defaultLoadingMessages = [
-    "正在读取你的选择倾向...",
-    "正在识别隐藏动机...",
-    "正在计算结果分布...",
-    "正在生成专属报告...",
-    "分析完成。",
-  ];
-
+  var defaultLoadingMessages = ["正在读取你的选择倾向...", "正在识别隐藏动机...", "正在计算结果分布...", "正在生成专属报告...", "分析完成。"];
+  var safeSessionStorage = {
+    getItem: function getItem(key) {
+      try {
+        return window.sessionStorage ? window.sessionStorage.getItem(key) : null;
+      } catch (error) {
+        return null;
+      }
+    },
+    setItem: function setItem(key, value) {
+      try {
+        if (window.sessionStorage) window.sessionStorage.setItem(key, value);
+      } catch (error) {}
+    },
+    removeItem: function removeItem(key) {
+      try {
+        if (window.sessionStorage) window.sessionStorage.removeItem(key);
+      } catch (error) {}
+    }
+  };
   init();
-
-  async function init() {
+  function init() {
+    if (window.__QUIZ_CONFIG__) {
+      initialize(window.__QUIZ_CONFIG__);
+      return;
+    }
+    fetchConfig().then(initialize).catch(renderLoadError);
+  }
+  function initialize(config) {
     try {
-      state.config = await fetchConfig();
+      state.config = config;
       applyDocumentMeta(state.config);
       applyTheme(state.config);
-
-      const saved = sessionStorage.getItem(getStorageKey());
+      var saved = safeSessionStorage.getItem(getStorageKey());
       if (saved) {
         state.answers = JSON.parse(saved);
       }
-      const savedProfile = sessionStorage.getItem(getProfileStorageKey());
+      var savedProfile = safeSessionStorage.getItem(getProfileStorageKey());
       if (savedProfile) {
         state.profile = JSON.parse(savedProfile);
       }
-
       routeFromHash();
       window.addEventListener("hashchange", routeFromHash);
     } catch (error) {
-      app.innerHTML = `
-        <div class="error">
-          <div>
-            <h1>测试加载失败</h1>
-            <p>请确认你是通过网页链接打开页面，而不是直接双击 HTML 文件。</p>
-          </div>
-        </div>
-      `;
-      console.error(error);
+      renderLoadError(error);
     }
   }
-
-  async function fetchConfig() {
-    if (window.__QUIZ_CONFIG__) return window.__QUIZ_CONFIG__;
-    let lastError;
-    for (const path of configPaths) {
-      try {
-        const response = await fetch(path, { cache: "no-store" });
-        if (!response.ok) throw new Error(`${path} ${response.status}`);
-        return response.json();
-      } catch (error) {
-        lastError = error;
-      }
-    }
-    throw lastError;
+  function renderLoadError(error) {
+    app.innerHTML = "\n      <div class=\"error\">\n        <div>\n          <h1>\u6D4B\u8BD5\u52A0\u8F7D\u5931\u8D25</h1>\n          <p>\u8BF7\u590D\u5236\u94FE\u63A5\u5230\u624B\u673A\u7CFB\u7EDF\u6D4F\u89C8\u5668\u91CD\u65B0\u6253\u5F00\u3002</p>\n        </div>\n      </div>\n    ";
+    console.error(error);
   }
-
+  function fetchConfig() {
+    return _fetchConfig.apply(this, arguments);
+  }
+  function _fetchConfig() {
+    _fetchConfig = _asyncToGenerator(_regenerator().m(function _callee() {
+      var lastError, _iterator, _step, path, response, _t, _t2;
+      return _regenerator().w(function (_context) {
+        while (1) switch (_context.p = _context.n) {
+          case 0:
+            if (!window.__QUIZ_CONFIG__) {
+              _context.n = 1;
+              break;
+            }
+            return _context.a(2, window.__QUIZ_CONFIG__);
+          case 1:
+            _iterator = _createForOfIteratorHelper(configPaths);
+            _context.p = 2;
+            _iterator.s();
+          case 3:
+            if ((_step = _iterator.n()).done) {
+              _context.n = 9;
+              break;
+            }
+            path = _step.value;
+            _context.p = 4;
+            _context.n = 5;
+            return fetch(path, {
+              cache: "no-store"
+            });
+          case 5:
+            response = _context.v;
+            if (response.ok) {
+              _context.n = 6;
+              break;
+            }
+            throw new Error("".concat(path, " ").concat(response.status));
+          case 6:
+            return _context.a(2, response.json());
+          case 7:
+            _context.p = 7;
+            _t = _context.v;
+            lastError = _t;
+          case 8:
+            _context.n = 3;
+            break;
+          case 9:
+            _context.n = 11;
+            break;
+          case 10:
+            _context.p = 10;
+            _t2 = _context.v;
+            _iterator.e(_t2);
+          case 11:
+            _context.p = 11;
+            _iterator.f();
+            return _context.f(11);
+          case 12:
+            throw lastError;
+          case 13:
+            return _context.a(2);
+        }
+      }, _callee, null, [[4, 7], [2, 10, 11, 12]]);
+    }));
+    return _fetchConfig.apply(this, arguments);
+  }
   function applyDocumentMeta(cfg) {
-    const title = cfg.title || "趣味测试";
-    const description = cfg.metaDescription || cfg.subtitle || "完成测试，生成你的专属报告。";
+    var title = cfg.title || "趣味测试";
+    var description = cfg.metaDescription || cfg.subtitle || "完成测试，生成你的专属报告。";
     document.title = title;
     setMeta("name", "description", description);
     setMeta("property", "og:title", title);
     setMeta("property", "og:description", description);
   }
-
   function applyTheme(cfg) {
-    Object.entries(cfg.theme || {}).forEach(([name, value]) => {
+    Object.entries(cfg.theme || {}).forEach(function (_ref) {
+      var _ref2 = _slicedToArray(_ref, 2),
+        name = _ref2[0],
+        value = _ref2[1];
       document.documentElement.style.setProperty(name, value);
     });
   }
-
   function setMeta(attr, key, content) {
-    let node = document.querySelector(`meta[${attr}="${key}"]`);
+    var node = document.querySelector("meta[".concat(attr, "=\"").concat(key, "\"]"));
     if (!node) {
       node = document.createElement("meta");
       node.setAttribute(attr, key);
@@ -881,121 +1041,65 @@ button {
     }
     node.setAttribute("content", content);
   }
-
   function routeFromHash() {
-    const route = (location.hash || "#/").replace("#/", "") || "home";
+    var route = (location.hash || "#/").replace("#/", "") || "home";
     renderRoute(route);
   }
-
   function navigate(route) {
-    const nextHash = `#/${route}`;
+    var nextHash = "#/".concat(route);
     if (location.hash === nextHash) {
       renderRoute(route);
       return;
     }
     location.hash = nextHash;
   }
-
   function renderRoute(route) {
     state.route = route;
-    if (route === "quiz") renderQuiz();
-    else if (route === "loading") startLoading();
-    else if (route === "result") renderResult();
-    else renderHome();
+    if (route === "quiz") renderQuiz();else if (route === "loading") startLoading();else if (route === "result") renderResult();else renderHome();
   }
-
-  function renderShell(content, extraClass = "") {
-    app.innerHTML = `
-      <div class="shell">
-        <div class="top-rule"></div>
-        <section class="screen ${extraClass}">${content}</section>
-      </div>
-      <div id="toast" class="toast">已复制</div>
-    `;
+  function renderShell(content) {
+    var extraClass = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : "";
+    app.innerHTML = "\n      <div class=\"shell\">\n        <div class=\"top-rule\"></div>\n        <section class=\"screen ".concat(extraClass, "\">").concat(content, "</section>\n      </div>\n      <div id=\"toast\" class=\"toast\">\u5DF2\u590D\u5236</div>\n    ");
   }
-
   function renderHome() {
-    const cfg = state.config;
-    renderShell(
-      `
-      <div class="home">
-        <div class="kicker"><span class="dot"></span><span>${text(cfg.kicker)}</span><span class="dot"></span></div>
-        <h1 class="hero-title">${text(cfg.title)}</h1>
-        <p class="hero-subtitle">${text(cfg.subtitle)}</p>
-        <div class="hairline"></div>
-        <div class="intro">
-          ${(cfg.intro || []).map((p, index) => `<p class="${index === cfg.intro.length - 1 ? "strong" : ""}">${text(p)}</p>`).join("")}
-        </div>
-        ${!cfg.compactHome && (cfg.dimensions || []).length ? `
-          <div class="pill-grid">
-            ${(cfg.dimensions || []).map((item) => `<div class="pill">${text(item)}</div>`).join("")}
-          </div>
-        ` : ""}
-        ${cfg.testInfo ? `
-          <section class="home-card info-card">
-            <h2>${text(cfg.testInfo.title || "测验说明")}</h2>
-            <ul>${(cfg.testInfo.bullets || []).map((item) => `<li>${text(item)}</li>`).join("")}</ul>
-          </section>
-        ` : ""}
-        ${cfg.matchingSystem ? `
-          <section class="home-card info-card">
-            <h2>${text(cfg.matchingSystem.title || "综合匹配系统")}</h2>
-            <p>${text(cfg.matchingSystem.body || "")}</p>
-          </section>
-        ` : ""}
-        ${cfg.profileInput ? `
-          <section class="profile-panel">
-            <label class="profile-label" for="profile-value">${text(cfg.profileInput.title || "先输入出生日期")}</label>
-            <div class="profile-field">
-              <span>${text(cfg.profileInput.label || "出生日期")}</span>
-              <input
-                id="profile-value"
-                type="${text(cfg.profileInput.type || "date")}"
-                value="${text(getProfileInputValue(cfg.profileInput))}"
-                ${cfg.profileInput.type === "number" ? `inputmode="numeric" min="${text(cfg.profileInput.min || 1)}" max="${text(cfg.profileInput.max || 99)}" placeholder="${text(cfg.profileInput.placeholder || "")}"` : ""}
-                ${cfg.profileInput.required ? "required" : ""}
-              >
-            </div>
-            <p class="profile-note">${text(cfg.profileInput.note || "")}</p>
-            <p class="profile-error" data-profile-error aria-live="polite"></p>
-          </section>
-        ` : ""}
-        <button class="primary-btn" data-action="start">${text(cfg.startButton || "开始测试")}</button>
-        ${cfg.compactHome && (cfg.dimensions || []).length ? `
-          <div class="pill-grid compact-pills">
-            ${(cfg.dimensions || []).map((item) => `<div class="pill">${text(item)}</div>`).join("")}
-          </div>
-        ` : ""}
-        <p class="disclaimer">${text(cfg.disclaimer || "本测试为趣味内容，仅供娱乐参考。")}</p>
-      </div>
-      `,
-      "home"
-    );
-    const startButton = app.querySelector("[data-action='start']");
-    const profileField = app.querySelector("#profile-value");
-    const profileError = app.querySelector("[data-profile-error]");
-    profileField?.addEventListener("input", () => {
+    var cfg = state.config;
+    renderShell("\n      <div class=\"home\">\n        <div class=\"kicker\"><span class=\"dot\"></span><span>".concat(text(cfg.kicker), "</span><span class=\"dot\"></span></div>\n        <h1 class=\"hero-title\">").concat(text(cfg.title), "</h1>\n        <p class=\"hero-subtitle\">").concat(text(cfg.subtitle), "</p>\n        <div class=\"hairline\"></div>\n        <div class=\"intro\">\n          ").concat((cfg.intro || []).map(function (p, index) {
+      return "<p class=\"".concat(index === cfg.intro.length - 1 ? "strong" : "", "\">").concat(text(p), "</p>");
+    }).join(""), "\n        </div>\n        ").concat(!cfg.compactHome && (cfg.dimensions || []).length ? "\n          <div class=\"pill-grid\">\n            ".concat((cfg.dimensions || []).map(function (item) {
+      return "<div class=\"pill\">".concat(text(item), "</div>");
+    }).join(""), "\n          </div>\n        ") : "", "\n        ").concat(cfg.testInfo ? "\n          <section class=\"home-card info-card\">\n            <h2>".concat(text(cfg.testInfo.title || "测验说明"), "</h2>\n            <ul>").concat((cfg.testInfo.bullets || []).map(function (item) {
+      return "<li>".concat(text(item), "</li>");
+    }).join(""), "</ul>\n          </section>\n        ") : "", "\n        ").concat(cfg.matchingSystem ? "\n          <section class=\"home-card info-card\">\n            <h2>".concat(text(cfg.matchingSystem.title || "综合匹配系统"), "</h2>\n            <p>").concat(text(cfg.matchingSystem.body || ""), "</p>\n          </section>\n        ") : "", "\n        ").concat(cfg.profileInput ? "\n          <section class=\"profile-panel\">\n            <label class=\"profile-label\" for=\"profile-value\">".concat(text(cfg.profileInput.title || "先输入出生日期"), "</label>\n            <div class=\"profile-field\">\n              <span>").concat(text(cfg.profileInput.label || "出生日期"), "</span>\n              <input\n                id=\"profile-value\"\n                type=\"").concat(text(cfg.profileInput.type || "date"), "\"\n                value=\"").concat(text(getProfileInputValue(cfg.profileInput)), "\"\n                ").concat(cfg.profileInput.type === "number" ? "inputmode=\"numeric\" min=\"".concat(text(cfg.profileInput.min || 1), "\" max=\"").concat(text(cfg.profileInput.max || 99), "\" placeholder=\"").concat(text(cfg.profileInput.placeholder || ""), "\"") : "", "\n                ").concat(cfg.profileInput.required ? "required" : "", "\n              >\n            </div>\n            <p class=\"profile-note\">").concat(text(cfg.profileInput.note || ""), "</p>\n            <p class=\"profile-error\" data-profile-error aria-live=\"polite\"></p>\n          </section>\n        ") : "", "\n        <button class=\"primary-btn\" data-action=\"start\">").concat(text(cfg.startButton || "开始测试"), "</button>\n        ").concat(cfg.compactHome && (cfg.dimensions || []).length ? "\n          <div class=\"pill-grid compact-pills\">\n            ".concat((cfg.dimensions || []).map(function (item) {
+      return "<div class=\"pill\">".concat(text(item), "</div>");
+    }).join(""), "\n          </div>\n        ") : "", "\n        <p class=\"disclaimer\">").concat(text(cfg.disclaimer || "本测试为趣味内容，仅供娱乐参考。"), "</p>\n      </div>\n      "), "home");
+    var startButton = app.querySelector("[data-action='start']");
+    var profileField = app.querySelector("#profile-value");
+    var profileError = app.querySelector("[data-profile-error]");
+    profileField === null || profileField === void 0 || profileField.addEventListener("input", function () {
       profileField.classList.remove("invalid");
       if (profileError) profileError.textContent = "";
     });
-    let started = false;
-    const startQuiz = () => {
+    var started = false;
+    var startQuiz = function startQuiz() {
+      var _profileField$value, _cfg$profileInput, _cfg$profileInput3;
       if (started) return;
-      const profileValue = profileField?.value?.trim() || "";
-      if (cfg.profileInput?.required && !profileValue) {
-        profileField?.classList.add("invalid");
-        if (profileError) profileError.textContent = cfg.profileInput?.error || "请先填写信息，再开始测试。";
-        profileField?.focus();
+      var profileValue = (profileField === null || profileField === void 0 || (_profileField$value = profileField.value) === null || _profileField$value === void 0 ? void 0 : _profileField$value.trim()) || "";
+      if ((_cfg$profileInput = cfg.profileInput) !== null && _cfg$profileInput !== void 0 && _cfg$profileInput.required && !profileValue) {
+        var _cfg$profileInput2;
+        profileField === null || profileField === void 0 || profileField.classList.add("invalid");
+        if (profileError) profileError.textContent = ((_cfg$profileInput2 = cfg.profileInput) === null || _cfg$profileInput2 === void 0 ? void 0 : _cfg$profileInput2.error) || "请先填写信息，再开始测试。";
+        profileField === null || profileField === void 0 || profileField.focus();
         return;
       }
-      if (cfg.profileInput?.type === "number") {
-        const numericValue = Number(profileValue);
-        const min = Number(cfg.profileInput.min || 1);
-        const max = Number(cfg.profileInput.max || 99);
+      if (((_cfg$profileInput3 = cfg.profileInput) === null || _cfg$profileInput3 === void 0 ? void 0 : _cfg$profileInput3.type) === "number") {
+        var numericValue = Number(profileValue);
+        var min = Number(cfg.profileInput.min || 1);
+        var max = Number(cfg.profileInput.max || 99);
         if (!Number.isFinite(numericValue) || numericValue < min || numericValue > max) {
-          profileField?.classList.add("invalid");
-          if (profileError) profileError.textContent = cfg.profileInput?.rangeError || `请输入 ${min}-${max} 之间的数字。`;
-          profileField?.focus();
+          var _cfg$profileInput4;
+          profileField === null || profileField === void 0 || profileField.classList.add("invalid");
+          if (profileError) profileError.textContent = ((_cfg$profileInput4 = cfg.profileInput) === null || _cfg$profileInput4 === void 0 ? void 0 : _cfg$profileInput4.rangeError) || "\u8BF7\u8F93\u5165 ".concat(min, "-").concat(max, " \u4E4B\u95F4\u7684\u6570\u5B57\u3002");
+          profileField === null || profileField === void 0 || profileField.focus();
           return;
         }
       }
@@ -1003,832 +1107,637 @@ button {
       state.answers = {};
       state.profile = buildProfileFromInput(cfg.profileInput, profileValue);
       state.currentIndex = 0;
-      sessionStorage.removeItem(getStorageKey());
-      sessionStorage.setItem(getProfileStorageKey(), JSON.stringify(state.profile));
+      safeSessionStorage.removeItem(getStorageKey());
+      safeSessionStorage.setItem(getProfileStorageKey(), JSON.stringify(state.profile));
       navigate("quiz");
     };
     startButton.addEventListener("click", startQuiz);
-    startButton.addEventListener(
-      "touchend",
-      (event) => {
-        event.preventDefault();
-        startQuiz();
-      },
-      { passive: false }
-    );
+    startButton.addEventListener("touchend", function (event) {
+      event.preventDefault();
+      startQuiz();
+    }, {
+      passive: false
+    });
   }
-
   function renderQuiz() {
-    const questions = state.config.questions || [];
-    const question = questions[state.currentIndex];
+    var questions = state.config.questions || [];
+    var question = questions[state.currentIndex];
     if (!question) {
       renderHome();
       return;
     }
-
-    const progress = ((state.currentIndex + 1) / questions.length) * 100;
-
-    renderShell(
-      `
-      <div class="sticky-head">
-        <div class="quiz-meta">
-          <span>${String(state.currentIndex + 1).padStart(2, "0")} / ${questions.length}</span>
-          <span>${text(question.module)}</span>
-        </div>
-        <div class="progress-track"><div class="progress-bar" style="width:${progress}%"></div></div>
-      </div>
-      <div class="question-no">${String(state.currentIndex + 1).padStart(2, "0")}</div>
-      <h1 class="question-title">${text(question.text)}</h1>
-      <div class="options">
-        ${(question.options || [])
-          .map(
-            (option) => `
-            <button class="option" data-option="${text(option.key)}">
-              <span class="option-key">${text(option.key)}</span>
-              <span class="option-text">${text(option.text)}</span>
-            </button>
-          `
-          )
-          .join("")}
-      </div>
-      <p class="hint">${text(state.config.quizHint || "选择后自动进入下一题")}</p>
-      `,
-      "quiz-screen"
-    );
-
-    app.querySelectorAll("[data-option]").forEach((button) => {
-      button.addEventListener("click", () => selectOption(button.dataset.option));
+    var progress = (state.currentIndex + 1) / questions.length * 100;
+    renderShell("\n      <div class=\"sticky-head\">\n        <div class=\"quiz-meta\">\n          <span>".concat(String(state.currentIndex + 1).padStart(2, "0"), " / ").concat(questions.length, "</span>\n          <span>").concat(text(question.module), "</span>\n        </div>\n        <div class=\"progress-track\"><div class=\"progress-bar\" style=\"width:").concat(progress, "%\"></div></div>\n      </div>\n      <div class=\"question-no\">").concat(String(state.currentIndex + 1).padStart(2, "0"), "</div>\n      <h1 class=\"question-title\">").concat(text(question.text), "</h1>\n      <div class=\"options\">\n        ").concat((question.options || []).map(function (option) {
+      return "\n            <button class=\"option\" data-option=\"".concat(text(option.key), "\">\n              <span class=\"option-key\">").concat(text(option.key), "</span>\n              <span class=\"option-text\">").concat(text(option.text), "</span>\n            </button>\n          ");
+    }).join(""), "\n      </div>\n      <p class=\"hint\">").concat(text(state.config.quizHint || "选择后自动进入下一题"), "</p>\n      "), "quiz-screen");
+    app.querySelectorAll("[data-option]").forEach(function (button) {
+      button.addEventListener("click", function () {
+        return selectOption(button.dataset.option);
+      });
     });
   }
-
   function selectOption(key) {
     if (state.locked) return;
     state.locked = true;
     state.selected = key;
-    const question = state.config.questions[state.currentIndex];
+    var question = state.config.questions[state.currentIndex];
     state.answers[question.id] = key;
-
-    app.querySelectorAll(".option").forEach((button) => {
-      const selected = button.dataset.option === key;
+    app.querySelectorAll(".option").forEach(function (button) {
+      var selected = button.dataset.option === key;
       button.classList.toggle("selected", selected);
       button.classList.toggle("dimmed", !selected);
     });
-
-    window.setTimeout(() => {
+    window.setTimeout(function () {
       if (state.currentIndex < state.config.questions.length - 1) {
         state.currentIndex += 1;
         state.locked = false;
         state.selected = null;
         renderQuiz();
       } else {
-        sessionStorage.setItem(getStorageKey(), JSON.stringify(state.answers));
+        safeSessionStorage.setItem(getStorageKey(), JSON.stringify(state.answers));
         state.locked = false;
         navigate("loading");
       }
     }, 420);
   }
-
   function startLoading() {
     state.loadingStep = 0;
     renderLoading("");
     tickLoading();
   }
-
   function renderLoading(value) {
-    const loadingMessages = getLoadingMessages();
-    renderShell(
-      `
-      <div class="loading-card">
-        <div class="spinner"></div>
-        <div class="loading-text">${text(value)}<span class="cursor">|</span></div>
-        <div class="step-bars">
-          ${loadingMessages.map((_, index) => `<div class="step ${index < state.loadingStep ? "done" : ""}"><span></span></div>`).join("")}
-        </div>
-      </div>
-      `,
-      "loading-screen"
-    );
+    var loadingMessages = getLoadingMessages();
+    renderShell("\n      <div class=\"loading-card\">\n        <div class=\"spinner\"></div>\n        <div class=\"loading-text\">".concat(text(value), "<span class=\"cursor\">|</span></div>\n        <div class=\"step-bars\">\n          ").concat(loadingMessages.map(function (_, index) {
+      return "<div class=\"step ".concat(index < state.loadingStep ? "done" : "", "\"><span></span></div>");
+    }).join(""), "\n        </div>\n      </div>\n      "), "loading-screen");
   }
-
   function tickLoading() {
     if (state.route !== "loading") return;
-    const loadingMessages = getLoadingMessages();
+    var loadingMessages = getLoadingMessages();
     if (state.loadingStep >= loadingMessages.length) {
-      window.setTimeout(() => navigate("result"), 700);
+      window.setTimeout(function () {
+        return navigate("result");
+      }, 700);
       return;
     }
-    const message = loadingMessages[state.loadingStep];
-    let chars = 0;
-    const interval = window.setInterval(() => {
+    var message = loadingMessages[state.loadingStep];
+    var chars = 0;
+    var interval = window.setInterval(function () {
       chars += 1;
       renderLoading(message.slice(0, chars));
       if (chars >= message.length) {
         window.clearInterval(interval);
-        window.setTimeout(() => {
+        window.setTimeout(function () {
           state.loadingStep += 1;
           tickLoading();
         }, 520);
       }
     }, 35);
   }
-
   function renderResult() {
-    const saved = sessionStorage.getItem(getStorageKey());
+    var _state$config$seconda;
+    var saved = safeSessionStorage.getItem(getStorageKey());
     if (saved) state.answers = JSON.parse(saved);
     if (Object.keys(state.answers).length < state.config.questions.length) {
       renderHome();
       return;
     }
-
-    const scored = scoreAnswers(state.answers);
-    const primary = state.config.results[scored.primary];
-    const secondary = scored.secondary ? state.config.secondaryNotes?.[scored.primary]?.[scored.secondary] : null;
-    const headlineScore = Number.isFinite(scored.score) ? scored.score : primary.maturityScore;
-    const stage = getStage(headlineScore);
-    const shareText = buildShareText(primary, secondary, scored);
-    const compareLabels = state.config.compareLabels || ["如果继续原路", "如果换一种做法"];
-    state.resultData = { scored, primary, secondary, stage, shareText };
-
-    renderShell(
-      `
-      <article class="report">
-        <div class="kicker"><span class="dot"></span><span>${text(state.config.resultKicker || "Result Report")}</span><span class="dot"></span></div>
-        <h1 class="result-type">${text(primary.typeName)}</h1>
-        <p class="result-subtitle">${text(primary.subtitle)}</p>
-        <div class="stamp-row">
-          <div class="stamp"><strong>${text(headlineScore)}</strong><span>${text(state.config.scoreLabel || "决策成熟度")}</span></div>
-          <div class="stamp"><strong>${text(stage)}</strong><span>${text(state.config.stageLabel || "当前行动阶段")}</span></div>
-        </div>
-
-        ${renderMatchSummary(scored)}
-
-        ${scored.psychological || scored.attachment || scored.liking || scored.distribution ? "" : `
-          <section class="section">
-            <h2>你的答案分布</h2>
-            <div class="meters">
-              ${Object.entries(scored.counts)
-                .filter(([, value]) => value > 0)
-                .map(([key, value]) => {
-                  const typeData = state.config.results[key];
-                  const width = (value / state.config.questions.length) * 100;
-                  return `
-                    <div>
-                      <div class="meter-head"><span>${text(key)} · ${text(typeData.typeName)}</span><span>${value} 题</span></div>
-                      <div class="meter-track"><div class="meter-fill" style="width:${width}%"></div></div>
-                    </div>
-                  `;
-                })
-                .join("")}
-            </div>
-          </section>
-        `}
-
-        ${secondary ? `<section class="section"><h2>副倾向提示</h2><div class="secondary-note">${text(secondary)}</div></section>` : ""}
-
-        <section class="section">
-          <h2>诊断结论</h2>
-          <div class="quote">${text(primary.coreConclusion)}</div>
-        </section>
-
-        <section class="section">
-          <h2>为什么你会这样</h2>
-          <p>${text(primary.diagnosis)}</p>
-          <p>${text(primary.whatYouReallyWant)}</p>
-        </section>
-
-        <section class="section">
-          <h2>${text(primary.mechanism.title)}</h2>
-          <p>${text(primary.mechanism.content)}</p>
-        </section>
-
-        ${renderParagraphSection("专业解读框架", primary.professionalBasis)}
-        ${renderTagSection("你的关键矛盾", primary.coreTensions)}
-        ${renderCompareListSection("适合推进的条件", "需要谨慎的信号", primary.suitableIf, primary.cautionIf)}
-
-        <section class="section">
-          <h2>关键指数</h2>
-          <div class="meters">
-            ${(primary.indices || [])
-              .map(
-                (item) => `
-                <div>
-                  <div class="meter-head"><span>${text(item.label)}</span><span>${text(item.value)}</span></div>
-                  <div class="meter-track"><div class="meter-fill" style="width:${number(item.value)}%"></div></div>
-                </div>
-              `
-              )
-              .join("")}
-          </div>
-        </section>
-
-        <section class="section">
-          <h2>两条路径对比</h2>
-          <div class="compare">
-            <div class="compare-card"><h3>${text(compareLabels[0])}</h3><p>${text(primary.ifStay)}</p></div>
-            <div class="compare-card"><h3>${text(compareLabels[1])}</h3><p>${text(primary.ifChange)}</p></div>
-          </div>
-        </section>
-
-        <section class="section">
-          <h2>现在最不建议你做</h2>
-          <div class="tag-list">${(primary.notRecommended || []).map((item) => `<span class="tag">${text(item)}</span>`).join("")}</div>
-        </section>
-
-        <section class="section">
-          <h2>${text(state.config.planTitle || "未来 90 天验证方案")}</h2>
-          <div class="plan">
-            ${(primary.plan90 || [])
-              .map(
-                (item, index) => `
-                <div class="plan-card">
-                  <h3>${index + 1}. ${text(item.title)}</h3>
-                  <p>${text(item.content)}</p>
-                </div>
-              `
-              )
-              .join("")}
-          </div>
-        </section>
-
-        <section class="section">
-          <h2>最后一句话</h2>
-          <p>${text(primary.closing)}</p>
-        </section>
-
-        ${state.config.disclaimer ? `<p class="result-disclaimer">${text(state.config.disclaimer)}</p>` : ""}
-
-        <div class="actions">
-          <button class="primary-btn" data-action="copy">${text(state.config.copyButton || "复制我的结果")}</button>
-          <button class="ghost-btn" data-action="restart">${text(state.config.restartButton || "重新测试")}</button>
-        </div>
-      </article>
-      `,
-      "result-screen"
-    );
-
-    app.querySelector("[data-action='copy']").addEventListener("click", () => copyShareText(shareText));
-    app.querySelector("[data-action='restart']").addEventListener("click", () => {
-      sessionStorage.removeItem(getStorageKey());
-      sessionStorage.removeItem(getProfileStorageKey());
+    var scored = scoreAnswers(state.answers);
+    var primary = state.config.results[scored.primary];
+    var secondary = scored.secondary ? (_state$config$seconda = state.config.secondaryNotes) === null || _state$config$seconda === void 0 || (_state$config$seconda = _state$config$seconda[scored.primary]) === null || _state$config$seconda === void 0 ? void 0 : _state$config$seconda[scored.secondary] : null;
+    var headlineScore = Number.isFinite(scored.score) ? scored.score : primary.maturityScore;
+    var stage = getStage(headlineScore);
+    var shareText = buildShareText(primary, secondary, scored);
+    var compareLabels = state.config.compareLabels || ["如果继续原路", "如果换一种做法"];
+    state.resultData = {
+      scored: scored,
+      primary: primary,
+      secondary: secondary,
+      stage: stage,
+      shareText: shareText
+    };
+    renderShell("\n      <article class=\"report\">\n        <div class=\"kicker\"><span class=\"dot\"></span><span>".concat(text(state.config.resultKicker || "Result Report"), "</span><span class=\"dot\"></span></div>\n        <h1 class=\"result-type\">").concat(text(primary.typeName), "</h1>\n        <p class=\"result-subtitle\">").concat(text(primary.subtitle), "</p>\n        <div class=\"stamp-row\">\n          <div class=\"stamp\"><strong>").concat(text(headlineScore), "</strong><span>").concat(text(state.config.scoreLabel || "决策成熟度"), "</span></div>\n          <div class=\"stamp\"><strong>").concat(text(stage), "</strong><span>").concat(text(state.config.stageLabel || "当前行动阶段"), "</span></div>\n        </div>\n\n        ").concat(renderMatchSummary(scored), "\n\n        ").concat(scored.psychological || scored.attachment || scored.liking || scored.distribution ? "" : "\n          <section class=\"section\">\n            <h2>\u4F60\u7684\u7B54\u6848\u5206\u5E03</h2>\n            <div class=\"meters\">\n              ".concat(Object.entries(scored.counts).filter(function (_ref3) {
+      var _ref4 = _slicedToArray(_ref3, 2),
+        value = _ref4[1];
+      return value > 0;
+    }).map(function (_ref5) {
+      var _ref6 = _slicedToArray(_ref5, 2),
+        key = _ref6[0],
+        value = _ref6[1];
+      var typeData = state.config.results[key];
+      var width = value / state.config.questions.length * 100;
+      return "\n                    <div>\n                      <div class=\"meter-head\"><span>".concat(text(key), " \xB7 ").concat(text(typeData.typeName), "</span><span>").concat(value, " \u9898</span></div>\n                      <div class=\"meter-track\"><div class=\"meter-fill\" style=\"width:").concat(width, "%\"></div></div>\n                    </div>\n                  ");
+    }).join(""), "\n            </div>\n          </section>\n        "), "\n\n        ").concat(secondary ? "<section class=\"section\"><h2>\u526F\u503E\u5411\u63D0\u793A</h2><div class=\"secondary-note\">".concat(text(secondary), "</div></section>") : "", "\n\n        <section class=\"section\">\n          <h2>\u8BCA\u65AD\u7ED3\u8BBA</h2>\n          <div class=\"quote\">").concat(text(primary.coreConclusion), "</div>\n        </section>\n\n        <section class=\"section\">\n          <h2>\u4E3A\u4EC0\u4E48\u4F60\u4F1A\u8FD9\u6837</h2>\n          <p>").concat(text(primary.diagnosis), "</p>\n          <p>").concat(text(primary.whatYouReallyWant), "</p>\n        </section>\n\n        <section class=\"section\">\n          <h2>").concat(text(primary.mechanism.title), "</h2>\n          <p>").concat(text(primary.mechanism.content), "</p>\n        </section>\n\n        ").concat(renderParagraphSection("专业解读框架", primary.professionalBasis), "\n        ").concat(renderTagSection("你的关键矛盾", primary.coreTensions), "\n        ").concat(renderCompareListSection("适合推进的条件", "需要谨慎的信号", primary.suitableIf, primary.cautionIf), "\n\n        <section class=\"section\">\n          <h2>\u5173\u952E\u6307\u6570</h2>\n          <div class=\"meters\">\n            ").concat((primary.indices || []).map(function (item) {
+      return "\n                <div>\n                  <div class=\"meter-head\"><span>".concat(text(item.label), "</span><span>").concat(text(item.value), "</span></div>\n                  <div class=\"meter-track\"><div class=\"meter-fill\" style=\"width:").concat(number(item.value), "%\"></div></div>\n                </div>\n              ");
+    }).join(""), "\n          </div>\n        </section>\n\n        <section class=\"section\">\n          <h2>\u4E24\u6761\u8DEF\u5F84\u5BF9\u6BD4</h2>\n          <div class=\"compare\">\n            <div class=\"compare-card\"><h3>").concat(text(compareLabels[0]), "</h3><p>").concat(text(primary.ifStay), "</p></div>\n            <div class=\"compare-card\"><h3>").concat(text(compareLabels[1]), "</h3><p>").concat(text(primary.ifChange), "</p></div>\n          </div>\n        </section>\n\n        <section class=\"section\">\n          <h2>\u73B0\u5728\u6700\u4E0D\u5EFA\u8BAE\u4F60\u505A</h2>\n          <div class=\"tag-list\">").concat((primary.notRecommended || []).map(function (item) {
+      return "<span class=\"tag\">".concat(text(item), "</span>");
+    }).join(""), "</div>\n        </section>\n\n        <section class=\"section\">\n          <h2>").concat(text(state.config.planTitle || "未来 90 天验证方案"), "</h2>\n          <div class=\"plan\">\n            ").concat((primary.plan90 || []).map(function (item, index) {
+      return "\n                <div class=\"plan-card\">\n                  <h3>".concat(index + 1, ". ").concat(text(item.title), "</h3>\n                  <p>").concat(text(item.content), "</p>\n                </div>\n              ");
+    }).join(""), "\n          </div>\n        </section>\n\n        <section class=\"section\">\n          <h2>\u6700\u540E\u4E00\u53E5\u8BDD</h2>\n          <p>").concat(text(primary.closing), "</p>\n        </section>\n\n        ").concat(state.config.disclaimer ? "<p class=\"result-disclaimer\">".concat(text(state.config.disclaimer), "</p>") : "", "\n\n        <div class=\"actions\">\n          <button class=\"primary-btn\" data-action=\"copy\">").concat(text(state.config.copyButton || "复制我的结果"), "</button>\n          <button class=\"ghost-btn\" data-action=\"restart\">").concat(text(state.config.restartButton || "重新测试"), "</button>\n        </div>\n      </article>\n      "), "result-screen");
+    app.querySelector("[data-action='copy']").addEventListener("click", function () {
+      return copyShareText(shareText);
+    });
+    app.querySelector("[data-action='restart']").addEventListener("click", function () {
+      safeSessionStorage.removeItem(getStorageKey());
+      safeSessionStorage.removeItem(getProfileStorageKey());
       state.answers = {};
-      state.profile = { birthDate: "" };
+      state.profile = {
+        birthDate: ""
+      };
       state.currentIndex = 0;
       navigate("home");
     });
   }
-
   function renderParagraphSection(title, paragraphs) {
     if (!Array.isArray(paragraphs) || !paragraphs.length) return "";
-    return `
-      <section class="section">
-        <h2>${text(title)}</h2>
-        ${paragraphs.map((item) => `<p>${text(item)}</p>`).join("")}
-      </section>
-    `;
+    return "\n      <section class=\"section\">\n        <h2>".concat(text(title), "</h2>\n        ").concat(paragraphs.map(function (item) {
+      return "<p>".concat(text(item), "</p>");
+    }).join(""), "\n      </section>\n    ");
   }
-
   function renderTagSection(title, items) {
     if (!Array.isArray(items) || !items.length) return "";
-    return `
-      <section class="section">
-        <h2>${text(title)}</h2>
-        <div class="tag-list">${items.map((item) => `<span class="tag">${text(item)}</span>`).join("")}</div>
-      </section>
-    `;
+    return "\n      <section class=\"section\">\n        <h2>".concat(text(title), "</h2>\n        <div class=\"tag-list\">").concat(items.map(function (item) {
+      return "<span class=\"tag\">".concat(text(item), "</span>");
+    }).join(""), "</div>\n      </section>\n    ");
   }
-
   function renderMatchSummary(scored) {
     if (scored.distribution) return renderDistributionSummary(scored.distribution);
     if (scored.psychological) return renderPsychologicalSummary(scored.psychological);
     if (scored.attachment) return renderAttachmentSummary(scored.attachment);
     if (scored.liking) return renderLikingSummary(scored.liking);
     if (!scored.match) return "";
-    const match = scored.match;
-    return `
-      <section class="section">
-        <h2>综合匹配结果</h2>
-        <div class="match-summary">
-          <div class="match-grid">
-            <div class="match-item"><span>出生日期倾向</span><strong>${text(match.birthElement)}</strong></div>
-            <div class="match-item"><span>答题倾向</span><strong>${text(match.personalityElement)}</strong></div>
-            <div class="match-item"><span>城市匹配度</span><strong>${text(match.matchScore)}%</strong></div>
-          </div>
-          <p>本结果按出生日期倾向与 49 道题的生活选择加权生成。五行仅用于表达生活偏好，结果需要结合真实岗位、预算、住房和试住体验判断。</p>
-        </div>
-      </section>
-    `;
+    var match = scored.match;
+    return "\n      <section class=\"section\">\n        <h2>\u7EFC\u5408\u5339\u914D\u7ED3\u679C</h2>\n        <div class=\"match-summary\">\n          <div class=\"match-grid\">\n            <div class=\"match-item\"><span>\u51FA\u751F\u65E5\u671F\u503E\u5411</span><strong>".concat(text(match.birthElement), "</strong></div>\n            <div class=\"match-item\"><span>\u7B54\u9898\u503E\u5411</span><strong>").concat(text(match.personalityElement), "</strong></div>\n            <div class=\"match-item\"><span>\u57CE\u5E02\u5339\u914D\u5EA6</span><strong>").concat(text(match.matchScore), "%</strong></div>\n          </div>\n          <p>\u672C\u7ED3\u679C\u6309\u51FA\u751F\u65E5\u671F\u503E\u5411\u4E0E 49 \u9053\u9898\u7684\u751F\u6D3B\u9009\u62E9\u52A0\u6743\u751F\u6210\u3002\u4E94\u884C\u4EC5\u7528\u4E8E\u8868\u8FBE\u751F\u6D3B\u504F\u597D\uFF0C\u7ED3\u679C\u9700\u8981\u7ED3\u5408\u771F\u5B9E\u5C97\u4F4D\u3001\u9884\u7B97\u3001\u4F4F\u623F\u548C\u8BD5\u4F4F\u4F53\u9A8C\u5224\u65AD\u3002</p>\n        </div>\n      </section>\n    ");
   }
-
   function renderDistributionSummary(data) {
-    const size = 320;
-    const center = size / 2;
-    const radius = 108;
-    const count = data.dimensionOrder.length;
-    const point = (index, scale = 1) => {
-      const angle = -Math.PI / 2 + (Math.PI * 2 * index) / count;
-      return [
-        center + Math.cos(angle) * radius * scale,
-        center + Math.sin(angle) * radius * scale,
-      ];
+    var _data$ranking$, _data$ranking$2;
+    var size = 320;
+    var center = size / 2;
+    var radius = 108;
+    var count = data.dimensionOrder.length;
+    var point = function point(index) {
+      var scale = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 1;
+      var angle = -Math.PI / 2 + Math.PI * 2 * index / count;
+      return [center + Math.cos(angle) * radius * scale, center + Math.sin(angle) * radius * scale];
     };
-    const polygon = (scale) =>
-      data.dimensionOrder.map((_, index) => point(index, scale).join(",")).join(" ");
-    const valuePolygon = data.dimensionOrder
-      .map((key, index) => point(index, number(data.dimensions[key]) / 100).join(","))
-      .join(" ");
-    const labels = data.dimensionOrder
-      .map((key, index) => {
-        const [x, y] = point(index, 1.28);
-        return `<text x="${x}" y="${y}" text-anchor="middle" dominant-baseline="middle">${text(data.dimensionLabels[key] || key)}</text>`;
-      })
-      .join("");
-
-    return `
-      <section class="section distribution-summary">
-        <h2>${text(data.title || "七维张力分布")}</h2>
-        <div class="distribution-chart" role="img" aria-label="${text(data.title || "七维张力分布")}">
-          <svg viewBox="0 0 ${size} ${size}">
-            ${[0.25, 0.5, 0.75, 1].map((scale) => `<polygon class="radar-grid" points="${polygon(scale)}"></polygon>`).join("")}
-            ${data.dimensionOrder.map((_, index) => {
-              const [x, y] = point(index, 1);
-              return `<line class="radar-axis" x1="${center}" y1="${center}" x2="${x}" y2="${y}"></line>`;
-            }).join("")}
-            <polygon class="radar-value" points="${valuePolygon}"></polygon>
-            ${data.dimensionOrder.map((key, index) => {
-              const [x, y] = point(index, number(data.dimensions[key]) / 100);
-              return `<circle class="radar-dot" cx="${x}" cy="${y}" r="4"></circle>`;
-            }).join("")}
-            ${labels}
-          </svg>
-        </div>
-        <div class="match-summary">
-          <div class="match-grid">
-            <div class="match-item"><span>主导印记</span><strong>${text(data.ranking[0]?.label || "")}</strong></div>
-            <div class="match-item"><span>第二倾向</span><strong>${text(data.ranking[1]?.label || "")}</strong></div>
-            <div class="match-item"><span>分布状态</span><strong>${text(data.balanceLabel)}</strong></div>
-          </div>
-          <p>${text(data.note)}</p>
-        </div>
-      </section>
-      <section class="section">
-        <h2>七维排序</h2>
-        <div class="meters">
-          ${data.ranking.map((item, index) => `
-            <div>
-              <div class="meter-head"><span>${index + 1}. ${text(item.label)}</span><span>${text(item.value)}</span></div>
-              <div class="meter-track"><div class="meter-fill" style="width:${number(item.value)}%"></div></div>
-            </div>
-          `).join("")}
-        </div>
-      </section>
-    `;
+    var polygon = function polygon(scale) {
+      return data.dimensionOrder.map(function (_, index) {
+        return point(index, scale).join(",");
+      }).join(" ");
+    };
+    var valuePolygon = data.dimensionOrder.map(function (key, index) {
+      return point(index, number(data.dimensions[key]) / 100).join(",");
+    }).join(" ");
+    var labels = data.dimensionOrder.map(function (key, index) {
+      var _point = point(index, 1.28),
+        _point2 = _slicedToArray(_point, 2),
+        x = _point2[0],
+        y = _point2[1];
+      return "<text x=\"".concat(x, "\" y=\"").concat(y, "\" text-anchor=\"middle\" dominant-baseline=\"middle\">").concat(text(data.dimensionLabels[key] || key), "</text>");
+    }).join("");
+    return "\n      <section class=\"section distribution-summary\">\n        <h2>".concat(text(data.title || "七维张力分布"), "</h2>\n        <div class=\"distribution-chart\" role=\"img\" aria-label=\"").concat(text(data.title || "七维张力分布"), "\">\n          <svg viewBox=\"0 0 ").concat(size, " ").concat(size, "\">\n            ").concat([0.25, 0.5, 0.75, 1].map(function (scale) {
+      return "<polygon class=\"radar-grid\" points=\"".concat(polygon(scale), "\"></polygon>");
+    }).join(""), "\n            ").concat(data.dimensionOrder.map(function (_, index) {
+      var _point3 = point(index, 1),
+        _point4 = _slicedToArray(_point3, 2),
+        x = _point4[0],
+        y = _point4[1];
+      return "<line class=\"radar-axis\" x1=\"".concat(center, "\" y1=\"").concat(center, "\" x2=\"").concat(x, "\" y2=\"").concat(y, "\"></line>");
+    }).join(""), "\n            <polygon class=\"radar-value\" points=\"").concat(valuePolygon, "\"></polygon>\n            ").concat(data.dimensionOrder.map(function (key, index) {
+      var _point5 = point(index, number(data.dimensions[key]) / 100),
+        _point6 = _slicedToArray(_point5, 2),
+        x = _point6[0],
+        y = _point6[1];
+      return "<circle class=\"radar-dot\" cx=\"".concat(x, "\" cy=\"").concat(y, "\" r=\"4\"></circle>");
+    }).join(""), "\n            ").concat(labels, "\n          </svg>\n        </div>\n        <div class=\"match-summary\">\n          <div class=\"match-grid\">\n            <div class=\"match-item\"><span>\u4E3B\u5BFC\u5370\u8BB0</span><strong>").concat(text(((_data$ranking$ = data.ranking[0]) === null || _data$ranking$ === void 0 ? void 0 : _data$ranking$.label) || ""), "</strong></div>\n            <div class=\"match-item\"><span>\u7B2C\u4E8C\u503E\u5411</span><strong>").concat(text(((_data$ranking$2 = data.ranking[1]) === null || _data$ranking$2 === void 0 ? void 0 : _data$ranking$2.label) || ""), "</strong></div>\n            <div class=\"match-item\"><span>\u5206\u5E03\u72B6\u6001</span><strong>").concat(text(data.balanceLabel), "</strong></div>\n          </div>\n          <p>").concat(text(data.note), "</p>\n        </div>\n      </section>\n      <section class=\"section\">\n        <h2>\u4E03\u7EF4\u6392\u5E8F</h2>\n        <div class=\"meters\">\n          ").concat(data.ranking.map(function (item, index) {
+      return "\n            <div>\n              <div class=\"meter-head\"><span>".concat(index + 1, ". ").concat(text(item.label), "</span><span>").concat(text(item.value), "</span></div>\n              <div class=\"meter-track\"><div class=\"meter-fill\" style=\"width:").concat(number(item.value), "%\"></div></div>\n            </div>\n          ");
+    }).join(""), "\n        </div>\n      </section>\n    ");
   }
-
   function renderAttachmentSummary(data) {
-    return `
-      <section class="section">
-        <h2>你的关系联结坐标</h2>
-        <div class="match-summary">
-          <div class="match-grid">
-            <div class="match-item"><span>关系焦虑</span><strong>${text(data.anxiety)}分</strong></div>
-            <div class="match-item"><span>亲密回避</span><strong>${text(data.avoidance)}分</strong></div>
-            <div class="match-item"><span>当前状态</span><strong>${text(data.mixed ? "带有混合倾向" : "主要倾向清晰")}</strong></div>
-          </div>
-          <p>分数表示你在当前关系经验中更容易启动的保护反应，不是终身不变的标签。关系对象、安全感和近期压力变化，都可能让坐标移动。</p>
-        </div>
-      </section>
-      <section class="section">
-        <h2>双维度关系天气</h2>
-        <div class="meters">
-          <div>
-            <div class="meter-head"><span>关系焦虑：对失去连接的警觉</span><span>${text(data.anxiety)}</span></div>
-            <div class="meter-track"><div class="meter-fill" style="width:${number(data.anxiety)}%"></div></div>
-          </div>
-          <div>
-            <div class="meter-head"><span>亲密回避：对过度靠近的压力</span><span>${text(data.avoidance)}</span></div>
-            <div class="meter-track"><div class="meter-fill" style="width:${number(data.avoidance)}%"></div></div>
-          </div>
-        </div>
-      </section>
-    `;
+    return "\n      <section class=\"section\">\n        <h2>\u4F60\u7684\u5173\u7CFB\u8054\u7ED3\u5750\u6807</h2>\n        <div class=\"match-summary\">\n          <div class=\"match-grid\">\n            <div class=\"match-item\"><span>\u5173\u7CFB\u7126\u8651</span><strong>".concat(text(data.anxiety), "\u5206</strong></div>\n            <div class=\"match-item\"><span>\u4EB2\u5BC6\u56DE\u907F</span><strong>").concat(text(data.avoidance), "\u5206</strong></div>\n            <div class=\"match-item\"><span>\u5F53\u524D\u72B6\u6001</span><strong>").concat(text(data.mixed ? "带有混合倾向" : "主要倾向清晰"), "</strong></div>\n          </div>\n          <p>\u5206\u6570\u8868\u793A\u4F60\u5728\u5F53\u524D\u5173\u7CFB\u7ECF\u9A8C\u4E2D\u66F4\u5BB9\u6613\u542F\u52A8\u7684\u4FDD\u62A4\u53CD\u5E94\uFF0C\u4E0D\u662F\u7EC8\u8EAB\u4E0D\u53D8\u7684\u6807\u7B7E\u3002\u5173\u7CFB\u5BF9\u8C61\u3001\u5B89\u5168\u611F\u548C\u8FD1\u671F\u538B\u529B\u53D8\u5316\uFF0C\u90FD\u53EF\u80FD\u8BA9\u5750\u6807\u79FB\u52A8\u3002</p>\n        </div>\n      </section>\n      <section class=\"section\">\n        <h2>\u53CC\u7EF4\u5EA6\u5173\u7CFB\u5929\u6C14</h2>\n        <div class=\"meters\">\n          <div>\n            <div class=\"meter-head\"><span>\u5173\u7CFB\u7126\u8651\uFF1A\u5BF9\u5931\u53BB\u8FDE\u63A5\u7684\u8B66\u89C9</span><span>").concat(text(data.anxiety), "</span></div>\n            <div class=\"meter-track\"><div class=\"meter-fill\" style=\"width:").concat(number(data.anxiety), "%\"></div></div>\n          </div>\n          <div>\n            <div class=\"meter-head\"><span>\u4EB2\u5BC6\u56DE\u907F\uFF1A\u5BF9\u8FC7\u5EA6\u9760\u8FD1\u7684\u538B\u529B</span><span>").concat(text(data.avoidance), "</span></div>\n            <div class=\"meter-track\"><div class=\"meter-fill\" style=\"width:").concat(number(data.avoidance), "%\"></div></div>\n          </div>\n        </div>\n      </section>\n    ");
   }
-
   function renderPsychologicalSummary(data) {
-    const deltaLabel = data.delta > 0 ? `比实际年龄成熟 ${data.delta} 岁` : data.delta < 0 ? `比实际年龄年轻 ${Math.abs(data.delta)} 岁` : "与实际年龄同频";
-    return `
-      <section class="section">
-        <h2>心理年龄对比</h2>
-        <div class="match-summary">
-          <div class="match-grid">
-            <div class="match-item"><span>实际年龄</span><strong>${text(data.actualAge)}岁</strong></div>
-            <div class="match-item"><span>心理年龄</span><strong>${text(data.psychologicalAge)}岁</strong></div>
-            <div class="match-item"><span>年龄差</span><strong>${text(deltaLabel)}</strong></div>
-          </div>
-          <p>${text(data.ageLabel)}。这个数字不是能力高低，只代表你最近面对世界时更常用的心理模式。</p>
-        </div>
-      </section>
-      <section class="section">
-        <h2>8维心理画像</h2>
-        <div class="meters">
-          ${data.dimensionOrder.map((key) => `
-            <div>
-              <div class="meter-head"><span>${text(data.dimensionLabels[key] || key)}</span><span>${text(data.dimensions[key])}</span></div>
-              <div class="meter-track"><div class="meter-fill" style="width:${number(data.dimensions[key])}%"></div></div>
-            </div>
-          `).join("")}
-        </div>
-      </section>
-      <section class="section">
-        <h2>关键词标签</h2>
-        <div class="tag-list">${data.tags.map((item) => `<span class="tag">${text(item)}</span>`).join("")}</div>
-      </section>
-      <section class="section">
-        <h2>你的长板与盲点</h2>
-        <div class="compare">
-          <div class="compare-card">
-            <h3>最高的 3 个维度</h3>
-            ${data.topDimensions.map((item) => `<p>${text(item.label)}：${text(item.value)}</p>`).join("")}
-          </div>
-          <div class="compare-card">
-            <h3>最低的 2 个维度</h3>
-            ${data.lowDimensions.map((item) => `<p>${text(item.label)}：${text(item.value)}</p>`).join("")}
-          </div>
-        </div>
-      </section>
-    `;
+    var deltaLabel = data.delta > 0 ? "\u6BD4\u5B9E\u9645\u5E74\u9F84\u6210\u719F ".concat(data.delta, " \u5C81") : data.delta < 0 ? "\u6BD4\u5B9E\u9645\u5E74\u9F84\u5E74\u8F7B ".concat(Math.abs(data.delta), " \u5C81") : "与实际年龄同频";
+    return "\n      <section class=\"section\">\n        <h2>\u5FC3\u7406\u5E74\u9F84\u5BF9\u6BD4</h2>\n        <div class=\"match-summary\">\n          <div class=\"match-grid\">\n            <div class=\"match-item\"><span>\u5B9E\u9645\u5E74\u9F84</span><strong>".concat(text(data.actualAge), "\u5C81</strong></div>\n            <div class=\"match-item\"><span>\u5FC3\u7406\u5E74\u9F84</span><strong>").concat(text(data.psychologicalAge), "\u5C81</strong></div>\n            <div class=\"match-item\"><span>\u5E74\u9F84\u5DEE</span><strong>").concat(text(deltaLabel), "</strong></div>\n          </div>\n          <p>").concat(text(data.ageLabel), "\u3002\u8FD9\u4E2A\u6570\u5B57\u4E0D\u662F\u80FD\u529B\u9AD8\u4F4E\uFF0C\u53EA\u4EE3\u8868\u4F60\u6700\u8FD1\u9762\u5BF9\u4E16\u754C\u65F6\u66F4\u5E38\u7528\u7684\u5FC3\u7406\u6A21\u5F0F\u3002</p>\n        </div>\n      </section>\n      <section class=\"section\">\n        <h2>8\u7EF4\u5FC3\u7406\u753B\u50CF</h2>\n        <div class=\"meters\">\n          ").concat(data.dimensionOrder.map(function (key) {
+      return "\n            <div>\n              <div class=\"meter-head\"><span>".concat(text(data.dimensionLabels[key] || key), "</span><span>").concat(text(data.dimensions[key]), "</span></div>\n              <div class=\"meter-track\"><div class=\"meter-fill\" style=\"width:").concat(number(data.dimensions[key]), "%\"></div></div>\n            </div>\n          ");
+    }).join(""), "\n        </div>\n      </section>\n      <section class=\"section\">\n        <h2>\u5173\u952E\u8BCD\u6807\u7B7E</h2>\n        <div class=\"tag-list\">").concat(data.tags.map(function (item) {
+      return "<span class=\"tag\">".concat(text(item), "</span>");
+    }).join(""), "</div>\n      </section>\n      <section class=\"section\">\n        <h2>\u4F60\u7684\u957F\u677F\u4E0E\u76F2\u70B9</h2>\n        <div class=\"compare\">\n          <div class=\"compare-card\">\n            <h3>\u6700\u9AD8\u7684 3 \u4E2A\u7EF4\u5EA6</h3>\n            ").concat(data.topDimensions.map(function (item) {
+      return "<p>".concat(text(item.label), "\uFF1A").concat(text(item.value), "</p>");
+    }).join(""), "\n          </div>\n          <div class=\"compare-card\">\n            <h3>\u6700\u4F4E\u7684 2 \u4E2A\u7EF4\u5EA6</h3>\n            ").concat(data.lowDimensions.map(function (item) {
+      return "<p>".concat(text(item.label), "\uFF1A").concat(text(item.value), "</p>");
+    }).join(""), "\n          </div>\n        </div>\n      </section>\n    ");
   }
-
   function renderLikingSummary(data) {
-    return `
-      <section class="section">
-        <h2>你的喜欢光谱</h2>
-        <div class="match-summary">
-          <div class="match-grid">
-            <div class="match-item"><span>喜欢值</span><strong>${text(data.score)} / 100</strong></div>
-            <div class="match-item"><span>当前阶段</span><strong>${text(data.bandLabel)}</strong></div>
-            <div class="match-item"><span>理想化提醒</span><strong>${text(data.idealizationRisk)}分</strong></div>
-          </div>
-          <p>喜欢值表示你此刻的主观心动与投入，不代表双方匹配度，也不代表对方有同样的感觉。现实看见和关系准备越充分，这份喜欢越有机会从想象走向真实。</p>
-        </div>
-      </section>
-      <section class="section">
-        <h2>四维喜欢档案</h2>
-        <div class="meters">
-          ${data.dimensionOrder.map((key) => `
-            <div>
-              <div class="meter-head"><span>${text(data.dimensionLabels[key] || key)}</span><span>${text(data.dimensions[key])}</span></div>
-              <div class="meter-track"><div class="meter-fill" style="width:${number(data.dimensions[key])}%"></div></div>
-            </div>
-          `).join("")}
-        </div>
-      </section>
-    `;
+    return "\n      <section class=\"section\">\n        <h2>\u4F60\u7684\u559C\u6B22\u5149\u8C31</h2>\n        <div class=\"match-summary\">\n          <div class=\"match-grid\">\n            <div class=\"match-item\"><span>\u559C\u6B22\u503C</span><strong>".concat(text(data.score), " / 100</strong></div>\n            <div class=\"match-item\"><span>\u5F53\u524D\u9636\u6BB5</span><strong>").concat(text(data.bandLabel), "</strong></div>\n            <div class=\"match-item\"><span>\u7406\u60F3\u5316\u63D0\u9192</span><strong>").concat(text(data.idealizationRisk), "\u5206</strong></div>\n          </div>\n          <p>\u559C\u6B22\u503C\u8868\u793A\u4F60\u6B64\u523B\u7684\u4E3B\u89C2\u5FC3\u52A8\u4E0E\u6295\u5165\uFF0C\u4E0D\u4EE3\u8868\u53CC\u65B9\u5339\u914D\u5EA6\uFF0C\u4E5F\u4E0D\u4EE3\u8868\u5BF9\u65B9\u6709\u540C\u6837\u7684\u611F\u89C9\u3002\u73B0\u5B9E\u770B\u89C1\u548C\u5173\u7CFB\u51C6\u5907\u8D8A\u5145\u5206\uFF0C\u8FD9\u4EFD\u559C\u6B22\u8D8A\u6709\u673A\u4F1A\u4ECE\u60F3\u8C61\u8D70\u5411\u771F\u5B9E\u3002</p>\n        </div>\n      </section>\n      <section class=\"section\">\n        <h2>\u56DB\u7EF4\u559C\u6B22\u6863\u6848</h2>\n        <div class=\"meters\">\n          ").concat(data.dimensionOrder.map(function (key) {
+      return "\n            <div>\n              <div class=\"meter-head\"><span>".concat(text(data.dimensionLabels[key] || key), "</span><span>").concat(text(data.dimensions[key]), "</span></div>\n              <div class=\"meter-track\"><div class=\"meter-fill\" style=\"width:").concat(number(data.dimensions[key]), "%\"></div></div>\n            </div>\n          ");
+    }).join(""), "\n        </div>\n      </section>\n    ");
   }
-
   function renderCompareListSection(leftTitle, rightTitle, leftItems, rightItems) {
-    const hasLeft = Array.isArray(leftItems) && leftItems.length;
-    const hasRight = Array.isArray(rightItems) && rightItems.length;
+    var hasLeft = Array.isArray(leftItems) && leftItems.length;
+    var hasRight = Array.isArray(rightItems) && rightItems.length;
     if (!hasLeft && !hasRight) return "";
-    return `
-      <section class="section">
-        <h2>适用边界</h2>
-        <div class="compare">
-          <div class="compare-card">
-            <h3>${text(leftTitle)}</h3>
-            ${(leftItems || []).map((item) => `<p>${text(item)}</p>`).join("")}
-          </div>
-          <div class="compare-card">
-            <h3>${text(rightTitle)}</h3>
-            ${(rightItems || []).map((item) => `<p>${text(item)}</p>`).join("")}
-          </div>
-        </div>
-      </section>
-    `;
+    return "\n      <section class=\"section\">\n        <h2>\u9002\u7528\u8FB9\u754C</h2>\n        <div class=\"compare\">\n          <div class=\"compare-card\">\n            <h3>".concat(text(leftTitle), "</h3>\n            ").concat((leftItems || []).map(function (item) {
+      return "<p>".concat(text(item), "</p>");
+    }).join(""), "\n          </div>\n          <div class=\"compare-card\">\n            <h3>").concat(text(rightTitle), "</h3>\n            ").concat((rightItems || []).map(function (item) {
+      return "<p>".concat(text(item), "</p>");
+    }).join(""), "\n          </div>\n        </div>\n      </section>\n    ");
   }
-
   function scoreAnswers(answers) {
-    if (state.config.scoring?.mode === "distribution-profile") {
+    var _state$config$scoring, _state$config$scoring2, _state$config$scoring3, _state$config$scoring4, _state$config$scoring5, _state$config$scoring6, _state$config$seconda2;
+    if (((_state$config$scoring = state.config.scoring) === null || _state$config$scoring === void 0 ? void 0 : _state$config$scoring.mode) === "distribution-profile") {
       return scoreDistributionProfile(answers, state.config.scoring);
     }
-    if (state.config.scoring?.mode === "liking-profile") {
+    if (((_state$config$scoring2 = state.config.scoring) === null || _state$config$scoring2 === void 0 ? void 0 : _state$config$scoring2.mode) === "liking-profile") {
       return scoreLikingProfile(answers, state.config.scoring);
     }
-    if (state.config.scoring?.mode === "attachment-two-axis") {
+    if (((_state$config$scoring3 = state.config.scoring) === null || _state$config$scoring3 === void 0 ? void 0 : _state$config$scoring3.mode) === "attachment-two-axis") {
       return scoreAttachmentTwoAxis(answers, state.config.scoring);
     }
-    if (state.config.scoring?.mode === "psychological-age") {
+    if (((_state$config$scoring4 = state.config.scoring) === null || _state$config$scoring4 === void 0 ? void 0 : _state$config$scoring4.mode) === "psychological-age") {
       return scorePsychologicalAge(answers, state.config.scoring);
     }
-    if (state.config.scoring?.mode === "paired-attributes") {
+    if (((_state$config$scoring5 = state.config.scoring) === null || _state$config$scoring5 === void 0 ? void 0 : _state$config$scoring5.mode) === "paired-attributes") {
       return scorePairedAttributes(answers, state.config.scoring);
     }
-    if (state.config.scoring?.mode === "city-with-elements") {
+    if (((_state$config$scoring6 = state.config.scoring) === null || _state$config$scoring6 === void 0 ? void 0 : _state$config$scoring6.mode) === "city-with-elements") {
       return scoreCityWithElements(answers, state.config.scoring);
     }
-
-    const resultKeys = Object.keys(state.config.results || {});
-    const counts = Object.fromEntries(resultKeys.map((key) => [key, 0]));
-    (state.config.questions || []).forEach((question) => {
-      const answerKey = answers[question.id];
+    var resultKeys = Object.keys(state.config.results || {});
+    var counts = Object.fromEntries(resultKeys.map(function (key) {
+      return [key, 0];
+    }));
+    (state.config.questions || []).forEach(function (question) {
+      var answerKey = answers[question.id];
       if (!answerKey) return;
-      const option = (question.options || []).find((item) => item.key === answerKey);
-      const weights = option?.weights;
-      if (weights && typeof weights === "object") {
-        Object.entries(weights).forEach(([key, value]) => {
+      var option = (question.options || []).find(function (item) {
+        return item.key === answerKey;
+      });
+      var weights = option === null || option === void 0 ? void 0 : option.weights;
+      if (weights && _typeof(weights) === "object") {
+        Object.entries(weights).forEach(function (_ref7) {
+          var _ref8 = _slicedToArray(_ref7, 2),
+            key = _ref8[0],
+            value = _ref8[1];
           if (counts[key] !== undefined) counts[key] += Number(value) || 0;
         });
         return;
       }
-      const scoreKey = option?.score || option?.result || answerKey;
+      var scoreKey = (option === null || option === void 0 ? void 0 : option.score) || (option === null || option === void 0 ? void 0 : option.result) || answerKey;
       if (counts[scoreKey] !== undefined) counts[scoreKey] += 1;
     });
-    const sorted = Object.entries(counts).sort((a, b) => b[1] - a[1]);
-    const threshold = state.config.secondaryThreshold ?? 2;
-    const primary = sorted[0][0];
-    const secondary = sorted[1][1] > 0 && sorted[0][1] - sorted[1][1] <= threshold ? sorted[1][0] : null;
-    return { counts, primary, secondary };
+    var sorted = Object.entries(counts).sort(function (a, b) {
+      return b[1] - a[1];
+    });
+    var threshold = (_state$config$seconda2 = state.config.secondaryThreshold) !== null && _state$config$seconda2 !== void 0 ? _state$config$seconda2 : 2;
+    var primary = sorted[0][0];
+    var secondary = sorted[1][1] > 0 && sorted[0][1] - sorted[1][1] <= threshold ? sorted[1][0] : null;
+    return {
+      counts: counts,
+      primary: primary,
+      secondary: secondary
+    };
   }
-
   function scoreDistributionProfile(answers, scoring) {
-    const dimensionOrder = scoring.dimensionOrder || Object.keys(state.config.results || {});
-    const dimensionLabels = scoring.dimensionLabels || {};
-    const totals = Object.fromEntries(dimensionOrder.map((key) => [key, 0]));
-    const possible = Object.fromEntries(dimensionOrder.map((key) => [key, 0]));
-
-    (state.config.questions || []).forEach((question) => {
-      const answerKey = answers[question.id];
-      const chosen = (question.options || []).find((item) => item.key === answerKey);
-      dimensionOrder.forEach((key) => {
-        const maxForQuestion = Math.max(
-          0,
-          ...(question.options || []).map((option) => Number(option.weights?.[key] || 0)),
-        );
+    var _ranking$, _ranking$2, _ranking$3, _ranking;
+    var dimensionOrder = scoring.dimensionOrder || Object.keys(state.config.results || {});
+    var dimensionLabels = scoring.dimensionLabels || {};
+    var totals = Object.fromEntries(dimensionOrder.map(function (key) {
+      return [key, 0];
+    }));
+    var possible = Object.fromEntries(dimensionOrder.map(function (key) {
+      return [key, 0];
+    }));
+    (state.config.questions || []).forEach(function (question) {
+      var answerKey = answers[question.id];
+      var chosen = (question.options || []).find(function (item) {
+        return item.key === answerKey;
+      });
+      dimensionOrder.forEach(function (key) {
+        var _chosen$weights;
+        var maxForQuestion = Math.max.apply(Math, [0].concat(_toConsumableArray((question.options || []).map(function (option) {
+          var _option$weights;
+          return Number(((_option$weights = option.weights) === null || _option$weights === void 0 ? void 0 : _option$weights[key]) || 0);
+        }))));
         possible[key] += maxForQuestion;
-        totals[key] += Number(chosen?.weights?.[key] || 0);
+        totals[key] += Number((chosen === null || chosen === void 0 || (_chosen$weights = chosen.weights) === null || _chosen$weights === void 0 ? void 0 : _chosen$weights[key]) || 0);
       });
     });
-
-    const dimensions = Object.fromEntries(
-      dimensionOrder.map((key) => [
-        key,
-        possible[key] ? clamp(Math.round((totals[key] / possible[key]) * 100), 0, 100) : 0,
-      ]),
-    );
-    const ranking = dimensionOrder
-      .map((key) => ({ key, label: dimensionLabels[key] || key, value: dimensions[key] }))
-      .sort((left, right) => right.value - left.value);
-    const primary = ranking[0]?.key;
-    const secondary = ranking[1]?.key || null;
-    const spread = (ranking[0]?.value || 0) - (ranking[ranking.length - 1]?.value || 0);
-    const balanceLabel = spread <= 18 ? "七面较均衡" : spread <= 35 ? "双核牵引" : "主轴较清晰";
-    const average = Math.round(ranking.reduce((sum, item) => sum + item.value, 0) / Math.max(1, ranking.length));
-    const counts = Object.fromEntries(dimensionOrder.map((key) => [key, dimensions[key]]));
-
+    var dimensions = Object.fromEntries(dimensionOrder.map(function (key) {
+      return [key, possible[key] ? clamp(Math.round(totals[key] / possible[key] * 100), 0, 100) : 0];
+    }));
+    var ranking = dimensionOrder.map(function (key) {
+      return {
+        key: key,
+        label: dimensionLabels[key] || key,
+        value: dimensions[key]
+      };
+    }).sort(function (left, right) {
+      return right.value - left.value;
+    });
+    var primary = (_ranking$ = ranking[0]) === null || _ranking$ === void 0 ? void 0 : _ranking$.key;
+    var secondary = ((_ranking$2 = ranking[1]) === null || _ranking$2 === void 0 ? void 0 : _ranking$2.key) || null;
+    var spread = (((_ranking$3 = ranking[0]) === null || _ranking$3 === void 0 ? void 0 : _ranking$3.value) || 0) - (((_ranking = ranking[ranking.length - 1]) === null || _ranking === void 0 ? void 0 : _ranking.value) || 0);
+    var balanceLabel = spread <= 18 ? "七面较均衡" : spread <= 35 ? "双核牵引" : "主轴较清晰";
+    var average = Math.round(ranking.reduce(function (sum, item) {
+      return sum + item.value;
+    }, 0) / Math.max(1, ranking.length));
+    var counts = Object.fromEntries(dimensionOrder.map(function (key) {
+      return [key, dimensions[key]];
+    }));
     return {
-      counts,
-      primary,
-      secondary,
+      counts: counts,
+      primary: primary,
+      secondary: secondary,
       score: dimensions[primary] || average,
       distribution: {
         title: scoring.title || "七维张力分布",
-        dimensions,
-        dimensionOrder,
-        dimensionLabels,
-        ranking,
-        balanceLabel,
-        note: scoring.note || "这些分数表示特定情境下更容易被启动的欲望与防御，不代表道德好坏，也不是固定人格。",
-      },
+        dimensions: dimensions,
+        dimensionOrder: dimensionOrder,
+        dimensionLabels: dimensionLabels,
+        ranking: ranking,
+        balanceLabel: balanceLabel,
+        note: scoring.note || "这些分数表示特定情境下更容易被启动的欲望与防御，不代表道德好坏，也不是固定人格。"
+      }
     };
   }
-
   function scoreLikingProfile(answers, scoring) {
-    const answerValues = scoring.answerValues || { A: 1, B: 2, C: 3, D: 4, E: 5 };
-    const dimensionOrder = scoring.dimensionOrder || ["attraction", "reality", "investment", "readiness"];
-    const dimensionLabels = scoring.dimensionLabels || {};
-    const totals = Object.fromEntries(dimensionOrder.map((key) => [key, 0]));
-    const itemCounts = Object.fromEntries(dimensionOrder.map((key) => [key, 0]));
-
-    (state.config.questions || []).forEach((question) => {
-      const answerKey = answers[question.id];
-      const dimension = question.dimension;
+    var _state$config$results;
+    var answerValues = scoring.answerValues || {
+      A: 1,
+      B: 2,
+      C: 3,
+      D: 4,
+      E: 5
+    };
+    var dimensionOrder = scoring.dimensionOrder || ["attraction", "reality", "investment", "readiness"];
+    var dimensionLabels = scoring.dimensionLabels || {};
+    var totals = Object.fromEntries(dimensionOrder.map(function (key) {
+      return [key, 0];
+    }));
+    var itemCounts = Object.fromEntries(dimensionOrder.map(function (key) {
+      return [key, 0];
+    }));
+    (state.config.questions || []).forEach(function (question) {
+      var _ref9, _answerValues$answerK;
+      var answerKey = answers[question.id];
+      var dimension = question.dimension;
       if (!answerKey || !(dimension in totals)) return;
-      const base = Number(answerValues[answerKey] ?? answerValues[String(answerKey)] ?? 0);
+      var base = Number((_ref9 = (_answerValues$answerK = answerValues[answerKey]) !== null && _answerValues$answerK !== void 0 ? _answerValues$answerK : answerValues[String(answerKey)]) !== null && _ref9 !== void 0 ? _ref9 : 0);
       if (!Number.isFinite(base) || base < 1 || base > 5) return;
-      const adjusted = question.reverse ? 6 - base : base;
+      var adjusted = question.reverse ? 6 - base : base;
       totals[dimension] += adjusted;
       itemCounts[dimension] += 1;
     });
-
-    const dimensions = {};
-    dimensionOrder.forEach((key) => {
-      const count = itemCounts[key] || 0;
-      const averageScore = count ? totals[key] / count : 1;
-      dimensions[key] = clamp(Math.round(((averageScore - 1) / 4) * 100), 0, 100);
+    var dimensions = {};
+    dimensionOrder.forEach(function (key) {
+      var count = itemCounts[key] || 0;
+      var averageScore = count ? totals[key] / count : 1;
+      dimensions[key] = clamp(Math.round((averageScore - 1) / 4 * 100), 0, 100);
     });
-
-    const weights = scoring.dimensionWeights || {};
-    const weightTotal = dimensionOrder.reduce((sum, key) => sum + Number(weights[key] ?? 1), 0) || 1;
-    const score = clamp(
-      Math.round(
-        dimensionOrder.reduce(
-          (sum, key) => sum + dimensions[key] * Number(weights[key] ?? 1),
-          0,
-        ) / weightTotal,
-      ),
-      0,
-      100,
-    );
-    const bands = scoring.bands || [
-      { max: 24, key: "BUD" },
-      { max: 44, key: "CURIOUS" },
-      { max: 64, key: "SPARK" },
-      { max: 82, key: "SERIOUS" },
-      { max: 100, key: "COMMITTED" },
-    ];
-    const band = bands.find((item) => score <= Number(item.max)) || bands[bands.length - 1];
-    const primary = band.key;
-    const primaryData = state.config.results?.[primary] || {};
-    const liking = {
-      score,
+    var weights = scoring.dimensionWeights || {};
+    var weightTotal = dimensionOrder.reduce(function (sum, key) {
+      var _weights$key;
+      return sum + Number((_weights$key = weights[key]) !== null && _weights$key !== void 0 ? _weights$key : 1);
+    }, 0) || 1;
+    var score = clamp(Math.round(dimensionOrder.reduce(function (sum, key) {
+      var _weights$key2;
+      return sum + dimensions[key] * Number((_weights$key2 = weights[key]) !== null && _weights$key2 !== void 0 ? _weights$key2 : 1);
+    }, 0) / weightTotal), 0, 100);
+    var bands = scoring.bands || [{
+      max: 24,
+      key: "BUD"
+    }, {
+      max: 44,
+      key: "CURIOUS"
+    }, {
+      max: 64,
+      key: "SPARK"
+    }, {
+      max: 82,
+      key: "SERIOUS"
+    }, {
+      max: 100,
+      key: "COMMITTED"
+    }];
+    var band = bands.find(function (item) {
+      return score <= Number(item.max);
+    }) || bands[bands.length - 1];
+    var primary = band.key;
+    var primaryData = ((_state$config$results = state.config.results) === null || _state$config$results === void 0 ? void 0 : _state$config$results[primary]) || {};
+    var liking = {
+      score: score,
       bandLabel: primaryData.typeName || primary,
       idealizationRisk: clamp(100 - Number(dimensions.reality || 0), 0, 100),
-      dimensions,
-      dimensionOrder,
-      dimensionLabels,
+      dimensions: dimensions,
+      dimensionOrder: dimensionOrder,
+      dimensionLabels: dimensionLabels
     };
-    const counts = Object.fromEntries(Object.keys(state.config.results || {}).map((key) => [key, key === primary ? 1 : 0]));
-    return { counts, primary, secondary: null, score, liking };
+    var counts = Object.fromEntries(Object.keys(state.config.results || {}).map(function (key) {
+      return [key, key === primary ? 1 : 0];
+    }));
+    return {
+      counts: counts,
+      primary: primary,
+      secondary: null,
+      score: score,
+      liking: liking
+    };
   }
-
   function scoreAttachmentTwoAxis(answers, scoring) {
-    const answerValues = scoring.answerValues || { A: 1, B: 2, C: 3, D: 4, E: 5 };
-    const totals = { anxiety: 0, avoidance: 0 };
-    const itemCounts = { anxiety: 0, avoidance: 0 };
-
-    (state.config.questions || []).forEach((question) => {
-      const answerKey = answers[question.id];
-      const dimension = question.dimension;
+    var _scoring$threshold;
+    var answerValues = scoring.answerValues || {
+      A: 1,
+      B: 2,
+      C: 3,
+      D: 4,
+      E: 5
+    };
+    var totals = {
+      anxiety: 0,
+      avoidance: 0
+    };
+    var itemCounts = {
+      anxiety: 0,
+      avoidance: 0
+    };
+    (state.config.questions || []).forEach(function (question) {
+      var _ref0, _answerValues$answerK2;
+      var answerKey = answers[question.id];
+      var dimension = question.dimension;
       if (!answerKey || !(dimension in totals)) return;
-      const base = Number(answerValues[answerKey] ?? answerValues[String(answerKey)] ?? 0);
+      var base = Number((_ref0 = (_answerValues$answerK2 = answerValues[answerKey]) !== null && _answerValues$answerK2 !== void 0 ? _answerValues$answerK2 : answerValues[String(answerKey)]) !== null && _ref0 !== void 0 ? _ref0 : 0);
       if (!Number.isFinite(base) || base < 1 || base > 5) return;
-      const adjusted = question.reverse ? 6 - base : base;
+      var adjusted = question.reverse ? 6 - base : base;
       totals[dimension] += adjusted;
       itemCounts[dimension] += 1;
     });
-
-    const toPercent = (dimension) => {
-      const count = itemCounts[dimension] || 0;
+    var toPercent = function toPercent(dimension) {
+      var count = itemCounts[dimension] || 0;
       if (!count) return 0;
-      const averageScore = totals[dimension] / count;
-      return clamp(Math.round(((averageScore - 1) / 4) * 100), 0, 100);
+      var averageScore = totals[dimension] / count;
+      return clamp(Math.round((averageScore - 1) / 4 * 100), 0, 100);
     };
-
-    const anxiety = toPercent("anxiety");
-    const avoidance = toPercent("avoidance");
-    const threshold = Number(scoring.threshold ?? 50);
-    const anxietyHigh = anxiety >= threshold;
-    const avoidanceHigh = avoidance >= threshold;
-    const resultMap = scoring.resultMap || {
+    var anxiety = toPercent("anxiety");
+    var avoidance = toPercent("avoidance");
+    var threshold = Number((_scoring$threshold = scoring.threshold) !== null && _scoring$threshold !== void 0 ? _scoring$threshold : 50);
+    var anxietyHigh = anxiety >= threshold;
+    var avoidanceHigh = avoidance >= threshold;
+    var resultMap = scoring.resultMap || {
       "low-low": "SECURE",
       "high-low": "ANXIOUS",
       "low-high": "AVOIDANT",
-      "high-high": "FEARFUL",
+      "high-high": "FEARFUL"
     };
-    const quadrantKey = `${anxietyHigh ? "high" : "low"}-${avoidanceHigh ? "high" : "low"}`;
-    const primary = resultMap[quadrantKey];
-    const mixedBand = Array.isArray(scoring.mixedBand) ? scoring.mixedBand : [42, 58];
-    const mixed =
-      (anxiety >= Number(mixedBand[0]) && anxiety <= Number(mixedBand[1])) ||
-      (avoidance >= Number(mixedBand[0]) && avoidance <= Number(mixedBand[1]));
-
-    let secondary = null;
+    var quadrantKey = "".concat(anxietyHigh ? "high" : "low", "-").concat(avoidanceHigh ? "high" : "low");
+    var primary = resultMap[quadrantKey];
+    var mixedBand = Array.isArray(scoring.mixedBand) ? scoring.mixedBand : [42, 58];
+    var mixed = anxiety >= Number(mixedBand[0]) && anxiety <= Number(mixedBand[1]) || avoidance >= Number(mixedBand[0]) && avoidance <= Number(mixedBand[1]);
+    var secondary = null;
     if (mixed) {
-      const flipAnxiety = Math.abs(anxiety - threshold) <= Math.abs(avoidance - threshold);
-      const secondaryKey = flipAnxiety
-        ? `${anxietyHigh ? "low" : "high"}-${avoidanceHigh ? "high" : "low"}`
-        : `${anxietyHigh ? "high" : "low"}-${avoidanceHigh ? "low" : "high"}`;
+      var flipAnxiety = Math.abs(anxiety - threshold) <= Math.abs(avoidance - threshold);
+      var secondaryKey = flipAnxiety ? "".concat(anxietyHigh ? "low" : "high", "-").concat(avoidanceHigh ? "high" : "low") : "".concat(anxietyHigh ? "high" : "low", "-").concat(avoidanceHigh ? "low" : "high");
       secondary = resultMap[secondaryKey] || null;
     }
-
-    const counts = Object.fromEntries(
-      Object.keys(state.config.results || {}).map((key) => [
-        key,
-        key === primary ? (state.config.questions || []).length : 0,
-      ])
-    );
-
+    var counts = Object.fromEntries(Object.keys(state.config.results || {}).map(function (key) {
+      return [key, key === primary ? (state.config.questions || []).length : 0];
+    }));
     return {
-      counts,
-      primary,
-      secondary,
+      counts: counts,
+      primary: primary,
+      secondary: secondary,
       attachment: {
-        anxiety,
-        avoidance,
-        threshold,
-        mixed,
-      },
+        anxiety: anxiety,
+        avoidance: avoidance,
+        threshold: threshold,
+        mixed: mixed
+      }
     };
   }
-
   function scorePsychologicalAge(answers, scoring) {
-    const answerValues = scoring.answerValues || { A: 1, B: 2, C: 3, D: 4, E: 5 };
-    const dimensionLabels = scoring.dimensionLabels || {};
-    const dimensionOrder = scoring.dimensionOrder || Object.keys(dimensionLabels);
-    const rawTotals = Object.fromEntries(dimensionOrder.map((key) => [key, 0]));
-    const rawCounts = Object.fromEntries(dimensionOrder.map((key) => [key, 0]));
-
-    (state.config.questions || []).forEach((question) => {
-      const answerKey = answers[question.id];
+    var _scoring$ageFactor, _scoring$minAge, _scoring$maxAge;
+    var answerValues = scoring.answerValues || {
+      A: 1,
+      B: 2,
+      C: 3,
+      D: 4,
+      E: 5
+    };
+    var dimensionLabels = scoring.dimensionLabels || {};
+    var dimensionOrder = scoring.dimensionOrder || Object.keys(dimensionLabels);
+    var rawTotals = Object.fromEntries(dimensionOrder.map(function (key) {
+      return [key, 0];
+    }));
+    var rawCounts = Object.fromEntries(dimensionOrder.map(function (key) {
+      return [key, 0];
+    }));
+    (state.config.questions || []).forEach(function (question) {
+      var _ref1, _answerValues$answerK3;
+      var answerKey = answers[question.id];
       if (!answerKey || !question.dimension) return;
-      const base = Number(answerValues[answerKey] ?? answerValues[String(answerKey)] ?? 0);
+      var base = Number((_ref1 = (_answerValues$answerK3 = answerValues[answerKey]) !== null && _answerValues$answerK3 !== void 0 ? _answerValues$answerK3 : answerValues[String(answerKey)]) !== null && _ref1 !== void 0 ? _ref1 : 0);
       if (!Number.isFinite(base) || base <= 0) return;
-      const value = question.reverse ? 6 - base : base;
+      var value = question.reverse ? 6 - base : base;
       rawTotals[question.dimension] = (rawTotals[question.dimension] || 0) + value;
       rawCounts[question.dimension] = (rawCounts[question.dimension] || 0) + 1;
     });
-
-    const dimensions = {};
-    dimensionOrder.forEach((key) => {
-      const count = rawCounts[key] || 0;
+    var dimensions = {};
+    dimensionOrder.forEach(function (key) {
+      var count = rawCounts[key] || 0;
       if (!count) {
         dimensions[key] = 0;
         return;
       }
-      const min = count;
-      const max = count * 5;
-      dimensions[key] = Math.round(((rawTotals[key] - min) / (max - min)) * 100);
+      var min = count;
+      var max = count * 5;
+      dimensions[key] = Math.round((rawTotals[key] - min) / (max - min) * 100);
     });
-
-    const matureDimensions = scoring.matureDimensions || ["emotion", "responsibility", "resilience", "tolerance", "selfAcceptance"];
-    const youthfulDimensions = scoring.youthfulDimensions || ["curiosity", "socialEase", "lifePassion"];
-    const matureIndex = average(matureDimensions.map((key) => dimensions[key]));
-    const youthfulIndex = average(youthfulDimensions.map((key) => dimensions[key]));
-    const actualAge = getActualAge(scoring);
-    const psychologicalAge = clamp(
-      Math.round(actualAge + (matureIndex - youthfulIndex) * Number(scoring.ageFactor ?? 0.22)),
-      Number(scoring.minAge ?? 10),
-      Number(scoring.maxAge ?? 70)
-    );
-    const delta = psychologicalAge - actualAge;
-    const primary = getPsychologicalResultKey(delta, scoring);
-    const counts = Object.fromEntries(Object.keys(state.config.results || {}).map((key) => [key, key === primary ? (state.config.questions || []).length : 0]));
-    const rankedDimensions = dimensionOrder
-      .map((key) => ({ key, label: dimensionLabels[key] || key, value: dimensions[key] ?? 0 }))
-      .sort((left, right) => right.value - left.value);
-    const tags = buildPsychologicalTags(rankedDimensions, delta, primary, scoring);
-
+    var matureDimensions = scoring.matureDimensions || ["emotion", "responsibility", "resilience", "tolerance", "selfAcceptance"];
+    var youthfulDimensions = scoring.youthfulDimensions || ["curiosity", "socialEase", "lifePassion"];
+    var matureIndex = average(matureDimensions.map(function (key) {
+      return dimensions[key];
+    }));
+    var youthfulIndex = average(youthfulDimensions.map(function (key) {
+      return dimensions[key];
+    }));
+    var actualAge = getActualAge(scoring);
+    var psychologicalAge = clamp(Math.round(actualAge + (matureIndex - youthfulIndex) * Number((_scoring$ageFactor = scoring.ageFactor) !== null && _scoring$ageFactor !== void 0 ? _scoring$ageFactor : 0.22)), Number((_scoring$minAge = scoring.minAge) !== null && _scoring$minAge !== void 0 ? _scoring$minAge : 10), Number((_scoring$maxAge = scoring.maxAge) !== null && _scoring$maxAge !== void 0 ? _scoring$maxAge : 70));
+    var delta = psychologicalAge - actualAge;
+    var primary = getPsychologicalResultKey(delta, scoring);
+    var counts = Object.fromEntries(Object.keys(state.config.results || {}).map(function (key) {
+      return [key, key === primary ? (state.config.questions || []).length : 0];
+    }));
+    var rankedDimensions = dimensionOrder.map(function (key) {
+      var _dimensions$key;
+      return {
+        key: key,
+        label: dimensionLabels[key] || key,
+        value: (_dimensions$key = dimensions[key]) !== null && _dimensions$key !== void 0 ? _dimensions$key : 0
+      };
+    }).sort(function (left, right) {
+      return right.value - left.value;
+    });
+    var tags = buildPsychologicalTags(rankedDimensions, delta, primary, scoring);
     return {
-      counts,
-      primary,
+      counts: counts,
+      primary: primary,
       secondary: null,
       psychological: {
-        actualAge,
-        psychologicalAge,
-        delta,
+        actualAge: actualAge,
+        psychologicalAge: psychologicalAge,
+        delta: delta,
         ageLabel: getPsychologicalAgeLabel(delta),
         matureIndex: Math.round(matureIndex),
         youthfulIndex: Math.round(youthfulIndex),
-        dimensions,
-        dimensionLabels,
-        dimensionOrder,
+        dimensions: dimensions,
+        dimensionLabels: dimensionLabels,
+        dimensionOrder: dimensionOrder,
         topDimensions: rankedDimensions.slice(0, 3),
         lowDimensions: rankedDimensions.slice(-2).reverse(),
-        tags,
-      },
+        tags: tags
+      }
     };
   }
-
   function getActualAge(scoring) {
-    const numericAge = Number(state.profile.actualAge);
+    var numericAge = Number(state.profile.actualAge);
     if (Number.isFinite(numericAge) && numericAge > 0) return Math.round(numericAge);
-    const birthAge = calculateAgeFromBirthDate(state.profile.birthDate);
+    var birthAge = calculateAgeFromBirthDate(state.profile.birthDate);
     if (birthAge) return birthAge;
     return Number(scoring.defaultActualAge || 28);
   }
-
   function calculateAgeFromBirthDate(value) {
     if (!value) return null;
-    const date = new Date(value);
+    var date = new Date(value);
     if (Number.isNaN(date.getTime())) return null;
-    const now = new Date();
-    let age = now.getFullYear() - date.getFullYear();
-    const monthDiff = now.getMonth() - date.getMonth();
-    if (monthDiff < 0 || (monthDiff === 0 && now.getDate() < date.getDate())) age -= 1;
+    var now = new Date();
+    var age = now.getFullYear() - date.getFullYear();
+    var monthDiff = now.getMonth() - date.getMonth();
+    if (monthDiff < 0 || monthDiff === 0 && now.getDate() < date.getDate()) age -= 1;
     return age > 0 ? age : null;
   }
-
   function getPsychologicalResultKey(delta, scoring) {
-    const groups = scoring.ageGroups || [
-      { key: "CURIOUS_CHILD", maxDelta: -8 },
-      { key: "HOT_BLOODED_TEEN", maxDelta: -3 },
-      { key: "BALANCED_YOUTH", maxDelta: 2 },
-      { key: "STEADY_ADVISER", maxDelta: 7 },
-      { key: "CLEAR_HELM", maxDelta: Infinity },
-    ];
-    const hit = groups.find((item) => delta <= Number(item.maxDelta));
-    return hit?.key || groups[groups.length - 1]?.key || Object.keys(state.config.results || {})[0];
+    var _groups;
+    var groups = scoring.ageGroups || [{
+      key: "CURIOUS_CHILD",
+      maxDelta: -8
+    }, {
+      key: "HOT_BLOODED_TEEN",
+      maxDelta: -3
+    }, {
+      key: "BALANCED_YOUTH",
+      maxDelta: 2
+    }, {
+      key: "STEADY_ADVISER",
+      maxDelta: 7
+    }, {
+      key: "CLEAR_HELM",
+      maxDelta: Infinity
+    }];
+    var hit = groups.find(function (item) {
+      return delta <= Number(item.maxDelta);
+    });
+    return (hit === null || hit === void 0 ? void 0 : hit.key) || ((_groups = groups[groups.length - 1]) === null || _groups === void 0 ? void 0 : _groups.key) || Object.keys(state.config.results || {})[0];
   }
-
   function getPsychologicalAgeLabel(delta) {
     if (delta <= -8) return "灵魂明显年轻";
     if (delta <= -3) return "少年感在线";
@@ -1836,205 +1745,262 @@ button {
     if (delta <= 7) return "心智略超前";
     return "灵魂明显成熟";
   }
-
   function buildPsychologicalTags(rankedDimensions, delta, primary, scoring) {
-    const tagMap = scoring.dimensionTags || {};
-    const ageTags = scoring.ageTags || {};
-    const resultTags = scoring.resultTags || {};
-    const tags = rankedDimensions
-      .slice(0, 3)
-      .map((item) => tagMap[item.key]?.[0] || item.label)
-      .filter(Boolean);
+    var tagMap = scoring.dimensionTags || {};
+    var ageTags = scoring.ageTags || {};
+    var resultTags = scoring.resultTags || {};
+    var tags = rankedDimensions.slice(0, 3).map(function (item) {
+      var _tagMap$item$key;
+      return ((_tagMap$item$key = tagMap[item.key]) === null || _tagMap$item$key === void 0 ? void 0 : _tagMap$item$key[0]) || item.label;
+    }).filter(Boolean);
     tags.push(ageTags[getPsychologicalAgeLabel(delta)] || getPsychologicalAgeLabel(delta));
     tags.push(resultTags[primary] || "社交原型清晰");
-    return [...new Set(tags)].slice(0, 5);
+    return _toConsumableArray(new Set(tags)).slice(0, 5);
   }
-
   function scoreCityWithElements(answers, scoring) {
-    const resultKeys = Object.keys(state.config.results || {});
-    const counts = Object.fromEntries(resultKeys.map((key) => [key, 0]));
-    const elementMap = scoring.elementMap || {};
-    const elementCounts = {};
-    Object.values(elementMap).forEach((element) => { elementCounts[element] = 0; });
-
-    (state.config.questions || []).forEach((question) => {
-      const answerKey = answers[question.id];
+    var _Object$entries$sort$, _scoring$birthWeight, _state$config$seconda3;
+    var resultKeys = Object.keys(state.config.results || {});
+    var counts = Object.fromEntries(resultKeys.map(function (key) {
+      return [key, 0];
+    }));
+    var elementMap = scoring.elementMap || {};
+    var elementCounts = {};
+    Object.values(elementMap).forEach(function (element) {
+      elementCounts[element] = 0;
+    });
+    (state.config.questions || []).forEach(function (question) {
+      var answerKey = answers[question.id];
       if (!answerKey) return;
-      const option = (question.options || []).find((item) => item.key === answerKey);
-      const scoreKey = option?.score || option?.result || answerKey;
-      const element = elementMap[scoreKey];
+      var option = (question.options || []).find(function (item) {
+        return item.key === answerKey;
+      });
+      var scoreKey = (option === null || option === void 0 ? void 0 : option.score) || (option === null || option === void 0 ? void 0 : option.result) || answerKey;
+      var element = elementMap[scoreKey];
       if (counts[scoreKey] !== undefined) counts[scoreKey] += 1;
       if (element && elementCounts[element] !== undefined) elementCounts[element] += 1;
     });
-
-    const personalityElement = Object.entries(elementCounts).sort((left, right) => right[1] - left[1])[0]?.[0] || "未提供";
-    const birthElement = getBirthElement(state.profile.birthDate, scoring);
-    const birthWeight = Number(scoring.birthWeight ?? 0.25);
-    const combined = Object.fromEntries(resultKeys.map((key) => {
-      const birthBonus = elementMap[key] === birthElement ? (state.config.questions.length * birthWeight) : 0;
+    var personalityElement = ((_Object$entries$sort$ = Object.entries(elementCounts).sort(function (left, right) {
+      return right[1] - left[1];
+    })[0]) === null || _Object$entries$sort$ === void 0 ? void 0 : _Object$entries$sort$[0]) || "未提供";
+    var birthElement = getBirthElement(state.profile.birthDate, scoring);
+    var birthWeight = Number((_scoring$birthWeight = scoring.birthWeight) !== null && _scoring$birthWeight !== void 0 ? _scoring$birthWeight : 0.25);
+    var combined = Object.fromEntries(resultKeys.map(function (key) {
+      var birthBonus = elementMap[key] === birthElement ? state.config.questions.length * birthWeight : 0;
       return [key, counts[key] + birthBonus];
     }));
-    const sorted = Object.entries(combined).sort((left, right) => right[1] - left[1]);
-    const threshold = state.config.secondaryThreshold ?? 2;
-    const primary = sorted[0][0];
-    const secondary = sorted[1][1] > 0 && sorted[0][1] - sorted[1][1] <= threshold ? sorted[1][0] : null;
-    const personalityShare = counts[primary] / Math.max(1, state.config.questions.length);
-    const birthMatch = elementMap[primary] === birthElement;
-    const matchScore = Math.round(Math.min(99, 55 + personalityShare * 30 + (birthMatch ? 15 : 5)));
+    var sorted = Object.entries(combined).sort(function (left, right) {
+      return right[1] - left[1];
+    });
+    var threshold = (_state$config$seconda3 = state.config.secondaryThreshold) !== null && _state$config$seconda3 !== void 0 ? _state$config$seconda3 : 2;
+    var primary = sorted[0][0];
+    var secondary = sorted[1][1] > 0 && sorted[0][1] - sorted[1][1] <= threshold ? sorted[1][0] : null;
+    var personalityShare = counts[primary] / Math.max(1, state.config.questions.length);
+    var birthMatch = elementMap[primary] === birthElement;
+    var matchScore = Math.round(Math.min(99, 55 + personalityShare * 30 + (birthMatch ? 15 : 5)));
     return {
-      counts,
-      primary,
-      secondary,
-      match: { birthElement, personalityElement, elementCounts, matchScore },
+      counts: counts,
+      primary: primary,
+      secondary: secondary,
+      match: {
+        birthElement: birthElement,
+        personalityElement: personalityElement,
+        elementCounts: elementCounts,
+        matchScore: matchScore
+      }
     };
   }
-
   function getBirthElement(value, scoring) {
     if (!value) return "未提供";
-    const parts = value.split("-").map(Number);
-    if (parts.length !== 3 || parts.some((part) => !Number.isFinite(part))) return "未提供";
-    const [year, month, day] = parts;
-    const elements = scoring.birthElements || ["木", "火", "土", "金", "水"];
+    var parts = value.split("-").map(Number);
+    if (parts.length !== 3 || parts.some(function (part) {
+      return !Number.isFinite(part);
+    })) return "未提供";
+    var _parts = _slicedToArray(parts, 3),
+      year = _parts[0],
+      month = _parts[1],
+      day = _parts[2];
+    var elements = scoring.birthElements || ["木", "火", "土", "金", "水"];
     return elements[Math.abs(year * 13 + month * 7 + day) % elements.length];
   }
-
   function scorePairedAttributes(answers, scoring) {
-    const attributes = Object.fromEntries((scoring.attributes || []).map((key) => [key, 0]));
-    const questionsById = Object.fromEntries((state.config.questions || []).map((question) => [question.id, question]));
-
-    (state.config.questions || []).forEach((question) => {
-      const answerKey = answers[question.id];
+    var _scoring$pairs, _state$config$seconda4;
+    var attributes = Object.fromEntries((scoring.attributes || []).map(function (key) {
+      return [key, 0];
+    }));
+    var questionsById = Object.fromEntries((state.config.questions || []).map(function (question) {
+      return [question.id, question];
+    }));
+    (state.config.questions || []).forEach(function (question) {
+      var answerKey = answers[question.id];
       if (!answerKey) return;
-      const option = (question.options || []).find((item) => item.key === answerKey);
-      (option?.attributes || []).forEach((attribute) => {
+      var option = (question.options || []).find(function (item) {
+        return item.key === answerKey;
+      });
+      ((option === null || option === void 0 ? void 0 : option.attributes) || []).forEach(function (attribute) {
         if (attributes[attribute] !== undefined) attributes[attribute] += 1;
       });
     });
-
-    const chosen = (scoring.pairs || []).map(([left, right], index) => {
+    var chosen = (scoring.pairs || []).map(function (_ref10, index) {
+      var _scoring$tieBreakers, _tieQuestion$options, _tieOption$attributes;
+      var _ref11 = _slicedToArray(_ref10, 2),
+        left = _ref11[0],
+        right = _ref11[1];
       if (attributes[left] > attributes[right]) return left;
       if (attributes[right] > attributes[left]) return right;
-
-      const tieQuestionId = scoring.tieBreakers?.[String(index)];
-      const tieQuestion = questionsById[tieQuestionId];
-      const tieAnswer = tieQuestion && answers[tieQuestionId];
-      const tieOption = tieQuestion?.options?.find((item) => item.key === tieAnswer);
-      return tieOption?.attributes?.includes(left) ? left : right;
+      var tieQuestionId = (_scoring$tieBreakers = scoring.tieBreakers) === null || _scoring$tieBreakers === void 0 ? void 0 : _scoring$tieBreakers[String(index)];
+      var tieQuestion = questionsById[tieQuestionId];
+      var tieAnswer = tieQuestion && answers[tieQuestionId];
+      var tieOption = tieQuestion === null || tieQuestion === void 0 || (_tieQuestion$options = tieQuestion.options) === null || _tieQuestion$options === void 0 ? void 0 : _tieQuestion$options.find(function (item) {
+        return item.key === tieAnswer;
+      });
+      return tieOption !== null && tieOption !== void 0 && (_tieOption$attributes = tieOption.attributes) !== null && _tieOption$attributes !== void 0 && _tieOption$attributes.includes(left) ? left : right;
     });
-
-    const primary = chosen.join("");
-    const counts = Object.fromEntries(Object.keys(state.config.results || {}).map((key) => [key, key === primary ? (state.config.questions || []).length : 0]));
-    const alternate = chosen.slice();
-    if (scoring.pairs?.length) {
-      const firstPair = scoring.pairs[0];
+    var primary = chosen.join("");
+    var counts = Object.fromEntries(Object.keys(state.config.results || {}).map(function (key) {
+      return [key, key === primary ? (state.config.questions || []).length : 0];
+    }));
+    var alternate = chosen.slice();
+    if ((_scoring$pairs = scoring.pairs) !== null && _scoring$pairs !== void 0 && _scoring$pairs.length) {
+      var firstPair = scoring.pairs[0];
       alternate[0] = alternate[0] === firstPair[0] ? firstPair[1] : firstPair[0];
     }
-    const secondary = alternate.join("") !== primary && state.config.secondaryNotes?.[primary]?.[alternate.join("")] ? alternate.join("") : null;
-    return { counts, primary, secondary, attributes };
+    var secondary = alternate.join("") !== primary && (_state$config$seconda4 = state.config.secondaryNotes) !== null && _state$config$seconda4 !== void 0 && (_state$config$seconda4 = _state$config$seconda4[primary]) !== null && _state$config$seconda4 !== void 0 && _state$config$seconda4[alternate.join("")] ? alternate.join("") : null;
+    return {
+      counts: counts,
+      primary: primary,
+      secondary: secondary,
+      attributes: attributes
+    };
   }
-
   function getStage(score) {
-    const labels = state.config.stageLabels || [
-      { max: 45, label: "观察期" },
-      { max: 65, label: "验证期" },
-      { max: 82, label: "规划期" },
-      { max: 100, label: "行动期" },
-    ];
-    const hit = labels.find((item) => score <= item.max);
+    var labels = state.config.stageLabels || [{
+      max: 45,
+      label: "观察期"
+    }, {
+      max: 65,
+      label: "验证期"
+    }, {
+      max: 82,
+      label: "规划期"
+    }, {
+      max: 100,
+      label: "行动期"
+    }];
+    var hit = labels.find(function (item) {
+      return score <= item.max;
+    });
     return hit ? hit.label : labels[labels.length - 1].label;
   }
-
-  function buildShareText(primary, secondary, scored = {}) {
-    const template = state.config.shareTemplate || [
-      "我测出了：{{typeName}}",
-      "{{posterSubtext}}",
-      "{{secondaryLine}}",
-      "",
-      "{{title}}",
-    ];
-    const values = {
+  function buildShareText(primary, secondary) {
+    var scored = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : {};
+    var template = state.config.shareTemplate || ["我测出了：{{typeName}}", "{{posterSubtext}}", "{{secondaryLine}}", "", "{{title}}"];
+    var values = {
       title: state.config.title,
       typeName: primary.typeName,
       posterSubtext: primary.posterSubtext,
       secondary: secondary || "",
-      secondaryLine: secondary ? `副倾向：${secondary}` : "",
-      score: Number.isFinite(scored.score) ? scored.score : primary.maturityScore,
+      secondaryLine: secondary ? "\u526F\u503E\u5411\uFF1A".concat(secondary) : "",
+      score: Number.isFinite(scored.score) ? scored.score : primary.maturityScore
     };
-    return template
-      .map((line) => fillTemplate(line, values))
-      .filter((line, index, arr) => line || arr[index - 1])
-      .join("\n")
-      .trim();
+    return template.map(function (line) {
+      return fillTemplate(line, values);
+    }).filter(function (line, index, arr) {
+      return line || arr[index - 1];
+    }).join("\n").trim();
   }
-
-  async function copyShareText(value) {
+  function copyShareText(value) {
+    var fallbackCopy = function fallbackCopy() {
+      var field = document.createElement("textarea");
+      field.value = value;
+      field.setAttribute("readonly", "");
+      field.style.position = "fixed";
+      field.style.opacity = "0";
+      document.body.appendChild(field);
+      field.select();
+      var copied = document.execCommand && document.execCommand("copy");
+      document.body.removeChild(field);
+      if (!copied) throw new Error("copy unavailable");
+    };
     try {
-      await navigator.clipboard.writeText(value);
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(value).then(function () {
+          return showToast("结果文案已复制");
+        }, function () {
+          try {
+            fallbackCopy();
+            showToast("结果文案已复制");
+          } catch (error) {
+            showToast("复制失败，可长按手动复制");
+          }
+        });
+        return;
+      }
+      fallbackCopy();
       showToast("结果文案已复制");
     } catch (error) {
       showToast("复制失败，可长按手动复制");
     }
   }
-
   function showToast(value) {
-    const toast = document.getElementById("toast");
+    var toast = document.getElementById("toast");
     if (!toast) return;
     toast.textContent = value;
     toast.classList.add("show");
-    window.setTimeout(() => toast.classList.remove("show"), 1600);
+    window.setTimeout(function () {
+      return toast.classList.remove("show");
+    }, 1600);
   }
-
   function getLoadingMessages() {
     return state.config.loadingMessages || defaultLoadingMessages;
   }
-
   function getStorageKey() {
-    return `xhsTestAnswers:${state.config.slug || "default"}`;
+    return "xhsTestAnswers:".concat(state.config.slug || "default");
   }
-
   function getProfileStorageKey() {
-    return `xhsTestProfile:${state.config?.slug || "default"}`;
+    var _state$config;
+    return "xhsTestProfile:".concat(((_state$config = state.config) === null || _state$config === void 0 ? void 0 : _state$config.slug) || "default");
   }
-
   function getProfileInputValue(inputConfig) {
     if (!inputConfig) return "";
     if (inputConfig.type === "number") return state.profile.actualAge || "";
     return state.profile.birthDate || "";
   }
-
   function buildProfileFromInput(inputConfig, value) {
-    if (inputConfig?.type === "number") {
-      return { birthDate: "", actualAge: value };
+    if ((inputConfig === null || inputConfig === void 0 ? void 0 : inputConfig.type) === "number") {
+      return {
+        birthDate: "",
+        actualAge: value
+      };
     }
-    return { birthDate: value, actualAge: "" };
+    return {
+      birthDate: value,
+      actualAge: ""
+    };
   }
-
   function fillTemplate(template, values) {
-    return String(template).replace(/\{\{(\w+)\}\}/g, (_, key) => values[key] || "");
+    return String(template).replace(/\{\{(\w+)\}\}/g, function (_, key) {
+      return values[key] || "";
+    });
   }
-
   function number(value) {
-    const parsed = Number(value);
+    var parsed = Number(value);
     if (Number.isNaN(parsed)) return 0;
     return Math.max(0, Math.min(100, parsed));
   }
-
   function average(values) {
-    const cleanValues = values.map(Number).filter((value) => Number.isFinite(value));
+    var cleanValues = values.map(Number).filter(function (value) {
+      return Number.isFinite(value);
+    });
     if (!cleanValues.length) return 0;
-    return cleanValues.reduce((sum, value) => sum + value, 0) / cleanValues.length;
+    return cleanValues.reduce(function (sum, value) {
+      return sum + value;
+    }, 0) / cleanValues.length;
   }
-
   function clamp(value, min, max) {
     return Math.max(min, Math.min(max, value));
   }
-
   function text(value) {
-    return String(value ?? "")
-      .replace(/&/g, "&amp;")
-      .replace(/</g, "&lt;")
-      .replace(/>/g, "&gt;")
-      .replace(/"/g, "&quot;");
+    return String(value !== null && value !== void 0 ? value : "").replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;");
   }
 })();
 
