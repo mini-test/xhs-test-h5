@@ -1,0 +1,2009 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <meta name="description" content="24道真实情境题，从冲突、欲望、关系、权力、压力与代价六个模块，生成你的原生天性档案。" />
+    <meta property="og:title" content="你的原生天性有多危险？" />
+    <meta property="og:description" content="24道真实情境题，从冲突、欲望、关系、权力、压力与代价六个模块，生成你的原生天性档案。" />
+    <title>你的原生天性有多危险？</title>
+    <style>
+:root {
+  --bg: #fbfaf7;
+  --paper: #fffefd;
+  --ink: #20242a;
+  --muted: #65707d;
+  --line: #d9d4ca;
+  --line-strong: #b9afa0;
+  --accent: #9b4339;
+  --accent-soft: #f1dfd7;
+  --gold: #c0964d;
+  --sage: #66795f;
+  --blue: #526a86;
+  --shadow: 0 16px 36px rgba(60, 47, 38, 0.1);
+  --radius: 8px;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  min-height: 100%;
+  width: 100%;
+  overflow-x: hidden;
+  background:
+    linear-gradient(rgba(32, 36, 42, 0.035) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(32, 36, 42, 0.035) 1px, transparent 1px),
+    var(--bg);
+  background-size: 24px 24px;
+}
+
+body {
+  width: 100%;
+  overflow-x: hidden;
+  min-height: 100vh;
+  margin: 0;
+  color: var(--ink);
+  font-family:
+    "PingFang SC",
+    "Microsoft YaHei",
+    "Noto Sans SC",
+    system-ui,
+    -apple-system,
+    BlinkMacSystemFont,
+    sans-serif;
+  letter-spacing: 0;
+}
+
+button {
+  font: inherit;
+}
+
+.shell {
+  width: 100%;
+  max-width: 480px;
+  min-height: 100vh;
+  margin: 0 auto;
+  background: rgba(251, 250, 247, 0.88);
+  overflow-x: hidden;
+}
+
+.top-rule {
+  height: 4px;
+  background: var(--accent);
+}
+
+.screen {
+  width: 100%;
+  overflow-x: hidden;
+  min-height: calc(100vh - 4px);
+  padding: 28px 22px 32px;
+}
+
+.home {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.kicker {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  color: var(--muted);
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  font-size: 11px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+.dot {
+  width: 7px;
+  height: 7px;
+  background: var(--accent);
+  border-radius: 50%;
+}
+
+.hero-title {
+  max-width: 100%;
+  margin: 26px 0 14px;
+  color: var(--ink);
+  font-size: 30px;
+  line-height: 1.2;
+  text-align: center;
+  font-weight: 800;
+  overflow-wrap: anywhere;
+}
+
+.hero-subtitle {
+  margin: 0 auto 28px;
+  max-width: 340px;
+  color: var(--muted);
+  font-size: 15px;
+  line-height: 1.75;
+  text-align: center;
+}
+
+.hairline {
+  width: 64px;
+  height: 1px;
+  margin: 0 auto 30px;
+  background: var(--line-strong);
+}
+
+.intro {
+  margin: 0 auto;
+  max-width: 380px;
+}
+
+.intro p {
+  margin: 0 0 15px;
+  color: rgba(32, 36, 42, 0.82);
+  font-size: 15px;
+  line-height: 1.8;
+}
+
+.intro .strong {
+  color: var(--accent);
+  font-weight: 700;
+}
+
+.pill-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px;
+  margin: 28px 0;
+}
+
+.compact-pills {
+  margin: 16px 0 10px;
+}
+
+.pill {
+  min-height: 42px;
+  display: grid;
+  place-items: center;
+  border: 1px solid var(--line);
+  color: var(--muted);
+  background: rgba(255, 255, 255, 0.44);
+  font-size: 13px;
+}
+
+.home-card {
+  margin-top: 16px;
+  padding: 18px 16px;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  background: rgba(255, 255, 255, 0.78);
+}
+
+.info-card h2 {
+  margin: 0 0 12px;
+  font-size: 19px;
+}
+
+.info-card p,
+.info-card li {
+  color: rgba(32, 36, 42, 0.78);
+  font-size: 14px;
+  line-height: 1.8;
+}
+
+.info-card p {
+  margin: 0;
+}
+
+.info-card ul {
+  display: grid;
+  gap: 9px;
+  margin: 0;
+  padding-left: 20px;
+}
+
+.info-card li::marker {
+  color: var(--accent);
+}
+
+.profile-panel {
+  margin-top: 16px;
+  padding: 16px;
+  border: 1px solid var(--line-strong);
+  background: var(--accent-soft);
+}
+
+.profile-label {
+  display: block;
+  margin-bottom: 10px;
+  color: var(--ink);
+  font-size: 17px;
+  font-weight: 800;
+}
+
+.profile-field {
+  display: grid;
+  grid-template-columns: 1fr minmax(0, 1.4fr);
+  gap: 12px;
+  align-items: center;
+  padding: 11px 12px;
+  border: 1px solid var(--line);
+  background: var(--paper);
+}
+
+.profile-field span {
+  color: var(--muted);
+  font-size: 14px;
+}
+
+.profile-field input {
+  width: 100%;
+  min-height: 34px;
+  padding: 4px 6px;
+  border: 0;
+  background: transparent;
+  color: var(--ink);
+  font: inherit;
+  text-align: right;
+}
+
+.profile-field input:focus {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+
+.profile-field input.invalid {
+  outline: 2px solid #b3261e;
+  outline-offset: 2px;
+}
+
+.profile-note,
+.profile-error {
+  margin: 9px 0 0;
+  color: var(--muted);
+  font-size: 12px;
+  line-height: 1.6;
+}
+
+.profile-error {
+  min-height: 19px;
+  color: #a42f29;
+}
+
+.primary-btn,
+.ghost-btn,
+.copy-btn {
+  width: 100%;
+  min-height: 48px;
+  border: 1px solid var(--ink);
+  border-radius: 0;
+  cursor: pointer;
+  transition: transform 150ms ease, background 150ms ease, color 150ms ease, border-color 150ms ease;
+}
+
+.primary-btn {
+  background: var(--ink);
+  color: #fff;
+  font-weight: 700;
+}
+
+.ghost-btn,
+.copy-btn {
+  background: transparent;
+  color: var(--ink);
+}
+
+.primary-btn:active,
+.ghost-btn:active,
+.copy-btn:active,
+.option:active {
+  transform: translateY(1px);
+}
+
+.disclaimer {
+  margin: 18px auto 0;
+  max-width: 340px;
+  color: var(--muted);
+  font-size: 12px;
+  line-height: 1.65;
+  text-align: center;
+}
+
+.quiz-screen {
+  padding-top: 0;
+}
+
+.sticky-head {
+  position: sticky;
+  top: 0;
+  z-index: 5;
+  margin: 0 -22px 26px;
+  padding: 14px 22px 12px;
+  background: rgba(251, 250, 247, 0.95);
+  border-bottom: 1px solid var(--line);
+  backdrop-filter: blur(12px);
+}
+
+.quiz-meta {
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+  color: var(--muted);
+  font-size: 12px;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+}
+
+.progress-track {
+  height: 4px;
+  margin-top: 10px;
+  background: rgba(32, 36, 42, 0.09);
+}
+
+.progress-bar {
+  height: 100%;
+  background: var(--accent);
+  transition: width 260ms ease;
+}
+
+.question-no {
+  color: rgba(155, 67, 57, 0.18);
+  font-size: 48px;
+  line-height: 1;
+  font-weight: 800;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+}
+
+.question-title {
+  margin: 18px 0 24px;
+  font-size: 22px;
+  line-height: 1.5;
+  font-weight: 750;
+}
+
+.options {
+  display: grid;
+  gap: 12px;
+}
+
+.option {
+  min-height: 66px;
+  display: grid;
+  grid-template-columns: 30px 1fr;
+  gap: 12px;
+  align-items: start;
+  width: 100%;
+  padding: 15px;
+  border: 1px solid var(--line);
+  background: rgba(255, 255, 255, 0.68);
+  color: var(--ink);
+  text-align: left;
+  cursor: pointer;
+  transition: background 160ms ease, border-color 160ms ease, color 160ms ease, opacity 160ms ease;
+}
+
+.option-key {
+  display: grid;
+  place-items: center;
+  width: 28px;
+  height: 28px;
+  border: 1px solid var(--line-strong);
+  font-size: 13px;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+}
+
+.option-text {
+  padding-top: 2px;
+  font-size: 15px;
+  line-height: 1.55;
+}
+
+.option.selected {
+  border-color: var(--accent);
+  background: var(--accent);
+  color: #fff;
+}
+
+.option.selected .option-key {
+  border-color: rgba(255, 255, 255, 0.8);
+}
+
+.option.dimmed {
+  opacity: 0.42;
+}
+
+.hint {
+  margin: 18px 0 0;
+  color: var(--muted);
+  font-size: 12px;
+  text-align: center;
+}
+
+.loading-screen {
+  display: grid;
+  place-items: center;
+}
+
+.loading-card {
+  width: 100%;
+  max-width: 360px;
+  text-align: center;
+}
+
+.spinner {
+  width: 54px;
+  height: 54px;
+  margin: 0 auto 24px;
+  border: 2px solid var(--line);
+  border-top-color: var(--accent);
+  border-radius: 50%;
+  animation: spin 850ms linear infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.loading-text {
+  min-height: 54px;
+  color: var(--accent);
+  font-size: 17px;
+  line-height: 1.6;
+  font-weight: 700;
+}
+
+.step-bars {
+  display: grid;
+  gap: 8px;
+  margin-top: 28px;
+}
+
+.step {
+  height: 4px;
+  overflow: hidden;
+  background: rgba(32, 36, 42, 0.09);
+}
+
+.step span {
+  display: block;
+  height: 100%;
+  width: 0;
+  background: var(--accent);
+  transition: width 300ms ease;
+}
+
+.step.done span {
+  width: 100%;
+}
+
+.result-screen {
+  padding: 22px 18px 30px;
+}
+
+.report {
+  padding: 22px 16px 18px;
+  border: 1px solid var(--line);
+  background: var(--paper);
+  box-shadow: var(--shadow);
+}
+
+.result-type {
+  margin: 8px 0 8px;
+  color: var(--accent);
+  font-size: 30px;
+  line-height: 1.15;
+  font-weight: 850;
+  text-align: center;
+}
+
+.result-subtitle {
+  margin: 0 auto 20px;
+  color: var(--muted);
+  font-size: 15px;
+  line-height: 1.7;
+  text-align: center;
+}
+
+.stamp-row {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px;
+  margin: 18px 0 20px;
+}
+
+.stamp {
+  padding: 12px 10px;
+  border: 1px solid var(--line);
+  background: #fbfaf7;
+}
+
+.stamp strong {
+  display: block;
+  margin-bottom: 4px;
+  color: var(--ink);
+  font-size: 20px;
+}
+
+.stamp span {
+  color: var(--muted);
+  font-size: 12px;
+}
+
+.section {
+  padding: 20px 0;
+  border-top: 1px solid var(--line);
+}
+
+.section h2 {
+  margin: 0 0 12px;
+  font-size: 18px;
+  color: var(--ink);
+}
+
+.section p {
+  margin: 0 0 12px;
+  color: rgba(32, 36, 42, 0.82);
+  font-size: 15px;
+  line-height: 1.85;
+}
+
+.quote {
+  padding: 15px;
+  border-left: 3px solid var(--accent);
+  background: var(--accent-soft);
+  color: #5b2d27;
+  line-height: 1.8;
+  font-weight: 700;
+}
+
+.meters {
+  display: grid;
+  gap: 14px;
+}
+
+.meter-head {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 7px;
+  color: var(--muted);
+  font-size: 13px;
+}
+
+.meter-track {
+  height: 8px;
+  background: rgba(32, 36, 42, 0.08);
+}
+
+.meter-fill {
+  height: 100%;
+  background: var(--accent);
+}
+
+.distribution-chart {
+  width: min(100%, 360px);
+  margin: 4px auto 18px;
+  color: var(--ink);
+}
+
+.distribution-chart svg {
+  display: block;
+  width: 100%;
+  height: auto;
+  overflow: visible;
+}
+
+.radar-grid,
+.radar-axis {
+  fill: none;
+  stroke: rgba(119, 91, 52, 0.22);
+  stroke-width: 1;
+}
+
+.radar-value {
+  fill: rgba(154, 54, 52, 0.22);
+  stroke: #9a3634;
+  stroke-width: 2.5;
+}
+
+.radar-dot {
+  fill: #f8f2e7;
+  stroke: #9a3634;
+  stroke-width: 2;
+}
+
+.distribution-chart text {
+  fill: currentColor;
+  font-size: 13px;
+  font-weight: 700;
+}
+
+.result-disclaimer {
+  margin: 18px 0 0;
+  padding-top: 14px;
+  border-top: 1px solid var(--line);
+  color: var(--muted);
+  font-size: 12px;
+  line-height: 1.7;
+}
+
+.compare {
+  display: grid;
+  gap: 10px;
+}
+
+.compare-card {
+  padding: 14px;
+  border: 1px solid var(--line);
+  background: #fbfaf7;
+}
+
+.compare-card h3,
+.plan-card h3 {
+  margin: 0 0 8px;
+  font-size: 15px;
+}
+
+.compare-card p,
+.plan-card p {
+  font-size: 14px;
+}
+
+.tag-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.tag {
+  padding: 7px 9px;
+  border: 1px solid var(--line);
+  background: #fbfaf7;
+  color: var(--muted);
+  font-size: 13px;
+}
+
+.plan {
+  display: grid;
+  gap: 10px;
+}
+
+.plan-card {
+  padding: 14px;
+  border: 1px solid var(--line);
+  background: #fbfaf7;
+}
+
+.secondary-note {
+  padding: 14px;
+  border: 1px dashed var(--line-strong);
+  background: rgba(192, 150, 77, 0.12);
+  line-height: 1.75;
+  font-size: 14px;
+}
+
+.match-summary {
+  padding: 14px;
+  border: 1px solid var(--line-strong);
+  background: var(--accent-soft);
+}
+
+.match-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 8px;
+}
+
+.match-item {
+  min-width: 0;
+  padding: 10px 8px;
+  background: var(--paper);
+  text-align: center;
+}
+
+.match-item span,
+.match-item strong {
+  display: block;
+}
+
+.match-item span {
+  color: var(--muted);
+  font-size: 11px;
+  line-height: 1.4;
+}
+
+.match-item strong {
+  margin-top: 4px;
+  color: var(--accent);
+  font-size: 20px;
+}
+
+.match-summary p {
+  margin: 12px 0 0;
+  color: rgba(32, 36, 42, 0.72);
+  font-size: 12px;
+  line-height: 1.7;
+}
+
+.actions {
+  display: grid;
+  gap: 10px;
+  margin-top: 18px;
+}
+
+.toast {
+  position: fixed;
+  left: 50%;
+  bottom: 22px;
+  z-index: 20;
+  transform: translateX(-50%);
+  padding: 10px 14px;
+  background: var(--ink);
+  color: #fff;
+  font-size: 13px;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 180ms ease;
+}
+
+.toast.show {
+  opacity: 1;
+}
+
+.error {
+  display: grid;
+  place-items: center;
+  min-height: 100vh;
+  padding: 24px;
+  text-align: center;
+}
+
+.error p {
+  color: var(--muted);
+  line-height: 1.7;
+}
+
+@media (min-width: 700px) {
+  body {
+    padding: 28px 0;
+  }
+
+  .shell {
+    min-height: calc(100vh - 56px);
+    border: 1px solid var(--line);
+    box-shadow: var(--shadow);
+  }
+
+  .screen {
+    min-height: calc(100vh - 60px);
+  }
+}
+
+    </style>
+  </head>
+  <body>
+    <main id="app" aria-live="polite">
+      <div style="max-width:560px;margin:0 auto;padding:42vh 24px 48px;text-align:center;color:#5f514c;font:16px/1.7 system-ui,-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif">
+        页面正在加载，请稍候。<br>
+        <small style="color:#8b7d77">若长时间停留，请复制链接到手机系统浏览器打开。</small>
+      </div>
+    </main>
+    <noscript>
+      <div style="padding:24px;text-align:center">请开启浏览器 JavaScript 后重新打开测试。</div>
+    </noscript>
+    <script>window.__QUIZ_CONFIG__ = {"slug":"test-innate-nature-risk-24","compactHome":true,"topic":"原生天性档案","kicker":"天性档案局 · 24题","title":"你的原生天性有多危险？","subtitle":"是生性淡漠、深层压抑、清醒纯良，还是天性颠覆？真正的危险不是某种性格，而是不知道它何时会替你做决定。","metaDescription":"24道真实情境题，从冲突、欲望、关系、权力、压力与代价六个模块，生成你的原生天性档案。","startButton":"拆开我的原生天性","resultKicker":"你的原生天性档案","quizHint":"每题4选1，请凭第一反应选择，不选最体面或最正确的答案","copyButton":"复制结果摘要","restartButton":"重新答题","scoreLabel":"原生张力指数","stageLabel":"天性觉察阶段","indexTitle":"你的五维天性图","tensionTitle":"这套天性最容易在哪失控","planTitle":"未来30天的驯化练习","blurSummary":"完整天性档案已生成，包含主导原型、第二倾向、五维天性图、触发机制、优势场景、失控风险与30天调整方案。","stageLabels":["刚看见默认反应","开始识别触发点","能够分辨保护与选择","会把天性用在正确位置"],"compareLabels":["让原生反应自动接管","把天性变成可选择的能力"],"disclaimer":"本测试仅用于趣味自我观察。“危险”只描述压力和关系中的反应强度及影响力，不代表暴力、违法倾向、人格障碍或任何心理诊断。结果不用于评价善恶，也不能替代专业评估。","secondaryThreshold":2,"dimensions":["情感温度","阴影压抑","反击强度","规则颠覆","欲望掌控"],"intro":["你有没有发现：越是在压力大、被冒犯或必须做选择的时候，人越不像平时那个自己。","有人瞬间冷下来，有人把所有话咽回去；有人仍愿意讲道理，也有人会直接重写规则。","这24道题不判断你善不善良，只识别最先接管你的那套原生反应，以及它最像哪一种故事人物。"],"loadingMessages":["正在回看你的24次第一反应…","正在计算四类天性的主次结构…","正在生成你的五维天性档案…"],"questions":[{"id":1,"module":"冲突与冒犯","dimension":"冲突与冒犯","text":"会上有人拿你的失误开玩笑，大家都在笑。你第一反应更像？","options":[{"key":"A","text":"不动声色记住这件事，之后降低对他的信任","score":"FROST"},{"key":"B","text":"跟着笑过去，回家却把那几句话重新想一遍","score":"VAULT"},{"key":"C","text":"等气氛过去，直接问他是不是越过了边界","score":"LAMP"},{"key":"D","text":"当场把话顶回去，让他知道玩笑也有代价","score":"REBEL"}]},{"id":2,"module":"冲突与冒犯","dimension":"冲突与冒犯","text":"亲近的人说“你就是想太多”，你更可能？","options":[{"key":"A","text":"嘴上说没事，心里却越来越委屈","score":"VAULT"},{"key":"B","text":"说清哪句话伤到你，也请对方先听完","score":"LAMP"},{"key":"C","text":"反问为什么总要用你的沉默换他的轻松","score":"REBEL"},{"key":"D","text":"不再解释，把真实感受从这段关系里撤走","score":"FROST"}]},{"id":3,"module":"冲突与冒犯","dimension":"冲突与冒犯","text":"同事把你的成果说成自己的贡献，你会？","options":[{"key":"A","text":"用事实补充过程，把归属讲清楚","score":"LAMP"},{"key":"B","text":"立刻拆穿，不给对方继续占便宜的空间","score":"REBEL"},{"key":"C","text":"收好证据，悄悄调整之后的合作方式","score":"FROST"},{"key":"D","text":"很生气，却担心闹大后显得自己计较","score":"VAULT"}]},{"id":4,"module":"冲突与冒犯","dimension":"冲突与冒犯","text":"排队时有人插队还反过来怼你，你会？","options":[{"key":"A","text":"直接挡回去，对方越横你越不会让","score":"REBEL"},{"key":"B","text":"只要损失不大就懒得纠缠","score":"FROST"},{"key":"C","text":"忍下来，但一路都在生闷气","score":"VAULT"},{"key":"D","text":"平静提醒规则，必要时请工作人员处理","score":"LAMP"}]},{"id":5,"module":"资源与欲望","dimension":"资源与欲望","text":"突然多了一笔奖金，你第一件想做的事是？","options":[{"key":"A","text":"先存下或投资，让选择权留在以后","score":"FROST"},{"key":"B","text":"想买点喜欢的，又会为花钱产生负罪感","score":"VAULT"},{"key":"C","text":"一部分奖励自己，一部分留作安全垫","score":"LAMP"},{"key":"D","text":"拿去启动一个一直想试、但别人觉得冒险的计划","score":"REBEL"}]},{"id":6,"module":"资源与欲望","dimension":"资源与欲望","text":"你和朋友同时竞争一个稀缺机会，你更倾向？","options":[{"key":"A","text":"怕伤关系，下意识先让一点","score":"VAULT"},{"key":"B","text":"提前说开，公平竞争，结束后仍尊重彼此","score":"LAMP"},{"key":"C","text":"寻找第三条路，不接受只能有一个赢家的设定","score":"REBEL"},{"key":"D","text":"感情归感情，竞争归竞争，各凭实力","score":"FROST"}]},{"id":7,"module":"资源与欲望","dimension":"资源与欲望","text":"一个人反复向你借钱又拖着不还，你会？","options":[{"key":"A","text":"明确说清旧账和新的边界","score":"LAMP"},{"key":"B","text":"一次性把所有账摊开，必要时结束关系","score":"REBEL"},{"key":"C","text":"以后不再借，但也不多解释","score":"FROST"},{"key":"D","text":"碍于情面继续帮，心里越来越不舒服","score":"VAULT"}]},{"id":8,"module":"资源与欲望","dimension":"资源与欲望","text":"你非常想要一件超出当前预算的东西，会？","options":[{"key":"A","text":"想办法多赚一笔，而不是只在预算里忍耐","score":"REBEL"},{"key":"B","text":"先降温，确认它是否真的值得","score":"FROST"},{"key":"C","text":"压抑很久，最后可能在情绪上头时买下","score":"VAULT"},{"key":"D","text":"定一个储蓄期限，达到条件再买","score":"LAMP"}]},{"id":9,"module":"关系与信任","dimension":"关系与信任","text":"一个亲近的人突然变冷淡，你更可能？","options":[{"key":"A","text":"对方退一步，你也把距离拉开","score":"FROST"},{"key":"B","text":"先怀疑是不是自己哪里做错了","score":"VAULT"},{"key":"C","text":"直接问发生了什么，也给对方一点空间","score":"LAMP"},{"key":"D","text":"要求把话说明白，不接受长期吊着","score":"REBEL"}]},{"id":10,"module":"关系与信任","dimension":"关系与信任","text":"你只告诉一个人的秘密被传了出去，你会？","options":[{"key":"A","text":"装作不在意，心里却很难再靠近","score":"VAULT"},{"key":"B","text":"先核实，再认真谈一次伤害和边界","score":"LAMP"},{"key":"C","text":"当面对质，确认后迅速切断","score":"REBEL"},{"key":"D","text":"永久调低对他的信任等级","score":"FROST"}]},{"id":11,"module":"关系与信任","dimension":"关系与信任","text":"伴侣希望交换手机密码来证明信任，你会？","options":[{"key":"A","text":"先谈清不安全感来自哪里，再共同定边界","score":"LAMP"},{"key":"B","text":"直接否定这种证明方式，重新制定相处规则","score":"REBEL"},{"key":"C","text":"拒绝，亲密也不等于放弃隐私","score":"FROST"},{"key":"D","text":"为了避免争吵先给，之后越来越别扭","score":"VAULT"}]},{"id":12,"module":"关系与信任","dimension":"关系与信任","text":"朋友连续几次临时取消约定，你会？","options":[{"key":"A","text":"暂停这段关系，让对方承担失约的后果","score":"REBEL"},{"key":"B","text":"以后不再把重要时间留给他","score":"FROST"},{"key":"C","text":"每次都说理解，失望却一点点累积","score":"VAULT"},{"key":"D","text":"告诉他这影响了信任，改成更可靠的安排","score":"LAMP"}]},{"id":13,"module":"规则与权力","dimension":"规则与权力","text":"一条工作规则明显低效，但大家一直照做，你会？","options":[{"key":"A","text":"找到不惹麻烦的绕行办法","score":"FROST"},{"key":"B","text":"照做，心里一直觉得荒唐","score":"VAULT"},{"key":"C","text":"拿数据提出改法，先做小范围试验","score":"LAMP"},{"key":"D","text":"直接用新办法做出结果，再逼规则改变","score":"REBEL"}]},{"id":14,"module":"规则与权力","dimension":"规则与权力","text":"有权力的人明显偏袒别人，你更可能？","options":[{"key":"A","text":"先忍着，怕反抗后处境更差","score":"VAULT"},{"key":"B","text":"收集事实，通过正式渠道申诉","score":"LAMP"},{"key":"C","text":"公开指出问题，不让权力替不公平遮羞","score":"REBEL"},{"key":"D","text":"评估成本，选择最有利的时机处理","score":"FROST"}]},{"id":15,"module":"规则与权力","dimension":"规则与权力","text":"你临时接手一个表现很差的团队，会先做什么？","options":[{"key":"A","text":"逐个了解问题，再建立清楚标准","score":"LAMP"},{"key":"B","text":"快速重组，先砍掉最拖累结果的部分","score":"REBEL"},{"key":"C","text":"按能力重新分工，让系统先运转起来","score":"FROST"},{"key":"D","text":"自己多扛一点，怕别人跟不上","score":"VAULT"}]},{"id":16,"module":"规则与权力","dimension":"规则与权力","text":"别人说“以前一直都是这么做的”，你会？","options":[{"key":"A","text":"把旧习惯当作最需要被推翻的证据","score":"REBEL"},{"key":"B","text":"只要不影响我，就不浪费精力争","score":"FROST"},{"key":"C","text":"明知不合理，还是先配合","score":"VAULT"},{"key":"D","text":"先问这套做法解决什么问题，再提出替代方案","score":"LAMP"}]},{"id":17,"module":"压力与失控","dimension":"压力与失控","text":"准备很久的计划突然彻底泡汤，你会？","options":[{"key":"A","text":"迅速切换备用方案，不让情绪拖慢动作","score":"FROST"},{"key":"B","text":"先撑住，等没人的时候才崩下来","score":"VAULT"},{"key":"C","text":"承认失落，复盘后重新搭建下一步","score":"LAMP"},{"key":"D","text":"索性换一条更大的路，把失败变成转向","score":"REBEL"}]},{"id":18,"module":"压力与失控","dimension":"压力与失控","text":"你在公开场合被批评，其中一半并不公平，会？","options":[{"key":"A","text":"当时沉默，之后反复攻击自己","score":"VAULT"},{"key":"B","text":"把事实和情绪分开，回应需要澄清的部分","score":"LAMP"},{"key":"C","text":"当场挑战对方的叙事，不接受被随意定义","score":"REBEL"},{"key":"D","text":"只拿走有用的部分，其余不进入内心","score":"FROST"}]},{"id":19,"module":"压力与失控","dimension":"压力与失控","text":"你已经累到明显撑不住，却还有很多任务，会？","options":[{"key":"A","text":"主动求助、减量，把恢复也放进计划","score":"LAMP"},{"key":"B","text":"直接停掉不合理的安排，哪怕别人不理解","score":"REBEL"},{"key":"C","text":"切到最低能耗，只做必须完成的部分","score":"FROST"},{"key":"D","text":"继续硬扛，直到身体替你按下暂停键","score":"VAULT"}]},{"id":20,"module":"压力与失控","dimension":"压力与失控","text":"你确认自己被重要的人背叛后，最像哪种反应？","options":[{"key":"A","text":"迅速结束，把时间、注意力和尊严收回来","score":"REBEL"},{"key":"B","text":"关闭情感通道，从此不再让他靠近","score":"FROST"},{"key":"C","text":"反复追问为什么，很久走不出来","score":"VAULT"},{"key":"D","text":"允许自己难过，也重新建立边界","score":"LAMP"}]},{"id":21,"module":"选择与代价","dimension":"选择与代价","text":"稳定工作和高风险机会摆在面前，你会？","options":[{"key":"A","text":"计算最坏结果与成功概率，再决定","score":"FROST"},{"key":"B","text":"多半留下，却会长期想象另一种人生","score":"VAULT"},{"key":"C","text":"先看需要、资源和退路，争取小步试错","score":"LAMP"},{"key":"D","text":"如果停滞更可怕，就选择不确定","score":"REBEL"}]},{"id":22,"module":"选择与代价","dimension":"选择与代价","text":"喜欢的人和你的核心目标发生冲突，你会？","options":[{"key":"A","text":"先牺牲自己，之后慢慢积累怨气","score":"VAULT"},{"key":"B","text":"谈清双方底线，寻找能共同承担的方案","score":"LAMP"},{"key":"C","text":"拒绝二选一，重新设计关系和路径","score":"REBEL"},{"key":"D","text":"优先保护长期目标","score":"FROST"}]},{"id":23,"module":"选择与代价","dimension":"选择与代价","text":"一个群体默认排挤某个人，你会？","options":[{"key":"A","text":"主动给对方支持，并尝试修复氛围","score":"LAMP"},{"key":"B","text":"公开反对，让群体规则本身接受审视","score":"REBEL"},{"key":"C","text":"不参与，但也不想成为事件中心","score":"FROST"},{"key":"D","text":"知道不对，却害怕站出来后自己也被排斥","score":"VAULT"}]},{"id":24,"module":"选择与代价","dimension":"选择与代价","text":"如果未来一年没人评价你，你最想怎么活？","options":[{"key":"A","text":"彻底试一次别人不看好、但自己一直想做的事","score":"REBEL"},{"key":"B","text":"减少噪音，过更简单、更安静的生活","score":"FROST"},{"key":"C","text":"先休息，再把压了很久的愿望拿出来","score":"VAULT"},{"key":"D","text":"和真正重要的人与事重新建立连接","score":"LAMP"}]}],"results":{"FROST":{"key":"FROST","typeName":"霜镜观察者","subtitle":"生性淡漠","posterSubtext":"情绪低温，判断清醒。真正的风险是撤得太早。","maturityScore":42,"coreConclusion":"你不是没有感情，而是习惯先把感受放进冷藏层。","diagnosis":"你在混乱里很少立刻失控。先观察、后判断、再决定投入多少，是你的原生节奏。你的优势是清醒、边界感和低耗能；当防御过度时，你会在关系真正修复前就撤走情感权限，让别人只看见你的平静，看不见你曾经在意。","whatYouReallyWant":"你真正想要的是自主、安静和不被情绪绑架。你不排斥亲密，只排斥被迫解释、被强行索取和没有边界的靠近。","mechanism":{"title":"你的原生反应机制","content":"当外界变得不可控，你会降低情绪温度，把自己从事件中抽离。它能让你免于被裹挟，也可能让需要沟通的问题被直接冻结。"},"professionalBasis":"本结果依据24道生活情境中反复出现的选择倾向生成，观察的是你在冲突、资源、关系、权力、压力与代价面前的默认反应结构，不是医学或人格诊断。","coreTensions":["清醒与疏离之间的距离","自我保护与情感可达性","不争与过早放弃解释"],"suitableIf":["需要危机判断和资源配置","需要在混乱中保持稳定","需要不被群体情绪带走"],"cautionIf":["把不表达误认为不在意","用关系降级代替边界沟通","长期处于低欲望、低连接状态"],"indices":[{"label":"情感温度","value":38},{"label":"阴影压抑","value":45},{"label":"反击强度","value":34},{"label":"规则颠覆","value":46},{"label":"欲望掌控","value":82}],"ifStay":"继续只靠抽离保护自己，你会越来越不容易受伤，也越来越难被真正理解。","ifChange":"保留冷静，同时在撤退前多说一句真实感受，你的边界会更清楚，关系也不必靠消失来结束。","notRecommended":["用冷处理惩罚对方","在未核实前永久降级关系","把所有需要都解释成麻烦"],"plan90":[{"title":"先命名","content":"每次想撤退前，先写下自己究竟失望、愤怒还是害怕。"},{"title":"再开口","content":"只表达一个事实、一个感受和一个边界，不必解释整个人生。"},{"title":"延迟封存","content":"重大关系决定至少隔一晚，再确认你是在选择还是在冻结。"}],"closing":"你最像「守夜的观星者」。危险从来不是拥有某种天性，而是不知道它何时替你做了决定。"},"VAULT":{"key":"VAULT","typeName":"沉默守门人","subtitle":"深层压抑","posterSubtext":"表面能忍，内里高压。真正的风险是把火种留得太久。","maturityScore":67,"coreConclusion":"你表面最能忍，内心却长期替所有未说出口的话守门。","diagnosis":"你很擅长维持体面、照顾场面，也比多数人更能感知关系里的微妙变化。只是你经常把冲突先压回自己体内，等到委屈累积到无法消化，才以崩溃、失望或突然断联的方式出现。你的危险不是攻击性，而是长期自我压缩后的反弹。","whatYouReallyWant":"你真正想要的不是别人猜中你，而是一种可以安全表达、不必立刻承担关系破裂后果的许可。","mechanism":{"title":"你的原生反应机制","content":"压力来临时，你先确保局面不失控，再把自己的感受延后。短期能保护关系，长期却会让身体和情绪替你记账。"},"professionalBasis":"本结果依据24道生活情境中反复出现的选择倾向生成，观察的是你在冲突、资源、关系、权力、压力与代价面前的默认反应结构，不是医学或人格诊断。","coreTensions":["体面与真实的拉扯","善解人意与自我忽略","避免冲突与积累怨气"],"suitableIf":["需要耐心、共情和长期投入","需要维持复杂合作","需要理解他人未说出口的需求"],"cautionIf":["把忍耐误认为成熟","在最后一刻突然清算","用自责代替对事实的判断"],"indices":[{"label":"情感温度","value":58},{"label":"阴影压抑","value":91},{"label":"反击强度","value":52},{"label":"规则颠覆","value":28},{"label":"欲望掌控","value":55}],"ifStay":"继续把所有感受延后，你可能看起来越来越懂事，内心却越来越不相信有人能接住真实的你。","ifChange":"练习在不满只有三分时开口，而不是等到十分，你的温柔会从消耗变成力量。","notRecommended":["用“没事”结束所有对话","替别人承担本应由对方负责的后果","积累证据后一次性爆发"],"plan90":[{"title":"三分就说","content":"不适刚出现时，用一句具体事实表达，不等情绪满格。"},{"title":"区分责任","content":"每天记下一件“这不是我的责任”，减少自动背锅。"},{"title":"设置出口","content":"为高压关系安排固定复盘，而不是靠突然离开结束。"}],"closing":"你最像「背着火种的守门人」。危险从来不是拥有某种天性，而是不知道它何时替你做了决定。"},"LAMP":{"key":"LAMP","typeName":"提灯护心者","subtitle":"清醒纯良","posterSubtext":"心有温度，也有边界。你的纯良是一种清醒选择。","maturityScore":31,"coreConclusion":"你的纯良不是没见过阴影，而是见过以后仍愿意保留分寸。","diagnosis":"你倾向于理解处境、照顾关系，也愿意把问题讲清楚。你的善意并不等于没有判断力，而是相信多数冲突可以通过诚实、边界和修复被处理。风险在于，当你过度相信沟通的力量，可能对反复越界的人给出太多机会。","whatYouReallyWant":"你真正想要的是互相尊重、可以修复的关系，以及不必牺牲良知也能保护自己的生活。","mechanism":{"title":"你的原生反应机制","content":"遇到压力时，你会先寻找事情里仍可被理解和修复的部分。它让你不容易被仇恨接管，也需要边界来避免善意被无限透支。"},"professionalBasis":"本结果依据24道生活情境中反复出现的选择倾向生成，观察的是你在冲突、资源、关系、权力、压力与代价面前的默认反应结构，不是医学或人格诊断。","coreTensions":["理解他人与保护自己","给机会与识别重复模式","温柔表达与坚定执行"],"suitableIf":["需要信任建设和关系修复","需要长期协作与照顾复杂感受","需要在原则和温度间找到平衡"],"cautionIf":["对反复越界的人解释太多","把对方的潜力当作现实","害怕坚定会破坏自己的善良形象"],"indices":[{"label":"情感温度","value":84},{"label":"阴影压抑","value":36},{"label":"反击强度","value":48},{"label":"规则颠覆","value":42},{"label":"欲望掌控","value":63}],"ifStay":"继续只有理解而没有后果，你的善意会被误读成无限额度。","ifChange":"把边界写进行动，而不只写进语言，你会更温柔，也更不容易被消耗。","notRecommended":["只看动机忽略实际伤害","反复替别人寻找理由","把离开等同于失败"],"plan90":[{"title":"看重复","content":"判断一个人时看连续三次行为，而不是最好的一次解释。"},{"title":"给后果","content":"边界被越过后执行约定好的后果，不额外惩罚，也不撤回。"},{"title":"保留善意","content":"把帮助给愿意承担责任的人，停止对拒绝改变的人过度投入。"}],"closing":"你最像「穿过风雨的提灯人」。危险从来不是拥有某种天性，而是不知道它何时替你做了决定。"},"REBEL":{"key":"REBEL","typeName":"边界破局者","subtitle":"天性颠覆","posterSubtext":"反击强、颠覆高。真正的风险是把每一次阻力都当成战争。","maturityScore":79,"coreConclusion":"你真正危险的不是脾气，而是不愿让任何旧规则决定你的边界。","diagnosis":"你对控制、不公和虚伪高度敏感。一旦确认某个系统只是在消耗你，你会迅速反击、重组甚至离开。你的力量是行动、破局和重新定义规则；当张力过高时，你可能在事实还没完整之前就进入战斗，把可以协商的差异也当成必须推翻的压迫。","whatYouReallyWant":"你真正想要的是主体性、诚实和自由。你愿意承担代价，但无法忍受明知不合理还要假装顺从。","mechanism":{"title":"你的原生反应机制","content":"压力会迅速转化为行动能量。你通过改变局面找回控制感，因此很难长时间待在模糊、拖延或权责不清的环境里。"},"professionalBasis":"本结果依据24道生活情境中反复出现的选择倾向生成，观察的是你在冲突、资源、关系、权力、压力与代价面前的默认反应结构，不是医学或人格诊断。","coreTensions":["真实与冲动之间的半步","破局与破坏的边界","自主选择与持续协作"],"suitableIf":["需要快速开路和推动变革","需要面对不公与高压谈判","需要从零到一建立新秩序"],"cautionIf":["把所有妥协理解成背叛","在高压时替别人决定结局","沉迷推翻却忽略长期建设"],"indices":[{"label":"情感温度","value":61},{"label":"阴影压抑","value":43},{"label":"反击强度","value":87},{"label":"规则颠覆","value":94},{"label":"欲望掌控","value":76}],"ifStay":"继续只用强度证明边界，你会赢下很多对抗，却可能失去原本想保护的关系与目标。","ifChange":"让证据比怒气先到场，把颠覆力用在真正值得改变的结构上，你会从反抗者变成建设者。","notRecommended":["在情绪峰值做不可逆决定","把不同意见自动视为控制","只负责推翻，不负责新秩序"],"plan90":[{"title":"延迟十分钟","content":"重要反击先延迟十分钟，写清目标、证据和最低可接受结果。"},{"title":"分级战斗","content":"把问题分成可忽略、可协商、必须反对三档，只对第三档全力出手。"},{"title":"建设替代","content":"每推翻一条旧规则，同时提出一条更可执行的新规则。"}],"closing":"你最像「重画地图的破局者」。危险从来不是拥有某种天性，而是不知道它何时替你做了决定。"}},"secondaryNotes":{"FROST":{"VAULT":"你的主导天性是“霜镜观察者”，同时带有“深层压抑”倾向。你会随关系距离和压力强度，在两套反应之间切换。","LAMP":"你的主导天性是“霜镜观察者”，同时带有“清醒纯良”倾向。你会随关系距离和压力强度，在两套反应之间切换。","REBEL":"你的主导天性是“霜镜观察者”，同时带有“天性颠覆”倾向。你会随关系距离和压力强度，在两套反应之间切换。"},"VAULT":{"FROST":"你的主导天性是“沉默守门人”，同时带有“生性淡漠”倾向。你会随关系距离和压力强度，在两套反应之间切换。","LAMP":"你的主导天性是“沉默守门人”，同时带有“清醒纯良”倾向。你会随关系距离和压力强度，在两套反应之间切换。","REBEL":"你的主导天性是“沉默守门人”，同时带有“天性颠覆”倾向。你会随关系距离和压力强度，在两套反应之间切换。"},"LAMP":{"FROST":"你的主导天性是“提灯护心者”，同时带有“生性淡漠”倾向。你会随关系距离和压力强度，在两套反应之间切换。","VAULT":"你的主导天性是“提灯护心者”，同时带有“深层压抑”倾向。你会随关系距离和压力强度，在两套反应之间切换。","REBEL":"你的主导天性是“提灯护心者”，同时带有“天性颠覆”倾向。你会随关系距离和压力强度，在两套反应之间切换。"},"REBEL":{"FROST":"你的主导天性是“边界破局者”，同时带有“生性淡漠”倾向。你会随关系距离和压力强度，在两套反应之间切换。","VAULT":"你的主导天性是“边界破局者”，同时带有“深层压抑”倾向。你会随关系距离和压力强度，在两套反应之间切换。","LAMP":"你的主导天性是“边界破局者”，同时带有“清醒纯良”倾向。你会随关系距离和压力强度，在两套反应之间切换。"}},"shareTemplate":["我的原生天性是「{{typeName}}」","{{posterSubtext}}","{{secondaryLine}}","","真正危险的不是某种天性，而是不知道它什么时候替你做了决定。"]};</script>
+    <script>
+(function () {
+  if (!Object.entries) {
+    Object.entries = function (object) {
+      return Object.keys(object).map(function (key) {
+        return [key, object[key]];
+      });
+    };
+  }
+
+  if (!Object.values) {
+    Object.values = function (object) {
+      return Object.keys(object).map(function (key) {
+        return object[key];
+      });
+    };
+  }
+
+  if (!Object.fromEntries) {
+    Object.fromEntries = function (entries) {
+      return entries.reduce(function (object, entry) {
+        object[entry[0]] = entry[1];
+        return object;
+      }, {});
+    };
+  }
+
+  if (!Array.prototype.find) {
+    Array.prototype.find = function (predicate, thisArg) {
+      for (var index = 0; index < this.length; index += 1) {
+        if (predicate.call(thisArg, this[index], index, this)) return this[index];
+      }
+      return undefined;
+    };
+  }
+
+  if (!Array.prototype.includes) {
+    Array.prototype.includes = function (value, fromIndex) {
+      var start = Math.max(Number(fromIndex) || 0, 0);
+      for (var index = start; index < this.length; index += 1) {
+        if (this[index] === value || (this[index] !== this[index] && value !== value)) return true;
+      }
+      return false;
+    };
+  }
+
+  if (!String.prototype.padStart) {
+    String.prototype.padStart = function (targetLength, padString) {
+      var value = String(this);
+      var padding = String(padString === undefined ? " " : padString);
+      while (value.length < targetLength) value = padding + value;
+      return value.slice(value.length - targetLength);
+    };
+  }
+
+  if (!Number.isFinite) {
+    Number.isFinite = function (value) {
+      return typeof value === "number" && isFinite(value);
+    };
+  }
+
+  if (!Number.isNaN) {
+    Number.isNaN = function (value) {
+      return typeof value === "number" && value !== value;
+    };
+  }
+
+  if (window.NodeList && !NodeList.prototype.forEach) {
+    NodeList.prototype.forEach = Array.prototype.forEach;
+  }
+})();
+
+    </script>
+    <script>
+function _regenerator() { var e, t, r = "function" == typeof Symbol ? Symbol : {}, n = r.iterator || "@@iterator", o = r.toStringTag || "@@toStringTag"; function i(r, n, o, i) { var c = n && n.prototype instanceof Generator ? n : Generator, u = Object.create(c.prototype); return _regeneratorDefine2(u, "_invoke", function (r, n, o) { var i, c, u, f = 0, p = o || [], y = !1, G = { p: 0, n: 0, v: e, a: d, f: d.bind(e, 4), d: function d(t, r) { return i = t, c = 0, u = e, G.n = r, a; } }; function d(r, n) { for (c = r, u = n, t = 0; !y && f && !o && t < p.length; t++) { var o, i = p[t], d = G.p, l = i[2]; r > 3 ? (o = l === n) && (u = i[(c = i[4]) ? 5 : (c = 3, 3)], i[4] = i[5] = e) : i[0] <= d && ((o = r < 2 && d < i[1]) ? (c = 0, G.v = n, G.n = i[1]) : d < l && (o = r < 3 || i[0] > n || n > l) && (i[4] = r, i[5] = n, G.n = l, c = 0)); } if (o || r > 1) return a; throw y = !0, n; } return function (o, p, l) { if (f > 1) throw TypeError("Generator is already running"); for (y && 1 === p && d(p, l), c = p, u = l; (t = c < 2 ? e : u) || !y;) { i || (c ? c < 3 ? (c > 1 && (G.n = -1), d(c, u)) : G.n = u : G.v = u); try { if (f = 2, i) { if (c || (o = "next"), t = i[o]) { if (!(t = t.call(i, u))) throw TypeError("iterator result is not an object"); if (!t.done) return t; u = t.value, c < 2 && (c = 0); } else 1 === c && (t = i.return) && t.call(i), c < 2 && (u = TypeError("The iterator does not provide a '" + o + "' method"), c = 1); i = e; } else if ((t = (y = G.n < 0) ? u : r.call(n, G)) !== a) break; } catch (t) { i = e, c = 1, u = t; } finally { f = 1; } } return { value: t, done: y }; }; }(r, o, i), !0), u; } var a = {}; function Generator() {} function GeneratorFunction() {} function GeneratorFunctionPrototype() {} t = Object.getPrototypeOf; var c = [][n] ? t(t([][n]())) : (_regeneratorDefine2(t = {}, n, function () { return this; }), t), u = GeneratorFunctionPrototype.prototype = Generator.prototype = Object.create(c); function f(e) { return Object.setPrototypeOf ? Object.setPrototypeOf(e, GeneratorFunctionPrototype) : (e.__proto__ = GeneratorFunctionPrototype, _regeneratorDefine2(e, o, "GeneratorFunction")), e.prototype = Object.create(u), e; } return GeneratorFunction.prototype = GeneratorFunctionPrototype, _regeneratorDefine2(u, "constructor", GeneratorFunctionPrototype), _regeneratorDefine2(GeneratorFunctionPrototype, "constructor", GeneratorFunction), GeneratorFunction.displayName = "GeneratorFunction", _regeneratorDefine2(GeneratorFunctionPrototype, o, "GeneratorFunction"), _regeneratorDefine2(u), _regeneratorDefine2(u, o, "Generator"), _regeneratorDefine2(u, n, function () { return this; }), _regeneratorDefine2(u, "toString", function () { return "[object Generator]"; }), (_regenerator = function _regenerator() { return { w: i, m: f }; })(); }
+function _regeneratorDefine2(e, r, n, t) { var i = Object.defineProperty; try { i({}, "", {}); } catch (e) { i = 0; } _regeneratorDefine2 = function _regeneratorDefine(e, r, n, t) { function o(r, n) { _regeneratorDefine2(e, r, function (e) { return this._invoke(r, n, e); }); } r ? i ? i(e, r, { value: n, enumerable: !t, configurable: !t, writable: !t }) : e[r] = n : (o("next", 0), o("throw", 1), o("return", 2)); }, _regeneratorDefine2(e, r, n, t); }
+function _createForOfIteratorHelper(r, e) { var t = "undefined" != typeof Symbol && r[Symbol.iterator] || r["@@iterator"]; if (!t) { if (Array.isArray(r) || (t = _unsupportedIterableToArray(r)) || e && r && "number" == typeof r.length) { t && (r = t); var _n = 0, F = function F() {}; return { s: F, n: function n() { return _n >= r.length ? { done: !0 } : { done: !1, value: r[_n++] }; }, e: function e(r) { throw r; }, f: F }; } throw new TypeError("Invalid attempt to iterate non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); } var o, a = !0, u = !1; return { s: function s() { t = t.call(r); }, n: function n() { var r = t.next(); return a = r.done, r; }, e: function e(r) { u = !0, o = r; }, f: function f() { try { a || null == t.return || t.return(); } finally { if (u) throw o; } } }; }
+function _toConsumableArray(r) { return _arrayWithoutHoles(r) || _iterableToArray(r) || _unsupportedIterableToArray(r) || _nonIterableSpread(); }
+function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+function _iterableToArray(r) { if ("undefined" != typeof Symbol && null != r[Symbol.iterator] || null != r["@@iterator"]) return Array.from(r); }
+function _arrayWithoutHoles(r) { if (Array.isArray(r)) return _arrayLikeToArray(r); }
+function _typeof(o) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (o) { return typeof o; } : function (o) { return o && "function" == typeof Symbol && o.constructor === Symbol && o !== Symbol.prototype ? "symbol" : typeof o; }, _typeof(o); }
+function _slicedToArray(r, e) { return _arrayWithHoles(r) || _iterableToArrayLimit(r, e) || _unsupportedIterableToArray(r, e) || _nonIterableRest(); }
+function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+function _unsupportedIterableToArray(r, a) { if (r) { if ("string" == typeof r) return _arrayLikeToArray(r, a); var t = {}.toString.call(r).slice(8, -1); return "Object" === t && r.constructor && (t = r.constructor.name), "Map" === t || "Set" === t ? Array.from(r) : "Arguments" === t || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(t) ? _arrayLikeToArray(r, a) : void 0; } }
+function _arrayLikeToArray(r, a) { (null == a || a > r.length) && (a = r.length); for (var e = 0, n = Array(a); e < a; e++) n[e] = r[e]; return n; }
+function _iterableToArrayLimit(r, l) { var t = null == r ? null : "undefined" != typeof Symbol && r[Symbol.iterator] || r["@@iterator"]; if (null != t) { var e, n, i, u, a = [], f = !0, o = !1; try { if (i = (t = t.call(r)).next, 0 === l) { if (Object(t) !== t) return; f = !1; } else for (; !(f = (e = i.call(t)).done) && (a.push(e.value), a.length !== l); f = !0); } catch (r) { o = !0, n = r; } finally { try { if (!f && null != t.return && (u = t.return(), Object(u) !== u)) return; } finally { if (o) throw n; } } return a; } }
+function _arrayWithHoles(r) { if (Array.isArray(r)) return r; }
+function asyncGeneratorStep(n, t, e, r, o, a, c) { try { var i = n[a](c), u = i.value; } catch (n) { return void e(n); } i.done ? t(u) : Promise.resolve(u).then(r, o); }
+function _asyncToGenerator(n) { return function () { var t = this, e = arguments; return new Promise(function (r, o) { var a = n.apply(t, e); function _next(n) { asyncGeneratorStep(a, r, o, _next, _throw, "next", n); } function _throw(n) { asyncGeneratorStep(a, r, o, _next, _throw, "throw", n); } _next(void 0); }); }; }
+(function () {
+  var app = document.getElementById("app");
+  var configPaths = ["./configs/site-config.json", "./configs/career-change.json"];
+  var state = {
+    config: null,
+    answers: {},
+    profile: {
+      birthDate: "",
+      actualAge: ""
+    },
+    currentIndex: 0,
+    selected: null,
+    locked: false,
+    loadingStep: 0,
+    route: "home",
+    resultData: null
+  };
+  var defaultLoadingMessages = ["正在读取你的选择倾向...", "正在识别隐藏动机...", "正在计算结果分布...", "正在生成专属报告...", "分析完成。"];
+  var safeSessionStorage = {
+    getItem: function getItem(key) {
+      try {
+        return window.sessionStorage ? window.sessionStorage.getItem(key) : null;
+      } catch (error) {
+        return null;
+      }
+    },
+    setItem: function setItem(key, value) {
+      try {
+        if (window.sessionStorage) window.sessionStorage.setItem(key, value);
+      } catch (error) {}
+    },
+    removeItem: function removeItem(key) {
+      try {
+        if (window.sessionStorage) window.sessionStorage.removeItem(key);
+      } catch (error) {}
+    }
+  };
+  init();
+  function init() {
+    if (window.__QUIZ_CONFIG__) {
+      initialize(window.__QUIZ_CONFIG__);
+      return;
+    }
+    fetchConfig().then(initialize).catch(renderLoadError);
+  }
+  function initialize(config) {
+    try {
+      state.config = config;
+      applyDocumentMeta(state.config);
+      applyTheme(state.config);
+      var saved = safeSessionStorage.getItem(getStorageKey());
+      if (saved) {
+        state.answers = JSON.parse(saved);
+      }
+      var savedProfile = safeSessionStorage.getItem(getProfileStorageKey());
+      if (savedProfile) {
+        state.profile = JSON.parse(savedProfile);
+      }
+      routeFromHash();
+      window.addEventListener("hashchange", routeFromHash);
+    } catch (error) {
+      renderLoadError(error);
+    }
+  }
+  function renderLoadError(error) {
+    app.innerHTML = "\n      <div class=\"error\">\n        <div>\n          <h1>\u6D4B\u8BD5\u52A0\u8F7D\u5931\u8D25</h1>\n          <p>\u8BF7\u590D\u5236\u94FE\u63A5\u5230\u624B\u673A\u7CFB\u7EDF\u6D4F\u89C8\u5668\u91CD\u65B0\u6253\u5F00\u3002</p>\n        </div>\n      </div>\n    ";
+    console.error(error);
+  }
+  function fetchConfig() {
+    return _fetchConfig.apply(this, arguments);
+  }
+  function _fetchConfig() {
+    _fetchConfig = _asyncToGenerator(_regenerator().m(function _callee() {
+      var lastError, _iterator, _step, path, response, _t, _t2;
+      return _regenerator().w(function (_context) {
+        while (1) switch (_context.p = _context.n) {
+          case 0:
+            if (!window.__QUIZ_CONFIG__) {
+              _context.n = 1;
+              break;
+            }
+            return _context.a(2, window.__QUIZ_CONFIG__);
+          case 1:
+            _iterator = _createForOfIteratorHelper(configPaths);
+            _context.p = 2;
+            _iterator.s();
+          case 3:
+            if ((_step = _iterator.n()).done) {
+              _context.n = 9;
+              break;
+            }
+            path = _step.value;
+            _context.p = 4;
+            _context.n = 5;
+            return fetch(path, {
+              cache: "no-store"
+            });
+          case 5:
+            response = _context.v;
+            if (response.ok) {
+              _context.n = 6;
+              break;
+            }
+            throw new Error("".concat(path, " ").concat(response.status));
+          case 6:
+            return _context.a(2, response.json());
+          case 7:
+            _context.p = 7;
+            _t = _context.v;
+            lastError = _t;
+          case 8:
+            _context.n = 3;
+            break;
+          case 9:
+            _context.n = 11;
+            break;
+          case 10:
+            _context.p = 10;
+            _t2 = _context.v;
+            _iterator.e(_t2);
+          case 11:
+            _context.p = 11;
+            _iterator.f();
+            return _context.f(11);
+          case 12:
+            throw lastError;
+          case 13:
+            return _context.a(2);
+        }
+      }, _callee, null, [[4, 7], [2, 10, 11, 12]]);
+    }));
+    return _fetchConfig.apply(this, arguments);
+  }
+  function applyDocumentMeta(cfg) {
+    var title = cfg.title || "趣味测试";
+    var description = cfg.metaDescription || cfg.subtitle || "完成测试，生成你的专属报告。";
+    document.title = title;
+    setMeta("name", "description", description);
+    setMeta("property", "og:title", title);
+    setMeta("property", "og:description", description);
+  }
+  function applyTheme(cfg) {
+    Object.entries(cfg.theme || {}).forEach(function (_ref) {
+      var _ref2 = _slicedToArray(_ref, 2),
+        name = _ref2[0],
+        value = _ref2[1];
+      document.documentElement.style.setProperty(name, value);
+    });
+  }
+  function setMeta(attr, key, content) {
+    var node = document.querySelector("meta[".concat(attr, "=\"").concat(key, "\"]"));
+    if (!node) {
+      node = document.createElement("meta");
+      node.setAttribute(attr, key);
+      document.head.appendChild(node);
+    }
+    node.setAttribute("content", content);
+  }
+  function routeFromHash() {
+    var route = (location.hash || "#/").replace("#/", "") || "home";
+    renderRoute(route);
+  }
+  function navigate(route) {
+    var nextHash = "#/".concat(route);
+    if (location.hash === nextHash) {
+      renderRoute(route);
+      return;
+    }
+    location.hash = nextHash;
+  }
+  function renderRoute(route) {
+    state.route = route;
+    if (route === "quiz") renderQuiz();else if (route === "loading") startLoading();else if (route === "result") renderResult();else renderHome();
+  }
+  function renderShell(content) {
+    var extraClass = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : "";
+    app.innerHTML = "\n      <div class=\"shell\">\n        <div class=\"top-rule\"></div>\n        <section class=\"screen ".concat(extraClass, "\">").concat(content, "</section>\n      </div>\n      <div id=\"toast\" class=\"toast\">\u5DF2\u590D\u5236</div>\n    ");
+  }
+  function renderHome() {
+    var cfg = state.config;
+    renderShell("\n      <div class=\"home\">\n        <div class=\"kicker\"><span class=\"dot\"></span><span>".concat(text(cfg.kicker), "</span><span class=\"dot\"></span></div>\n        <h1 class=\"hero-title\">").concat(text(cfg.title), "</h1>\n        <p class=\"hero-subtitle\">").concat(text(cfg.subtitle), "</p>\n        <div class=\"hairline\"></div>\n        <div class=\"intro\">\n          ").concat((cfg.intro || []).map(function (p, index) {
+      return "<p class=\"".concat(index === cfg.intro.length - 1 ? "strong" : "", "\">").concat(text(p), "</p>");
+    }).join(""), "\n        </div>\n        ").concat(!cfg.compactHome && (cfg.dimensions || []).length ? "\n          <div class=\"pill-grid\">\n            ".concat((cfg.dimensions || []).map(function (item) {
+      return "<div class=\"pill\">".concat(text(item), "</div>");
+    }).join(""), "\n          </div>\n        ") : "", "\n        ").concat(cfg.testInfo ? "\n          <section class=\"home-card info-card\">\n            <h2>".concat(text(cfg.testInfo.title || "测验说明"), "</h2>\n            <ul>").concat((cfg.testInfo.bullets || []).map(function (item) {
+      return "<li>".concat(text(item), "</li>");
+    }).join(""), "</ul>\n          </section>\n        ") : "", "\n        ").concat(cfg.matchingSystem ? "\n          <section class=\"home-card info-card\">\n            <h2>".concat(text(cfg.matchingSystem.title || "综合匹配系统"), "</h2>\n            <p>").concat(text(cfg.matchingSystem.body || ""), "</p>\n          </section>\n        ") : "", "\n        ").concat(cfg.profileInput ? "\n          <section class=\"profile-panel\">\n            <label class=\"profile-label\" for=\"profile-value\">".concat(text(cfg.profileInput.title || "先输入出生日期"), "</label>\n            <div class=\"profile-field\">\n              <span>").concat(text(cfg.profileInput.label || "出生日期"), "</span>\n              <input\n                id=\"profile-value\"\n                type=\"").concat(text(cfg.profileInput.type || "date"), "\"\n                value=\"").concat(text(getProfileInputValue(cfg.profileInput)), "\"\n                ").concat(cfg.profileInput.type === "number" ? "inputmode=\"numeric\" min=\"".concat(text(cfg.profileInput.min || 1), "\" max=\"").concat(text(cfg.profileInput.max || 99), "\" placeholder=\"").concat(text(cfg.profileInput.placeholder || ""), "\"") : "", "\n                ").concat(cfg.profileInput.required ? "required" : "", "\n              >\n            </div>\n            <p class=\"profile-note\">").concat(text(cfg.profileInput.note || ""), "</p>\n            <p class=\"profile-error\" data-profile-error aria-live=\"polite\"></p>\n          </section>\n        ") : "", "\n        <button class=\"primary-btn\" data-action=\"start\">").concat(text(cfg.startButton || "开始测试"), "</button>\n        ").concat(cfg.compactHome && (cfg.dimensions || []).length ? "\n          <div class=\"pill-grid compact-pills\">\n            ".concat((cfg.dimensions || []).map(function (item) {
+      return "<div class=\"pill\">".concat(text(item), "</div>");
+    }).join(""), "\n          </div>\n        ") : "", "\n        <p class=\"disclaimer\">").concat(text(cfg.disclaimer || "本测试为趣味内容，仅供娱乐参考。"), "</p>\n      </div>\n      "), "home");
+    var startButton = app.querySelector("[data-action='start']");
+    var profileField = app.querySelector("#profile-value");
+    var profileError = app.querySelector("[data-profile-error]");
+    profileField === null || profileField === void 0 || profileField.addEventListener("input", function () {
+      profileField.classList.remove("invalid");
+      if (profileError) profileError.textContent = "";
+    });
+    var started = false;
+    var startQuiz = function startQuiz() {
+      var _profileField$value, _cfg$profileInput, _cfg$profileInput3;
+      if (started) return;
+      var profileValue = (profileField === null || profileField === void 0 || (_profileField$value = profileField.value) === null || _profileField$value === void 0 ? void 0 : _profileField$value.trim()) || "";
+      if ((_cfg$profileInput = cfg.profileInput) !== null && _cfg$profileInput !== void 0 && _cfg$profileInput.required && !profileValue) {
+        var _cfg$profileInput2;
+        profileField === null || profileField === void 0 || profileField.classList.add("invalid");
+        if (profileError) profileError.textContent = ((_cfg$profileInput2 = cfg.profileInput) === null || _cfg$profileInput2 === void 0 ? void 0 : _cfg$profileInput2.error) || "请先填写信息，再开始测试。";
+        profileField === null || profileField === void 0 || profileField.focus();
+        return;
+      }
+      if (((_cfg$profileInput3 = cfg.profileInput) === null || _cfg$profileInput3 === void 0 ? void 0 : _cfg$profileInput3.type) === "number") {
+        var numericValue = Number(profileValue);
+        var min = Number(cfg.profileInput.min || 1);
+        var max = Number(cfg.profileInput.max || 99);
+        if (!Number.isFinite(numericValue) || numericValue < min || numericValue > max) {
+          var _cfg$profileInput4;
+          profileField === null || profileField === void 0 || profileField.classList.add("invalid");
+          if (profileError) profileError.textContent = ((_cfg$profileInput4 = cfg.profileInput) === null || _cfg$profileInput4 === void 0 ? void 0 : _cfg$profileInput4.rangeError) || "\u8BF7\u8F93\u5165 ".concat(min, "-").concat(max, " \u4E4B\u95F4\u7684\u6570\u5B57\u3002");
+          profileField === null || profileField === void 0 || profileField.focus();
+          return;
+        }
+      }
+      started = true;
+      state.answers = {};
+      state.profile = buildProfileFromInput(cfg.profileInput, profileValue);
+      state.currentIndex = 0;
+      safeSessionStorage.removeItem(getStorageKey());
+      safeSessionStorage.setItem(getProfileStorageKey(), JSON.stringify(state.profile));
+      navigate("quiz");
+    };
+    startButton.addEventListener("click", startQuiz);
+    startButton.addEventListener("touchend", function (event) {
+      event.preventDefault();
+      startQuiz();
+    }, {
+      passive: false
+    });
+  }
+  function renderQuiz() {
+    var questions = state.config.questions || [];
+    var question = questions[state.currentIndex];
+    if (!question) {
+      renderHome();
+      return;
+    }
+    var progress = (state.currentIndex + 1) / questions.length * 100;
+    renderShell("\n      <div class=\"sticky-head\">\n        <div class=\"quiz-meta\">\n          <span>".concat(String(state.currentIndex + 1).padStart(2, "0"), " / ").concat(questions.length, "</span>\n          <span>").concat(text(question.module), "</span>\n        </div>\n        <div class=\"progress-track\"><div class=\"progress-bar\" style=\"width:").concat(progress, "%\"></div></div>\n      </div>\n      <div class=\"question-no\">").concat(String(state.currentIndex + 1).padStart(2, "0"), "</div>\n      <h1 class=\"question-title\">").concat(text(question.text), "</h1>\n      <div class=\"options\">\n        ").concat((question.options || []).map(function (option) {
+      return "\n            <button class=\"option\" data-option=\"".concat(text(option.key), "\">\n              <span class=\"option-key\">").concat(text(option.key), "</span>\n              <span class=\"option-text\">").concat(text(option.text), "</span>\n            </button>\n          ");
+    }).join(""), "\n      </div>\n      <p class=\"hint\">").concat(text(state.config.quizHint || "选择后自动进入下一题"), "</p>\n      "), "quiz-screen");
+    app.querySelectorAll("[data-option]").forEach(function (button) {
+      button.addEventListener("click", function () {
+        return selectOption(button.dataset.option);
+      });
+    });
+  }
+  function selectOption(key) {
+    if (state.locked) return;
+    state.locked = true;
+    state.selected = key;
+    var question = state.config.questions[state.currentIndex];
+    state.answers[question.id] = key;
+    app.querySelectorAll(".option").forEach(function (button) {
+      var selected = button.dataset.option === key;
+      button.classList.toggle("selected", selected);
+      button.classList.toggle("dimmed", !selected);
+    });
+    window.setTimeout(function () {
+      if (state.currentIndex < state.config.questions.length - 1) {
+        state.currentIndex += 1;
+        state.locked = false;
+        state.selected = null;
+        renderQuiz();
+      } else {
+        safeSessionStorage.setItem(getStorageKey(), JSON.stringify(state.answers));
+        state.locked = false;
+        navigate("loading");
+      }
+    }, 420);
+  }
+  function startLoading() {
+    state.loadingStep = 0;
+    renderLoading("");
+    tickLoading();
+  }
+  function renderLoading(value) {
+    var loadingMessages = getLoadingMessages();
+    renderShell("\n      <div class=\"loading-card\">\n        <div class=\"spinner\"></div>\n        <div class=\"loading-text\">".concat(text(value), "<span class=\"cursor\">|</span></div>\n        <div class=\"step-bars\">\n          ").concat(loadingMessages.map(function (_, index) {
+      return "<div class=\"step ".concat(index < state.loadingStep ? "done" : "", "\"><span></span></div>");
+    }).join(""), "\n        </div>\n      </div>\n      "), "loading-screen");
+  }
+  function tickLoading() {
+    if (state.route !== "loading") return;
+    var loadingMessages = getLoadingMessages();
+    if (state.loadingStep >= loadingMessages.length) {
+      window.setTimeout(function () {
+        return navigate("result");
+      }, 700);
+      return;
+    }
+    var message = loadingMessages[state.loadingStep];
+    var chars = 0;
+    var interval = window.setInterval(function () {
+      chars += 1;
+      renderLoading(message.slice(0, chars));
+      if (chars >= message.length) {
+        window.clearInterval(interval);
+        window.setTimeout(function () {
+          state.loadingStep += 1;
+          tickLoading();
+        }, 520);
+      }
+    }, 35);
+  }
+  function renderResult() {
+    var _state$config$seconda;
+    var saved = safeSessionStorage.getItem(getStorageKey());
+    if (saved) state.answers = JSON.parse(saved);
+    if (Object.keys(state.answers).length < state.config.questions.length) {
+      renderHome();
+      return;
+    }
+    var scored = scoreAnswers(state.answers);
+    var primary = state.config.results[scored.primary];
+    var secondary = scored.secondary ? (_state$config$seconda = state.config.secondaryNotes) === null || _state$config$seconda === void 0 || (_state$config$seconda = _state$config$seconda[scored.primary]) === null || _state$config$seconda === void 0 ? void 0 : _state$config$seconda[scored.secondary] : null;
+    var headlineScore = Number.isFinite(scored.score) ? scored.score : primary.maturityScore;
+    var stage = getStage(headlineScore);
+    var shareText = buildShareText(primary, secondary, scored);
+    var compareLabels = state.config.compareLabels || ["如果继续原路", "如果换一种做法"];
+    state.resultData = {
+      scored: scored,
+      primary: primary,
+      secondary: secondary,
+      stage: stage,
+      shareText: shareText
+    };
+    renderShell("\n      <article class=\"report\">\n        <div class=\"kicker\"><span class=\"dot\"></span><span>".concat(text(state.config.resultKicker || "Result Report"), "</span><span class=\"dot\"></span></div>\n        <h1 class=\"result-type\">").concat(text(primary.typeName), "</h1>\n        <p class=\"result-subtitle\">").concat(text(primary.subtitle), "</p>\n        <div class=\"stamp-row\">\n          <div class=\"stamp\"><strong>").concat(text(headlineScore), "</strong><span>").concat(text(state.config.scoreLabel || "决策成熟度"), "</span></div>\n          <div class=\"stamp\"><strong>").concat(text(stage), "</strong><span>").concat(text(state.config.stageLabel || "当前行动阶段"), "</span></div>\n        </div>\n\n        ").concat(renderMatchSummary(scored), "\n\n        ").concat(scored.psychological || scored.attachment || scored.liking || scored.distribution ? "" : "\n          <section class=\"section\">\n            <h2>\u4F60\u7684\u7B54\u6848\u5206\u5E03</h2>\n            <div class=\"meters\">\n              ".concat(Object.entries(scored.counts).filter(function (_ref3) {
+      var _ref4 = _slicedToArray(_ref3, 2),
+        value = _ref4[1];
+      return value > 0;
+    }).map(function (_ref5) {
+      var _ref6 = _slicedToArray(_ref5, 2),
+        key = _ref6[0],
+        value = _ref6[1];
+      var typeData = state.config.results[key];
+      var width = value / state.config.questions.length * 100;
+      return "\n                    <div>\n                      <div class=\"meter-head\"><span>".concat(text(key), " \xB7 ").concat(text(typeData.typeName), "</span><span>").concat(value, " \u9898</span></div>\n                      <div class=\"meter-track\"><div class=\"meter-fill\" style=\"width:").concat(width, "%\"></div></div>\n                    </div>\n                  ");
+    }).join(""), "\n            </div>\n          </section>\n        "), "\n\n        ").concat(secondary ? "<section class=\"section\"><h2>\u526F\u503E\u5411\u63D0\u793A</h2><div class=\"secondary-note\">".concat(text(secondary), "</div></section>") : "", "\n\n        <section class=\"section\">\n          <h2>\u8BCA\u65AD\u7ED3\u8BBA</h2>\n          <div class=\"quote\">").concat(text(primary.coreConclusion), "</div>\n        </section>\n\n        <section class=\"section\">\n          <h2>\u4E3A\u4EC0\u4E48\u4F60\u4F1A\u8FD9\u6837</h2>\n          <p>").concat(text(primary.diagnosis), "</p>\n          <p>").concat(text(primary.whatYouReallyWant), "</p>\n        </section>\n\n        <section class=\"section\">\n          <h2>").concat(text(primary.mechanism.title), "</h2>\n          <p>").concat(text(primary.mechanism.content), "</p>\n        </section>\n\n        ").concat(renderParagraphSection("专业解读框架", primary.professionalBasis), "\n        ").concat(renderTagSection("你的关键矛盾", primary.coreTensions), "\n        ").concat(renderCompareListSection("适合推进的条件", "需要谨慎的信号", primary.suitableIf, primary.cautionIf), "\n\n        <section class=\"section\">\n          <h2>\u5173\u952E\u6307\u6570</h2>\n          <div class=\"meters\">\n            ").concat((primary.indices || []).map(function (item) {
+      return "\n                <div>\n                  <div class=\"meter-head\"><span>".concat(text(item.label), "</span><span>").concat(text(item.value), "</span></div>\n                  <div class=\"meter-track\"><div class=\"meter-fill\" style=\"width:").concat(number(item.value), "%\"></div></div>\n                </div>\n              ");
+    }).join(""), "\n          </div>\n        </section>\n\n        <section class=\"section\">\n          <h2>\u4E24\u6761\u8DEF\u5F84\u5BF9\u6BD4</h2>\n          <div class=\"compare\">\n            <div class=\"compare-card\"><h3>").concat(text(compareLabels[0]), "</h3><p>").concat(text(primary.ifStay), "</p></div>\n            <div class=\"compare-card\"><h3>").concat(text(compareLabels[1]), "</h3><p>").concat(text(primary.ifChange), "</p></div>\n          </div>\n        </section>\n\n        <section class=\"section\">\n          <h2>\u73B0\u5728\u6700\u4E0D\u5EFA\u8BAE\u4F60\u505A</h2>\n          <div class=\"tag-list\">").concat((primary.notRecommended || []).map(function (item) {
+      return "<span class=\"tag\">".concat(text(item), "</span>");
+    }).join(""), "</div>\n        </section>\n\n        <section class=\"section\">\n          <h2>").concat(text(state.config.planTitle || "未来 90 天验证方案"), "</h2>\n          <div class=\"plan\">\n            ").concat((primary.plan90 || []).map(function (item, index) {
+      return "\n                <div class=\"plan-card\">\n                  <h3>".concat(index + 1, ". ").concat(text(item.title), "</h3>\n                  <p>").concat(text(item.content), "</p>\n                </div>\n              ");
+    }).join(""), "\n          </div>\n        </section>\n\n        <section class=\"section\">\n          <h2>\u6700\u540E\u4E00\u53E5\u8BDD</h2>\n          <p>").concat(text(primary.closing), "</p>\n        </section>\n\n        ").concat(state.config.disclaimer ? "<p class=\"result-disclaimer\">".concat(text(state.config.disclaimer), "</p>") : "", "\n\n        <div class=\"actions\">\n          <button class=\"primary-btn\" data-action=\"copy\">").concat(text(state.config.copyButton || "复制我的结果"), "</button>\n          <button class=\"ghost-btn\" data-action=\"restart\">").concat(text(state.config.restartButton || "重新测试"), "</button>\n        </div>\n      </article>\n      "), "result-screen");
+    app.querySelector("[data-action='copy']").addEventListener("click", function () {
+      return copyShareText(shareText);
+    });
+    app.querySelector("[data-action='restart']").addEventListener("click", function () {
+      safeSessionStorage.removeItem(getStorageKey());
+      safeSessionStorage.removeItem(getProfileStorageKey());
+      state.answers = {};
+      state.profile = {
+        birthDate: ""
+      };
+      state.currentIndex = 0;
+      navigate("home");
+    });
+  }
+  function renderParagraphSection(title, paragraphs) {
+    if (!Array.isArray(paragraphs) || !paragraphs.length) return "";
+    return "\n      <section class=\"section\">\n        <h2>".concat(text(title), "</h2>\n        ").concat(paragraphs.map(function (item) {
+      return "<p>".concat(text(item), "</p>");
+    }).join(""), "\n      </section>\n    ");
+  }
+  function renderTagSection(title, items) {
+    if (!Array.isArray(items) || !items.length) return "";
+    return "\n      <section class=\"section\">\n        <h2>".concat(text(title), "</h2>\n        <div class=\"tag-list\">").concat(items.map(function (item) {
+      return "<span class=\"tag\">".concat(text(item), "</span>");
+    }).join(""), "</div>\n      </section>\n    ");
+  }
+  function renderMatchSummary(scored) {
+    if (scored.distribution) return renderDistributionSummary(scored.distribution);
+    if (scored.psychological) return renderPsychologicalSummary(scored.psychological);
+    if (scored.attachment) return renderAttachmentSummary(scored.attachment);
+    if (scored.liking) return renderLikingSummary(scored.liking);
+    if (!scored.match) return "";
+    var match = scored.match;
+    return "\n      <section class=\"section\">\n        <h2>\u7EFC\u5408\u5339\u914D\u7ED3\u679C</h2>\n        <div class=\"match-summary\">\n          <div class=\"match-grid\">\n            <div class=\"match-item\"><span>\u51FA\u751F\u65E5\u671F\u503E\u5411</span><strong>".concat(text(match.birthElement), "</strong></div>\n            <div class=\"match-item\"><span>\u7B54\u9898\u503E\u5411</span><strong>").concat(text(match.personalityElement), "</strong></div>\n            <div class=\"match-item\"><span>\u57CE\u5E02\u5339\u914D\u5EA6</span><strong>").concat(text(match.matchScore), "%</strong></div>\n          </div>\n          <p>\u672C\u7ED3\u679C\u6309\u51FA\u751F\u65E5\u671F\u503E\u5411\u4E0E 49 \u9053\u9898\u7684\u751F\u6D3B\u9009\u62E9\u52A0\u6743\u751F\u6210\u3002\u4E94\u884C\u4EC5\u7528\u4E8E\u8868\u8FBE\u751F\u6D3B\u504F\u597D\uFF0C\u7ED3\u679C\u9700\u8981\u7ED3\u5408\u771F\u5B9E\u5C97\u4F4D\u3001\u9884\u7B97\u3001\u4F4F\u623F\u548C\u8BD5\u4F4F\u4F53\u9A8C\u5224\u65AD\u3002</p>\n        </div>\n      </section>\n    ");
+  }
+  function renderDistributionSummary(data) {
+    var _data$ranking$, _data$ranking$2;
+    var size = 320;
+    var center = size / 2;
+    var radius = 108;
+    var count = data.dimensionOrder.length;
+    var point = function point(index) {
+      var scale = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 1;
+      var angle = -Math.PI / 2 + Math.PI * 2 * index / count;
+      return [center + Math.cos(angle) * radius * scale, center + Math.sin(angle) * radius * scale];
+    };
+    var polygon = function polygon(scale) {
+      return data.dimensionOrder.map(function (_, index) {
+        return point(index, scale).join(",");
+      }).join(" ");
+    };
+    var valuePolygon = data.dimensionOrder.map(function (key, index) {
+      return point(index, number(data.dimensions[key]) / 100).join(",");
+    }).join(" ");
+    var labels = data.dimensionOrder.map(function (key, index) {
+      var _point = point(index, 1.28),
+        _point2 = _slicedToArray(_point, 2),
+        x = _point2[0],
+        y = _point2[1];
+      return "<text x=\"".concat(x, "\" y=\"").concat(y, "\" text-anchor=\"middle\" dominant-baseline=\"middle\">").concat(text(data.dimensionLabels[key] || key), "</text>");
+    }).join("");
+    return "\n      <section class=\"section distribution-summary\">\n        <h2>".concat(text(data.title || "七维张力分布"), "</h2>\n        <div class=\"distribution-chart\" role=\"img\" aria-label=\"").concat(text(data.title || "七维张力分布"), "\">\n          <svg viewBox=\"0 0 ").concat(size, " ").concat(size, "\">\n            ").concat([0.25, 0.5, 0.75, 1].map(function (scale) {
+      return "<polygon class=\"radar-grid\" points=\"".concat(polygon(scale), "\"></polygon>");
+    }).join(""), "\n            ").concat(data.dimensionOrder.map(function (_, index) {
+      var _point3 = point(index, 1),
+        _point4 = _slicedToArray(_point3, 2),
+        x = _point4[0],
+        y = _point4[1];
+      return "<line class=\"radar-axis\" x1=\"".concat(center, "\" y1=\"").concat(center, "\" x2=\"").concat(x, "\" y2=\"").concat(y, "\"></line>");
+    }).join(""), "\n            <polygon class=\"radar-value\" points=\"").concat(valuePolygon, "\"></polygon>\n            ").concat(data.dimensionOrder.map(function (key, index) {
+      var _point5 = point(index, number(data.dimensions[key]) / 100),
+        _point6 = _slicedToArray(_point5, 2),
+        x = _point6[0],
+        y = _point6[1];
+      return "<circle class=\"radar-dot\" cx=\"".concat(x, "\" cy=\"").concat(y, "\" r=\"4\"></circle>");
+    }).join(""), "\n            ").concat(labels, "\n          </svg>\n        </div>\n        <div class=\"match-summary\">\n          <div class=\"match-grid\">\n            <div class=\"match-item\"><span>\u4E3B\u5BFC\u5370\u8BB0</span><strong>").concat(text(((_data$ranking$ = data.ranking[0]) === null || _data$ranking$ === void 0 ? void 0 : _data$ranking$.label) || ""), "</strong></div>\n            <div class=\"match-item\"><span>\u7B2C\u4E8C\u503E\u5411</span><strong>").concat(text(((_data$ranking$2 = data.ranking[1]) === null || _data$ranking$2 === void 0 ? void 0 : _data$ranking$2.label) || ""), "</strong></div>\n            <div class=\"match-item\"><span>\u5206\u5E03\u72B6\u6001</span><strong>").concat(text(data.balanceLabel), "</strong></div>\n          </div>\n          <p>").concat(text(data.note), "</p>\n        </div>\n      </section>\n      <section class=\"section\">\n        <h2>\u4E03\u7EF4\u6392\u5E8F</h2>\n        <div class=\"meters\">\n          ").concat(data.ranking.map(function (item, index) {
+      return "\n            <div>\n              <div class=\"meter-head\"><span>".concat(index + 1, ". ").concat(text(item.label), "</span><span>").concat(text(item.value), "</span></div>\n              <div class=\"meter-track\"><div class=\"meter-fill\" style=\"width:").concat(number(item.value), "%\"></div></div>\n            </div>\n          ");
+    }).join(""), "\n        </div>\n      </section>\n    ");
+  }
+  function renderAttachmentSummary(data) {
+    return "\n      <section class=\"section\">\n        <h2>\u4F60\u7684\u5173\u7CFB\u8054\u7ED3\u5750\u6807</h2>\n        <div class=\"match-summary\">\n          <div class=\"match-grid\">\n            <div class=\"match-item\"><span>\u5173\u7CFB\u7126\u8651</span><strong>".concat(text(data.anxiety), "\u5206</strong></div>\n            <div class=\"match-item\"><span>\u4EB2\u5BC6\u56DE\u907F</span><strong>").concat(text(data.avoidance), "\u5206</strong></div>\n            <div class=\"match-item\"><span>\u5F53\u524D\u72B6\u6001</span><strong>").concat(text(data.mixed ? "带有混合倾向" : "主要倾向清晰"), "</strong></div>\n          </div>\n          <p>\u5206\u6570\u8868\u793A\u4F60\u5728\u5F53\u524D\u5173\u7CFB\u7ECF\u9A8C\u4E2D\u66F4\u5BB9\u6613\u542F\u52A8\u7684\u4FDD\u62A4\u53CD\u5E94\uFF0C\u4E0D\u662F\u7EC8\u8EAB\u4E0D\u53D8\u7684\u6807\u7B7E\u3002\u5173\u7CFB\u5BF9\u8C61\u3001\u5B89\u5168\u611F\u548C\u8FD1\u671F\u538B\u529B\u53D8\u5316\uFF0C\u90FD\u53EF\u80FD\u8BA9\u5750\u6807\u79FB\u52A8\u3002</p>\n        </div>\n      </section>\n      <section class=\"section\">\n        <h2>\u53CC\u7EF4\u5EA6\u5173\u7CFB\u5929\u6C14</h2>\n        <div class=\"meters\">\n          <div>\n            <div class=\"meter-head\"><span>\u5173\u7CFB\u7126\u8651\uFF1A\u5BF9\u5931\u53BB\u8FDE\u63A5\u7684\u8B66\u89C9</span><span>").concat(text(data.anxiety), "</span></div>\n            <div class=\"meter-track\"><div class=\"meter-fill\" style=\"width:").concat(number(data.anxiety), "%\"></div></div>\n          </div>\n          <div>\n            <div class=\"meter-head\"><span>\u4EB2\u5BC6\u56DE\u907F\uFF1A\u5BF9\u8FC7\u5EA6\u9760\u8FD1\u7684\u538B\u529B</span><span>").concat(text(data.avoidance), "</span></div>\n            <div class=\"meter-track\"><div class=\"meter-fill\" style=\"width:").concat(number(data.avoidance), "%\"></div></div>\n          </div>\n        </div>\n      </section>\n    ");
+  }
+  function renderPsychologicalSummary(data) {
+    var deltaLabel = data.delta > 0 ? "\u6BD4\u5B9E\u9645\u5E74\u9F84\u6210\u719F ".concat(data.delta, " \u5C81") : data.delta < 0 ? "\u6BD4\u5B9E\u9645\u5E74\u9F84\u5E74\u8F7B ".concat(Math.abs(data.delta), " \u5C81") : "与实际年龄同频";
+    return "\n      <section class=\"section\">\n        <h2>\u5FC3\u7406\u5E74\u9F84\u5BF9\u6BD4</h2>\n        <div class=\"match-summary\">\n          <div class=\"match-grid\">\n            <div class=\"match-item\"><span>\u5B9E\u9645\u5E74\u9F84</span><strong>".concat(text(data.actualAge), "\u5C81</strong></div>\n            <div class=\"match-item\"><span>\u5FC3\u7406\u5E74\u9F84</span><strong>").concat(text(data.psychologicalAge), "\u5C81</strong></div>\n            <div class=\"match-item\"><span>\u5E74\u9F84\u5DEE</span><strong>").concat(text(deltaLabel), "</strong></div>\n          </div>\n          <p>").concat(text(data.ageLabel), "\u3002\u8FD9\u4E2A\u6570\u5B57\u4E0D\u662F\u80FD\u529B\u9AD8\u4F4E\uFF0C\u53EA\u4EE3\u8868\u4F60\u6700\u8FD1\u9762\u5BF9\u4E16\u754C\u65F6\u66F4\u5E38\u7528\u7684\u5FC3\u7406\u6A21\u5F0F\u3002</p>\n        </div>\n      </section>\n      <section class=\"section\">\n        <h2>8\u7EF4\u5FC3\u7406\u753B\u50CF</h2>\n        <div class=\"meters\">\n          ").concat(data.dimensionOrder.map(function (key) {
+      return "\n            <div>\n              <div class=\"meter-head\"><span>".concat(text(data.dimensionLabels[key] || key), "</span><span>").concat(text(data.dimensions[key]), "</span></div>\n              <div class=\"meter-track\"><div class=\"meter-fill\" style=\"width:").concat(number(data.dimensions[key]), "%\"></div></div>\n            </div>\n          ");
+    }).join(""), "\n        </div>\n      </section>\n      <section class=\"section\">\n        <h2>\u5173\u952E\u8BCD\u6807\u7B7E</h2>\n        <div class=\"tag-list\">").concat(data.tags.map(function (item) {
+      return "<span class=\"tag\">".concat(text(item), "</span>");
+    }).join(""), "</div>\n      </section>\n      <section class=\"section\">\n        <h2>\u4F60\u7684\u957F\u677F\u4E0E\u76F2\u70B9</h2>\n        <div class=\"compare\">\n          <div class=\"compare-card\">\n            <h3>\u6700\u9AD8\u7684 3 \u4E2A\u7EF4\u5EA6</h3>\n            ").concat(data.topDimensions.map(function (item) {
+      return "<p>".concat(text(item.label), "\uFF1A").concat(text(item.value), "</p>");
+    }).join(""), "\n          </div>\n          <div class=\"compare-card\">\n            <h3>\u6700\u4F4E\u7684 2 \u4E2A\u7EF4\u5EA6</h3>\n            ").concat(data.lowDimensions.map(function (item) {
+      return "<p>".concat(text(item.label), "\uFF1A").concat(text(item.value), "</p>");
+    }).join(""), "\n          </div>\n        </div>\n      </section>\n    ");
+  }
+  function renderLikingSummary(data) {
+    return "\n      <section class=\"section\">\n        <h2>\u4F60\u7684\u559C\u6B22\u5149\u8C31</h2>\n        <div class=\"match-summary\">\n          <div class=\"match-grid\">\n            <div class=\"match-item\"><span>\u559C\u6B22\u503C</span><strong>".concat(text(data.score), " / 100</strong></div>\n            <div class=\"match-item\"><span>\u5F53\u524D\u9636\u6BB5</span><strong>").concat(text(data.bandLabel), "</strong></div>\n            <div class=\"match-item\"><span>\u7406\u60F3\u5316\u63D0\u9192</span><strong>").concat(text(data.idealizationRisk), "\u5206</strong></div>\n          </div>\n          <p>\u559C\u6B22\u503C\u8868\u793A\u4F60\u6B64\u523B\u7684\u4E3B\u89C2\u5FC3\u52A8\u4E0E\u6295\u5165\uFF0C\u4E0D\u4EE3\u8868\u53CC\u65B9\u5339\u914D\u5EA6\uFF0C\u4E5F\u4E0D\u4EE3\u8868\u5BF9\u65B9\u6709\u540C\u6837\u7684\u611F\u89C9\u3002\u73B0\u5B9E\u770B\u89C1\u548C\u5173\u7CFB\u51C6\u5907\u8D8A\u5145\u5206\uFF0C\u8FD9\u4EFD\u559C\u6B22\u8D8A\u6709\u673A\u4F1A\u4ECE\u60F3\u8C61\u8D70\u5411\u771F\u5B9E\u3002</p>\n        </div>\n      </section>\n      <section class=\"section\">\n        <h2>\u56DB\u7EF4\u559C\u6B22\u6863\u6848</h2>\n        <div class=\"meters\">\n          ").concat(data.dimensionOrder.map(function (key) {
+      return "\n            <div>\n              <div class=\"meter-head\"><span>".concat(text(data.dimensionLabels[key] || key), "</span><span>").concat(text(data.dimensions[key]), "</span></div>\n              <div class=\"meter-track\"><div class=\"meter-fill\" style=\"width:").concat(number(data.dimensions[key]), "%\"></div></div>\n            </div>\n          ");
+    }).join(""), "\n        </div>\n      </section>\n    ");
+  }
+  function renderCompareListSection(leftTitle, rightTitle, leftItems, rightItems) {
+    var hasLeft = Array.isArray(leftItems) && leftItems.length;
+    var hasRight = Array.isArray(rightItems) && rightItems.length;
+    if (!hasLeft && !hasRight) return "";
+    return "\n      <section class=\"section\">\n        <h2>\u9002\u7528\u8FB9\u754C</h2>\n        <div class=\"compare\">\n          <div class=\"compare-card\">\n            <h3>".concat(text(leftTitle), "</h3>\n            ").concat((leftItems || []).map(function (item) {
+      return "<p>".concat(text(item), "</p>");
+    }).join(""), "\n          </div>\n          <div class=\"compare-card\">\n            <h3>").concat(text(rightTitle), "</h3>\n            ").concat((rightItems || []).map(function (item) {
+      return "<p>".concat(text(item), "</p>");
+    }).join(""), "\n          </div>\n        </div>\n      </section>\n    ");
+  }
+  function scoreAnswers(answers) {
+    var _state$config$scoring, _state$config$scoring2, _state$config$scoring3, _state$config$scoring4, _state$config$scoring5, _state$config$scoring6, _state$config$seconda2;
+    if (((_state$config$scoring = state.config.scoring) === null || _state$config$scoring === void 0 ? void 0 : _state$config$scoring.mode) === "distribution-profile") {
+      return scoreDistributionProfile(answers, state.config.scoring);
+    }
+    if (((_state$config$scoring2 = state.config.scoring) === null || _state$config$scoring2 === void 0 ? void 0 : _state$config$scoring2.mode) === "liking-profile") {
+      return scoreLikingProfile(answers, state.config.scoring);
+    }
+    if (((_state$config$scoring3 = state.config.scoring) === null || _state$config$scoring3 === void 0 ? void 0 : _state$config$scoring3.mode) === "attachment-two-axis") {
+      return scoreAttachmentTwoAxis(answers, state.config.scoring);
+    }
+    if (((_state$config$scoring4 = state.config.scoring) === null || _state$config$scoring4 === void 0 ? void 0 : _state$config$scoring4.mode) === "psychological-age") {
+      return scorePsychologicalAge(answers, state.config.scoring);
+    }
+    if (((_state$config$scoring5 = state.config.scoring) === null || _state$config$scoring5 === void 0 ? void 0 : _state$config$scoring5.mode) === "paired-attributes") {
+      return scorePairedAttributes(answers, state.config.scoring);
+    }
+    if (((_state$config$scoring6 = state.config.scoring) === null || _state$config$scoring6 === void 0 ? void 0 : _state$config$scoring6.mode) === "city-with-elements") {
+      return scoreCityWithElements(answers, state.config.scoring);
+    }
+    var resultKeys = Object.keys(state.config.results || {});
+    var counts = Object.fromEntries(resultKeys.map(function (key) {
+      return [key, 0];
+    }));
+    (state.config.questions || []).forEach(function (question) {
+      var answerKey = answers[question.id];
+      if (!answerKey) return;
+      var option = (question.options || []).find(function (item) {
+        return item.key === answerKey;
+      });
+      var weights = option === null || option === void 0 ? void 0 : option.weights;
+      if (weights && _typeof(weights) === "object") {
+        Object.entries(weights).forEach(function (_ref7) {
+          var _ref8 = _slicedToArray(_ref7, 2),
+            key = _ref8[0],
+            value = _ref8[1];
+          if (counts[key] !== undefined) counts[key] += Number(value) || 0;
+        });
+        return;
+      }
+      var scoreKey = (option === null || option === void 0 ? void 0 : option.score) || (option === null || option === void 0 ? void 0 : option.result) || answerKey;
+      if (counts[scoreKey] !== undefined) counts[scoreKey] += 1;
+    });
+    var sorted = Object.entries(counts).sort(function (a, b) {
+      return b[1] - a[1];
+    });
+    var threshold = (_state$config$seconda2 = state.config.secondaryThreshold) !== null && _state$config$seconda2 !== void 0 ? _state$config$seconda2 : 2;
+    var primary = sorted[0][0];
+    var secondary = sorted[1][1] > 0 && sorted[0][1] - sorted[1][1] <= threshold ? sorted[1][0] : null;
+    return {
+      counts: counts,
+      primary: primary,
+      secondary: secondary
+    };
+  }
+  function scoreDistributionProfile(answers, scoring) {
+    var _ranking$, _ranking$2, _ranking$3, _ranking;
+    var dimensionOrder = scoring.dimensionOrder || Object.keys(state.config.results || {});
+    var dimensionLabels = scoring.dimensionLabels || {};
+    var totals = Object.fromEntries(dimensionOrder.map(function (key) {
+      return [key, 0];
+    }));
+    var possible = Object.fromEntries(dimensionOrder.map(function (key) {
+      return [key, 0];
+    }));
+    (state.config.questions || []).forEach(function (question) {
+      var answerKey = answers[question.id];
+      var chosen = (question.options || []).find(function (item) {
+        return item.key === answerKey;
+      });
+      dimensionOrder.forEach(function (key) {
+        var _chosen$weights;
+        var maxForQuestion = Math.max.apply(Math, [0].concat(_toConsumableArray((question.options || []).map(function (option) {
+          var _option$weights;
+          return Number(((_option$weights = option.weights) === null || _option$weights === void 0 ? void 0 : _option$weights[key]) || 0);
+        }))));
+        possible[key] += maxForQuestion;
+        totals[key] += Number((chosen === null || chosen === void 0 || (_chosen$weights = chosen.weights) === null || _chosen$weights === void 0 ? void 0 : _chosen$weights[key]) || 0);
+      });
+    });
+    var dimensions = Object.fromEntries(dimensionOrder.map(function (key) {
+      return [key, possible[key] ? clamp(Math.round(totals[key] / possible[key] * 100), 0, 100) : 0];
+    }));
+    var ranking = dimensionOrder.map(function (key) {
+      return {
+        key: key,
+        label: dimensionLabels[key] || key,
+        value: dimensions[key]
+      };
+    }).sort(function (left, right) {
+      return right.value - left.value;
+    });
+    var primary = (_ranking$ = ranking[0]) === null || _ranking$ === void 0 ? void 0 : _ranking$.key;
+    var secondary = ((_ranking$2 = ranking[1]) === null || _ranking$2 === void 0 ? void 0 : _ranking$2.key) || null;
+    var spread = (((_ranking$3 = ranking[0]) === null || _ranking$3 === void 0 ? void 0 : _ranking$3.value) || 0) - (((_ranking = ranking[ranking.length - 1]) === null || _ranking === void 0 ? void 0 : _ranking.value) || 0);
+    var balanceLabel = spread <= 18 ? "七面较均衡" : spread <= 35 ? "双核牵引" : "主轴较清晰";
+    var average = Math.round(ranking.reduce(function (sum, item) {
+      return sum + item.value;
+    }, 0) / Math.max(1, ranking.length));
+    var counts = Object.fromEntries(dimensionOrder.map(function (key) {
+      return [key, dimensions[key]];
+    }));
+    return {
+      counts: counts,
+      primary: primary,
+      secondary: secondary,
+      score: dimensions[primary] || average,
+      distribution: {
+        title: scoring.title || "七维张力分布",
+        dimensions: dimensions,
+        dimensionOrder: dimensionOrder,
+        dimensionLabels: dimensionLabels,
+        ranking: ranking,
+        balanceLabel: balanceLabel,
+        note: scoring.note || "这些分数表示特定情境下更容易被启动的欲望与防御，不代表道德好坏，也不是固定人格。"
+      }
+    };
+  }
+  function scoreLikingProfile(answers, scoring) {
+    var _state$config$results;
+    var answerValues = scoring.answerValues || {
+      A: 1,
+      B: 2,
+      C: 3,
+      D: 4,
+      E: 5
+    };
+    var dimensionOrder = scoring.dimensionOrder || ["attraction", "reality", "investment", "readiness"];
+    var dimensionLabels = scoring.dimensionLabels || {};
+    var totals = Object.fromEntries(dimensionOrder.map(function (key) {
+      return [key, 0];
+    }));
+    var itemCounts = Object.fromEntries(dimensionOrder.map(function (key) {
+      return [key, 0];
+    }));
+    (state.config.questions || []).forEach(function (question) {
+      var _ref9, _answerValues$answerK;
+      var answerKey = answers[question.id];
+      var dimension = question.dimension;
+      if (!answerKey || !(dimension in totals)) return;
+      var base = Number((_ref9 = (_answerValues$answerK = answerValues[answerKey]) !== null && _answerValues$answerK !== void 0 ? _answerValues$answerK : answerValues[String(answerKey)]) !== null && _ref9 !== void 0 ? _ref9 : 0);
+      if (!Number.isFinite(base) || base < 1 || base > 5) return;
+      var adjusted = question.reverse ? 6 - base : base;
+      totals[dimension] += adjusted;
+      itemCounts[dimension] += 1;
+    });
+    var dimensions = {};
+    dimensionOrder.forEach(function (key) {
+      var count = itemCounts[key] || 0;
+      var averageScore = count ? totals[key] / count : 1;
+      dimensions[key] = clamp(Math.round((averageScore - 1) / 4 * 100), 0, 100);
+    });
+    var weights = scoring.dimensionWeights || {};
+    var weightTotal = dimensionOrder.reduce(function (sum, key) {
+      var _weights$key;
+      return sum + Number((_weights$key = weights[key]) !== null && _weights$key !== void 0 ? _weights$key : 1);
+    }, 0) || 1;
+    var score = clamp(Math.round(dimensionOrder.reduce(function (sum, key) {
+      var _weights$key2;
+      return sum + dimensions[key] * Number((_weights$key2 = weights[key]) !== null && _weights$key2 !== void 0 ? _weights$key2 : 1);
+    }, 0) / weightTotal), 0, 100);
+    var bands = scoring.bands || [{
+      max: 24,
+      key: "BUD"
+    }, {
+      max: 44,
+      key: "CURIOUS"
+    }, {
+      max: 64,
+      key: "SPARK"
+    }, {
+      max: 82,
+      key: "SERIOUS"
+    }, {
+      max: 100,
+      key: "COMMITTED"
+    }];
+    var band = bands.find(function (item) {
+      return score <= Number(item.max);
+    }) || bands[bands.length - 1];
+    var primary = band.key;
+    var primaryData = ((_state$config$results = state.config.results) === null || _state$config$results === void 0 ? void 0 : _state$config$results[primary]) || {};
+    var liking = {
+      score: score,
+      bandLabel: primaryData.typeName || primary,
+      idealizationRisk: clamp(100 - Number(dimensions.reality || 0), 0, 100),
+      dimensions: dimensions,
+      dimensionOrder: dimensionOrder,
+      dimensionLabels: dimensionLabels
+    };
+    var counts = Object.fromEntries(Object.keys(state.config.results || {}).map(function (key) {
+      return [key, key === primary ? 1 : 0];
+    }));
+    return {
+      counts: counts,
+      primary: primary,
+      secondary: null,
+      score: score,
+      liking: liking
+    };
+  }
+  function scoreAttachmentTwoAxis(answers, scoring) {
+    var _scoring$threshold;
+    var answerValues = scoring.answerValues || {
+      A: 1,
+      B: 2,
+      C: 3,
+      D: 4,
+      E: 5
+    };
+    var totals = {
+      anxiety: 0,
+      avoidance: 0
+    };
+    var itemCounts = {
+      anxiety: 0,
+      avoidance: 0
+    };
+    (state.config.questions || []).forEach(function (question) {
+      var _ref0, _answerValues$answerK2;
+      var answerKey = answers[question.id];
+      var dimension = question.dimension;
+      if (!answerKey || !(dimension in totals)) return;
+      var base = Number((_ref0 = (_answerValues$answerK2 = answerValues[answerKey]) !== null && _answerValues$answerK2 !== void 0 ? _answerValues$answerK2 : answerValues[String(answerKey)]) !== null && _ref0 !== void 0 ? _ref0 : 0);
+      if (!Number.isFinite(base) || base < 1 || base > 5) return;
+      var adjusted = question.reverse ? 6 - base : base;
+      totals[dimension] += adjusted;
+      itemCounts[dimension] += 1;
+    });
+    var toPercent = function toPercent(dimension) {
+      var count = itemCounts[dimension] || 0;
+      if (!count) return 0;
+      var averageScore = totals[dimension] / count;
+      return clamp(Math.round((averageScore - 1) / 4 * 100), 0, 100);
+    };
+    var anxiety = toPercent("anxiety");
+    var avoidance = toPercent("avoidance");
+    var threshold = Number((_scoring$threshold = scoring.threshold) !== null && _scoring$threshold !== void 0 ? _scoring$threshold : 50);
+    var anxietyHigh = anxiety >= threshold;
+    var avoidanceHigh = avoidance >= threshold;
+    var resultMap = scoring.resultMap || {
+      "low-low": "SECURE",
+      "high-low": "ANXIOUS",
+      "low-high": "AVOIDANT",
+      "high-high": "FEARFUL"
+    };
+    var quadrantKey = "".concat(anxietyHigh ? "high" : "low", "-").concat(avoidanceHigh ? "high" : "low");
+    var primary = resultMap[quadrantKey];
+    var mixedBand = Array.isArray(scoring.mixedBand) ? scoring.mixedBand : [42, 58];
+    var mixed = anxiety >= Number(mixedBand[0]) && anxiety <= Number(mixedBand[1]) || avoidance >= Number(mixedBand[0]) && avoidance <= Number(mixedBand[1]);
+    var secondary = null;
+    if (mixed) {
+      var flipAnxiety = Math.abs(anxiety - threshold) <= Math.abs(avoidance - threshold);
+      var secondaryKey = flipAnxiety ? "".concat(anxietyHigh ? "low" : "high", "-").concat(avoidanceHigh ? "high" : "low") : "".concat(anxietyHigh ? "high" : "low", "-").concat(avoidanceHigh ? "low" : "high");
+      secondary = resultMap[secondaryKey] || null;
+    }
+    var counts = Object.fromEntries(Object.keys(state.config.results || {}).map(function (key) {
+      return [key, key === primary ? (state.config.questions || []).length : 0];
+    }));
+    return {
+      counts: counts,
+      primary: primary,
+      secondary: secondary,
+      attachment: {
+        anxiety: anxiety,
+        avoidance: avoidance,
+        threshold: threshold,
+        mixed: mixed
+      }
+    };
+  }
+  function scorePsychologicalAge(answers, scoring) {
+    var _scoring$ageFactor, _scoring$minAge, _scoring$maxAge;
+    var answerValues = scoring.answerValues || {
+      A: 1,
+      B: 2,
+      C: 3,
+      D: 4,
+      E: 5
+    };
+    var dimensionLabels = scoring.dimensionLabels || {};
+    var dimensionOrder = scoring.dimensionOrder || Object.keys(dimensionLabels);
+    var rawTotals = Object.fromEntries(dimensionOrder.map(function (key) {
+      return [key, 0];
+    }));
+    var rawCounts = Object.fromEntries(dimensionOrder.map(function (key) {
+      return [key, 0];
+    }));
+    (state.config.questions || []).forEach(function (question) {
+      var _ref1, _answerValues$answerK3;
+      var answerKey = answers[question.id];
+      if (!answerKey || !question.dimension) return;
+      var base = Number((_ref1 = (_answerValues$answerK3 = answerValues[answerKey]) !== null && _answerValues$answerK3 !== void 0 ? _answerValues$answerK3 : answerValues[String(answerKey)]) !== null && _ref1 !== void 0 ? _ref1 : 0);
+      if (!Number.isFinite(base) || base <= 0) return;
+      var value = question.reverse ? 6 - base : base;
+      rawTotals[question.dimension] = (rawTotals[question.dimension] || 0) + value;
+      rawCounts[question.dimension] = (rawCounts[question.dimension] || 0) + 1;
+    });
+    var dimensions = {};
+    dimensionOrder.forEach(function (key) {
+      var count = rawCounts[key] || 0;
+      if (!count) {
+        dimensions[key] = 0;
+        return;
+      }
+      var min = count;
+      var max = count * 5;
+      dimensions[key] = Math.round((rawTotals[key] - min) / (max - min) * 100);
+    });
+    var matureDimensions = scoring.matureDimensions || ["emotion", "responsibility", "resilience", "tolerance", "selfAcceptance"];
+    var youthfulDimensions = scoring.youthfulDimensions || ["curiosity", "socialEase", "lifePassion"];
+    var matureIndex = average(matureDimensions.map(function (key) {
+      return dimensions[key];
+    }));
+    var youthfulIndex = average(youthfulDimensions.map(function (key) {
+      return dimensions[key];
+    }));
+    var actualAge = getActualAge(scoring);
+    var psychologicalAge = clamp(Math.round(actualAge + (matureIndex - youthfulIndex) * Number((_scoring$ageFactor = scoring.ageFactor) !== null && _scoring$ageFactor !== void 0 ? _scoring$ageFactor : 0.22)), Number((_scoring$minAge = scoring.minAge) !== null && _scoring$minAge !== void 0 ? _scoring$minAge : 10), Number((_scoring$maxAge = scoring.maxAge) !== null && _scoring$maxAge !== void 0 ? _scoring$maxAge : 70));
+    var delta = psychologicalAge - actualAge;
+    var primary = getPsychologicalResultKey(delta, scoring);
+    var counts = Object.fromEntries(Object.keys(state.config.results || {}).map(function (key) {
+      return [key, key === primary ? (state.config.questions || []).length : 0];
+    }));
+    var rankedDimensions = dimensionOrder.map(function (key) {
+      var _dimensions$key;
+      return {
+        key: key,
+        label: dimensionLabels[key] || key,
+        value: (_dimensions$key = dimensions[key]) !== null && _dimensions$key !== void 0 ? _dimensions$key : 0
+      };
+    }).sort(function (left, right) {
+      return right.value - left.value;
+    });
+    var tags = buildPsychologicalTags(rankedDimensions, delta, primary, scoring);
+    return {
+      counts: counts,
+      primary: primary,
+      secondary: null,
+      psychological: {
+        actualAge: actualAge,
+        psychologicalAge: psychologicalAge,
+        delta: delta,
+        ageLabel: getPsychologicalAgeLabel(delta),
+        matureIndex: Math.round(matureIndex),
+        youthfulIndex: Math.round(youthfulIndex),
+        dimensions: dimensions,
+        dimensionLabels: dimensionLabels,
+        dimensionOrder: dimensionOrder,
+        topDimensions: rankedDimensions.slice(0, 3),
+        lowDimensions: rankedDimensions.slice(-2).reverse(),
+        tags: tags
+      }
+    };
+  }
+  function getActualAge(scoring) {
+    var numericAge = Number(state.profile.actualAge);
+    if (Number.isFinite(numericAge) && numericAge > 0) return Math.round(numericAge);
+    var birthAge = calculateAgeFromBirthDate(state.profile.birthDate);
+    if (birthAge) return birthAge;
+    return Number(scoring.defaultActualAge || 28);
+  }
+  function calculateAgeFromBirthDate(value) {
+    if (!value) return null;
+    var date = new Date(value);
+    if (Number.isNaN(date.getTime())) return null;
+    var now = new Date();
+    var age = now.getFullYear() - date.getFullYear();
+    var monthDiff = now.getMonth() - date.getMonth();
+    if (monthDiff < 0 || monthDiff === 0 && now.getDate() < date.getDate()) age -= 1;
+    return age > 0 ? age : null;
+  }
+  function getPsychologicalResultKey(delta, scoring) {
+    var _groups;
+    var groups = scoring.ageGroups || [{
+      key: "CURIOUS_CHILD",
+      maxDelta: -8
+    }, {
+      key: "HOT_BLOODED_TEEN",
+      maxDelta: -3
+    }, {
+      key: "BALANCED_YOUTH",
+      maxDelta: 2
+    }, {
+      key: "STEADY_ADVISER",
+      maxDelta: 7
+    }, {
+      key: "CLEAR_HELM",
+      maxDelta: Infinity
+    }];
+    var hit = groups.find(function (item) {
+      return delta <= Number(item.maxDelta);
+    });
+    return (hit === null || hit === void 0 ? void 0 : hit.key) || ((_groups = groups[groups.length - 1]) === null || _groups === void 0 ? void 0 : _groups.key) || Object.keys(state.config.results || {})[0];
+  }
+  function getPsychologicalAgeLabel(delta) {
+    if (delta <= -8) return "灵魂明显年轻";
+    if (delta <= -3) return "少年感在线";
+    if (delta <= 2) return "与真实年龄同频";
+    if (delta <= 7) return "心智略超前";
+    return "灵魂明显成熟";
+  }
+  function buildPsychologicalTags(rankedDimensions, delta, primary, scoring) {
+    var tagMap = scoring.dimensionTags || {};
+    var ageTags = scoring.ageTags || {};
+    var resultTags = scoring.resultTags || {};
+    var tags = rankedDimensions.slice(0, 3).map(function (item) {
+      var _tagMap$item$key;
+      return ((_tagMap$item$key = tagMap[item.key]) === null || _tagMap$item$key === void 0 ? void 0 : _tagMap$item$key[0]) || item.label;
+    }).filter(Boolean);
+    tags.push(ageTags[getPsychologicalAgeLabel(delta)] || getPsychologicalAgeLabel(delta));
+    tags.push(resultTags[primary] || "社交原型清晰");
+    return _toConsumableArray(new Set(tags)).slice(0, 5);
+  }
+  function scoreCityWithElements(answers, scoring) {
+    var _Object$entries$sort$, _scoring$birthWeight, _state$config$seconda3;
+    var resultKeys = Object.keys(state.config.results || {});
+    var counts = Object.fromEntries(resultKeys.map(function (key) {
+      return [key, 0];
+    }));
+    var elementMap = scoring.elementMap || {};
+    var elementCounts = {};
+    Object.values(elementMap).forEach(function (element) {
+      elementCounts[element] = 0;
+    });
+    (state.config.questions || []).forEach(function (question) {
+      var answerKey = answers[question.id];
+      if (!answerKey) return;
+      var option = (question.options || []).find(function (item) {
+        return item.key === answerKey;
+      });
+      var scoreKey = (option === null || option === void 0 ? void 0 : option.score) || (option === null || option === void 0 ? void 0 : option.result) || answerKey;
+      var element = elementMap[scoreKey];
+      if (counts[scoreKey] !== undefined) counts[scoreKey] += 1;
+      if (element && elementCounts[element] !== undefined) elementCounts[element] += 1;
+    });
+    var personalityElement = ((_Object$entries$sort$ = Object.entries(elementCounts).sort(function (left, right) {
+      return right[1] - left[1];
+    })[0]) === null || _Object$entries$sort$ === void 0 ? void 0 : _Object$entries$sort$[0]) || "未提供";
+    var birthElement = getBirthElement(state.profile.birthDate, scoring);
+    var birthWeight = Number((_scoring$birthWeight = scoring.birthWeight) !== null && _scoring$birthWeight !== void 0 ? _scoring$birthWeight : 0.25);
+    var combined = Object.fromEntries(resultKeys.map(function (key) {
+      var birthBonus = elementMap[key] === birthElement ? state.config.questions.length * birthWeight : 0;
+      return [key, counts[key] + birthBonus];
+    }));
+    var sorted = Object.entries(combined).sort(function (left, right) {
+      return right[1] - left[1];
+    });
+    var threshold = (_state$config$seconda3 = state.config.secondaryThreshold) !== null && _state$config$seconda3 !== void 0 ? _state$config$seconda3 : 2;
+    var primary = sorted[0][0];
+    var secondary = sorted[1][1] > 0 && sorted[0][1] - sorted[1][1] <= threshold ? sorted[1][0] : null;
+    var personalityShare = counts[primary] / Math.max(1, state.config.questions.length);
+    var birthMatch = elementMap[primary] === birthElement;
+    var matchScore = Math.round(Math.min(99, 55 + personalityShare * 30 + (birthMatch ? 15 : 5)));
+    return {
+      counts: counts,
+      primary: primary,
+      secondary: secondary,
+      match: {
+        birthElement: birthElement,
+        personalityElement: personalityElement,
+        elementCounts: elementCounts,
+        matchScore: matchScore
+      }
+    };
+  }
+  function getBirthElement(value, scoring) {
+    if (!value) return "未提供";
+    var parts = value.split("-").map(Number);
+    if (parts.length !== 3 || parts.some(function (part) {
+      return !Number.isFinite(part);
+    })) return "未提供";
+    var _parts = _slicedToArray(parts, 3),
+      year = _parts[0],
+      month = _parts[1],
+      day = _parts[2];
+    var elements = scoring.birthElements || ["木", "火", "土", "金", "水"];
+    return elements[Math.abs(year * 13 + month * 7 + day) % elements.length];
+  }
+  function scorePairedAttributes(answers, scoring) {
+    var _scoring$pairs, _state$config$seconda4;
+    var attributes = Object.fromEntries((scoring.attributes || []).map(function (key) {
+      return [key, 0];
+    }));
+    var questionsById = Object.fromEntries((state.config.questions || []).map(function (question) {
+      return [question.id, question];
+    }));
+    (state.config.questions || []).forEach(function (question) {
+      var answerKey = answers[question.id];
+      if (!answerKey) return;
+      var option = (question.options || []).find(function (item) {
+        return item.key === answerKey;
+      });
+      ((option === null || option === void 0 ? void 0 : option.attributes) || []).forEach(function (attribute) {
+        if (attributes[attribute] !== undefined) attributes[attribute] += 1;
+      });
+    });
+    var chosen = (scoring.pairs || []).map(function (_ref10, index) {
+      var _scoring$tieBreakers, _tieQuestion$options, _tieOption$attributes;
+      var _ref11 = _slicedToArray(_ref10, 2),
+        left = _ref11[0],
+        right = _ref11[1];
+      if (attributes[left] > attributes[right]) return left;
+      if (attributes[right] > attributes[left]) return right;
+      var tieQuestionId = (_scoring$tieBreakers = scoring.tieBreakers) === null || _scoring$tieBreakers === void 0 ? void 0 : _scoring$tieBreakers[String(index)];
+      var tieQuestion = questionsById[tieQuestionId];
+      var tieAnswer = tieQuestion && answers[tieQuestionId];
+      var tieOption = tieQuestion === null || tieQuestion === void 0 || (_tieQuestion$options = tieQuestion.options) === null || _tieQuestion$options === void 0 ? void 0 : _tieQuestion$options.find(function (item) {
+        return item.key === tieAnswer;
+      });
+      return tieOption !== null && tieOption !== void 0 && (_tieOption$attributes = tieOption.attributes) !== null && _tieOption$attributes !== void 0 && _tieOption$attributes.includes(left) ? left : right;
+    });
+    var primary = chosen.join("");
+    var counts = Object.fromEntries(Object.keys(state.config.results || {}).map(function (key) {
+      return [key, key === primary ? (state.config.questions || []).length : 0];
+    }));
+    var alternate = chosen.slice();
+    if ((_scoring$pairs = scoring.pairs) !== null && _scoring$pairs !== void 0 && _scoring$pairs.length) {
+      var firstPair = scoring.pairs[0];
+      alternate[0] = alternate[0] === firstPair[0] ? firstPair[1] : firstPair[0];
+    }
+    var secondary = alternate.join("") !== primary && (_state$config$seconda4 = state.config.secondaryNotes) !== null && _state$config$seconda4 !== void 0 && (_state$config$seconda4 = _state$config$seconda4[primary]) !== null && _state$config$seconda4 !== void 0 && _state$config$seconda4[alternate.join("")] ? alternate.join("") : null;
+    return {
+      counts: counts,
+      primary: primary,
+      secondary: secondary,
+      attributes: attributes
+    };
+  }
+  function getStage(score) {
+    var labels = state.config.stageLabels || [{
+      max: 45,
+      label: "观察期"
+    }, {
+      max: 65,
+      label: "验证期"
+    }, {
+      max: 82,
+      label: "规划期"
+    }, {
+      max: 100,
+      label: "行动期"
+    }];
+    var hit = labels.find(function (item) {
+      return score <= item.max;
+    });
+    return hit ? hit.label : labels[labels.length - 1].label;
+  }
+  function buildShareText(primary, secondary) {
+    var scored = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : {};
+    var template = state.config.shareTemplate || ["我测出了：{{typeName}}", "{{posterSubtext}}", "{{secondaryLine}}", "", "{{title}}"];
+    var values = {
+      title: state.config.title,
+      typeName: primary.typeName,
+      posterSubtext: primary.posterSubtext,
+      secondary: secondary || "",
+      secondaryLine: secondary ? "\u526F\u503E\u5411\uFF1A".concat(secondary) : "",
+      score: Number.isFinite(scored.score) ? scored.score : primary.maturityScore
+    };
+    return template.map(function (line) {
+      return fillTemplate(line, values);
+    }).filter(function (line, index, arr) {
+      return line || arr[index - 1];
+    }).join("\n").trim();
+  }
+  function copyShareText(value) {
+    var fallbackCopy = function fallbackCopy() {
+      var field = document.createElement("textarea");
+      field.value = value;
+      field.setAttribute("readonly", "");
+      field.style.position = "fixed";
+      field.style.opacity = "0";
+      document.body.appendChild(field);
+      field.select();
+      var copied = document.execCommand && document.execCommand("copy");
+      document.body.removeChild(field);
+      if (!copied) throw new Error("copy unavailable");
+    };
+    try {
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(value).then(function () {
+          return showToast("结果文案已复制");
+        }, function () {
+          try {
+            fallbackCopy();
+            showToast("结果文案已复制");
+          } catch (error) {
+            showToast("复制失败，可长按手动复制");
+          }
+        });
+        return;
+      }
+      fallbackCopy();
+      showToast("结果文案已复制");
+    } catch (error) {
+      showToast("复制失败，可长按手动复制");
+    }
+  }
+  function showToast(value) {
+    var toast = document.getElementById("toast");
+    if (!toast) return;
+    toast.textContent = value;
+    toast.classList.add("show");
+    window.setTimeout(function () {
+      return toast.classList.remove("show");
+    }, 1600);
+  }
+  function getLoadingMessages() {
+    return state.config.loadingMessages || defaultLoadingMessages;
+  }
+  function getStorageKey() {
+    return "xhsTestAnswers:".concat(state.config.slug || "default");
+  }
+  function getProfileStorageKey() {
+    var _state$config;
+    return "xhsTestProfile:".concat(((_state$config = state.config) === null || _state$config === void 0 ? void 0 : _state$config.slug) || "default");
+  }
+  function getProfileInputValue(inputConfig) {
+    if (!inputConfig) return "";
+    if (inputConfig.type === "number") return state.profile.actualAge || "";
+    return state.profile.birthDate || "";
+  }
+  function buildProfileFromInput(inputConfig, value) {
+    if ((inputConfig === null || inputConfig === void 0 ? void 0 : inputConfig.type) === "number") {
+      return {
+        birthDate: "",
+        actualAge: value
+      };
+    }
+    return {
+      birthDate: value,
+      actualAge: ""
+    };
+  }
+  function fillTemplate(template, values) {
+    return String(template).replace(/\{\{(\w+)\}\}/g, function (_, key) {
+      return values[key] || "";
+    });
+  }
+  function number(value) {
+    var parsed = Number(value);
+    if (Number.isNaN(parsed)) return 0;
+    return Math.max(0, Math.min(100, parsed));
+  }
+  function average(values) {
+    var cleanValues = values.map(Number).filter(function (value) {
+      return Number.isFinite(value);
+    });
+    if (!cleanValues.length) return 0;
+    return cleanValues.reduce(function (sum, value) {
+      return sum + value;
+    }, 0) / cleanValues.length;
+  }
+  function clamp(value, min, max) {
+    return Math.max(min, Math.min(max, value));
+  }
+  function text(value) {
+    return String(value !== null && value !== void 0 ? value : "").replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;");
+  }
+})();
+
+    </script>
+  </body>
+</html>
