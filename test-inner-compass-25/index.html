@@ -1,0 +1,107 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+    <meta name="theme-color" content="#f5efe5" />
+    <meta name="description" content="25道生活场景题，看见你在关系与生活里最真实的保护方式。" />
+    <title>内在罗盘｜关系与能量状态测试</title>
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><circle cx=%2250%22 cy=%2250%22 r=%2248%22 fill=%22%237b421e%22/><text x=%2250%22 y=%2267%22 text-anchor=%22middle%22 font-size=%2252%22 fill=%22%23fffaf4%22>内</text></svg>" />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div class="ambient ambient-one"></div>
+    <div class="ambient ambient-two"></div>
+
+    <main class="app-shell">
+      <header class="topbar">
+        <a class="brand" href="./" aria-label="返回测试首页">
+          <span class="brand-mark">内</span>
+          <span>内在罗盘</span>
+        </a>
+        <button class="ghost-button hidden" id="reset-top" type="button">重新测试</button>
+      </header>
+
+      <section class="screen active" id="intro-screen" aria-labelledby="intro-title">
+        <div class="eyebrow"><span></span> 25道生活场景题 · 约4分钟</div>
+        <h1 id="intro-title">你把自己藏在了<br /><em>哪种保护方式</em>里？</h1>
+        <p class="lead">从缺爱补偿、关系边界、低欲防御、安全感到假性独立，找到此刻最影响你的内在模式。</p>
+
+        <div class="dimension-orbit" aria-label="测试包含五个维度">
+          <span>缺爱补偿</span><span>关系边界</span><span>低欲防御</span><span>安全感</span><span>假性独立</span>
+        </div>
+
+        <button class="primary-button" id="start-button" type="button">
+          <span>开始看见自己</span><span aria-hidden="true">↗</span>
+        </button>
+        <button class="resume-button hidden" id="resume-button" type="button">继续上次测试</button>
+
+        <div class="intro-note">
+          <span class="spark">✦</span>
+          <p>凭第一反应选择。答案没有好坏，只反映你最近更常使用哪种保护方式。</p>
+        </div>
+      </section>
+
+      <section class="screen" id="quiz-screen" aria-live="polite">
+        <div class="progress-meta">
+          <span id="dimension-label">关系感受</span>
+          <span><strong id="question-number">01</strong> / 25</span>
+        </div>
+        <div class="progress-track"><div id="progress-fill"></div></div>
+
+        <article class="question-card" id="question-card">
+          <div class="question-index" id="question-index">问题 01</div>
+          <h2 id="question-text"></h2>
+          <div class="options" id="options"></div>
+        </article>
+
+        <div class="quiz-nav">
+          <button class="back-button" id="back-button" type="button">← 上一题</button>
+          <span>选择后自动进入下一题</span>
+        </div>
+      </section>
+
+      <section class="screen" id="result-screen" aria-labelledby="result-title">
+        <div class="result-hero">
+          <div class="eyebrow result-eyebrow"><span></span> 你的主导保护模式</div>
+          <div class="result-symbol" id="result-symbol">◌</div>
+          <p class="result-kicker" id="result-kicker"></p>
+          <h1 id="result-title"></h1>
+          <p class="result-summary" id="result-summary"></p>
+        </div>
+
+        <div class="result-grid">
+          <section class="result-card chart-card">
+            <div class="card-heading">
+              <div><small>INNER MAP</small><h2>你的五维内在地图</h2></div>
+              <span class="score-seal" id="score-seal">0</span>
+            </div>
+            <div class="dimension-bars" id="dimension-bars"></div>
+          </section>
+
+          <section class="result-card insight-card">
+            <small>WHAT IT MEANS</small>
+            <h2>你并不是太敏感，<br />只是在努力保护自己</h2>
+            <p id="result-insight"></p>
+            <div class="quote-block" id="result-quote"></div>
+          </section>
+
+          <section class="result-card suggestion-card">
+            <small>A SMALL STEP</small>
+            <h2>此刻最适合你的一个练习</h2>
+            <p id="result-action"></p>
+          </section>
+        </div>
+
+        <div class="result-actions">
+          <button class="primary-button" id="share-button" type="button"><span>分享我的结果</span><span>↗</span></button>
+          <button class="secondary-button" id="restart-button" type="button">重新测试</button>
+        </div>
+        <p class="disclaimer">本测试仅供自我探索与娱乐参考，不构成心理诊断或医疗建议。</p>
+      </section>
+    </main>
+
+    <div class="toast" id="toast" role="status">结果链接已复制</div>
+    <script src="app.js"></script>
+  </body>
+</html>
